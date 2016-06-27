@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"><div style="display:none;">title=Node.js & MongoDB 연동(with Mongoose)
+                created=2014-10-19
+            </div>
+                <p>오늘은 node.js 와 mongodb의 연결을 해보려고 합니다. 이때 필요한건 <a href="http://docs.mongodb.org/ecosystem/drivers/node-js/">mongodb 드라이버</a>겠죠. 간단한 예제를 통해서 node.js와 mongodb를 연결해봅시다.</p>
+                <h2>Ready for Test</h2><p>기본적으로 몽고DB<span class="refer">mongodb</span> 와 node.js를 설치했다고 가정합니다. 저 같은 경우 아래처럼 설치 했습니다.</p><pre class="console">Node.js : C:\Program Files\nodejs
+mongodb : C:\Program Files\MongoDB 2.6 Standard
+</pre>
+                <h2>Build node.js application</h2>
+                <p>이제 몽고DB를 띄운 뒤에 실제 연결해볼 node.js 애플리케이션을 작성해 봅시다. 그전 테스트할 프로젝트 디렉토리부터 생성해야겠네요. 아래와 같은 곳에 생성했습니다. 그리고 프로젝트까지 바로 초기화 해봅시다.</p>
+<pre class="console">C:\Program Files\nodejs\mongo
+C:\Program Files\nodejs\mongo>npm init
+... 중략
+</pre>
+                <p>mongo라는 프로젝트를 위한 <span class="command">package.json</span>이 완성 됐습니다. 이번엔 몽고DB 드라이버를 설치해봅시다. 아래처럼 입력합니다.</p>
+<pre class="console">C:\Program Files\nodejs\mongo&gt;npm install mongodb --save
+</pre>
+                <p><span class="command">--save</span> 옵션을 주면 자동으로 <span class="command">package.json</span>의 dependencies 부분을 업데이트 해줍니다. 몽고DB 드라이버를 설치했다면 이번엔 오브젝트 매퍼인 <span class="command">Mongoose</span>를 설치해봅시다.</p>
+
+<pre class="console">C:\Program Files\nodejs\mongo>npm install mongoose --save
+</pre>
+                <p>최종적으로 완성된 mongo 프로젝트의 <span class="command">package.json</span> 파일은 다음과 같습니다. <span class="refer">* 개인별로 차이가 있을 수 있습니다.</span></p>
+<pre class="prettyprint lang-js">/* package.json */
+{
+  "name": "mongo",
+  "version": "0.0.0",
+  "description": "my first app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^1.4.19",
+    "mongoose": "^3.8.17"
+  }
+}
+</pre>
+                <h2>Connect to MongoDB</h2>
+                <p><span class="command">Mongoose</span> 말고도 다른 오브젝트 매퍼들이 있지만 이 포스팅에서는 <a href="http://mongoosejs.com/docs/index.html">Mongoose</a>를 기준으로 작성하고 있습니다. 이제부터는 실제 구동할 소스 코드를 작성해 봅시다. 방금 절에서 만든 "mongo" 디렉토리에 가서 <span class="command">index.js</span> 파일을 만듭니다. 그리고 안에 다음처럼 소스 코드를 입력합니다.</p>
+<pre class="prettyprint lang-js">/* index.js */
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/test'); // 기본 설정에 따라 포트가 상이 할 수 있습니다.
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+	console.log("mongo db connection OK.");
+});
+</pre>
+                <h2>Connection Test</h2><p>작성 후 아래처럼 입력해서 애플리케이션을 구동해 봅시다.</p><pre class="console">C:\Program Files\nodejs\mongo>node index
+</pre>
+                <p>실행 후에 <strong>"mongo db connection OK."</strong> 문구가 나오면 몽고DB와 연결에 성공한 것입니다.</p>
+
+                <h2>Schema & Model</h2><p>RDBMS에서는 Create 구문 등을 통해 스키마<span class="refer">Schema</span>를 생성해서 사용합니다. 몽고DB는 스키마를 별도로 지정하지 않아도 되지만 <span class="command">Mongoose</span>에서는 스키마라는 함수를 통해 레퍼런스를 선언해 줄 수 있습니다. 다음처럼 입력해 봅시다.</p>
+<pre class="prettyprint lang-js">/* Schema 선언 */
+var testSchema = mongoose.Schema({
+	name: String
+});
+</pre>
+                <p>위 구문은 testSchema가 <span class="command">name</span>이라는 프로퍼티를 가지고 있으며 해당 프로퍼티는 <span class="command">String</span> 타입이라는 것을 지정합니다. 스키마를 선언했다면 이번엔 실제로 사용을 해봅시다. 다음처럼 입력합니다.</p>
+<pre class="prettyprint lang-js">/* Model 선언 */
+var TestModel = mongoose.model("TestModel", testSchema);
+</pre>
+                <p>testSchema를 통해 TestModel를 만들어냈습니다. 이 TestModel을 이용해서 인스턴스를 만들어 봅시다. 다음처럼 입력합니다.</p>
+<pre class="prettyprint lang-js">/* Create Instance */
+var testIns = new TestModel({ name: "testIns" });
+console.log(testIns.name); // "testIns"
+</pre>
+                <p>인스턴스까지 생성을 마쳤다면 기본적인 몽고DB <span class="command">document</span>를 생성하는 것까진 익힌겁니다. testIns 오브젝트는 몽고DB의 <span class="command">document</span>로써 제 역할을 할 것입니다. 이번엔 몽고DB 스키마에 메소드를 추가해봅시다. 다음처럼 입력합니다.</p>
+<pre class="prettyprint lang-js">/* add methods*/
+testSchema.methods.speak = function () {
+	var greeting = this.name
+	? "Meow name is " + this.name
+	: "I don't have a name"
+	console.log(greeting);
+}
+</pre>
+                <p>testSchema에 <span class="command">speak()</span>라는 메소드를 추가했습니다. 여기서 주의해야 하는 점은  methods를 이용하고자 할 때 <strong>반드시</strong> <span class="command">mongoose.model()</span>를 <strong>사용하기 전(before compiling)에 작성</strong>해야 합니다. 이제 만들어진 <span class="command">speak()</span> 메소드를 사용해 봅시다. 다음처럼 입력합니다.</p>
+<pre class="prettyprint lang-js">/* use methods */
+var testIns = new TestModel({ name: "testIns" });
+testIns.speak(); /* "Meow name is testIns" */
+</pre>
+                <p>메소드 사용법까지 익혔습니다. 그러면 이번엔 실제로 몽고DB에 만들어진 <span class="command">document</span>를 저장해 봅시다. 다음처럼 입력합니다.</p>
+<pre class="prettyprint lang-js">/* save document in mongodb */
+testIns.save(function(err, testIns){
+	if(err) return console.error(err);
+	testIns.speak();
+});
+</pre><p><span class="command">save()</span> 메소드를 이용해 만들어진 <span class="command">document</span>를 몽고DB에 저장할 수 있습니다. 첫번째 인자값인 err 아규먼트는 오류가 생기면 처리할 콜백함수를 정의합니다. 저장을 했다면 이번엔 검색을 해봅시다. 다음처럼 입력합니다.</p>
+<pre class="prettyprint lang-js">/* find document in mongodb */
+TestModel.find(function(err, models){
+	if(err) return console.error(err);
+	console.log(models);
+});
+</pre>
+                <p><span class="command">find()</span> 커맨드를 TestModel에 추가했습니다. <span class="command">find()</span>를 통해 검색된 모델 오브젝트들은 <span class="command">console</span> 커맨드를 통해 출력될 겁니다. 실제로 아까 저장했던 "testIns"를 찾아봅시다. 다음처럼 입력합니다.</p>
+<pre class="prettyprint lang-js">/* find document in mongodb */
+TestModel.find({name:/^testIns/}, callback);
+</pre>
+                <p>위와 같은 구문은 name 프로퍼티가 "testIns"인 모델을 찾는 구문입니다. 자세한 사용처는 <a href="http://mongoosejs.com/docs/queries.html">querying</a>에서 찾아 볼 수 있습니다.</p>
+                <h2>Summary Example</h2><p>지금까지 단편적으로 살펴본 모든 구문을 하나로 합친 예제를 만들어 봅시다.</p><pre class="prettyprint lang-js">/* index.js */
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/test'); // 기본 설정에 따라 포트가 상이 할 수 있습니다.
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+	console.log("mongo db connection OK.");
+});
+
+var testSchema = mongoose.Schema({
+	name: String
+});
+
+testSchema.methods.speak = function () {
+	var greeting = this.name
+	? "Meow name is " + this.name
+	: "I don't have a name"
+	console.log("speak() - " + greeting);
+}
+
+var TestModel = mongoose.model("TestModel", testSchema);
+
+var testIns = new TestModel({ name: "testIns"});
+
+testIns.save(function(err, testIns){
+	if(err) return console.error(err);
+	testIns.speak();
+});
+
+TestModel.find(function(err, models){
+	if(err) return console.error(err);
+	console.log("find() - "+models);
+});
+
+TestModel.find({name:/^testIns/});
+</pre>
+                <h2>몽고DB 확인</h2><p>정말로 데이터가 삽입 되었는지 확인을 해봅시다. 몽고DB 쉘에 접속해서 <span class="command">show collections</span>를 입력해 봅시다. 그러면 "testmodels" 라는 새로운 콜렉션이 보일겁니다. <span class="command">db.testmodels.find()</span> 구문을 통해 정말로 데이터가 삽입 됐는지 확인 해보고 삽입이 되어 있으면 성공적인 node.js + mongodb 첫 프로젝트가 완성 된 겁니다. :)</p></div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

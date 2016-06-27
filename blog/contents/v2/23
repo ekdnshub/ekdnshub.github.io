@@ -37,4 +37,4 @@ elif options.readMemo:
 #p P.S 인자값 처리까지 해주진 않으니 if문을 조금 더 다듬어서 로직 처리에 필요한 인자를 다 받았는지 봐야 한다.
 #p P.S2 parser option에 들어가는 값들이 무엇인지 자세히 알고 싶으면 {$http://docs.python.org/2/library/optparse.html|Parser for command line options} 를 참조해보자.
 #p 다음은 실행 화면이다.
-{$$/img/23.png}
+{$$/blog/images/23.png}
