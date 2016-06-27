@@ -69,6 +69,14 @@
 				type:"get",
 				done:function(data){ data = data.replace("<", "&lt;"); $("#help").html( "<pre>"+data+"</pre>" );  }
 			});
+			var htmlTemplate = "";
+			o.ajax.send({
+				url:"/blog/base.html",
+				type:"get",
+				done:function(data){
+					htmlTemplate = data;
+				}
+			});
 
 
 		    // first-letter 처리
@@ -185,6 +193,7 @@
 	            $("#content").html( result );
 	            PR.prettyPrint();
 			applyEtcEffect();
+			result = o.mapper.toHtml(htmlTemplate, { body: result });
 			$("#result_area").val(result);
 	        }
 	        $("#doit").click(function(){
