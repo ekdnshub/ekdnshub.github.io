@@ -1,0 +1,38 @@
+html { font-size:16px; }
+body { font-family: "Nanum Gothic Coding", sans-serif !important;}
+.services { cursor:pointer; padding:2em; opacity: 0.75; transition: opacity 1s linear; }
+.services:hover {
+	border-radius: 5px;
+	box-shadow:0px 0px 20px #999;
+	z-index:100;
+	transform: scale(1.05, 1.05); 
+	-webkit-transform: scale(1.05, 1.05); 
+	-webkit-transition-duration: 0.2s; 
+	-webkit-transition-property: transform; 
+	-webkit-transition-timing-function: linear;
+	-moz-transform: scale(1.05, 1.05); 
+	-moz-transition-duration: 0.2s; 
+	-moz-transition-property: transform; 
+	-moz-transition-timing-function: linear;
+	-ms-transform: scale(1.05, 1.05); 
+	-ms-transition-duration: 0.2s; 
+	-ms-transition-property: transform; 
+	-ms-transition-timing-function: linear;	
+	opacity: 1.0;
+}
+#about{
+	height:100%;
+	background-image: url('http://static.jdm.kr/img/main/main-2-trans.png'); 
+	background-position: center;
+	background-size: cover;
+}
+hr {
+  max-width: 100px;
+  border-color: #259CE0;
+  border-width: 2px;
+}
+hr.small {
+  max-width: 50px;
+  border-color: #259CE0;
+  border-width: 1px;
+}
