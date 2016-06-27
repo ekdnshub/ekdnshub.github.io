@@ -78,20 +78,28 @@ function applyContentEffect(){
 			$(this).hide();
 		});
 	});
+	
+	// 본문이 끝나면 처음으로 돌아갈 수 있는 링크 하나를 만들어준다.
+	$("#content").after("<p class=\"text-right\"><a href=\"#\">Go Top(문서 처음으로)</a></p>");
 };
 
 function addInfoBody(currentSeq){
 	var body = o.util.multiLine(function(){
 	  /*!
+	  	<!-- 추가 정보 -->
+		<div id="add_info" style="padding-top:1em;">
 			<span id="content_category" class="text-muted" style="display:none;"></span>│<span id="content_created" class="mycolor1">2014-09-29</span>
 			<div class="btn-group" role="group">
 				<button id="bigsize" class="btn btn-default btn-xs"><i id="bigsizeLabel" class="fa fa-expand"> Wide</i></button>
 				<button id="up_font_size" class="btn btn-default btn-xs"><i class="fa fa-text-height"></i> 확대</button>
 				<button id="down_font_size" class="btn btn-default btn-xs"><i class="fa fa-text-height"></i> 축소</button>
 			</div>
+		</div>
+		<hr>
 	  */
 	});
-	$("#add_info").html(body);
+	
+	$("#content_title").after(body);
 	
 	// 추가 기능 버튼 리스너
 	$("#bigsize").click(function(){
@@ -259,6 +267,9 @@ $( document ).ready(function(){
 		o.toast.info("IE를 업그레이드 해주시거나 다른 브라우저를 이용하세요.");
 	}
 	
+	/* meta 정보 처리 */
+	$("title").val($("#content_title").val()+":: JDM's Blog");
+	
 	/* header 처리 */
 	Header.printGnb();
 	Header.printTopSubject( "JDM's Blog", "/blog", "온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3");
@@ -266,11 +277,27 @@ $( document ).ready(function(){
 	/* 아카이브 그룹 초기화 */
 	ArchiveGroup.init(maxPostsCnt);
 	
-	/* 추가정보 템플릿 처리 */
+	/* 본문 상단 템플릿 처리 */
 	addInfoBody(currentSeq);
 	
 	/* 본문 이펙트 효과 모음 */
 	applyContentEffect();
+	
+	/* 본문 하단 공간 */
+	var subAreaBody = o.util.multiLine(function(){
+	/*!
+		<!-- 본문 하단 공간 -->
+		<div id="sub_area">
+		  <!-- 크리에이티브 커먼즈 & 카피라이트 -->
+			<div id="copyright_body"></div>
+			<!-- 게시글 목록 -->
+			<div id="top_list" style="display:none; margin-bottom:1em;"></div>
+		</div>
+		<!-- 한줄 공간 -->
+		<div id="comment_body" class="tab-content" style="margin-top:1em;"></div>
+	*/
+	});
+	$("article").after(subAreaBody);
 	
 	/* 카피라이트 문구 처리 */
 	Copyright.init();
