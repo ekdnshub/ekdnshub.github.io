@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+	<!-- # common resource # -->
+	<link rel="shortcut icon" href="//static.jdm.kr/favicon.ico">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+	<meta name="author" content="Jung DongMin">
+	<link rel="stylesheet" type="text/css" href="//static.jdm.kr/lib/reset_css/reset.css">
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	
+	<!-- # font -->
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+	<!-- # jquery -->
+	<!--[if lte IE 9]>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+	<![endif]-->
+	<!--[if gt IE 9]><!-->
+	<script src="//static.jdm.kr/lib/jquery/2.1.1/jquery.min.js"></script>
+	<!--<![endif]-->
+
+	<!-- # front view lib # -->
+	<link rel="stylesheet" type="text/css" href="//static.jdm.kr/lib/bootstrap/3.3.1/css/bootstrap.min.css">
+	<script src="//static.jdm.kr/lib/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+	<!-- # o library # -->
+	<script src="//static.jdm.kr/mylib/o/1.0.1.min.js"></script>
+
+	<!-- # unique resource for this page # -->
+	<link rel="stylesheet" type="text/css" href="/index.css">
+	<title>Welcome :: JDM's Site</title>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">JDM's Site</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#about">ABOUT</a></li>
+					<li><a href="#services">SERVICES</a></li>
+					<li><a href="#contact">CONTACT</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="jumbotron" id="about">
+		<div class="container" style="text-align: center;">
+			<h1 style="padding-top:4rem;"><strong>JDM.KR에 오신것을 환영합니다.</strong></h1>
+			<br>
+			<p>
+				<strong>
+					이 웹사이트는 개발 역량 향상을 위해 테스트 해보는 공간입니다.<br>
+					<a href="http://www.google.com/chrome/index.html" target="_blank">크롬 브라우저</a>에 최적화 되어 있습니다.<br>
+					<a href="https://www.apple.com/kr/safari/">사파리</a>, <a href="http://www.mozilla.or.kr/ko/firefox/new/">파이어폭스</a>, <a href="http://windows.microsoft.com/ko-kr/internet-explorer/download-ie">IE11</a> 이상을 권장합니다.
+				</strong>
+			</p>
+		</div>
+	</div>
+
+	<div class="col-md-12 text-center">
+		<h1><strong>JDM's Services</strong></h1>
+		<hr>
+	</div>
+
+	<div class="container" id="services">
+		<div class="row">
+			<div class="col-md-3 services" data-link="//blog.jdm.kr">
+				<img class="img-responsive" src="//static.jdm.kr/img/main/main-1.png" alt="이미지">
+				<hr class="small">
+				<h2>블로그</h2>
+				<p>개인적인 일상과 프로그래밍 관련된 내용을 볼 수 있는 공간입니다.</p>
+			</div>
+			<div class="col-md-3 services" data-link="//board.jdm.kr">
+				<img class="img-responsive" src="//static.jdm.kr/img/main/main-2.png" alt="이미지">
+				<hr class="small">
+				<h2>게시판</h2>
+				<p>시범적으로 동영상 게시판을 만들어봤습니다. 추후에 다른 게시판도 많이 생길 예정입니다.</p>
+			</div>
+			<div class="col-md-3 services" data-link="//guest.jdm.kr">
+				<img class="img-responsive" src="//static.jdm.kr/img/main/main-3.png" alt="이미지">
+				<hr class="small">
+				<h2>방명록</h2>
+				<p>방문하신 것도 인연(?)인데, 오신 김에 방명록 한글자 남겨주시면 안될까요?</p>
+			</div>
+			<div class="col-md-3 services" data-link="//lab.jdm.kr">
+				<img class="img-responsive" src="//static.jdm.kr/img/main/main-4.png" alt="이미지">
+				<hr class="small">
+				<h2>실험실</h2>
+				<p>개인적으로 흥미 있는 기술을 테스트하거나 이상한 짓을 해보는 공간입니다. 과거의 자료도 이곳으로 옵니다.</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" id="contact">
+		<div class="col-md-12 text-center">
+			<h1><strong>Contact Me</strong></h1>
+			<hr>
+			<div class="row">
+				<div class="com-md-6">
+					<h1 title="Email">webm<span style="display:none">!?...</span>aster@jdm.kr</h1>
+					<p>
+						<a href="https://www.linkedin.com/in/jungdongmin">LinkedIn</a>
+						<a href="https://www.facebook.com/jung.dongmin.5">FaceBook</a>
+					</p>
+				</div>
+			</div>
+			<p>
+				어떤 곳이든 언제든지 열려 있습니다. :D
+			</p>
+		</div>
+	</div>
+	<script>
+	$(document).ready(function(){
+		$(".services").each(function(){
+			$(this).click(function(){
+				window.location.href = $(this).attr("data-link");
+			});
+		});
+		o.wheel.init(200, 800);
+
+		o.loader.getScript("//static.jdm.kr/mylib/o/plugin/o.socket.1.min.js", function(){
+			o.socket.connect(function(){
+				o.socket.sendTitle("Welcome :: JDM's Site");
+			});
+		});
+	});
+
+	</script>
+	<script src="//static.jdm.kr/js/footer/footer_bt.js"></script>
+</body>
+</html>
