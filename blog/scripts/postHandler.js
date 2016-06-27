@@ -204,20 +204,21 @@ function addReferencePost(item){
 	//$("#toplist_"+seq).hide().delay(500).fadeIn("slow");
 };
 
-function makeReferencePost(seq){
-  
-  var initBody = o.util.multiLine(function(){
-    /*!
+function initReferencePost(){
+	var initBody = o.util.multiLine(function(){
+		/*!
 			<hr>
 			<h3 style="font-size:1.5em; font-weight:bold;">Reference Post</h3>
 			<a href="javascript:;" id="top_more_after"><span class="more text-center" style="border-bottom: 1px solid #eee;">▲more</span></a>
 			<ul class="list-unstyled" style="margin-bottom: 0px;">	
 			</ul>
 			<a href="javascript:;" id="top_more_before"><span class="more text-center" style="border-top: 1px solid #eee;">▼more</span></a>
-    */
-  });
-  $("#top_list").html(initBody);
-  
+		*/
+	});
+	$("#top_list").html(initBody);
+};
+
+function makeReferencePost(seq){
 	$("#top_list ul").html("");
 	var data = ArchiveGroup.findGroup(seq);
 	if( data == null ) return;
@@ -352,6 +353,7 @@ $( document ).ready(function(){
 	RightCategory.init();
 	
 	/* 관련 게시글 목록 생성 */
+	initReferencePost();
 	makeReferencePost(currentSeq);
 	
 	/* 코멘트 관련 처리 */
