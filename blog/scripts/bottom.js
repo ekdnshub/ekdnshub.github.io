@@ -15,7 +15,7 @@ var Bottom = (function(){
   							<p class="panel-title">Blog Photo</p>
   						</div>	
   						<div class="panel-body">
-  							<p><img id="profile_img" class="img-responsive img-rounded" src="/img/profile_1.jpg" alt="프로필 이미지"></p>
+  							<p><img id="profile_img" class="img-responsive img-rounded" src="/blog/images/profile_1.jpg" alt="프로필 이미지"></p>
   							<p style="margin-top:10px;">귀여운 꾸끼, 가끔 날 괴롭히는 고양이...</p>
   						</div>
   					</div>
