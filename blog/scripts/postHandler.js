@@ -284,6 +284,14 @@ $( document ).ready(function(){
 	ArchiveGroup.init(maxPostsCnt);
 	
 	/* 본문 상단 템플릿 처리 */
+	var title = o.util.multiLine(function(){
+		/*!
+			<!-- 제목 -->
+			<h1 id="content_title">{{title}}</h1>
+		*/
+	});
+	title = o.mapper.toHtml(title, { title: postsMeta[currentSeq].title })
+	$("article").prepend(title)
 	addInfoBody(currentSeq);
 	
 	/* 본문 이펙트 효과 모음 */
