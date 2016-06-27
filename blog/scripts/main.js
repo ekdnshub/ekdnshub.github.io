@@ -41,7 +41,7 @@ $( document ).ready(function(){
                 <div id="doc_{{seq}}" class="col-md-12">
                     <div class="item_wrap">
                         <span>{{created}} ┃ {{category}}</span>
-                        <h4><a href="/{{seq}}">{{title}}</a></h4>
+                        <h4><a href="/blog/{{seq}}">{{title}}</a></h4>
                     </div>
                 </div>
             */
