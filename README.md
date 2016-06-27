@@ -1,2 +1,1 @@
-# ekdnshub.github.io
-github pages
+index 페이지를 관리하는 저장소입니다.
