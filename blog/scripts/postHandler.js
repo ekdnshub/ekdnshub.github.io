@@ -257,7 +257,11 @@ $( document ).ready(function(){
 	var maxPostsCnt = o.util.getObjectSize(postsInfo.getMeta()); // 포스트 총 개수
 	
 	/* current Seq 처리 */
-	var currentLocationToken = window.location.href.split("/");
+	var currentLocation = window.location.href;
+	currentLocation = currentLocation.replace("#", "");
+	currentLocation = currentLocation.replace(".html", "");
+	var currentLocationToken = currentLocation.split("/");
+	
 	var currentSeq = Number(currentLocationToken[currentLocationToken.length-1]);
 	
 	/* 블로그 부가 효과 선처리 */
