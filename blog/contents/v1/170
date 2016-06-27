@@ -1,0 +1,39 @@
+<p>
+C++ 파일 읽기/쓰기 Hello World 입니다. :3
+</p>
+
+<pre class="prettyprint lang-cpp">
+#include &lt;fstream>
+#include &lt;iostream>
+
+using namespace std;
+
+int main()
+{
+	string filePath = "test.txt";
+
+	// write File
+	ofstream writeFile(filePath.data());
+	if( writeFile.is_open() ){
+		writeFile &lt;&lt; "Hello World!\n";
+		writeFile &lt;&lt; "This is C++ File Contents.\n";
+		writeFile.close();
+	}
+
+	// read File
+	ifstream openFile(filePath.data());
+	if( openFile.is_open() ){
+		string line;
+		while(getline(openFile, line)){
+			cout &lt;&lt; line &lt;&lt; endl;
+		}
+		openFile.close();
+	}
+
+	return 0;
+}
+</pre>
+<pre class="console">
+Hello World!
+This is C++ File Contents.
+</pre>

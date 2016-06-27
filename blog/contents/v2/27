@@ -1,0 +1,66 @@
+###info
+title=jQuery show() / hide() / toggle() 사용법
+created=2014-10-23
+###
+#p {=* 이 포스팅은 네이버 블로그에서 작성(2013.04.02)한 내용을 옮겨온 것입니다.}
+#p 오늘은 자바스크립트 라이브러리 중 하나인 jQuery 에서 사용 가능한 이펙트 함수 중 가장 빈번하게 쓰이는 " show / hide / toggle " 에 대해 알아보고자 합니다.
+#p 검색해서 들어오셨다면 기본적인 jQuery 사용 방법은 숙지하셨다 생각하고 바로 본론으로 들어갑시다!
+
+#h2 show() & hide() Example
+###code.js
+$("#tagID").show(); // display 속성을 block 으로 바꾼다.
+$("#tagID").hide(); // display 속성을 none 으로 바꾼다. 
+###
+#p 보여주거나 감추고 싶은 태그 ID를 넣어주면 됩니다. 간단합니다.
+
+#h2 show() / hide() Syntax
+#p 더 정확한 문법은 다음과 같습니다.
+###code.js
+$(selector).show(speed,callback);
+$(selector).hide(speed,callback);
+###
+###box.green
+###ul
+#li {!selector} - 태그 ID 값 또는 선택할 노드들의 셀렉터 구문을 넣어줍니다.
+#li {!speed}(optional) - "slow", "fast", 또는 밀리세컨드의 숫자를 넣어주면 보여주거나 감출 속도를 정할 수 있습니다.
+#li {!callback}(optional) - 콜백 함수를 설정하면 show()/hide() 함수 완료 후 실행됩니다. 
+###
+###
+#p 정확한 이해를 위해 예제 코드를 보면 좋겠죠? {$http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_hide_show|여기}를 클릭해서 연습합시다.
+
+#h2 show() / hide() Complex Example
+#p 예전엔 이런식의 코드도 많이 사용했었습니다. {=지금도 사용 가능합니다.}
+
+###code.js
+function toggle_layer() {
+	if($("#layer").css("display") == "none"){
+		$("#layer").show();
+	}else{
+		$("#layer").hide();
+	}
+}
+###
+
+#p 위와 같은 함수를 만들땐 여러가지 복합적으로 처리를 할 때 가끔 사용하면 좋겠죠. 하지만 단순한 on/off 기능이 필요하다면 toggle() 함수를 써봅시다.
+
+#h2 toggle() Example
+###code.js
+$("#tagID").toggle(); // show -> hide , hide -> show
+###
+#p toggle()을 사용하게 되면 이전 상태에 따라 현재 상태를 반대로 바꿔줍니다.
+
+#h2 toggle() Syntax
+###code.js
+$(selector).toggle(speed,callback);
+###
+###box.blue
+###ul
+#li {!selector} - 태그 ID 값 또는 선택할 노드들의 셀렉터 구문을 넣어줍니다.
+#li {!speed}(optional) - "slow", "fast", 또는 밀리세컨드의 숫자를 넣어주면 보여주거나 감출 속도를 정할 수 있습니다.
+#li {!callback}(optional) - 콜백 함수를 설정하면 toggle() 함수 완료 후 실행됩니다. 
+###
+###
+#p 정확한 이해를 위해 예제 코드를 봅시다. {$http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_toggle|여기}를 클릭해서 연습합시다.
+
+#h2 Closing Remarks
+#p 간단하게 show() / hide() / toggle() 에 대해 알아봤습니다. 틀린 부분, 추가 보충해야 할 부분 전부 댓글에 적어주시면 고맙겠습니다!

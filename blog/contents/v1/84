@@ -1,0 +1,15 @@
+
+ <p> 파일 사이즈를 구하는것도 C에서 간단한 것은 아니군요. 다음처럼 이용합시다... </p> 
+ <pre class="prettyprint linenums lang-cpp">
+#include &lt;stdio.h&gt;
+...
+// 파일 사이즈 체크
+string filePath = "...";
+FILE *f;
+f = fopen(filePath, "r");
+fseek(f, 0, SEEK_END);
+int fileLength = ftell(f);
+fclose(f);
+...
+</pre> 
+ <p> fileLength 값으로 사이즈 크기를 알 수 있습니다. </p> 

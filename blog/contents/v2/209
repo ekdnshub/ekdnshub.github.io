@@ -1,0 +1,43 @@
+###info
+title=Mac Apache
+created=2015-10-13
+###
+
+#p 간단하게 Mac X OS상에서 아파치{=Apache}를 설치하는 법을 알아봅시다.
+
+#h2 get root authority
+
+#p 아파치를 설치하기 전 터미널을 띄운 뒤에 다음과 같은 커맨드를 이용해 root 권한을 획득합니다.
+
+###console
+$ sudo su -
+###
+
+#h2 Enable Apache on Mac OS X
+
+#p 그리고 apachectl 커맨드를 이용해 아파치를 구동합니다.
+
+###console
+$ apachectl start
+###
+
+#h2 check your web browser
+#p 이후 {@http://localhost}로 접속이 잘 되는지 확인합니다. 그리고 기본 도큐먼트 루트{=Document root}는 {@/Library/WebServer/Documents}입니다.
+
+#h2 Disable Apache on Mac OS X
+
+#p 아파치를 내릴 때는 다음과 같은 커맨드를 이용합니다.
+
+###console
+$ apachectl stop
+###
+
+#h2 apache config
+#p 아파치 설정은 다음 파일을 수정해줍니다.
+
+###console
+$ vi /etc/apache2/httpd.conf
+###
+
+#h2 Tip
+#p 로컬호스트에서만 접근하고 싶다면 http.conf 설정 중에 {@Listen 127.0.0.1:80}을 넣어주면 됩니다. (기존 Listen 구문이 있다면 변경하면 됩니다.)

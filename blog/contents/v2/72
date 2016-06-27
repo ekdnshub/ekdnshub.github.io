@@ -1,0 +1,123 @@
+###info
+title=자바 Runnable를 이용해 쓰레드 만들기 (Java Runnable Interface)
+created=2015-02-17
+###
+
+#p 저번 포스팅에서 얘기했던대로 이번엔 Runnable 인터페이스를 이용한 쓰레드 작성 방법에 대해 알아고보자 합니다.
+
+#h2 Runnable 인터페이스(Runnable Interface)
+#p 기본적인 Runnable 인터페이스의 사용 방법은 다음과 같습니다.
+
+###code.java
+/* Using Runnable Interface */
+class foo implements Runnable{
+	@Override
+	public void run() {
+		// do something...
+	}
+}
+###
+
+#p 위의 코드에서 {@run()} 메소드만 채워주면 Runnable 인터페이스를 구현하는 것은 간단합니다. 하지만 Thread를 상속받은 클래스처럼 {@start()} 메소드가 없습니다. 따라서 별도의 쓰레드를 생성 해 주고 구현한 Runnable 인터페이스를 인자로 넘겨주어야 합니다. 다음의 코드처럼요.
+###code.java
+/* Using Runnable Interface */
+public class RunnableTest{
+	public static void main(String[] args){
+		Runnable r = new foo();
+		Thread t = new Thread(r);
+		t.start();
+	}
+}
+class foo implements Runnable{
+	@Override
+	public void run() {}
+}
+###
+
+#h2 Simple Runnable Program
+#p 이번 포스팅에서는 상태를 체크할 index 변수를 전역 변수가 아닌 Runnable 인터페이스를 구현할 클래스{=이하 ConcreteRunnable}에서 사용하도록 변경해보겠습니다. 코드를 봅시다.
+###code.java
+/* Runnable 쓰레드 프로그램 */
+import java.util.ArrayList;
+import java.util.Random;
+
+public class RunnableTest{
+	public static void main(String[] args) throws InterruptedException {
+		
+		System.out.println("Start main method.");
+		
+		Runnable r = new ConcreteRunnable(); // 실제 구현한 Runnable 인터페이스
+		ArrayList&lt;Thread&gt; threadList = new ArrayList&lt;Thread&gt;(); // 쓰레드들을 담을 객체
+
+		for(int i = 0 ; i &lt; 10 ; i++ ){
+			// Runnable 인터페이스를 사용해 새로운 쓰레드를 만듭니다.
+			Thread test = new Thread(r); 
+			
+			test.start(); // 이 메소드를 실행하면 Thread 내의 run()을 수행한다.
+			threadList.add(test); // 생성한 쓰레드를 리스트에 삽입
+		}
+		
+		for(Thread t : threadList){
+			t.join(); // 쓰레드의 처리가 끝날때까지 기다립니다.
+		}
+		
+		System.out.println("End main method.");
+	}
+}
+
+class ConcreteRunnable implements Runnable{
+
+	private int index = 0;
+	
+	@Override
+	public void run() {
+		
+		Random r = new Random(System.currentTimeMillis());
+		
+		long s = r.nextInt(3000); // 3초내로 끝내자.
+		try {
+			Thread.sleep(s); // 쓰레드를 잠시 멈춤
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		addIndex();
+
+	}
+	
+	// 내부 변수를 동기화해서 사용!
+	// 동기화 이유가 궁금하다면 synchronized 키워드를 삭제 해서 여러번 돌려보세요!
+	synchronized void addIndex(){
+		index++;
+		System.out.println("current index value: " + index);
+	}
+	
+}
+###
+
+#p 하나의 ConcreteRunnable를 생성 후 여러 개의 쓰레드에 인자로 넘겨줬습니다. {!이렇게 하면 ConcreteRunnable 내의 멤버 변수는 모든 쓰레드가 공유하게 됩니다.} 만약 모든 쓰레드에 새로운 ConcreteRunnable를 생성해 넣는다면 ConcreteRunnable의 멤버 변수는 공유하지 않습니다. 지금 예제에서는 ConcreteRunnable를 하나만 생성해 쓰레드를 만들었으므로 index 변수를 모든 쓰레드가 공유하게 됩니다.
+#p 위의 프로그램을 실행시켜 본다면 다음과 같은 결과를 콘솔에서 볼 수 있습니다.
+
+###console
+Start main method.
+current index value: 1
+current index value: 2
+current index value: 3
+current index value: 4
+current index value: 5
+current index value: 6
+current index value: 7
+current index value: 8
+current index value: 9
+current index value: 10
+End main method.
+###
+
+#p 실제로 상기의 코드를 실무에서 사용할 일은 없을테지만 Runnable 인터페이스를 사용하는 방법에 대해선 괜찮을거라 생각합니다. (…)
+
+#h2 Thread vs Runnable
+
+#p 쓰레드를 직접 상속 받는 방법과 이번 포스팅에서 설명한 것처럼 Runnable 인터페이스를 구현하는 방법의 차이점은 많이 있습니다. 하지만 가장 큰 것은 Thread를 상속{=extends} 받게 되면 상속 받은 클래스는 다른 클래스를 상속 받을 수가 없지만 Runnable은 인터페이스이기 때문에 구현{=implements}만 하면 되고 다른 필요한 클래스를 상속 받을 수 있다는 것입니다.
+#p 언뜻 봐서는 Runnable 인터페이스를 구현하는 것이 어떠한 상황에서든 합당해 보이나 프로그래밍은 언제나 그렇듯이 일방적인 해답만 있는건 아니니 사용 프로그램의 케이스를 따져서 Thread를 상속 받을지 Runnable 인터페이스를 구현할지 결정하시기 바랍니다. :)
+
+#h2 Closing Remarks
+#p 이렇게 자바에서 Thread를 만드는 방법 2가지를 알아봤습니다. 각각 {@Thread 상속}, {@Runnable 구현}입니다. 각자 사용처에 따라 입맛대로 쓸 수 있을때까지 열심히 코딩합시다. :)

@@ -1,0 +1,364 @@
+###info
+title=Spring MockMvc(spring-test)
+created=2015-07-03
+###
+#p 스프링 프레임워크에서 단위 테스트의 중요성은 다들 아실거라 생각합니다. :D
+#p 이번 포스팅에서는 Spring 3.2부터 사용 가능한 {@MockMvc}를 활용한 단위 테스트에 대해 알아보고자 합니다.
+#p {!또한 Springboot에서 같은 방법으로 사용가능합니다.}
+
+#h2 Spring MockMvc
+#p spring.io에서 {$https://spring.io/blog/2012/11/12/spring-framework-3-2-rc1-spring-mvc-test-framework|Spring Framework 3.2 RC1: Spring MVC Test Framework}라는 이름으로 포스팅이 되었습니다. 시간 나면 읽어보세요. :D
+#p {@MockMvc}는 기존의 {@MockHttpServletRequest}, {@MockHttpServletResponse}을 활용한 단위 테스트에서 발전되었습니다. 기존의 Mock 객체들은 충분한 검증 결과{=Annotaions, Request, etc. 를 포함한}를 보여 줄 수 없었기 때문입니다. 그래서 {@spring-test} 모듈을 스프링 프레임워크에 더했습니다.
+
+#h2 How to use Spring MockMvc
+#p 그럼 간단하게 스프링 테스트 모듈을 사용해 봅시다.
+
+#h3 Create Project
+#p 프로젝트 생성부터 해야겠네요. IDE는 STS이고 다음과 같은 순서로 만듭니다.
+###box.green
+File > New > Spring Project > Spring MVC Project
+###
+#p 패키지명은 {@kr.jdm.junit}으로 했습니다.
+
+#h3 Update pom.xml for Spring
+#p {@pom.xml} 파일을 갱신해야 합니다. 아래와 같은 부분을 추가하거나 수정해 주세요. {!Springboot는 이 부분을 무시하셔도 됩니다.}
+
+###code.xml
+&lt;properties>
+	&lt;java-version>1.6&lt;/java-version>
+	&lt;org.springframework-version>4.1.7.RELEASE&lt;/org.springframework-version>
+	&lt;org.aspectj-version>1.6.10&lt;/org.aspectj-version>
+	&lt;org.slf4j-version>1.6.6&lt;/org.slf4j-version>
+&lt;/properties>
+&lt;dependency>
+	&lt;groupId>org.springframework&lt;/groupId>
+	&lt;artifactId>spring-test&lt;/artifactId>
+	&lt;version>${org.springframework-version}&lt;/version>
+&lt;/dependency>
+&lt;dependency>
+	&lt;groupId>junit&lt;/groupId>
+	&lt;artifactId>junit&lt;/artifactId>
+	&lt;version>4.9&lt;/version>
+	&lt;scope>test&lt;/scope>
+&lt;/dependency>
+&lt;dependency>
+	&lt;groupId>javax.servlet&lt;/groupId>
+	&lt;artifactId>javax.servlet-api&lt;/artifactId>
+	&lt;version>3.1.0&lt;/version>
+&lt;/dependency>
+###
+#p 자바 버전이 낮은것이 흠이긴 하지만, 1.7 또는 1.8 이상으로 업그레이드 하셨다면 의존성 처리를 깨끗하게 하신 뒤에 다음으로 진행합니다.
+
+#h3 Controller
+#p 자동으로 생성된 컨트롤러의 소스 코드입니다. 이번 포스팅의 목표는 기존에 생성된 프로젝트를 최소한으로 수정해서 사용법을 알아 보는 것입니다. 따라서 기존 생성된 코드는 건들지 않습니다.
+###fold.View Source Code
+###code.java
+package kr.jdm.junit;
+
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+/**
+ * Handles requests for the application home page.
+ */
+@Controller
+public class HomeController {
+
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat
+								.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+
+		String formattedDate = dateFormat.format(date);
+
+		model.addAttribute("serverTime", formattedDate );
+
+		return "home";
+	}
+}
+###
+###
+
+#h3 Setup
+#p 셋업 코드를 작성합니다. 두 가지의 테스트 클래스가 작성됩니다. 해당 클래스들은 {@src/test/java} 디렉토리 하위 {@kr.jdm.junit} 패키지 경로에 만들어집니다.
+
+#h4 Setup with StandAlone
+#p 먼저 볼 것은 컨트롤러 단독으로 테스트 하기 위한 테스트 클래스입니다.
+###code.java
+package kr.jdm.junit;
+
+// 이부분 추가하셔야 합니다.
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+public class StandAloneTest {
+
+	private MockMvc mockMvc;
+
+	// 테스트 메소드 실행전 셋업 메소드입니다.
+	@Before
+	public void setup(){
+		// 이곳에서 HomeController를 MockMvc 객체로 만듭니다.
+		this.mockMvc = MockMvcBuilders.standaloneSetup(new HomeController()).build();
+	}
+
+	@Test
+	public void test() throws Exception{
+		// HomeController의 "/" 매핑으로 정의합니다.
+		this.mockMvc.perform(get("/"))
+		// 처리 내용을 출력합니다.
+		.andDo(print())
+		// 상태값은 OK가 나와야 합니다.
+		.andExpect(status().isOk())
+		// "serverTime"이라는 attribute가 존재해야 합니다.
+		.andExpect(model().attributeExists("serverTime"));
+	}
+}
+###
+
+###console
+INFO : kr.jdm.junit.HomeController - Welcome home! The client locale is en.
+
+MockHttpServletRequest:
+         HTTP Method = GET
+         Request URI = /
+          Parameters = {}
+             Headers = {}
+
+             Handler:
+                Type = kr.jdm.junit.HomeController
+              Method = public java.lang.String kr.jdm.junit.HomeController.home(java.util.Locale,org.springframework.ui.Model)
+
+               Async:
+       Async started = false
+        Async result = null
+
+  Resolved Exception:
+                Type = null
+
+        ModelAndView:
+           View name = home
+                View = null
+           Attribute = serverTime
+               value = July 3, 2015 9:42:51 PM KST
+
+            FlashMap:
+
+MockHttpServletResponse:
+              Status = 200
+       Error message = null
+             Headers = {}
+        Content type = null
+                Body =
+       Forwarded URL = home
+      Redirected URL = null
+             Cookies = []
+###
+
+#h4 Setup with Application Configuration
+#p 정의된 웹 어플리케이션 컨텍스트를 이용한 테스트 클래스를 작성합니다.
+
+###code.java
+package kr.jdm.junit;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml")
+public class ContextConfigTest {
+
+	@Autowired
+	private WebApplicationContext context;
+
+	private MockMvc mockMvc;
+
+	@Before
+	public void setup(){
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+	}
+
+	@Test
+	public void test() throws Exception{
+		 this.mockMvc.perform(get("/"))
+		 .andDo(print())
+		 .andExpect(status().isOk())
+		 .andExpect(model().attributeExists("serverTime"));
+	}
+}
+###
+###console
+INFO : kr.jdm.junit.HomeController - Welcome home! The client locale is en.
+
+MockHttpServletRequest:
+         HTTP Method = GET
+         Request URI = /
+          Parameters = {}
+             Headers = {}
+
+             Handler:
+                Type = kr.jdm.junit.HomeController
+              Method = public java.lang.String kr.jdm.junit.HomeController.home(java.util.Locale,org.springframework.ui.Model)
+
+               Async:
+       Async started = false
+        Async result = null
+
+  Resolved Exception:
+                Type = null
+
+        ModelAndView:
+           View name = home
+                View = null
+           Attribute = serverTime
+               value = July 3, 2015 9:43:56 PM KST
+
+            FlashMap:
+
+MockHttpServletResponse:
+              Status = 200
+       Error message = null
+             Headers = {}
+        Content type = null
+                Body =
+       Forwarded URL = /WEB-INF/views/home.jsp
+      Redirected URL = null
+             Cookies = []
+###
+
+#h3 Result Console
+
+#p 위의 두가지 테스트 클래스의 Console 결과는 비슷하지만 조금씩 차이도 있습니다. 이부분은 우선 참고만 하시길 바랍니다.
+
+#h2 Analyze MockMvc
+#p 간단하게 예제 코드를 통한 단위 테스트 방법을 확인 했습니다. 그럼 하나씩 뜯어봅시다.
+
+#h3 MockMvc
+#p 해당 클래스는 {$http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/test/web/servlet/MockMvc.html|MockMvc} Doc에서 확인 가능합니다. 지원하는 메소드는 {@.perform()}입니다. 이 메소드가 리턴하는 객체는 {@ResultActions}라는 인터페이스입니다.
+###code.java
+this.mockMvc.perform(get("/")) // basic
+this.mockMvc.perform(post("/")) // send post
+this.mockMvc.perform(get("/?foo={var}", "1")) // query string
+this.mockMvc.perform(get("/").param("bar", "2")) // using param
+this.mockMvc.perform(get("/").accept(MediaType.ALL)) // select media type
+###
+#p post(), put(), delete() 등도 가능합니다.
+
+###box.yellow
+#p {+help} {!TIP}
+#p 혹시라도 Filter 처리를 하고 싶다면 MockMvc를 초기화 할때 build() 메소드 호출 전 .addFilter 또는 .addFilters 메소드를 호출해서 필터를 등록해주시면 됩니다.
+###
+
+#h3 ResultActions
+#p MockMvc.perform 메소드로 리턴되는 인터페이스입니다. {$http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/test/web/servlet/ResultActions.html|ResultActions} Doc에서 확인 가능합니다. 지원 메소드는 andExpect, andDo, andReturn 입니다.
+
+#h4 andExpert
+#p 예상값을 검증합니다. {!!assert*} 메소드들과 유사합니다.
+
+###code.java
+// status 값이 정상인 경우를 기대하고 만든 체이닝 메소드 중 일부입니다.
+.andExpect(status().isOk())
+// contentType을 검증합니다.
+.andExpect(content().contentType("application/json;charset=utf-8"))
+###
+###box.red
+#p {+warn} {!WARNING}
+#p 혹시라도 mockMvc 객체로 테스트 중 한글이 깨지는 경우 컨트롤러 매핑을 확인해 봅시다.
+###code.java
+@RequestMapping(value = "/", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+###
+#p 위처럼 produces 부분에 캐릭터셋도 확실하게 지정을 해줘야 합니다.
+###
+
+
+#h4 andDo
+#p 요청에 대한 처리를 합니다. {@print()} 메소드가 일반적입니다.
+
+###code.java
+.andDo(print())
+###
+
+#h4 andReturn
+#p 테스트 클래스에서 작성은 안했지만 테스트한 결과 객체를 받을 때 사용합니다.
+
+###code.java
+MvcResult result = this.mockMvc.perform(get("/"))
+.andDo(print())
+.andExpect(status().isOk())
+.andExpect(model().attributeExists("serverTime"))
+.andReturn();
+###
+
+#h2 Setup with Application Configuration for Springboot
+#p Springboot에서는 아래처럼 테스트 클래스를 만듭니다.
+###code.java
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = DemoApplication.class)
+@WebAppConfiguration
+public class TestClass {
+	@Autowired
+	private WebApplicationContext context;
+
+	private MockMvc mvc;
+
+	@Before
+	public void setup(){
+		this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+	}
+
+	@Test
+	public void contextLoads() throws Exception {
+		this.mvc.perform(post("/").param("test", "한글")).andDo(print())
+		.andExpect(content().contentType("application/json;charset=utf-8"));
+	}
+}
+###
+
+#h2 jsonPath
+#p 만약 응답 결과물이 {@json}이라면 {$https://github.com/jayway/JsonPath|JsonPath}를 한번 검토해보세요. 다음처럼 사용할 수 있습니다.
+###code.java
+/*
+{"message":"val"} 이라는 response를 받았는지 검증하려면 아래처럼 사용하세요.
+*/
+.andExpect(jsonPath("$.message").value("val"))
+###
+
+#h2 Closing Remarks
+#p 새벽에 오류난 것을 고치는것보다 미리 테스트를 통한 검증으로 발뻗고 잡시다. :D

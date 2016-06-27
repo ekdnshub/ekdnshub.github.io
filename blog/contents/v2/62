@@ -1,0 +1,150 @@
+###info
+title=Javascript Use Strict
+created=2015-01-21
+###
+#p 이 포스팅의 원본 문서는 {$http://www.w3schools.com/js/js_strict.asp|이곳}입니다. 이 포스팅은 원본 문서를 한글로 번역한 것임을 밝힙니다. 중간중간 의역이 있습니다. 유의 부탁드립니다. :)
+
+#h2 Define "use strict"
+#p 자바스크립트에서 {@use strict}란 선언된 이후의 자바스크립트 코드들을 {!strict mode}로 실행한다는 뜻이다.
+
+#h2 Syntax "use strict"
+#p {@use strict} 구문은 자바스크립트 1.8.5(ECMAScript version 5)버전에서 새롭게 추가 되었다. 이 구문은 상태(statement)가 아니고 문자 표현식(literal expression)이다. 자바스크립트의 이전 버전에서는 무시된다.
+#p {@use strict} 구문의 목적은 선언 이후 자바스크립트 코드들을 {!strict mode}로 실행될 것임을 표시한다. 예를 들어 {!strict mode}는 사용자가 선언되지 않은 변수를 사용하는 것을 막는다.
+#p 현재 {!strict mode}를 지원하는 브라우저는 다음과 같다.
+###box.green
+###ul
+#li IE 10
+#li Firefox 4
+#li Chrome 13
+#li Safari 5.1
+#li Opera 12
+### 
+###
+
+#h2 Way for Define Strict Mode
+#p {!엄격한 문법}{=Strict Mode}의 선언 방법은 자바스크립트 파일 또는 자바스크립트 함수 시작 위치에 {@"use strict";} 를 더하는 것이다.
+#p 자바스크립트 파일의 시작 위치에 선언하는 것은 전역 범위{=global scope}를 가진다. 이것은 {!모든} 자바스크립트 코드를 "엄격한 문법"을 사용하겠다는 것이다.
+#p 자바스크립트 함수의 내부에 선언하는 것은 지역 범위{=local scope}를 가진다. 이것은 함수 내의 코드만을 {!엄격한 문법}을 적용 시킨다.
+###code.sh
+/* 전역 선언(Global declaration) */
+"use strict";
+x = 3.14;       // 이 코드는 오류가 난다.
+myFunction();   // 이 코드 또한 오류가 난다.
+
+function myFunction() {
+    x = 3.14;
+}
+###
+###code.js
+/* 지역 선언(Local declaration) */
+x = 3.14;       // 이 코드는 오류가 나지 않는다.
+myFunction();   // 이 코드는 오류가 난다.
+
+function myFunction() {
+   "use strict";
+    x = 3.14;
+}
+###
+###box.red
+#p {+warn} {!주의사항}
+#p {@use strict} 선언은 {!반드시} 스크립트 또는 함수의 {!처음} 부분에 구성 되어야 한다.
+###
+
+#h2 Syntax "use strict";
+#p {!엄격한 문법} 선언을 위한 문법은 옛날 버전의 자바스크립트에도 호환될 수 있게 디자인 되었다.
+#p 자바스크립트 프로그램 내에서 숫자형 문자{=numeric literal}, 예를 들자면 {@4 + 5;}같은 것이나 또는 문자열 문자{=string literal} 예를 들자면 {@"JDM";} 같은 코드를 컴파일하는데 부작용{=side effects}을 가지지 않는다. 이것은 단순하게 익명 변수로 컴파일하고 무시한다.
+#p 그래서 {@"use strict";} 구문은 이것을 이해할 수 있는 새로운 컴파일러들만이 처리할 것이다
+
+#h2 Why I use "Strict Mode"?
+#p {!엄격한 문법}은 자바스크립트 코드를 {!안전하게} 만드는 것을 쉽게 할 수 있도록 만든다.
+#p {!엄격한 문법}은 오류가 날만한 나쁜 문법{=bad syntax}을 실제 오류{=real errors}로 바꿔준다.
+#p 예를 들어 일반적인 자바스크립트에선 변수를 사용할 때 단순한 실수로 오탈자가 생기면{=mistyping} 이것을 오류가 아닌 새로운 전역 변수{=global variable}로 만든다. 하지만 {!엄격한 문법}에서는 이것을 오류라고 표시하고 전역 변수를 갑작스럽게 만들어내는 것을 불가능하게 만든다.
+#p 또한 일반적인 자바스크립트에서 개발자가 쓰기 불가 속성{=non-writable properties}에 새로운 값을 집어넣어도 피드백을 주지 않아 이것이 오류라는 것을 인지 할 수 없다.
+#p 그러나 {!엄격한 문법} 내에선 쓰기 불가 속성{=non-writable property}, 읽기 전용 속성{=getter-only property}, 존재하지 않는 속성{=non-existing property}, 존재하지 않는 변수{=non-existing variable} 또는 존재하지 않는 객체{=non-existing object}까지 전부 오류로 인식한다.
+
+
+
+
+#h2 Not allowed code in "Strict Mode"
+#p 변수를 사용할 때 선언하지 않으면 사용할 수 없다.
+###code.js
+"use strict";
+x = 3.14; // 이 코드는 오류가 난다. x가 선언되지 않았기 때문이다.
+###
+#line
+#p 변수{=variable}, 함수{=function}, 또는 인자{=argument}를 삭제하는 것은 허용 하지 않는다.
+###code.js
+"use strict";
+x = 3.14;
+delete x; // 이 코드는 오류가 난다.
+###
+#line
+#p 같은 속성 내에서 두번 정의 하는 것은 허용 하지 않는다.
+###code.js
+"use strict";
+var x = {p1:10, p1:20};   // 이 코드는 오류가 난다.
+###
+#line
+#p 중복된 파라미터 이름을 선언할 수 없다.
+###code.js
+"use strict";
+function x(p1, p1) {}; // 이 코드는 오류가 난다.
+###
+
+#line
+#p 8진수 숫자형 문자{=Octal numeric literals}와 탈출{=escape} 문자는 허용 되지 않는다.
+###code.js
+"use strict";
+var x = 010; // 이 코드는 오류가 난다.
+var y = \010; // 이 코드는 오류가 난다.
+###
+
+#line
+#p 읽기 전용 속성{=read-only property}에 값을 새로 쓰는 것은 허용하지 않는다.
+###code.js
+"use strict";
+var obj = {};
+obj.defineProperty(obj, "x", {value:0, writable:false});
+obj.x = 3.14; // 이 코드는 오류가 난다.
+###
+
+#line
+#p 읽기 전용 속성{=get-only property}에 값을 새로 쓰는 것은 허용하지 않는다.
+###code.js
+"use strict";
+var obj = { get x(){ return 0; } };
+obj.x = 3.14; // 이 코드는 오류가 난다.
+###
+
+#line
+#p 삭제 불가능 속성{=undeletable property}을 삭제하는 것은 허용하지 않는다.
+###code.js
+"use strict";
+delete Object.prototype; // 이 코드는 오류가 난다.
+###
+
+#line
+#p 변수 명으로 {@eval}과 {@arguments}를 사용할 수 없다.
+###code.js
+"use strict";
+var eval = 3.14; // 이 코드는 오류가 난다.
+var arguments = 3.14; // 이 코드는 오류가 난다.
+###
+
+#line
+#p {@with} 구문{=statement}을 사용할 수 없다.
+###code.js
+"use strict";
+with (Math){x = cos(2)}; // 이 코드는 오류가 난다.
+###
+
+#line
+#p 보안적인 이유로 {@eval()} 함수를 써서 만든 새로운 변수들은 호출 할 수 없다.
+###code.js
+"use strict";
+eval ("var x = 2");
+alert (x) // 이 코드는 오류가 난다.
+###
+
+#line
+#p 마지막으로, 함수{=function} 내에서 {@f()} 같은 함수를 호출하면 이 값은 전역 객체{=global object}지만 {!엄격한 문법} 내에서는 {@@undefined} 값을 가진다.

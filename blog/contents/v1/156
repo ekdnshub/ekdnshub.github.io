@@ -1,0 +1,6 @@
+<p>
+요즘은 <a href="http://redis.io/">Redis</a>에서 <a href="http://redis.io/topics/sentinel">Sentinel</a>과 <a href="http://redis.io/topics/partitioning">Partitioning</a>부분을 유심히 보고 있습니다. 이걸 사용하게 될 수도 있다보니... -_-
+</p>
+<p>
+Sentinel은 Zookeeper하고 유사해 보이는 역할이지만 Redis Instance에 촛점이 맞춰져 있네요. Partitioning도 서버 사이드에서 할 수 있는 방안이 많아서 이쪽으로 깊게 파고 들어봐야겠어요.
+</p>

@@ -1,0 +1,181 @@
+###info
+title=[Java] ToStringBuilder 사용법
+created=2016-03-11
+###
+
+#p 이번 포스팅은 {@commons-lang3} 패키지에 포함되어 있는 {@ToStringBuilder} 클래스에 대해 알아봅니다.
+
+#h2 Why use ToStringBuilder?
+#p {@ToStringBuilder}를 설명하기 전에 한가지 예제를 먼저 봅시다.
+#p 우선 우리들이 특정 클래스를 만들었다고 가정합니다. 예를 들면 다음과 같은 클래스입니다.
+
+###code.java
+public class Duck {
+    private String name;
+    private Integer age;
+
+    public Duck(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+}
+###
+
+#p 위는 오리를 나타내는 클래스입니다. 이 클래스에는 오리의 이름과 나이를 멤버 변수로 가지고 있습니다. 그리고 Setter/Getter 메소드가 있어요. 만약 위 클래스의 정보를 알고 싶으면 어떻게 해야할까요?
+#p 다음과 같은 예제 코드를 돌려봅시다.
+###code.java
+import org.junit.Test;
+
+public class ToStringBuilderTest {
+    @Test
+    public void test(){
+        Duck duck = new Duck("bob", 1);
+        System.out.println(duck.toString());
+    }
+}
+###
+###console
+Duck@504bae78
+###
+#p 위와 같은 결과가 나오는 이유는 {@Object} 클래스의 {@.toString()} 메소드를 사용했기 때문입니다. 해당 메소드는 다음처럼 구현되어 있습니다.
+###code.java
+// Object.class
+public String toString() {
+    return getClass().getName() + "@" + Integer.toHexString(hashCode());
+}
+###
+#p 즉, 클래스의 이름과 자신의 해시코드를 "@" 문자열로 연결한 값을 출력해서 보여주는거죠. 하지만 이 정보는 클래스의 멤버 변수가 출력 되지 않기 때문에 실제 어떤값이 있는지 확인할 용도로는 적합하지 않습니다.
+#p 그러면 다음 방법은 {@.toString()} 메소드를 오버라이드{=override}하는 겁니다. 자신이 원하는 정보를 출력하도록 만드는거죠. 예를 들면 다음처럼요.
+
+###code.java
+// Duck.class
+@Override
+public String toString() {
+    return String.format("[name] %s [age] %d", name, age);
+}
+###
+
+#p 오리 클래스에 위처럼 메소드를 오버라이드를 하고 {@.toString()} 메소드를 실행시켜 봅시다. 그러면 다음과 같은 결과가 나올거에요.
+###console
+[name] bob [age] 1
+###
+#p 이제 멤버 변수의 값이 어떤건지 알 수 있게 되었습니다. 그런데 여기에 새로운 멤버 변수 {@fly}가 추가 되었습니다. 날수 있는지 없는지에 대한 것을 마킹할 용도로 만들어진겁니다. 그래서 현재 {@Duck} 클래스는 다음처럼 변경 되었습니다.
+
+###code.java
+public class Duck {
+
+    private String name;
+    private Integer age;
+    private Boolean fly;
+
+    public Duck(String name, Integer age, Boolean fly) {
+        this.name = name;
+        this.age = age;
+        this.fly = fly;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Boolean getFly() {
+        return fly;
+    }
+
+    public void setFly(Boolean fly) {
+        this.fly = fly;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[name] %s [age] %d", name, age);
+    }
+}
+###
+
+#p 변경을 한것은 좋은데 문제가 있습니다. {@.toString()} 메소드에는 멤버 변수 {@fly}에 대한 값이 출력 되지 않는겁니다. 물론, 멤버 변수가 추가 될때마다 {@String.format()}을 사용해 {@.toString()} 에서 반환할 문자열을 바꿔주면 됩니다. 하지만 이것은 생각보다 번거로운 일이죠.
+#p 이제 {@ToStringBuilder} 클래스를 사용해 볼 떄입니다.
+
+#h2 How to use ToStringBuilder?
+
+#p {@ToStringBuilder}를 사용하기 위해서는 다음과 같은 의존성을 선언해 줘야 합니다. Maven 기준이긴 합니다만 별도의 패키지 저장소를 사용하지 않는다면 직접 jar 파일을 다운로드 받아서 사용하세요.
+###code.xml
+<dependency>
+  <groupId>org.apache.commons</groupId>
+  <artifactId>commons-lang3</artifactId>
+  <version>3.4</version>
+</dependency>
+###
+#p 위처럼 의존성 선언을 해줬다면 다음은 자신이 필요한 클래스의 {@.toString()} 메소드에 한줄만 추가해주면 됩니다. 다음처럼요.
+
+###code.java
+// Duck.class
+@Override
+public String toString() {
+  return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+}
+###
+
+#p 그럼 준비는 끝났습니다. 아까 전 만들어뒀던 테스트 코드를 살짝만 바꿔서 다시 실행해 봅시다.
+
+###code.java
+import org.junit.Test;
+
+public class ToStringBuilderTest {
+    @Test
+    public void test(){
+        Duck duck = new Duck("bob", 1, true);
+        System.out.println(duck.toString());
+    }
+}
+###
+###console
+{"name":"bob","age":1,"fly":true}
+###
+
+#p 이젠 멤버 변수를 추가 하더라도 {@.toString()} 메소드에서 누락되는 일은 없을겁니다. {@ToStringBuilder} 클래스의 사용법은 이정도면 충분하게 활용할 수 있을것이라 봅니다.
+
+#h2 ToStringBuilder.reflectionToString() Argument.
+#p 앞서 봤던 예제 코드에서는 {@Json} 형태의 문자열로 객체 정보를 반환했습니다. 이것이 가능한 이유는 {@.reflectionToString()} 메소드의 파라미터에 {@ToStringStyle.JSON_STYLE} 을 선언했기 때문입니다. 센스 있으신 분들은 이걸 보자마자 다른 형태도 제공하겠구나! 라고 생각하실텐데 맞습니다.
+#p {@ToStringBuilder} 에서는 다양한 형태의 문자열 템플릿을 제공하고 있습니다. 다음처럼 설정할 수 있어요.
+###code.java
+ToStringStyle.DEFAULT_STYLE
+ToStringStyle.MULTI_LINE_STYLE
+ToStringStyle.NO_FIELD_NAMES_STYLE
+ToStringStyle.SHORT_PREFIX_STYLE
+ToStringStyle.SIMPLE_STYLE
+ToStringStyle.NO_CLASS_NAME_STYLE
+ToStringStyle.JSON_STYLE
+###
+#p 다양하게 테스트 해보시고 취향(?)에 맞는 것을 사용하시면 됩니다.
+
+#h2 Closing Remarks
+#p {@ToStringBuilder} 클래스를 활용해서 반복 작업에서 탈출합시다! :D

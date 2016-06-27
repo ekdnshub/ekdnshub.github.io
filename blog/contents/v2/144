@@ -1,0 +1,53 @@
+###info
+title=jQuery 상위 요소 가져오기(parents, closest)
+created=2015-05-26
+###
+#p 가끔 jQuery 사용시에 특정 상위 객체를 가져와야 하는 때가 종종 있다. 까먹지 않게 포스팅.
+
+#h2 Example
+#p jQuery에서 특정 상위 객체를 가져오는 방법은 여러가지가 있으니 하나씩 알아보자. 우선 예제로 쓸 HTML 페이지 구성은 아래와 같다.
+###code.html
+&lt;html&gt;
+	&lt;body&gt;
+		&lt;div id="parent2"&gt;&lt;!-- 부모 2 --&gt;
+			&lt;div id="parent1"&gt;&lt;!-- 부모 1 --&gt;
+				&lt;span id="test"&gt;&lt;/span&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+###
+<div id="parent2" style="display:none;">
+<!-- 부모 2 --> 
+  <div id="parent1">
+   <!-- 부모 1 --> 
+   <span id="test"></span> 
+  </div> 
+</div> 
+#p 이제부터 이 예제 코드를 가지고 다음의 함수들을 살펴보자.
+#h2 $(selector).parents(selector)
+#p parents 함수는 parents 인자값으로 잡히는 모든 상위 요소를 반환한다. 예를들자면,  예제 HTML 코드처럼 div 태그가 중첩되어 있을때 {@$("#test").parents("div")}를 실행하면 결과 객체는 배열이 나온다. 즉, {!셀렉터}{=selector}{!로 잡히는 모든 상위 요소를 반환한다.}
+#p 반환된 배열에는 parent1 div, parent2 div 태그가 있다. <button class="btn btn-xs btn-info" id="test1">테스트</button> 버튼을 눌러서 어떤 값이 나오는지 확인해보자. 지금 이 버튼은 해당 포스트를 구성하는 HTML의 일부분을 가져오게 되어 있다. 그래서 parent1,2 외에 다른 div도 다수 뜨게 되어 있지만 무시하자. 여기서 중요한건 셀렉터로 잡히는 모든 상위 요소를 가져온다는 것이다. 물론 특별한 요소 ID를 입력시키면 하나만 반환이 되긴 하겠다.
+#h2 $(selector).closest(selector)
+#p closest 함수는 parents 함수와 달리 {!셀렉터로 잡히는 상위 요소중 가장 근접한 하나를 반환한다.} {@$("#test").closest("div")}를 실행하면 parent1 div 태그 객체가 반환된다. <button class="btn btn-xs btn-info" id="test2">테스트</button> 버튼을 눌러서 확인해보자.
+<script>
+(function($){
+	$("#test1").click(function(){
+		$("#test").parents("div").each(
+			function(index,obj){ 
+				(function(index,obj){
+					setTimeout(function(){
+						o.toast.info($(obj).attr("id"));
+					}, index*100 );
+				})(index,obj);
+			}
+		);
+	});
+
+	$("#test2").click(function(){
+		$("#test").closest("div").each(function(){ 
+			o.toast.info($(this).attr("id")); 
+		});
+	});
+})($);
+</script>

@@ -1,0 +1,53 @@
+
+ <p> C++에서 map을 쓸일이 생겼습니다. 간단한 예제 프로그램을 굴려봤어요. </p> 
+ <h4>example source</h4> 
+ <pre class="prettyprint linenums lang-cpp">/* map example */
+#include &lt;map&gt;
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+
+using std::map;
+using std::string;
+using std::cout;
+using std::endl;
+
+int main(void){
+	// &lt;int, string&gt; fair map test
+	map&lt;int, string&gt; m;
+	map&lt;int, string&gt;::iterator i;
+
+	m.insert( map&lt;int, string&gt;::value_type(1, "Hello") );
+	m.insert( map&lt;int, string&gt;::value_type(2, "World") );
+
+	// map 순회
+	for(i = m.begin(); i != m.end(); i++){
+		cout &lt;&lt; "[" &lt;&lt; i-&gt;first &lt;&lt; "] " &lt;&lt; i-&gt;second &lt;&lt; endl;
+	}
+
+	// direct select
+	cout &lt;&lt; m[1] &lt;&lt; endl;
+
+	// &lt;string, string&gt; fair map test
+	map&lt;string, string&gt; m2;
+	map&lt;string, string&gt;::iterator j;
+
+	m2.insert( map&lt;string, string&gt;::value_type("a", "Hello") );
+	m2.insert( map&lt;string, string&gt;::value_type("123", "World") );
+
+	// map 순회
+	for(j = m2.begin(); j != m2.end(); j++){
+		cout &lt;&lt; "[" &lt;&lt; j-&gt;first &lt;&lt; "] " &lt;&lt; j-&gt;second &lt;&lt; endl;
+	}
+
+	// direct select
+	cout &lt;&lt; m2["123"] &lt;&lt; endl;
+}
+</pre> 
+ <pre class="console">
+[1] Hello
+[2] World
+Hello
+[123] World
+[a] Hello
+World
+</pre> 

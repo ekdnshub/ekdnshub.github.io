@@ -1,0 +1,194 @@
+###info
+title=Java Json 다루기(Java Jackson Examples)
+created=2016-01-04
+###
+#p 새해 첫 포스팅입니다. 오늘은 자바에서 JSON을 다룰 수 있게 도와주는 Jackson 라이브러리에 대해 알아봅니다.
+
+#h2 Maven Dependency
+#p 먼저 Jackson 라이브러리를 추가해줍니다.
+###code.xml
+<dependency>
+	<groupId>com.fasterxml.jackson.core</groupId>
+	<artifactId>jackson-databind</artifactId>
+	<version>2.6.4</version>
+</dependency>
+###
+#p 이번 예제 코드를 위해 jUnit 라이브러리도 추가해줍니다.
+###code.xml
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+</dependency>
+###
+
+#h2 Code Examples
+#p 이제 코드를 작성해 Json 포맷을 다뤄봅니다.
+#p 다음 코드는 Jackson 라이브러리를 이용해 Json을 다루는 테스트 케이스들을 모아놓은 것입니다. 자세한 내용은 주석을 참고하세요.
+###code.java
+/* JacksonTest.java */
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
+
+import static org.junit.Assert.assertTrue;
+
+public class JacksonTest {
+    private ObjectMapper mapper;
+
+    @Before
+    public void setup(){
+        this.mapper = new ObjectMapper();
+    }
+
+    /**
+     * 이 테스트는 기본적인 사용 방법을 보여줍니다.
+     * @throws IOException
+     */
+    @Test
+    public void testBasicCode() throws IOException {
+       /**
+        test.json 파일 내용
+        {
+            "name":"JDM",
+            "age":30,
+            "bool":true
+        }
+       */
+        InputStream is = JacksonTest.class.getClassLoader()
+                .getResourceAsStream("test.json");
+        Map test = mapper.readValue(is, Map.class);
+        assertTrue("JDM".equals(test.get("name")));
+        assertTrue(30 == Integer.parseInt(test.get("age").toString()));
+        assertTrue(true == Boolean.parseBoolean(test.get("bool").toString()));
+    }
+
+    /**
+     * 이 테스트는 기본 json 포맷 내부 엘리먼트 요소로 list가 있는 경우
+     * model class를 사용해 처리하는 것을 보여줍니다.
+     * model class 소스 코드는 포스트 하단에 있습니다.
+     * @throws IOException
+     */
+    @Test
+    public void testComplexCodeUsingModel() throws IOException {
+        /**
+         test2.json 파일 내용
+         {
+             "name":"JDM",
+             "age":30,
+             "bool":true,
+             "numbers":[1,2,3]
+         }
+         */
+        InputStream is = JacksonTest.class.getClassLoader()
+                .getResourceAsStream("test2.json");
+        TestTwoModel test = mapper.readValue(is, TestTwoModel.class);
+        assertTrue(test.getName().equals("JDM"));
+        assertTrue(test.getAge() == 30);
+        assertTrue(test.isBool() == true);
+        assertTrue(test.getNumbers().size() == 3);
+    }
+
+    /**
+     * 이 테스트는 JsonNode를 사용하는 방법을 보여줍니다.
+     * @throws IOException
+     */
+    @Test
+    public void testComplexCodeUsingJsonNode() throws IOException {
+        /**
+         test2.json 파일 내용
+         {
+             "name":"JDM",
+             "age":30,
+             "bool":true,
+             "numbers":[1,2,3]
+         }
+         */
+        InputStream is = JacksonTest.class.getClassLoader()
+                .getResourceAsStream("test2.json");
+        JsonNode test = mapper.readValue(is, JsonNode.class);
+
+        /**
+         * .get()를 이용해서 원하는 필드의 값을 가져옵니다.
+         * .get()은 값을 찾을 수 없는 경우 null을 반환합니다.
+         */
+        assertTrue(test.get("name").asText().equals("JDM"));
+        assertTrue(test.get("age").asInt() == 30);
+        assertTrue(test.get("bool").asBoolean() == true);
+        assertTrue(test.get("numbers").isArray());
+
+        /**
+         * .path()를 이용할 수도 있습니다.
+         * .get()와의 차이점은 값을 찾을 수 없는 경우 return 값으로
+         * MissingNode 객체를 반환합니다.
+         */
+        assertTrue(test.path("name").asText().equals("JDM"));
+    }
+
+    /**
+     * JsonNode 객체는 불변(immutable)하는 객체기 때문에 값을 변경하려면
+     * 가변 객체인 ObjectNode로 캐스팅해서 바꿔야 합니다.
+     * @throws IOException
+     */
+    @Test
+    public void testChangeValueUsingObejctNode() throws IOException {
+        String src = "{\"item\":\"i'm Item!\"}";
+        JsonNode obj = mapper.readValue(src, JsonNode.class);
+        assertTrue(obj.get("item").asText().equals("i'm Item!"));
+        ((ObjectNode) obj).put("item", "change Value!"); // .set()을 사용해도 됩니다.
+        assertTrue(obj.get("item").asText().equals("change Value!"));
+    }
+}
+###
+###code.java
+/* TestTwoModel.java */
+import java.util.List;
+
+public class TestTwoModel {
+    private String name;
+    private int age;
+    private boolean bool;
+    private List<Integer> numbers;
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    public void setNumbers(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
+    public boolean isBool() {
+        return bool;
+    }
+
+    public void setBool(boolean bool) {
+        this.bool = bool;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+###
+
+#h2 Closing Remarks
+#p 간단하게 자바 Json 처리를 도와주는 Jackson 라이브러리에 대해 알아봤습니다. :D

@@ -1,0 +1,23 @@
+ <p> 요즘 톰캣으로 이것저것 하고 있는데 설정 부분은 매번 까먹는 듯 합니다. 이번엔 톰캣 Document Root 설정 방법에 대해 알아봅시다. <span class="refer">이 포스팅에서는 tomcat7을 기준으로 하고 있습니다.</span> </p>
+ <h4>server.xml</h4> 
+ <p> 톰캣의 Document Root 설정은 tomcatPath/conf/server.xml 파일을 확인해 보면 됩니다. 여기에서 톰캣 내에서 사용할 웹 애플리케이션의 설정이 가능합니다. server.xml에서 Document Root를 설정 한다는 것을 기억합시다. <span class="refer">tomcatPath는 톰캣이 설치된 디렉토리입니다.</span> </p> 
+ <h4>Default Document Root</h4> 
+ <p> 기본적으로 톰캣의 Document Root는 webapps이라는 디렉토리로 설정 되어 있습니다. 이 디렉토리는 tomcatPath/webapps를 뜻합니다. server.xml의 태그는 일반적으로 다음처럼 설정 되어 있습니다. </p> 
+ <pre class="prettyprint linenums lang-xml">/* server.xml */
+...
+&lt;Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true"&gt;
+...
+</pre> 
+ <p> 만약 기본 설정된 포트(일반적으로 8080)로 접속한다면 localhost:8080 으로 접속시에 webapps 디렉토리 내부에 맞는 웹 애플리케이션이 있는지 확인할거에요. Context 태그가 없다면 기본적으로는 ROOT 웹 애플리케이션을 참조합니다. </p> 
+ <p> 즉 localhost:8080 -&gt; webapps/ROOT 로 매핑이 된다라고 간단하게 생각하세요. </p> 
+ <h4>Sub Document Root</h4> 
+ <p> 만약에 localhost:8080/app -&gt; webapps/app 으로 매핑하고 싶으면 어떻게 해야할까요? 다음처럼 하면 됩니다. </p> 
+ <pre class="prettyprint linenums lang-xml">/* server.xml */
+...
+&lt;Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true"&gt;
+	&lt;Context path="/app" docBase="app" reloadable="true"/&gt;
+...
+</pre> 
+ <span class="refer">docBase를 "ROOT"로 하는것도 가능합니다.</span> 
+ <h4>마무리</h4> 
+ <p> 정말 간단하게(+급하게) 정리했습니다. 추후에 덧붙이는걸로 하고 일단은 무책임하게 여기서 끝 :3 </p>

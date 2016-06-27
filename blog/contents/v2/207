@@ -1,0 +1,330 @@
+###info
+title=Ehcache Usage & Example(Basic)
+created=2015-10-05
+###
+
+#h2 Ehcache Overview
+#p 지금 소개해드릴 {$http://www.ehcache.org/|Ehcache}는 오픈소스(아파치 라이센스 2.0)이면서 표준 기반 cache 입니다. 자바 기반의 cache로 폭넓게 사용 되고 있는데 이것은 다른 인기있는 라이브러리 또는 프레임워크와 같이 통합해서 사용하고 있기 때문입니다.
+
+#p 참고로 Ehcache는 독립적인 캐시 데몬을 가지지 않습니다. 이것은 memCached와 다른점이고 또한 원격 지원을 하는 Redis와도 다른점입니다.
+
+#p 이말인즉슨 Ehcache는 어플리케이션 구동시 내부적으로 동작합니다. 따라서 원격 캐시 서버를 사용하며 생길 수 있는 네트워크 지연 또는 단절로 인한 데이터 유실이 거의 없을뿐더러 같은 로컬 머신일지라도 별도로 구동하는 memCached와는 다르게 EhCache는 라이프사이클을 애플리케이션과 함께 합니다.
+
+#p 현재 최신 버전은 3.0.0.m3이 릴리즈 되었네요. 또한 JSR107 스펙을 지원합니다. 이 부분은 추후에 알아보는것으로 하고 기본적인 사용법에 대해 알아보고자 합니다.
+
+#h2 Maven Dependency
+#p Ehcache을 사용하기 위해서 다음과 같은 메이븐 의존성을 {@pom.xml} 파일에 추가해줍니다.
+###code.xml
+&lt;dependency>
+    &lt;groupId>org.ehcache&lt;/groupId>
+    &lt;artifactId>ehcache&lt;/artifactId>
+    &lt;version>3.0.0.m3&lt;/version>
+&lt;/dependency>
+###
+
+#h2 Example
+#p 이제부터 실제 코드로 확인해 봅시다.
+
+#h3 Basic
+#p 가장 기본적인 사용 방법입니다. 자세한 설명은 주석으로 대체합니다.
+
+###code.java
+import org.ehcache.Cache;
+import org.ehcache.CacheManager;
+import org.ehcache.CacheManagerBuilder;
+import org.ehcache.config.CacheConfigurationBuilder;
+
+public class EhCacheTest {
+
+    private static final String cacheName = "aliasName";
+    private static final String cacheNameTwo = "aliasName2";
+
+    public static void main(String[] args) {
+
+        /**
+         * 캐시 매니저를 생성한다. 생성할때는 CacheManagerBuilder 클래스의 .build() 메소드를 호출한다.
+         * 호출할때 별도의 캐시를 설정 할 수 있다.
+         * 아래는 2개의 캐시를 설정하고 이것을 관리하는 CacheManager 객체를 생성하는 코드이다.
+         */
+        CacheManager cacheManager = CacheManagerBuilder.newCacheManagerBuilder()
+                /**
+                 * 첫번째 캐시에 대한 설정을 만드는 코드이다. 이 캐시의 key는 String, value도 String으로 설정한다.
+                 */
+                .withCache(cacheName, CacheConfigurationBuilder.newCacheConfigurationBuilder()
+                        .buildConfig(String.class, String.class))
+                /**
+                 * 두번째 캐시에 대한 설정을 만드는 코드이다. 이 캐시의 key는 String, value는 Double이다.
+                 */
+                .withCache(cacheNameTwo, CacheConfigurationBuilder.newCacheConfigurationBuilder()
+                        .buildConfig(String.class, Double.class))
+                /**
+                 * .build(flag)에서 flag의 값에 따라 캐시 매니저 객체 생성 이후 바로 초기화 한다.
+                 * true : 캐시 매니저 빌드 이후 바로 캐시 초기화
+                 * false : 캐시를 바로 초기화 하지 않음
+                 */
+                .build(false);
+
+        /**
+         * 밑의 코드는 상기에 기술된 .build(false)로 인해 캐시 초기화를 해줘야 하므로 넣어준 코드이다.
+         * 이 코드를 통해 원하는 시점에서 캐시를 초기화 시킬 수도 있다.
+         */
+        cacheManager.init();
+
+        /**
+         * 캐시 매니저 객체에 미리 정의된 캐시를 가져오는 코드이다.
+         */
+        Cache&lt;String, String> cache = cacheManager.getCache(cacheName, String.class, String.class);
+        Cache&lt;String, Double> cache2 = cacheManager.getCache(cacheNameTwo, String.class, Double.class);
+
+        /**
+         * 캐시 매니저에 등록 하지 않은 캐시라도 .createCache() 메소드를 호출해 생성할 수 있다.
+         * 아래의 코드는 직접 "newCache"라는 이름의 캐시를 생성한다.
+         */
+        Cache&lt;Integer, String> newCache = cacheManager.createCache("newCache",
+                CacheConfigurationBuilder.newCacheConfigurationBuilder().buildConfig(Integer.class, String.class));
+
+        /**
+         * 새로 생성한 캐시에 값을 넣는다.
+         */
+        newCache.put(1, "one");
+
+        /**
+         * 새로 생성한 캐시에서 값을 가져온다.
+         */
+        String val = newCache.get(1);
+
+        /**
+         * 해당 값은 "one"이 출력된다.
+         */
+        System.out.println("val is " + val);
+
+        /**
+         * 필요가 없어진 캐시는 .removeCache() 메소드를 통해 제거할 수 있다.
+         */
+        cacheManager.removeCache("newCache");
+
+        /**
+         * 아래의 try/cache 구문은 실제로 삭제한 캐시에 다시 한번 값을 조회해보고 오류가 나는것을 확인하는 용도의 코드이다.
+         */
+        try {
+            val = newCache.get(1);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        /**
+         * 사용이 끝난 캐시 매니저는 .close() 호출해서 모든 Cache 인스턴스들을 닫는다.
+         */
+        cacheManager.close();
+
+        /**
+         * 따라서 아래의 코드는 오류가 난다.
+         */
+        try {
+            cache.put("one", "1");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+###
+
+#h3 Ehcache 3.0 Feature
+#p Ehcache 3버전에서 추가된 {@UserManagedCache} 클래스입니다. 자세한 설명은 주석으로 대체합니다.
+
+###code.java
+import org.ehcache.UserManagedCache;
+import org.ehcache.UserManagedCacheBuilder;
+
+public class EhCache3Test {
+    public static void main(String[] args) {
+        /**
+         * ehCache 3.0의 새로운 기능이다.
+         * 보다 간편하게 유저가 캐시를 만들어 낼 수 있다.
+         * 아래의 코드는 key가 String, value가 String인 유저 캐시 인스턴스를 만든다.
+         */
+        UserManagedCache&lt;String, String> userManagedCache =
+                UserManagedCacheBuilder.newUserManagedCacheBuilder(String.class, String.class)
+                        /**
+                         * .build(flag) 메소드는 CacheManager 인스턴스를 만들때와 동일한 역할이다.
+                         */
+                        .build(false);
+
+        /**
+         * .build(false)로 지정된 경우 .init() 메소드를 호출하는 시점을 정할 수 있다.
+         */
+        userManagedCache.init();
+
+        /**
+         * 유저 캐시에 값을 저장한다.
+         */
+        userManagedCache.put("one", "1");
+
+        /**
+         * 유저 캐시에서 값을 가져온다.
+         */
+        System.out.println(userManagedCache.get("one"));
+
+        /**
+         * 유저 캐시를 사용한 이후 필요가 없어지면 "반드시" .close() 메소드를 호출해서 닫아야 한다.
+         * 하지만 이 "유저 캐시" 인스턴스는 CacheManager.close() 메소드 호출에 의해 닫히지 않는다.
+         */
+        userManagedCache.close();
+    }
+}
+###
+
+#h3 Limit Cache Size
+#p 아래의 코드는 heap, offheap, disk 용량을 결정해서 사용하는 코드입니다. 자세한 설명은 주석으로 대체합니다.
+
+###code.java
+import org.ehcache.CacheManager;
+import org.ehcache.CacheManagerBuilder;
+import org.ehcache.PersistentCacheManager;
+import org.ehcache.config.CacheConfigurationBuilder;
+import org.ehcache.config.ResourcePoolsBuilder;
+import org.ehcache.config.persistence.CacheManagerPersistenceConfiguration;
+import org.ehcache.config.units.EntryUnit;
+import org.ehcache.config.units.MemoryUnit;
+
+import java.io.File;
+
+public class EhCacheTieringTest {
+    public static void main(String[] args) {
+        /**
+         * Offheap을 사용하는 캐시 매니저 코드이다.
+         * Offheap이란 말그대로 heap 외부에 있는 메모리로 자바 GC에 의해 데이터가 정리 되지 않는 공간이다.
+         * 거꾸로 말해서 메모리에 데이터가 지속적으로 유지 되는 공간이다.
+         */
+        CacheManager cacheManager = CacheManagerBuilder.newCacheManagerBuilder()
+                .withCache("offheapCache", CacheConfigurationBuilder.newCacheConfigurationBuilder()
+                        .withResourcePools(ResourcePoolsBuilder.newResourcePoolsBuilder()
+                                .heap(10, EntryUnit.ENTRIES) // Heap 사이즈 결정
+                                .offheap(10, MemoryUnit.MB)) // Offheap 사이즈 결정
+                        .buildConfig(String.class, String.class))
+                .build(true);
+        cacheManager.close();
+
+        /**
+         * disk에도 데이터를 저장하는 캐시 매니저 인스턴스 코드이다.
+         * 중간쯤 코드에 .disk() 메소드를 호출한다. 이 메소드가 디스크에 저장할 용량의 크기를 결정한다.
+         * 저장할 파일 위치는 .with() 메소드가 시작하는 코드에서 new File("...") 부분이다.
+         * 아래 코드에서 .offheap() 메소드는 optional이다.
+         * 또한 .offheap() 메소드를 설정했다면 .disk() 메소드에서는 해당 값이 더 커야 한다.
+         */
+        PersistentCacheManager persistentCacheManager =
+                CacheManagerBuilder.newCacheManagerBuilder()
+                        .with(new CacheManagerPersistenceConfiguration(new File("cache")))
+                        .withCache("complexCache", CacheConfigurationBuilder.newCacheConfigurationBuilder()
+                                .withResourcePools(ResourcePoolsBuilder.newResourcePoolsBuilder()
+                                        .heap(10, EntryUnit.ENTRIES)
+                                        .offheap(10, MemoryUnit.MB)
+                                        .disk(20, MemoryUnit.MB))
+                                .buildConfig(String.class, String.class))
+                        .build(true);
+        persistentCacheManager.close();
+    }
+}
+###
+
+#h3 Xml Config for Ehcache
+#p 자바 코드로 캐시를 설정하는 것 외에도 XML 파일을 이용해서 손쉽게 캐시를 설정할 수 있습니다. 자세한 내용은 코드를 참조하세요.
+
+#h4 Java Code
+###code.java
+import org.ehcache.Cache;
+import org.ehcache.CacheManager;
+import org.ehcache.CacheManagerBuilder;
+import org.ehcache.config.xml.XmlConfiguration;
+
+import java.net.URL;
+
+public class EhCacheXmlTest {
+
+    private CacheManager cacheManager;
+
+    EhCacheXmlTest() throws Exception {
+        /**
+         * Maven 프로젝트 기본 디렉토리 구조로 사용중이라면 /src/main/resources/ 아래 넣어야 한다.
+         */
+        final URL url = this.getClass().getResource("/ehCache-config.xml");
+        XmlConfiguration xmlConfiguration = new XmlConfiguration(url);
+        this.cacheManager = CacheManagerBuilder.newCacheManager(xmlConfiguration);
+        cacheManager.init();
+    }
+
+    public CacheManager getCacheManager(){
+        return this.cacheManager;
+    }
+
+    public void closeCacheManager(){
+        this.cacheManager.close();
+    }
+
+    public static void main(String[] args) {
+        try {
+            EhCacheXmlTest ehCacheXmlTest = new EhCacheXmlTest();
+            Cache cache = ehCacheXmlTest.getCacheManager().getCache("xmlCache", String.class, String.class);
+            cache.put("one", "1");
+            System.out.println(cache.get("one"));
+            ehCacheXmlTest.closeCacheManager();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+###
+#h4 Xml Configration
+
+#p 아래는 간단한 Ehcache XML 환경설정 파일입니다.
+
+###code.xml
+&lt;!-- ehCache-config.xml -->
+&lt;ehcache:config xmlns:ehcache="http://www.ehcache.org/v3">
+    &lt;!--
+    Cache를 설정한다.
+    -->
+    &lt;ehcache:cache alias="xmlCache">
+        &lt;!-- 키로 이용할 타입 지정 -->
+        &lt;ehcache:key-type>java.lang.String&lt;/ehcache:key-type>
+        &lt;!-- 값으로 이용할 타입 지정 -->
+        &lt;ehcache:value-type>java.lang.String&lt;/ehcache:value-type>
+        &lt;!-- Cache의 만료 시간을 정한다. -->
+        &lt;ehcache:expiry>
+            &lt;ehcache:tti unit="seconds">60&lt;/ehcache:tti>
+        &lt;/ehcache:expiry>
+        &lt;!--
+        지정된 Cache의 용량을 넘어서면 제거할 알고리즘을 정한다.
+        LRU : 최근에 이용하지 않은 것을 제거한다.
+        FIFO : 먼저 입력한 것을 제거한다.
+        LFU : 가장 적게 이용한 것을 제거한다.
+        -->
+        &lt;ehcache:eviction-prioritizer>LRU&lt;/ehcache:eviction-prioritizer>
+        &lt;!-- 힙 사이즈를 결정한다. -->
+        &lt;ehcache:heap size="100" unit="entries">&lt;/ehcache:heap>
+    &lt;/ehcache:cache>
+&lt;/ehcache:config>
+###
+
+#h3 Expire Configuration
+#p 캐시를 얼마나 유지하고 있어야 하는지도 결정해준다면 보다 효율적인 캐시 메모리 관리를 할 수 있지 않을까요? 이번 절에서는 캐시의 생명 주기를 결정하는 방법을 알아 봅시다.
+
+###code.java
+UserManagedCache<String, String> cache = UserManagedCacheBuilder
+        .newUserManagedCacheBuilder(String.class, String.class)
+        .withExpiry(Expirations.timeToIdleExpiration(new Duration(60L, TimeUnit.SECONDS)))
+        .withExpiry(Expirations.timeToLiveExpiration(new Duration(120L, TimeUnit.SECONDS)))
+        .build(true);
+###
+
+#p 위와 같은 코드로 캐시의 저장 주기를 결정 할 수 있습니다. 여기서 눈여겨 봐야하는것은 {@timeToIdleExpiration} 메소드와 {@timeToLiveExpiration} 메소드인데요, 두가지 메소드는 차이가 있습니다.
+#p 우선 {@timeToIdleExpiration} 메소드는 {!마지막 캐시 요청 이후 지정 시간동안 재 요청이 없다면 삭제 하는 시간}을 결정합니다. {@timeToLiveExpiration} 메소드는 {!최초 캐시 저장 이후부터 지정시간이 되면 캐시를 삭제 하는 시간}을 결정합니다. 보통은 {@timeToLiveExpiration} 값이 더 큰 경우가 많겠죠?
+#p 따라서 위의 코드에 따르면 해당 캐시에 저장되는 값들은 최대 120초 동안 유지가 될 수 있고 60초동안 재 요청이 없으면 값을 삭제하는 것이 되겠습니다.
+#p 일반적으로 만료 시간을 주지 않으면 캐시 정책에 따라 값들이 지워질 수도 있지만 명시적으로 영구 보존을 하고 싶다면 아래와 같은 코드를 사용합니다.
+###code.java
+.withExpiry(Expirations.timeToLiveExpiration(Duration.FOREVER))
+###
+#p 메모리가 있는 한 계속 저장할거에요. 물론 {@Duration.ZERO}라는 옵션도 존재는 합니다. 하지만 캐시를 써야하는 입장이라면 굳이 쓰일 이유는 없지 않을까요? :)
+
+#h2 Closing Remarks
+#p 간단한 Ehcache 사용법에 대해 알아봤습니다. :)

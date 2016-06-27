@@ -1,0 +1,236 @@
+###info
+title=Javascript Objects
+created=2015-01-23
+###
+#p 이 포스팅의 원본은 {$http://www.w3schools.com/js/js_object_definition.asp|이곳}입니다. 이 포스팅은 원본 문서를 한글로 번역한 것임을 밝힙니다. 중간중간 의역이 있습니다. 유의 부탁드립니다. :)
+
+#h2 JavaScript Objects
+###box.green
+#p 자바스크립트에서 객체{=Object}들은 킹{=king}이다. 만약 이 글을 보고 있는 당신이 객체들을 이해한다면 당신은 자바스크립트를 안다고 할 수 있다. 
+###
+#p 자바스크립트에서 대체적으로 "어느것이든" 객체다.
+###box.blue
+###ul
+#li {@Boolean}, {@Number}, {@String} 타입은 객체가 될 수 있다. 또는 객체로써 기본 자료형 취급한다.
+#li {@Date}, {@Math}, {@Regular expression}{=정규표현식}, {@Array}{=배열}, {@function}{=함수} 타입은 언제나 객체다.
+#li {@Object} 타입은 객체다.
+###
+###
+
+#p 자바스크립트에서 기본 자료형을 제외한 모든 값들은 객체들이다.
+#p 기본 자료형이란 다음과 같다.
+###box.yellow
+###ul
+#li 문자열{=strings} : "JDM"
+#li 숫자{=numbers} : 3.14
+#li true, false, null, undefined 
+###
+###
+#h2 Objects are Variables Containing Variables
+#p 객체들은 변수들을 포함하는 변수들이다.
+#p 자바스크립트 변수들은 단일 값을 가질 수 있다.
+###code.js
+var person = "JDM";
+###
+#p 객체들은 변수와도 같다. 그러나 객체들은 많은 변수들을 가질 수 있다.
+#p 이 값들은 name:value 형태의 한 쌍으로 쓰여질 수 있다. {=name 과 value는 콜론 기호로 분리 된다.}
+###code.js
+var person = {firstName:"DM", lastName:"J", age:29, eyeColor:"black"};
+###
+
+###box.green
+#p 자바스크립트 객체는 변수{=(named values라 불리는)}들이 정렬 되지 않은 집합이다. 
+###
+
+#h2 Object Properties
+#p 자바스크립트 객체에서 named values는 {!속성}{=properties}이라고도 한다.
+
+###box.none
+  <table> 
+   <tbody>
+    <tr> 
+     <td>{!Property}</td> 
+     <td>{!Value}</td> 
+    </tr> 
+    <tr> 
+     <td>firstName</td> 
+     <td>DM</td> 
+    </tr> 
+    <tr> 
+     <td>lastName</td> 
+     <td>J</td> 
+    </tr> 
+    <tr> 
+     <td>age</td> 
+     <td>29</td> 
+    </tr> 
+    <tr> 
+     <td>eyeColor</td> 
+     <td>black</td> 
+    </tr> 
+   </tbody>
+  </table> 
+###
+
+#p 객체들은 name value 한 쌍으로 유사하게 다음과 같은 곳에서 유사하게 쓰인다.
+###ul
+#li PHP에서 Associative arrays
+#li 파이썬{=Python}에서 사전 자료형{=Dictionaries}
+#li C언어에서 해시 테이블{=Hash tables}
+#li 자바{=Java}에서 해시 맵{=Hash maps}
+#li 루비{=Ruby} 또는 펄{=perl}에서 해시{=hashes}
+###
+
+#h2 Object Methods
+#p 메소드{=Method}란 객체에서 수행될 수 있는 {!행동들}{=actions}이다.
+#p 객체 속성은 기본 자료형{=primitive values}, 다른 객체, 그리고 함수들{=functions}이 가능하다.
+#p 객체 메소드{=Object Methods}는 {!함수를 포함}한 객체 속성이다. 아래는 하나의 객체를 표현한 것이다.
+###box.none
+  <table> 
+   <tbody>
+    <tr> 
+     <td><b>Property</b></td> 
+     <td><b>Value</b></td> 
+    </tr> 
+    <tr> 
+     <td>firstName</td> 
+     <td>DM</td> 
+    </tr> 
+    <tr> 
+     <td>lastName</td> 
+     <td>J</td> 
+    </tr> 
+    <tr> 
+     <td>age</td> 
+     <td>29</td> 
+    </tr> 
+    <tr> 
+     <td>eyeColor</td> 
+     <td>black</td> 
+    </tr> 
+    <tr> 
+     <td>fullName</td> 
+     <td>function() {return this.firstName + " " + this.lastName;}</td> 
+    </tr> 
+   </tbody>
+  </table> 
+###
+###box.green
+#p {+help} {!TIP.} <br>자바스크립트 객체는 named values, 속성 및 메소드들을 위한 컨테이너다. 
+###
+
+#h2 Creating a JavaScript Object
+#p 자바스크립트에서 사용자는 사용자 소유의 객체들을 만들거나 정의할 수 있다. 새로운 객체를 만드는 방법들은 다양하다.
+###ul
+#li 단일 객체{=Single object}를 정의하거나 만들때는 객체 리터럴{=Object literal}을 사용한다.
+#li 또는 단일 객체를 만들기 위해 {@new} 키워드를 사용한다.
+#li 객체 생성자를 정의해서 구성할 수 있다.
+###
+#p ECMAScript 5에서는 객체를 만들때 {@function() Object.create()}를 사용할 수 있다.
+
+#h2 Using an Object Literal
+#p 자바스크립트 객체를 만들기 위한 쉬운 방법이 있다. {!객체 리터럴}을 사용하면 사용자는 하나의 구문에서 객체를 만들거나 정의한다.
+#p 객체 리터럴은 예를 들자면 {age:50} 같은 중괄호 안에 name:value 값을 넣어 구성된 목록이다.
+
+#p 다음의 예제를 보자, 4개의 속성을 가진 새로운 자바스크립트 객체를 만드는 것이다.
+###code.js
+var person = {firstName:"DM", lastName:"J", age:29, eyeColor:"black"};
+###
+#p 공백{=Space}과 줄의 분리{=line breaks}는 중요하지 않다. 객체 정의는 여러 줄에 걸칠 수도 있다.
+###code.js
+var person = {
+	firstName:"DM",
+	lastName:"J",
+	age:29,
+	eyeColor:"black"
+};
+###
+#h2 Using the JavaScript Keyword "new"
+#p 다음의 예제 또한 4개의 속성을 가진 새로운 자바스크립트 객체를 만든다.
+
+###code.js
+var person = new Object();
+person.firstName = "DM";
+person.lastName = "J";
+person.age = 29;
+person.eyeColor = "black";
+###
+
+#p {@new} 키워드를 사용하는것과 객체 리터럴을 사용하는 예제들은 완벽하게 같은 동작을 한다. new Object()를 사용하는 것은 필요하지 않다. 간단하게, 읽기 좋게, 실행 속도를 빠르게 하기 위해서는 객체 리터럴 메소드를 사용하라. 
+
+#h2 Using an Object Constructor
+#p 지금까지의 예제는 많은 상황을 제한하고 단지 단일 객체만을 만든다. 때때로 우리는 많은 객체들의 타입으로 이용될 "객체 타입"을 가지는 것을 선호한다.
+#p 객체 타입을 만들기 위해 흔한 방법으로 객체 생성자 함수{=object constructor function}를 사용하는 것이다.
+###code.js
+function person(first, last, age, eyecolor) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eyecolor;
+}
+var myFather = new person("DM", "J", 29, "black");
+var myMother = new person("HR", "L", 3, "green");
+###
+#p 여기서 {@person()} 함수는 객체 생성자다.
+#p 사용자가 객체 생성자를 하나 만들면, 사용자는 같은 타입의 새로운 객체들을 만들어 낼 수 있다.
+
+#h2 The "this" Keyword
+#p 자바스크립트에서 {!this}라 불리는 것은 {!자기 자신}을 뜻하는 자바스크립트 코드이자 객체다.
+#p 함수 내에서 {!this}의 값은 함수 "자신"의 객체다.
+#p 객체 내에서 {!this}의 값은 객체 "자신"이다.
+#p 객체 생성자{=object constructor}에서 {!this} 키워드는 값을 가지지 않는다. 이것은 단지 새로운 객체를 대신하는 것이다.
+#p 생성자가 객체를 만들때, {!this}의 값은 새로운 객체가 될 것이다.
+
+###box.red
+#p {+warn} {!Warning} 
+#p {!this}는 변수가 아니다. 이것은 "키워드"다. 사용자는 {!this}의 값을 바꿀 수 없다.
+###
+
+#h2 Built-in JavaScript Constructors
+#p 자바스크립트는 객체를 만들 수 있는 기본 생성자를 가지고 있다.
+###code.js
+var x1 = new Object();    // 새로운 Object 객체
+var x2 = new String();    // 새로운 String 객체
+var x3 = new Number();    // 새로운 Number 객체
+var x4 = new Boolean()    // 새로운 Boolean 객체
+var x5 = new Array();     // 새로운 Array 객체
+var x6 = new RegExp();    // 새로운 RegExp 객체
+var x7 = new Function();  // 새로운 Function 객체
+var x8 = new Date();      // 새로운 Date 객체
+###
+#p {@Math()} 객체는 이 목록에 포함되지 않는다. Math는 전역 객체{=global object}기 때문이다. {@new} 키워드는 Math 안에서 사용할 수 {!없다}.
+###box.green
+#p {+help} {!이건 알고 있나요?}
+#p 보다시피, 자바스크립트는 기본 데이터 형인 String, Number, Boolean의 객체 버전이다.
+#p 복잡한 객체는 만들 이유가 전혀 없다. 기본 데이터 형 값들은 빠른 속도로 실행된다. 
+#p 그리고 new Array() 또한 사용할 이유가 없다. 대신 배열 객체를 위해서 [] 를 사용하라.
+#p 그리고 new RegExp() 또한 사용할 이유가 없다. 대신 리터럴 패턴인 /()/ 를 사용하라.
+#p 그리고 new Function() 또한 사용할 이유가 없다. 대신 표현형인 function(){} 을 사용하라.
+#p 그리고 new Object() 또한 사용할 이유가 없다. 대신 객체 리터럴인 {} 을 사용하라. 
+###code.js
+var x1 = {};            // 새 객체 타입
+var x2 = "";            // 새 기본 문자열 타입
+var x3 = 0;             // 새 기본 숫자 타입
+var x4 = false;         // 새 기본 boolean 타입
+var x5 = [];            // 새 기본 배열 타입
+var x6 = /()/           // 새 기본 정규식 타입
+var x7 = function(){};  // 새 기본 함수 타입
+###
+###
+
+#h2 JavaScript Objects are Mutable
+#p 객체는 변경할 수 있다. 객체는 by reference로 참조 가능하다. by value로 참조 하지 않는다.
+#p 만약 y가 객체라면 밑에 기술된 구문은 y를 복사해서 가지지 않는다.
+###code.js
+var x = y;  // 이것은 y를 복사해서 새로운 객체를 만들지 않는다.
+###
+#p 객체 x는 y를 {!복사한 값}을 가지지 않는다. 이것은 {!y일 뿐이다.} x와 y가 가리키고 있는 것은 같은 객체다.
+#p 어떠한 변경이라도 y를 변경하면 x도 같이 변경된다. x와 y는 같은 객체를 바라보고 있기 때문이다.
+###code.js
+var person = {firstName:"DM", lastName:"J", age:29, eyeColor:"black"}
+var x = person;
+x.age = 10; // 이것은 x.age를 변경했지만 x.age와 person.age의 값을 전부 변경한다.
+###
+
+#h2 Closing Remarks
+#p 다음엔 자바스크립트 객체 속성{=JavaScript Object Properties}에 대해 심도(?) 있는 파악을 해볼까 합니다. 그때까지 Bye~

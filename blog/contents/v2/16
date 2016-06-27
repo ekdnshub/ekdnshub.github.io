@@ -1,0 +1,59 @@
+###info
+title=MongoDB 설치 및 환경설정(for Window7)
+created=2014-10-13
+###
+
+#p NoSQL 종류 중 하나인 몽고 DB는 설치 개발이 쉽고 다양한 언어의 API를 제공하기 때문에 많은 곳에서 사용한다고 한다. 그래서 실제로 윈도우7에서 몽고DB{=Mongodb}를 설치해 봤다.
+
+#h2 Download
+#p 다운로드는 다음 링크에서 할 수 있다.
+###box.green
+#p {$http://www.mongodb.org/downloads}
+###
+
+#p 로컬에서 테스트 해보기 위해 32Bit 윈도우 버전으로 받았다. {=기준 파일명 : mongodb-win32-i386-2.6.5-signed.msi}
+
+#h2 Install
+#p 다운로드 받았다면 이젠 설치를 해야한다. mongodb-win32-i386-2.6.5-signed.msi 파일을 실행 시키면 설치 화면이 나온다. 해당 파일은 몽고DB 2.6.5 버전이다.
+#p Next를 하다보면 {!Choose Setup Type}이 나온다. Typical, Custom, Complete인데 여기서는 {@Typical}을 선택한다. 선택하면 몽고 DB가 설치된다.
+
+#h2 Configuration
+
+#p 설치 위치는 각자 다르겠지만 여기서는 {@C:\Program Files\MongoDB 2.6 Standard}{=이하 Root}를 기준으로 삼겠다. 해당 디렉토리 밑에 {@\bin} 디렉토리가 있는데 이곳에 여러가지 {@.exe} 파일이 있다.
+#p 몽고DB는 기본적으로 데이터 디렉토리{=data directory}를 필요로 하기 때문에 디렉토리 하나를 생성해준다. 위치는 {@Root/data/db}이다. 명령 프롬프트를 통해 다음 처럼 입력한다.
+###console
+C:\Program Files\MongoDB 2.6 Standard>md .\data\db
+###
+#p 커맨드가 실행된 뒤에는 Root 디렉토리 밑에 data 디렉토리가 생성된다. 생성된 위치는 다음과 같다.
+###console
+C:\Program Files\MongoDB 2.6 Standard\data\db
+###
+#p 이후 실제로 몽고 DB를 구동해 보기 위해 다음처럼 입력해 봤다.
+###console
+C:\Program Files\MongoDB 2.6 Standard\bin>mongod.exe --dbpath "C:\Program Files\MongoDB 2.6 Standard\data"
+###
+#p {=* 위 커맨드는 bin 디렉토리 밑에서 실행해야 한다.}
+#p 해당 커맨드를 실행하면 콘솔에 다양한 결과가 출력 되고 간혹 방화벽을 해제해달라는 윈도우가 뜰 수 있는데 액세스 허용을 해준다.
+
+#h2 Usage
+#p 설치를 끝냈다면 몇가지를 실제로 사용해보자.
+#h3 Access MongoDB Shell
+#p 루트디렉토리 및 bin 디렉토리에서 {@mongo.exe}를 실행한다. {@mongod.exe}를 실행시켰던 명령 프롬프트 창은 놔두고 새로 띄운 뒤에 아래처럼 입력한다.
+###console
+C:\Program Files\MongoDB 2.6 Standard\bin>mongo.exe
+###
+#p 해당 커맨드를 실행하면 몽고DB 쉘 버전과 어떤 DB에 연결 됐는지 콘솔에 출력된다. 쉘에 접속한 뒤 {@DB} 커맨드를 치면 현재 데이터베이스 이름이 출력된다.
+#p 기본적으로 몽고DB 쉘은 test 라는 이름을 가진 데이터베이스를 기본으로 사용하게 되어 있다.
+###box.green
+#p {+help} 몽고DB 쉘에서 "help"를 입력하면 언제든지 명령어 도움말을 볼 수 있다.
+###
+
+#h3 Create Database
+#p 새로운 데이터베이스를 만들어보자.
+###console
+use mydb
+###
+#p 해당 커맨드를 실행하면 {!switched to db mydb}라는 문구가 콘솔에 출력된다.
+
+#h2 Reference
+#p 더 자세한 검토가 필요하다면 {$http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows|Install MongoDB on Windows}를 확인해 보자.

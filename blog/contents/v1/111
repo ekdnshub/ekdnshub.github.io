@@ -1,0 +1,49 @@
+
+ <p> 이 포스팅은 개인적으로 스터디한 <strong>Multivariate adaptive regression splines(MARS)</strong>에 대해서입니다. 번역하자면 <strong>다변수 적응 회귀 스플라인</strong>이 되겠네요. 사실 뭔 말인지는 잘 모르지만 스터디 하면서 알아갔으면 합니다. </p> 
+ <h4>MARS의 정의(Definition of MARS)</h4> 
+ <p> 위키피디아에서 정의를 찾아봤습니다. 다음과 같네요. </p> 
+ <blockquote> 
+  <p> In statistics, Multivariate adaptive regression splines (MARS) is a form of regression analysis introduced by Jerome H. Friedman in 1991. It is a non-parametric regression technique and can be seen as an extension of linear models that automatically models non-linearities and interactions between variables. </p> 
+  <p> The term "MARS" is trademarked and licensed to Salford Systems. In order to avoid trademark infringements, many open source implementations of MARS are called "Earth". </p> 
+  <cite><a href="http://en.wikipedia.org/wiki/Multivariate_adaptive_regression_splines">Wikipedia - Multivariate adaptive regression splines</a></cite> 
+ </blockquote> 
+ <p> 통계학에서 MARS는 Jerome H. Friedman에 의해 1991년 소개 된 회귀 분석 방법입니다. 이것은 파라미터가 없는 회귀 기술과 선형 모델의 확장으로 보입니다. </p> 
+ <p> 용어로써 MARS는 Salford Systems의 트레이드마크이자 라이센스가 부여 되었습니다. 트레이드마크 침해를 피하기 위해 MARS의 많은 오픈 소스의 구현은 "Earth"라고 합니다. </p> 
+ <p> 음, 이미 MARS라는 용어는 상표가 있는 것이군요. 따라서 오픈 소스를 검색할땐 Earth로 해야하는 걸까요? </p> 
+ <p> 위 인용구에서 출처를 클릭하면 위키피디아의 해당 항목으로 넘어가는데 <strong>The basics</strong> 항목은 수학식만 봐도 좋으니 한번 살펴 보시기 바랍니다. 대략적으로 감은 잡을 수 있을 것 같네요. </p> 
+ <h5>예제(MARS Expression Example)</h5> 
+ <p> 어줍잖지만 일단 제가 이해한대로 예제를 하나 만들어볼까 합니다. </p> 
+ <pre class="green">
+Y = 3.14
+    + 0.2 max(0,X - 2)
+    + 3.1 max(0,2 - X)
+    - 0.3 max(0,Z - 2)
+    + 0.5 max(0,Z - 1)
+</pre> 
+ <p> 위와 같은 식이 있다고 가정을 하고서 시작하겠습니다. Y는 기본적으로 3.14라는 값을 가집니다. 그러나 독립적인 변수들 X,Z의 값에 영향을 받아 Y의 값은 변하게 됩니다. </p> 
+ <p> 만약 X의 값이 0보다는 크지만 2보다 작은 경우 Y의 값은 0.2가 가산됩니다. 그러나 X의 값이 2보다 큰 경우에는 Y의 값에 3.1이 가산이 되는겁니다. 하지만 이 와중에 Z의 값에도 영향을 받는데 만약 Z의 값이 0보다 크고 2보다는 작은 경우 Y의 값에 -0.3을 하는것이죠. 하지만 Z의 값이 0보다 크고 1보다 작으면 Y의 값이 0.5를 가산합니다. </p> 
+ <p> 만약 Z의 값이 0.5라고 한다면 Y의 값에 -0.3 과 +0.5를 해야 하는겁니다. </p> 
+ <p> X,Z는 참고로 "독립적인 변수"입니다. 따라서 표현식에서 X,Z는 전체가 같이 일어날 수도 있고 아닐 수도 있습니다. </p> 
+ <h4 id="RegressionAnalysis">회귀 분석(Regression Analysis)</h4> 
+ <p> 회귀라는 말이 많이 보입니다. 회귀가 정확히 뭘까 궁금해서 찾아봤습니다. "회귀 분석"이라는 말이 있는데 이것을 설명하는 페이지가 있습니다. <a href="http://www.ktword.co.kr/abbr_view.php?nav=2&amp;opt=&amp;m_temp1=1663&amp;id=314"> Regression Analysis 회귀 분석</a>을 클릭하세요. </p> 
+ <p> 수학적인 식이 아닌 확률적으로 관계식을 맺는다가 포인트인 것 같군요. </p> 
+ <h4>소프트웨어(SoftWare)</h4> 
+ <p> 실제로 사용하기 위한 소프트웨어에 대한 내용이 친절하게 위키피디아에 작성이 되어 있군요. 일단 상업적인 용도는 제외하고 "Free" 부분만 검토해 보고자 합니다. </p> 
+ <blockquote> 
+  <div class="box"> 
+   <strong>FREE</strong>
+   <br> R package(fit MARS-type models) : 
+   <a href="http://cran.r-project.org/web/packages/earth/index.html">earth</a>, 
+   <a href="http://cran.r-project.org/web/packages/mda/index.html">mars</a>, 
+   <a href="http://cran.r-project.org/web/packages/polspline/index.html">polymars</a>
+   <br> Matlab code : 
+   <a href="http://www.cs.rtu.lv/jekabsons/regression.html">ARESLab</a>
+   <br> Python : 
+   <a href="http://blog.biolab.si//2011/12/20/earth-multivariate-adaptive-regression-splines/">Earth - Multivariate adaptive regression splines</a>, 
+   <a href="https://github.com/jcrudy/py-earth/">py-earth</a> 
+  </div> 
+  <cite><a href="http://en.wikipedia.org/wiki/Multivariate_adaptive_regression_splines">Wikipedia - Multivariate adaptive regression splines</a></cite> 
+ </blockquote> 
+ <p> R 패키지로 제공되는 것들이 제일 많아보이네요. 해당 소프트웨어를 이용하려면 R 사용 숙지가 필요할 것 같습니다. 그외에 메트랩 코드와 파이썬이 그뒤로 있는데 아무래도 메트랩보다는 파이썬이 접근하기에 더 수월할 것 같네요. </p> 
+ <h5>R Language - Earth Package</h5> 
+ <p> <a href="/131">R Language - Earth Package</a>라는 제목의 포스트에 earth 패키지를 사용한 것을 다뤘습니다. <span class="refer">2015.05.04</span> </p>

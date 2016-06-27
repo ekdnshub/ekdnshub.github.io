@@ -1,0 +1,30 @@
+###info
+title=자바 파일 입출력(Java File Input&Output)
+created=2014-09-30
+###
+
+#p {=* 이 포스팅은 네이버 블로그에서 작성(2012.11.05)한 내용을 옮겨온 것입니다.}
+#p 예전에 Java로 파일 입출력을 어떻게 하냐고 물어보신 분이 계셨다. 의외로 C언어보다 자바 파일 입출력을 더 어려워하시는 분들이 많은 것 같았다. 아래 소스는 질문을 받고 즉흥적으로 만들어본 예제소스다. 가장 기본적인 부분만 작성했으니 이걸 응용하는건 보시는 분들의 자유. :)
+
+###code.java
+public static void main(String[] args) throws IOException { 
+    // 파일 쓰기 
+    BufferedWriter bw = new BufferedWriter(new FileWriter(new File("test.txt"))); 
+    bw.write("test write"); // 문자열 입력은 write 메소드를 사용 
+    bw.newLine(); // 한줄 띄우기는 newLine() 메소드를 사용 
+    bw.write("test newLine"); 
+    bw.close(); // 항상 닫아주셔야 파일 저장이 됩니다. 중요합니다. 
+    //파일 내용은 아래처럼 나옵니다. 
+    //(해당 프로젝트 루트에 가보면 test.txt 파일이 있을겁니다.) 
+    // 파일 읽기 
+    BufferedReader br = new BufferedReader(new FileReader(new File("test.txt"))); 
+    String buffer = ""; 
+    // 한줄씩 읽는 메소드가 readLine() 입니다. 
+    while((buffer = br.readLine()) != null){ 
+        System.out.println(buffer); // 한줄씩 읽어서 Print 합니다. 
+    }
+    br.close(); // 마찬가지로 꼭 닫아주세요. 
+}// end 'main'
+###
+
+#p Java8을 이용한 파일 읽기 코드는 {$/226|[Java] Reading File using Stream} 포스팅을 참고하세요.

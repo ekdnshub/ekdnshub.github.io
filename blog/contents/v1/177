@@ -1,0 +1,183 @@
+<p>
+이 세상엔 자료구조가 참 많죠(...). 알아야 할 것도 많다고 생각합니다. 그 중에서도 대표적인 자료구조가 있는데 바로 힙(Heap)입니다. 이번 포스팅은 힙에 대해 전반적으로 알아보고자 합니다.
+</p>
+
+<h2>Introduction</h2>
+<p>
+원래 <a href="https://en.wikipedia.org/wiki/Heap_(data_structure)">힙(heap)</a>의 요건은 <strong>"모든 노드들은 자식 노드보다 값이 크거나 같다."</strong> 또는 <strong>"모든 노드들은 자식 노드보다 값이 작거나 같다."</strong>입니다. 일반적으로 <span class="command">max heap</span>, <span class="command">min heap</span>이라고 표현을 합니다.
+</p>
+<p>
+그리고 Tree 구조를 기반으로한 추상적인 데이터 타입입니다. 구현 방법에 따라 여러가지 힙이 있지만 대표적으로 <a href="https://en.wikipedia.org/wiki/Binary_heap">바이너리 힙(Binary Heap)</a>이 있습니다. 자바에서는 Heap 구현체로 <span class="command">java.util.PriorityQueue&lt;E></span>를 이미 패키지로 만들어 뒀습니다.
+</p>
+
+<h2>Operations</h2>
+<p>
+힙의 동작은 크게 네가지의 범주로 나눌 수 있습니다. 그리고 범주에는 세부 기능들이 있습니다. 해당 항목의 원문 내용은 <a href="https://en.wikipedia.org/wiki/Heap_(data_structure)#Operations">Wikipedia - Heap_(data_structure) :: Operations</a>에서 확인 하실 수 있습니다.
+</p>
+
+<h3>기본(Basic)</h3>
+<ul>
+	<li>
+		<strong>최대값 찾기(find-max), 최소값 찾기(find-min)</strong>
+		<p>max heap에서는 가장 큰 값을, min heap에서는 가장 작은 값을 찾습니다. 예를 들면 <span class="command">.peek()</span> 메소드입니다.</p>
+	</li>
+	<li>
+		<strong>삽입(insert)</strong>
+		<p>힙에 새로운 값을 삽입합니다. 예를 들면 <span class="command">.push()</span> 메소드입니다.</p>
+	</li>
+	<li>
+		<strong>최대값 추출(extract-max), 최소값 추출(extract-min)</strong>
+		<p>힙에서 해당 값을 삭제하고 해당 값을 반환합니다. 예를 들면 <span class="command">.pop()</span> 메소드입니다.</p>
+	</li>
+	<li>
+		<strong>최대값 삭제(delete-max), 최소값 삭제(delete-min)</strong>
+		<p>힙에서 해당 값을 삭제합니다.</p>
+	</li>
+	<li>
+		<strong>교체(replace)</strong>
+		<p>루트 노드의 값을 반환 받고 새로운 값을 넣습니다.</p>
+	</li>
+</ul>
+
+<h3>생성(Creation)</h3>
+<ul>
+	<li>
+		<strong>힙 생성(create-heap)</strong>
+		<p>비어있는 힙을 만듭니다.</p>
+	</li>
+	<li>
+		<strong>힙화(heapify)</strong>
+		<p>요소로 구성된 배열을 힙으로 만듭니다.</p>
+	</li>
+	<li>
+		<strong>병합(merge, union)</strong>
+		<p>두 개의 힙을 연결해서 두 힙의 모든 요소를 집어 넣은 새로운 힙을 만듭니다. 기존의 힙들은 보존됩니다.</p>
+	</li>
+	<li>
+		<strong>혼합(meld)</strong>
+		<p>두 개의 힙을 연결해서 두 힙의 모든 요소를 집어 넣은 새로운 힙을 만듭니다. 기존의 힙들은 삭제됩니다.</p>
+	</li>
+</ul>
+
+<h3>검증(Inspection)</h3>
+<ul>
+	<li>
+		<strong>크기(size)</strong>
+		<p>힙의 모든 요소 개수를 반환합니다.</p>
+	</li>
+	<li>
+		<strong>비어있는지 여부(is-empty)</strong>
+		<p>힙이 비어있다면 <span class="command">true</span>를 반환하고 아니라면 <span class="command">false</span>를 반환합니다.</p>
+	</li>
+</ul>
+
+<h3>내부(Internal)</h3>
+<ul>
+	<li>
+		<strong>증가하는 키(increase-key), 감소하는 키(decrease-key)</strong>
+		<p>max-heap 또는 min-heap 안의 키를 갱신합니다.</p>
+	</li>
+	<li>
+		<strong>삭제(delete)</strong>
+		<p>임의의 노드를 삭제합니다. (힙을 유지하기 위해 마지막 노드를 움직이거나 선별을 한 이후) </p>
+	</li>
+	<li>
+		<strong>상향 선별(sift-up)</strong>
+		<p>필요하다면 힙의 트리에서 노드를 위로 올립니다. 삽입 동작 이후 힙의 조건을 만족하기 위해 사용합니다.</p>
+	</li>
+	<li>
+		<strong>하향 선별(sift-down)</strong>
+		<p>상향 선별과 유사하게 힙의 트리에서 노드를 아래로 내립니다. 삭제 또는 교체 동작 이후 힙의 조건을 만족하기 위해 사용합니다.</p>
+	</li>
+</ul>
+
+<h2>Implementation</h2>
+<p>
+힙을 구현하는 방법은 굉장히 다양합니다. 데이터 노드로 배열(Array)을 선택 할 수도 있고 링크드리스트(LinkedList)를 사용할 수도 있습니다. 힙의 구조로 바이너리 힙(binary heap)이나 또는 피보나치 힙(Fibonacci heap)을 선택할 수도 있습니다.
+</p>
+<p>
+하지만 지면 관계로(!?) 이번 포스팅에선 간단하게 부모 노드와 자식 노드를 찾기 위한 방법과 삽입, 추출 방법만 간단히 알아봅니다.
+</p>
+
+<h3>Find Children</h3>
+<p>
+만약, 바이너리 힙(binary heap)으로 만든다고 가정하고 배열(Array)로 힙을 구성하는 경우엔 몇번째 인덱스를 Root 노드로 잡는지에 따라 계산값이 바뀝니다.
+</p>
+
+<h4>Zero based Array</h4>
+<p>
+배열로 힙을 구성할 때 배열의 가장 첫 칸인 0번째 인덱스를 Root 노드로 잡는다면 계산식은 아래와 같습니다.
+</p>
+
+<div class="green">
+<span>부모 노드: n</span><br>
+<span>하위 노드(좌측): 2n + 1</span><br>
+<span>하위 노드(우측): 2n + 2</span>
+</div>
+
+<p>
+따라서 0번 인덱스의 자식 노드 인덱스는 1과 2가 됩니다. 1번 인덱스라면 3,4가 되겠습니다.
+</p>
+
+<h4>One based Array</h4>
+<p>
+배열의 1번 인덱스(배열에서는 2번째 칸)를 Root 노드로 잡는다면 계산식은 아래와 같습니다.
+</p>
+
+<div class="green">
+<span>부모 노드: n</span><br>
+<span>하위 노드(좌측): 2n</span><br>
+<span>하위 노드(우측): 2n + 1</span>
+</div>
+
+<p>
+따라서 1번 인덱스의 자식 노드는 2, 3이 됩니다. 2번 인덱스라면 4,5가 되겠습니다.
+</p>
+
+<h3>Insert</h3>
+<p>
+새로운 값을 삽입한다면 어떻게 될까요? 아래와 같은 순서로 작업해서 힙의 요건을 유지하면 됩니다.
+</p>
+<div>
+<ul>
+	<li>1. 새로운 노드를 단말 노드로 추가합니다.</li>
+	<li>2. 추가된 단말 노드를 부모 노드와 값을 비교하여 선별(sift) 후 위치를 교환합니다.</li>
+	<li>3. 교체된 노드가 있다면 교체된 노드와 부모 노드를 비교하여 선별 후 위치를 교환합니다.</li>
+	<li>4. 힙의 요건을 만족할 때까지 3번 동작을 반복합니다.</li>
+</ul>
+</div>
+
+<div class="yellow">
+<p>
+<strong><i class="fa fa-check fa-lg"></i> TIP. 단말 노드(Leaf-Node)</strong><br>
+단말 노드라는 것은 자식노드가 없는 노드를 뜻합니다.
+</p>
+</div>
+
+<h3>Extract</h3>
+<p>
+값을 추출한 뒤에 힙에서 어떤 동작을 해야 할까요? 아래와 같은 순서로 작업이 진행됩니다.
+</p>
+<div>
+<ul>
+	<li>1. Root 노드에 있는 값을 반환하고 해당 위치에 단말 노드를 가져옵니다.</li>
+	<li>2. Root 노드에 있는 값과 자식 노드와 비교하여 선별(sift) 후 위치를 교환합니다.</li>
+	<li>3. 교체된 노드가 있다면 교체된 노드와 자식 노드를 비교하여 선별 후 위치를 교환합니다.</li>
+	<li>4. 힙의 요건을 만족할 때까지 3번 동작을 반복합니다.</li>
+</ul>
+</div>
+
+<h2>Variants</h2>
+<p>
+힙은 다양한 변형이 존재합니다. 이 포스팅에서 자주 언급되는 바이너리 힙(binary heap)도 힙의 변형 중 하나입니다. 그 외에도 다양한 변형 힙이 존재하니 확인하시려면 <a href="https://en.wikipedia.org/wiki/Heap_(data_structure)#Variants">Wikipedia - Heap_(data_structure) :: Variants</a>를 참조하세요.
+</p>
+
+<h2>Applications</h2>
+<p>
+힙 자료구조를 이용한 어플리케이션이 많습니다. 대표적으로는 힙 정렬(heap sort)과 우선 순위 큐(Priority Queue)등이 있습니다.
+</p>
+
+<h2>Closing Remarks</h2>
+<p>
+간단하게 힙에 대해 알아봤습니다. :3
+</p>

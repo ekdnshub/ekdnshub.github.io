@@ -1,0 +1,49 @@
+###info
+title=Jolokia 사용법 소개
+created=2016-06-12
+###
+
+#h2 Jolokia가 무엇인가요?
+#p Jolokia는 HTTP 프로토콜을 이용해 손쉽게 JMX 값을 JSON 형식으로 받아볼 수 있게 해주는 일종의 JMX-HTTP 커넥터입니다.
+###include
+#p {!Jolokia} is remote JMX with JSON over HTTP. It is fast, simple, polyglot and has unique features. It's JMX on Capsaicin.
+#cite {$https://jolokia.org/index.html}
+###
+
+#h2 어디에 사용할까요?
+#p 특정 어플리케이션이 JMX을 제공한다면 JMX 모니터링을 위해 Jolokia를 사용할 수 있습니다.
+
+#h2 사용법
+#p 간단한 설치 및 사용법은 {$https://jolokia.org/tutorial.html|Jolokia 튜토리얼}에서 확인할 수 있습니다.
+
+#h2 예제
+#p 실제 설치가 끝났다면 특정 어플리케이션{=ex. Kafka Server}에서 제공하는 JMX값을 받아 보는 예제를 해봅시다. 제가 주로 참조한 문서는 {$https://jolokia.org/reference/html/protocol.html#protocol-proxy|Jolokia :: protocol-proxy}입니다.
+#p 이 예제는 Jolokia가 설치된 호스트가 아닌 별도의 호스트에 어플리케이션이 동작하는 경우 원격으로 JMX 값을 읽어보는 것입니다. 아래의 예제는 전부 {!Request Body}만 작성했습니다. {=Jolokia 1.3.3 버전에서 테스트 되었습니다.}
+
+#h3 Read Type 예제
+###code.js
+{
+	"type": "read",
+	"mbean": "kafka.log:type=Log,*",
+	"attribute": "Value",
+	"target": {
+		"url": "service:jmx:rmi:///jndi/rmi://kafka.server.domain:9997/jmxrmi"
+	}
+}
+###
+#p 해당 예제에서는 어플리케이션 JMX 활성 포트가 9997이라고 가정했습니다.
+
+#h3 List Type 예제
+###code.js
+{
+	"type":"list",
+	"path":"kafka.log",
+	"target": {
+		"url":"service:jmx:rmi:///jndi/rmi://kafka.server.domain:9997/jmxrmi"
+	}
+}
+###
+
+###box.green
+#p {+help} Java JDK에 포함된 {@jconsole}을 이용해 미리 mbean 값을 찾는것이 정신건강에 이로울 수 있습니다.
+###

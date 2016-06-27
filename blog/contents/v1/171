@@ -1,0 +1,19 @@
+<p>
+JSP에서 Redirect와 Forward의 차이점을 알기 위해 구글링 하는데 설명이 간단명료해서 공유합니다. :)
+</p>
+
+<blockquote>
+<p>
+redirect sets the response status to 302, and the new url in a Location header, and sends the response to the browser. Then the browser, according to the http specification, makes another request to the new url
+</p>
+<p>
+forward happens entirely on the server. The servlet container just forwards the same request to the target url, without the browser knowing about that. Hence you can use the same request attributes and the same request parameters when handling the new url. And the browser won't know the url has changed (because it has happened entirely on the server)
+</p>
+<cite><a href="http://stackoverflow.com/a/6068925">stackoverflow - difference between jsp forward and redirect</a></cite>
+</blockquote>
+<p>
+<strong>Redirect</strong>는 status를 302로 바꾸고 Location Header에 새로운 url을 세팅합니다. 그리고 브라우저에 응답을 보내죠. 브라우저는 http 명세에 따라서 새로운 url의 응답을 만들어 냅니다.
+</p>
+<p>
+<strong>Forward</strong>는 전적으로 서버에서 일어납니다. 서블릿 컨테이너는 목표가 되는 url에 같은 요청(request)을 전달합니다. 하지만 브라우저는 이 사실을 모르죠. 목표가 되는 url을 처리할 때, 같은 요청 속성(request attributes)들과 같은 요청 파라미터(request parameter)를 사용 할 수 있습니다. 그리고 브라우저는 url이 바뀌었다는 사실을 인지 하지 못합니다. 이 모든 것은 서버에서 일어난 것이기 때문이죠.
+</p>

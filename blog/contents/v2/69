@@ -1,0 +1,390 @@
+###info
+title=자바 쓰레드 기초(Java Thread Basic)
+created=2015-02-13
+###
+#p 이번엔 Java Thread에 대해 알아보고자 합니다. 시작합니다!
+#h2 Java Thread Definition
+#p 자바 쓰레드{=Java Thread}의 정의를 알기 전에 프로세스{=Process}에 대해 알아야 합니다. 보통 우리가 만드는 프로그래밍 언어{=Java, C/C++ 등}로 소스를 짜서 만든 것을 "프로그램"이라고 합니다. 그리고 이 프로그램을 "실행" 시켜서 동작하게 만들면 이것을 "프로세스"라고 합니다. 이 프로세스는 보통 하나의 루틴{=프로그램 처리 경로}을 가지고 있습니다. 이 루틴은 직렬적입니다. 즉 어떠한 일을 수행하는 것에 있어 프로그래머가 원하는 순서대로 일을 처리합니다. 그러나 생각해보면 굳이 앞뒤 순서가 필요 없는 일들이 있을 때 분리해서 동시에 처리하고 싶은 생각이 들 때가 있습니다. 이 때 자바에서 사용할 수 있는 것이 쓰레드{=Thread}입니다.
+#p 자바 쓰레드를 이용하면 하나의 프로세스에서도 병렬적으로 처리, 즉 여러 개의 처리 루틴을 가질 수 있습니다. 단순 반복의 코드를 실행할 때도 여러 개의 쓰레드를 만들어서 분리 시킨 뒤 결과 데이터를 받아 합치면 그만큼 시간을 절약할 수 있습니다.
+#p 백문이불여일견(不如一見), 실제로 간단한 쓰레드 프로그램을 구동해 봅시다.
+
+#h2 Simple Thread Program
+#p 자바 쓰레드를 만들어서 구동하는 것 중 대표적인 것은 {@Thread} 클래스를 상속 받는 것입니다. 실제로 쓰레드를 만들때 상속이 간편하고 편리합니다. 다음과 같은 코드를 봅시다.
+###code.java
+/* 간단한 쓰레드 프로그램 */
+import java.util.Random;
+public class ThreadTest extends Thread {
+	private int id = -1;
+	public ThreadTest(int id){
+		this.id = id;
+	}
+	public void run(){
+		System.out.println( id + "번 쓰레드 동작 중..." );
+		Random r = new Random(System.currentTimeMillis());
+		try {
+			long s = r.nextInt(3000); // 3초내로 끝내자.
+			Thread.sleep(s); // 쓰레드를 잠시 멈춤
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println( id + "번 쓰레드 동작 종료..." );
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Start main method.");
+		
+		for(int i = 0 ; i &lt; 10 ; i++ ){
+			ThreadTest test = new ThreadTest(i);
+			test.start(); // 이 메소드를 실행하면 Thread 내의 run()을 수행한다.
+		}
+		
+		System.out.println("End main method.");
+	}
+}
+###
+
+#p 이 코드에서 알 수 있는 것은 {@Thread} 클래스를 상속받아 {@run()} 메소드를 오버라이드{=Override}했다는 것을 알 수 있습니다. {@run()} 메소드 안에서 {@Thread.sleep()} 메소드를 이용해 쓰레드를 잠시 멈출 수 있다는 것과 {@main()} 메소드에서 쓰레드를 생성하고 {@start()} 메소드를 이용해 쓰레드를 실행하는 것까지 알 수 있습니다.
+#p {@start()}를 실행하면 내부적으로 쓰레드의 {@run()} 메소드를 실행합니다. 만약 {@Thread}를 상속받았는데도 {@run()} 메소드를 오버라이드 하지 않는다면 아무런 동작을 안하는 것처럼 보일겁니다. 그리고 위 프로그램의 실행 결과는 다음과 같습니다.
+###console
+Start main method.
+0번 쓰레드 동작 중...
+2번 쓰레드 동작 중...
+1번 쓰레드 동작 중...
+3번 쓰레드 동작 중...
+4번 쓰레드 동작 중...
+5번 쓰레드 동작 중...
+6번 쓰레드 동작 중...
+7번 쓰레드 동작 중...
+End main method.
+9번 쓰레드 동작 중...
+8번 쓰레드 동작 중...
+1번 쓰레드 동작 종료...
+4번 쓰레드 동작 종료...
+8번 쓰레드 동작 종료...
+7번 쓰레드 동작 종료...
+9번 쓰레드 동작 종료...
+6번 쓰레드 동작 종료...
+0번 쓰레드 동작 종료...
+2번 쓰레드 동작 종료...
+5번 쓰레드 동작 종료...
+3번 쓰레드 동작 종료...
+###
+#p 여기서 {@main()} 메소드가 자신이 실행 시킨 쓰레드들이 종료가 되지 않았음에도 먼저 끝나버리는 것을 볼 수 있습니다. 지금 프로그램에서는 별 문제가 없어보일 수도 있습니다만 코드를 조금만 바꿔서 다시 봅시다.
+
+###code.java
+/* 간단한 쓰레드 프로그램(변경 1) */
+import java.util.Random;
+public class ThreadTest extends Thread {
+	// index 변수를 추가해서 스레드가 동작시에 해당 변수를 증가시키도록 할겁니다.
+	private static int index = 0; 
+	
+	private int id = -1;
+	public ThreadTest(int id){
+		this.id = id;
+	}
+	public void run(){
+		System.out.println( id + "번 쓰레드 동작 중..." );
+		Random r = new Random(System.currentTimeMillis());
+		try {
+			long s = r.nextInt(3000); // 3초내로 끝내자.
+			Thread.sleep(s); // 쓰레드를 잠시 멈춤
+			index++; // index 변수를 증가시킵니다.
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println( id + "번 쓰레드 동작 종료..." );
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Start main method.");
+		
+		for(int i = 0 ; i &lt; 10 ; i++ ){
+			ThreadTest test = new ThreadTest(i);
+			test.start(); // 이 메소드를 실행하면 Thread 내의 run()을 수행한다.
+		}
+		
+		System.out.println("current Index: "+ index); // index의 값을 반환합니다.
+		System.out.println("End main method.");
+	}
+}
+###
+#p 프로그래머 입장이라면 스레드가 하나씩 증가시킬 것이라 예상을 하고 {@index} 변수를 프로그램 마지막에 출력해보면 10이 찍힐 것이라 예상할 수 있습니다. 실행 시킨 쓰레드는 총 10개이니까요. 하지만 결과는 다음과 같습니다.
+###console
+Start main method.
+0번 쓰레드 동작 중...
+1번 쓰레드 동작 중...
+2번 쓰레드 동작 중...
+3번 쓰레드 동작 중...
+4번 쓰레드 동작 중...
+5번 쓰레드 동작 중...
+6번 쓰레드 동작 중...
+7번 쓰레드 동작 중...
+current Index: 0
+8번 쓰레드 동작 중...
+9번 쓰레드 동작 중...
+End main method.
+5번 쓰레드 동작 종료...
+6번 쓰레드 동작 종료...
+1번 쓰레드 동작 종료...
+0번 쓰레드 동작 종료...
+3번 쓰레드 동작 종료...
+2번 쓰레드 동작 종료...
+4번 쓰레드 동작 종료...
+8번 쓰레드 동작 종료...
+9번 쓰레드 동작 종료...
+7번 쓰레드 동작 종료...
+###
+#p 문제가 생겼습니다. 프로그래머의 의도대로 코드가 동작하지 않는것이죠. 만약 {@index} 변수를 가지고 다른 작업을 처리하는 코드가 포함 됐다면 이 프로그램은 오류를 만들어낼 것이 틀림 없습니다. 그래서 {@main()} 메소드도 쓰레드라는 것을 생각하고선 다음처럼 만들어 봤습니다.
+###code.java
+/* 간단한 쓰레드 프로그램(변경 2) */
+import java.util.Random;
+public class ThreadTest extends Thread {
+	// index 변수를 추가해서 스레드가 동작시에 해당 변수를 증가시키도록 할겁니다.
+	private static int index = 0; 
+	
+	private int id = -1;
+	public ThreadTest(int id){
+		this.id = id;
+	}
+	public void run(){
+		System.out.println( id + "번 쓰레드 동작 중..." );
+		Random r = new Random(System.currentTimeMillis());
+		try {
+			long s = r.nextInt(3000); // 3초내로 끝내자.
+			Thread.sleep(s); // 쓰레드를 잠시 멈춤
+			index++; // index 변수를 증가시킵니다.
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println( id + "번 쓰레드 동작 종료..." );
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Start main method.");
+		
+		for(int i = 0 ; i &lt; 10 ; i++ ){
+			ThreadTest test = new ThreadTest(i);
+			test.start(); // 이 메소드를 실행하면 Thread 내의 run()을 수행한다.
+		}
+		
+		try {
+			Thread.sleep(5000); // 쓰레드가 종료할 때까지의 충분한 시간을 기다립니다.
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("current Index: "+ index); // index의 값을 반환합니다.
+		System.out.println("End main method.");
+	}
+}
+###
+#p 아까와 다르게 메인 메소드 내에서 {@sleep()} 메소드를 추가했습니다. 프로그램 내에서 쓰레드가 3초 내로 끝난다는 것을 알고 있기 때문에 일부러 메인 메소드에선 5초를 멈추게 했습니다. 그럼 의도대로 실행이 될까요?
+
+###console
+Start main method.
+0번 쓰레드 동작 중...
+1번 쓰레드 동작 중...
+2번 쓰레드 동작 중...
+3번 쓰레드 동작 중...
+4번 쓰레드 동작 중...
+5번 쓰레드 동작 중...
+6번 쓰레드 동작 중...
+7번 쓰레드 동작 중...
+8번 쓰레드 동작 중...
+9번 쓰레드 동작 중...
+9번 쓰레드 동작 종료...
+8번 쓰레드 동작 종료...
+6번 쓰레드 동작 종료...
+7번 쓰레드 동작 종료...
+1번 쓰레드 동작 종료...
+2번 쓰레드 동작 종료...
+3번 쓰레드 동작 종료...
+0번 쓰레드 동작 종료...
+5번 쓰레드 동작 종료...
+4번 쓰레드 동작 종료...
+current Index: 7
+End main method.
+###
+
+#p 이 방법은 코드가 예쁘지도 않고 나쁜 코드에 속하며 게다가 결과값도 의도치 않는 값이 나옵니다. {@index} 값은 프로그램 실행 할때마다 달라질텐데 이건 추후에 다른 측면으로 설명하고자 하고 이 코드는 폐기합니다. {~~이런 코드 쓰면 안되요.}
+
+#h2 Thread Join
+#p 메인 메소드가 자신이 실행시킨 쓰레드들이 전부 종료되기도 전에 먼저 종료가 되는 것을 해결하는 좋은 방법은 쓰레드 조인{=Thread Join}을 이용하는 것입니다. 쓰레드 조인은 현재 스레드가 동작중이면 동작이 끝날때까지 기다리는 메소드입니다. 물론 기다리는 시간도 정해줄 수 있습니다만, 여기에선 간단하게 작성해 봅니다.
+
+###code.java
+/* 간단한 쓰레드 프로그램(변경 3) */
+import java.util.ArrayList;
+import java.util.Random;
+public class ThreadTest extends Thread {
+	// index 변수를 추가해서 스레드가 동작시에 해당 변수를 증가시키도록 할겁니다.
+	private static int index = 0; 
+	
+	private int id = -1;
+	public ThreadTest(int id){
+		this.id = id;
+	}
+	public void run(){
+		System.out.println( id + "번 쓰레드 동작 중..." );
+		Random r = new Random(System.currentTimeMillis());
+		try {
+			long s = r.nextInt(3000); // 3초내로 끝내자.
+			Thread.sleep(s); // 쓰레드를 잠시 멈춤
+			index++; // index 변수를 증가시킵니다.
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println( id + "번 쓰레드 동작 종료..." );
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Start main method.");
+		
+		ArrayList&lt;Thread&gt; threadList = new ArrayList&lt;Thread&gt;();
+
+		for(int i = 0 ; i &lt; 10 ; i++ ){
+			ThreadTest test = new ThreadTest(i);
+			
+			test.start(); // 이 메소드를 실행하면 Thread 내의 run()을 수행한다.
+			threadList.add(test); // 생성한 쓰레드를 리스트에 삽입
+		}
+		
+		for(int i = 0 ; i &lt; threadList.size(); i++){
+			try {
+				threadList.get(i).join(); // 쓰레드의 처리가 끝날때까지 기다립니다.
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("current Index: "+ index); // index의 값을 반환합니다.
+		System.out.println("End main method.");
+	}
+}
+###
+#p 추가가 된 것은 {@threadList}에 쓰레드를 삽입하고 이후 {@threadList}를 순회하며 각 쓰레드에서 {@join()} 메소드를 실행시켜주는 것입니다. 이렇게 작성하고 프로그램을 돌리면 어떤 결과가 나올까요?
+###console
+Start main method.
+0번 쓰레드 동작 중...
+1번 쓰레드 동작 중...
+2번 쓰레드 동작 중...
+3번 쓰레드 동작 중...
+4번 쓰레드 동작 중...
+5번 쓰레드 동작 중...
+6번 쓰레드 동작 중...
+7번 쓰레드 동작 중...
+8번 쓰레드 동작 중...
+9번 쓰레드 동작 중...
+4번 쓰레드 동작 종료...
+1번 쓰레드 동작 종료...
+6번 쓰레드 동작 종료...
+5번 쓰레드 동작 종료...
+0번 쓰레드 동작 종료...
+2번 쓰레드 동작 종료...
+3번 쓰레드 동작 종료...
+8번 쓰레드 동작 종료...
+7번 쓰레드 동작 종료...
+9번 쓰레드 동작 종료...
+current Index: 9
+End main method.
+###
+#p 운이 좋으면 {@current Index} 값이 10으로 출력 될 수도 있겠습니다만, 대부분은 오차가 나옵니다. 하지만 원래 의도했던 쓰레드가 모두 종료 된 뒤 메인 메소드 종료라는 문제는 해결이 됐습니다. 그러면 이제 남은 것은 {@index}의 값이 멋대로 바뀌는 현상이 왜 생기는지 알아봅시다.
+
+#h2 Thread Synchronized
+#p 쓰레드 사이에서 공통적으로 사용해야할 객체가 있다면 동기화{=synchronization}에 대해 고민을 해야 합니다. 동기화가 무엇인지에 대한 것은 다른 포스팅에서 설명 하기로 하고 지금 포스팅에서는 동기화 문제를 해결하기 위한 코드를 삽입하겠습니다.
+
+###code.java
+/* 간단한 쓰레드 프로그램(변경 4) */
+import java.util.ArrayList;
+import java.util.Random;
+public class ThreadTest extends Thread {
+	// index 변수를 추가해서 스레드가 동작시에 해당 변수를 증가시키도록 할겁니다.
+	private static int index = 0; 
+	
+	private int id = -1;
+	public ThreadTest(int id){
+		this.id = id;
+	}
+	public void run(){
+		System.out.println( id + "번 쓰레드 동작 중..." );
+		Random r = new Random(System.currentTimeMillis());
+		try {
+			long s = r.nextInt(3000); // 3초내로 끝내자.
+			Thread.sleep(s); // 쓰레드를 잠시 멈춤
+			setIndex();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println( id + "번 쓰레드 동작 종료..." );
+	}
+	
+	public synchronized static void setIndex(){
+		index++; // index 변수를 증가시킵니다.
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Start main method.");
+		
+		ArrayList&lt;Thread&gt; threadList = new ArrayList&lt;Thread&gt;();
+
+		for(int i = 0 ; i &lt; 10 ; i++ ){
+			ThreadTest test = new ThreadTest(i);
+			
+			test.start(); // 이 메소드를 실행하면 Thread 내의 run()을 수행한다.
+			threadList.add(test); // 생성한 쓰레드를 리스트에 삽입
+		}
+		
+		for(int i = 0 ; i &lt; threadList.size(); i++){
+			try {
+				threadList.get(i).join(); // 쓰레드의 처리가 끝날때까지 기다립니다.
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("current Index: "+ index); // index의 값을 반환합니다.
+		System.out.println("End main method.");
+	}
+}
+###
+
+#p 새로운 정적 메소드인 {@setIndex()}가 추가 되었습니다. 그리고 동기화를 위한 키워드인 {@synchronized}도 붙어 있습니다. 이 키워드가 있는 한 {@setIndex()}를 쓰레드들이 동시에 접근할 수 없습니다. 한번에 하나씩만 접근할 수 있습니다. 따라서 이렇게 만들어진 프로그램을 구동하면 다음과 같은 결과가 나옵니다.
+
+###console
+Start main method.
+0번 쓰레드 동작 중...
+1번 쓰레드 동작 중...
+2번 쓰레드 동작 중...
+3번 쓰레드 동작 중...
+4번 쓰레드 동작 중...
+5번 쓰레드 동작 중...
+6번 쓰레드 동작 중...
+7번 쓰레드 동작 중...
+8번 쓰레드 동작 중...
+9번 쓰레드 동작 중...
+7번 쓰레드 동작 종료...
+9번 쓰레드 동작 종료...
+4번 쓰레드 동작 종료...
+5번 쓰레드 동작 종료...
+3번 쓰레드 동작 종료...
+2번 쓰레드 동작 종료...
+8번 쓰레드 동작 종료...
+6번 쓰레드 동작 종료...
+1번 쓰레드 동작 종료...
+0번 쓰레드 동작 종료...
+current Index: 10
+End main method.
+###
+#p 아무리 프로그램을 재실행해도 아까처럼 이상한 {@index}가 잡히진 않습니다. 원하는대로 구현이 된것입니다. 그러나 이렇게 난잡한 코드를 예제로 쓰는것도 처음입니다. -_-; 실무에서 쓰면 상사에게 뒷통수 맞기 좋습니다. 예제로만 봐주세요.
+
+#h2 Closing Remarks
+#p 해당 포스팅에서 자바 쓰레드를 만들어 실행하는 것과 {@join()} 메소드, 동기화에 대한 문제 해결까지 간략하게 알아 봤습니다. 그러나 처음에 말씀 드렸던 것처럼 자바 쓰레드를 만드는 법은 {@Thread} 클래스를 상속 받는 것 외에 또 다른 방법이 있습니다. 바로 {@Runnable} 인터페이스를 사용하는 것인데 이 포스팅이 너무 길어질것 같아서 이 방법은 다음 포스팅에서 다루겠습니다. 그때까지 Bye ~ :)

@@ -1,0 +1,158 @@
+<p>
+간만에 돌아오는 디자인 패턴 포스트입니다. 이번엔 추상 팩토리 패턴(Abstract Factory Pattern)에 대해 알아보고자 합니다.
+</p>
+
+<h2>Overview</h2>
+<p>
+<strong>추상 팩토리 패턴은 많은 수의 연관된 서브 클래스를 특정 그룹으로 묶어 한번에 교체할 수 있도록 만든 디자인 패턴</strong>입니다. 예를 들어 특정 라이브러리를 배포하는데 OS별로 지원하는 기능이 상이하다면 추상 팩토리 패턴을 사용해 OS별 기능 변경을 통합적으로 변경 할 수 있습니다.
+</p>
+
+<h2>UML Diagram</h2>
+<p>
+직접 추상 팩토리 패턴을 사용한 간단한 프로그램을 작성해 봅시다. 기본적인 다이어그램은 아래와 같습니다.
+</p>
+<pre class="diagram">
+┏━━━━┓                ┏━━━━┓
+┃MachineA┃                ┃MachineB┃
+┗━━━━┛                ┗━━━━┛
+     ▲                          ▲
+     ┣━━━━━━━┓          ┣━━━━━━━┓
+┏━━━━━┓┏━━━━━┓┏━━━━━┓┏━━━━━┓
+┃MachineA1 ┃┃MachineA2 ┃┃MachineB1 ┃┃MachineB2 ┃
+┗━━━━━┛┗━━━━━┛┗━━━━━┛┗━━━━━┛
+      ＾            ＾            ＾            ＾
+      ┃            ┗━━━━━━┃━━━━━━┨
+      ┗━━━━━━━━━━┰━━┛            ┃
+                            ┃                  ┃
+┏━━━━━━━┓ ┏━━━━━━━━┓ ┏━━━━━━━━┓  ▲ : Realization
+┃MachineFactory┃ ┃MachineFactoryA ┃ ┃MachineFactoryB ┃  ＾ : Association
+┗━━━━━━━┛ ┗━━━━━━━━┛ ┗━━━━━━━━┛
+        ▲                  ┃                    ┃
+        ┗━━━━━━━━━┻━━━━━━━━━━┛
+</pre>
+<p>
+이해를 위해 실제 공장을 바탕으로 생각을 해보고자 만든 다이어그램입니다. 따라서 실제 공장 역할을 하는 클래스는 접두사가 MachineFactory입니다. 그리고 공장의 내부를 채워줄 기계 클래스는 접두사가 Machine입니다.
+</p>
+<p>
+공장별로 팩토리(<span class="command">MachineFactoryA</span>, <span class="command">MachineFactoryB</span>)를 만들고 해당 팩토리는 자신에게 알맞는 멤버 클래스들을 생성합니다.
+</p>
+<p>
+최종적으로는 <span class="command">MachineFactoryA</span>, <span class="command">MachineFactoryB</span>를 구동하는 메인 프로그램을 작성해서 결과를 확인해 봅시다.
+</p>
+
+<h2>Example Code</h2>
+<p>
+다이어그램에 있는 그대로 클래스 및 인터페이스를 만들어봅시다.
+</p>
+<h3>MachineA</h3>
+<pre class="prettyprint lang-java">
+public interface MachineA {
+	public void process();
+}
+</pre>
+<pre class="prettyprint lang-java">
+public class MachineA1 implements MachineA {
+	@Override
+	public void process() {
+		System.out.println("execute MachineA1");
+	}
+}
+</pre>
+<pre class="prettyprint lang-java">
+public class MachineA2 implements MachineA {
+	@Override
+	public void process() {
+		System.out.println("execute MachineA2");
+	}
+}
+</pre>
+
+<h3>MachineB</h3>
+<pre class="prettyprint lang-java">
+public interface MachineB {
+	public void process();
+}
+</pre>
+<pre class="prettyprint lang-java">
+public class MachineB1 implements MachineB {
+	@Override
+	public void process() {
+		System.out.println("execute MachineB1");
+	}
+}
+</pre>
+<pre class="prettyprint lang-java">
+public class MachineB2 implements MachineB {
+	@Override
+	public void process() {
+		System.out.println("execute MachineB2");
+	}
+}
+</pre>
+
+<h3>MachineFactory</h3>
+<pre class="prettyprint lang-java">
+public interface MachineFactory {
+	public MachineA getMachineA();
+	public MachineB getMachineB();
+}
+</pre>
+<pre class="prettyprint lang-java">
+public class MachineFactoryA implements MachineFactory{
+	@Override
+	public MachineA getMachineA() {
+		return new MachineA1();
+	}
+	@Override
+	public MachineB getMachineB() {
+		return new MachineB1();
+	}
+}
+</pre>
+<pre class="prettyprint lang-java">
+public class MachineFactoryB implements MachineFactory{
+	@Override
+	public MachineA getMachineA() {
+		return new MachineA2();
+	}
+	@Override
+	public MachineB getMachineB() {
+		return new MachineB2();
+	}
+}
+</pre>
+
+<h3>Main Program</h3>
+<p>
+실제로 클래스 및 인터페이스를 완성시키고 메인 프로그램을 구동해 봅시다. 코드는 다음과 같습니다.
+</p>
+<pre class="prettyprint lang-java">
+public class FactoryMain {
+	public static void main(String[] args) {
+		MachineFactory machineFactoryA = new MachineFactoryA();
+		machineFactoryA.getMachineA().process();
+		machineFactoryA.getMachineB().process();
+
+		MachineFactory machineFactoryB = new MachineFactoryB();
+		machineFactoryB.getMachineA().process();
+		machineFactoryB.getMachineB().process();
+	}
+}
+</pre>
+<pre class="console">
+execute MachineA1
+execute MachineB1
+execute MachineA2
+execute MachineB2
+</pre>
+<p>
+잘 동작하는 것을 볼 수 있습니다.
+</p>
+
+<h2>Closing Remarks</h2>
+<p>
+추상 팩토리 패턴에 대해 간단히 알아봤습니다. 팩토리 메소드 패턴과 유사하면서도 사용 용도가 다르다는 것을 알 수 있습니다. 물론 추상 팩토리 패턴에 팩토리 메소드 패턴을 차용할 수도 있습니다. 이 포스트에서는 사용하지 않았지만 <span class="command">MachineFactory</span>를 인터페이스가 아닌 추상 클래스(abstract class)로 선언하고 <span class="command">public static MachineFactory getFactory( String arg )</span>등의 메소드를 이용해서 인자값으로 어떤 팩토리를 사용할지 제어 할 수도 있습니다.
+</p>
+<p>
+혹시라도 이외에 피드백 주실 수 있다면 댓글 부탁드립니다. :3
+</p>

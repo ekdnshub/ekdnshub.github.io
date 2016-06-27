@@ -1,0 +1,50 @@
+###info
+title=C언어 파일 권한 체크 - access() 사용법
+created=2015-02-24
+###
+#p 오늘은 C언어에서 {@.access()} 함수에 대해 알아고보자 합니다. 기준 OS는 centOS(gcc version 4.1.2)입니다.
+
+#h2 .access() function definition
+#p {@.access()} 함수는 파일 또는 디렉토리의 사용자 권한을 체크합니다.
+
+#h2 use .access() function
+#p {@.access()} 함수의 사용법은 다음과 같습니다.
+
+###code.c
+#include <unistd.h>
+int access(const char *pathname, int mode); 
+###
+
+#p 사용하고자 하는 프로그램상에 {@unistd.h} 헤더 파일을 포함하고 {@.access()} 함수에 매개 인자를 넘겨주면 됩니다.
+#p pathname에는 체크하고자할 디렉토리 또는 파일명을 넣고 mode 변수에는 적절한 마스크{=mask} 값을 넣으면 됩니다. mode 변수에 들어갈 수 있는 마스크 값은 다음과 같습니다.
+###console
+{~R_OK} : 파일 존재 여부, 읽기 권한 여부
+{~W_OK} : 파일 존재 여부, 쓰기 권한 여부
+{~X_OK} : 파일 존재 여부, 실행 권한 여부
+{~F_OK} : 파일 존재 여부 
+###
+
+#p {@.access()} 함수의 결과 값은 int형으로 {!성공하면} {@0}을, {!실패하면} {@@-1}을 반환합니다. 오류의 원인에 대해서는 errno에 세팅됩니다. 해당 부분에 대한 자세한 내용은 C 컴파일러가 설치되었다는 가정 하에 콘솔에 {@man access}를 실행해 보세요.
+
+###code.sh
+$ man access # access 함수에 대한 자세한 설명을 출력합니다.
+###
+
+#h2 Example
+###code.c
+#include <stdio.h>
+#include <unistd.h>
+
+int main(void){
+	char *pathname = "./hello.txt";
+	int mode = R_OK | W_OK;
+	if( access( pathname, mode ) == 0 ){
+		printf("읽고 쓸 수 있습니다.");
+	}
+	else{
+		printf("권한이 없거나 존재하지 않습니다.");
+	}
+}
+###
+
+#p 프로그램을 보면 알수 있듯이 mode 변수가 들어갈 곳에 비트 연산으로 여러가지를 한번에 체크할 수 있습니다. 하나씩만 체크할 필요는 없어요.

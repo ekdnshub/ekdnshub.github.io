@@ -1,0 +1,151 @@
+ <p> 자바스크립트에는 클로저(Closure)라는 용어가 있습니다. 사실 이걸 이해하면 자바스크립트는 끝났다라는 말도 간혹 보이긴 합니다만. 그만큼 중요한 개념이기도 합니다. 물론 자바스크립트는 접근하기 쉬운 언어에 속하긴 해도 자세히 뜯어보면 또 다른 맛이 납니다. </p>
+ <h4>클로저(Closure)</h4> 
+ <p> 클로저 개념에 대한 상세한 정보는 <a href="http://en.wikipedia.org/wiki/Closure_(computer_programming)">Wikipedia - Closure(computer programming)</a>를 참조하시는게 좋아 보입니다만, 간략하게 정의만 짚고 넘어가자면. </p> 
+ <blockquote> 
+  <p> In programming languages, closures (also lexical closures or function closures) are a technique for implementing lexically scoped name binding in languages with first-class functions. </p> 
+  <cite><a href="http://en.wikipedia.org/wiki/Closure_(computer_programming)">Wikipedia - Closure(computer programming)</a></cite> 
+ </blockquote> 
+ <p> 프로그래밍 언어에서 클로저(어휘 클로저 또는 함수 클로저)는 <a href="http://en.wikipedia.org/wiki/First-class_function">first-class 함수</a> 언어에서 어휘 범위 이름의 바인딩을 구현하기 위한 기술입니다. </p> 
+ <p> 번역조차 어렵습니다. 맞는지도 의문입니다. 간단히 말해서 <i>무언가를 바인딩을 한다</i>는 것이 포인트입니다. 그 무언가는 무엇일까요? 코드로 봅시다. </p> 
+ <h4>자바스크립트 클로저(Javascript Closure)</h4> 
+ <p> 우선 기본적인 내용에 의문을 가지기 위한 코드(?)를 살펴보겠습니다. </p> 
+ <pre class="prettyprint linenums lang-js">
+function multi(ratio){
+	return function(input){
+		return ratio * input;
+	};
+};
+var doubleMulti = multi(2);
+doubleMulti(2); // 4
+</pre> 
+ <p> multi라는 함수는 내부에서 익명의 함수를 반환 하고 있습니다. 무엇이 의문점일까요? 일단은 이 코드에서 doubleMulti 함수가 어떤 내용으로 구성 되어 있는지 단순히 콘솔로 출력해보면 다음과 같습니다. </p> 
+ <pre class="prettyprint linenums lang-js">
+function (input){
+	return ratio * input;
+}
+</pre> 
+ <p> ratio라는 값은 어디에 있는걸까요? 혹시 안보이는 값이 있는건가요? 이번엔 tripleMulti 함수를 만들어 봅시다. </p> 
+ <pre class="prettyprint linenums lang-js">
+var tripleMulti = multi(3);
+</pre> 
+ <p> 이렇게 선언한 후에 다시 한번 tripleMulti 함수를 출력해 보면 doubleMulti 함수와 같은 내용을 출력합니다. 즉 doubleMulti, tripleMulti 함수는 같은 함수를 가진것처럼 보이지만 결과는 다르죠. tripleMulti(3)을 호출하면 9라는 값이 나올테니까요. 아니, 그전에 어떻게 함수 내용이 출력이 되는거죠? 분명히 함수는 종료하면 모든 지역 변수가 소멸 되어 사라질텐데요? 어떻게 자바스크립트는 ratio라는 변수 값을 가지고 있는건가요? 이 의문을 한번 풀어봅시다. </p> 
+ <h5>자바를 한번 보고 갑시다.</h5> 
+ <p> 일반적인 프로그래밍 언어, 예를 들자면 Java에서 어떤 메소드를 호출하는 경우 콜스택에 쌓이게 됩니다. 만약 위와 같은 multi 함수는 자바로 구현할 때 다음처럼 될거에요. </p> 
+ <pre class="prettyprint linenums lang-java">
+public class TestMain {
+	public int multi(int ratio, int input){
+		return ratio * input;
+	}
+	public int doubleMulti(int input){
+		return multi(2, input);
+	}
+	public int tripleMulti(int input){
+		return multi(3, input);
+	}
+	
+	public static void main(String[] args) {
+		TestMain m = new TestMain();
+		int result = m.doubleMulti(2); // 4
+		
+		System.out.println(result);
+	}
+}
+</pre> 
+ <p> 간만에 각 메소드에 브레이크포인트를 걸고 디버그 모드로 실행해 봅시다. 그리고 doubleMulti 메소드를 실행한다고 가정해봅시다. 콜스택은 다음처럼 쌓입니다. </p> 
+ <pre class="console">
+TestMain.multi(int, int) line: 4	
+TestMain.doubleMulti(int) line: 7	
+TestMain.main(String[]) line: 15
+</pre> 
+ <p> 그리고 차근차근 multi 메소드에서부터 처리되어 최종적으로는 4라는 출력값을 보여준 뒤 프로그램이 종료됩니다. 여기서 우리가 알 수 있는 것은 콜스택에 쌓이고 나오는 순간 <strong>메소드가 소멸</strong>한다는 것입니다. </p> 
+ <h5>다시 자바스크립트로 돌아와서</h5> 
+ <p> 하지만 아까전에 봤던 자바스크립트의 doubleMulti, tripleMulti 함수는 분명 처리가 되서 끝났음에도 불구하고 살아 남아서 자신의 구현부를 보여줍니다. 결론적으로는 각각의 함수가 "고유의 범위"를 가지고 있다는 것입니다. 이것이 바로 "클로저"입니다. 일반적으로 자바스크립트의 함수 내의 지역 변수는 함수가 종료되면 삭제됩니다. 그런데 클로저는 그렇지 않습니다. 자신의 고유 블록(+환경)을 가진 상태로 소멸하지 않고 외부 함수에 의해 호출되는 함수를 만드는 것, 바로 이것이 클로저입니다. </p> 
+ <p class="refer"> * "고유의 범위" 부분에 대해서는 자바스크립트의 Scope에 대한 이해가 필요합니다. 자세한 내용은 <a href="http://en.wikipedia.org/wiki/Scope_(computer_science)#JavaScript">Wikipedia - Scope (computer science)#JavaScript</a>를 참조 바랍니다. </p> 
+ <p> 클로저와 일반 지역 변수의 차이점은 클로저는 자신의 만들어질 당시의 환경을 그대로 유지하고 일반 지역 변수는 삭제된다는 것이죠. </p> 
+ <h4>클로저를 선언하는 법</h4> 
+ <p> 간단하게 생각하면 <strong>함수에서 함수를 반환</strong>시키면 됩니다. 주로 익명 함수를 사용합니다. 그럼 실제 예제를 한 번 봅시다. </p> 
+ <p> 아래와 같은 요소가 있다고 가정합시다. </p> 
+ <pre class="prettyprint linenums lang-html">
+&lt;button class="button-test"&gt;0&lt;/button&gt;
+&lt;button class="button-test"&gt;1&lt;/button&gt;
+&lt;button class="button-test"&gt;2&lt;/button&gt;
+&lt;button class="button-test"&gt;3&lt;/button&gt;
+&lt;button class="button-test"&gt;4&lt;/button&gt;
+</pre> 
+ <p> 밑에 있는 버튼들은 실제로 위에 있는 html 코드를 현재 포스트에 적용한 결과 입니다. </p> 
+ <div class="green"> 
+  <button class="button-test">0</button> 
+  <button class="button-test">1</button> 
+  <button class="button-test">2</button> 
+  <button class="button-test">3</button> 
+  <button class="button-test">4</button> 
+ </div> 
+ <p> 이제 여기에 기능을 추가해 봅시다. 버튼을 클릭시에 자신의 값을 alert으로 띄우는 것이 목적입니다. 1번 버튼을 클릭하면 "1"이라는 값이 alert으로 나오는거죠. 그래서 아래처럼 코드를 먼저 짜봤습니다. </p> 
+ <h5>클로저가 될까?</h5> 
+ <pre class="prettyprint linenums lang-js">
+function addAlert(){
+	var length = $(".button-test").size();
+	for(var i = 0 ; i &lt; length; i++){
+		$($(".button-test")[i]).unbind("click");
+		$($(".button-test")[i]).click(function(){
+			alert(i);
+		});
+	}
+};
+</pre> 
+ <script>
+function addAlert(){
+	var length = $(".button-test").size();
+	for(var i = 0 ; i < length; i++){
+		$($(".button-test")[i]).unbind("click");
+		$($(".button-test")[i]).click(function(){
+			alert(i);
+		});
+	}
+};
+</script> 
+ <button onclick="addAlert();">실행!</button> 
+ <p> 위의 실행 버튼을 클릭하고 숫자 버튼을 클릭해 보시기 바랍니다. 아마도 모든 숫자 버튼이 "5"라는 값을 출력할겁니다. 이유가 뭘까요? click 이벤트가 등록될 당시 모든 버튼들은 addAlert 내의 모든 환경 변수를 공유하기 때문입니다. 따라서 i값이 length값과 비교후 for문이 종료되는 순간의 환경을 모든 버튼이 공유하고 있는거죠. 따라서 실제로 버튼을 클릭해서 alert창을 띄울시 "콜백"이기 때문에 5가 나오게 됩니다. 이미 i값은 5로 되어 있는 상태니까요. 함수를 선언하는 순간이 아닌 함수 처리가 끝난 후 실제로 기능을 호출 할 때의 환경 변수 값을 참조하는 겁니다. </p> 
+ <h5>진정한 클로저</h5> 
+ <p> 그러면 정말로 버튼을 클릭 했을 때 제대로된 숫자가 나오도록 처리해봅시다. </p> 
+ <pre class="prettyprint linenums lang-js">
+function addClosureAlert(){
+	var length = $(".button-test").size();
+	for(var i = 0 ; i &lt; length; i++){
+		$($(".button-test")[i]).unbind("click");
+		$($(".button-test")[i]).click(
+			(function(i){
+				return function(){
+					alert(i);
+				}
+			})(i)
+		);
+	}
+};
+</pre> 
+ <script>
+function notiAlert(input){
+	alert(input);
+};
+
+function addClosureAlert(){
+	var length = $(".button-test").size();
+	for(var i = 0 ; i < length; i++){
+		$($(".button-test")[i]).unbind("click");
+		$($(".button-test")[i]).click(
+			(function(i){
+				return function(){
+					alert(i);
+				}
+			})(i)
+		);
+	}
+};
+</script> 
+ <button onclick="addClosureAlert();">실행!</button> 
+ <p> 위 실행 버튼을 클릭하고 다섯개가 있던 버튼을 눌러봅시다. 원하는대로 해당 버튼에 있는 값이 나올겁니다. 아까 전에 말씀드렸던대로 함수 안에 함수를 만들어 반환하면 됩니다. 이렇게 하게 되면 어떤 현상이 일어날까요? 아까전에는 같은 환경을 공유 했던 콜백 함수들은 이제 각자 "클로저"로 인해 별도의 환경 변수를 가지게 되었습니다. </p> 
+ <p class="refer"> * 클로저를 선언할 때 사용한 방식은 "즉시 실행 함수"입니다. 자세한 내용은 <a href="/118">자바스크립트 네임스페이스(javascript namespace)</a>를 참조하세요. </p> 
+ <p> addAlert 함수와 비교해 보세요. 버튼별로 별도의 환경 변수를 가지지 않았기 때문에 클릭 이벤트가 발생했을 당시 "콜백"을 통해 자신이 속한 범위에서 가장 근접한 i값을 가져옵니다. 자신이 가지고 있는 i값은 별도로 구성 되지 않았기 때문에 상위 블록에 있던 i값을 가져오게 되었죠. </p> 
+ <p> addClosureAlert 함수의 소스코드도 숫자 버튼 클릭시 "콜백"을 통해 이벤트를 실행합니다. 그러나 이번엔 상위 블록에 i값이 있어도 자신의 고유한 범위를 가지는 클로저로 할당된 i값이 가장 근접하기 때문에 그 값을 가져옵니다. </p> 
+ <h4>Closing Remarks</h4> 
+ <p> 하나만 기억하세요! 자바스크립트 클로저를 선언하는 방법은 <strong><i>함수에서 함수를 반환한다</i></strong>는 것입니다! 더 깊게 파고 들면 머리가 아파서 이정도로만! :) </p>

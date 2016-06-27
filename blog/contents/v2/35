@@ -1,0 +1,16 @@
+###info
+title=Oracle Sql Developer Error - not find jvm.dll
+created=2014-11-21
+###
+#p 음, Oracle에서 제공하는 쿼리 툴인 {!SQL Developer}를 설치하고 다음날 컴퓨터를 켜보니 오류가 났다. -_-
+#p  jvm.dll을 못찾는 오류였는데 이 경우에 {@product.conf} 파일을 수정 해줘야한다. 해당 파일은 4.x버전대를 쓴다면 아래와 같은 경로로 찾을 수 있다.
+
+###code.sh
+C:\Users\{계정명}\AppData\Roaming\sqldeveloper\1.0.0.0.0 
+###
+#p {=참고로 OS는 Windows7 이다.}
+#p 해당 파일을 열어보면 AddVMOption 이라는 항목이 있는데 처음 세팅이 {@-Xmx800M} 으로 잡혀있다. 여기서 800부분을 256으로 바꿔주면 해결!
+#p 요약하자면 {@product.conf} 파일에서 아래부분을 바꿔주면 된다.
+###pre
+AddVMOption -Xmx800M =====> AddVMOption -Xms256M
+###

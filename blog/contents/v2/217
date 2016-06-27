@@ -1,0 +1,177 @@
+###info
+title=빌더 패턴(Builder Pattern)
+created=2015-11-15
+###
+
+#p 간만에 작성하는 디자인 패턴 포스트입니다. 이번 포스트에서는 빌더 패턴{=Builder Pattern}에 대해 알아보고자 합니다.
+
+#h2 Builder Pattern
+#p 빌더 패턴은 추상 팩토리 패턴이나 팩토리 메소드 패턴과는 조금 다릅니다. 빌더 패턴도 새로운 객체를 만들어서 반환하는 패턴이긴 하지만 실제 동작 방식은 조금 다릅니다.
+#p 빌더 패턴은 생성자에 들어갈 매개 변수가 많든 적든 차례차례 매개 변수를 받아들이고 모든 매개 변수를 받은 뒤에 이 변수들을 통합해서 한번에 사용을 합니다.
+###fold.원문 펼치기
+###include
+#p The builder pattern is an object creation software design pattern. Unlike the abstract factory pattern and the factory method pattern whose intention is to enable polymorphism, the intention of the builder pattern is to find a solution to the telescoping constructor anti-pattern. The telescoping constructor anti-pattern occurs when the increase of object constructor parameter combination leads to an exponential list of constructors. Instead of using numerous constructors, the builder pattern uses another object, a builder, that receives each initialization parameter step by step and then returns the resulting constructed object at once.
+#cite {$https://en.wikipedia.org/wiki/Builder_pattern}
+###
+###
+
+#h2 Why Use Builder Pattern?
+#p 그렇다면 어떤 경우에 빌더 패턴을 사용하면 좋을까요. 아래의 예제를 한번 봅시다.
+###code.java
+/**
+ * 제약사항 : 이 객체는 한번 생성되면 읽기(Read)만 가능해야 합니다.
+ */
+public class PersonInfo {
+    private String name;
+    private Integer age;
+    private String favoriteColor;
+    private String favoriteAnimal;
+    private Integer favoriteNumber;
+
+    public PersonInfo(String name, Integer age, String favoriteColor, String favoriteAnimal, Integer favoriteNumber){
+        this.name = name;
+        this.age = age;
+        this.favoriteColor = favoriteColor;
+        this.favoriteAnimal = favoriteAnimal;
+        this.favoriteNumber = favoriteNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public String getFavoriteColor() {
+        return favoriteColor;
+    }
+
+    public String getFavoriteAnimal() {
+        return favoriteAnimal;
+    }
+
+    public Integer getFavoriteNumber() {
+        return favoriteNumber;
+    }
+
+    public String getPersonInfo(){
+        String personInfo = String.format("name:%s, age:%d, favoriteColor:%s, favoriteAnimal:%s, favoriteNumber:%d"
+                , name, age, favoriteColor, favoriteAnimal, favoriteNumber);
+        return personInfo;
+    }
+}
+###
+#p 이 클래스는 한 사람의 정보를 담기 위한 것입니다. 하지만 제약 사항이 걸려 있네요.
+#p 따라서 setter 메소드는 존재할 수 없고 오로지 생성자를 통해서만 데이터를 입력 받는다는 가정으로 만든 클래스입니다. 생성자를 보면 모든 매개변수를 받도록 하고 있습니다. 하지만 어떤 사람들은 모든 데이터가 없을 수도 있습니다.
+#p 예를 들어 "이름"과 "나이"만 알고 있는 사람의 경우는 다음처럼 객체를 만들어 내야 할 것입니다.
+###code.java
+new PersonInfo("JDM", 20, null, null, null);
+###
+#p 하지만 이경우는 가독성이 안좋겠죠. 그래서 추가 생성자를 만들어서 처리하도록 해봅시다. 다음과 같은 생성자가 추가될 겁니다.
+###code.java
+public PersonInfo(String name, Integer age){
+    this(name, age, null, null, null);
+}
+###
+#p 이렇게 해서 하나의 케이스에 대해서는 처리를 했습니다. {!하지만} 여기에 새로운 유형의 정보가 들어온다면 어떻게 될까요?
+#p 예를 들자면, 이름만 있다거나, 이름과 좋아하는 동물만 있다거나 하면서요. 그럼 그때마다 새로운 생성자를 만들어 줘야 할까요?
+#p {!문제는 하나 더 있습니다.} 만약 데이터를 입력하는 순서가 달라진다면 그것도 재앙이 될겁니다.
+###code.java
+// 이름이 들어가야할 곳에 좋아하는 동물이 들어갔습니다.
+// 반대로 좋아하는 동물이 들어가야 할 곳에 사람 이름이 들어갔네요.
+new PersonInfo("cat", 20, "JDM", null, null);
+###
+#p 이런 경우 찾아내기도 힘들뿐더러 매번 사용자가 체크를 해야하는 상황이 옵니다. {!조금 더 명시적이고 명확하게 객체를 만들어낼 순 없을까요?}
+#p 그럼 이제 빌더 패턴을 적용 해봅시다.
+
+#h2 Implement Builder Pattern
+#p 해결 해야하는 것은 다음과 같습니다.
+###box.green
+###ul
+#li 불필요한 생성자를 만들지 않고 객체를 만든다.
+#li 데이터의 순서에 상관 없이 객체를 만들어 낸다.
+#li 사용자가 봤을때 명시적이고 이해할 수 있어야 한다.
+###
+###
+#p 그래서 다음과 같은 빌더 패턴을 적용한 빌더{=Builder} 클래스가 필요한 겁니다.
+###code.java
+public class PersonInfoBuilder {
+    private String name;
+    private Integer age;
+    private String favoriteColor;
+    private String favoriteAnimal;
+    private Integer favoriteNumber;
+
+    public PersonInfoBuilder setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public PersonInfoBuilder setAge(Integer age) {
+        this.age = age;
+        return this;
+    }
+
+    public PersonInfoBuilder setFavoriteColor(String favoriteColor) {
+        this.favoriteColor = favoriteColor;
+        return this;
+    }
+
+    public PersonInfoBuilder setFavoriteAnimal(String favoriteAnimal) {
+        this.favoriteAnimal = favoriteAnimal;
+        return this;
+    }
+
+    public PersonInfoBuilder setFavoriteNumber(Integer favoriteNumber) {
+        this.favoriteNumber = favoriteNumber;
+        return this;
+    }
+
+    public PersonInfo build(){
+        PersonInfo personInfo = new PersonInfo(name, age, favoriteColor, favoriteAnimal, favoriteNumber);
+        return personInfo;
+    }
+}
+###
+#p 위의 빌더 클래스를 사용하면 {@PersonInfo} 객체를 손쉽게 가능한 헷갈리지 않도록(?) 만들어 낼 수 있습니다.
+#p 빌더를 만들었으니 사용해봅시다.
+###code.java
+public class BuilderPattern {
+    public static void main(String[] args) {
+        // 빌더 객체를 하나 만듭니다.
+        PersonInfoBuilder personInfoBuilder = new PersonInfoBuilder();
+        // 빌더 객체에 원하는 데이터를 입력합니다. 순서는 상관 없습니다.
+        PersonInfo result = personInfoBuilder
+                .setName("MISTAKE")
+                .setAge(20)
+                .setFavoriteAnimal("cat")
+                .setFavoriteColor("black")
+                .setName("JDM") // 다시 같은 메소드를 호출한다면 나중에 호출한 값이 들어갑니다.
+                .setFavoriteNumber(7)
+                // 마지막에 .build() 메소드를 호출해서 최종적인 결과물을 만들어 반환합니다.
+                .build();
+        // print is "name:JDM, age:20, favoriteColor:black, favoriteAnimal:cat, favoriteNumber:7"
+        System.out.println(result.getPersonInfo());
+    }
+}
+###
+#p 사용자 입장에서 {@PersonInfo} 객체를 만들어 낼 때 {@PersonInfoBuilder} 클래스를 이용한다면 조금 더 명확하게 이해하고 만들어 낼 수 있을겁니다.
+
+###box.green
+#p {!{+help} TIP.} 빌더 클래스를 꼭 객체를 만들어낼 클래스와 분리할 필요는 없습니다. 객체를 만들어낼 클래스 내부에 빌더 클래스를 포함할 수 있습니다. 예를 들자면 다음처럼 됩니다.
+###code.java
+PersonInfo p = PersonInfo.Builder().setName("JDM").setAge(20).build();
+###
+#p 물론 Builder() 메소드는 {@static}으로 선언하고 빌더 클래스를 반환해주면 됩니다. 아래의 코드를 보시면 됩니다.
+###code.java
+/* PersionInfo.java */
+public static PersonInfoBuilder Builder(){
+    return new PersonInfoBuilder();
+}
+###
+###
+
+#h2 Closing Remarks
+#p 간단하게 빌더 패턴에 대해 알아봤습니다. 응용하면 아름다운 코드를 만들어 낼 수 있을거라 믿어 의심치 않습니다. :)

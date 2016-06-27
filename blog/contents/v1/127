@@ -1,0 +1,93 @@
+ <p> 아파치 머하웃(Apache Mahout)이라는 프로젝트를 최근에 알게 됐습니다. 실제 개발이 시작된건 2011년처럼 보이는데 2015년 4월 11일 0.10.0 버전이 릴리즈 됐습니다. <a class="refer" href="https://mahout.apache.org/">[출처] https://mahout.apache.org/</a> </p>
+ <h4>머하웃?(Mahout?)</h4> 
+ <p> 머하웃(Mahout)이라는 단어는 코끼리 조련사라는 뜻을 가지고 있습니다. 코끼리라는 말로 봐서 이 프로젝트 역시 Hadoop에서 파생된것으로 볼 수 있겠네요. 위키피디아에서는 다음처럼 소개하고 있습니다. </p> 
+ <blockquote> 
+  <p> <strong>Apache Mahout</strong> is a project of the Apache Software Foundation to produce free implementations of distributed or otherwise scalable machine learning algorithms focused primarily in the areas of collaborative filtering, clustering and classification. </p> 
+  <cite><a href="http://en.wikipedia.org/wiki/Apache_Mahout">Wikipedia - Apache Mahout</a></cite> 
+ </blockquote> 
+ <p> 아파치 머하웃은 협력 필터링, 클러스터링, 분류에 주로 촛점을 맞춘 분산 처리 및 확장 가능한 기계 학습 알고리즘의 자유 구현을 만들기 위한 아파치 소프트웨어 재단의 프로젝트입니다. </p> 
+ <p> 기계 학습이라는 말을 봐서는 데이터셋을 넣어 학습을 시킨 후 추후 input데이터를 넣었을때 output을 도출해주는 프로젝트로 보이네요. </p> 
+ <h4>0.10.0 버전 동향</h4> 
+ <p> <a href="https://mahout.apache.org/">공식 웹사이트</a>에서 2015년 4월 11일 0.10.0 버전을 릴리즈 했습니다. 그리고 새로운 계산 환경인 <a href="http://mahout.apache.org/users/sparkbindings/home.html">Samsara</a>를 발표했네요. 이것을 기반으로 한 알고리즘도 많아 보입니다. <a href="http://mahout.apache.org/users/basics/algorithms.html">머하웃 알고리즘</a>은 머하웃-삼사라(Mahout-Samsara)의 속도를 위한 새로 작성한 것을 포함하고 있다고 합니다. </p> 
+ <p> Scala, R, Spark Cluster 등에서 사용가능한 것으로 보이는데 어떤식으로 사용할 수 있는지는 조금 더 검토를 해봐야 할 것 같네요. </p> 
+ <h4>머하웃 설치(Install Mahout)</h4> 
+ <p> 실제로 설치를 한번 진행해 봅니다. 해당 내용은 <a href="http://mahout.apache.org/general/downloads.html">공식 웹사이트 - 다운로드</a>부분을 참조했습니다. 설치 환경은 CentOS 6.4입니다. </p> 
+ <h5>소스 코드 내려받기</h5> 
+ <p> 다음과 같은 커맨드로 현재 스냅샷의 소스 코드를 다운로드 받을 수 있습니다. </p> 
+ <pre class="prettyprint linenums lang-sh">
+$ git clone https://github.com/apache/mahout.git mahout
+</pre> 
+ <p> 커맨드 실행시 다음처럼 나옵니다. </p> 
+ <pre class="console">
+Initialized empty Git repository in /home/dev/mahout/.git/
+remote: Counting objects: 82377, done.
+remote: Compressing objects: 100% (62/62), done.
+remote: Total 82377 (delta 23), reused 0 (delta 0), pack-reused 82294
+Receiving objects: 100% (82377/82377), 39.90 MiB | 294 KiB/s, done.
+Resolving deltas: 100% (44182/44182), done.
+</pre> 
+ <h5>환경 구성</h5> 
+ <p> 해당 리눅스 계정의 ~/.bashrc 파일에 설정을 해줘야 합니다. 맥 사용자라면 ~/.bash_profile 파일을 바꿔야겠네요. </p> 
+ <pre class="prettyprint linenums lang-sh">
+export MAHOUT_HOME=/path/to/mahout
+export MAHOUT_LOCAL=true # for running standalone on your dev machine, 
+# unset MAHOUT_LOCAL for running on a cluster
+</pre> 
+ <p> MAHOUT_HOME에 방금 설치한 mahout의 디렉토리를 잡아주신 뒤 MAHOUT_LOCAL값을 true로 바꿔줍니다. 해당 값은 standalone방식으로 실행하기 위한 것입니다. 클러스터로 동작시키려면 해당 값은 삭제해주세요. 그리고 또한 스파크(Spark)를 실행 중이라면 $SPARK_HOME을 잡아줍니다. 물론 $JAVA_HOME으로 자바 실행 위치도 잡아주세요. </p> 
+ <h4>머하웃 라이브러리</h4> 
+ <p> 머하웃을 라이브러리 용도로 사용하고자 한다면 Maven을 이용하거나 Gradle을 이용해 사용할 수 있습니다. 아래의 링크를 클릭하세요. <a class="refer" href="http://mahout.apache.org/general/downloads.html#using-mahout-as-a-library">[출처] Using Mahout as a Library</a> </p> 
+ <div class="green"> 
+  <ul> 
+   <li><a href="http://mvnrepository.com/artifact/org.apache.mahout/mahout-core">http://mvnrepository.com/artifact/org.apache.mahout/mahout-core</a></li> 
+   <li><a href="http://mvnrepository.com/artifact/org.apache.mahout/mahout-math">http://mvnrepository.com/artifact/org.apache.mahout/mahout-math</a></li> 
+   <li><a href="http://mvnrepository.com/artifact/org.apache.mahout/mahout-hdfs">http://mvnrepository.com/artifact/org.apache.mahout/mahout-hdfs</a></li> 
+  </ul> 
+ </div> 
+ <p> 실제로 프로젝트를 구성할때 Gradle을 사용한다면 다음과 같은 부분을 build.gradle 파일에 넣어주세요. </p> 
+ <pre class="console">
+compile("org.apache.mahout:mahout-hdfs:0.10.0")
+compile("org.apache.mahout:mahout-math:0.10.0")
+compile("org.apache.mahout:mahout-core:0.9")
+</pre> 
+ <h5>예제를 돌려봅시다.</h5> 
+ <p> 머하웃 라이브러리를 이용해서 간단하게 예제를 만들어 봅시다. 해당 부분은 <a href="https://mahout.apache.org/users/recommender/userbased-5-minutes.html">Creating a User-Based Recommender in 5 minutes</a>부분을 참조합시다. :) </p> 
+ <p> 실제로 돌려 봤습니다. 코드는 다음처럼 작성했습니다. 데이터셋은 <a href="https://mahout.apache.org/users/recommender/userbased-5-minutes.html#dataset">DataSet</a>을 참조하세요. 해당 데이터셋의 구조는 ID,아이템ID,추천점수 순입니다. </p> 
+ <pre class="prettyprint linenums lang-java">
+public class Test {
+
+	public static void main(String[] args) throws IOException, TasteException {
+		DataModel model = new FileDataModel(new File("data.csv"));
+		UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
+		UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1,
+				similarity, model);
+		UserBasedRecommender recommender = new GenericUserBasedRecommender(
+				model, neighborhood, similarity);
+
+		List&lt;RecommendedItem&gt; recommendations = recommender.recommend(2, 3);
+		for (RecommendedItem recommendation : recommendations) {
+			System.out.println(recommendation);
+		}
+	}
+}
+</pre> 
+ <p> 결과는 아래처럼 나왔습니다. </p> 
+ <pre class="console">
+RecommendedItem[item:12, value:4.8328104]
+RecommendedItem[item:13, value:4.6656213]
+RecommendedItem[item:14, value:4.331242]
+</pre> 
+ <p> ID가 2번인 사람에게 3개의 아이템을 추천하라고 했는데 12,13,14번 아이템을 추천을 해준것으로 보입니다. </p> 
+ <h4>유사(Similarity)</h4> 
+ <p data-date="2015.04.28"> 유사라는 것은 무언가와 비교할 때 비슷하다는 개념이죠. 머하웃에서의 유사는 두 종류가 존재합니다. 바로 사용자 유사(UserSimilarity)와 아이템 유사(ItemSimilarity)입니다. 이 두 가지는 다른 접근을 합니다. </p> 
+ <p data-date="2015.04.28"> 먼저 <strong>사용자 유사</strong>는 두 사용자 간의 유사한 정도를 측정하고 이것을 지표로 삼는것입니다. 추천 엔진에서 매우 중요한 부분입니다. 반대로 <strong>아이템 유사</strong>는 아이템 간의 유사한 정도를 측정해 지표로 삼는 방식입니다. </p> 
+ <h4>추천기(Recommender)</h4> 
+ <p data-date="2015.04.28"> 머하웃에는 기본적인 두 종류의 추천기가 있습니다. 사용자 기반 추천기(User-based Recommender)와 아이템 기반 추천기(Item-based Recommender)가 그것입니다. </p> 
+ <p data-date="2015.07.03"> 보다 자세한 내용을 원한다면 <a href="https://mahout.apache.org/users/recommender/recommender-documentation.html">Mahout Overview</a> 항목을 참조하세요. </p> 
+ <h5>사용자 기반 추천기(User-based Recommender)</h5> 
+ <p data-date="2015.04.28"> 사용자 기반 추천기는 기본적입니다. 데이터가 꼬여있거나, 조그만 볼륨의 데이터 셋에 알맞고 빠른 추천 시스템이 필수적이지 않다면 좋은 생산성을 보여줍니다. </p> 
+ <p data-date="2015.04.28"> 예를 들자면, A라는 사람과 B라는 사람이 있을 때 A는 a,b,c를 좋아하고 B는 b,c를 좋아한다고 하면 A와 B는 공통적으로 b,c를 좋아하니 유사도가 높다고 판단하고 A의 a를 B에게 추천을 해주는것 정도로 이해하면 될 것 같습니다. </p> 
+ <h5>아이템 기반 추천기(Item-based Recommender)</h5> 
+ <p data-date="2015.04.28"> 아이템 기반 추천기는 사용자가 아닌 아이템의 유사한 정도를 지표로 삼는 추천기입니다. 다만 사용자 간의 유사성보단 아이템 간의 유사성이 더 고정되어 있습니다. 따라서 큰 볼륨의 데이터 셋에 알맞고 미리 계산할 수도 있습니다. </p> 
+ <p data-date="2015.04.28"> 예를 들자면, A부터 D까지의 아이템이 있는데, A와 B가 같은 카테고리고 C와 D가 같은 카테고리라고 가정한다면 어떤 사용자가 A를 좋아한다고 할 때 같은 카테고리 아이템인 B를 추천해 준다는 것 정도로 이해하면 될 것 같습니다. </p> 
+ <h4>Closing Remarks</h4> 
+ <p> 조금 더 검토를 해서 포스팅에 추가해야겠네요. :) </p>

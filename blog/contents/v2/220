@@ -1,0 +1,105 @@
+###info
+title=Setting up NginX for CentOS
+created=2015-11-25
+###
+
+#p 이번 포스트는 CentOS에서 NginX를 설치하는 방법을 알아봅니다.
+
+#h2 Download Nginx
+#p NginX를 다운로드 받습니다. 다운로드 받고자 하는 디렉토리에서 아래의 커맨드를 실행합니다.
+###code.sh
+$ wget http://nginx.org/download/nginx-1.8.0.tar.gz
+$ tar -xvf nginx-1.8.0.tar.gz
+###
+
+#h2 Test Configuration
+
+#p 우선 NginX가 설치 가능한 환경인지 테스트를 해봅니다. 아래의 커맨드를 실행하세요.
+
+###code.sh
+$ cd nginx-1.8.0
+$ ./configure
+###
+
+#p {@./configure} 실행시 빌드가 가능한 상태인지 체크를 하게 되는데 여기서 누락된 모듈이 있으면 콘솔로 출력 해줍니다. 콘솔로 출력된 해당 모듈을 옵션으로 제외를 시키던지 또는 설치하라는 안내문구가 출력되는데 이 부분을 모두 처리하고 다음 단계로 갑니다.
+
+###box.green
+#p {!{+help} TIP.} 포스트 작성중에는 {@PCRE}가 없었기 때문 해당 부분을 처리해야 했습니다.
+#p PCRE는 {$http://www.pcre.org/} 에서 관리하고 있는데 여기서 Download 부분을 보면 됩니다. 현재 가장 최신 버전은 8.37 버전인듯 하네요.
+###code.sh
+$ wget http://sourceforge.net/projects/pcre/files/pcre/8.37/pcre-8.37.tar.gz
+$ tar -xvf pcre-8.37.tar.gz
+###
+#p ftp와 소스 포지 미러를 제공하는데 소스 포지에서 내려 받아서 했습니다. 그 이후 압축을 해제하시면 설치 끝!
+#p 다시 한번 nginx-1.8.0/configure를 실행시켜봤습니다다. {@--with-pcre} 옵션에는 위에서 설치한 pcre의 위치를 잡아줍니다. 아래처럼 실행하면 됩니다.
+###code.sh
+$ ./configure --with-pcre=<path>
+###
+###
+
+#h2 build make file
+#p {@./configure}에서 에러가 나지 않는다면 make 파일을 생성해줍니다. 그럼 다음처럼 설치를 진행합니다.
+###code.sh
+$ make
+$ sudo make install
+###
+
+#p 설치를 끝냈다면 기본적인 NginX의 설치 위치는 {@/usr/local/nginx} 입니다.
+
+#h2 Handling NginX
+#p 기본적인 NginX 사용법을 알아봅니다. 우선 아래와 같은 커맨드로 NginX를 구동할 수 있습니다.
+###code.sh
+$ sudo /usr/local/nginx/sbin/nginx
+###
+#p 메뉴얼이 필요하다면 {@-?} 옵션을 주면 됩니다. 자주 쓰이는 옵션은 {@-s}인데 이것은 다음처럼 사용합니다.
+###code.sh
+$ nginx -s stop # 빠른 종료. (강제로 Kill)
+$ nginx -s quit # 부드러운 종료. (기존 처리 내역이 있다면 처리하고 종료)
+$ nginx -s reopen # 로그 파일들을 다시 오픈.
+$ nginx -s reload # 환경 설정 파일을 다시 읽음.
+###
+#p 그리고 {@-V} 옵션을 사용하면 nginx 빌드할때 사용했던 옵션을 알 수 있습니다.
+
+#h2 Nginx Configration
+#p NginX의 환경설정은 기본 위치일때 {@/usr/local/nginx/conf/nginx.conf} 입니다. 파일을 열어보면 기본 root 설정이 html로 되어 있는데 이것의 위치는 {@/usr/local/nginx/html} 입니다. 더 자세한 설명은 {$https://www.nginx.com/resources/wiki/start/topics/examples/full/}을 참조하세요.
+
+#h2 Simple Example
+#p 가상 호스트를 적용하는법을 간단하게 하나 투척하고 갑니다.
+###code.sh
+server {
+    listen <port>; # ex. 80
+    server_name <your domain>; # ex. blog.jdm.kr
+    root <rootDir>; # ex. /home/blog
+    index none; # 필요에 따라 첫 페이지를 지정합니다.
+    # 아래는 파비콘 관련 부분인데 필요 없으면 삭제 가능합니다.
+    location = /favicon.ico {
+            return 204;
+            access_log     off;
+            log_not_found  off;
+    }
+    location /some {
+            # 헤더를 정의할 수도 있습니다.
+            add_header 'Access-Control-Allow-Origin' 'http://some.domain.name';
+            add_header 'Access-Control-Allow-Methods' 'GET';
+            alias <someDir>;
+            index none;
+    }
+    location / {
+            # 프록시 설정도 해줄 수 있어요.
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_pass http://localhost:1234;
+    }
+}
+###
+
+###box.green
+#p {!{+help} TIP.} {@location} 구문은 선언한 순서대로 동작하지 않고 우선 순위대로 동작합니다. 해당 부분에 대해서는 {$http://nginx.org/en/docs/http/ngx_http_core_module.html#location}를 확인하세요.
+###
+
+#h2 Etc.
+#p 부가적이긴 하지만 아래의 옵션을 켜주면 좋습니다.
+###console
+gzip on; # 패킷 압축 사용
+server_tokens off; # 응답 헤더의 NginX 버전 감춤
+###

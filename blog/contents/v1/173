@@ -1,0 +1,109 @@
+<p>
+지난번 포스팅인 <a href="/172">자바 벡터(Java Vector)</a>에 이어서 이번엔 ArrayList에 대해서 알아보고자 합니다.
+</p>
+
+<h2>Initialize ArrayList</h2>
+<p>
+ArrayList는 기본적으로 다음과 같이 초기화를 할 수 있습니다.
+</p>
+<pre class="prettyprint lang-java">
+/* initialize ArrayList */
+// (1)
+// 기본 크기는 10으로 지정된다.
+ArrayList&lt;String> al = new ArrayList&lt;String>();
+
+// (2)
+// 크기가 10인 배열 생성
+// 요소 삽입으로 배열 크기 초과시 초기 지정값 만큼 커진다.
+ArrayList&lt;String> al2 = new ArrayList&lt;String>(10);
+
+// (3)
+// Object로 선언 후 실제 요소들을 다양하게 삽입
+ArrayList&lt;Object> al3 = new ArrayList&lt;Object>(10);
+al3.add(1);
+al3.add("1");
+</pre>
+<p>
+ArrayList도 벡터와 마찬가지로 데이터 저장 용도 멤버 변수인 <span class="command">Object[]</span>를 가지고 있습니다. Object로 선언 뒤에 다양한 객체를 삽입 할 수 있긴 합니다.
+</p>
+
+<h2>Methods</h2>
+<p>
+벡터에서는 <span class="command">.add()</span> 메소드에 <span class="command">synchronized</span> 키워드가 있었습니다. <strong>하지만 ArrayList의 메소드에는 그런 키워드가 존재하지 않습니다.</strong>
+</p>
+<pre class="prettyprint lang-java">
+public boolean add(E e)
+</pre>
+<p>
+눈에 불을 키고 찾아봐도 <span class="command">synchronized</span> 키워드가 붙은 메소드가 없네요. ArrayList와 벡터의 결정적 차이는 메소드의 <span class="command">synchronized</span> 키워드 여부입니다. 다른 말로 바꿔보자면 <strong>동기화</strong>를 하는 벡터와 동기화가 없는 ArrayList가 되겠네요.
+</p>
+<div class="green">
+<p> <strong>[TIP]</strong> 다음과 같은 방식으로 동기화가 되는 ArrayList를 생성 할 수 있습니다.</p>
+<pre class="prettyprint lang-java">
+List ary = Collections.synchronizedList(new ArrayList&lt;String>());
+</pre>
+</div>
+
+
+<h2>grow Size</h2>
+<p>
+ArrayList에서 크기를 초과하는 요소 삽입시에 하는 액션은 벡터와 놀랍도록 비슷합니다. -_-;
+</p>
+<p>
+ArrayList도 내부적으로 크기 초과시에 <span class="command">.grow()</span> 메소드를 호출 합니다.
+</p>
+<pre class="prettyprint lang-java">
+private void grow(int minCapacity)
+</pre>
+<p>
+일정 개수 이상(2^31-8) 크기를 초과하면 <span class="command">OutOfMemoryError</span> 오류가 나는 것도 벡터와 유사합니다.
+</p>
+
+<h2>Processing Image</h2>
+<p>
+벡터의 동작과 유사하기 때문에 여기서는 remove 할 때의 프로세스만을 자세하게 다뤄보겠습니다.
+</p>
+
+<pre>
+# 크기가 6인 ArrayList의 remove
+
+1) 초기 상태
+╋━╋━╋━╋━╋━╋━╋
+┃ A┃ B┃ C┃ D┃ E┃ F┃
+╋━╋━╋━╋━╋━╋━╋
+
+2) 요소 C의 삭제
+╋━╋━╋━╋━╋━╋━╋
+┃ A┃ B┃ -┃ D┃ E┃ F┃
+╋━╋━╋━╋━╋━╋━╋
+
+3) 요소 C의 삭제 후 남은 빈 공간으로 차례대로 복사
+            ◀
+╋━╋━╋━╋━╋━╋━╋
+┃ A┃ B┃ D┃ -┃ E┃ F┃
+╋━╋━╋━╋━╋━╋━╋
+                ◀
+╋━╋━╋━╋━╋━╋━╋
+┃ A┃ B┃ D┃ E┃ -┃ F┃
+╋━╋━╋━╋━╋━╋━╋
+                    ◀
+╋━╋━╋━╋━╋━╋…╋
+┃ A┃ B┃ D┃ E┃ F┃  ┃
+╋━╋━╋━╋━╋━╋…╋
+
+4) 최종
+╋━╋━╋━╋━╋━╋………╋
+┃ A┃ B┃ D┃ E┃ F┃(null)┃
+╋━╋━╋━╋━╋━╋………╋
+</pre>
+<p>
+위의 이미지로 보셨듯이 벡터와 ArrayList의 삭제 동작은 위처럼 차례대로 기존 자리에 다음 요소를 복사하고 마지막에 null을 삽입합니다.
+</p>
+<p>
+그런데 이런 동작을 <strong>매번 <span class="command">synchronized</span> 키워드를 붙여서 처리하는 벡터</strong>라면 ArrayList보다도 성능적인 이슈가 매우 많이 생기겠죠?
+</p>
+
+<h2>Summary</h2>
+<p>
+ArrayList는 간단하고 빠르게 사용할 수 있는 Collection 클래스입니다. 가능하면 멀티 스레드가 아닌 이상 벡터가 아닌 ArrayList를 애용합시다. :D
+</p>

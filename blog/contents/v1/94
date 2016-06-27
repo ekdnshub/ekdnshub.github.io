@@ -1,0 +1,15 @@
+ <p> 스칼라를 이용해 줄(line)단위로 파일을 읽는 코드입니다. </p>
+ <pre class="prettyprint linenums lang-scala">/* file reading example */
+import scala.io.Source
+object fileReadObj {
+  def main(args: Array[String]){
+    try{
+      for(line &lt;- Source.fromFile("/home/path/path.txt").getLines()){
+        println(line)
+      }
+    } catch {
+      case ex: Exception =&gt; println(ex)
+    }
+  }
+}
+</pre>

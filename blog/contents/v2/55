@@ -1,0 +1,26 @@
+###info
+title=Oracle leading hint
+created=2015-01-14
+###
+#p Oracle LEADING 힌트를 써보게 되었다. 음... 간단한 사용법은 아래처럼..
+###code.sql
+select /*+ leading(b) */ *
+from tbl a, tbl2 b
+where a.id = b.id
+###
+#p leading 힌트는 join을 할 때 먼저 읽어들일 테이블을 지정하는 힌트 구문이다. 대체적으로 다음과 같은 특징을 가지고 있다.
+###box.green
+###ul
+#li 테이블 조인시 지정 테이블을 먼저 수행
+#li ORDERED 힌트와 같이 사용할땐 쓰지 않음 
+###
+###
+#p 어쨌든, FROM절에 있는 테이블 기술 순서와는 다르게 제어할 수 있다는 것이 마음에 든다. ORDERED하고 같이 쓰면 무시 된다는 점은 까먹지 말아야지. 테이블이 2개보다 많은 경우엔...
+###code.sql
+select /*+ leading(b c) */ *
+from tbl a, tbl2 b, tbl3 c
+where a.id = b.id
+and b.id = c.id
+...
+###
+#p b c a 순으로 조인을 하겠다는 뜻... 기억하자.

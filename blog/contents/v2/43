@@ -1,0 +1,11 @@
+###info
+title=Blog 서브 도메인을 Node.js 웹어플리케이션으로 구축해봤습니다.
+created=2014-12-05
+###
+#p blog 서브 도메인을 만들었습니다. 기존 home 도메인에 있던 "블로그"탭은 Spring 컨테이너를 기반으로 한 웹 어플리케이션입니다. 그래서 도메인 분할이 필요하다 생각 되어 nodejs로 blog 서브 도메인을 만들어봤습니다. 익숙하지 않지만 메인 화면 정도는 어찌저찌 구현이 되어 공개할 수 있게 되었네요. ^^
+#p 정리를 해보면 다음처럼 됩니다.
+###pre
+home.jdm.kr - Apache / Tomcat / Spring(+tiles, myBatis) / MariaDB
+blog.jdm.kr - Apache / node.js(+express, ejs) / MariaDB
+###
+#p 이제 시간 나면 blog 서브 도메인을 집중해서 완벽하게 home 도메인에 있는 블로그 서비스를 node.js 웹 어플리케이션으로 포팅해야겠어요.

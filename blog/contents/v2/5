@@ -1,0 +1,7 @@
+###info
+title=node.js + socket.io 연습 중...
+created=2014-10-02
+###
+
+#p 요즘은 node.js 와 socket.io 를 이용한 실시간 채팅 서비스를 연습겸 만들어 보고 있습니다.
+#p 나중에 socket.io와 d3.js를 합쳐서 실시간 차트 그리기도 도전 해봐야겠네요.

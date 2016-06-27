@@ -1,0 +1,146 @@
+<p>
+Apache Spark(이하 "스파크")를 설치하고 예제를 돌려보는 포스팅입니다. :D
+</p>
+
+<h2>Apache Spark</h2>
+<p>
+스파크는 다음과 같은 캐치프레이즈를 가지고 있습니다.
+</p>
+<blockquote>
+<p>
+<strong>Apache Spark™</strong> is a fast and general engine for large-scale data processing.
+</p>
+<cite><a href="http://spark.apache.org/">Apache Spark</a></cite>
+</blockquote>
+<p>
+스파크는 엄청난 크기의 데이터를 빠르게 처리할 수 있는 엔진이라고 합니다. 이 외에도 스파크는 몇가지를 장점으로 내세우고 있습니다.
+</p>
+
+<ul>
+	<li>
+		<strong>Speed</strong>
+		<p>스파크는 하둡보다 메모리로 처리시 100배, 디스크로 처리시 10배 빠릅니다.</p>
+	</li>
+	<li>
+		<strong>Ease of Use</strong>
+		<p>스파크는 Java, Scala, Python, R로 빠르게 애플리케이션 코드를 작성 할 수 있습니다.</p>
+	</li>
+	<li>
+		<strong>Generality</strong>
+		<p>SQL, 스트리밍(streaming), 복잡한 분석(complex analytics)등을 결합 할 수 있습니다.</p>
+	</li>
+	<li>
+		<strong>Runs Everywhere</strong>
+		<p>하둡, 메소스(Mesos), 스탠드얼론(standalone) 및 클라우드로 스파크를 실행 할 수 있습니다. 또한 HDFS, 카산드라, Hbase, S3로도 접근 가능합니다.</p>
+	</li>
+</ul>
+<p>
+스파크의 개요에 대해서는 <a href="http://spark.apache.org/docs/latest/">Spark Overview</a> 항목을 참조하시기 바랍니다. :D
+</p>
+
+<h2>Download</h2>
+<p>
+간단하게 스파크에 대해 알아봤습니다. 이번엔 스파크를 다운로드 해봅시다. <a href="http://spark.apache.org/downloads.html">Download</a> 페이지를 클릭해 봅시다.
+</p>
+
+<h3>Select Version</h3>
+<p>
+다운로드 페이지 상단에서는 스파크 버전을 맞출 수 있도록 셀렉트 박스를 여러개 만들어 뒀습니다. 항목은 다음과 같습니다.
+</p>
+
+<div class="green">
+<ul>
+	<li>
+		<strong>Choose a Spark release</strong>
+		<p>릴리즈된 스파크 버전을 선택합니다. 가능한 최신 버전을 선택하도록 합니다. 현재 포스팅 시점에서는 <strong>1.4.0 (Jun 11 2015)</strong>가 최신입니다.</p>
+	</li>
+	<li>
+		<strong>Choose a package type</strong>
+		<p>스파크 패키지 타입을 선택 합니다. 소스 코드로 내려 받게 되면 컴파일 과정이 필요합니다. 이 포스팅에서는 미리 빌드 되어 있는 패키지를 받겠습니다. <strong>Pre-build for Hadoop 2.6 and later</strong>입니다. </p>
+	</li>
+	<li>
+		<strong>Choose a download type</strong>
+		<p>이 부분은 어떻게 다운로드 받을 것인지 결정하는 것입니다. 여기서는 <strong>Select Apache Mirror</strong>로 선택합니다.</p>
+	</li>
+</ul>
+</div>
+
+<p>
+위와 같은 셀렉트 박스 지정이 끝났다면 <strong>Download Spark</strong> 항목에 선택되어 있는 타입의 다운로드 링크가 있습니다. 제가 선택한 방식은 <span class="command">spark-1.4.0-bin-hadoop2.6.tgz</span>가 되겠네요. 해당 링크를 클릭해서 다운로드 합니다.
+</p>
+
+<h3>Install</h3>
+<p>
+다운로드 받은 스파크 패키지 압축 파일을 실행하고자 하는 서버에 업로드 합니다. 그리고 압축을 풀어줍니다.
+</p>
+<pre class="console">
+$ tar -xvf spark-1.4.0-bin-hadoop2.6.tgz
+</pre>
+<p>
+설치가 끝났습니다. WOW!
+</p>
+
+<h2>Example</h2>
+<p>
+이제 스파크를 이용해 간단한 애플리케이션 코드를 작성하고 실행해 봅시다.
+</p>
+
+<h3>Execute Shell</h3>
+<p>
+쉘을 이용해서 간단한 테스트를 해봅니다. 스파크에서는 여러가지 쉘을 지원하고 있는데 그 중 <span class="command">spark-shell</span>을 사용해 봅시다. 이 쉘의 위치는 <span class="command">/your-spark-path/bin/</span>에 있습니다.
+</p>
+<pre class="console">
+$ spark-shell --master local[2]
+</pre>
+<p>
+위처럼 커맨드를 입력해서 실행해 봅시다. 여기서 <span class="command">--master</span> 옵션은 분산 클러스터를 위한 마스터 URL을 지정합니다. 또는 <i>local[N]</i>이라고 지정하게 되면 N의 개수 만큼 쓰레드를 만들어 로컬에서 구동합니다.
+</p>
+
+<h3>Test Code</h3>
+<p>
+spark-shell의 정상적인 구동이 진행됐다면 마지막에 <span class="command">scala></span>라는 커서가 깜빡입니다. 그럼 이상태에서 다음처럼 입력해봅시다.
+</p>
+<pre class="console">
+scala> <span class="light">var readMe = sc.textFile("../README.md")</span>
+...
+readMe: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[3] at textFile at &lt;console>:21
+</pre>
+<p>
+sc는 Spark Context입니다. 이 부분은 일단 패스합시다. 위의 커맨드는 readMe라는 변수에 README.md 파일을 읽어서 넣어놓은겁니다.
+</p>
+
+<pre class="console">
+scala> <span class="light">readMe.count()</span>
+...
+res2: Long = 98
+scala> <span class="light">readMe.first()</span>
+...
+res3: String = # Apache Spark
+</pre>
+
+<p>
+감이 좋으신 분들은 .count 메소드와 .first 메소드가 뭘 뜻하는지 아실것 같습니다만 :D, 설명 드리자면 .count 메소드는 아이템 카운트(item count)이고 .first는 해당 파일의 첫번째 아이템입니다. 여기서 아이템이란 라인(line) 단위입니다.
+</p>
+
+<h2>Resilient Distributed Datasets (RDDs)</h2>
+<p>
+테스트 코드를 실행하다 보니 유난히 <span class="command">RDD</span>라는 단어가 많이 보였습니다. 이게 대체 무엇인지 알아봅시다.
+</p>
+<p>
+Resilient Distributed Datasets를 줄여서 RDD라고 합니다. 번역하자면 <i>탄력적 분산 데이터셋</i> 정도가 될 것 같습니다.
+</p>
+<p>
+이 부분에 대해서는 제가 구글링해서 참조한 링크를 보시면 이해가 훨씬 빠를 것 같습니다.
+</p>
+<div class="yellow">
+<ul>
+	<li><a href="https://spark.apache.org/docs/latest/programming-guide.html#resilient-distributed-datasets-rdds">Resilient Distributed Datasets (RDDs)</a></li>
+	<li><a href="http://www.thecloudavenue.com/2014/01/resilient-distributed-datasets-rdd.html">Resilient Distributed Datasets (RDD) for the impatient</a></li>
+	<li><a href="http://www.slideshare.net/yongho/rdd-paper-review">Spark 의 핵심은 무엇인가? RDD! (RDD paper review)</a></li>
+</ul>
+</div>
+
+<h2>Closing Remarks</h2>
+<p>
+간단하게 스파크의 개요 및 예제를 실행해 봤습니다. :3
+</p>

@@ -1,0 +1,13 @@
+###info
+title=AngularJS ngRepeat dupes Error
+created=2014-11-03
+###
+#p angularJS를 테스트 해보다가 ng-repeat를 쓸일이 생겼는데 같은 값이 배열에 입력 되면 "dupes"라는 오류가 났다. 이 문제를 고치려고 구글링을 해보니 {$https://docs.angularjs.org/error/ngRepeat/dupes}에서 해결법을 제시해 줬다.
+
+#p 의외로 간단하게 {!"track by $index}라는 값을 추가해서 해결할 수 있었다.
+
+###code.html
+<div ng-repeat="value in [4, 4] track by $index"></div>
+<li ng-repeat="todo in todoList track by $index">{{todo}}</li>
+###
+#p 위에 있는 구문이 링크에서 제공한 방법이고 밑에 있는 구문이 내가 적용한 방법이다.

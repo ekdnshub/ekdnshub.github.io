@@ -1,0 +1,9 @@
+###info
+title=Ruby on Rails 시작!!
+created=2014-12-01
+###
+#p Ruby on Rails 4를 시작했습니다. {$http://edgeguides.rubyonrails.org/getting_started.html|이곳}에서 튜토리얼을 진행했어요. 굉장히 빠르게 방명록 비스무리한 것을 만들어낼 수 있었습니다. 상당히 빠르긴 한데, 아직 익숙하지 않은게 많아서 바로 실전 투입하려면 개발속도는 비슷하지 않을까 생각 되네요.
+#p 그리고 튜토리얼 중간에 destroy 부분이 제대로 동작 안하는게 있었는데 {$http://stackoverflow.com/questions/24622677/issue-with-destroy-method-in-controller-ror|이곳}을 보고 수정할 수 있었습니다.
+#p 아직 튜토리얼 후반 부분은 진행하지 않았는데(Comment 부분) 마저 진행을 해본 뒤에 bootstrap으로 예쁘게 감싸서 방명록으로 공개(?) 해보고 싶네요. 그때가 언제가 될지 알 수는 없지만... -_-a
+#p 여담으로, RoR 자체 내장 되어 있는 webrick 웹 서버를 사용하고 여기에 튜토리얼 애플리케이션을 올려놓기만 했는데 메모리를 상당히(!) 많이 잡아 먹더군요. 애플리케이션 모드가 "개발" 이라서 그랬던건지는 잘 모르겠으나, 추후에 "상용(Production)" 모드로 바꾼 뒤에 메모리를 얼마나 먹는지 체크 좀 해봐야겠어요.
+#p 아니면, sqlite3 자체도 용량을 잡아먹어서 그러려나... 여러모로 테스트가 필요한 시점입니다.

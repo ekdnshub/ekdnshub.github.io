@@ -1,0 +1,9 @@
+<p>
+자바에서 종종 파일을 읽고 쓸때 인코딩을 별도로 지정해서 처리해야 하는 경우가 있다. 그럴때 사용하자.
+</p>
+<pre class="prettyprint lang-java">
+// euc-kr로 파일 읽기
+BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "euc-kr"));
+// euc-kr로 파일 쓰기
+BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "euc-kr"));
+</pre>

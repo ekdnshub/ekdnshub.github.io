@@ -1,0 +1,153 @@
+ <p> 작년 이맘때쯤 조사를 해봤던 내용인 비트코인(Bitcoin)에 대해 사용법 및 최근 추세가 어떤지 검토해 보는 포스팅입니다. :3 </p>
+ <h4>비트코인 정의(Definition of Bitcoin)</h4> 
+ <blockquote> 
+  <p> <strong>비트코인(Bitcoin)</strong>은 2009년 나카모토 사토시(영어: Nakamoto Satoshi)가 만든 디지털 통화로, 통화를 발행하고 관리하는 중앙 장치가 존재하지 않는 구조를 가지고 있다. 대신, 비트코인의 거래는 P2P 기반 분산 데이터베이스에 의해 이루어지며, 공개 키 암호 방식 기반으로 거래를 수행한다. 비트코인은 공개성을 가지고 있다. 비트코인은 지갑 파일의 형태로 저장되며, 이 지갑에는 각각의 고유 주소가 부여되며, 그 주소를 기반으로 비트코인의 거래가 이루어진다. 비트코인은 1998년 웨이따이가 사이버펑크 메일링 리스트에 올린 암호통화(cryptocurrency)란 구상을 최초로 구현한 것 중의 하나이다. </p> 
+  <cite><a href="http://ko.wikipedia.org/wiki/%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8">위키백과 - 비트코인</a></cite> 
+ </blockquote> 
+ <blockquote> 
+  <p> 비트코인은 중앙권한이나 은행이 없는 운영을 위해 피어투피어 기술을 사용합니다. 거래의 관리와 비트코인의 발행은 네트워크에 의해 공동으로 이루어집니다. <b>비트코인은 오픈소스입니다. 공개적으로 개발되었으며 그 누구도 비트코인을 소유하거나 조종하지 않습니다. 또한 <a href="https://bitcoin.org/ko/support-bitcoin">누구나 비트코인을 사용하고 비트코인에 참여할 수 있습니다</a></b>. 독특한 기능들을 통해 비트코인은 그 어떤 결제시스템도 하지못한 일들을 가능하게 합니다 </p> 
+  <cite><a href="https://bitcoin.org/ko/">Bitcoin.org</a></cite> 
+ </blockquote> 
+ <h5>단위 및 가격</h5> 
+ <div class="blue"> 
+  <ul> 
+   <li>기본 단위 : BTC</li> 
+   <li>0.001BTC : mBTC(millicoin, 밀리코인)</li> 
+   <li>0.000001BTC : μBTC(microcoin || bits, 마이크로코인 또는 비츠)</li> 
+   <li>0.00000001BTC : satoshi(사토시) <span class="refer">* 이 단위는 창시자 이름을 따서 만들었습니다.</span></li> 
+  </ul> 
+ </div> 
+ <h5>1분 동영상</h5> 
+ <p> 2개의 동영상을 준비했습니다. 원래 하나였는데 비교적 최근(2014/4/24)에 추가된 동영상이 하나 더 있네요. </p> 
+ <div class="green"> 
+  <ul> 
+   <li><a href="https://www.youtube.com/watch?v=Um63OQz3bjo">What is Bitcoin? (v1)</a></li> 
+   <li><a href="https://www.youtube.com/watch?v=Gc2en3nHxA4">What is Bitcoin? (v2)</a></li> 
+  </ul> 
+ </div> 
+ <h4>비트코인 특징</h4> 
+ <p> <a href="https://bitcoin.org/ko/bitcoin-for-individuals">비트 코인의 특징</a>을 간략하게 알아봅시다. 개인, 사업자, 개발자 순으로 나눠서 특징을 설명합니다. </p> 
+ <h5>개인</h5> 
+ <div class="green"> 
+  <ul> 
+   <li>보다 쉬운 모바일 결제</li> 
+   <li>당신의 돈에 대한 보안과 통제</li> 
+   <li>언제 어디서나 사용 가능한</li> 
+   <li>보다 빠른 국제 결제</li> 
+   <li>무료 또는 낮은 수수료</li> 
+   <li>당신의 신원 보호</li> 
+  </ul> 
+ </div> 
+ <h5>사업자</h5> 
+ <div class="green"> 
+  <ul> 
+   <li>가장 낮은 수수료</li> 
+   <li>금융사기로부터 보호</li> 
+   <li>신속한 국제 거래</li> 
+   <li>불필요한 PCI 준수</li> 
+   <li>무료 홍보 효과</li> 
+   <li>다중 서명</li> 
+   <li>투명한 회계</li> 
+  </ul> 
+ </div> 
+ <h5>개발자</h5> 
+ <div class="green"> 
+  <ul> 
+   <li>가장 간단한 결제 시스템</li> 
+   <li>많은 3사 API</li> 
+   <li>자신만의 금융 시스템을 가질 수 있습니다</li> 
+   <li>청구서 추적이 가능한 비트코인 주소</li> 
+   <li>대부분의 보안은 클라이언트에게 있습니다</li> 
+   <li>저렴한 소액 결제</li> 
+  </ul> 
+ </div> 
+ <h4>비트코인 원리 &amp; 용어</h4> 
+ <p> <a href="https://bitcoin.org/ko/how-it-works">비트코인의 원리는 무엇입니까?</a>를 통해서 한번 읽어보시면 될 것 같습니다. 개발에 필요한 더 많은 정보는 <a href="https://bitcoin.org/en/developer-documentation">bitcoin :: developer documentation</a>을 참조하세요. 또한 <a href="http://ko.wikipedia.org/wiki/%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8#.EA.B8.B0.EC.88.A0">위키백과 :: 비트코인 기술</a>탭에서도 확인 가능합니다. </p> 
+ <h5>블록</h5> 
+ <p> <a href="https://bitcoin.org/ko/vocabulary#block">블록</a>은 수많은 거래 명세를 가지고 승인 할 수 있도록 약 10분간 거래 내역을 모은 것입니다. </p> 
+ <h5>블록 체인</h5> 
+ <p> 이러한 블록이 채굴을 통해 <a href="https://bitcoin.org/ko/vocabulary#block-chain">블록 체인</a>에 더해집니다. 블록 체인은 비트코인의 공공원장, 거래 기록을 가지고 있습니다. </p> 
+ <h5>채굴</h5> 
+ <p> 채굴(mining)이란 무엇인지 알아봅시다. </p> 
+ <blockquote> 
+  <p> Mining is the process of adding transaction records to Bitcoin's public ledger of past transactions. This ledger of past transactions is called the block chain as it is a chain of blocks. The block chain serves to confirm transactions to the rest of the network as having taken place. Bitcoin nodes use the block chain to distinguish legitimate Bitcoin transactions from attempts to re-spend coins that have already been spent elsewhere. </p> 
+  <cite><a href="https://en.bitcoin.it/wiki/Mining">Bitcoin wiki - Mining</a></cite> 
+ </blockquote> 
+ <p> 채굴은 과거 거래<span class="refer">(transaction을 거래라고 의역)</span>의 비트코인 공공원장에 거래 기록을 추가하는 과정입니다. 이 과거 거래의 원장은 블록 체인이라고 불립니다. 블록 체인은 거래를 확인 받기 위해 제공합니다. 비트코인 노드들은 블록 체인을 합법적인 비트코인 거래인지 구별하기 위해 사용합니다. 이미 사용한 비트코인을 다시 사용하려고 시도하는지를 구별하는 것입니다. </p> 
+ <p> 비트코인으로 거래를 시도하면 블록 체인을 구성하고 이 블록 체인으로 거래를 확인하기 위한 특수한 작업을 "채굴"이라고 하는것이군요. 한마디로 채굴은 "거래의 증명 과정"과도 같습니다. 거래가 증명 되면 채굴자는 일정의 비트코인을 "보상"으로 받고 그 외에도 만약 송신자가 "수수료"를 지불하면 그것 또한 받습니다. </p> 
+ <h5>지갑</h5> 
+ <p> 비트코인에서의 <a href="https://bitcoin.org/ko/vocabulary#wallet">지갑</a>(wallet)은 실제 생활에서의 지갑과 유사합니다. 블록 체인 안에 사용가능한 비트코인의 개인키(private key)들을 저장합니다. </p> 
+ <p> 잠깐 개인키에 대해 언급하자면 이것은 공개키(publick key) 암호화와 관련 있습니다. 일반적으로 공개키 암호화 방식에서는 사용자가 2종류의 키를 받습니다. 공개키(public key)와 개인키(private key)입니다. 단순하게 생각하면 공개키로 암호화한 내용은 같은 쌍으로 만들어진 개인키로만 복호화가 됩니다. 자세한 내용은 <a href="http://ko.wikipedia.org/wiki/%EA%B3%B5%EA%B0%9C_%ED%82%A4_%EC%95%94%ED%98%B8_%EB%B0%A9%EC%8B%9D">위키백과 - 공개 키 암호 방식</a>에서 확인해 보세요. </p> 
+ <p> 따라서 실제로 비트코인의 거래는 공개키(public key)로 진행을 합니다. </p> 
+ <h5>주소</h5> 
+ <blockquote> 
+  <p> 비트코인 네트워크에 참여하는 사람은 모두 임의의 암호화 키쌍을 담고 있는 지갑을 갖게 된다. 공개키는 비트코인 주소와 마찬가지인데 모든 지불의 발신자와 수신자 종단점으로 작동한다. 공개키의 짝이 되는 비밀키는 소유자만이 지불할 수 있도록 허가하는데 사용된다. 비트코인 주소에는 소유자에 대한 정보가 포함되지 않아서 익명성을 갖고 있다. 주소는 사람이 읽을 수 있게 표기될 경우 33글자 정도 되며 1rYK1YzEGa59pI314159KUF2Za4jAYYTd처럼 보인다. 비트코인 사용자는 여러 주소를 보유할 수 있고 새로운 주소를 제한 없이 생성할 수 있다. 어떤 네트워크 노드와도 접촉할 필요 없이 새로운 공개키와 암호키쌍을 간단히 생성하면 새로운 주소를 즉시 만들 수 있기 때문이다. 쉽게 주소를 무한대로 생성해 바꿔 사용한다면 익명성이 보장될 수 있다. </p> 
+  <cite><a href="http://ko.wikipedia.org/wiki/%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8#.EC.A3.BC.EC.86.8C">위키백과 - 비트코인(주소)</a></cite> 
+ </blockquote> 
+ <h5>거래</h5> 
+ <blockquote> 
+  <p> 비트코인에는 현재 소유자의 공개키(주소)가 포함되어 있다. 사용자 갑이 사용자 을에게 무언가를 전송할 경우를 보자. 갑은 을의 공개키(주소)를 비트코인에 추가하고 갑이 소유한 개인키로 서명한다. 그 다음 갑은 이 비트코인을 적절한 메시지의 거래 내역으로 P2P 네트워크에 방송한다. 나머지 네트워크 노드들은 암호화된 서명과 거래량을 허가하기 전에 입증한다. </p> 
+  <cite><a href="http://ko.wikipedia.org/wiki/%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8#.EA.B1.B0.EB.9E.98">위키백과 - 비트코인(거래)</a></cite> 
+ </blockquote> 
+ <h4>비트코인의 유통량</h4> 
+ <p> 비트코인의 유통량은 <a href="https://blockchain.info/ko/charts/total-bitcoins">비트코인 총 유통량</a>에서 확인이 가능합니다. </p> 
+ <h5>최대 발행량</h5> 
+ <p> 비트 코인은 최대 2100만까지만 발행이 가능합니다. 2013년까지 1200만 비트코인이 발행 되었습니다. 해당 정보는 <a href="http://ko.wikipedia.org/wiki/%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8#.EC.B4.9D.EB.B0.9C.ED.96.89.EB.9F.89">위키백과 - 비트코인(총발행량)</a>에서 자세히 확인 가능합니다. </p> 
+ <h4>비트코인 사용</h4> 
+ <h5>지갑 만들기</h5> 
+ <p> 다양한 사이트가 비트코인 지갑을 지원하고 있습니다. 대표적으로 두가지만 적어봤습니다. </p> 
+ <div class="green"> 
+  <ul> 
+   <li><a href="https://blockchain.info/ko/wallet">https://blockchain.info/ko/wallet</a></li> 
+   <li><a href="https://bitcoin.org/ko/choose-your-wallet">https://bitcoin.org/ko/choose-your-wallet</a></li> 
+  </ul> 
+ </div> 
+ <h5>채굴 방법</h5> 
+ <p> 우선 <a href="https://guiminer.org/">GUIMiner</a>라 불리는 프로그램으로 채굴을 한번 해봅시다. 해당 사이트에서 프로그램을 다운로드 해주세요. </p> 
+ <p> 그 후 <a href="https://www.btcguild.com">BTC Guild</a>라는 곳에서 회원가입을 합시다. </p> 
+ <p> 그리고 다음과 같은 순서로 실행합니다. </p> 
+ <pre class="blue">
+·GUIMiner를 실행 한 뒤에 서버를 "BTC Guild (Any)"로 변경
+·BTC Guild 가입시 설정한 계정명 및 비밀번호 입력
+·Start Mining 클릭하면 비트코인 채광 시작
+</pre> 
+ <h4>최근 추세</h4> 
+ <h5>뉴스</h5> 
+ <p> 최근 추세라고 한다면 대략 2014년 초부터 2015년 현재(4월)까지의 뉴스를 살펴봐야겠습니다. </p> 
+ <div class="green"> 
+  <ul> 
+   <li><a href="http://www.bloter.net/archives/181894">전세계 비트코인 규제 현황 지도(2014.02)</a></li> 
+   <li><a href="http://www.mt.co.kr/view/mtview.php?type=1&amp;no=2014041317294740889&amp;outlink=1">中 폭발적 성장하는 인터넷금융 놓고 찬반 격론(2014.04)</a></li> 
+   <li><a href="http://www.thebell.co.kr/front/free/contents/news/article_view.asp?key=201410080100014980000956">코인플러그, 기술력·시장 미래성 투자자 사로잡아(2014.10)</a></li> 
+   <li><a href="http://www.etnews.com/20150312000208">세계 비트코인, 80%가 위안화로 환전된다(2015.03)</a></li> 
+   <li><a href="http://view.asiae.co.kr/news/view.htm?idxno=2015040314421898348">비트코인, 금·마리화나로 제2전성기맞이할까?(2015.04)</a></li> 
+   <li><a href="http://view.asiae.co.kr/news/view.htm?idxno=2015041313140215834">비트코인 모의투자대회 국내최초 열린다(2015.04)</a></li> 
+  </ul> 
+ </div> 
+ <p> 제목만 봤을 때 좋은/나쁜쪽으로 반반씩 뽑아봤습니다. 비트코인에 대해 금융으로 접근하는 것으로 우려를 나타내는것도 있지만 반대로 비트코인을 이용해 새로운 방법으로 접근하는 뉴스도 있습니다. </p> 
+ <h5>위키백과</h5> 
+ <p> 위키백과에서 우리나라의 관점은 어떤지 살펴봤습니다. </p> 
+ <blockquote> 
+  <p> 2013년 10월 국회에 제출한 자료에 따르면, 한국은행은 비트코인에 대해 "비트코인을 지급수단으로 사용 가능한 전 세계의 온·오프라인 매장 수는 800여개에 불과하다"며 "한국엔 아예 매장이 없는 등 통용성이 매우 제한적"이라고 말했다. 2013년 4월 비트코인 온라인 거래소가 해킹을 당하며 가격이 이틀 새 80% 폭락한 사례를 들어 "불안정한 화폐 가치 등으로 인해 비트코인은 앞으로도 지급수단으로 광범위하게 사용될 가능성은 거의 없다"고 진단했다. 하지만, "지급수단의 다양화가 현금통화에 미치는 영향 등에 대한 연구는 지속할 것"이라고 언급했다. </p> 
+  <p> 그러한 한국은행의 언급에도 불구하고, 각국 통화로 환전할 수 있는 비트 코인 거래소인 코빗(Korbit)과 엑스코인(Xcoin)이 설립되는 등 대한민국 내에서도 다양한 관심을 받고 있다. </p> 
+  <p> 2013년 12월, 한국은행은 뒤이어 비트코인과 관련된 보고서를 내기로 밝혔다. 보고서는 비트코인이 기존 통화를 대체할 수 있는 지급·결제수단으로 사용될 수 있을지에 대해서는 “가까운 미래에는 어렵다”고 결론 내린 것으로 전해졌다. 화폐가 교환의 매개로 쓰이려면 가치가 안정돼야 하는데 비트코인은 1비트코인당 500달러에서 한달만에 1200달러로 폭등하는 등 변동이 심하다는 게 이유다. 비트코인이 컴퓨터에 파일 형태로 보관돼 보안 문제가 있고, 외환보유액이나 정치 후원금 용도 등 현재 예상되고 있는 사용 방안에 대해서도 부정적으로 판단한 것으로 알려졌다. </p> 
+  <cite><a href="http://ko.wikipedia.org/wiki/%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8#.EB.8C.80.ED.95.9C.EB.AF.BC.EA.B5.AD">위키백과 - 비트코인(대한민국)</a></cite> 
+ </blockquote> 
+ <p> 2013년에 우리나라에선 <strong>“가까운 미래에는 어렵다”</strong>라고 한 점에 눈에 띄네요. 이유로는 가치가 안정 되어야 하는데 변동폭이 심해서라고 하는군요. </p> 
+ <p> 가격 추이가 어떤가 싶어서 <a href="https://blockchain.info/ko/charts/market-cap">시가 총액</a>을 살펴봤습니다. 주가처럼 오르락내리락하는 것이 확실히 변동값은 큽니다. 다만 이런 차익을 노려보는것도 한가지 방법이 될 수 있을 것 같네요. </p> 
+ <h5>행사</h5> 
+ <blockquote> 
+  <p> 2014년 12월 12일에서 13일 이틀간 일산 킨텍스에서 세계 최대의 비트코인 행사인 '인사이드 비트코인 한국대회(Inside Bitcoins in Korea)'가 개최되었다. 미국 멕클러미디어 회사와 킨텍스가 공동 주관한 이 행사에는 국내외 비트코인 거래소 및 관련 서비스, 결제, 금융, 클라우드 플랫폼, 보안솔루션 업체 등 약 30여 개 회사가 참여하였다. 일반인들은 이 행사에서 직접 비트코인으로 간단한 식음료, 도시락 등을 구입해 볼 수 있는 체험 기회를 가졌다. </p> 
+  <cite><a href="http://ko.wikipedia.org/wiki/%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8#.ED.96.89.EC.82.AC">위키백과 - 비트코인(행사)</a></cite> 
+ </blockquote> 
+ <p> 비교적 최근에 우리나라에서도 행사가 있었습니다. 나름대로 비트코인은 알게 모르게 조금씩 주변으로 녹아들고 있는 듯 하네요. </p> 
+ <h4>거래소</h4> 
+ <p> 비트코인 거래소도 다양하게 존재합니다. </p> 
+ <div class="blue"> 
+  <ul> 
+   <li><a href="https://www.korbit.co.kr/">KORBIT(코빗)</a></li> 
+   <li><a href="https://www.xcoin.co.kr/">Xcoin(엑스코인)</a></li> 
+   <li><a href="https://www.coinbase.com/">coinbase</a></li> 
+   <li><a href="https://bitpay.com/">bitpay</a></li> 
+  </ul> 
+ </div>

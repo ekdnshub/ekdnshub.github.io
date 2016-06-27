@@ -1,0 +1,112 @@
+###info
+title=SpringBoot @ConfigurationProperties DataSource Setting
+created=2016-05-18
+###
+
+#h2 이번 포스트는?
+#p 이번 포스트는 SpringBoot에서 {!@ConfigurationProperties} 어노테이션을 이용해 {@DataSource} 구성에 필요한 환경설정 값을 만들고 사용하는 법을 알아봅니다.
+
+#h2 @ConfigurationProperties
+#p @ConfigurationProperties 어노테이션은 환경설정 파일{=ex. application.properties}에서 값을 추출해 주입해줍니다. 이로써 환경설정 값도 추상화가 가능합니다.
+
+#h2 환경 설정 파일 구성
+#p SpringBoot 프로젝트를 기본 생성한다면 {@application.properties} 파일에 어플리케이션 환경설정에 필요한 값을 삽입할 수 있습니다. 아래처럼 {!datasource}를 prefix로 갖는 Datasource 환경설정을 삽입해 봅니다.
+
+###console
+datasource.driverClassName=com.mysql.jdbc.Driver
+datasource.url=jdbc:mysql://127.0.0.1:3306/test
+datasource.username=test
+datasource.password=test!@#$
+datasource.default-read-only=true
+datasource.initial-size=3
+datasource.min-idle=1
+datasource.max-idle=5
+datasource.max-active=5
+datasource.test-while-idle=true
+datasource.validation-query=select 1
+###
+
+#h2 예제 코드
+#p 그리고 실제로 {!@ConfigurationProperties} 어노테이션을 사용해 Datasource Bean을 만드는 예제 코드입니다. 상세 설명은 코드 라인별로 주석을 달았습니다.
+
+###code.java
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.tomcat.jdbc.pool.PoolProperties;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import javax.sql.DataSource;
+
+
+@Configuration
+@MapperScan(basePackages = "kr.jdm.dao", sqlSessionFactoryRef="getSqlSessionFactory")
+@EnableTransactionManagement
+public class DBConfig {
+
+    // 패스워드만 가져오고 싶다면 @Value 를 사용할 수 있습니다.
+    @Value("${datasource.password}")
+    private String password;
+
+    // 데이터소스를 만들기 위해 커넥션풀 프로퍼티 객체를 반환하는 빈을 선언합니다.
+    // 해당 빈을 만들 때 @ConfigurationProperties 어노테이션을 사용합니다.
+    // "prefix" 값을 이용해 해당 prefix로 시작하는 값들을 주입 받습니다.
+    @Bean
+    @ConfigurationProperties(prefix="datasource")
+    public PoolProperties getPoolProperties(){
+        return new PoolProperties();
+    }
+
+    // 데이터소스를 반환하는 빈을 선언합니다.
+    // 해당 빈은 톰캣 JDBC 데이터소스 객체를 반환합니다.
+    // 중간에 패스워드를 변경할 수 있다는 것을 코드를 통해 알 수 있습니다.
+    @Bean
+    public DataSource getDataSource() {
+        org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource(getPoolProperties());
+        String catchPassword = password + "postfix";
+        dataSource.setPassword(catchPassword);
+        return dataSource;
+    }
+
+    // 이번 예제에서는 SQL 매퍼로 "Mybatis"를 사용합니다.
+    // Mybatis에 관련된 SqlSessionFactory 객체를 반환하는 빈을 선언합니다.
+    @Bean
+    public SqlSessionFactory getSqlSessionFactory() throws Exception {
+        SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
+        factory.setDataSource(getDataSource());
+        factory.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:/config/mybatis-config.xml"));
+        return factory.getObject();
+    }
+
+    // 트랜잭션 매니저를 반환하는 빈을 선언합니다.
+    @Bean
+    public DataSourceTransactionManager transactionManager() {
+        DataSourceTransactionManager manager = new DataSourceTransactionManager(getDataSource());
+        return manager;
+    }
+}
+###
+
+#h3 Mybatis 설정 파일(mybatis-config.xml)
+#p 위의 예제 코드에서 사용한 {@mybatis-config.xml} 파일입니다. 이번 포스팅의 주제와는 거리가 있지만 참고 차원에서 남겨봅니다. 자세한 설정 방법은 {$http://www.mybatis.org/mybatis-3/ko/configuration.html|Mybatis3 - 매퍼 설정}을 참고하세요.
+###code.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="defaultExecutorType" value="REUSE" />
+        <setting name="defaultStatementTimeout" value="20000" />
+    </settings>
+    <typeAliases>
+        <package name="kr.jdm.model" />
+    </typeAliases>
+</configuration>
+###

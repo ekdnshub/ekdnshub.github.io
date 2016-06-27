@@ -1,0 +1,140 @@
+###info
+title=싱글튼 패턴(Singleton Pattern)
+created=2014-10-09
+###
+
+#p 디자인 패턴은 일반적인 코딩이 아닌 조금 더 고차원적인 아키텍트를 설계하기 위해 알아야 할 몇가지 공통적인 코딩 방법들을 말합니다. 예전에 배웠던 내용을 상기시키며 복습 겸 하나씩 풀어가려 합니다.
+#p 그래서 오늘은 가장 많이 쓰일지도 모르는(?) 패턴인 "싱글턴 패턴"에 대해 알아보고자 합니다. 싱글턴 패턴은 유일하게 사용해야할 클래스가 필요할때에 유용하게 쓰이는 디자인 패턴입니다.
+#p "유일하게" 사용해야하는 경우가 언제인지는 직접 파악하셔야 합니다. :0
+
+#h2 정의
+###box.green
+#p 단 하나의 유일한 객체를 만들기 위한 디자인 패턴
+###
+
+#h2 구현
+
+###code.java
+public class Singleton {
+    private static Singleton instance;
+
+    private Singleton(){}
+
+    public static Singleton getInstance(){
+        if( instance == null ){ // (1)
+            instance = new Singleton(); // (2)
+        }
+        return instance;
+    }
+}
+###
+###box.red
+#p {!{+warn} 주의하세요.}
+#p 이 소스 코드는 실무에서 사용하면 위험합니다. 
+###
+#p 정말 필요한 코드로만 구성된 싱글턴 클래스입니다.
+#p {!생성자가 private 라는 것에 주목하세요.} 외부에서 new 를 사용한 객체 생성이 불가능합니다. 따라서 getInstance 메소드를 호출해서 객체를 받아와야 합니다. {!getInstance() 가 static 메소드인 것도 주목해야 합니다.}
+#p 그런데 getInstance()는 객체가 없다면 새 객체를 만들어 반환하고, 있다면 기존 객체를 반환합니다. 따라서 단 하나의 객체만을 가지고 여러곳에서 사용이 가능합니다.
+#p 예전엔 저렇게 쓰는 줄 알고 있었습니다. 하지만 {!이 방법은 조금만 더 생각해 보면 문제점이 있다}고 해서 조금 더 자료를 찾아봤습니다.
+
+#h2 문제점 파악
+#p 문제점이 뭔가 했더니 이 클래스를 "멀티 스레드"로 돌릴시에 문제가 생깁니다. 여기에서 말하는 {@@멀티 스레드 문제점}이라는 것은 위의 소스 코드에서 주석에서 (1)과 (2)로 표시된 부분을 잘 살펴보시기 바랍니다. 문제가 보이시나요?
+
+#p 만약, 스레드가 3개라고 가정을 해봅시다. 각각의 스레드 이름은 T1, T2, T3이라고 합시다. 그리고 위의 싱글튼 클래스를 호출하는 순간을 상상을 해봅시다.
+
+###console
+━━━━━━╋━━╋━━╋━━╋
+Thread Name ┃ T1 ┃ T2 ┃ T3 ┃
+━━━━━━╋━━╋━━╋━━╋ * Work Flow의 숫자는 상단의 소스코드에 주석으로
+Work Flow   ┃(1) ┃    ┃    ┃   표시된 (1)과 (2)번 코드라인입니다.
+            ┃(2) ┃(1) ┃    ┃
+            ┃    ┃(2) ┃(1) ┃
+            ┃    ┃    ┃(2) ┃
+━━━━━━╋━━╋━━╋━━╋
+###
+#p T1의 (1)번 플로우로 인해 인스턴스가 {@null}임을 알고 새로운 객체를 만들기 위해 (2)번 플로우로 갑니다. 그리고 T1의 (2)번 플로우가 실행되는 그 순간 T2의 (1)번 플로우가 실행이 되면 아직까진 싱글턴 객체가 없기 때문에 {@null}을 반환 받고 새로운 객체를 만드려 하겠죠. 그리고 T1에서는 이미 싱글턴 객체가 완성이 됩니다. 그 다음 T3의 (1)번 플로우가 실행이 되는 순간엔 T2의 (2)번 플로우도 실행이 되며 결국 싱글튼 객체가 2개가 되어버립니다.
+
+###box.yellow
+#p {!{+help} TIP. 이것은 예제입니다.}
+#p 상기에 기술한 스레드의 동작은 제가 설명한 부분과 일치하지 않을 수 있습니다. 이해를 돕기 위한 예제일 뿐입니다. :)
+###
+
+#p 이러한 {@멀티 스레드 문제점}으로 인해 이 싱글턴 클래스는 자기멋대로 객체가 두개 이상이 되어 버립니다. 이러면 싱글튼 패턴을 사용한 클래스가 아니게 되버립니다. (다만, 싱글 스레드에서는 안전합니다.)
+
+#h2 해결 방법
+#p 싱글튼 클래스를 위한 여러가지 해법이 존재합니다.
+
+#h3 add synchronized keyword
+#p 간단하게 getInstance() 메소드 앞에 {@synchronized} 를 붙여줍니다. 그럼 해당 클래스를 그대로 활용할 수 있습니다.
+
+###code.java
+public class Singleton {
+    private static Singleton instance;
+
+    private Singleton(){}
+
+    public static synchronized Singleton getInstance(){
+        if( instance == null ){
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+###
+
+#p 하지만 {@synchronized} 는 퍼포먼스에 {!엄청난} 영향을 줍니다. 안좋은쪽으로요.
+#p {=* synchronized 는 행위(메소드)에 대해 동기화하고 volatile 은 객체(인스턴스)에 대해 원자성(atomic)을 보장한다고 보시면 됩니다.}
+
+#h3 Eager initialization
+#p 아니면 객체를 프로그램 시작과 동시에 초기화를 해줘도 됩니다. 이것을 {@Eager initialization}라고 합니다.
+
+###code.java
+public class Singleton {
+    private static Singleton instance = new Singleton();
+
+    private Singleton(){}
+
+    public static Singleton getInstance(){
+        return instance;
+    }
+}
+###
+
+#h2 SingletonHolder
+#p 이 테크닉을 정확히 무슨 명칭으로 불러줘야 할지 잘 모르겠습니다. {$https://en.wikipedia.org/wiki/Singleton_pattern#Initialization-on-demand_holder_idiom|위키피디아}에서는 {@Initialization-on-demand holder idiom}라는 이름으로 소개하고 있어요. 미리 초기화 하는것은 {@Eager initialization} 방식과 유사합니다만, 별도의 static class에서 초기화를 해서 가지고 있다는게 특이한 점입니다.
+
+###code.java
+public class Singleton {
+     private Singleton(){}
+
+     private static class SingletonHolder {
+             private static final Singleton INSTANCE = new Singleton();
+     }
+
+     public static Singleton getInstance() {
+             return SingletonHolder.INSTANCE;
+     }
+}
+###
+
+###box.green
+#p {+help} 이 포스팅에서는 제대로 소개를 안했지만 DCL(Double Checking Locking)라는 테크닉도 존재합니다. 자세한 사항은 {$https://en.wikipedia.org/wiki/Double-checked_locking|Double-checked locking}을 참고하세요.
+###
+
+#h2 Using Class
+#p 그러면 이 클래스를 한번 사용해 볼까요?
+
+###code.java
+Singleton s = new Singleton(); // (X)
+Singleton s = Singleton.getInstance(); // (O)
+###
+#p 직접 메소드를 생성해서 값을 넣어보고 빼보고 하시면 더 빠른 이해가 가능할거라 생각합니다.
+
+#h2 Closing Remarks
+
+#p 지금까지 싱글턴 패턴에 대해 알아봤습니다. :)
+
+#line
+#p {=* 2014.10.09 네이버 블로그에서 이동(2013.03.22)}
+#p {=* 2015.07.21 오탈자 수정 및 추가 정보 삽입}
+###

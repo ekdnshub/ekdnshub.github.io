@@ -1,0 +1,10 @@
+###info
+title=Google Go 문법 공부(한글 문서)
+created=2015-01-20
+###
+#p 헐, Go 프로그래밍 언어의 매뉴얼이 별도로 있었습니다. 간단한 문법은 여기서 직접 돌려볼 수도 있고, 무엇보다 {!한글}입니다. 얼른 링크 타고 가셔서 공부해보세요! {$http://go-tour-kr.appspot.com/#1|Google Go를 한글로 공부하자!}
+
+#p 다음 사이트는 매뉴얼을 한글화한 그룹 링크입니다. {$https://developers.google.com/groups/chapter/112714242728066184635/|GDG Korea Golang(한국 Go 사용자 모임)}
+
+#p 그리고 제가 관심을 가져야 할 부분입니다! 웹 어플리케이션을 작성하는 방법을 기술하고 있는 문서입니다. {$http://golang.org/doc/articles/wiki/|Writing Web Applications} 
+#p 차근차근 스텝을 밟으며 즐거운 공부를 합시다 ~ :)

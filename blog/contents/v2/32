@@ -1,0 +1,136 @@
+###info
+title=옵저버 패턴(Observer Pattern)
+created=2014-11-05
+###
+#h2 Intro
+#p 옵저버 패턴을 생각나는대로 정리해보고자 한다. 정말 간단하게 이 패턴이 어떻게 쓰는지만 써놓으려 하는데, 혹시라도 이게 잘못될까 싶어 전전긍긍이다. 아무튼, 복잡하지 않게 정말 간단한 코드로 옵저버 패턴에 대해 알아보자!
+
+#h2 Overview Observer Pattern
+#p 옵저버 패턴이란 어떤 연예인이 있는데 연예인의 주변을 둘러쌓는 팬들을 떠올리면 쉬울 것 같다. 연예인들은 팬들이 누군지 하나하나 알 필요는 없지만 노래를 하거나 소리를 치거나 해서 모든 팬들에게 자신의 의사를 전달 할 수 가 있다. 여기서 연예인은 "주체"가 되고 팬들은 "옵저버"가 된다.
+#p 즉, 옵저버 패턴에서는 연예인과 팬을 구현하는 것이다. 이제부터 하나씩 알아보고자 한다.
+
+#h2 Implement Observer Pattern for Java
+#p Java를 이용해서 옵저버 패턴 예제를 구현해 보자.
+
+#h3 Need Classes
+###box.green
+###ul
+#li {!Talent Interface} - 연예인이 되기 위해서는 연예인 인터페이스를 포함 해야 한다.
+#li {!Singer Class} - 가수는 연예인 인터페이스를 포함 해야 된다.
+#li {!Fan Interface} - 팬이 되기 위해서는 팬 인터페이스를 포함해야 한다.
+#li {!SingerFan Class} - 가수를 좋아하는 팬을 구현하는 클래스. 
+###
+###
+
+#p 위에서 보다시피 4가지의 클래스 및 인터페이스를 구현해야 한다. 이번 예제에서는 연예인 인터페이스를 포함하는 "가수"와 팬 인터페이스를 포함하는 "일반인"을 구현해서 옵저버 패턴을 익혀보자.
+
+#h3 Coding Classes
+#p 윗절에서 기술된 것을 바탕으로 실제 코드로 구현을 해보고자 한다. 우선 연예인 인터페이스부터 구현한다.
+
+#h4 Talent Interface
+###code.java
+/* Talent Interface */
+public interface Talent {
+	public void addFan(Fan o);
+	public void deleteFan(Fan o);
+	public void speak();
+}
+###
+#p 이 인터페이스를 포함하면 어떠한 클래스든 "연예인"이 될 수 있다. 연예인은 자신의 팬들을 추가하거나 삭제할 수 있고 또한 말도 할 수 있다.
+
+#h4 Singer Class
+###code.java
+/* Singer Class */
+public class Singer implements Talent {
+	private ArrayList<Fan> fanList;
+	public Singer() {
+		fanList = new ArrayList<Fan>();
+	}
+	@Override
+	public void addFan(Fan o) {
+		fanList.add(o);
+	}
+	@Override
+	public void deleteFan(Fan o) {
+		if( fanList.indexOf(o) <= 0){
+			fanList.remove(o);
+		}
+	}
+	@Override
+	public void speak() {
+		String [] voices = { "사랑해요, 여러분!", "너희같은 팬 필요 없어!" };
+		Random r = new Random();
+		int index = r.nextInt(voices.length);
+		for(int i = 0 ; i < fanList.size(); i++){
+			Fan o = (Fan)fanList.get(i);
+			o.hear(voices[index]);
+		}
+	}
+}
+###
+#p 이 클래스는 연예인 인터페이스를 포함해서 자신의 팬을 가질 수 있는 "가수"로 탄생한다. 가수는 자신의 팬들에게 따로 말도 할 수 있다. 하지만 오거나 떠나는 팬을 잡을 수 있는 권한은 없다. 단지 추가하거나 제거할 뿐이다.
+#h4 Fan Interface
+###code.java
+/* Fan Interface */
+public interface Fan {
+	// 팬은 자신이 좋아하는 연예인의 소리를 들을 수 있다.
+	public void hear(String voice);
+}
+###
+#p 팬 인터페이스를 구현한다. 이 인터페이스를 포함하면 해당 클래스는 자신이 좋아하는 연예인의 소리를 들을 수 있게 된다.
+#h4 SingerFan Class
+###code.java
+/* SingerFan */
+public class SingerFan implements Fan{
+	private String name;
+	public String getName() {
+		return name;
+	}
+	public SingerFan(String name) {
+		this.name = name;
+	}
+	@Override
+	public void hear(String voice) {
+		System.out.println(name + "은 \"" + voice + "\"를 들었습니다!");
+	}
+}
+###
+
+#p 이 클래스는 팬 인터페이스를 상속 받은 "가수 팬" 클래스다. 가수팬은 가수에게 달라붙어서 나를 봐달라고 소리칠 것이고 어떤 가수에게든 가서 팬이 되거나 탈퇴할 수도 있다.
+
+#h3 Execute Example Code
+#p 지금까지 4개의 자바 인터페이스 및 클래스를 구현했다. 실제로 이것들을 사용해서 콘솔에 출력해보는 간단한 메인 프로그램을 짜보자.
+###code.java
+/* test Main */
+public static void main(String[] args) {
+	Singer mcJDM = new Singer(); // 가수 탄생 
+	
+	// 팬 생성
+	SingerFan person1 = new SingerFan("일반인1");
+	SingerFan person2 = new SingerFan("일반인2");
+	
+	// 가수를 보고 팬들이 달라붙음
+	mcJDM.addFan(person1);
+	mcJDM.addFan(person2);
+
+	mcJDM.speak(); // 가수가 말을 합니다.
+	
+	// 팬 한명이 가수를 보기 싫어해서 탈퇴합니다.
+	mcJDM.deleteFan(person2);
+	
+	// 새로운 팬이 되기로 결심합니다.
+	SingerFan person3 = new SingerFan("일반인3");
+	mcJDM.addFan(person3);
+	
+	mcJDM.speak(); // 가수가 말을 합니다.
+}
+###
+#p 위와 같은 코드를 작성하고 실행하면 콘솔에 다음처럼 출력된다. (가수가 말하는것은 랜덤이기 때문에 실제 구동할때마다 달라진다.) 
+###console
+일반인1은 "사랑해요, 여러분!"를 들었습니다!
+일반인2은 "사랑해요, 여러분!"를 들었습니다!
+일반인1은 "너희같은 팬 필요 없어!"를 들었습니다!
+일반인3은 "너희같은 팬 필요 없어!"를 들었습니다! 
+###
+#h2 Closing Remarks
+#p 이것만 보고 옵저버 패턴을 완벽히 알았다고 할 수는 {!"절대"} 없다. 이 코드들은 옵저버 패턴의 정말 단순하고 단순한 것만을 표현한 것일 뿐이다. 더욱 복잡한 옵저버 패턴도 존재하고 많은 곳에서 사용도 되고 있다. 사실 듣고 보는것보다 한번 직접 코드를 짜보는것이 도움이 된다. 돌려보자!
