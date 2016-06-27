@@ -1,8 +1,8 @@
-/*
-maxPostsCnt : 최대 포스트 개수
-*/
-var Bottom = (function(maxPostsCnt){
-  var init = function(){
+var Bottom = (function(){
+  /*
+    maxPostsCnt : 최대 포스트 개수
+  */
+  var init = function(maxPostsCnt){
     var body = o.util.multiLine(function(){
       /*!
         <!-- bottom 영역 -->
@@ -72,4 +72,4 @@ var Bottom = (function(maxPostsCnt){
   return {
     init:init
   }
-})(maxPostsCnt);
+})();
