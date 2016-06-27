@@ -1041,6 +1041,10 @@ var postsInfo = (function(){
             "231":{
                 "title":"Jolokia 사용법 소개",
                 "created":"2016-06-12"
+            },
+            "231":{
+                "title":"2016년 6월 개발 이야기",
+                "created":"2016-06-28"
             }
         }
 
