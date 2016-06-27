@@ -340,7 +340,7 @@ $( document ).ready(function(){
 	
   /* header 처리 */
   Header.printGnb();
-  Header.orgTopSubject( "JDM's Blog", "/blog", "온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3");
+  Header.printTopSubject( "JDM's Blog", "/blog", "온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3");
 	
 	/* 아카이브 그룹 초기화 */
 	ArchiveGroup.init(maxPostsCnt);
