@@ -1,0 +1,187 @@
+@charset "utf-8";
+
+html { font-size:16px; }
+body { font-family: "Nanum Gothic Coding", sans-serif !important; /* background-color: #2b2b2b; background: -webkit-radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%); */}
+
+/* drag 색 변경 */
+::selection{ background-color: #00B321;	color: #fff; }
+::-ms-selection{ background-color: #00B321;	color: #fff; }
+::-webkit-selection{ background-color: #00B321;	color: #fff; }
+::-moz-selection{ background-color: #00B321; color: #fff; }
+
+#viewContainer { /*box-shadow: 0px 0px 10px #999;*/ background-color: white; margin-bottom:2em; }
+
+.mycolor1 { color: #EC751A; }
+
+#comment_list .sub_comments { padding-left: 2em; }
+
+.panel { border:none; margin-bottom:0; border-radius: 0px; box-shadow: none; }
+/*
+.panel a{ text-decoration: none; }
+.panel li:hover { background:#eee; }
+*/
+.panel-heading { border-radius: 0px;}
+.panel-title { font-weight:bold; color:black; }
+
+/* 태그 목록 */
+/*
+#tag_list a { padding:0.5em; color:gray; -webkit-transition: background-color .3s ease-in-out,border-color .3s ease-in-out,color .3s ease-in-out; -moz-transition: background-color .3s ease-in-out,border-color .3s ease-in-out,color .3s ease-in-out; -ms-transition: background-color .3s ease-in-out,border-color .3s ease-in-out,color .3s ease-in-out; -o-transition: background-color .3s ease-in-out,border-color .3s ease-in-out,color .3s ease-in-out; transition: background-color .3s ease-in-out, border-color .3s ease-in-out, color .3s ease-in-out; }
+#tag_list a:hover{ color: #fff; border-color: #337ab7; background-color: #337ab7; text-decoration:none; }
+*/
+
+/* 관련 카테고리 목록 */
+#top_list .more { display: block; }
+#top_list .more:hover { background:#eee; }
+#top_list li:hover { background:#eee; }
+#top_list a:hover { text-decoration: none; }
+
+/* 타이틀 */
+#content_title { font-size:2.20rem; margin:0; padding-top:0.5em; font-weight:bold; }
+
+/* 코멘트 부분 */
+/* active tab color */
+#comment_header a { border-radius: 0px; }
+#comment_header.nav-tabs>li.active>a, #comment_header.nav-tabs>li.active>a:hover, #comment_header.nav-tabs>li.active>a:focus { background-color: #ccc; }
+
+/**************************************/
+/* s:블로그 내용 꾸미기 관련(content) */
+/**************************************/
+#content { font-family: "Nanum Gothic Coding", sans-serif !important; word-wrap: break-word; font-size: 1rem; background-color: white; color:black; }
+
+/* h 태그 관련 */
+/*
+이제 제목은 h1이고 그 이하 본문 소제목은 h2부터 시작한다. 2015.05.19 이후 작성 포스트는 해당 규칙을 따를것.
+*/
+#content h1, #content h2, #content h3, #content h4, #content h5{
+font-family:"Nanum Gothic"; font-weight: bold; position: relative; border-radius: 4px;
+border-color:#259CE0; border-left-style: solid; border-left-width:0.25em; padding-left:0.25em; font-weight:bold;
+}
+#content h1:after, #content h2:after, #content h3:after, #content h4:after, #content h5:after {
+content: ""; position: absolute; bottom: 0; left: 0; right:0; height: 1px;
+background-image: -ms-linear-gradient(left, #259CE0, #fff);
+background-image: -webkit-linear-gradient(left, #259CE0, #fff);
+background-image: -moz-linear-gradient(left, #259CE0, #fff);
+background-image: -o-linear-gradient(left, #259CE0, #fff);
+}
+
+/*#content h1:before, #content h2:before, #content h3:before, #content h4:before, #content h5:before{ content:'＃ '; }*/
+#content h1{ font-size:2.00rem; padding-top:0.60em; padding-bottom:0.60em; margin-top:2.00em; border-left-width:0.35em; }
+#content h2{ font-size:1.80rem; padding-top:0.50em; padding-bottom:0.50em; margin-top:1.75em; border-left-width:0.30em; }
+#content h3{ font-size:1.60rem; padding-top:0.40em; padding-bottom:0.40em; margin-top:1.50em; border-left-width:0.25em; }
+#content h4{ font-size:1.40rem; padding-top:0.30em; padding-bottom:0.30em; margin-top:1.25em; border-left-width:0.20em; }
+#content h5{ font-size:1.20rem; padding-top:0.20em; padding-bottom:0.20em; margin-top:1.00em; border-left-width:0.15em; }
+
+/* etc */
+#content strong { font-weight:bold; }
+#content i { font-style:italic; }
+#content i.fa { font-style:normal; } /* for font awesome */
+#content del{ color: #999; }
+#content ul { list-style-type: circle; padding-left: 2em; margin:0; }
+#content ul.num { list-style-type: decimal; }
+#content ul li { padding:0.125em; font-family:"Nanum Gothic"; }
+#content ol { list-style-type: decimal; padding-left: 2em; margin:0; }
+#content .refer { font-size: 0.75rem; color: gray; }
+/* #content .first_letter:first-letter { padding-left:0.5em; } */
+/* a */
+#content a { /*font-style:italic;*/ color:#0346ae; border-bottom: gray 1px dashed; /*display:inline-block;*/ }
+#content a:hover { text-decoration:none; border-bottom:#0346ae 1px solid; }
+#content a:focus { text-decoration:none; }
+#content a:first-letter{ padding:0; }
+#content a.refer { border-bottom:none; }
+#content a.refer:focus { text-decoration:none; }
+#content a.refer:hover { text-decoration:underline; }
+
+/* span */
+#content span.white { color:white; }
+#content span.red { color:red; }
+#content span.blue { color:blue; }
+#content span.gray { color:gray; }
+#content span.light { color:rgb(0, 255, 0); } /* 형광색 */
+
+#content span.command { padding:0.125em 0.25em 0.125em 0.25em; margin:0; background-color:#F5F5F5; border-radius: 4px; border:1px solid #999; font-family: "Nanum Gothic Coding"; }
+#content span.error { padding:0.125em 0.25em 0.125em 0.25em; background-color:#F5F5F5; border:1px solid #999; border-radius: 4px; font-size:0.9rem; color:red; font-family: "Nanum Gothic Coding"; }
+
+/* p */
+#content p { font-family:"Nanum Gothic"; font-size:1rem; line-height:1.75rem; padding:0.50em; margin:0; }
+
+/* div */
+#content div { font-size:1rem; line-height:1.75rem; padding:0.5em; margin:0; border-radius: 4px; }
+#content div.none { font-family:"Nanum Gothic"; color:black; }
+#content div.green { font-family:"Nanum Gothic"; border: 1px solid #00B321; background-color:#F3FEF3; color:black; }
+#content div.blue { font-family:"Nanum Gothic"; border: 1px solid #0054B3; background-color:#F3F8FE; color:black; }
+#content div.red { font-family:"Nanum Gothic"; border: 1px solid #B30000; background-color:#FEF3F3; color:black; }
+#content div.yellow { font-family:"Nanum Gothic"; border: 1px solid #BAA900; background-color:#FFFDEB; color:black; }
+#content div.console { font-family: "Nanum Gothic Coding"; background-color:#2D2D2D; color:white; word-wrap: normal; }
+
+/* pre */
+#content pre { word-wrap: normal; font-family: "Nanum Gothic Coding", sans-serif !important; padding:0.5em; font-size:1rem; margin-top:0.25em; margin-bottom:0.25em; border-radius: 4px; }
+#content pre.green { border: 1px solid #00B321; background-color:#F3FEF3; color:black; }
+#content pre.blue { border: 1px solid #0054B3; background-color:#F3F8FE; color:black; }
+#content pre.console { background-color:#222; color:white; }
+#content pre.diagram { line-height: 1rem; }
+
+#content pre.prettyprint {
+font-family: "Nanum Gothic Coding";
+width: auto; overflow: auto; word-wrap: normal; white-space: pre; font-size:1rem;
+border-radius: 4px;
+-moz-tab-size: 4;
+-o-tab-size: 4;
+-webkit-tab-size: 4;
+tab-size: 4;
+}
+/*
+<pre class="prettyprint lang-html">
+<pre class="prettyprint linenums lang-html">
+  The lang-* class specifies the language file extensions.
+  File extensions supported by default include
+    "bsh", "c", "cc", "cpp", "cs", "csh", "cyc", "cv", "htm", "html", "r", "s",
+    "java", "js", "m", "mxml", "perl", "pl", "pm", "py", "rb", "sh",
+    "xhtml", "xml", "xsl".
+	extendsion : sql, scala
+</pre>
+*/
+
+/* table */
+#content table { width:100%; border:1px solid gray; margin-bottom:1em; }
+#content table tr { border:1px solid gray; }
+#content table tr td { border:1px solid gray; padding:2px; }
+
+/* blockquote(인용구) */
+#content blockquote { font-size:1rem; }
+#content blockquote cite { color:gray; font-size:0.85rem; font-style:italic; }
+#content blockquote cite:before { content:'[출처] ';}
+#content blockquote cite a { color:gray; border-bottom:none; }
+#content blockquote cite a:hover { text-decoration:underline; border-bottom:none; }
+
+/**************************************/
+/* e:블로그 내용 꾸미기 관련(content) */
+/**************************************/
+
+/* side bar */
+#sidebar #count_d3 rect { fill: #d9edf7; }
+#sidebar #count_d3 rect:hover { fill:#bce8f1; }
+/*#sidebar #count_d3 text { fill: #31708f; font-size:0.75em; text-anchor: middle; }*/
+
+#sidebar .right_menu { font-family:"Nanum Gothic"; }
+#sidebar .right_menu .sub { display:block; }
+#sidebar .right_menu .sub:hover { background:#eee; }
+#sidebar .right_menu a { color:#333; }
+#sidebar .right_menu a:hover { text-decoration: none; }
+/*#sidebar hr { border-color: #259CE0; border-width: 1px; max-width:50px; }*/
+#sidebar .panel-title { position: relative; }
+#sidebar .panel-title:after {
+content: ""; position: absolute; bottom: -2px; left: 0; right:0; height: 1px;
+/*background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#259CE0), to(transparent));*/
+background-image: -ms-linear-gradient(left, #259CE0, #fff);
+background-image: -webkit-linear-gradient(left, #259CE0, #fff);
+background-image: -moz-linear-gradient(left, #259CE0, #fff);
+background-image: -o-linear-gradient(left, #259CE0, #fff);
+}
+
+/* trash */
+/*
+#content > div ul { margin:0; }
+#content > div ul li:before { content:'·'; }
+#content blockquote:before { content:'〃'; font-weight:bold; }
+#content h1:hover, #content h2:hover, #content h3:hover, #content h4:hover, #content h5:hover { background:#fff; box-shadow:0px 0px 20px #999; }
+*/
