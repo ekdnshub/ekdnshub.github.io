@@ -1,0 +1,35 @@
+@charset "utf-8";
+body { font-family: "Nanum Gothic Coding", sans-serif !important; /* background-color: #2b2b2b; background: -webkit-radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%); */}
+
+h4 { margin-top:10px; margin-bottom:10px; font-weight: bold; }
+a { color: #333; }
+a:hover{ color: #333; text-decoration:none; }
+
+#list_wrap { margin-top:10px; }
+.item_wrap { margin-bottom:5px; padding:10px; border-radius: 5px; box-shadow:5px 5px 5px #999; }
+.item_wrap:hover{
+	z-index:100;
+	transform: scale(1.05, 1.05);
+	-webkit-transform: scale(1.05, 1.05);
+	-webkit-transition-duration: 0.2s;
+	-webkit-transition-property: transform;
+	-webkit-transition-timing-function: linear;
+	-moz-transform: scale(1.05, 1.05);
+	-moz-transition-duration: 0.2s;
+	-moz-transition-property: transform;
+	-moz-transition-timing-function: linear;
+	-ms-transform: scale(1.05, 1.05);
+	-ms-transition-duration: 0.2s;
+	-ms-transition-property: transform;
+	-ms-transition-timing-function: linear;
+}
+.limit {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	height:1em; /* line-height 하고 -webkit-line-clamp 곱한값(ie 처리) */
+	line-height:1em;
+	-webkit-line-clamp: 1; /* number of lines to show */
+	-webkit-box-orient: vertical;
+}
+.row { margin-bottom:10px; }
