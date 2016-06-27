@@ -1,63 +1,3 @@
-// smooth wheel
-o.wheel.init(200,800);
-
-// select modal type
-var myBtModal = o.modal.BtModal;
-
-// ie 사용자에게 크롬 브라우저 사용 유도
-(function(){
-	$(document).ready(function(){
-		if( o.browser.isLowerIE(10) ){
-			o.toast.info("IE를 업그레이드 해주시거나 다른 브라우저를 이용하세요.");
-		}
-	});
-})();
-
-// first-letter 처리
-var FirstLetter = (function(){
-	function init(){
-	    $("#content p").each(function(){
-	        $(this).prepend("<span style='padding-left:0.5em;'></span>");
-	    });
-	};
-	return{
-	    init:init
-	}
-})();
-
-// 접기(fold) 처리(위키 문법에 추가됨)
-var Folder = (function(){
-	function init(){
-	
-		$("#content .fold").each(function(i, obj){
-	
-			var id = "fold_"+i;
-	
-			$(this).attr("id", id);
-			var title = $(this).data("title");
-	
-			if( title == null ){
-				title = "펼치기";
-			}
-	
-			$(this).before("<button class=\"btn btn-xs btn-default js-fold\" data-id=\""+id+"\">"+title+"</button>");
-	
-			$(this).hide();
-		});
-		$(".js-fold").each(function(i, obj){
-			var foldId = $(this).data("id");
-			$(this).click(function(){
-				$("#"+foldId).show();
-				$(this).hide();
-			});
-		});
-	};
-	
-	return{
-		init:init
-	}
-})();
-
 // 블로그 본문 로딩중임을 알림
 var BlogLoadingBar = (function(){
 	function _loading(){
@@ -97,32 +37,28 @@ function applyContentEffect(){
 		});
 	}
 
-	// s: 본문 소제목에 번호를 붙이자.
-	(function(){
-		var map = { "h1":0, "h2":0, "h3":0, "h4":0, "h5":0 };
-		$("#content h1,#content h2,#content h3,#content h4,#content h5").each(function(i, obj){
+	// 본문 소제목에 번호를 붙이자.
+	var map = { "h1":0, "h2":0, "h3":0, "h4":0, "h5":0 };
+	$("#content h1,#content h2,#content h3,#content h4,#content h5").each(function(i, obj){
+		var tagName = $(obj).prop("tagName").toLowerCase();
 
-			var tagName = $(obj).prop("tagName").toLowerCase();
+		switch( tagName ){
+			case "h1": map["h2"] = 0;
+			case "h2": map["h3"] = 0;
+			case "h3": map["h4"] = 0;
+			case "h4": map["h5"] = 0;
+		}
+		map[tagName]++;
 
-			switch( tagName ){
-				case "h1": map["h2"] = 0;
-				case "h2": map["h3"] = 0;
-				case "h3": map["h4"] = 0;
-				case "h4": map["h5"] = 0;
-			}
-			map[tagName]++;
+		var subIndex = "";
+		if( map["h1"] > 0) subIndex = map["h1"]+".";
+		if( map["h2"] > 0) subIndex += map["h2"]+".";
+		if( map["h3"] > 0) subIndex += map["h3"]+".";
+		if( map["h4"] > 0) subIndex += map["h4"]+".";
+		if( map["h5"] > 0) subIndex += map["h5"]+".";
 
-			var subIndex = "";
-			if( map["h1"] > 0) subIndex = map["h1"]+".";
-			if( map["h2"] > 0) subIndex += map["h2"]+".";
-			if( map["h3"] > 0) subIndex += map["h3"]+".";
-			if( map["h4"] > 0) subIndex += map["h4"]+".";
-			if( map["h5"] > 0) subIndex += map["h5"]+".";
-
-			$(obj).html( subIndex + " " + $(obj).html() );
-		});
-	})();
-	// e: 본문 소제목에 번호를 붙이자.
+		$(obj).html( subIndex + " " + $(obj).html() );
+	});
 
 	// 본문 내 a링크인데 _blank 옵션이 없으면 넣어준다.
 	$("#content a").each(function(index, obj){
@@ -137,12 +73,40 @@ function applyContentEffect(){
 		}
 	});
 	
-	o.popup.image("#content img"); // image popup...
-	FirstLetter.init();
-	Folder.init();
+	// image popup...
+	o.popup.image("#content img"); 
+	
+	// first-letter 처리
+	$("#content p").each(function(){
+		$(this).prepend("<span style='padding-left:0.5em;'></span>");
+	});
+	
+	// 접기(fold) 처리(위키 문법에 추가됨)
+	$("#content .fold").each(function(i, obj){
+	
+		var id = "fold_"+i;
+	
+		$(this).attr("id", id);
+		var title = $(this).data("title");
+	
+		if( title == null ){
+			title = "펼치기";
+		}
+	
+		$(this).before("<button class=\"btn btn-xs btn-default js-fold\" data-id=\""+id+"\">"+title+"</button>");
+	
+		$(this).hide();
+	});
+	$(".js-fold").each(function(i, obj){
+		var foldId = $(this).data("id");
+		$(this).click(function(){
+			$("#"+foldId).show();
+			$(this).hide();
+		});
+	});
 };
 
-function addInfoBody(){
+function addInfoBody(currentSeq){
 	var body = o.util.multiLine(function(){
 	  /*!
 			<span id="content_category" class="text-muted" style="display:none;"></span>│<span id="content_created" class="mycolor1">2014-09-29</span>
@@ -155,6 +119,7 @@ function addInfoBody(){
 	});
 	$("#add_info").html(body);
 	
+	// 추가 기능 버튼 리스너
 	$("#bigsize").click(function(){
 		if( $("#bigsize").hasClass("js-active") ){
 			$("#bigsize").removeClass("js-active");
@@ -180,6 +145,9 @@ function addInfoBody(){
 		var fontSize = $("html").css("font-size").replace("px","")*0.9;
 		$("html").css("font-size", fontSize+"px");
 	});
+	
+	// 카테고리 이름 출력
+	$("#content_category").html(ArchiveGroup.findName(currentSeq)).show();
 };
 
 // s:우측 카테고리 관련
@@ -301,36 +269,6 @@ function showAnimationForReferenecePost( _obj, order, loopCnt, delay ){
 };
 // end : ReferencePost
 
-var RightCategory = (function(){
-
-	var template = o.util.multiLine(function(){
-	    /*!
-	        <li class="right_menu sub"><a href="{{seq}}"><span><i class="fa fa-angle-double-right"></i> {{name}}<span class="mycolor1">({{count}})</span></span></a></li>
-	    */
-	});
-	
-	function init(){
-	    $("#right_category").html("");
-	    var html = "";
-	    var names = ArchiveGroup.findNameAll();
-	    for( var i = 0; i < names.length; i++ ){
-	    	var name = names[i];
-	    	var group = ArchiveGroup.findGroupByName(name);
-	    	var obj = {};
-	    	obj["name"] = name;
-	    	obj["count"] = group.length;
-	    	obj["seq"] = group[group.length-1];
-	    	html += o.mapper.toHtml( template, obj );
-	    }
-
-	    $("#right_category").html(html);
-	    
-	};
-	return {
-	    init:init
-	}
-})();
-
 $( document ).ready(function(){
 	var maxPostsCnt = o.util.getObjectSize(postsInfo.getMeta()); // 포스트 총 개수
 	
@@ -338,18 +276,30 @@ $( document ).ready(function(){
 	var currentLocationToken = window.location.href.split("/");
 	var currentSeq = Number(currentLocationToken[currentLocationToken.length-1]);
 	
-  /* header 처리 */
-  Header.printGnb();
-  Header.printTopSubject( "JDM's Blog", "/blog", "온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3");
+	/* 블로그 부가 효과 선처리 */
+	// smooth wheel
+	o.wheel.init(200,800);
 	
+	// ie 사용자에게 크롬 브라우저 사용 유도
+	if( o.browser.isLowerIE(10) ){
+		o.toast.info("IE를 업그레이드 해주시거나 다른 브라우저를 이용하세요.");
+	}
+	
+	/* header 처리 */
+	Header.printGnb();
+	Header.printTopSubject( "JDM's Blog", "/blog", "온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3");
+		
 	/* 아카이브 그룹 초기화 */
 	ArchiveGroup.init(maxPostsCnt);
 	
-	/* 본문 이펙트 효과 모음*/
+	/* 추가정보 템플릿 처리 */
+	addInfoBody(currentSeq);
+	
+	/* 본문 이펙트 효과 모음 */
 	applyContentEffect();
-
-	/* 카테고리 메뉴 초기화 */
-	RightCategory.init();
+	
+	/* 카피라이트 문구 처리 */
+	Copyright.init();
 	
 	/* 관련 게시글 목록 생성 */
 	initReferencePost();
@@ -358,18 +308,6 @@ $( document ).ready(function(){
 	/* 코멘트 관련 처리 */
 	Comment.init(currentSeq);
 	
-	/* 카피라이트 문구 처리 */
-	Copyright.init();
-	
 	/* Bottom 처리(SideBar) */
-	Bottom.init();
-	
-	/* 포스트 총 개수 출력 */
-	$("#content_total").html(maxPostsCnt);
-	
-	/* 추가정보 템플릿 처리 */
-	addInfoBody();
-	
-	/* 카테고리 이름 출력 */
-	$("#content_category").html(ArchiveGroup.findName(currentSeq)).show();
+	Bottom.init(maxPostsCnt);
 });
