@@ -50,9 +50,12 @@
 				<div id="help" class="col-md-12" style="overflow-y:scroll; height:200px;">
 				</div>                
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-6" style="height:60%;">
 				<textarea id="content_area">#p Hello World!</textarea>
 				<button id="doit">변환</button>
+			</div>
+			<div class="col-md-6" style="height:40%;">
+				<textarea id="result_area"></textarea>
 			</div>
 		<script>
 			var docHeight = $(document).height();
@@ -181,7 +184,8 @@
 	            //console.log( result );
 	            $("#content").html( result );
 	            PR.prettyPrint();
-	         	applyEtcEffect();
+			applyEtcEffect();
+			$("#result_area").val(result);
 	        }
 	        $("#doit").click(function(){
 	        	doit();
