@@ -216,6 +216,25 @@ function initReferencePost(){
 		*/
 	});
 	$("#top_list").html(initBody);
+	
+	$("#top_more_after").click(function(){
+		$("#top_list ul li").each(function(){				
+			if( $(this).css("display") != "none" ){
+				for( var i = 0; i <= 5; i++ ){
+					showAnimationForReferenecePost($(this), "prev", i, i*100 );
+				}
+			}
+		});
+	});
+	$("#top_more_before").click(function(){
+		$($("#top_list ul li").get().reverse()).each(function(){				
+			if( $(this).css("display") != "none" ){
+				for( var i = 0; i <= 5; i++ ){
+					showAnimationForReferenecePost($(this), "next", i, i*100 );
+				}
+			}		
+		});
+	});
 };
 
 function makeReferencePost(seq){
@@ -255,25 +274,6 @@ function makeReferencePost(seq){
 
 	$("#top_list").slideDown(250, 'linear', function(){});
 };
-
-$("#top_more_after").click(function(){
-	$("#top_list ul li").each(function(){				
-		if( $(this).css("display") != "none" ){
-			for( var i = 0; i <= 5; i++ ){
-				showAnimationForReferenecePost($(this), "prev", i, i*100 );
-			}
-		}
-	});
-});
-$("#top_more_before").click(function(){
-	$($("#top_list ul li").get().reverse()).each(function(){				
-		if( $(this).css("display") != "none" ){
-			for( var i = 0; i <= 5; i++ ){
-				showAnimationForReferenecePost($(this), "next", i, i*100 );
-			}
-		}		
-	});
-});
 
 function showAnimationForReferenecePost( _obj, order, loopCnt, delay ){
     var obj = _obj;
