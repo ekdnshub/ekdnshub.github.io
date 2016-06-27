@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+  	<!-- # common resource # -->
+  	<link rel="shortcut icon" href="/images/favicon.ico">
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+  	<meta name="author" content="Jung DongMin">
+  	
+  	<!-- # css -->
+  	<link rel="stylesheet" type="text/css" href="/css/reset.css">
+  	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  	
+  	<!-- # font -->
+  	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+  	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+  
+  	<!-- # jquery -->
+  	<!--[if lte IE 9]>
+  	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+  	<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+  	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+  	<![endif]-->
+  	<!--[if gt IE 9]><!-->
+  	<script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  	<!--<![endif]-->
+  
+  	<!-- # front view lib # -->
+  	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+        <!-- # unique resource for this page # -->
+        <!-- # code highlight -->
+        <script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+        <script src="/lib/o/wiki/1.min.js"></script>
+	</head>
+	<body>
+		
+			<div class="col-md-6" id="left_wrap">
+				<article>
+                    <!-- 본문 -->
+                    <div id="content" style="overflow-y:scroll; height:800px;">
+                    </div>
+
+                </article>
+				<h2>도움말</h2>
+				<div id="help" class="col-md-12" style="overflow-y:scroll; height:200px;">
+				</div>                
+			</div>
+			<div class="col-md-6">
+				<textarea id="content_area">#p Hello World!</textarea>
+				<button id="doit">변환</button>
+			</div>
+		<script>
+			var docHeight = $(document).height();
+
+			$("#content_area").width($("#content_area").parent().width());
+			$("#content_area").height(docHeight-100);
+			$("#content").height(docHeight-300);		
+
+			o.ajax.send({
+				url:"//static.jdm.kr/js/o/README",
+				type:"get",
+				done:function(data){ data = data.replace("<", "&lt;"); $("#help").html( "<pre>"+data+"</pre>" );  }
+			});
+
+
+		    // first-letter 처리
+            var FirstLetter = (function(){
+                function init(){
+                    $("#content p").each(function(){
+                        $(this).prepend("<span style='padding-left:0.5em;'></span>");
+                    });
+                };
+                return{
+                    init:init
+                }
+            })();
+
+			// 접기(fold) 처리(위키 문법에 추가됨)
+			var Folder = (function(){
+				function init(){
+				
+					$("#content .fold").each(function(i, obj){
+				
+						var id = "fold_"+i;
+				
+						$(this).attr("id", id);
+						var title = $(this).data("title");
+				
+						if( title == null ){
+							title = "펼치기";
+						}
+				
+						$(this).before("<button class=\"btn btn-xs btn-default js-fold\" data-id=\""+id+"\">"+title+"</button>");
+				
+						$(this).hide();
+					});
+					$(".js-fold").each(function(i, obj){
+						var foldId = $(this).data("id");
+						$(this).click(function(){
+							$("#"+foldId).show();
+							$(this).hide();
+						});
+					});
+				};
+				
+				return{
+					init:init
+				}
+			})();            
+
+            function applyEtcEffect(){
+
+				// bootstrap class add
+				if( !o.browser.isLowerIE(8) ){
+					$( "#content img" ).each(function(){
+						$(this).addClass("img-responsive");
+						$(this).addClass("img-rounded");
+						if( $(this).attr("alt") == null){
+							$(this).attr("alt", "첨부이미지");
+						}
+					});
+				}
+
+				// 본문 내 del 링크는 감춘다.
+				$("#content del").hide();
+				
+
+				// s: 본문 소제목에 번호를 붙이자.
+				(function(){
+					var map = { "h1":0, "h2":0, "h3":0, "h4":0, "h5":0 };
+					$("#content h1,#content h2,#content h3,#content h4,#content h5").each(function(i, obj){
+
+					var tagName = $(obj).prop("tagName").toLowerCase();
+
+					switch( tagName ){
+						case "h1": map["h2"] = 0;
+						case "h2": map["h3"] = 0;
+						case "h3": map["h4"] = 0;
+						case "h4": map["h5"] = 0;
+					}
+					map[tagName]++;
+
+					var subIndex = "";
+						if( map["h1"] > 0) subIndex = map["h1"]+".";
+						if( map["h2"] > 0) subIndex += map["h2"]+".";
+						if( map["h3"] > 0) subIndex += map["h3"]+".";
+						if( map["h4"] > 0) subIndex += map["h4"]+".";
+						if( map["h5"] > 0) subIndex += map["h5"]+".";
+
+						$(obj).html( subIndex + " " + $(obj).html() );
+					});
+				})();
+				// e: 본문 소제목에 번호를 붙이자.
+
+				// 본문 내 a링크인데 _blank 옵션이 없으면 넣어준다.
+				$("#content a").each(function(index, obj){
+					var target = obj.getAttribute("target");
+					if( target == null || target == "" ){
+						obj.setAttribute("target", "_blank");
+					}
+					// 2015.04.14 봇이 링크를 따라가지 않도록 한다.
+					var rel = obj.getAttribute("rel");
+					if( rel == null || rel == "" ){
+						obj.setAttribute("rel", "nofollow");
+					}
+				});
+
+				o.popup.image("#content img"); // image popup...
+
+				FirstLetter.init();
+				Folder.init();
+			};
+
+            function doit(){
+	            var result = owiki.interpreter($("#content_area").val());
+	            //console.log( result );
+	            $("#content").html( result );
+	            PR.prettyPrint();
+	         	applyEtcEffect();
+	        }
+	        $("#doit").click(function(){
+	        	doit();
+	        });
+	        $("#content_area").keypress(function(){
+	        	doit();
+	        });
+
+	        doit();
+
+		</script>
+	</body>
+</html>
