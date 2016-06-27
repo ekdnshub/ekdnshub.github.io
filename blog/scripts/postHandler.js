@@ -153,39 +153,36 @@ function addInfoBody(){
 			</div>
 	  */
 	});
-	$("#add_info").html(body);	
+	$("#add_info").html(body);
+	
+	$("#bigsize").click(function(){
+		if( $("#bigsize").hasClass("js-active") ){
+			$("#bigsize").removeClass("js-active");
+			$("#left_wrap").removeClass();
+			$("#left_wrap").addClass("col-md-10 col-md-offset-1");
+			$("#bigsizeLabel").addClass("fa-expand");
+			$("#bigsizeLabel").removeClass("fa-compress");
+		}
+		else{
+			$("#bigsize").addClass("js-active");
+			$("#left_wrap").removeClass();
+			$("#left_wrap").addClass("col-md-12");
+			$("#bigsizeLabel").addClass("fa-compress");
+			$("#bigsizeLabel").removeClass("fa-expand");
+		}
+	});
+	
+	$("#up_font_size").click(function(){
+		var fontSize = $("html").css("font-size").replace("px","")*1.1;
+		$("html").css("font-size", fontSize+"px");
+	});
+	$("#down_font_size").click(function(){
+		var fontSize = $("html").css("font-size").replace("px","")*0.9;
+		$("html").css("font-size", fontSize+"px");
+	});
 };
 
-// s: 추가 기능 버튼
-$("#bigsize").click(function(){
-	if( $("#bigsize").hasClass("js-active") ){
-		$("#bigsize").removeClass("js-active");
-		$("#left_wrap").removeClass();
-		$("#left_wrap").addClass("col-md-10 col-md-offset-1");
-		$("#bigsizeLabel").addClass("fa-expand");
-		$("#bigsizeLabel").removeClass("fa-compress");
-	}
-	else{
-		$("#bigsize").addClass("js-active");
-		$("#left_wrap").removeClass();
-		$("#left_wrap").addClass("col-md-12");
-		$("#bigsizeLabel").addClass("fa-compress");
-		$("#bigsizeLabel").removeClass("fa-expand");
-	}
-});
-
-$("#up_font_size").click(function(){
-	var fontSize = $("html").css("font-size").replace("px","")*1.1;
-	$("html").css("font-size", fontSize+"px");
-});
-$("#down_font_size").click(function(){
-	var fontSize = $("html").css("font-size").replace("px","")*0.9;
-	$("html").css("font-size", fontSize+"px");
-});
-// e: 추가 기능 버튼
-
 // s:우측 카테고리 관련
-
 // start : ReferencePost
 var referencePostTemplate = o.util.multiLine(function(){
 	/*!
