@@ -142,17 +142,19 @@ function applyContentEffect(){
 	Folder.init();
 };
 
-var addInfoBody = o.util.multiLine(function(){
-  /*!
-		<span id="content_category" class="text-muted" style="display:none;"></span>│<span id="content_created" class="mycolor1">2014-09-29</span>
-		<div class="btn-group" role="group">
-			<button id="bigsize" class="btn btn-default btn-xs"><i id="bigsizeLabel" class="fa fa-expand"> Wide</i></button>
-			<button id="up_font_size" class="btn btn-default btn-xs"><i class="fa fa-text-height"></i> 확대</button>
-			<button id="down_font_size" class="btn btn-default btn-xs"><i class="fa fa-text-height"></i> 축소</button>
-		</div>
-  */
-});
-$("#add_info").html(addInfoBody);
+function addInfoBody(){
+	var body = o.util.multiLine(function(){
+	  /*!
+			<span id="content_category" class="text-muted" style="display:none;"></span>│<span id="content_created" class="mycolor1">2014-09-29</span>
+			<div class="btn-group" role="group">
+				<button id="bigsize" class="btn btn-default btn-xs"><i id="bigsizeLabel" class="fa fa-expand"> Wide</i></button>
+				<button id="up_font_size" class="btn btn-default btn-xs"><i class="fa fa-text-height"></i> 확대</button>
+				<button id="down_font_size" class="btn btn-default btn-xs"><i class="fa fa-text-height"></i> 축소</button>
+			</div>
+	  */
+	});
+	$("#add_info").html(body);	
+};
 
 // s: 추가 기능 버튼
 $("#bigsize").click(function(){
@@ -367,6 +369,9 @@ $( document ).ready(function(){
 	
 	/* 포스트 총 개수 출력 */
 	$("#content_total").html(maxPostsCnt);
+	
+	/* 추가정보 템플릿 처리 */
+	addInfoBody();
 	
 	/* 카테고리 이름 출력 */
 	$("#content_category").html(ArchiveGroup.findName(currentSeq)).show();
