@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"><div style="display:none;">title=Jolokia 사용법 소개
+                created=2016-06-12
+            </div>
+                <h2>Jolokia가 무엇인가요?</h2><p>Jolokia는 HTTP 프로토콜을 이용해 손쉽게 JMX 값을 JSON 형식으로 받아볼 수 있게 해주는 일종의 JMX-HTTP 커넥터입니다.</p><blockquote><p><strong>Jolokia</strong> is remote JMX with JSON over HTTP. It is fast, simple, polyglot and has unique features. It's JMX on Capsaicin.</p><cite><a href="https://jolokia.org/index.html">https://jolokia.org/index.html</a></cite></blockquote>
+                <h2>어디에 사용할까요?</h2><p>특정 어플리케이션이 JMX을 제공한다면 JMX 모니터링을 위해 Jolokia를 사용할 수 있습니다.</p>
+                <h2>사용법</h2><p>간단한 설치 및 사용법은 <a href="https://jolokia.org/tutorial.html">Jolokia 튜토리얼</a>에서 확인할 수 있습니다.</p>
+                <h2>예제</h2><p>실제 설치가 끝났다면 특정 어플리케이션<span class="refer">ex. Kafka Server</span>에서 제공하는 JMX값을 받아 보는 예제를 해봅시다. 제가 주로 참조한 문서는 <a href="https://jolokia.org/reference/html/protocol.html#protocol-proxy">Jolokia :: protocol-proxy</a>입니다.</p><p>이 예제는 Jolokia가 설치된 호스트가 아닌 별도의 호스트에 어플리케이션이 동작하는 경우 원격으로 JMX 값을 읽어보는 것입니다. 아래의 예제는 전부 <strong>Request Body</strong>만 작성했습니다. <span class="refer">Jolokia 1.3.3 버전에서 테스트 되었습니다.</span></p>
+                <h3>Read Type 예제</h3><pre class="prettyprint lang-js">{
+	"type": "read",
+	"mbean": "kafka.log:type=Log,*",
+	"attribute": "Value",
+	"target": {
+		"url": "service:jmx:rmi:///jndi/rmi://kafka.server.domain:9997/jmxrmi"
+	}
+}
+</pre><p>해당 예제에서는 어플리케이션 JMX 활성 포트가 9997이라고 가정했습니다.</p>
+                <h3>List Type 예제</h3><pre class="prettyprint lang-js">{
+	"type":"list",
+	"path":"kafka.log",
+	"target": {
+		"url":"service:jmx:rmi:///jndi/rmi://kafka.server.domain:9997/jmxrmi"
+	}
+}
+</pre>
+                <div class="green"><p><i class="fa fa-check fa-lg"></i> Java JDK에 포함된 <span class="command">jconsole</span>을 이용해 미리 mbean 값을 찾는것이 정신건강에 이로울 수 있습니다.</p></div></div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

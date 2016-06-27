@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"><div style="display:none;">title=[Java] System.nanoTime()
+                created=2016-04-22
+            </div>
+                <p>이번 포스팅은 <strong>자바 코드 실행에 걸린 시간</strong>을 측정 할 수 있는 <span class="command">System.nanoTime()</span>에 대해 알아봅니다.</p>
+                <h2>System.nanoTime()</h2><p>이 메소드는 구동중인 JVM에서 임의로 고정된 구간으로부터 현재 나노세컨즈<span class="refer">nanoseconds</span> 값을 반환합니다.</p>
+                <h2>예제 코드</h2><pre class="prettyprint lang-java">long startTime = System.nanoTime();
+// 시간을 체크할 자바 코드 삽입
+// ...
+long endTime = System.nanoTime();
+long estimatedTime = endTime - startTime;
+// nano seconds to seconds
+double seconds = estimatedTime / 1000000000.0;
+</pre><p>최종적으로 <span class="command">seconds</span>가 코드 수행에 걸린 시간(초)입니다.</p>
+                <h2>주의할점</h2><p><span class="command">System.nanoTime()</span> 메소드는 자바 버전 <strong>1.5 이상</strong>에서 사용 가능합니다. 그리고 <strong>측정 용도</strong>로만 사용해주세요.</p></div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

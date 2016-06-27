@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"><div style="display:none;">title=Linux SSH 사용법
+                created=2015-10-28
+            </div>
+                <p>이번 포스트는 리눅스(CentOS)에서 SSH의 사용법에 대해 알아보고자 합니다. 간단한 ssh의 설명부터 시작하겠습니다!</p>
+                <h2>SSH?</h2><blockquote><p>Secure Shell, or SSH, is a cryptographic (encrypted) network protocol to allow remote login and other network services to operate securely over an unsecured network.</p><cite><a href="https://en.wikipedia.org/wiki/Secure_Shell">https://en.wikipedia.org/wiki/Secure_Shell</a></cite></blockquote><p>시큐어쉘<span class="refer">Secure Shell</span>은 암호화된 네트워크 프로토콜입니다. 일반적으로 암호화 하지 않는 네트워크 위에서 암호화된 접속 및 서비스 사용을 위해 사용합니다. 시큐어쉘을 통한 모든것은 암호화 되어 동작하기 때문에 중간에 메시지를 가로채더라도 원문은 알 수가 없죠.</p>
+                <h2>Linux SSH</h2><p>그러면 리눅스에서의 SSH는 어떻게 사용할까요? 일반적인 커맨드는 아래와 같습니다.</p><pre class="console"># 1.
+$ ssh user@hostname
+# 2.
+$ ssh user@127.0.0.1
+</pre><p>기본적인 ssh 접속은 위와 같은 <span class="command">ssh</span> 커맨드를 이용하면 됩니다. 접속에 성공하면 그때부터는 원격 호스트의 쉘을 사용하게 됩니다. 언제든지 <span class="command">exit</span> 명령어를 통해 원격 호스트의 쉘을 종료하고 원래의 쉘로 돌아올 수 있습니다.</p>
+                <h2>Linux .ssh Directory</h2><p>하지만 <span class="command">ssh</span> 접속을 할때 항상 비밀번호를 묻게 되어 있습니다. 신뢰할 수 없는 호스트에 한해서이긴 합니다. 호스트가 한대나 두대 정도라면 일일히 비밀번호를 입력하고 원격 호스트의 쉘로 접속할 수도 있겠지만, 요즘 같은 분산 처리가 흔한 상황이라면 기본적으로 돌리는 호스트 대수는 최소 몇대에서 몇십대에 이릅니다.</p><p>효율적인 측면에서 좋지 않습니다. 따라서 <span class="command">ssh</span>로 접속시 비밀번호를 묻지 않게 할 수 있다면 일반적인 쉘스크립트<span class="refer">.sh</span>를 만들어서 일괄적으로 처리할 수 있겠죠.</p><p>그래서 필요한 것이 소제목에 있던 <span class="command">.ssh</span> 디렉토리입니다. 해당 디렉토리는 모든 계정에 일반적으로 존재합니다.</p><pre class="console">$ cd ~/.ssh
+</pre><p>위처럼 입력하면 <span class="command">.ssh</span> 디렉토리로 이동합니다. 이곳에 특정 파일들이 위치할 수 있습니다. 기본적으로는 아무것도 존재하지 않을 수 있습니다.</p><p>위의 디렉토리에서 <span class="command">ls -al</span> 명령어를 실행해봅시다. 파일이 있을 수도 또는 없을 수도 있습니다. 예시 화면은 아래와 같습니다.</p><pre class="console">drwx------   8 jdm  jdm   272 10 22 14:04 .
+drwxr-xr-x+ 33 jdm  jdm  1122 10 27 11:35 ..
+-rw-------   1 jdm  jdm  3247  9  2 12:50 id_rsa
+-rw-r--r--   1 jdm  jdm   749  9  2 12:50 id_rsa.pub
+-rw-r--r--   1 jdm  jdm   749  9  2 12:50 authorized_keys
+</pre><p>여기서 보이는 파일들이 흔하게 접할 파일들입니다. 하나씩 알아봅시다.</p>
+                <h3>id_rsa[.pub]</h3><p>이 파일은 일반적으로 <span class="command">ssh-keygen</span>이라는 커맨드를 통해 만들어집니다. 디폴트 파일명이 id_rsa로 되어 있는 경우가 많습니다. 이 파일을 한번 만들어 봅시다.</p><pre class="console">$ <span class="light">ssh-keygen</span>
+Generating public/private rsa key pair.
+(1) 이부분에서 기본 키 위치와 이름을 정할 수 있습니다.
+Enter file in which to save the key (/home/jdm/.ssh/id_rsa):
+(2) 해당 키를 사용할 때 암호를 지정합니다. (그냥 Enter치면 암호는 쓰지 않는 것입니다. 일반적으론 만들지 않습니다.)
+Enter passphrase (empty for no passphrase):
+(3) (2)번에서 입력한 암호를 다시 입력합니다.
+Enter same passphrase again:
+Your identification has been saved in /home/jdm/.ssh/id_rsa.
+Your public key has been saved in /home/jdm/.ssh/id_rsa.pub.
+The key fingerprint is:
+12:23:56:78:90:12:23:ab:cd:ef:e7:d0:b9:02:1c:12 jdm@jdm.kr
+The key's randomart image is:
++--[ RSA 2048]----+
+|    o*.o.* o     |
+|   oE * = %      |
+|    *  . * =     |
+|     . .. o .    |
+|      . S.       |
+|         .       |
+|                 |
+|                 |
+|                 |
++-----------------+
+</pre><div class="yellow"><p><strong><i class="fa fa-exclamation-triangle fa-lg"></i> 주의</strong></p><p>위의 예시 화면은 임의로 조작이 되어 있습니다. 그리고 <span class="command">ssh-keygen</span>의 더 좋은 사용법은 아래처럼 옵션을 주는 것입니다.</p><pre class="console">$ ssh-keygen -t rsa -b 4096 -C "myname@mydomain.com"
+</pre><p>조금 더 안전하고 알아보기 쉽게 만들 수 있습니다. <span class="command">-t</span>옵션은 키의 타입을 결정하고 <span class="command">-b</span>옵션은 키를 만들때 bit의 개수입니다. 마지막으로 <span class="command">-C</span>옵션은 해당 키를 알아볼 수 있도록 코멘트를 새로 생성합니다.</p></div>
+                <p>쉘에 <span class="command">ssh-keygen</span> 입력 이후 아무런 조작 없이 <strong>Enter</strong>만 입력했더니 <span class="command">id_rsa</span> 파일과 <span class="command">id_rsa.pub</span> 파일이 생성 되었습니다. 이 파일에서 <span class="command">.pub</span>이 붙어 있는 파일이 <strong>공개키</strong>가 됩니다. 반대로 다른 하나는 <strong>비밀키</strong>가 됩니다. 이 파일은 가급적 외부에 공개하지 않는 것이 좋습니다.</p><p>또한 이렇게 특정 호스트에 만들어진 파일들은 호스트에 종속적이지 않습니다. 이말의 뜻은 하나의 호스트에서 만든 키를 복사하여 다른 호스트에 놓는다면 해당 호스트도 똑같이 사용이 가능합니다.</p><p>따라서 분산 처리를 위해 각 호스트마다 SSH키를 만들기 보다는 하나의 호스트에서 만든 SSH키를 복사하는 것이 효율적일 수도 있습니다. <span class="refer">반대로 보안에 취약해질 수 있어요.</span></p><p>이제 <span class="command">id_rsa.pub</span>의 내부 파일 구조를 봅시다.</p><pre class="console">$ cat id_rsa.pub
+ssh-rsa ...== jdm@jdm.kr
+</pre><p>시작은 <strong>ssh-rsa</strong>이고 마지막은 계정과 호스트가 나옵니다. 이것은 <strong>공개키</strong>이기 때문에 외부에 노출해도 되지만 시작부터 끝까지 전부 복사해야 합니다.</p><p>그럼 <span class="command">id_rsa</span>는 어떨까요?</p><pre class="console">$ cat id_rsa
+-----BEGIN RSA PRIVATE KEY-----
+...
+-----END RSA PRIVATE KEY-----
+</pre><p>공개키와는 확실히 다르고 <strong>PRIVATE KEY</strong>라고 대문짝만하게 쓰여 있습니다. 신뢰할수 없다면 비밀키는 공개하지 않는 것이 좋습니다.</p>
+                <h3>authorized_keys</h3><p>이 파일은 현재 자신의 호스트에서 신뢰 할 수 있는 호스트들의 공개키들을 저장합니다. 여기서 <strong>신뢰 할 수 있다</strong>의 뜻은 비밀번호 없이 자신의 호스트로 접속 할 수 있다는 겁니다. 물론 방화벽이나 iptable같은 것에 막히지 않는다면 말이죠.</p><p>따라서 다른 호스트에서 만든 공개키를 그대로 <span class="command">authorized_keys</span>파일 내부에 복사해 넣으면 비밀번호 없이 해당 호스트로 접근이 가능합니다.</p><pre class="console">$ vi authorized_keys
+ssh-rsa ...
+....== jdm@jdm.kr
+ssh-rsa ...
+....== other@other.host
+</pre><p>위처럼 여러개의 공개키를 넣어놓을 수 있습니다.</p>
+                <h2>Summary</h2><p>간단하게 예를 들어봅시다. A호스트와 B호스트가 있다고 가정했을때 A호스트에서 B호스트에 접근하려면 <span class="command">ssh</span> 커맨드를 통해 접속할 수 있습니다.</p><pre class="console">$ ssh root@B.HOST
+</pre><p>위처럼 말이죠. 하지만 이 경우에는 비밀번호를 물어봅니다. 이것을 해결하기 위해서 A호스트의 <span class="command">ssh-keygen</span>으로 만든 공개키를 B호스트의 <span class="command">authorized_keys</span> 파일에 넣으면 됩니다.</p>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

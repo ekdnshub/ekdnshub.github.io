@@ -10,4 +10,4 @@ created=2015-12-16
 #p {$http://xapi.jdm.kr/counter/week}
 ###
 #p 애플리케이션 설치를 하지 않았다면 밋밋한 문자열만 출력이 되겠지만 {!JSONView}를 설치했다면 아래 이미지처럼 예쁘게 포맷팅 되어 나옵니다.
-{$$/img/223.png}
+{$$/blog/images/223.png}

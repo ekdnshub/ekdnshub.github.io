@@ -1,0 +1,237 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"><p>
+                이번 포스팅은 팩토리 메소드 패턴(Factory Method Pattern)에 대해 알아보고자 합니다.
+            </p>
+
+                <h2>Factory Method Pattern</h2>
+                <p>
+                    기본적으로 팩토리는 공장이란 뜻을 내포하고 있습니다. 따라서 팩토리 메소드 패턴도 무언가를 위한 공장이라고 보면 됩니다. 일반적으로 팩토리 메소드 패턴은 다음처럼 말할 수 있습니다.
+                </p>
+
+                <div class="green">
+                    객체를 만들어내는 부분을 서브 클래스(Sub-Class)에 위임하는 패턴.
+                </div>
+
+                <p>
+                    즉, <span class="command">new</span> 키워드를 호출하는 부분을 서브 클래스에 위임하는 겁니다. 결국 팩토리 메소드 패턴은 <strong>객체를 만들어내는 공장(Factory 객체)을 만드는 패턴</strong>이라 이해하면 됩니다.
+                </p>
+
+                <h2>Example</h2>
+                <p>
+                    사실 위의 정의만으로는 알 수 없기 때문에 예제를 진행하고자 합니다. 예제로 쓸 소재는 "로봇"입니다. 여러 종류의 로봇을 생상하는 "공장"도 있어야 할 것입니다. 따라서 로봇과 로봇공장을 만들어서 예제를 돌려봅니다. 예제 코드의 패키지명은 <span class="command">pattern.factory</span>입니다. 혹시라도 코드를 그대로 사용하신다면 주의하시기 바랍니다.
+                </p>
+
+                <h3>Structure</h3>
+                <p>
+                    실제로 예제 코드를 작성하기 전에 간략히 구조를 살펴봅니다.
+                </p>
+
+<pre>
+Robot(abstract class)
+	┗ SuperRobot
+	┗ PowerRobot
+
+RobotFactory(abstract class)
+	┗ SuperRobotFactory
+	┗ ModifiedSuperRobotFactory
+</pre>
+
+                <p>
+                    두종류의 로봇(SuperRobot, PowerRobot)과 두종류의 로봇공장(SuperRobotFactory, ModifiedSuperRobotFactory)을 만들 예정입니다. 이제부터는 실제 코드를 봅시다.
+                </p>
+
+                <h3>Robot</h3>
+                <p>
+                    로봇 클래스는 다음처럼 작성했습니다. 각각 차례대로 Robot, SuperRobot, PowerRobot입니다. 여기서 설명드릴건 딱히 없습니다. 한가지 있다면 추후 클래스의 구별을 위해 개별적으로 이름(name)을 반환하는 메소드가 작성되어 있습니다.
+                </p>
+<pre class="prettyprint lang-java">
+package pattern.factory;
+
+public abstract class Robot {
+	public abstract String getName();
+}
+</pre>
+<pre class="prettyprint lang-java">
+package pattern.factory;
+
+public class SuperRobot extends Robot {
+	@Override
+	public String getName() {
+		return "SuperRobot";
+	}
+}
+</pre>
+
+<pre class="prettyprint lang-java">
+package pattern.factory;
+
+public class PowerRobot extends Robot {
+	@Override
+	public String getName() {
+		return "PowerRobot";
+	}
+}
+</pre>
+
+                <h3>RobotFactory</h3>
+                <p>
+                    팩토리 메소드 패턴의 꽃은 역시 팩토리 클래스입니다. 차례대로 봅시다. 첫번째 보이는 코드는 기본 팩토리 클래스입니다.
+                </p>
+<pre class="prettyprint lang-java">
+package pattern.factory;
+
+public abstract class RobotFactory {
+	abstract Robot createRobot(String name);
+}
+</pre>
+
+                <p>
+                    아래 클래스는 기본 팩토리 클래스를 상속 받아 실제 로직을 구현한 팩토리입니다.
+                </p>
+<pre class="prettyprint lang-java">
+package pattern.factory;
+
+public class SuperRobotFactory extends RobotFactory {
+	@Override
+	Robot createRobot(String name) {
+		switch( name ){
+			case "super": return new SuperRobot();
+			case "power": return new PowerRobot();
+		}
+		return null;
+	}
+}
+</pre>
+
+                <p>
+                    아래 클래스는 <span class="command">SuperRobotFactory</span> 클래스와 비슷하지만 내부 구현이 조금 다릅니다. 로봇 클래스의 이름을 String 인자로 받아서 직접 인스턴스를 만들어 냅니다.
+                </p>
+<pre class="prettyprint lang-java">
+package pattern.factory;
+
+public class ModifiedSuperRobotFactory extends RobotFactory {
+	@Override
+	Robot createRobot(String name) {
+		try {
+			Class&lt;?> cls = Class.forName(name);
+			Object obj = cls.newInstance();
+			return (Robot)obj;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+}
+</pre>
+
+                <h3>Test Code</h3>
+                <p>
+                    준비가 다 되었다면 메인 프로그램을 작성해서 돌려봅시다.
+                </p>
+
+<pre class="prettyprint lang-java">
+package pattern.factory;
+
+public class FactoryMain {
+	public static void main(String[] args) {
+
+		RobotFactory rf = new SuperRobotFactory();
+		Robot r = rf.createRobot("super");
+		Robot r2 = rf.createRobot("power");
+
+		System.out.println(r.getName());
+		System.out.println(r2.getName());
+
+		RobotFactory mrf = new ModifiedSuperRobotFactory();
+		Robot r3 =  mrf.createRobot("pattern.factory.SuperRobot");
+		Robot r4 =  mrf.createRobot("pattern.factory.PowerRobot");
+
+		System.out.println(r3.getName());
+		System.out.println(r4.getName());
+	}
+}
+</pre>
+<pre class="console">
+SuperRobot
+PowerRobot
+SuperRobot
+PowerRobot
+</pre>
+                <p>
+                    메인 프로그램에서 <span class="command">new</span> 키워드가 없다는 것을 확인 할 수 있습니다. 객체 생성을 팩토리 클래스에 위임한 결과 입니다. 또한 메인 프로그램은 어떤 객체가 생성 되었는지 신경 쓰지 않고 단지 반환된 객체를 사용만 하면 됩니다. 또한 새로운 로봇이 추가 되고 새로운 팩토리가 추가 된다 하더라도 메인 프로그램에서 변경할 코드는 최소화됩니다.
+                </p>
+
+                <h2>Summary</h2>
+                <p>
+                    팩토리 메소드 패턴을 사용하는 이유는 클래스간의 결합도를 낮추기 위한것입니다. 결합도라는 것은 간단히 말해 <strong>클래스의 변경점이 생겼을 때 얼마나 다른 클래스에도 영향을 주는가</strong>입니다. 팩토리 메소드 패턴을 사용하는 경우 직접 객체를 생성해 사용하는 것을 방지하고 서브 클래스에 위임함으로써 보다 효율적인 코드 제어를 할 수 있고 의존성을 제거합니다. 결과적으로 결합도 또한 낮출 수 있습니다.
+                </p>
+
+                <h2>Closing Remarks</h2>
+                <p>
+                    팩토리 메소드 패턴에 대해 알아봤습니다. 혹시라도 이슈 될만한 내용이 있다면 코멘트 부탁드립니다. :D
+                </p>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"><div style="display:none;">title=SpringBoot @ConfigurationProperties DataSource Setting
+                created=2016-05-18
+            </div>
+                <h2>이번 포스트는?</h2><p>이번 포스트는 SpringBoot에서 <strong>@ConfigurationProperties</strong> 어노테이션을 이용해 <span class="command">DataSource</span> 구성에 필요한 환경설정 값을 만들고 사용하는 법을 알아봅니다.</p>
+                <h2>@ConfigurationProperties</h2><p>@ConfigurationProperties 어노테이션은 환경설정 파일<span class="refer">ex. application.properties</span>에서 값을 추출해 주입해줍니다. 이로써 환경설정 값도 추상화가 가능합니다.</p>
+                <h2>환경 설정 파일 구성</h2><p>SpringBoot 프로젝트를 기본 생성한다면 <span class="command">application.properties</span> 파일에 어플리케이션 환경설정에 필요한 값을 삽입할 수 있습니다. 아래처럼 <strong>datasource</strong>를 prefix로 갖는 Datasource 환경설정을 삽입해 봅니다.</p>
+<pre class="console">datasource.driverClassName=com.mysql.jdbc.Driver
+datasource.url=jdbc:mysql://127.0.0.1:3306/test
+datasource.username=test
+datasource.password=test!@#$
+datasource.default-read-only=true
+datasource.initial-size=3
+datasource.min-idle=1
+datasource.max-idle=5
+datasource.max-active=5
+datasource.test-while-idle=true
+datasource.validation-query=select 1
+</pre>
+                <h2>예제 코드</h2><p>그리고 실제로 <strong>@ConfigurationProperties</strong> 어노테이션을 사용해 Datasource Bean을 만드는 예제 코드입니다. 상세 설명은 코드 라인별로 주석을 달았습니다.</p>
+<pre class="prettyprint lang-java">import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.tomcat.jdbc.pool.PoolProperties;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import javax.sql.DataSource;
+
+
+@Configuration
+@MapperScan(basePackages = "kr.jdm.dao", sqlSessionFactoryRef="getSqlSessionFactory")
+@EnableTransactionManagement
+public class DBConfig {
+
+    // 패스워드만 가져오고 싶다면 @Value 를 사용할 수 있습니다.
+    @Value("${datasource.password}")
+    private String password;
+
+    // 데이터소스를 만들기 위해 커넥션풀 프로퍼티 객체를 반환하는 빈을 선언합니다.
+    // 해당 빈을 만들 때 @ConfigurationProperties 어노테이션을 사용합니다.
+    // "prefix" 값을 이용해 해당 prefix로 시작하는 값들을 주입 받습니다.
+    @Bean
+    @ConfigurationProperties(prefix="datasource")
+    public PoolProperties getPoolProperties(){
+        return new PoolProperties();
+    }
+
+    // 데이터소스를 반환하는 빈을 선언합니다.
+    // 해당 빈은 톰캣 JDBC 데이터소스 객체를 반환합니다.
+    // 중간에 패스워드를 변경할 수 있다는 것을 코드를 통해 알 수 있습니다.
+    @Bean
+    public DataSource getDataSource() {
+        org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource(getPoolProperties());
+        String catchPassword = password + "postfix";
+        dataSource.setPassword(catchPassword);
+        return dataSource;
+    }
+
+    // 이번 예제에서는 SQL 매퍼로 "Mybatis"를 사용합니다.
+    // Mybatis에 관련된 SqlSessionFactory 객체를 반환하는 빈을 선언합니다.
+    @Bean
+    public SqlSessionFactory getSqlSessionFactory() throws Exception {
+        SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
+        factory.setDataSource(getDataSource());
+        factory.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:/config/mybatis-config.xml"));
+        return factory.getObject();
+    }
+
+    // 트랜잭션 매니저를 반환하는 빈을 선언합니다.
+    @Bean
+    public DataSourceTransactionManager transactionManager() {
+        DataSourceTransactionManager manager = new DataSourceTransactionManager(getDataSource());
+        return manager;
+    }
+}
+</pre>
+                <h3>Mybatis 설정 파일(mybatis-config.xml)</h3><p>위의 예제 코드에서 사용한 <span class="command">mybatis-config.xml</span> 파일입니다. 이번 포스팅의 주제와는 거리가 있지만 참고 차원에서 남겨봅니다. 자세한 설정 방법은 <a href="http://www.mybatis.org/mybatis-3/ko/configuration.html">Mybatis3 - 매퍼 설정</a>을 참고하세요.</p><pre class="prettyprint lang-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;
+&lt;configuration&gt;
+    &lt;settings&gt;
+        &lt;setting name="defaultExecutorType" value="REUSE" /&gt;
+        &lt;setting name="defaultStatementTimeout" value="20000" /&gt;
+    &lt;/settings&gt;
+    &lt;typeAliases&gt;
+        &lt;package name="kr.jdm.model" /&gt;
+    &lt;/typeAliases&gt;
+&lt;/configuration&gt;
+</pre>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>
