@@ -6,7 +6,7 @@ var Bottom = (function(){
     var body = o.util.multiLine(function(){
       /*!
         <!-- bottom 영역 -->
-        <div class="col-md-10 col-md-offset-1" id="sidebar" role="navigation">
+        <div class="col-md-12" id="sidebar" role="navigation">
   				<!-- 1단 -->
   				<div class="col-md-6">
   					<!-- 프로필 -->
