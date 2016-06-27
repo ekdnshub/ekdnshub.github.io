@@ -61,7 +61,7 @@
 			$("#content").height(docHeight-300);		
 
 			o.ajax.send({
-				url:"//static.jdm.kr/js/o/README",
+				url:"/lib/o/wiki/README",
 				type:"get",
 				done:function(data){ data = data.replace("<", "&lt;"); $("#help").html( "<pre>"+data+"</pre>" );  }
 			});
