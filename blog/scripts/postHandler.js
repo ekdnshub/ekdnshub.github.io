@@ -139,7 +139,7 @@ function addInfoBody(currentSeq){
 var referencePostTemplate = o.util.multiLine(function(){
 	/*!
 	 <li id="toplist_{{seq}}">
-	 <a href="/{{seq}}">
+	 <a href="/blog/{{seq}}">
 	 <span style="display:block;">{{title}}<span class="pull-right hidden-xs"><span>{{category}}</span>│<span class="mycolor1">{{created}}</span></span></span>
 	 </a>
 	 </li>
