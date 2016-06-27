@@ -1,29 +1,3 @@
-// 블로그 본문 로딩중임을 알림
-var BlogLoadingBar = (function(){
-	function _loading(){
-		$( "#blog_loading_bar p" ).animate({ opacity: "toggle" }, 1000, "linear", function(){ _loading(); });
-	};
-
-	function init(){
-		var html = "<div id=\"blog_loading_bar\" style=\"z-index: 7777; width:100%; height:100%;\">";
-		html += "<p style=\"display:table-cell; text-align:center; vertical-align:middle;font-family:Arial; font-size:3em;color:#ccc;\">";
-		html += "Loading...";
-		html += "</p>";
-		html += "</div>";
-		$("#content").html(html);
-		_loading();
-	};
-
-	function close(){
-		$("#blog_loading_bar").remove();
-	};
-
-	return{
-		init:init,
-		close:close
-	}
-})();
-
 function applyContentEffect(){
 
 	// bootstrap class add
