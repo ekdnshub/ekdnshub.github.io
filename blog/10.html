@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"><div style="display:none;">title=싱글튼 패턴(Singleton Pattern)
+                created=2014-10-09
+            </div>
+                <p>디자인 패턴은 일반적인 코딩이 아닌 조금 더 고차원적인 아키텍트를 설계하기 위해 알아야 할 몇가지 공통적인 코딩 방법들을 말합니다. 예전에 배웠던 내용을 상기시키며 복습 겸 하나씩 풀어가려 합니다.</p><p>그래서 오늘은 가장 많이 쓰일지도 모르는(?) 패턴인 "싱글턴 패턴"에 대해 알아보고자 합니다. 싱글턴 패턴은 유일하게 사용해야할 클래스가 필요할때에 유용하게 쓰이는 디자인 패턴입니다.</p><p>"유일하게" 사용해야하는 경우가 언제인지는 직접 파악하셔야 합니다. :0</p>
+                <h2>정의</h2><div class="green"><p>단 하나의 유일한 객체를 만들기 위한 디자인 패턴</p></div>
+                <h2>구현</h2>
+<pre class="prettyprint lang-java">public class Singleton {
+    private static Singleton instance;
+
+    private Singleton(){}
+
+    public static Singleton getInstance(){
+        if( instance == null ){ // (1)
+            instance = new Singleton(); // (2)
+        }
+        return instance;
+    }
+}
+</pre><div class="red"><p><strong><i class="fa fa-exclamation-triangle fa-lg"></i> 주의하세요.</strong></p><p>이 소스 코드는 실무에서 사용하면 위험합니다.</p></div><p>정말 필요한 코드로만 구성된 싱글턴 클래스입니다.</p><p><strong>생성자가 private 라는 것에 주목하세요.</strong> 외부에서 new 를 사용한 객체 생성이 불가능합니다. 따라서 getInstance 메소드를 호출해서 객체를 받아와야 합니다. <strong>getInstance() 가 static 메소드인 것도 주목해야 합니다.</strong></p><p>그런데 getInstance()는 객체가 없다면 새 객체를 만들어 반환하고, 있다면 기존 객체를 반환합니다. 따라서 단 하나의 객체만을 가지고 여러곳에서 사용이 가능합니다.</p><p>예전엔 저렇게 쓰는 줄 알고 있었습니다. 하지만 <strong>이 방법은 조금만 더 생각해 보면 문제점이 있다</strong>고 해서 조금 더 자료를 찾아봤습니다.</p>
+                <h2>문제점 파악</h2><p>문제점이 뭔가 했더니 이 클래스를 "멀티 스레드"로 돌릴시에 문제가 생깁니다. 여기에서 말하는 <span class="error">멀티 스레드 문제점</span>이라는 것은 위의 소스 코드에서 주석에서 (1)과 (2)로 표시된 부분을 잘 살펴보시기 바랍니다. 문제가 보이시나요?</p>
+                <p>만약, 스레드가 3개라고 가정을 해봅시다. 각각의 스레드 이름은 T1, T2, T3이라고 합시다. 그리고 위의 싱글튼 클래스를 호출하는 순간을 상상을 해봅시다.</p>
+<pre class="console">━━━━━━╋━━╋━━╋━━╋
+Thread Name ┃ T1 ┃ T2 ┃ T3 ┃
+━━━━━━╋━━╋━━╋━━╋ * Work Flow의 숫자는 상단의 소스코드에 주석으로
+Work Flow   ┃(1) ┃    ┃    ┃   표시된 (1)과 (2)번 코드라인입니다.
+            ┃(2) ┃(1) ┃    ┃
+            ┃    ┃(2) ┃(1) ┃
+            ┃    ┃    ┃(2) ┃
+━━━━━━╋━━╋━━╋━━╋
+</pre><p>T1의 (1)번 플로우로 인해 인스턴스가 <span class="command">null</span>임을 알고 새로운 객체를 만들기 위해 (2)번 플로우로 갑니다. 그리고 T1의 (2)번 플로우가 실행되는 그 순간 T2의 (1)번 플로우가 실행이 되면 아직까진 싱글턴 객체가 없기 때문에 <span class="command">null</span>을 반환 받고 새로운 객체를 만드려 하겠죠. 그리고 T1에서는 이미 싱글턴 객체가 완성이 됩니다. 그 다음 T3의 (1)번 플로우가 실행이 되는 순간엔 T2의 (2)번 플로우도 실행이 되며 결국 싱글튼 객체가 2개가 되어버립니다.</p>
+                <div class="yellow"><p><strong><i class="fa fa-check fa-lg"></i> TIP. 이것은 예제입니다.</strong></p><p>상기에 기술한 스레드의 동작은 제가 설명한 부분과 일치하지 않을 수 있습니다. 이해를 돕기 위한 예제일 뿐입니다. :)</p></div>
+                <p>이러한 <span class="command">멀티 스레드 문제점</span>으로 인해 이 싱글턴 클래스는 자기멋대로 객체가 두개 이상이 되어 버립니다. 이러면 싱글튼 패턴을 사용한 클래스가 아니게 되버립니다. (다만, 싱글 스레드에서는 안전합니다.)</p>
+                <h2>해결 방법</h2><p>싱글튼 클래스를 위한 여러가지 해법이 존재합니다.</p>
+                <h3>add synchronized keyword</h3><p>간단하게 getInstance() 메소드 앞에 <span class="command">synchronized</span> 를 붙여줍니다. 그럼 해당 클래스를 그대로 활용할 수 있습니다.</p>
+<pre class="prettyprint lang-java">public class Singleton {
+    private static Singleton instance;
+
+    private Singleton(){}
+
+    public static synchronized Singleton getInstance(){
+        if( instance == null ){
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+</pre>
+                <p>하지만 <span class="command">synchronized</span> 는 퍼포먼스에 <strong>엄청난</strong> 영향을 줍니다. 안좋은쪽으로요.</p><p><span class="refer">* synchronized 는 행위(메소드)에 대해 동기화하고 volatile 은 객체(인스턴스)에 대해 원자성(atomic)을 보장한다고 보시면 됩니다.</span></p>
+                <h3>Eager initialization</h3><p>아니면 객체를 프로그램 시작과 동시에 초기화를 해줘도 됩니다. 이것을 <span class="command">Eager initialization</span>라고 합니다.</p>
+<pre class="prettyprint lang-java">public class Singleton {
+    private static Singleton instance = new Singleton();
+
+    private Singleton(){}
+
+    public static Singleton getInstance(){
+        return instance;
+    }
+}
+</pre>
+                <h2>SingletonHolder</h2><p>이 테크닉을 정확히 무슨 명칭으로 불러줘야 할지 잘 모르겠습니다. <a href="https://en.wikipedia.org/wiki/Singleton_pattern#Initialization-on-demand_holder_idiom">위키피디아</a>에서는 <span class="command">Initialization-on-demand holder idiom</span>라는 이름으로 소개하고 있어요. 미리 초기화 하는것은 <span class="command">Eager initialization</span> 방식과 유사합니다만, 별도의 static class에서 초기화를 해서 가지고 있다는게 특이한 점입니다.</p>
+<pre class="prettyprint lang-java">public class Singleton {
+     private Singleton(){}
+
+     private static class SingletonHolder {
+             private static final Singleton INSTANCE = new Singleton();
+     }
+
+     public static Singleton getInstance() {
+             return SingletonHolder.INSTANCE;
+     }
+}
+</pre>
+                <div class="green"><p><i class="fa fa-check fa-lg"></i> 이 포스팅에서는 제대로 소개를 안했지만 DCL(Double Checking Locking)라는 테크닉도 존재합니다. 자세한 사항은 <a href="https://en.wikipedia.org/wiki/Double-checked_locking">Double-checked locking</a>을 참고하세요.</p></div>
+                <h2>Using Class</h2><p>그러면 이 클래스를 한번 사용해 볼까요?</p>
+<pre class="prettyprint lang-java">Singleton s = new Singleton(); // (X)
+Singleton s = Singleton.getInstance(); // (O)
+</pre><p>직접 메소드를 생성해서 값을 넣어보고 빼보고 하시면 더 빠른 이해가 가능할거라 생각합니다.</p>
+                <h2>Closing Remarks</h2>
+                <p>지금까지 싱글턴 패턴에 대해 알아봤습니다. :)</p>
+                <hr><p><span class="refer">* 2014.10.09 네이버 블로그에서 이동(2013.03.22)</span></p><p><span class="refer">* 2015.07.21 오탈자 수정 및 추가 정보 삽입</span></p>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>
