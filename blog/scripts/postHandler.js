@@ -88,7 +88,7 @@ function addInfoBody(currentSeq){
 	  /*!
 	  	<!-- 추가 정보 -->
 		<div id="add_info" style="padding-top:1em;">
-			<span id="content_category" class="text-muted" style="display:none;"></span>│<span id="content_created" class="mycolor1">2014-09-29</span>
+			<span id="content_category" class="text-muted" style="display:none;"></span>│<span id="content_created" class="mycolor1">{{created}}</span>
 			<div class="btn-group" role="group">
 				<button id="bigsize" class="btn btn-default btn-xs"><i id="bigsizeLabel" class="fa fa-expand"> Wide</i></button>
 				<button id="up_font_size" class="btn btn-default btn-xs"><i class="fa fa-text-height"></i> 확대</button>
@@ -98,6 +98,8 @@ function addInfoBody(currentSeq){
 		<hr>
 	  */
 	});
+	
+	body = o.mapper.toHtml(body, { created: postsMeta[currentSeq].created });
 	
 	$("#content_title").after(body);
 	
