@@ -274,7 +274,7 @@ $( document ).ready(function(){
 	}
 	
 	/* meta 정보 처리 */
-	$("head").append("<title>"+postsMeta[currentSeq].title+":: JDM's Blog</title>");
+	$("head").append("<title>"+postsMeta[currentSeq].title+" :: JDM's Blog</title>");
 	
 	/* header 처리 */
 	Header.printGnb();
