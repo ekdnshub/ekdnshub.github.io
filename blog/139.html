@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"> <p> redis(이하 "레디스")를 설치 해봅시다. memcached와 비슷하면서도 다른(?) 레디스의 세계로! </p>
+                <h2>레디스가 뭔가요?</h2>
+                <p> 정말 단순 명료하게 표현하자면 key-value cache 및 store(or database)입니다. 그리고 여러가지 구조체를 지원하고 있어요. Redis는 참고로 REmote DIctionary Server의 약어입니다. 자세한 내용은 <a href="http://redis.io/">레디스 공식 홈페이지</a> 또는 <a href="http://en.wikipedia.org/wiki/Redis">Wikipedia - Redis</a>에서 확인 할 수 있습니다. </p>
+                <p> 공식 홈페이지에서는 레디스 설치 파일을 다운로드 받거나 개발 문서를 확인 할 수 있습니다. </p>
+                <h2>레디스 설치</h2>
+                <p> 레디스를 설치하는 방법을 알아봅시다. </p>
+                <h3>CentOS</h3>
+                <h4>레디스 다운로드</h4>
+                <p> <a href="http://redis.io/download">http://redis.io/download</a>에서 레디스를 다운로드 받습니다. 포스트 작성 시점엔 3.0.1 버전이 안정화 버전으로 릴리즈 되어 있습니다. 파일명은 redis-3.0.1.tar.gz이네요. 이 파일을 서버에 업로드 합니다. 그리고 다음 커맨드를 실행합시다. </p>
+ <pre class="prettyprint lang-sh">
+# wget으로 다운로드 받으려면 주석을 제거하고 아래 커맨드를 실행하세요.
+# wget http://download.redis.io/releases/redis-3.0.1.tar.gz
+# 압축 해제
+$ tar -xzf redis-3.0.1.tar.gz
+$ cd redis-3.0.1
+$ make
+</pre>
+ <pre class="console">
+...(생략)
+Hint: It's a good idea to run 'make test' ;)
+
+make[1]: Leaving directory `/yourpath/redis-3.0.1/src'
+</pre>
+                <p> make 커맨드를 실행하면 오류가 생기지 않을까 하는 초조함을 느낄 수 있습니다. 그리고 무사히 컴파일이 끝나면 위와 같은 콘솔 화면을 볼 수 있습니다. </p>
+                <h4>레디스 서버 실행</h4>
+                <p> 실행은 설치된 레디스 디렉토리 하위 src 디렉토리에서 다음과 같은 커맨드를 실행합니다. </p>
+ <pre class="prettyprint lang-sh">
+$ ./redis-server
+</pre>
+ <pre class="console">
+# Warning: no config file specified, using the default config. In order to specify a config file use ./redis-server /path/to/redis.conf
+* Increased maximum number of open files to 10032 (it was originally set to 1024).
+                _._
+           _.-``__ ''-._
+      _.-``    `.  `_.  ''-._           Redis 3.0.1 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 11862
+  `-._    `-._  `-./  _.-'    _.-'
+ |`-._`-._    `-.__.-'    _.-'_.-'|
+ |    `-._`-._        _.-'_.-'    |           http://redis.io
+  `-._    `-._`-.__.-'_.-'    _.-'
+ |`-._`-._    `-.__.-'    _.-'_.-'|
+ |    `-._`-._        _.-'_.-'    |
+  `-._    `-._`-.__.-'_.-'    _.-'
+      `-._    `-.__.-'    _.-'
+          `-._        _.-'
+              `-.__.-'
+
+# Server started, Redis version 3.0.1
+# WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+# WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+# WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+* The server is now ready to accept connections on port 6379
+</pre>
+                <p> 실행하면 위와 같은 콘솔 결과가 나옵니다. 스탠드얼론 모드로 동작하게 되어 있군요. 레디스가 자체적으로 클러스터 구성이 가능하다고 하는데 추후에 별도로 포스팅 해야겠네요. </p>
+                <p> 그리고 지금 레디스 서버를 아무런 인자값도 주지 않고 실행했기 때문에 기본 구성으로 실행했다고 경고가 뜨고 있네요. 별도의 환경 구성을 해줘야 할 것으로 보이지만 지금은 귀차니즘으로 패스. 다만 환경 구성에 대해 검토해보실 분은 <a href="http://redis.io/documentation#administration">Redis Documentation - Administration</a>을 확인해 보세요. </p>
+                <p> 아니면 레디스가 설치된 디렉토리의 redis.conf 파일을 열어보세요. 자세한 주석이 가득합니다. ^^... 이중 메모리에 관련된 중요한 설정 하나만 알아보겠습니다. </p>
+                <p> redis.conf 파일 내부의 수많은 영어 주석중에 <strong>maxmemory</strong> 라는 항목이 있습니다. 레디스를 캐시로 사용하는 경우에 메모리를 과도하게 사용하지 못하도록 지정해주는 값입니다. 만약 2 메가 바이트의 메모리를 사용한다고 하면 다음처럼 환경 설정 파일에 입력해줍니다. </p>
+ <pre class="prettyprint lang-sh">
+maxmemory 2mb
+maxmemory-policy allkeys-lru
+</pre>
+                <p> <strong>maxmemory-policy</strong> 항목은 레디스 캐시 정책을 결정합니다. 지금 결정한 정책은 "allkeys-lru"로 레디스가 지정된 메모리를 소진한 경우 LRU 알고리즘에 따라 key값을 제거해 메모리를 확보하겠다는 뜻입니다. </p>
+                <h4>레디스 콘솔 클라이언트</h4>
+                <p> 이번엔 서버를 띄운 상태에서 같이 설치 되어 있는 콘솔 클라이언트로 데이터를 캐시해봅시다. </p>
+ <pre class="prettyprint lang-sh">
+$ ./redis-cli
+127.0.0.1:6379&gt; set foo bar
+OK
+127.0.0.1:6379&gt; get foo
+"bar"
+127.0.0.1:6379&gt;
+</pre>
+                <p> 잘 되네요. :) 간단하게 레디스 사용법을 알아봤습니다. </p>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"><div style="display:none;">title=CHAP Links Library
+                created=2015-06-09
+            </div>
+                <h2>CHAP Links Library</h2><p>CHAP는 Collective Human Agent Paradigm의 약자입니다.</p><p>CHAP Links Library(이하 '라이브러리')는 웹 기반의 시각화 라이브러리입니다. 그래프, 네트워크, 타임라인등을 제공하고 있어요. 이 도구들은 구글 시각화 차트(Google Visualization Charts)로 개발 되었습니다.</p><p>Almende라는 이름의 개발자가 라이브러리를 개발했습니다. 라이센스는 아파치 라이센스 2.0입니다.</p>
+                <h3>관련 사이트(Reference Site)</h3><p>개요나 자세한 내용은 <a href="http://almende.github.io/chap-links-library/index.html">CHAP Links Library(Homepage)</a>에서 찾아보거나 또는 <a href="https://github.com/almende/chap-links-library">CHAP Links Library(Github)</a>에서 찾아보시기 바랍니다.</p>
+                <h2>컴포넌트(Component)</h2><p>라이브러리는 다양한 컴포넌트들을 지원합니다. 대표적으로 그래프(Graph), 3D그래프(Graph3D), 네트워크(Network), 타임라인(Timeline), 트리그리드(TreeGrid)가 있습니다.</p>
+                <h3>네트워크(Network)</h3><p>네트워크 컴포넌트에 대해 알아봅시다. 해당 부분은 <a href="http://almende.github.io/chap-links-library/network.html">이곳</a>을 클릭해서 확인 할 수도 있습니다. 포스트 작성 시점으로는 1.5.0 버전이 있군요. 라이브러리를 사용하기 위한 network-1.5.0.zip 파일을 내려받습니다.</p><p>그리고 바로 예제를 작성해봅니다.</p>
+                <h4>예제</h4><p>아래의 예제는 기본적인 네트워크를 구현한 것입니다.</p>
+                <h5>코드</h5><pre class="prettyprint lang-js">// 노드를 표현하는 배열입니다.
+var nodesTable = null;
+// 노드간 연결선인 링크를 표현하는 배열입니다.
+var linksTable = null;
+// 노드와 링크를 합쳐서 만든 네트워크 변수입니다.
+var network = null;
+
+// 구글 시각화 라이브러리를 로드합니다.
+google.load('visualization', '1');
+
+// 구글 관련 적재가 끝난 뒤 draw 함수를 호출합니다.
+google.setOnLoadCallback(draw);
+
+// 실제로 네트워크를 그리는 함수입니다.
+function draw() {
+
+    // 노드를 넣는 방법엔 여러가지가 있습니다.
+    // 첫번째 방법, 노드를 적절하게 넣어줍니다. 각 노드별로 옵션을 상이하게 줄 수 있습니다.
+    nodesTable = [
+        {"id":1, "text":"1st Node"},
+        {"id":2, "text":"2nd Node", "style":"image", "image":"http://static.jdm.kr/favicon.ico", "text":"label"},
+        {"id":3, "text":"3rd Node"},
+        {"id":4, "text":"4th Node"},
+        {"id":5, "text":"5th Node"}
+    ];
+    // 두번째 방법, 다음과 같은 방식으로도 적재 가능합니다.
+    /*
+    nodesTable = new google.visualization.DataTable();
+    nodesTable.addColumn('number', 'id');
+    nodesTable.addColumn('string', 'text');
+    ...
+    nodesTable.addRow([1, 'input your text', ...]);
+    */
+
+    // 노드간 링크를 연결합니다. 각 링크별로 옵션을 상이하게 줄 수 있습니다.
+    // 또한 nodesTable의 두번째 방법처럼도 선언이 가능합니다.
+    linksTable = new google.visualization.DataTable();
+    linksTable = [
+        {"from": 1, "to": 2},
+        {"from": 2, "to": 3, "style": "dash-line"},
+        {"from": 3, "to": 1, "style": "dash-line", "dashlength": 20},
+        {"from": 3, "to": 5, "style": "moving-arrows", "dashlength": 20},
+        {"from": 4, "to": 3, "style": "dash-line", "dashlength": 20, "dashgap": 2},
+        {"from": 4, "to": 1, "length":200 },
+        {"from": 5, "to": 4, "length":150, "color":"rgb(255, 0, 0)", "text":"Alert!" },
+        {"from": 5, "to": 2, "length":300, "color":"#F00" },
+        {"from": 5, "to": 1, "style": "arrow-end", "length":300, "color":"#F00" },
+    ];
+
+    // 표현될 네트워크의 옵션을 줄 수 있습니다.
+    var options = {
+        'width': $("#network1").parent().width(),
+        'height': '600px',
+        'links': {
+            'length': 100
+        },
+        'stabilize': false
+    };
+
+    // 최종적으로 네트워크를 표현할 DOM 오브젝트를 매핑합니다.
+    network = new links.Network(document.getElementById('network1'));
+
+    // 그립니다!
+    network.draw(nodesTable, linksTable, options);
+}
+</pre>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

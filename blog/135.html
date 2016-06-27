@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"> <p> 이 포스트는 <a href="/104">유전 알고리즘(Genetic Algorithms)</a>에서 파생되었습니다. 유전 알고리즘으로 구현된 라이브러리인 <strong>Jenetics</strong>에 대해 알아봅시다. </p>
+                <h4>준비</h4>
+                <p> JDK8이 필요합니다. 현 시점에서 가장 최신 버전인데 바로 사용하는 라이브러리군요. -_-; 일단 오라클에서 JDK8을 설치하고 다음절을 진행합니다. </p>
+                <p> <a href="http://jenetics.io/">jenetics</a>에서 Maven을 클릭하면 플랫폼별로 받을 수 있는 링크로 연결됩니다. 음, 전 우선 Maven 프로젝트로 구성하겠습니다. 따라서 POM.xml 파일에 jenectics 부분을 추가합시다. 그리고 zip 파일도 다운로드 받습니다. </p>
+                <h4>예제 검토</h4>
+                <p> 다운로드 받은 zip 파일의 압축을 해제 하면 example 디렉토리가 있습니다. 그 중 <strong>Sorting.java</strong>라는 파일의 소스를 검토해봤습니다. </p>
+ <pre class="prettyprint lang-java">
+/*
+ * Java Genetic Algorithm Library (@__identifier__@).
+ * Copyright (c) @__year__@ Franz Wilhelmstötter
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Author:
+ *    Franz Wilhelmstötter (franz.wilhelmstoetter@gmx.at)
+ */
+package org.jenetics.example;
+
+import java.util.function.Function;
+import java.util.stream.IntStream;
+
+import org.jenetics.Chromosome;
+import org.jenetics.EnumGene;
+import org.jenetics.Genotype;
+import org.jenetics.Optimize;
+import org.jenetics.PartiallyMatchedCrossover;
+import org.jenetics.PermutationChromosome;
+import org.jenetics.SwapMutator;
+import org.jenetics.engine.Engine;
+import org.jenetics.engine.EvolutionResult;
+import org.jenetics.engine.EvolutionStatistics;
+import org.jenetics.engine.limit;
+import org.jenetics.stat.DoubleMomentStatistics;
+import org.jenetics.util.LCG64ShiftRandom;
+import org.jenetics.util.RandomRegistry;
+
+public class Sorting {
+
+	private static int dist(Chromosome&lt;EnumGene&lt;Integer&gt;&gt; path, int i, int j) {
+		// 연속된 두 공간의 차이를 구한 후 이것을 곱한다.
+		// 따라서 i값이 3이고 j값이 9라면 거리는 36이 나온다.
+		return (path.getGene(i).getAllele() - path.getGene(j).getAllele())*
+				(path.getGene(i).getAllele() - path.getGene(j).getAllele());
+	}
+
+	private static int length(final Genotype&lt;EnumGene&lt;Integer&gt;&gt; genotype) {
+		// 거리간의 합을 합한다.
+		// 만약 10개의 항목을 정렬한다면 최소 아홉번을 비교한다.
+		// 이때 모든 항목이 정렬되었다면 최소값은 "9"가 될 것이다.
+		return IntStream.range(1, genotype.getChromosome().length())
+				.map(i -&gt; dist(genotype.getChromosome(), i, i - 1))
+				.sum();
+	}
+
+	public static void main(final String[] args) {
+
+		// GA를 위한 랜덤 레지스트리 설정
+		RandomRegistry.setRandom(new LCG64ShiftRandom.ThreadLocal());
+
+		// 엔진 구성
+		final Engine&lt;EnumGene&lt;Integer&gt;, Integer&gt; engine = Engine
+				// 마지막에 정렬할 개수를 정한다.
+				.builder((Function&lt;Genotype&lt;EnumGene&lt;Integer&gt;&gt;, Integer&gt;) Sorting::length,
+						PermutationChromosome.ofInteger(20))
+				// 거리간의 합이 제일 작은 것이 목표다.
+				.optimize(Optimize.MINIMUM)
+				// 인구 크기를 정한다. 클수록 오랜 세대를 보낸다.
+				.populationSize(1000)
+				// .survivorsSelector(new RouletteWheelSelector&lt;&gt;())
+				// .offspringSelector(new TruncationSelector&lt;&gt;())
+				// 다음 세대를 평가하기 위한 생존 확률?
+				// 이 값이 너무 낮아도 편차가 상당히 커진다.
+				.offspringFraction(0.9).alterers(
+						new SwapMutator&lt;&gt;(0.01), // 돌연변이 확률
+						new PartiallyMatchedCrossover&lt;&gt;(0.3)) // 교차 확률
+				.build();
+
+		// 진화 통계
+		final EvolutionStatistics&lt;Integer, DoubleMomentStatistics&gt; statistics =
+				EvolutionStatistics.ofNumber();
+
+		// 진화 결과
+		final EvolutionResult&lt;EnumGene&lt;Integer&gt;, Integer&gt; result = engine
+				.stream()
+				// 100세대 이내로 더 좋은 유전 형질이 나타나지 않으면 멈춤
+				.limit(limit.bySteadyFitness(100))
+				// 스트림 길이가 2500 넘어가면 멈춤?
+				.limit(2500)
+				// 통계 변수 삽입
+				.peek(statistics)
+				// 제일 좋은 진화 결과 취합
+				.collect(EvolutionResult.toBestEvolutionResult());
+
+		// 통계 출력
+		System.out.println(statistics);
+		// 제일 좋은 유전자 출력
+		System.out.println(result.getBestPhenotype());
+	}
+}
+</pre>
+                <p> 대부분의 내용은 주석을 달았습니다. 전부 맞다고 하기엔 애매하고 참조 정도로 봐주시면 되겠습니다. </p>
+ <pre class="console">
++---------------------------------------------------------------------------+
+|  Time statistics                                                          |
++---------------------------------------------------------------------------+
+|             Selection: sum=0.115449051000 s; mean=0.000630869131 s        |
+|              Altering: sum=0.502491419000 s; mean=0.002745854749 s        |
+|   Fitness calculation: sum=0.098742281000 s; mean=0.000539575306 s        |
+|     Overall execution: sum=0.733507542000 s; mean=0.004008237934 s        |
++---------------------------------------------------------------------------+
+|  Evolution statistics                                                     |
++---------------------------------------------------------------------------+
+|           Generations: 183                                                |
+|               Altered: sum=132,528; mean=724.196721311                    |
+|                Killed: sum=0; mean=0.000000000                            |
+|              Invalids: sum=0; mean=0.000000000                            |
++---------------------------------------------------------------------------+
+|  Population statistics                                                    |
++---------------------------------------------------------------------------+
+|                   Age: max=14; mean=0.968546; var=2.071197                |
+|               Fitness:                                                    |
+|                      min  = 70.000000000000                               |
+|                      max  = 2156.000000000000                             |
+|                      mean = 169.365551912568                              |
+|                      var  = 64200.536123362730                            |
++---------------------------------------------------------------------------+
+[4|6|7|9|11|14|17|19|18|16|15|13|12|10|8|5|3|2|1|0] --&gt; 70
+</pre>
+                <p> 위는 결과를 출력해본건데 소스에 있는대로 하면 딱히 잘 맞진 않네요. 정렬할 항목을 줄이거나 populationSize를 크게 주면 정렬이 잘 됩니다. </p>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

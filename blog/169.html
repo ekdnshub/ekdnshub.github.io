@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"><p>
+                DB 공부를 하다가 분포도라는 개념을 보게 되었습니다. <i>특정 컬럼의 데이터가 테이블에 평균적으로 분포 되어 있는 정도</i>를 말합니다. 그리고 분포도를 구하는 산식도 접하게 되었습니다. 그러다 의문점이 생겨 그것을 풀어보고자 써본 포스팅입니다. :D
+            </p>
+
+                <h2>Selectivity(분포도)</h2>
+                <p>
+                    DB에서 "분포도가 좋다."라 표현하는 것은 <i>해당 컬럼의 유니크한 데이터 종류가 많다</i>라고 이해하시면 될 것 같습니다. 산식은 <span class="command">1/해당 컬럼의 distinct 데이터 개수 * 100</span>입니다. 즉, 분포도 값이 낮으면 좋다라고 표현합니다. <strong>인덱스로 적정한 분포도는 10%~15%입니다.</strong> 한 가지 예를 들자면,
+                </p>
+<pre class="prettyprint lang-sql">
+select (1/cnt)*100
+from (
+	select count(distinct code) cnt /* select 9 rows */
+	from XXX
+) a
+</pre>
+                <p>
+                    만약 위에서 XXX 테이블의 code 컬럼 값이 9개가 나왔다고 하면 <span class="command">1/9*100 = 11.1%</span>라는 분포도가 나옵니다.
+                </p>
+                <p>
+                    하지만 해당 산식으로 낮은 값이 나왔다고 해서 반드시 인덱스로 구성하기에 좋은 것은 아닙니다. 예를 들면 아래와 같은 경우입니다. 위에 XXX 테이블에서 code 컬럼 값의 데이터 비율은 아래와 같습니다.
+                </p>
+<pre class="console">
+╋━━╋━━╋━━━━━╋━━╋  * code       : 코드 이름
+┃code┃Rows┃Total Rows┃Per ┃  * Rows       : 해당 코드값을 가진 Row 수(만 단위)
+╋━━╋━━╋━━━━━╋━━╋  * Total Rows : 테이블 전체 Row 수(만 단위)
+┃A   ┃10  ┃1000      ┃1   ┃  * Per        : (Rows / Total Rows) * 100
+┃B   ┃10  ┃1000      ┃1   ┃                 해당 코드값을 가진 Row 비율
+┃C   ┃800 ┃1000      ┃80  ┃
+┃D   ┃10  ┃1000      ┃1   ┃
+┃E   ┃30  ┃1000      ┃3   ┃
+┃F   ┃40  ┃1000      ┃4   ┃
+┃G   ┃10  ┃1000      ┃1   ┃
+┃H   ┃20  ┃1000      ┃2   ┃
+┃I   ┃70  ┃1000      ┃7   ┃
+╋━━╋━━╋━━━━━╋━━╋
+┃Tot ┃1000┃-         ┃100 ┃
+╋━━╋━━╋━━━━━╋━━╋
+┃Avg ┃111 ┃1000      ┃11.1┃
+╋━━╋━━╋━━━━━╋━━╋
+</pre>
+                <p>
+                    위 표는 대략 1000만건이 있는 테이블이라 가정하고 만든 code 데이터 비율입니다. 예를 들어 A라는 코드 값을 가진 Row는 10만개고 전체 Row는 1000만개인거죠. 그리고 A 값을 가진 Row의 비율은 1%라는 뜻입니다.
+                </p>
+                <p>
+                    분포도 산식의 다른 방법은 <span class="command">데이터별 평균 Rows / 테이블 전체 Rows * 100</span>입니다. 위 표에서 Avg라 표시한 것이 해당 산식으로 나온 값이 되겠습니다. SQL(MariaDB)로 표현하자면 아래처럼 되겠습니다.
+                </p>
+
+<pre class="prettyprint lang-sql">
+select ((avg(tot)/(select count(1) from XXX))*100) selectivity
+from(
+	select count(code) tot
+	from XXX
+	group by code
+) a
+</pre>
+                <p>
+                    분포도 산식에 의해 11.1%가 나왔고 이것은 인덱스로 적정한 분포도라 가정한 뒤에 code 컬럼으로 인덱스를 구성했다고 가정합니다. 만약 A나 B라는 코드값을 조회할때는 빠를지도 모릅니다. 하지만 C라는 값을 조회하는 순간 전체 Row의 80%에 해당하는 Row(800만)를 조회 해야하는 상황이 옵니다. <strong>즉, 분포도는 괜찮지만 데이터 분포의 불균형이 심하다면 인덱스를 만들지 않는게 나을 수도 있습니다.</strong>
+                </p>
+                <p>
+                    분포도 산식은 예외가 있을 수도 있다는 것입니다. (--;;) 다시 말해서, 지금 소개한 분포도 산식 결과는 <strong><i>컬럼 내의 값들이 일정하다</i></strong>는 가정 하에 만들어진 것입니다.
+                </p>
+                <p>
+                    <strong>분포도가 좋다</strong>라고 표현하는 것은 <strong>분포도의 값이 낮으면서 데이터가 일정하게 분포 되어 있다</strong>라고 이해하면 좋을 것 같습니다.
+                </p>
+
+                <h2>Closing Remarks</h2>
+                <p>
+                    DB도 깊숙히 파고들수록 뭔가 맛(?)이 있습니다. :3 잘하고 싶어요. 저도 DB는 말짱 꽝이라서 틀린 것이 있을 수 있습니다. 과감한 지적질이 필요합니다. TT
+                </p>
+
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

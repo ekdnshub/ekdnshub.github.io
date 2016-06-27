@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"> <p> 신경망 알고리즘이 무엇인지, 그리고 관련된 라이브러리가 있는지 스터디한 결과를 포스팅했습니다. (계속 추가됩니다!) <span class="refer">2015.04.03</span> </p>
+                <del> <p> 자바 기반의 신경망(Neural Network) 라이브러리를 찾고 있었는데 몇가지가 눈에 띄네요. 이 포스팅은 간단히 링크와 소개만 하고자 합니다. </p> </del>
+                <h4>신경망(Neural Network)</h4>
+                <blockquote>
+                    <p> In machine learning and cognitive science, artificial neural networks (ANNs) are a family of statistical learning algorithms inspired by biological neural networks (the central nervous systems of animals, in particular the brain) and are used to estimate or approximate functions that can depend on a large number of inputs and are generally unknown. Artificial neural networks are generally presented as systems of interconnected "neurons" which can compute values from inputs, and are capable of machine learning as well as pattern recognition thanks to their adaptive nature. <span class="refer">2015.04.10</span> </p>
+                    <cite><a href="http://en.wikipedia.org/wiki/Artificial_neural_network">Wikipedia - Artificial neural network</a></cite>
+                </blockquote>
+                <p> 기계 학습 및 인지 과학 분야에서 인공 신경망(ANNs)은 통계적인 학습 알고리즘의 구성원입니다. 이러한 알고리즘은 생물학의 신경망(동물의 중추 신경 시스템에서 특히 뇌)에서 영감을 받은 것입니다. 또한 알고리즘은 평가 또는 많은 수의 입력값과 일반적으로 알려지지 않은 것에 의존하는 대략적인 기능에 사용됩니다. 인공 신경망은 일반적으로 서로 연결된 "뉴런"들의 시스템으로써 표현 됩니다. 이 뉴런들은 입력으로부터 값을 계산할 수 있고 그들의 자연스러운 적응 덕택에 패턴인지 머신 러닝에 알맞습니다. <span class="refer">2015.04.10</span> </p>
+                <p> 짧은 동영상으로 어떤 것인지 감을 잡아봅시다. <a href="https://www.youtube.com/watch?v=gcK_5x2KsLA">Neural Networks, A Simple Explanation</a> <span class="refer">2015.04.02</span> </p>
+                <h5>Perceptron</h5>
+                <p> 퍼셉트론은 신경망 알고리즘에서 기본적인 개념입니다. 자세한 내용은 다음 링크를 클릭해서 확인합시다. <span class="refer">2015.04.03</span> </p>
+                <div class="green">
+                    <a href="http://www.aistudy.com/neural/perceptron.htm">Perceptron</a>
+                    <span class="refer">2015.04.03</span>
+                    <br>
+                    <a href="http://www.aistudy.com/neural/multilayer_perceptron.htm">Multilayer Perceptron</a>
+                    <span class="refer">2015.04.03</span>
+                </div>
+                <h4>관련 라이브러리</h4>
+                <h5>Java Neural Network Framework Neuroph(Neuroph)</h5>
+                <p> GUI 인터페이스가 돋보이는 라이브러리입니다. GUI 화면을 이용해 기반을 만들고 이것을 자바 코드로 변환하면 됩니다. 일단 소개 문구부터 볼까요. </p>
+                <blockquote>
+                    <p> <strong>Neuroph is lightweight Java neural network framework</strong> to develop common neural network architectures. It contains well designed, open source Java library with small number of basic classes which correspond to basic NN concepts. Also has nice GUI neural network editor to quickly create Java neural network components. It has been released as open source under the Apache 2.0 license, and it's <strong>FREE</strong> for you to use it. </p>
+                    <cite><a href="http://neuroph.sourceforge.net/index.html">Neuroph</a></cite>
+                </blockquote>
+                <p> 경량 자바 신경망 프레임워크라고 합니다. GUI 신경망 에디터로 빠르게 자바 신경망 콤포넌트를 구축할 수 있다고 하네요. 그리고 <strong>무료</strong>라는 것에 강조를 하고 있습니다. </p>
+                <p> 어찌되었든 GUI를 통해 먼저 기반을 닦은 후 그것을 자바 코드로 짜면 된다는 것이 좋아보이네요. </p>
+                <p> <a href="http://neuroph.sourceforge.net/tutorials/MultiLayerPerceptron.html">MultiLayerPerceptron 예제</a>를 클릭하면 간단하게 어떤식으로 동작하는지 확인 가능합니다. <span class="refer">2015.04.02</span> </p>
+                <p> 주가 예측을 위한 튜토리얼도 있네요. <a href="http://neuroph.sourceforge.net/tutorials/StockMarketPredictionTutorial.html">STOCK MARKET PREDICTION</a>을 참조하세요. <span class="refer">2015.04.03</span> </p>
+                <h5>Fast Artificial Neural Network Library(FANN)</h5>
+                <p> 다양한 언어로 바인딩을 해주고 있는 것이 특징입니다. 소개 문구를 봅시다. </p>
+                <blockquote>
+                    <p> Fast Artificial Neural Network Library is a free open source neural network library, which implements multilayer artificial neural networks in C with support for both fully connected and sparsely connected networks. Cross-platform execution in both fixed and floating point are supported. It includes a framework for easy handling of training data sets. It is easy to use, versatile, well documented, and fast. Bindings to more than 20 programming languages are available. An easy to read introduction article and a reference manual accompanies the library with examples and recommendations on how to use the library. Several graphical user interfaces are also available for the library. </p>
+                    <cite><a href="http://leenissen.dk/fann/wp/">FANN</a></cite>
+                </blockquote>
+                <p> FANN은 프리 오픈 소스 신경망 라이브러리라고 합니다. 중간 부분쯤 FANN은 트레이닝 데이터 집합의 쉬운 처리를 위해 프레임워크를 포함한다고 합니다. 사용하기 쉽고 다목적으로 활용하고 문서화가 잘 되어 있고 빠르다고 하는 것이 눈에 띄네요. 게다가 20개의 프로그래밍 언어 바인딩을 지원한다고 합니다. 그래서 FANN을 자바로 바인딩 할 수 있는 프로젝트를 찾아봤습니다. 이름은 FANNJ라고 하네요. </p>
+                <p> <a href="https://github.com/krenfro/fannj">이곳</a>을 클릭하면 FANNJ를 올려둔 Gitgub 사이트로 연결됩니다. 다만 FANN을 자바로 활용하려면 우선적으로 C로 작성된 FANN 라이브러리를 설치를 해야 한다고 하네요. 순수하게 자바로만 구동하는 것을 원한다면 FANN은 조금 꺼려질 수 있을 것 같습니다. </p>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"> <p> 이 포스팅은 개인적으로 스터디한 <strong>Support vector machine(SVMs)</strong>에 대해서입니다. 서포트 벡터 머신이란 무엇인지 한번 탐구해볼까 합니다. </p>
+                <h4>SVMs의 소개(Introduce of SVMs)</h4>
+                <blockquote>
+                    <p> In machine learning, support vector machines (SVMs, also support vector networks) are supervised learning models with associated learning algorithms that analyze data and recognize patterns, used for classification and regression analysis. </p>
+                    <cite><a href="http://en.wikipedia.org/wiki/Support_vector_machine">Wikipedia - Support vector machine</a></cite>
+                </blockquote>
+                <p> 머신 러닝(또는 기계 학습)에서 서포트 벡터 머신은 데이터 분석과 패턴을 인지하는 학습 알고리즘(learning algorithms)이 합쳐진 지도 학습 모델입니다. 학습 알고리즘은 분류(classification) 및 회귀 분석(regression analysis)을 위한 것입니다. </p>
+                <p> 저번에 공부했던 <a href="/111#RegressionAnalysis">회귀 분석</a>에 대해 다시 한 번 언급이 되고 있습니다. SVMs라는 것은 여러 알고리즘을 합쳐서 학습하는 것으로 보이네요. </p>
+                <p> <a href="https://www.youtube.com/watch?v=1NxnPkZM9bc">How SVM (Support Vector Machine) algorithm works</a> 동영상에서 알고리즘이 어떤식으로 동작하는지 설명하고 있습니다. <span class="refer">2015.04.10</span> </p>
+                <h4>SVMs의 정의(Definition of SVMs)</h4>
+                <blockquote>
+                    <p> More formally, a support vector machine constructs a hyperplane or set of hyperplanes in a high- or infinite-dimensional space, which can be used for classification, regression, or other tasks. Intuitively, a good separation is achieved by the hyperplane that has the largest distance to the nearest training data point of any class (so-called functional margin), since in general the larger the margin the lower the generalization error of the classifier. </p>
+                    <cite><a href="http://en.wikipedia.org/wiki/Support_vector_machine">Wikipedia - Support vector machine</a></cite>
+                </blockquote>
+                <p> 조금 더 공식적으로, 서포트 벡터 머신은 초평면(hyperplane) 또는 무한차원 공간 내부 초평면의 집합으로 구성합니다. 이것은 분류, 회귀, 또는 다른 작업을 위해 사용할 수 있습니다. 직관적으로, 좋은 분할은 어떠한 클래스의 트레이닝 데이터 포인트에 근접하기 위한 가장 큰 간격을 가진 초평면으로써 목적이 달성됩니다. </p>
+                <p> 무한차원 공간은 뭐고, 초평면은 또 뭐인지, 게다가 마지막 문단은 번역하기조차 힘듭니다. 아무튼 그래요, 초평면으로 뭔가를 하는건 알겠어요. 확실히 MARS와는 다르게 공식조차 엄청납니다. 옮겨오기도 힘든 문자로만 구성을 잘해 놨네요. </p>
+                <h4>초평면(Hyperplane)</h4>
+                <p> 초평면이 무엇인가부터 알아봅시다. 하이퍼플랜이라고 읽는건가요? 어찌됐든간에 위키피디아에 검색을 해보면 역시나 있군요. </p>
+                <blockquote>
+                    <p> In geometry a hyperplane is a subspace of one dimension less than its ambient space. If a space is 3-dimensional then its hyperplanes are the 2-dimensional planes, while if the space is 2-dimensional, its hyperplanes are the 1-dimensional lines. This notion can be used in any general space in which the concept of the dimension of a subspace is defined. </p>
+                    <cite><a href="http://en.wikipedia.org/wiki/Hyperplane">Wikipedia - Hyperplane</a></cite>
+                </blockquote>
+                <p> 기하학에서 초평면은 주변의 공간보다 낮은 한 차원의 부분 공간입니다. 만약 3차원 공간이라면 초평면은 2차원 평면입니다. 계속해서 만약 2차원 공간이면 초평면은 1차원 선입니다. 이 개념은 부분 공간의 차원의 컨셉이 정의된 모든 일반적인 공간 내에서 사용될 수 있습니다. </p>
+                <p> 초평면이라는건 주변의 공간 차원에서 한단계 밑을 가리키고 있는것을 말하는걸로 보이네요. 초평면이라는게 어떤건지는 이정도로만 감만 잡고 넘어가야겠어요. </p>
+                <h4>분할(Separation)</h4>
+                <p> SVMs의 정의에서 "좋은 분할"이라는 내용이 있었습니다. 좋은 분할이라는게 무엇인지 그림으로 한번 살펴보고 갑시다. </p>
+                <canvas id="_canvas">
+                </canvas>
+                <script>
+var c = document.getElementById("_canvas");
+var ctx = c.getContext("2d");
+
+ctx.beginPath();
+ctx.arc(50, 20, 10, 0, 2 * Math.PI, false);
+ctx.fillStyle = "gray";
+ctx.fill();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "black";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(100, 70, 10, 0, 2 * Math.PI, false);
+ctx.fillStyle = "gray";
+ctx.fill();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "black";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(150, 50, 10, 0, 2 * Math.PI, false);
+ctx.fillStyle = "gray";
+ctx.fill();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "black";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(200, 70, 10, 0, 2 * Math.PI, false);
+ctx.fillStyle = "white";
+ctx.fill();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "black";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(250, 80, 10, 0, 2 * Math.PI, false);
+ctx.fillStyle = "white";
+ctx.fill();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "black";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(100, 120, 10, 0, 2 * Math.PI, false);
+ctx.fillStyle = "white";
+ctx.fill();
+ctx.lineWidth = 1;
+ctx.strokeStyle = "black";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.moveTo(300,0);
+ctx.lineTo(0,150);
+ctx.strokeStyle = "blue";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.moveTo(300,50);
+ctx.lineTo(0,150);
+ctx.strokeStyle = "red";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.moveTo(300,-140);
+ctx.lineTo(0,150);
+ctx.strokeStyle = "red";
+ctx.stroke();
+</script>
+                <p class="refer"> * canvas, javascript로 구성한 이미지입니다. 브라우저에 따라 다르게 보일 수 있습니다. </p>
+                <p> 우선 회색 동그라미와 흰색 동그라미가 분석해야 할 데이터라고 가정을 합니다. 그리고 그래프는 "공간"이 되는셈입니다. 현재 "공간"은 2차원입니다. 따라서 2차원의 초평면은 1차원인 "선"이 되겠습니다. 따라서 이제부터 SVMs를 이용해서 "분할"을 한다고 가정을 하는겁니다. </p>
+                <p> 우선 <span class="red">붉은색</span>라인들은 "나쁜 분할"이 됩니다. 정확하게 데이터를 나누지 못했습니다. 그러나 <span class="blue">푸른색</span>라인은 정확하게 흰색 동그라미와 회색 동그라미를 분할했습니다. 이런 것을 "좋은 분할"이라고 합니다. </p>
+                <h4>SVMs 라이브러리(SVMs Library)</h4>
+                <p> 개념에 대한 것을 벗어나 이번엔 실제로 SVMs 알고리즘을 기반으로한 라이브러리를 소개합니다. </p>
+                <h5>LIBSVM -- A Library for Support Vector Machines</h5>
+                <p> 비교적 최근까지도 업데이트가 된걸로 보입니다. 마지막이 2014년 11월 15일에 3.20 버전이 릴리즈 되었네요. 홈페이지는 <a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/">이곳</a>을 확인하세요. </p>
+                <blockquote>
+                    <p> LIBSVM is an integrated software for support vector classification, (C-SVC, nu-SVC), regression (epsilon-SVR, nu-SVR) and distribution estimation (one-class SVM). It supports multi-class classification. </p>
+                    <cite><a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/">LIBSVM -- A Library for Support Vector Machines</a></cite>
+                </blockquote>
+                <p> LIBSVM은 서포트 벡터 분류 및 회귀와 분포 판단을 위한 통합 소프트웨어라고 하네요. </p>
+                <p> 실 사용을 하게 되면 추후에 따로 포스팅하거나 이 포스팅에 덧붙이겠습니다. </p>
+                <p> <a href="/134">libsvm 설치 및 예제</a>라는 이름으로 별도 포스팅이 되었습니다. <span class="refer">* 2015.05.07</span> </p>
+                <h5>SVMs 소프트웨어 현황</h5>
+                <p> <a href="http://www.svms.org/software.html">SVM Software</a>에서 SVMs로 구현된 소프트웨어 일람을 볼 수 있습니다. <span class="refer">2015.05.04</span> </p>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

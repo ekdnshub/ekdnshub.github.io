@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"> <p> MariaDB에서 데이터베이스를 생성하고 계정에 권한을 주는것까지 알아보는 포스팅입니다. 이 포스팅은 CentOS 6.X 및 MariaDB 10.0.15(mysql Ver 15.1 Distrib 10.0.15-MariaDB)을 기준으로 작성했습니다. </p>
+                <h4>Console 접속</h4>
+                <p> 아래와 같은 리눅스 커맨드를 통해 MariaDB 콘솔로 접속합시다. </p>
+ <pre class="prettyprint linenums lang-sh">
+$ mysql -uroot -pYYYY
+</pre>
+                <p> 우선 root로 접속을 했는데 혹시라도 다른 계정으로 만들 경우엔 root 부분을 해당 계정으로 바꿔주면 됩니다. YYYY는 계정 비밀번호를 입력하세요. </p>
+ <pre class="console">
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 5222
+Server version: 10.0.15-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2014, Oracle, SkySQL Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]&gt;
+</pre>
+                <p> 위와 같은 결과가 출력이 되며 MariaDB 콘솔을 사용할 수 있습니다. </p>
+                <h4>데이터베이스 생성</h4>
+                <p> 데이터 베이스를 만들기 전에 혹시 같은 이름으로 만드는것은 아닌지 <span class="command">show databases;</span>를 통해 먼저 확인해 보세요. 그 뒤에 중복되는 데이터베이스 이름이 없다면 아래와 같은 커맨드를 실행하세요. </p>
+ <pre class="prettyprint linenums lang-sql">
+create database db_name;
+</pre>
+                <h4>계정 생성</h4>
+                <p> 새로운 데이터베이스를 책임질 계정을 하나 만들어 봅시다. 아래와 같은 커맨드를 실행하면 새로운 계정을 만들 수 있습니다. </p>
+ <pre class="prettyprint linenums lang-sql">
+create user 'user_name'@'XXX.XXX.XXX.XXX' identified by 'input_password';
+</pre>
+                <p> user_name 부분에 원하는 계정명을 쓰고 @ 이후에는 접속할 IP를 입력하시면 됩니다. 그리고 input_password에는 해당 계정의 비밀번호를 입력해 주세요. <span class="refer">* 'user_name'@'localhost'도 생성하시면 로컬에서도 접속 가능합니다.</span> </p>
+                <h4>권한 추가</h4>
+                <p> 새로 만든 계정에 데이터베이스 권한을 추가합니다. 아래와 같은 커맨드를 실행하면 됩니다. </p>
+ <pre class="prettyprint linenums lang-sql">
+grant all privileges on db_name.* to 'user_name'@'XXX.XXX.XXX.XXX';
+flush privileges;
+</pre>
+                <h4>Tip</h4>
+                <p> 혹시 지금 MariaDB의 유저 목록을 보고 싶다면 아래 커맨드를 실행하세요. </p>
+ <pre class="prettyprint linenums lang-sql">
+select host, user from mysql.user;
+</pre>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

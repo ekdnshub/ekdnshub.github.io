@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"> <p> 이 포스팅은 SpringBoot AOP 적용을 위한 데모 프로젝트를 소개합니다. </p>
+                <h2>AOP가 뭔가요?</h2>
+                <p> AOP는 관점 지향 프로그래밍(Aspect-oriented programming)의 약어입니다. 자세한 내용은 <a href="/122"> 관점 지향 프로그래밍(Aspect-oriented programming)</a>을 검토해보세요! </p>
+                <h2>SpringBoot는 어떻게 설치해요?</h2>
+                <p> 설치하는 방법에 대해서는 <a href="/105">Spring Boot with STS(Spring Tool Suite)</a>를 참조하세요. </p>
+                <p> 또한 Entity, Repository에 대해서 <a href="/121">SpringBoot JPA 예제</a>를 확인하세요. </p>
+                <h2>데모 프로젝트 구성</h2>
+                <p> AOP가 무엇인지도 알았고, SpringBoot도 설치가 되었다면 이제부터 실제로 프로젝트를 만들어 봅시다. </p>
+                <h3>프로젝트 생성</h3>
+                <p> sts에서 New Spring Starter Project를 만듭시다. 구성내용은 다음처럼 했습니다. </p>
+                <div class="blue">
+                    Name : aop
+                    <br> Type : Gradle Project
+                    <br> Packaging : Jar
+                    <br> Java Version : 1.7
+                    <br> Language : Java
+                    <br> Boot Version : 1.2.3
+                    <br> Group : kr.jdm
+                    <br> Artifact : aop
+                    <br> Version : 0.0.1-SNAPSHOT
+                    <br> Description : Demo project for Spring Boot
+                    <br> Package : aop
+                    <br> Dependencies : AOP, H2, JPA, Web
+                </div>
+
+                <h2>ServiceAspect</h2>
+                <p> ServiceAspect라는 이름의 클래스를 만들어봅시다.</p>
+                <div>
+  <pre class="prettyprint lang-java">
+package aop.aspect;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@Component
+public class ServiceAspect {
+
+	@AfterReturning("execution(* aop..*ServiceImpl.*(..))")
+	public void logServiceAccess(JoinPoint joinPoint){
+
+		String result = "";
+
+		result += "\n*****\n";
+		result += joinPoint.getTarget().getClass().getName()+"."
+				+joinPoint.getSignature().getName() +"(";
+
+		int index = joinPoint.getArgs().length;
+		for( Object o : joinPoint.getArgs() ){
+
+			result += o;
+			if( --index != 0 ){
+				result += ", ";
+			}
+
+		}
+		result += ")\n";
+
+		result += "Completed:"+ joinPoint+"\n";
+		result += "*****\n";
+
+		logger.debug(result);
+}
+// 2015.06.30
+</pre>
+                    <del> <pre class="prettyprint linenums lang-java">
+package aop.aspect;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@Component
+public class ServiceAspect {
+
+	@AfterReturning("execution(* aop..*ServiceImpl.*(..))")
+	public void logServiceAccess(JoinPoint joinPoint){
+
+		String result = "";
+
+		result += "\n*****\n";
+		result += joinPoint.getTarget().getClass().getName()+"."
+				+joinPoint.getSignature().getName() +"(";
+
+		for( Object o : joinPoint.getArgs() ){
+			result += o + ", ";
+		}
+		result += ")\n";
+
+		result += "Completed:"+ joinPoint+"\n";
+		result += "*****\n";
+
+		System.out.println(result);
+
+	}
+}
+</pre> </del>
+                    <p> 클래스에 @Aspect 어노테이션으로 선언 이후, 하위 메소드에 @AfterReturning 어노테이션 선언 이후 포인트 컷 표현식을 이용해서 조인 포인트를 찾습니다. 실제로 @AfterReturning 어노테이션의 의미는 조인 포인트의 메소드 실행시 오류가 없다면 해당 공통 메소드를 실행하라는 뜻입니다. </p>
+                    <p> 따라서 위의 코드는 포인트 컷 표현식에 의해 조인 포인트를 맞추면 해당 조인 포인트의 로직을 처리 한 뒤에 logServiceAccess라는 메소드를 실행합니다. 실제로 Github에 첨부했던 프로젝트를 SpringBoot App으로 실행한 뒤에 http://localhost:8080/으로 접속후 콘솔을 살펴보면 다음과 같은 부분이 있습니다. </p>
+  <pre class="console">
+*****
+aop.service.impl.MemberServiceImpl.insertMember(a, 10)
+Completed:execution(void aop.service.MemberService.insertMember(String,int))
+*****
+</pre>
+                    <del> <pre class="console">
+*****
+aop.service.impl.MemberServiceImpl.insertMember(a, 15, )
+Completed:execution(void aop.service.MemberService.insertMember(String,int))
+*****
+</pre> </del>
+                    <p> 어떤 메소드가 호출되었고 인자는 어떤것이 들어갔는지 알 수 있습니다. 이말은 거꾸로 얘기하면 디버깅하기에도 정말 좋다는 얘기입니다. </p>
+                    <del> <p class="refer"> 출력 할때 인자 값이 뒤에 없으면 콤마(,) 하나를 제거 해야 하는데 귀찮아서 제거 안했습니다. 신경 쓰이는 분은 고쳐서 사용하시길 바라요. (-_-;;) </p> </del>
+                    <p> 실제로 다음과 같은 포인트컷 표현식을 잘 이해해야 합니다. </p>
+  <pre class="prettyprint lang-java">
+@AfterReturning("execution(* aop..*ServiceImpl.*(..))")
+</pre>
+                    <p> aop 하위 패키지이면서 객체 이름 사이에 ServiceImpl라는 인스턴스가 있으면 하위 모든 메소드에 대해 지정된 어드바이스(Advice)를 AfterReturning 방식으로 실행하라는 얘기입니다. </p>
+                    <p> 그래서 프로젝트의 구조화가 중요합니다. 아무리 좋은것이라도 잘 지켜주지 않으면 안되거든요. 또한 알아보기도 쉬워야 하구요. </p>
+                    <h2>마무리</h2>
+                    <p> 간단하게 AOP 적용법에 대해 알아봤습니다. :3 </p>
+                </div>
+                <p class="text-right"><a href="#">Go Top(문서 처음으로)</a></p>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>
