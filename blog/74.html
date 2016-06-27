@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"><div style="display:none;">title=리눅스 리다이렉션 & 파이프(Linux redirection & pipe)
+                created=2015-02-23
+            </div>
+                <p>이번엔 리눅스에서 리다이렉션(Redirection)과 파이프(pipe)에 대해 알아보고자 합니다.</p>
+                <h2>리눅스 리다이렉션(Linux Redirection)</h2><p>리다이렉션은 표준 스트림<span class="refer">standard stream</span>의 흐름을 바꿔줍니다. 리눅스에서 리다이렉션을 쓰고 싶으면 특수 기호 <span class="command">></span> 또는 <span class="command"><</span>를 사용합니다. 더 상세한 설명을 하기 전에 기반 지식을 쌓고 갑시다.</p>
+                <p>일반적으로 커맨드<span class="refer">command</span>로 실행되는 프로세스<span class="refer">process</span>는 표준 입력 스트림<span class="refer">standard input stream</span>, 표준 출력 스트림<span class="refer">standard output stream</span>과 오류 출력 스트림<span class="refer">standard error stream</span>을 가지고 있습니다. 총 하나의 입력 스트림과 두개의 출력 스트림을 가지고 있는것이죠. 기본적으로 이 모든 스트림은 일반적인 문자열<span class="refer">plain text</span>로 콘솔<span class="refer">console</span>에 출력 하게 되어 있습니다.</p><p>그렇다면 다시 돌아가서 리다이렉션이란 스트림의 흐름을 바꿔주는 것이라고 앞서 말씀 드렸습니다. 결론부터 말하면 실행된 프로세스의 스트림을 콘솔이 아닌 파일로 사용하고 싶다면 리다이렉션을 사용하면 됩니다. 코드로 살펴봅시다.</p><pre class="prettyprint lang-sh">$ ls &gt; ls.txt
+</pre>
+                <p><span class="command">ls</span> 명령어의 출력 결과를 <span class="command">ls.txt</span> 파일에 저장합니다. 정확하게 말해서 <span class="command">ls</span>의 출력 스트림을 <span class="command">ls.txt</span>이라는 파일로 쓰는것이죠. 따라서 <span class="command">ls</span> 명령어의 결과는 콘솔이 아닌 <span class="command">ls.txt</span>라는 파일에 기록됩니다. 반대의 경우도 가능합니다.</p>
+<pre class="prettyprint lang-sh">$ head &lt; ls.txt
+</pre>
+                <p><span class="command">head</span> 커맨드는 파일의 처음 부분을 설정한 라인<span class="refer">line</span>만큼 출력하는 명령어입니다. 기본적으로 10라인이 세팅 되어 있습니다. 위의 코드는 실행하면 <span class="command">ls.txt</span>의 처음 10줄을 가져올 겁니다. 정확하게 말하면 <span class="command">ls.txt</span>를 <span class="command">head</span>의 입력 스트림으로 보낸 것입니다.</p><p>조금 더 응용하면 다음처럼 사용도 가능합니다.</p>
+<pre class="prettyprint lang-sh">$ head &lt; ls.txt &gt; ls2.txt
+</pre><p>위의 코드는 다음과 같은 순서로 실행 됩니다.</p><div class="green"><ul><li>ls.txt의 내용을 head 명령어의 입력 스트림으로 전송</li><li>head 명령어는 입력 받은 ls.txt의 내용에서 처음 10줄을 출력</li><li>head 명령어의 출력 스트림을 ls2.txt 파일에 연결</li><li>head 명령어의 출력 스트림은 콘솔이 아닌 ls2.txt에 연결 되어 있으므로 출력 결과를 ls2.txt에 저장</li></ul></div>
+                <h2>리눅스 파이프(Linux Pipe)</h2><p>리다이렉션은 프로세스의 입력이나 출력을 파일로 사용하는 것이라면 파이프<span class="refer">pipe</span>는 프로세스간 사용하는 것입니다. 리눅스에서는 특수 기호로 <span class="command">|</span>를 사용합니다. 일반적으로 <strong>"A | B"</strong> 처럼 사용하는데 <span class="command">|</span>를 기준으로 A에 있는 커맨드의 표준 출력을 B에 있는 커맨드의 표준 입력으로 사용합니다.</p><p>프로세스의 출력 스트림을 다른 프로세스의 입력 스트림으로 사용할 때 리다이렉션 기호를 쓰면 오류가 납니다. 아마도 일치하는 파일이 없거나 디렉토리가 없다고 오류 메시지가 나올겁니다. 이런 경우엔 파이프 기호를 씁시다.</p><p>다음과 같은 코드를 보면 자연스럽게 파이프를 사용하고 있었다는 것을 알 수 있습니다.</p><pre class="prettyprint lang-sh">$ ls | grep ls.txt
+</pre><p><span class="command">ls</span> 명령어의 출력 스트림을 <span class="command">grep</span> 커맨드의 입력 스트림으로 보내고 <span class="command">grep</span> 커맨드의 인자값으로 <span class="command">ls.txt</span>를 준 것입니다. 현재 디렉토리에 <span class="command">ls.txt</span> 파일이 있으면 결과를 콘솔에 출력할 겁니다. <span class="command">grep</span> 명령어는 원래 다음처럼 사용합니다.</p><pre class="console">$ grep [-option] [pattern] [file or directory name]
+</pre><p><span class="command">grep</span> 키워드 이후 옵션과 패턴, 그리고 파일이나 디렉토리 이름을 써주면 됩니다. 패턴은 정규식<span class="refer">Regular Expression</span>으로 사용 가능합니다. 이러한 일반적인 <span class="command">grep</span> 사용법 외에 <span class="command">grep</span>을 파이프로 입력 스트림을 주는 경우엔 필터처럼 동작합니다. 파일이나 디렉토리명을 써주지 않더라도 입력 스트림으로 받은 내용과 패턴을 바탕으로 <span class="command">grep</span> 명령어를 시행합니다.</p><p>간단히 요약하면 프로세스간의 입력, 출력을 연결하고 싶으면 파이프 기호를 이용합시다.</p>
+                <h2>Combine redirection and pipe</h2><p>리다이렉션과 파이프는 조합이 가능합니다. 코드를 봅시다.</p><pre class="prettyprint lang-sh">$ ls | grep ls.txt &gt; ls3.txt
+</pre><p>차근차근 보면 어렵지 않습니다. <span class="command">ls</span> 명령어의 출력 스트림을 <span class="command">grep</span>의 입력 스트림으로 연결하고 <span class="command">ls</span> 명령어의 출력물을 <span class="command">grep</span> 명령어로 필터링한 뒤에 나온 내용을 <span class="command">ls3.txt</span> 파일에 기록하는 겁니다.</p><p>스트림 접근 변수를 통한 스트림 제어도 가능합니다. 다음 코드를 봅시다.</p><pre class="prettyprint lang-sh">$ head dummy.txt 2&gt;&gt; error.txt
+</pre>
+                <p>상단의 코드를 실행 해봅시다. <span class="command">dummy.txt</span> 파일의 처음 10줄을 읽어서 출력하고 오류 스트림은 <span class="command">error.txt</span>에 연결해서 기록하도록 합니다. <span class="command">dummy.txt</span> 파일이 없으면 오류 메시지가 <span class="command">error.txt</span> 파일에 기록될 겁니다.</p><p>말로 설명하면 굉장히 난잡하군요(…). 몇가지 코드를 시험 삼아 돌려보시면 이해하기 편할 듯 합니다.</p>
+                <h2>Closing Remarks</h2><p>이렇게 리다이렉션과 파이프에 대해 간략히 알아봤습니다. :)</p></div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

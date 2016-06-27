@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"> <p> Maven을 쓴지도 비교적 최근(?)의 일로 느껴졌는데, 요즘의 트렌드는 "Gradle"인가 봅니다. Spring 프레임워크도 Maven에서 Gradle로 바뀌고 있는 상태기도 하구요. 그래서 이번엔 Gradle을 설치하는 법을 포스팅해볼까 합니다. </p>
+                <h4>Gradle은 무엇?</h4>
+                <blockquote cite="https://gradle.org">
+                    <p> From <strong>command line</strong> to <strong>IDE</strong> to <strong>continuous integration</strong>, only one Enterprise build automation system to rule them all. Declare and execute all tasks necessary to compile, test, package and ship multi-language multi-platform multi-project and multi-channel software, SaaS and Mobile Apps. </p>
+                    <cite>gradle.org</cite>
+                </blockquote>
+                <p> Gradle에 대해 알수 있는 것은 역시 공식 홈페이지 인트로에 걸려 있는 소개 문구겠죠. "지속적인 통합" 이라는 단어가 굵게 강조 되어 있네요. 커맨드 라인부터 IDE에 이르기까지 전반적으로 지속적인 통합을 제공하는 엔터프라이즈 빌드 자동화 시스템이라고 하네요. </p>
+                <p> 컴파일, 테스트, 패키지, 다중 언어, 다중 플랫폼, 다중 프로젝트, 다중 채널 소프트웨어, SaaS, 모바일 Apps… 정말 전반적으로 모든 곳에서 사용 가능한 빌드 자동화 도구입니다. </p>
+                <h4>설치는 어떻게 하나요?(How to install Gradle)</h4>
+                <p> 이번 절에서는 실제로 Gradle을 다운로드 하고 설치하는 법을 알아봅시다. 현재 포스팅은 windows7 32bit 기준입니다. </p>
+                <h5>다운로드(download)</h5>
+                <p> <a href="https://gradle.org">https://gradle.org</a>에 접속하면 인트로에 엄청난 폰트 크기로 <strong>GET GRADLE</strong> 이라고 써져 있습니다. 그 바로 밑 <strong>Download Gradle 2.3</strong>을 클릭하세요. 그럼 gradle-2.3-all.zip 파일을 받을 수 있습니다. </p>
+                <h5>gradle-2.3-all.zip 분석</h5>
+                <p> 다운로드가 된 zip 파일을 압축 해제 해봅시다. 눈에 띄는것은 역시 getting-started.html 파일이네요. 열어서 내용을 확인해 보면 사전준비 사항이나 다운로드 하는법 언패킹하는법, 환경 변수 설정, 인스톨 후 구동 및 테스트 하는 법, JVM 옵션 등이 있습니다. </p>
+                <p> 그러면 다른 것도 봅시다. bin 디렉토리가 있네요. bin 디렉토리 안으로 들어가보면 gradle 과 gradle.bat 이 있습니다. 여기서는 windows7 기준이기 때문에 gradle.bat을 실행시켜 봐야겠어요. </p>
+ <pre class="console">
+C:\Users\Jung\Downloads\gradle-2.3-all\gradle-2.3\bin&gt;gradle.bat
+:help
+
+Welcome to Gradle 2.3.
+
+To run a build, run gradle
+  <task>
+      ...
+
+      To see a list of available tasks, run gradle tasks
+
+      To see a list of command-line options, run gradle --help
+
+      To see more detail about a task, run gradle help --task
+      <task>
+          BUILD SUCCESSFUL Total time: 1.612 secs C:\Users\Jung\Downloads\gradle-2.3-all\gradle-2.3\bin&gt;
+      </task>
+  </task></pre>
+                <p> Gradle에 대해 일반적인 내용을 담고 있네요. 궁금하니까 명시된 방법인 "gradle --help" 를 실행해 봅시다. </p>
+ <pre class="console">
+C:\Users\Jung\Downloads\gradle-2.3-all\gradle-2.3\bin&gt;gradle --help
+
+USAGE: gradle [option...] [task...]
+
+-?, -h, --help          Shows this help message.
+-a, --no-rebuild        Do not rebuild project dependencies.
+-b, --build-file        Specifies the build file.
+-c, --settings-file     Specifies the settings file.
+--configure-on-demand   Only relevant projects are configured in this build run. This means faster build for large multi-project builds. [incubating]
+--console               Specifies which type of console output to generate. Values are 'plain', 'auto' (default) or 'rich'.
+--continue              Continues task execution after a task failure.
+-D, --system-prop       Set system property of the JVM (e.g. -Dmyprop=myvalue).
+-d, --debug             Log in debug mode (includes normal stacktrace).
+--daemon                Uses the Gradle daemon to run the build. Starts the daemon if not running.
+--foreground            Starts the Gradle daemon in the foreground. [incubating]
+-g, --gradle-user-home  Specifies the gradle user home directory.
+--gui                   Launches the Gradle GUI.
+-I, --init-script       Specifies an initialization script.
+-i, --info              Set log level to info.
+-m, --dry-run           Runs the builds with all task actions disabled.
+--no-color              Do not use color in the console output. [deprecated - use --console=plain instead]
+--no-daemon             Do not use the Gradle daemon to run the build.
+--offline               The build should operate without accessing network resources.
+-P, --project-prop      Set project property for the build script (e.g. -Pmyprop=myvalue).
+-p, --project-dir       Specifies the start directory for Gradle. Defaults to current directory.
+--parallel              Build projects in parallel. Gradle will attempt to determine the optimal number of executor threads to use. [incubating]
+--parallel-threads      Build projects in parallel, using the specified number of executor threads. [incubating]
+--profile               Profiles build execution time and generates a report in the
+  <build_dir>
+      /reports/profile directory.
+      --project-cache-dir     Specifies the project-specific cache directory. Defaults to .gradle in the root project directory.
+      -q, --quiet             Log errors only.
+      --recompile-scripts     Force build script recompiling.
+      --refresh-dependencies  Refresh the state of dependencies.
+      --rerun-tasks           Ignore previously cached task results.
+      -S, --full-stacktrace   Print out the full (very verbose) stacktrace for all exceptions.
+      -s, --stacktrace        Print out the stacktrace for all exceptions.
+      --stop                  Stops the Gradle daemon if it is running.
+      -u, --no-search-upward  Don't search in parent folders for a settings.gradle file.
+      -v, --version           Print version info.
+      -x, --exclude-task      Specify a task to be excluded from execution.
+
+  </build_dir></pre>
+                <p> 넵, 엄청나게 많군요. 그중 눈에 띄는 것이 있는데 --gui 옵션입니다. Gradle GUI라고 되어 있네요. windows 사용자라면 이 옵션을 실행했을 때 자바로 실행되는 GUI 프로그램이 나옵니다. </p>
+                <h5>Gradle 구동정보</h5>
+                <p> 이번엔 Gradle의 구동 정보를 살펴봅시다. 실행은 "gradle -v" 입니다. </p>
+ <pre class="console">
+C:\Users\Jung\Downloads\gradle-2.3-all\gradle-2.3\bin&gt;gradle -v
+
+------------------------------------------------------------
+Gradle 2.3
+------------------------------------------------------------
+
+Build time:   2015-02-16 05:09:33 UTC
+Build number: none
+Revision:     586be72bf6e3df1ee7676d1f2a3afd9157341274
+
+Groovy:       2.3.9
+Ant:          Apache Ant(TM) version 1.9.3 compiled on December 23 2013
+JVM:          1.7.0_71 (Oracle Corporation 24.71-b01)
+OS:           Windows 7 6.1 x86
+</pre>
+                <p> 설치가 잘 된듯 하군요. 다음 포스팅에서는 Gradle을 이용해 자바 프로젝트를 빌드해 봅시다. </p>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

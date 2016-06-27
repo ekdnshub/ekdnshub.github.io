@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"> <p> 이번 포스팅은 Gradle을 이용해 자바 프로젝트를 빌드해보는 법을 알아보고자 합니다. 이번 가이드는 Gradle 홈페이지가 아닌 <a href="https://spring.io/guides/gs/gradle/">spring.io - gradle guide</a>에서 참조했습니다. 개발 환경은 windows7 32bit입니다. </p>
+                <h4>자바 프로젝트 준비(Java Project Setup)</h4>
+                <p> Gradle까지는 설치가 되었다는 가정하에 진행합니다. Gradle 설치에 대해서는 <a href="/99">이곳</a>을 참조하세요. </p>
+                <h5>디렉토리 구조 만들기</h5>
+                <p> 최상위 루트 디렉토리부터 만들어봅시다. 저는 "helloworld" 라는 디렉토리를 만들었습니다. 그리고 그 밑으로 src/main/java/hello 순으로 디렉토리를 만듭니다. </p>
+                <p> 따라서 다음처럼 명령 프롬프트에서 접근이 가능합니다. </p>
+ <pre class="console">
+C:\helloworld\src\main\java\hello&gt;
+</pre>
+                <h5>클래스 만들기</h5>
+                <p> 우선 HelloWorld.java 파일을 만들어봅시다. 내용은 다음처럼 작성합니다. </p>
+ <pre class="prettyprint linenums lang-java">
+public class HelloWorld {
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+	}
+}
+</pre>
+                <p> 이 파일의 위치는 C:\helloworld\src\main\java\hello\HelloWorld.java 가 됩니다. </p>
+                <h4>자바 프로젝트 빌드(build Java Project)</h4>
+                <h5>build.gradle 파일 만들기</h5>
+                <p> 그리고 build.gradle 이라는 이름의 파일을 C:\helloworld 위치에 만듭시다. 그리고 다음과 같은 내용을 입력하고 저장합니다. </p>
+ <pre class="prettyprint">
+apply plugin: 'java'
+</pre>
+                <h5>gradle로 빌드하기</h5>
+ <pre class="console">
+C:\helloworld&gt;C:\Users\Jung\Downloads\gradle-2.3-all\gradle-2.3\bin\gradle.bat build
+:compileJava
+:processResources UP-TO-DATE
+:classes
+:jar
+:assemble
+:compileTestJava UP-TO-DATE
+:processTestResources UP-TO-DATE
+:testClasses UP-TO-DATE
+:test UP-TO-DATE
+:check UP-TO-DATE
+:build
+
+BUILD SUCCESSFUL
+C:\helloworld&gt;
+</pre>
+                <p> 귀찮음(…)을 이유로 환경 변수 설정을 안했기 때문에 gradle.bat의 위치가 굉장히 길어졌습니다. 하지만 build 할때 문제는 없죠. 위처럼 gradle을 실행해서 준비한 자바 프로젝트를 빌드 했습니다. </p>
+                <h4>Hello World!</h4>
+                <p> 그러면 gradle이 만들어낸 class 파일을 실행해 봅시다. 위치는 C:\helloworld\build\classes\main\HelloWorld.class 입니다. </p>
+ <pre class="console">
+C:\helloworld\build\classes\main&gt;java HelloWorld
+Hello World!
+</pre>
+                <h4>Closing Remarks</h4>
+                <p> 간단하게 Gradle을 이용해 자바 프로젝트를 빌드하고 실행해 봤습니다. 앞으로는 자주 써야 할지도 모르니 열심히 공부해야겠네요. :3 </p>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

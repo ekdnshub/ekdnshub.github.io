@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"> <p> 자바스크립트에서 일정시간마다 특정 함수를 호출하고 싶은 경우가 종종 있습니다. 이런 경우에 사용할 수 있는 자바스크립트 이벤트 중에는 타이밍 이벤트(Timing Events)가 있어요. 타이밍 이벤트가 무엇인지 알아보고 사용법도 조금 살펴볼까 합니다. </p>
+                <h4>타이밍 이벤트(Timing Events)</h4>
+                <p> 타이밍 이벤트는 w3schools에선 다음처럼 설명 하고 있습니다. </p>
+                <blockquote cite="http://www.w3schools.com/js/js_timing.asp">
+                    <p> With JavaScript, it is possible to execute some code at specified time-intervals. This is called timing events. </p>
+                    <p> It's very easy to time events in JavaScript. The two key methods that are used are: </p>
+                    <div class="box">
+                        setInterval() - executes a function, over and over again, at specified time intervals
+                        <br> setTimeout() - executes a function, once, after waiting a specified number of milliseconds
+                    </div>
+                    <cite>w3schools - JavaScript Timing Events</cite>
+                </blockquote>
+                <p> 눈여겨 볼것은 두가지 함수가 설명이 되어 있는데요. 바로 setInterval, setTimeout 함수입니다. 두가지의 명확한 차이점이 있네요. </p>
+                <p> 인용한대로라면 <strong>setInterval</strong> 함수는 지정된 코드를 지정된 시간 간격만큼 계속해서 <strong>반복 실행</strong>을 한다고 되어 있습니다. 하지만 <strong>setTimeout</strong> 함수는 지정된 시간동안 기다린 후 지정된 코드를 <strong>단 한번만 실행</strong>한다고 되어 있네요. </p>
+                <p> 이 두가지 함수에 대해 조금 더 파볼까 합니다. </p>
+                <h4>타이밍 이벤트 함수 사용법</h4>
+                <h5>setInterval 함수</h5>
+                <p> setInterval 함수는 지정된 시간만큼 기다린 뒤 지정한 함수를 실행합니다. 그리고 이 동작을 반복하죠. 기본적인 사용법은 다음처럼 씁니다. </p>
+ <pre class="prettyprint linenums lang-js">
+/* 실행 */
+var onceTimer = window.setInterval(function(){ /* process... */ }, delay);
+/* 정지 */
+window.clearInterval(onceTimer);
+// 각 구문에서 window는 생략해도 됩니다.
+</pre>
+                <p> process로 주석처리 된 공간에 실행하고자 하는 자바스크립트 코드 또는 함수를 삽입하고 delay(milliseconds)에 반복하고자 하는 간격을 입력하면 됩니다. 반복 동작을 정지하려면 clearInterval을 호출하면 됩니다. </p>
+                <h5>setTimeout 함수</h5>
+                <p> setTimeout 함수는 지정된 시간만큼 기다린 후 단 한번 특정 코드를 실행하는 함수입니다. 기본적인 사용법은 다음처럼 씁니다. </p>
+ <pre class="prettyprint linenums lang-js">
+/* 실행 */
+var loopTimer = window.setTimeout(function(){ /* process... */}, delay);
+/* 정지 */
+window.clearTimeout(loopTimer);
+// 각 구문에서 window는 생략해도 됩니다.
+</pre>
+                <p> process로 주석처리 된 공간에 실행하고자 하는 자바스크립트 코드 또는 함수를 삽입하고 delay(milliseconds)에 기다릴 시간 간격을 입력하면 됩니다. </p>
+                <h4>Delay에 대하여</h4>
+                <p> 언뜻 보기에 setInterval과 setTimeout 함수는 매우 유사한 점이 많습니다. 다른점이라곤 반복 실행하느냐 한번 실행하느냐 정도로 보일수도 있어요. 하지만 정말 다른점은 지연 시간(Delay)과 각 함수의 처리 방식입니다. </p>
+                <h5>setInterval</h5>
+                <blockquote cite="http://javascript.info/tutorial/settimeout-setinterval#the-real-delay-of-setinterval">
+                    <p> Real delay for setInterval is actually less than given.<br> If the execution is impossible, it is queued.<br> If the browser is busy, and the execuion is already queued, setInterval skips it.<br> </p>
+                    <cite>Javascript Tutorial - Understanding timers: setTimeout and setInterval</cite>
+                </blockquote>
+                <p> 위의 인용구는 출처로 명기된 곳에서 일부 발췌한 내용입니다. 설명하자면 setInterval 함수의 실제 지연시간은 프로그래머가 준 시간보다 실제적으론 적다는 것입니다. 또한 실행할 수 없는 상태라면 큐에 저장된다고 하고 있네요. 만약에 브라우저가 처리할 수 없는 상태(바쁜 상태)이면서 이미 큐에 저장된 것이 있으면 setInterval은 이것을 무시합니다. </p>
+                <p> 다시 말해서 setInterval은 지정된 시간 간격만큼 무조건 지정된 코드를 호출하고자 합니다. 하지만 지정된 시간 간격에 도달했음에도 불구하고 지정된 코드를 실행할 수 없는 상태라면 setInterval은 이벤트를 큐에 저장합니다. </p>
+                <p> 여기서 큐를 조금 더 자세히 알아봅시다. setInterval에서 큐의 크기는 1입니다. 하나의 실행만을 저장할 수 있습니다. 그리고 큐에 저장된 것이 있다면 실행해야할 시간 간격과는 관계 없이 실행 가능한 상태일때 즉시 큐에서 이벤트를 꺼내 실행하게 되어 있습니다. </p>
+                <p> 하지만 조금 더 꼬아서 생각해 봅시다. 정해진 시간은 100ms라고 가정을 하죠. 그러면 setInterval이 처음 실행 할 때는 100ms 시간대에서 지정된 코드(A)를 실행할겁니다. 그리고 200ms라는 시간대가 되면 다시 한번 지정된 코드(B)를 실행하려 하겠죠. 하지만 이전 코드(A) 지연등의 이유로 실행 할 수 없는 상태라면 setInterval은 현재 실행할 코드(B)를 큐에 저장합니다. 그리고 300ms라는 시간대가 되어 다시 지정된 코드(C)를 실행하려 합니다. 하지만 이번엔 이전 코드(A)가 아직도 끝나지 않은 상태에서 큐에 이미 실행 할 코드(B)가 저장 되어 있다면 setInterval은 현재 실행할 코드(C)를 무시합니다. </p>
+                <p> 설명이 길었지만, setInterval은 정해진 시간 간격내에서 지정된 코드가 실행되는 경우 깔끔하게 처리할 수 있는 함수입니다. 하지만 지정된 코드가 지연되어 다음 이벤트 발생시기까지 영향을 끼치는 경우 <strong>"무시 당하는 이벤트"</strong>가 생길 염려가 있습니다. </p>
+                <h5>setTimeout</h5>
+                <p> setTimeout 함수는 단 한번 지정된 코드를 실행하지만 재귀호출 등의 방법을 이용해서 반복적으로 호출할 수 있습니다. 이 경우에는 어떤식으로 처리가 될까요? </p>
+                <p> 아까도 말씀드렸듯이 setTimeout 함수는 지정된 시간만큼을 기다린 후 지정된 코드를 실행합니다. 그리고 다음 호출하는 시기는 지정된 코드 내에서 정의가 가능합니다. 예제를 한번 봅시다. </p>
+ <pre class="prettyprint linenums lang-js">
+function foo(){
+	/* process... */
+	loop = setTimeout(function(){ foo() }, 1000);
+}
+var loop = setTimeout(function(){ foo() }, 1000);
+</pre>
+                <p> 위 코드는 지정된 코드(process로 주석처리 된 것) 이후에 다시 setTimeout으로 재귀호출을 하고 있습니다. 이렇게 처리를 한다면 setInterval에서 봤던 이벤트가 무시 당하는 일은 없어지겠네요. </p>
+                <p> 예를 들어, setTimeout을 실행하면 처음 지정된 간격만큼 기다린 후 지정된 코드를 실행합니다. 그리고 지정된 코드가 끝난 시점에서 다시 setTimeout 함수를 호출하는 것이죠. 그러면 지정된 코드가 지연되더라도 모든 처리가 끝난 다음에 setTimeout을 호출하기 때문에 이벤트가 중첩될 일은 없을겁니다. (물론 ajax등의 비동기적 코드가 있다면 콜백 함수처럼 만들어야 할 필요는 있겠습니다.) </p>
+                <h4>Closing Remarks</h4>
+                <p> 간단하게(?) setInterval, setTimeout에 대해 알아봤습니다. 어떤 것이 더 좋은 함수인가? 하는 것보다는, 언제까지나 적절한 상황에서 적절한 함수를 사용해야하겠죠! </p>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

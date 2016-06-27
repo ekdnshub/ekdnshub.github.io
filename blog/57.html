@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"><div style="display:none;">title=jQuery append()/prepend()
+                created=2015-01-14
+            </div><p>jQuery를 쓰다보면 관용구처럼 자주 쓰이는 함수들이 있다. 특정 DOM객체를 다른 부분에 붙인다던가, 앞 또는 뒤에 위치시킨다던가 하는 것을 가능하게 해주는 함수들이 오늘 포스팅할 내용이다.</p><h2>Parent/Child Relation</h2><p>부모/자식 관계라는 것은 상위 엘리멘트/하위 엘리멘트로 나뉘어져 있는 상태를 말한다. 즉 A라는 객체 안에 B라는 객체가 종속되어 있는 것이라고 생각하면 된다. 이럴 경우 다음과 같은 함수를 통해 객체를 처리할 수 있다.</p><pre class="prettyprint lang-js">$(parent).append(child) // child 객체를 parent 객체 내 마지막 요소 뒤에 붙인다.
+$(parent).prepend(child) // chlid 객체를 parent 객체 내 첫번째 요소로 붙인다.
+$(child).appendTo(parent) // child 객체를 parent 객체 내 마지막 요소 뒤에 붙인다.
+$(child).prependTo(parent) // chlid 객체를 parent 객체 내 첫번째 요소로 붙인다.
+</pre><p>즉 <span class="command">append()</span>와 <span class="command">prepend()</span>는 상하 관계가 있을때 사용하면 된다. 반대로 동등한 관계일땐 별도의 함수를 사용한다.</p><h2>Equal Relation</h2><p>동등 관계라는것은 같은 레벨의 DOM 객체를 뜻한다. 예를 들면 다음과 같다.</p><pre class="prettyprint lang-html">&lt;div&gt;
+	&lt;p&gt;밑에 있는 p 객체와 같은 레벨입니다.&lt;/p&gt;
+	&lt;p&gt;위에 있는 p 객체와 같은 레벨입니다.&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+                <p>p객체들은 같은 레벨에 있다고 볼 수 있다. 이럴 경우 사용하는 jQuery 함수들은 다음과 같다.</p>
+<pre class="prettyprint lang-js">$(first).before(second) // first 객체 앞쪽에 second 객체를 붙인다.
+$(first).after(second) // first 객체 뒤쪽에 second 객체를 붙인다.
+$(first).insertBefore(second) // first 객체를 second 객체의 앞쪽에 붙인다.
+$(first).insertAfter(second) // first 객체를 second 객체의 뒤쪽에 붙인다.
+</pre>
+                <p>단순히 새로운 객체를 추가해서 붙이는 것 외에도, <strong>DOM 문서 내의 기존 객체를 가져다 쓰는것도 가능하다.</strong> 이것에 대해서는 별도로 jQuery API 문서를 찾아보는 것이 좋을 것 같다.</p></div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

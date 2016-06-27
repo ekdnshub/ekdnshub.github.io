@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"> <p> 예전에 학부생 시절에 배웠던 시스템 프로그래밍 과목이 문득 생각나네요. 어셈블리어를 직접 코딩해서 실행해보기도 했던 기억이 새록새록 납니다. 그래서 생각난김에 어셈블리어에 대해 포스팅을 해봅니다. :3 </p>
+                <h4>어셈블리어(Assembly language)</h4>
+                <p> 어셈블리어의 정확한 정의는 위키피디아에서 찾아봤습니다. 다음과 같은 내용이 첫문단에 있네요. </p>
+                <blockquote cite="http://en.wikipedia.org/wiki/Assembly_language">
+                    <p> An <strong>assembly language</strong> is a low-level programming language for a computer, or other programmable device, in which there is a very strong (generally one-to-one) correspondence between the language and the architecture's machine code instructions. </p>
+                    <cite>Wikipedia - Assembly language</cite>
+                </blockquote>
+                <p> 어셈블리어는 컴퓨터를 위한 저급(low-level) 프로그래밍 언어라고 합니다. 뭐 기타 다른 장비들도 있겠지만요. 어셈블리어는 프로그래밍 언어와 아키텍처 컴퓨터 코드 명령어가(architecture's machine code instructions) 매우 정확하게(거의 1:1 수준으로) 일치한다고 하네요. </p>
+                <p> 일반적으로 우리가 알고 있는 고급(high-level) 프로그래밍 언어에는 C/C++, Java, Python 같은 것이 있겠네요. 이 프로그래밍 언어들은 일반적으로 컴파일(compile)을 하거나 인터프리터(interpreter) 등을 이용해 실행합니다. </p>
+                <p> 마찬가지로 어셈블리어도 일련의 변환 과정을 거칩니다. 어셈블리어는 <strong>어셈블러(assembler)</strong>를 이용해 실행 가능한 기계 코드로 변환해야 하죠. 이러한 변환 과정을 <strong>어셈블리(assembly) 또는 어셈블링(assembling)</strong>이라고 합니다. </p>
+                <h4>니모닉(mnemonic)</h4>
+                <p> 어셈블리어는 일반적으로 하나의 코드가 프로세서 명령어(processor instructions) 하나와 일치합니다. 프로세서 명령어는 일반적으로 기계어로 되어 있습니다. 뭐, 예를 들자면 "10110000" 같은 것이겠네요. 하지만 이러한 0과 1로 이루어진 기계어를 외우기란 쉽지 않습니다. 따라서 외우기 쉬운 키워드를 만듭니다. 예를 들면 "MOV" 같은것으로 말이죠. MOV는 MOVE의 축약어입니다. 이러한 키워드로 이루어진 코드를 니모닉이라고 합니다. </p>
+                <h4>예제 코드(Example Code)</h4>
+                <p> 옛날에 버려뒀던 네이버 블로그가 있었는데 간만에 들어가보니 2008년에 어셈블리를 공부한 시절에 작성했던 코드가 남아 있었습니다. 그 코드를 공개해봅니다. </p>
+ <pre class="prettyprint linenums">
+MAIN SEGMENT
+	ASSUME	CS : MAIN, DS : MAIN
+	MOV	AX, CS
+	MOV	DS, AX
+	MOV	CX, 1
+	MOV	AX, 0
+
+LOOP1:	ADD	AX, CX
+	INC	CX
+	CMP	CX, 120 ; 1부터 120까지 구하는 프로그램
+	JBE	LOOP1
+	MOV	SUM, AX
+	MOV	AH, 4CH
+	INC	21H
+
+SUM	DW	?
+
+MAIN ENDS
+
+END
+</pre>
+                <p> 정확하게는 2008년 4월 23일 18시 34분에 올렸던 글이었네요. 처음으로 어셈블리를 배우고 나서 작성한 코드라고 리뷰도 했었어요. 지금은 이 코드를 보니 옛날 생각만 납니다만, 각설하고 혹시라도 코드 돌려보실 분은 확인해보시고 틀리면 댓글좀 주세요. :3 </p>
+                <p> 어쨌든 예제 코드를 보시면 어셈블리어가 이런거구나! 하실 것 같습니다. 그리고 코드 실행을 해보려면 <strong>MASM</strong>을 설치해야 합니다. 구글에서 MASM 6.11을 검색하면 됩니다. 지금은 버전이 더 올라가 있을 것 같네요. </p>
+                <h4>장/단점</h4>
+                <p> 어셈블리어는 고수준의 서비스를 빠르게 작성하고 유지 보수하기에는 맞지 않아서 요즘은 잘 안보이긴 합니다. 그래도 사용처는 아직 남아있어요. 장점도 분명히 있으니까 말이죠. 반대로 단점도 많아요. </p>
+                <div class="green">
+                    <strong>장점</strong>
+                    <br>
+                    <ul>
+                        <li>매우 빠릅니다.</li>
+                        <li>정말 내가 원하는대로 짜는 것이 가능합니다. (대신 버그는 책임 못져요.)</li>
+                        <li>프로세서에 있는 모든 자원(register, i/o)을 직접 접근할 수 있습니다.</li>
+                        <li>etc.</li>
+                    </ul>
+                </div>
+                <div class="blue">
+                    <strong>단점</strong>
+                    <br>
+                    <ul>
+                        <li>실행 속도는 빠른데 개발 속도는 지옥입니다.(굇수 제외)</li>
+                        <li>버그가 발생하는 게 기본일 정도입니다. 디버깅을 하려면...(굇수 제외)</li>
+                        <li>코드는 특정 프로세서 및 모든 개발 환경이 동일해야 실행됩니다.</li>
+                        <li>거꾸로 얘기하자면 동일한 코드로 다른 기계에 이식하는 건 힘들죠.</li>
+                        <li>사실 어셈블리어를 보고 한번에 이해 할 사람은 그다지 많지 않습니다.</li>
+                        <li>게다가 코드 수정은 더더욱 어려워요. (유지 보수가 힘듭니다.)</li>
+                        <li>etc.</li>
+                    </ul>
+                </div>
+                <p> 특수한 직군을 제외하면 어셈블리어를 직접 만질 일은 그다지 없을겁니다. 가능하다면 고급 프로그래밍 언어를 사용해서 정신 건강을 챙기는 것이 이득일 수도 있어요. :3 </p>
+                <h4>Closing Remarks</h4>
+                <p> 간단하게 어셈블리어에 대해 알아봤습니다. 이 포스팅에 다른 내용이 덧붙여질 그때를 기약하며 Bye :) </p>
+            </div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- # font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+
+    <!-- # jquery -->
+    <!--[if lte IE 9]>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<![endif]-->
+
+    <!-- # front view lib # -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- # blog library # -->
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
+    <script src="/lib/o/1.0.2.min.js"></script>
+    <script src="/blog/scripts/posts.js"></script>
+    <script src="/blog/scripts/ArchiveGroup.js"></script>
+    <script src="/blog/scripts/header.js"></script>
+    <script src="/blog/scripts/comment.js"></script>
+    <script src="/blog/scripts/postHandler.js"></script>
+    <script src="/blog/scripts/copyright.js"></script>
+    <script src="/blog/scripts/bottom.js"></script>
+</head>
+<body>
+<!-- noscript -->
+<noscript>
+    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+</noscript>
+<!-- container -->
+<div class="container" id="viewContainer">
+    <!-- content 영역 -->
+    <div id="left_wrap" class="col-md-10 col-md-offset-1">
+        <!-- 블로그 전문 -->
+        <article>
+            <!-- 본문 -->
+            <div id="content"><div style="display:none;">title=데코레이터 패턴(Decorator Pattern)
+                created=2015-02-27
+            </div><p>지난 번 스트래티지 패턴 이후 많은 시간이 흘렀군요. 이번엔 데코레이터 패턴에 대해 포스팅 하고자 합니다. 디자인 패턴이라는건 공부할 땐 참 "아하!" 하게 되서 좋은데 막상 실무에 쓰려고 하면 기억이 잘 나지 않네요. 열심히 반복 학습이 필요할 것 같습니다.</p>
+                <h2>데코레이터 패턴 정의(Decorator Pattern Definition)</h2><div class="green"><p>객체를 동적(dynamic)으로 서브 클래스를 이용해 확장한다.</p></div><p>클래스를 써서 기능을 확장하는 방법이고 프로그램을 실행하는 중에도 객체를 확장 시킬 수 있는 패턴이군요. 요즘은 가끔씩 쿠키런을 하고 있는데, 이번엔 쿠키를 컨셉으로 해서 코드를 짜볼까 합니다.</p>
+                <h2>만들고 싶은 최종 코드(Final Example Source)</h2><pre class="prettyprint lang-java">/* main method */
+public class DecoratorMain {
+	public static void main(String[] args) {
+
+		// 그냥 용감한 쿠키 만들기
+		Cookie braveCookie = new BraveCookie();
+
+		// 우유를 얹은 용감한 쿠키 만들기
+		Cookie milkBraveCookie = new MilkTopping(braveCookie);
+
+		// 그위에 초콜릿을 얹은 용감한 쿠키 만들기
+		Cookie chocolateMilkBraveCookie = new ChocolateTopping(milkBraveCookie);
+
+		// 그위에 우유를 한번 더 넣은 용감한 쿠키 만들기
+		Cookie chocolateDoubleMilkBraveCookie = new MilkTopping(chocolateMilkBraveCookie);
+
+		System.out.println(chocolateDoubleMilkBraveCookie.getName());
+
+		// 소다 쿠키 만들기
+		Cookie SodaCookie = new Cookie() {
+			@Override
+			public String getName() {
+				return "소다 쿠키";
+			}
+		};
+
+		// 초콜릿을 두번 넣은 소다 쿠키 만들기
+		SodaCookie = new ChocolateTopping(new ChocolateTopping(SodaCookie));
+
+		System.out.println(SodaCookie.getName());
+	}
+}
+</pre>
+                <p>만들고 싶은 코드의 최종 모습입니다. 이 코드를 만들기 위해서 클래스들을 하나씩 만들어 봅시다.</p>
+                <h3>쿠키 만들기(Create Cookie)</h3><p>쿠키를 만들기 위해서는 쿠키 인터페이스를 이용해야 합니다. 아래처럼 인터페이스를 만듭니다.</p><pre class="prettyprint lang-java">/* Cookie Interface */
+public interface Cookie {
+	public String getName(); // 쿠키의 이름을 가져옵니다.
+}
+</pre><p>쿠키 인터페이스를 만들었으니 실제로 "용감한 쿠키"를 만들어봅시다.</p><pre class="prettyprint lang-java">/* Create Cookie */
+public class BraveCookie implements Cookie{
+	@Override
+	public String getName() {
+		return "용감한 쿠키";
+	}
+}
+</pre><p>용감한 쿠키가 만들어졌습니다. 이와 같은 방식으로 다양한 쿠키를 더 만들어 낼 수도 있습니다.</p>
+                <h3>쿠키에 얹을 토핑을 만들자! (Create Topping)</h3><p>쿠키가 있으니 이제 위에 토핑 재료를 얹어봅시다. 그 전에 토핑이라는 이름의 추상 클래스를 만들어 봅시다. 이 클래스는 앞으로 <strong>데코레이터 클래스</strong>로 활약할 거에요.</p>
+<pre class="prettyprint lang-java">/* Topping Class */
+// 쿠키 위에 얹을 토핑 클래스(데코레이터)입니다.
+public abstract class Topping implements Cookie{
+	protected Cookie cookie;
+
+	public Topping(Cookie cookie) {
+		this.cookie = cookie;
+	}
+
+	@Override
+	public abstract String getName();
+}
+</pre><p>토핑 클래스를 상속<span class="refer">extends</span>받아 우유맛, 초콜릿맛 토핑을 추가해봅시다.</p><pre class="prettyprint lang-java">/* Milk Topping */
+public class MilkTopping extends Topping{
+
+	public MilkTopping(Cookie cookie) {
+		super(cookie);
+	}
+
+	@Override
+	public String getName() {
+		return "우유맛 " + cookie.getName();
+	}
+}
+</pre><pre class="prettyprint lang-java">/* Chocolate Topping */
+// 쿠키에 초콜릿을 첨가합니다.
+public class ChocolateTopping extends Topping{
+
+	public ChocolateTopping(Cookie cookie) {
+		super(cookie);
+	}
+
+	@Override
+	public String getName() {
+		return "초콜릿맛 " + cookie.getName();
+	}
+}
+</pre>
+                <h3>정리</h3><p>위에 있는 예제 코드들을 전부 만들어서 제일 처음에 있던 최종 코드를 실행하면 아래처럼 콘솔에 나올겁니다.</p><pre class="console">우유맛 초콜릿맛 우유맛 용감한 쿠키
+초콜릿맛 초콜릿맛 소다 쿠키
+</pre>
+                <p>ArrayList등을 이용해서 중복된 맛을 하나로 뭉쳐서 처리할 수 있다면 더 좋았겠지만 귀찮음(…)으로 인해 간단하게 나열만 했습니다. (-_-)</p><p>이러한 데코레이터 패턴이 많이 보이는 자바 API는 파일 I/O 관련 부분입니다. 자바에서 파일을 읽어 들일 때 보통 다음처럼 사용 하잖아요?</p><pre class="prettyprint lang-java">/* read file example */
+BufferedReader br = new BufferedReader(new FileReader(new File("test.txt")));
+</pre><p>보다시피 데코레이터 패턴이 사용해서 유연하게 기능 확장을 할 수 있지만, 대신 각각 데코레이터 클래스들이 어떤 기능을 수행하는지 알고 있어야 하고 자잘한 클래스들이 많이 생기는 것이 단점입니다. 적절한 위치에서 활용해야 할 것 같아요.</p>
+                <h2>마무리</h2><p>점점 클래스이 많아지다보니 설명이 매우 짧아지는(!) 현상이 생기네요. 일단은 질러 놓고 나중에 보강을 해야겠어요(…).</p></div>
+        </article>
+    </div>
+    <!-- // content 영역 -->
+</div>
+<!-- # code highlight -->
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+<script src="/lib/scripts/footer.js"></script>
+</body>
+</html>
