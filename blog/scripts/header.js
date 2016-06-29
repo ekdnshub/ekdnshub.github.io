@@ -3,7 +3,7 @@ var Header = (function(){
 	var gnb = o.util.multiLine(function(){
 		/*!
 			<div id="_gnb" class="text-right" style="font-size:0.8em; padding:1px; background-color:#259CE0;">
-				<a style="color:white; text-decoration:none;" href="//www.jdm.kr">About</a>│<a style="color:white; text-decoration:none;" href="//blog.jdm.kr">Blog</a>│<a style="color:white; text-decoration:none;" href="//board.jdm.kr">Board</a>│<a style="color:white; text-decoration:none;" href="//guest.jdm.kr">Guestbook</a>│<a style="color:white; text-decoration:none;" href="//lab.jdm.kr">Lab</a>&nbsp;
+				<a style="color:white; text-decoration:none;" href="//www.jdm.kr">About</a>│<a style="color:white; text-decoration:none;" href="//blog.jdm.kr">Blog</a>│<a style="color:white; text-decoration:none;" href="//jdm.kr/guest/">Guestbook</a>│<a style="color:white; text-decoration:none;" href="//lab.jdm.kr">Lab</a>&nbsp;
 			</div>
 		*/
 	});
