@@ -87,7 +87,8 @@
 				<h2>블로그</h2>
 				<p>개인적인 일상과 프로그래밍 관련된 내용을 볼 수 있는 공간입니다.</p>
 			</div>
-			<div class="col-md-3 services" data-link="//board.jdm.kr">
+
+			<div class="col-md-3 services" data-link="pause">
 				<img class="img-responsive" src="/images/main-2.png" alt="이미지">
 				<hr class="small">
 				<h2>게시판</h2>
@@ -130,7 +131,11 @@
 	$(document).ready(function(){
 		$(".services").each(function(){
 			$(this).click(function(){
-				window.location.href = $(this).attr("data-link");
+				if ($(this).attr("data-link") == "pause") {
+					alert("새로운 서비스로 찾아뵙겠습니다! :3");
+				} else {
+					window.location.href = $(this).attr("data-link");
+				}
 			});
 		});
 		o.wheel.init(200, 800);
