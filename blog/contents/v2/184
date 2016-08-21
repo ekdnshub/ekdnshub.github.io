@@ -40,7 +40,7 @@ Row = Row Key + Column + [Column...]
 
 #h2 Summary
 #p 지금까지 알아본 것으로 만든 이미지입니다. 이미지 첨부를 좋아하는 편은 아니지만 이번엔 필요할 것 같아서 삽입했습니다.
-{$$/img/184.png}
+{$$/blog/images/184.png}
 
 #h2 Closing Remarks
 #p 간단하게 Hbase 데이터 모델에 대해 알아봤습니다. 잘못된 점이 있다면 댓글 요청드립니다. :)
