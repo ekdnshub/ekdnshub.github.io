@@ -316,7 +316,6 @@ var postsInfo = (function(){
             "79":{
                 "title":"정규 표현식 문자열 테스터[web](regular expression tester)",
                 "created":"2015-03-04"
-                ,"version":"v1"
             },
             "80":{
                 "title":"C++ map 예제(C++ map example)",
