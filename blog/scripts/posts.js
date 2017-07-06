@@ -320,7 +320,6 @@ var postsInfo = (function(){
             "80":{
                 "title":"C++ map 예제(C++ map example)",
                 "created":"2015-03-05"
-                ,"version":"v1"
             },
             "81":{
                 "title":"스프링 프로필 설정(Spring Profile)",
