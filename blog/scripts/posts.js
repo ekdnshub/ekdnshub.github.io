@@ -344,7 +344,6 @@ var postsInfo = (function(){
             "86":{
                 "title":"jQuery 테이블 데이터 정렬(using tablesorter)",
                 "created":"2015-03-11"
-                ,"version":"v1"
             },
             "87":{
                 "title":"특수 기호/문자 읽는법",

@@ -1,0 +1,67 @@
+###info
+title=
+created=
+###
+
+#p  이번 포스팅은 jquery 테이블 정렬할 때 간편하게 쓸만한 플러그인을 소개하려고 합니다. 이름은 {!tablesorter}에요. 라이센스는 MIT, GPL을 사용하고 있네요. 
+#h4 홈페이지
+#p  tablesorter 소개에 대해선 {$http://tablesorter.com/docs/}에서 확인 할 수 있습니다.
+#h4 다운로드
+#p  {$http://tablesorter.com/docs/#Download}에서 다운로드 받을 수 있습니다.
+#p  jquery.tablesorter.zip라고 되어 있는 링크를 클릭하면 되요. 다운로드 받은 zip파일은 압축 해제해서 사용할 수 있도록 웹서버에 올려놓아요. 
+#h4 사용법
+#p  그럼 간단하게 사용법을 알아봅시다. 순서는 관련 파일을 인클루드(include)하는 것과 실제 사용 코드를 소개하겠습니다. 
+#h5 플러그인 포함하기(Include Plug-in)
+#p  실제로 tablesorter를 사용하기 위해선 css 및 js 파일을 문서에 포함시켜야 합니다. 여기서는 head 태그에 전부 포함하는 것을 가정하고 진행하겠습니다. 
+###code.html
+&lt;head&gt;
+...
+&lt;script type="text/javascript" src="../jquery-latest.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="../jquery-tablesorter/jquery.tablesorter.min.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="../jquery-tablesorter/themes/blue/style.css" type="text/css"&gt;
+&lt;-- option --&gt;
+&lt;link rel="stylesheet" href="../jquery-tablesorter/themes/green/style.css" type="text/css"&gt;
+...
+&lt;/head&gt;
+### 
+#p  위처럼 jquery 라이브러리와 플러그인 라이브러리 js, 테마 관련 css 파일을 포함하면 됩니다. 테마는 blue와 green이 준비 되어 있습니다. 링크만 바꿔주면 됩니다. 
+#h5 기본 템플릿
+###code.html
+&lt;table id="myTable" class="tablesorter"&gt;
+	&lt;thead&gt;
+		&lt;tr&gt;
+			&lt;th&gt;col1&lt;/th&gt;
+			&lt;th&gt;col2&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td&gt;abc&lt;/td&gt;
+			&lt;td&gt;def&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+### 
+#p  기본 템플릿은 위처럼 맞춰주면 됩니다. table의 id값은 원하는 값으로 넣어도 되지만 class의 tablesorter는 그대로 넣어야 합니다. 
+#h5 적용
+#p  플러그인을 포함하고 기본 템플릿도 완성했으면 다음과 같은 코드로 tablesorter를 실행할 수 있습니다. 
+###code.js
+$(document).ready(function(){ 
+	$("#myTable").tablesorter();
+}); 
+### 
+#h5 데모
+###p
+해당 방식으로 구현된 데모 페이지 링크입니다. 클릭해서 확인해 보세요.
+{$http://tablesorter.com/docs/#Demo}
+###
+#h4 조금 더 자세히 원한다면...
+###p
+만약 정적 테이블이 아닌 ajax를 사용한 동적 테이블이라고 한다면 다음 링크를 검토 해보시면 됩니다.
+{$http://tablesorter.com/docs/example-ajax.html}
+다른 예제를 보고 싶으시면 다음 링크를 확인하세요.
+{$http://tablesorter.com/docs/#Examples}
+###
+#h4 Tip
+#p  shift키를 누른 상태에서 컬럼 제목(th 요소)을 클릭하면 다중 정렬이 가능합니다. 
+
