@@ -340,7 +340,6 @@ var postsInfo = (function(){
             "85":{
                 "title":"스칼라 문법 요약(Scala Cheatsheets)",
                 "created":"2015-03-11"
-                ,"version":"v1"
             },
             "86":{
                 "title":"jQuery 테이블 데이터 정렬(using tablesorter)",
