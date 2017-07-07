@@ -336,7 +336,6 @@ var postsInfo = (function(){
             "84":{
                 "title":"C 파일 사이즈 구하기(Getting file size with C)",
                 "created":"2015-03-10"
-                ,"version":"v1"
             },
             "85":{
                 "title":"스칼라 문법 요약(Scala Cheatsheets)",
