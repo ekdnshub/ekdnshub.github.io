@@ -1,0 +1,103 @@
+###info
+title=스프링 프로필 설정(Spring Profile)
+created=2015-03-06
+###
+
+#p  Spring 프레임워크를 쓰다보면 로컬 머신, 개발 서버, 운영 서버등 여러 곳에서 같은 애플리케이션 코드를 사용하지만 몇가지 속성을 바꿔주고 싶을 때가 있습니다. 기존에는 property 파일이나 또는 별도의 설정 파일을 애플리케이션 외부에 두는 방식으로 쓰고 있었는데, 조금 늦었지만 Spring Profile이라는 기능에 대해 알아보고자 합니다. 
+#h4 스프링 프로필(Spring Profile)
+#p  가장 대표적인 것은 DB 설정 변경 같은 것이 있겠지만 이번 포스팅에서는 간단하게 Root Path만 바꿔보는걸로 하겠습니다. 만약 로컬 머신이 Windows 환경이고 개발/운영 서버가 Linux 환경일 때 Root Path가 달라서 생기는 문제가 종종 있었어요. 이것을 해결하려면 외부 property 파일 등에 rootPath=C:\home 이라던가, rootPath=/home/... 등으로 써두곤 해당 프로퍼티 파일을 읽어 내부 로직에서 활용했습니다. 하지만 이 방법은 war 파일로 묶어서 배포 할 때 문제점이 외부 프로퍼티 파일 신경 쓰기가 참 애매하다는거죠. 
+#p  스프링 프로필 기능을 활용하면 war 배포할때도 web.xml 파일 또는 jvm 옵션을 줘서 애플리케이션을 옵션에 맞게 돌릴 수 있어요. 우선 코드를 보는게 빠를 것 같네요. 
+#p {=Spring Profile 기능은 3.1 버전 이상부터 지원합니다.}
+#h4 프로필 기능에서 사용할 클래스 만들기
+#p  우선 간단하게 프로필 기능에서 활용할 기본 클래스를 하나 만들겠습니다. 이름은 ProfileCls 에요. 
+###code.java
+public class ProfileCls {
+	private String rootPath;
+
+	public String getRootPath() {
+		return rootPath;
+	}
+
+	public void setRootPath(String rootPath) {
+		this.rootPath = rootPath;
+	}
+}
+### 
+#p  보시다시피 매우 간단한 클래스입니다. rootPath라는 변수 하나를 set/get 할 수 있는 클래스입니다. rootPath를 로컬/개발/운영 서버에 맞게끔 호출 할 수 있도록 해봅시다. 
+#h4 프로필 설정
+#h5 XML 파일 설정
+#p  저는 root-context.xml 파일에 해당 내용을 기술했지만 필요 여하에 따라 다른 XML 파일에도 기술 가능합니다. 다음처럼 작성 해보세요. 
+###code.xml
+...
+	&lt;beans profile="local"&gt;   
+		&lt;bean id="ProfileCls" class="your.package.name.ProfileCls"&gt;
+			&lt;property name="rootPath" value="C:/home/profile"/&gt;
+		&lt;/bean&gt;
+	&lt;/beans&gt;
+	&lt;beans profile="dev"&gt;   
+		&lt;bean id="ProfileCls" class="your.package.name.ProfileCls"&gt;
+			&lt;property name="rootPath" value="/home/dev"/&gt;
+		&lt;/bean&gt;
+	&lt;/beans&gt;
+	&lt;beans profile="production"&gt;   
+		&lt;bean id="ProfileCls" class="your.package.name.ProfileCls"&gt;
+			&lt;property name="rootPath" value="/home/release"/&gt;
+		&lt;/bean&gt;
+	&lt;/beans&gt;
+...
+### 
+#p  3개의 프로필을 설정했습니다. 로컬 머신에서는 windows 환경이라는 가정이었고, 개발(dev)/운영(production) 서버는 linux 환경이라는 가정으로 만든 XML 파일입니다. 
+#h4 프로필 적용 방법
+#h5 web.xml 수정
+#p  프로필 설정이 끝났으면 이번엔 web.xml 파일을 수정해볼 차례입니다. 이 부분을 스위칭 해서 프로필을 변경 할 수 있습니다. 중복 기입도 가능합니다. 
+###code.xml
+...
+	&lt;!-- use profile --&gt;
+	&lt;context-param&gt;
+		&lt;param-name&gt;spring.profiles.active&lt;/param-name&gt;
+		&lt;param-value&gt;local&lt;/param-value&gt;
+		&lt;!-- &lt;param-value&gt;local, dev&lt;/param-value&gt; --&gt;
+	&lt;/context-param&gt;		
+...
+### 
+#p  이제 해당 어플리케이션은 "local" 프로필로 설정 되었습니다. 정말로 그렇게 돌아가는지 확인도 해볼 필요가 있겠죠. 
+#h5 JVM option 설정
+#p  web.xml 외에도 별도의 WAS를 사용하고 있을 때 (톰캣이라던가, 톰캣이라던가?) JVM 옵션을 통해 프로필 설정도 가능합니다. {=2015.04.29} 
+###console
+-Dspring.profiles.active=local,dev
+###
+#p  여러개를 설정할 수도 있습니다. 만약 톰캣이라고 한다면 {@/tomcatPath/bin/catalina.sh}에 {@JAVA_OPTS="$JAVA_OPTS -Dspring.profiles.active=local,dev"} 같은 형식으로 넣어주세요. {=2015.04.29} 
+#h4 현재 프로필 확인
+#p  현재 프로필이 어떤것인지 확인하기 위해선 다음처럼 사용하면 됩니다. 컴포넌트가 하나 있다는 가정으로 시작하겠습니다. 컨트롤러도 가능합니다. 
+###code.java
+@Component("your.package.name.Comp")
+public class Comp {
+	private static final Logger logger = LoggerFactory.getLogger(Comp.class);
+...
+	@Autowired private ConfigurableWebApplicationContext subContext;
+	@Autowired private Environment env;
+...
+	// ConfigurableWebApplicationContext 이용
+	String[] profiles = subContext.getEnvironment().getActiveProfiles();
+	for(String profile : profiles){
+		logger.debug( profile );
+	}
+	// Environment 이용
+	profiles = env.getActiveProfiles();
+	for(String profile : profiles){
+		logger.debug( profile );
+	}
+...
+}
+### 
+#h4 이젠 정말로 사용하자
+#p  프로필 XML, 프로필에 사용할 클래스, web.xml 변경, 현재 프로필 설정까지 전부 확인했다면 이제 쓰는것밖에 안남았습니다. 실제로 사용하기 위해 다음처럼 해봅시다. 
+###code.java
+...
+	@Autowired private ProfileCls profileCls;
+...
+	logger.debug(profileClas.getRootPath()); // C:/home/profile 라는 문자열이 나옵니다.
+### 
+#h4 마무리
+#p  간단하게 스프링 프로필 설정에 대해 알아봤습니다. 저도 공부하면서 정리하는 것이라서 부족한 것이 많겠지만 개선이나 오류에 대해서 질문 및 댓글은 언제나 환영합니다. :3 
+

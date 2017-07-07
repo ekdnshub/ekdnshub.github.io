@@ -324,7 +324,6 @@ var postsInfo = (function(){
             "81":{
                 "title":"스프링 프로필 설정(Spring Profile)",
                 "created":"2015-03-06"
-                ,"version":"v1"
             },
             "82":{
                 "title":"스칼라 개발 툴 다운로드(IDE for Scala)",
