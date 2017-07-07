@@ -57,9 +57,9 @@ $(document).ready(function(){
 ###
 #h4 조금 더 자세히 원한다면...
 ###p
-만약 정적 테이블이 아닌 ajax를 사용한 동적 테이블이라고 한다면 다음 링크를 검토 해보시면 됩니다.
-{$http://tablesorter.com/docs/example-ajax.html}
-다른 예제를 보고 싶으시면 다음 링크를 확인하세요.
+만약 정적 테이블이 아닌 ajax를 사용한 동적 테이블이라고 한다면 다음 링크를 검토 해보시면 됩니다.\n
+{$http://tablesorter.com/docs/example-ajax.html}\n
+다른 예제를 보고 싶으시면 다음 링크를 확인하세요.\n
 {$http://tablesorter.com/docs/#Examples}
 ###
 #h4 Tip
