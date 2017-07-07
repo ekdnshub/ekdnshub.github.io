@@ -929,7 +929,6 @@ var postsInfo = (function(){
             "205":{
                 "title":"MariaDB - Multi In Query",
                 "created":"2015-10-01"
-                ,"version":"v1"
             },
             "206":{
                 "title":"Postman - Rest API Test Tool",
