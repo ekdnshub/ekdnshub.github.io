@@ -328,7 +328,6 @@ var postsInfo = (function(){
             "82":{
                 "title":"스칼라 개발 툴 다운로드(IDE for Scala)",
                 "created":"2015-03-09"
-                ,"version":"v1"
             },
             "83":{
                 "title":"Scala Hello World!",
