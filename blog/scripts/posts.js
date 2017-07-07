@@ -332,7 +332,6 @@ var postsInfo = (function(){
             "83":{
                 "title":"Scala Hello World!",
                 "created":"2015-03-09"
-                ,"version":"v1"
             },
             "84":{
                 "title":"C 파일 사이즈 구하기(Getting file size with C)",
