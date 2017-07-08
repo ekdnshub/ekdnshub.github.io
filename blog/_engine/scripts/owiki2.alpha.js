@@ -256,7 +256,6 @@ var owiki2 = (function(){
                     var findKey = prevOp;
                     multiLineKeywordList.forEach(function(process){
                         if (process[0] == findKey && process[3] != null) { // 블록 상태 중 처리할 프로세스를 실행한다.
-                            opStack.push(findKey);
                             resultMultiLine = process[3](line);
                         }
                     });
