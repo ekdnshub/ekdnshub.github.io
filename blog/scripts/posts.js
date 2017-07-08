@@ -388,7 +388,6 @@ var postsInfo = (function(){
             "97":{
                 "title":"자바스크립트 타이밍 이벤트(javascript timing events)",
                 "created":"2015-03-26"
-                ,"version":"v1"
             },
             "98":{
                 "title":"어셈블리어(Assembly Language)",
