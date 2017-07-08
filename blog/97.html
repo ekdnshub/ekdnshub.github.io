@@ -56,20 +56,20 @@
 				<article>
 					<!-- 본문 -->
 					<div id="content"><div style="display:none;">
-title=자바스크립트 타이밍 이벤트(javascript timing events)
-created=2015-03-26
+
+
 </div>
 <p>자바스크립트에서 일정시간마다 특정 함수를 호출하고 싶은 경우가 종종 있습니다. 이런 경우에 사용할 수 있는 자바스크립트 이벤트 중에는 타이밍 이벤트(Timing Events)가 있어요. 타이밍 이벤트가 무엇인지 알아보고 사용법도 조금 살펴볼까 합니다.</p>
 <h4>타이밍 이벤트(Timing Events)</h4>
 <p>타이밍 이벤트는 w3schools에선 다음처럼 설명 하고 있습니다.</p>
 <blockquote>
-<p>With JavaScript, it is possible to execute some code at specified time-intervals. This is called timing events.</p>
-<p>It's very easy to time events in JavaScript. The two key methods that are used are:</p>
-<div class="none">
+<p>
+With JavaScript, it is possible to execute some code at specified time-intervals. This is called timing events.<br>
+It's very easy to time events in JavaScript. The two key methods that are used are:<br>
 setInterval() - executes a function, over and over again, at specified time intervals<br>
-setTimeout() - executes a function, once, after waiting a specified number of milliseconds
-</div>
-<cite><a href="http://www.w3schools.com/js/js_timing.asp">w3schools - JavaScript Timing Events</a></cite>
+setTimeout() - executes a function, once, after waiting a specified number of milliseconds<br>
+</p>
+
 </blockquote>
 <p>눈여겨 볼것은 두가지 함수가 설명이 되어 있는데요. 바로 setInterval, setTimeout 함수입니다. 두가지의 명확한 차이점이 있네요.</p>
 <p>인용한대로라면 <strong>setInterval</strong> 함수는 지정된 코드를 지정된 시간 간격만큼 계속해서 <strong>반복 실행</strong>을 한다고 되어 있습니다. 하지만 <strong>setTimeout</strong> 함수는 지정된 시간동안 기다린 후 지정된 코드를 <strong>단 한번만 실행</strong>한다고 되어 있네요.</p>
@@ -100,11 +100,11 @@ window.clearTimeout(loopTimer);
 <h5>setInterval</h5>
 <blockquote>
 <p>
-Real delay for setInterval is actually less than given.
-If the execution is impossible, it is queued.
-If the browser is busy, and the execuion is already queued, setInterval skips it.
+Real delay for setInterval is actually less than given.<br>
+If the execution is impossible, it is queued.<br>
+If the browser is busy, and the execuion is already queued, setInterval skips it.<br>
 </p>
-<cite><a href="http://javascript.info/tutorial/settimeout-setinterval#the-real-delay-of-setinterval">Javascript Tutorial - Understanding timers: setTimeout and setInterval</a></cite>
+
 </blockquote>
 <p>위의 인용구는 출처로 명기된 곳에서 일부 발췌한 내용입니다. 설명하자면 setInterval 함수의 실제 지연시간은 프로그래머가 준 시간보다 실제적으론 적다는 것입니다. 또한 실행할 수 없는 상태라면 큐에 저장된다고 하고 있네요. 만약에 브라우저가 처리할 수 없는 상태(바쁜 상태)이면서 이미 큐에 저장된 것이 있으면 setInterval은 이것을 무시합니다.</p>
 <p>다시 말해서 setInterval은 지정된 시간 간격만큼 무조건 지정된 코드를 호출하고자 합니다. 하지만 지정된 시간 간격에 도달했음에도 불구하고 지정된 코드를 실행할 수 없는 상태라면 setInterval은 이벤트를 큐에 저장합니다.</p>

@@ -6,10 +6,10 @@ created=2015-03-26
 #h4 타이밍 이벤트(Timing Events)
 #p  타이밍 이벤트는 w3schools에선 다음처럼 설명 하고 있습니다. 
 ###include
-#p  With JavaScript, it is possible to execute some code at specified time-intervals. This is called timing events. 
-#p  It's very easy to time events in JavaScript. The two key methods that are used are:
-###box.none
-setInterval() - executes a function, over and over again, at specified time intervals\n
+###p
+With JavaScript, it is possible to execute some code at specified time-intervals. This is called timing events.
+It's very easy to time events in JavaScript. The two key methods that are used are:
+setInterval() - executes a function, over and over again, at specified time intervals
 setTimeout() - executes a function, once, after waiting a specified number of milliseconds
 ###
 #cite {$http://www.w3schools.com/js/js_timing.asp|w3schools - JavaScript Timing Events}
