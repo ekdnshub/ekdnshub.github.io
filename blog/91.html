@@ -1,21 +1,21 @@
 <!DOCTYPE HTML>
 <html lang="ko">
-<head>
+	<head>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
+    
     <!-- # font -->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -26,11 +26,11 @@
     <!--[if gt IE 9]><!-->
     <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <!--<![endif]-->
-
+    
     <!-- # front view lib # -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+    
     <!-- # blog library # -->
     <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
     <script src="/lib/o/1.0.2.min.js"></script>
@@ -41,47 +41,50 @@
     <script src="/blog/scripts/postHandler.js"></script>
     <script src="/blog/scripts/copyright.js"></script>
     <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"> <p> select query를 실행하는 순서가 문득 어떻게 되는지 궁금해졌습니다. 그냥 아~ 이런거구나 보단 문서로 확인하고 싶었어요. 지금 포스팅의 내용은 <a href="http://stackoverflow.com/questions/2617661/whats-the-execute-order-of-the-different-parts-of-a-sql-select-statement" target="_blank">이곳</a>에서 일부 인용 되었습니다. </p>
-                <h4>select query ordering</h4>
-                <div class="blue">
-                    <strong>FROM</strong>
-                    <br> ON
-                    <br> JOIN
-                    <br>
-                    <strong>WHERE</strong>
-                    <br> GROUP BY
-                    <br> CUBE | ROLLUP
-                    <br> HAVING
-                    <br>
-                    <strong>SELECT</strong>
-                    <br> DISTINCT
-                    <br>
-                    <strong>ORDER BY</strong>
-                    <br> TOP
-                    <br>
-                </div>
-                <p> select 쿼리는 위부터 아래의 순서로 실행이 됩니다. 자주 사용하는 구문은 두껍게 해놨습니다. :3 </p>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+	</head>
+	<body>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+					<!-- 본문 -->
+					<div id="content"><div style="display:none;">
+title=쿼리 실행 순서(SELECT 구문)
+created=2015-03-16
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+<p>select query를 실행하는 순서가 문득 어떻게 되는지 궁금해졌습니다. 그냥 아~ 이런거구나 보단 문서로 확인하고 싶었어요. 지금 포스팅의 내용은 <a href="http://stackoverflow.com/questions/2617661/whats-the-execute-order-of-the-different-parts-of-a-sql-select-statement">이곳</a>에서 일부 인용 되었습니다.</p>
+<h4>select query ordering</h4>
+<div class="blue">
+<strong>FROM</strong><br>
+ON<br>
+JOIN<br>
+<strong>WHERE</strong><br>
+GROUP BY<br>
+CUBE | ROLLUP<br>
+HAVING<br>
+<strong>SELECT</strong><br>
+DISTINCT<br>
+<strong>ORDER BY</strong><br>
+TOP
+</div>
+<p>select 쿼리는 위부터 아래의 순서로 실행이 됩니다. 자주 사용하는 구문은 두껍게 해놨습니다. :3</p>
+
+
+
+</div>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

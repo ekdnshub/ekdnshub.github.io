@@ -364,7 +364,6 @@ var postsInfo = (function(){
             "91":{
                 "title":"쿼리 실행 순서(SELECT 구문)",
                 "created":"2015-03-16"
-                ,"version":"v1"
             },
             "92":{
                 "title":"차트 라이브러리 highcharts",
