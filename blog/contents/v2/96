@@ -1,0 +1,65 @@
+###info
+title=스칼라 정규 표현식 CASE 처리
+created=2015-03-24
+###
+#p  스칼라에서 파일을 읽어 정규 표현식을 적용해 봤습니다. 로그 파일등을 분석할때 간단히 사용할 수 있을 정도로 숙련시켜 두면 좋을 것 같아요. 
+#h4 정규 표현식 사용
+#p  {!급하게 사용법만 알아야겠다고 한다면 해당 절만 읽으시면 됩니다.} 간략하게 파일을 읽어서 해당 라인에서 정규 표현식을 이용해 케이스별로 값을 출력하는 예제입니다. 
+#h5 샘플 파일
+#p  예제를 실행하기 위한 샘플 내용입니다. 내용을 담은 파일은 test.txt라고 지었습니다. 
+###box.none
+http://blog.jdm.kr\n
+이 라인은 문자열만 있습니다.
+###
+#h5 실행 코드
+###code.scala
+import scala.io.Source
+
+object rexTest {
+    def main(args: Array[String]){
+        try{
+            for(line &lt;- Source.fromFile("test.txt","euc-kr").getLines()){
+                line match {
+                    case s if s.matches("http.*") =&gt; println("URL")
+                    case _ =&gt; println("Not Found Regular Expression.")
+                }
+            }
+        } catch {
+            case ex: Exception =&gt; println(ex)
+        }
+    }
+}
+### 
+#h5 실행 결과
+#p  위의 코드를 실행한 결과는 다음과 같습니다. 
+###console
+URL
+Not Found Regular Expression.
+### 
+#h4 코드 분석
+#p  이제부터 위에서 사용된 실행 코드를 하나씩 뜯어보고자 합니다. 
+###code.scala
+for(line &lt;- Source.fromFile("test.txt","euc-kr").getLines()){...}
+### 
+#p  위 코드는 test.txt 파일을 줄 단위로 읽어들입니다. fromFile에서 두번째 인자값은 파일의 인코딩을 정할 수 있습니다. 
+###code.scala
+line match {
+case s if s.matches("http.*") =&gt; println("URL")
+case _ =&gt; println("Not Found Regular Expression.")
+}
+### 
+#p  위 코드는 줄 단위로 읽어들인 line 변수를 이용해 match 구문을 사용한 것입니다. match 구문 내부에는 case 구문이 있어야 합니다. 
+###code.scala
+case s if s.matches("http.*") =&gt; println("URL")
+### 
+#p  위 코드는 http.* 라는 정규 표현식 문자열을 이용해 체크가 되면 URL이라는 문자열을 출력합니다. 더욱 자세히 살펴본다면, s는 여기서 와일드카드(wildcard) 변수로 해당 케이스까지 처리할 데이터가 왔을 때 모든 값을 받습니다. 그리고 matches를 통해 정규 표현식 문자열과 매칭을 합니다. 자바와는 다르게 케이스를 결정할 때 if 구문 추가가 가능한데 이것을 {!가드(Guard)}라고도 합니다. 
+###code.scala
+case _ =&gt; println("Not Found Regular Expression.")
+### 
+#p  위 코드는 line 변수가 어떠한 case문에도 걸리지 않았다면 실행합니다. 기본적으로 scala에서 case가 나열되어 있다면 Top-Bottom으로 동작합니다. 즉, 위에서부터 차례대로 대조해봐서 처음 일치하는 것이 반환됩니다. 
+#p  만약 이 코드가 없다면 스칼라 컴파일러는 MatchError를 출력합니다. match 구문에서 어떠한 case에도 동작하지 않았다면 오류로 보기 때문이죠. 따라서 이 코드를 넣거나 반드시 걸리는 case 문을 추가해서 MatchError가 발생하는 것을 예방하는 것이 좋습니다. 
+#p  반드시 걸리는 case 문에는 다음과 같은 코드도 사용 가능합니다. 
+###code.scala
+case s =&gt; println(s)
+### 
+#p  변수를 통한 매칭(Match by Variable)입니다. s라는 변수는 모든 케이스에 일치하는 와일드카드(whildcard) 변수로 사용합니다. _ 변수와는 다르게 몸체(body)에서 참조가 가능합니다. 

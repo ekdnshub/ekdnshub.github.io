@@ -380,12 +380,10 @@ var postsInfo = (function(){
             "95":{
                 "title":"정보보안기사 준비!",
                 "created":"2015-03-23"
-                ,"version":"v1"
             },
             "96":{
                 "title":"스칼라 정규 표현식 CASE 처리",
                 "created":"2015-03-24"
-                ,"version":"v1"
             },
             "97":{
                 "title":"자바스크립트 타이밍 이벤트(javascript timing events)",
