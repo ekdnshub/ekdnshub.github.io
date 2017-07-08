@@ -210,7 +210,6 @@ var owiki2 = (function(){
             }, function(line){ return "</pre>"}, function(line){
                 line = line.replace(/</g,"&lt;");
                 line = line.replace(/>/g,"&gt;");
-                line += "<br>";
                 return line;
             }],
             ["###p", function(line){ return "<p>"; }, function(line){ return "</p>"; }, function(line){ return line+"<br>"; }],
@@ -221,6 +220,7 @@ var owiki2 = (function(){
                     if (obj[0] == prevOp) { // 이전 스택 값과 동일한 키일 경우 해당 블록 종료 프로세스를 실행한다.
                         result = obj[2](line);
                         opStack.pop(); // 사용한 op는 스택에서 삭제한다.
+                        // console.log(opStack);
                     }
                 });
                 return result;
@@ -259,10 +259,9 @@ var owiki2 = (function(){
                             resultMultiLine = process[3](line);
                         }
                     });
+                } else {
+                    resultMultiLine = line;
                 }
-                resultMultiLine = line;
-
-
             }
             convertMultiLineData += resultMultiLine + "\n";
         }
