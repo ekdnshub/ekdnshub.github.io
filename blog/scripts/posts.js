@@ -348,7 +348,6 @@ var postsInfo = (function(){
             "87":{
                 "title":"특수 기호/문자 읽는법",
                 "created":"2015-03-11"
-                ,"version":"v1"
             },
             "88":{
                 "title":"톰캣 로드밸런서 사용법(tomcat loadbalancers)",
