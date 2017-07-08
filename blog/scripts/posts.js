@@ -368,7 +368,6 @@ var postsInfo = (function(){
             "92":{
                 "title":"차트 라이브러리 highcharts",
                 "created":"2015-03-16"
-                ,"version":"v1"
             },
             "93":{
                 "title":"Tomcat document root 설정",
