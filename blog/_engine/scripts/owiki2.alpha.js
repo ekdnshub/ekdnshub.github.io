@@ -112,7 +112,7 @@ var owiki2 = (function(){
 
             keywordList.forEach(function(keyword){
                 var result = keyword[1](token);
-                console.log(keyword[0], result);
+                // console.log(keyword[0], result);
                 if (result != null) token = result;
             });
 
