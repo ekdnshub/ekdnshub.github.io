@@ -372,12 +372,10 @@ var postsInfo = (function(){
             "93":{
                 "title":"Tomcat document root 설정",
                 "created":"2015-03-17"
-                ,"version":"v1"
             },
             "94":{
                 "title":"스칼라 파일 읽기(read file with scala)",
                 "created":"2015-03-17"
-                ,"version":"v1"
             },
             "95":{
                 "title":"정보보안기사 준비!",
