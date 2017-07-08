@@ -356,7 +356,6 @@ var postsInfo = (function(){
             "89":{
                 "title":"스칼라 학교(scala school)",
                 "created":"2015-03-12"
-                ,"version":"v1"
             },
             "90":{
                 "title":"sbt 설치하기(Installing Simple Build Tool)",
