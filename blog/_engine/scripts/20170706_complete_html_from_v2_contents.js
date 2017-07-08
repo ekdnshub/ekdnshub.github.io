@@ -5,7 +5,7 @@ ex)
 $ node ./20170706_to_v2_from_v1_converter.js {number}
 */
 
-var owiki = require("../../../lib/o/wiki/1.min.js");
+var owiki = require("./owiki2.alpha.js");
 
 var BASE_TEMPLATE = "../../base.html";
 var V2_CONTENTS_PATH = "../../contents/v2/";
