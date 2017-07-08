@@ -360,7 +360,6 @@ var postsInfo = (function(){
             "90":{
                 "title":"sbt 설치하기(Installing Simple Build Tool)",
                 "created":"2015-03-13"
-                ,"version":"v1"
             },
             "91":{
                 "title":"쿼리 실행 순서(SELECT 구문)",
