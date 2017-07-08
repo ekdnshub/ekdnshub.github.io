@@ -254,11 +254,14 @@ var owiki2 = (function(){
                 var prevOp = opStack[opStack.length-1];
                 if (prevOp != null) { // 이전 op 값이 존재한다면
                     var findKey = prevOp;
+                    var isOnce = false;
                     multiLineKeywordList.forEach(function(process){
                         if (process[0] == findKey && process[3] != null) { // 블록 상태 중 처리할 프로세스를 실행한다.
                             resultMultiLine = process[3](line);
+                            isOnce = true;
                         }
                     });
+                    if (!isOnce) resultMultiLine = line;
                 } else {
                     resultMultiLine = line;
                 }
@@ -279,11 +282,11 @@ var owiki2 = (function(){
         // step2. 싱글 라인 변환
         var convertLineData = processSingleLine(convertKeywordData);
 
-        //console.log(convertLineData);
+        // console.log(convertLineData);
 
         // step3. 멀티 라인 변환
         var convertMultiLineData = processMultiLine(convertLineData);
-        //console.log(convertMultiLineData);
+        // console.log(convertMultiLineData);
 
 
         return convertMultiLineData;
