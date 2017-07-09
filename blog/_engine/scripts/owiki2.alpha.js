@@ -56,11 +56,11 @@ var owiki2 = (function(){
             ["{+warn", function(line){ // warn {+warn}
                 return line.replace(/\{\+warn\}/g, "<i class=\"fa fa-exclamation-triangle fa-lg\"></i>");
             }],
-            ["{@@", function(line){ // span.error {@@...}
-                return keywordProcess("\{@@(.*)\}", line, "<span class=\"error\">", "</span>");
+            ["{==", function(line){ // span.error {==...}
+                return keywordProcess("\{==(.*)\}", line, "<span class=\"error\">", "</span>");
             }],
             ["{@", function(line){ // span.command {@...}
-                return keywordProcess("\{@(.*)\}", line, "<span class=\"command\">", "</span>");
+                return line.replace(/\{\@([^\@\{]*)\}/g,"<span class=\"command\">$1</span>")
             }],
             ["{=", function(line){ // span.refer {=...}
                 return keywordProcess("\{=(.*)\}", line, "<span class=\"refer\">", "</span>");
@@ -69,7 +69,7 @@ var owiki2 = (function(){
                 return keywordProcess("\{!!(.*)\}", line, "<i>", "</i>");
             }],
             ["{!", function(line){ // strong {!...}
-                return keywordProcess("\{!(.*)\}", line, "<strong>", "</strong>");
+                return line.replace(/\{\!([^\!\{]*)\}/g,"<strong>$1</strong>")
             }],
             ["{~~~", function(line){ // blue {~~~...}
                 return keywordProcess("\{~~~(.*)\}", line, "<span class=\"blue\">", "</span>");
@@ -88,7 +88,8 @@ var owiki2 = (function(){
                     return line;
                 }
                 var start = line.indexOf("{$");
-                var end = line.lastIndexOf("}");
+                var subStr = line.substr(start, line.length - 1);
+                var end = start + subStr.indexOf("}");
                 var orgString = line.substring(start, end+1); // {$...|....}
                 var href = orgString.substring(2, orgString.length - 1); // ...|....
                 if (href.split("|").length == 2) {
@@ -202,7 +203,12 @@ var owiki2 = (function(){
                 var color = line.match(/###box\.(.*)/)[1];
                 return "<div class=\""+color+"\">";
             }, function(line){ return "</div>"; }, null],
-            ["###console", function(line){ return "<pre class=\"console\">"; }, function(line){ return "</pre>"; }, null],
+            ["###console", function(line){ return "<pre class=\"console\">"; }, function(line){ return "</pre>";
+            }, function(line){
+                line = line.replace(/</g,"&lt;");
+                line = line.replace(/>/g,"&gt;");
+                return line;
+            }],
             ["###diagram", function(line){ return "<pre class=\"diagram\">"; }, function(line){ return "</pre>"; }, null],
             ["###code", function(line){
                 var lang = line.match(/###code\.(.*)/)[1];

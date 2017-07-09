@@ -147,4 +147,4 @@ alert (x) // 이 코드는 오류가 난다.
 ###
 
 #line
-#p 마지막으로, 함수{=function} 내에서 {@f()} 같은 함수를 호출하면 이 값은 전역 객체{=global object}지만 {!엄격한 문법} 내에서는 {@@undefined} 값을 가진다.
+#p 마지막으로, 함수{=function} 내에서 {@f()} 같은 함수를 호출하면 이 값은 전역 객체{=global object}지만 {!엄격한 문법} 내에서는 {==undefined} 값을 가진다.
