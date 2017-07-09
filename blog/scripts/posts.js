@@ -392,7 +392,6 @@ var postsInfo = (function(){
             "98":{
                 "title":"어셈블리어(Assembly Language)",
                 "created":"2015-03-30"
-                ,"version":"v1"
             },
             "99":{
                 "title":"빌드 자동화 도구 Gradle 설치(install Gradle)",
