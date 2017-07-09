@@ -396,7 +396,6 @@ var postsInfo = (function(){
             "99":{
                 "title":"빌드 자동화 도구 Gradle 설치(install Gradle)",
                 "created":"2015-03-31"
-                ,"version":"v1"
             },
             "100":{
                 "title":"Gradle를 이용한 자바 프로젝트 빌드",
