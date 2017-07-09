@@ -1,5 +1,4 @@
-var owiki2 = (function(){
-
+ var owiki2 = (function(){
 
     var lastReplace = function(org, input, replaceStr) {
         var last = org.lastIndexOf(input);
@@ -9,7 +8,7 @@ var owiki2 = (function(){
         return org;
     };
 
-
+    // TODO delete keywordProcess Func
     var keywordProcess = function(matcher, line, start, end) {
         if (line == null || line == undefined) {
             return null;
@@ -41,7 +40,6 @@ var owiki2 = (function(){
         var tokens = data.split("\n");
         var convertKeywordData = "";
 
-
         // 키워드 리스트 [0] 키워드(정규식), [1] 처리 프로세스
         var keywordList = [
             ["n", function(line){ // check \n
@@ -60,7 +58,7 @@ var owiki2 = (function(){
                 return keywordProcess("\{==(.*)\}", line, "<span class=\"error\">", "</span>");
             }],
             ["{@", function(line){ // span.command {@...}
-                return line.replace(/\{\@([^\@\{]*)\}/g,"<span class=\"command\">$1</span>")
+                return line.replace(/\{\@([^\{]*)\}/g,"<span class=\"command\">$1</span>")
             }],
             ["{=", function(line){ // span.refer {=...}
                 return keywordProcess("\{=(.*)\}", line, "<span class=\"refer\">", "</span>");
@@ -69,7 +67,7 @@ var owiki2 = (function(){
                 return keywordProcess("\{!!(.*)\}", line, "<i>", "</i>");
             }],
             ["{!", function(line){ // strong {!...}
-                return line.replace(/\{\!([^\!\{]*)\}/g,"<strong>$1</strong>")
+                return line.replace(/\{\!([^\{]*)\}/g,"<strong>$1</strong>")
             }],
             ["{~~~", function(line){ // blue {~~~...}
                 return keywordProcess("\{~~~(.*)\}", line, "<span class=\"blue\">", "</span>");
