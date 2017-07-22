@@ -404,7 +404,6 @@ var postsInfo = (function(){
             "101":{
                 "title":"Convention over configuration(CoC)의 이해",
                 "created":"2015-04-01"
-                ,"version":"v1"
             },
             "102":{
                 "title":"Spring Boot Getting Started",
