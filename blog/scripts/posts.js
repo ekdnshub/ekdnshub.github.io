@@ -400,7 +400,6 @@ var postsInfo = (function(){
             "100":{
                 "title":"Gradle를 이용한 자바 프로젝트 빌드",
                 "created":"2015-03-31"
-                ,"version":"v1"
             },
             "101":{
                 "title":"Convention over configuration(CoC)의 이해",
