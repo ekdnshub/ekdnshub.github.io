@@ -31,10 +31,7 @@ var Comment = (function(){
     });
 
     var url = "http://jdm.kr/blog/"+seq;
-    var identifier = seq;
-    if (seq == 1) {
-    	identifier = "20170725_1";
-    }
+    var identifier = "20170725_"+seq;
     var body = o.mapper.toHtml(commentBody, {url: url, identifier: identifier});
     
     $("#comment_body").html(body);
