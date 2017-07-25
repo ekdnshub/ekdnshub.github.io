@@ -32,9 +32,9 @@ var Comment = (function(){
 
     var url = "http://jdm.kr/blog/"+seq;
     var identifier = seq;
-    if (seq == 1) {
-    	identifier = "__1";
-    }
+//    if (seq == 1) {
+//    	identifier = "__1";
+//    }
     var body = o.mapper.toHtml(commentBody, {url: url, identifier: identifier});
     
     $("#comment_body").html(body);
