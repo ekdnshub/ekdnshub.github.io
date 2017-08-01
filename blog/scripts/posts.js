@@ -412,7 +412,6 @@ var postsInfo = (function(){
             "103":{
                 "title":"신경망 알고리즘(Neural Network)",
                 "created":"2015-04-01"
-                ,"version":"v1"
             },
             "104":{
                 "title":"유전 알고리즘(Genetic Algorithms)",
