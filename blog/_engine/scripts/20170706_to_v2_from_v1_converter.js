@@ -25,7 +25,7 @@ result += "###\n";
 
 fs.readFileSync(V1_CONTENTS_PATH + number).toString().split('\n').forEach(function (_line) {
     var line = _line.toString();
-    if (line[0] == " ") line = line.trim();
+    if (line[0] == " ") line = line.substring(1,line.length-1);
     line = line.replace("<p>", "#p ").replace("</p>", "");
     line = line.replace('<p class="refer">', "#p {=");
     line = line.replace("<h1>", "#h1 ").replace("</h1>", "");
@@ -49,8 +49,8 @@ fs.readFileSync(V1_CONTENTS_PATH + number).toString().split('\n').forEach(functi
     line = line.replace('<div class="blue">', "###box.blue");
     line = line.replace('<div class="green">', "###box.green");
     line = line.replace('<div class="box">', "###console");
-
-
+    line = line.replace("<blockquote>", "###include");
+    line = line.replace("</blockquote>", "###");
     line = line.replace('<pre class="prettyprint linenums">', "###console");
     line = line.replace('<pre class="prettyprint linenums lang-cpp">', "###code.cpp");
     line = line.replace('<pre class="prettyprint linenums lang-java">', "###code.java");
