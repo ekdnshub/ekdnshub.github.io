@@ -408,7 +408,6 @@ var postsInfo = (function(){
             "102":{
                 "title":"Spring Boot Getting Started",
                 "created":"2015-04-01"
-                ,"version":"v1"
             },
             "103":{
                 "title":"신경망 알고리즘(Neural Network)",

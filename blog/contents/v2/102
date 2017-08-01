@@ -1,0 +1,158 @@
+###info
+title=Spring Boot Getting Started
+created=2015-04-01
+###
+#p  Spring 프레임워크는 자바 개발자라면 거의 필수로 익혀야 할 정도로 대중화 되어있고 유연한 기능성으로 개발자들에게 사랑을 받고 있습니다. 그리고 현시점에서 Spring 프레임워크를 더욱 간단하게 접근할 수 있도록 만들어진 프로젝트가 있어요. 바로 {!Spring Boot}입니다. 
+#h4 Spring Boot가 뭐죠?
+###include
+#p  Takes an opinionated view of building production-ready Spring applications. Spring Boot favors convention over configuration and is designed to get you up and running as quickly as possible. 
+#cite {$http://projects.spring.io/spring-boot|Spring Boot}
+###
+#p  스프링 부트는 CoC(convention over configuration)을 선호하고 개발자로 하여금 가능한 빠르게 실행 가능하도록 디자인되었다고 합니다. 아직까진 와닿지가 않지만 좀 더 파악해볼 필요가 있겠네요. 
+#p  혹시 전체 매뉴얼을 확인하고 싶으시면 {$http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/|spring boot Docs}를 확인해보세요.
+#h4 스프링 부트 시작(Getting Started)
+#p  실제로 스프링 부트를 사용하기 위해서 설치할 것이 있습니다. Spring boot 라이브러리죠. 우선 저는 Gradle로 패키지를 다운로드 받으려고 합니다. Gradle의 설치는 {$99|이곳}을 참조하세요.
+#p  그리고 자바 프로젝트도 하나 준비합니다. 이번 포스팅에서 사용하는 프로젝트는 {$100|이곳}에서 작성한 예제 프로젝트를 가지고 진행합니다.
+#p  이 예제는 다음과 같은 디렉토리 구조를 가집니다. 
+###console
+helloworld
+└ .gradle
+    └ build
+    └ src
+        └ main
+            └ java
+                └ hello
+                    └ HelloWorld.java
+    └ build.gradle
+###
+#h5 build.gradle 구성
+#p  스프링 부트 패키지를 받기 위해서 일반적으로 다음과 같은 gradle 파일을 사용합니다. 
+###code.js
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'myproject'
+    version =  '0.0.1-SNAPSHOT'
+}
+
+repositories {
+    jcenter()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+### 
+#p  위의 내용을 helloworld 디렉토리 밑에 있는 build.gradle 파일에 적용했습니다. 그리고 다시 한번 gradle 명령어로 빌드를 진행합니다. 
+###console
+C:\helloworld&gt;C:\Users\Jung\Downloads\gradle-2.3-all\gradle-2.3\bin\gradle.bat build
+Download http://repo.spring.io/snapshot/org/springframework/boot/spring-boot-gradle-plugin/1.3.0.BUILD-SNAPSHOT/spring-boot-gradle-plugin-1.3.0.BUILD-20150331.093712-60.pom
+Download http://repo.spring.io/snapshot/org/springframework/boot/spring-boot-tools/1.3.0.BUILD-SNAPSHOT/spring-boot-tools-1.3.0.BUILD-20150331.093712-61.pom
+...(중략)
+Download https://jcenter.bintray.com/org/slf4j/log4j-over-slf4j/1.7.11/log4j-over-slf4j-1.7.11.jar
+Download https://jcenter.bintray.com/org/jboss/logging/jboss-logging/3.1.3.GA/jboss-logging-3.1.3.GA.jar
+Download https://jcenter.bintray.com/ch/qos/logback/logback-core/1.1.3/logback-core-1.1.3.jar
+Download https://jcenter.bintray.com/org/slf4j/slf4j-api/1.7.11/slf4j-api-1.7.11.jar
+:processResources UP-TO-DATE
+:classes
+:jar
+:findMainClass
+:startScripts
+:distTar
+:distZip
+:bootRepackage
+:assemble
+:compileTestJava UP-TO-DATE
+:processTestResources UP-TO-DATE
+:testClasses UP-TO-DATE
+:test UP-TO-DATE
+:check UP-TO-DATE
+:build
+
+BUILD SUCCESSFUL
+
+Total time: 2 mins 11.695 secs
+C:\helloworld&gt;
+### 
+#p  시간이 꽤 소요됐습니다만 빌드가 성공적으로 끝났네요. 
+#h5 SampleController.java
+#p  이번에는 SampleController 클래스를 추가해봅시다. 다음과 같은 파일을 C:\helloworld\src\main\java\hello\SampleController.java라는 이름으로 만들었습니다. 그리고 main() 함수가 2곳에 존재할 필요는 없으니 C:\helloworld\src\main\java\hello\HelloWorld.java 파일은 지워줍니다. 
+###code.java
+import org.springframework.boot.*;
+import org.springframework.boot.autoconfigure.*;
+import org.springframework.stereotype.*;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+@EnableAutoConfiguration
+public class SampleController {
+
+    @RequestMapping("/")
+    @ResponseBody
+    String home() {
+        return "Hello World!";
+    }
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(SampleController.class, args);
+    }
+}
+### 
+#p  그리고 다시 gradle로 빌드를 해봅시다. 
+###console
+C:\helloworld&gt;C:\Users\Jung\Downloads\gradle-2.3-all\gradle-2.3\bin\gradle.bat build
+:compileJava
+:processResources UP-TO-DATE
+:classes
+:jar
+:findMainClass
+:startScripts
+:distTar
+:distZip
+:bootRepackage
+:assemble
+:compileTestJava UP-TO-DATE
+:processTestResources UP-TO-DATE
+:testClasses UP-TO-DATE
+:test UP-TO-DATE
+:check UP-TO-DATE
+:build
+
+BUILD SUCCESSFUL
+
+Total time: 6.218 secs
+### 
+#p  빌드는 잘 됐습니다. 그럼 다음으로 빌드한 것을 실행 해봐야죠. 
+###console
+C:\helloworld\build\libs&gt;java -jar myproject-0.0.1-SNAPSHOT.jar
+
+.   ____          _            __ _ _
+/\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+\\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+'  |____| .__|_| |_|_| |_\__, | / / / /
+=========|_|==============|___/=/_/_/_/
+:: Spring Boot ::  (v1.3.0.BUILD-SNAPSHOT)
+
+2015-04-01 12:35:58.732  INFO 4768 --- [           main] SampleController                         : Starting SampleController on Jung-PC with PID 4768(C:\helloworld\build\libs\myproject-0.0.1-SNAPSHOT.jar started by Jung in C:\helloworld\build\libs)
+...(중략)
+2015-04-01 12:36:01.079  INFO 4768 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2015-04-01 12:36:01.149  INFO 4768 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2015-04-01 12:36:01.151  INFO 4768 --- [           main] SampleController                         : Started SampleController in 2.63 seconds (JVM running for 2.938)
+### 
+#p  위처럼 입력하면 로그가 콘솔에 줄줄히 찍히면서 어플리케이션이 실행됩니다. 마지막에 보면 8080 포트로 실행이 된다는걸 알 수가 있네요. 브라우저를 켜서 http://localhost:8080 을 입력하면 "Hello World!"가 찍혀 있는 것을 확인 할 수 있습니다. :) 
