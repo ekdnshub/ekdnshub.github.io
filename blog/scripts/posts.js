@@ -424,7 +424,6 @@ var postsInfo = (function(){
             "106":{
                 "title":"sts를 이용한 github 저장소 업로드",
                 "created":"2015-04-03"
-                ,"version":"v1"
             },
             "107":{
                 "title":"서버 메모리 압박 두번째.",
