@@ -420,7 +420,6 @@ var postsInfo = (function(){
             "105":{
                 "title":"Spring Boot with STS(Spring Tool Suite)",
                 "created":"2015-04-02"
-                ,"version":"v1"
             },
             "106":{
                 "title":"sts를 이용한 github 저장소 업로드",
