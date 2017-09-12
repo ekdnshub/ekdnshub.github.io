@@ -1,49 +1,26 @@
-$( document ).ready(function(){
+$(document).ready(function(){
 
-    ArchiveGroup.init(o.util.getObjectSize(postsInfo.getMeta()));
+    var totalPostCount = o.util.getObjectSize(postsInfo.getMeta());
+    var currentIndex = ++totalPostCount;
 
-	// smooth wheel
-	o.wheel.init(200,800);
+    ArchiveGroup.init(totalPostCount);
 
-	for( var i = 0 ; i < 10; i++ ){
-	    addPost();
-	}
+    function load(count) {
+        for(var i = 0 ; i < count; i++){
+	        addPost(--currentIndex);
+	    }
+    };
 
-    /* scroll end event catch */
-    $(window).scroll(function() {
-        if ( o.util.isEndScroll() ) {
-            addPost();
-        }
-    });
-
-    /* scroll check */
-    setInterval(function(){
-        if ( o.util.isEndScroll() ) {
-            addPost();
-        }
-    }, 1000);
-
-    function addPost(){
-        var lastId;
-
-        try{
-            lastId = $("#list_wrap>div:last>div:last").attr("id").split("_")[1];
-        } catch( ex ){
-            lastId = getSize(postsMeta) + 1;
-        }
-
-
-        var printingId = lastId - 1;
-
+    function addPost(printingId){
         var html = "";
         var template = o.util.multiLine(function(){
             /*!
-                <div id="doc_{{seq}}" class="col-md-12">
-                    <div class="item_wrap">
-                        <span>{{created}} ┃ {{category}}</span>
-                        <h4><a href="/blog/{{seq}}">{{title}}</a></h4>
-                    </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h4 class="card-title"><a href="/blog/{{seq}}" style="">{{title}}</a></h4>
+                    <p class="card-text"><small class="text-muted">{{category}} | {{created}}</small></p>
                 </div>
+            </div>
             */
         });
 
@@ -52,16 +29,21 @@ $( document ).ready(function(){
             data.seq = printingId;
             data.category = ArchiveGroup.findName(printingId);
             html = o.mapper.toHtml(template, data);
-            html = "<div class=\"row\">"+html+"</div>";
         }
-        $("#list_wrap").append(html);
+
+        $("#list_wrap").append("<div class=\"card-deck\">"+html+"</div>");
     };
 
-    function getSize(obj) {
-        var size = 0, key;
-        for (key in obj) {
-            if (obj.hasOwnProperty(key)) size++;
+    function isEndScroll() {
+        if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
+            return true;
         }
-        return size;
+        return false;
     };
+
+    $(window).scroll(function(){
+        if (isEndScroll()) load(6);
+    });
+
+    load(15);
 });
