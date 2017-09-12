@@ -448,7 +448,6 @@ var postsInfo = (function(){
             "112":{
                 "title":"Support vector machine(SVMs)",
                 "created":"2015-04-09"
-                ,"version":"v1"
             },
             "113":{
                 "title":"머신 러닝(Machine learning)",
