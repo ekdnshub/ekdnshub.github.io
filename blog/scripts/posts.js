@@ -416,7 +416,6 @@ var postsInfo = (function(){
             "104":{
                 "title":"유전 알고리즘(Genetic Algorithms)",
                 "created":"2015-04-02"
-                ,"version":"v1"
             },
             "105":{
                 "title":"Spring Boot with STS(Spring Tool Suite)",

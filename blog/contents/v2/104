@@ -1,0 +1,39 @@
+###info
+title=유전 알고리즘(Genetic Algorithms)
+created=2015-04-02
+###
+#p 이번엔 자바 기반의 유전 알고리즘(Genetic Algorithms)에 대해 조사해봤습니다. 신경망 알고리즘 외에도 유전 알고리즘도 굉장히 많은 라이브러리가 존재합니다.
+#h4 유전 알고리즘이란?
+#p 전 개인적으로 특정 용어에 대한건 위키피디아에서 많이 찾아봅니다. 다음은 위키피디아에서 인용한 유전 알고리즘의 설명입니다.
+###include
+#p  In the field of artificial intelligence, a genetic algorithm (GA) is a search heuristic that mimics the process of natural selection. This heuristic (also sometimes called a metaheuristic) is routinely used to generate useful solutions to optimization and search problems. Genetic algorithms belong to the larger class of evolutionary algorithms (EA), which generate solutions to optimization problems using techniques inspired by natural evolution, such as inheritance, mutation, selection, and crossover.
+#p  Genetic algorithms find application in bioinformatics, phylogenetics, computational science, engineering, economics, chemistry, manufacturing, mathematics, physics, pharmacometrics and other fields.
+#cite {$http://en.wikipedia.org/wiki/Genetic_algorithm|Wikipedia - Genetic algorithm}
+###
+#p 인공지능 분야에서 유전자 알고리즘(GA)는 자연 선택의 프로세스를 모방하여 스스로 답을 찾는 검색 방법(search heuristic)이라고 합니다. 휴리스틱(heuristic)은 최적화 및 검색 문제를 위한 유용한 솔루션을 생성하는데 익숙하다고 합니다.
+#p 사용되는 곳도 생물정보학, 계통발생학, 전산 과학, 공학, 경제학, 화학등… 많은 곳에서 발견할 수 있다고 하네요.
+#p 이해를 돕기 위한 동영상을 하나 첨부했습니다. {$https://www.youtube.com/watch?v=Yr_nRnqeDp0|유전적 알고리즘으로 그네 타는 법을 학습시켰다.}
+#h5 유전 알고리즘 연산
+#p 유전 알고리즘의 연산은 다양하게 있지만 그 중 주요 연산만을 추려내면 초기화(Initialization), 선택(Selection), 유전 연산(Genetic operators), 종료(Termination)가 있습니다. {=2015.04.03}
+#p {!초기화(Initialization) 단계}는 문제 해결을 위해 개별적인 유전자 집단을 만듭니다. 초기의 유전자 집단은 불규칙적으로 생성을 합니다. {!선택(Selection) 단계}는 다음 세대를 위해 문제 해결에 근접한 성공적인 유전자를 선택합니다. {!유전 연산(Genetic operators) 단계}에서는 선택 단계에서 선택한 유전자를 재결합 시킵니다. 이 단계에서 "돌연변이"가 나타날 확률도 존재합니다. {!종료(Termination) 단계}에서는 종료 조건에 도달했는지를 검증합니다. 종료 조건이 아니면 세대 교체를 위해 위의 단계를 반복합니다. {=2015.04.03}
+#p 알고리즘 연산에 대해 정확한 정보를 원하시면 {$http://en.wikipedia.org/wiki/Genetic_algorithm|이곳}을 참조하시기 바랍니다. {=2015.04.03}
+#h4 관련 라이브러리
+#h5 Jenetics
+#p 깔끔한 홈페이지가 인상적이네요. 링크는 {$http://jenetics.io/|이곳}입니다.
+###include
+#p Jenetics is designed with a clear separation of the several concepts of the algorithm, e.g. Gene, Chromosome, Genotype, Phenotype, Population and fitness Function. Jenetics allows you to minimize and maximize the given fitness function without tweaking it. In contrast to other GA implementations, the library uses the concept of an evolution stream (EvolutionStream) for executing the evolution steps. Since the EvolutionStream implements the Java Stream interface, it works smoothly with the rest of the Java Stream API.
+#cite {$http://jenetics.io/|Jenetics - Overview}
+###
+#p 제네틱스는 알고리즘의 개별적 컨셉들을 명확히 구분하도록 설계 되었습니다. 컨셉들이란 예를 들어 유전자, 염색체, 유전자 타입 등이 있습니다. 제네틱스는 사용자가 조정하지 않아도 알맞은 기능을 제공합니다. 다른 GA 구현과는 대조적으로 라이브러리는 진화 단계를 실행하기 위해 에볼루션 스트림의 개념을 사용합니다. 에볼루션 스트림은 자바 스트림 인터페이스로 구현한 이후로 자바 스트림 API와 부드럽게 동작합니다.
+#p 에볼루션 스트림(EvolutionStream)이라는게 정확히 뭔지는 실제로 사용을 해봐야 알 것 같습니다. 최근에도 업데이트가 된 것으로 보이네요.
+#p 해당 라이브러리에 대해서는 {$135|jenetics 설치 및 예제} 포스트로 다뤘습니다. {=2015.05.08}
+#h5 JGAP: Java Genetic Algorithms Package
+#p JGAP는 자바 기반의 유전 알고리즘 패키지를 제공합니다. 홈페이지는 {$http://jgap.sourceforge.net/|이곳}입니다. 마지막 업데이트가 2013년 5월입니다.
+###include
+#p JGAP (pronounced "jay-gap") is a Genetic Algorithms and Genetic Programming component provided as a Java framework. It provides basic genetic mechanisms that can be easily used to apply evolutionary principles to problem solutions. See the examples for a demonstration or watch out the graphical tree that can be created with JGAP for found solutions of genetically evolved programs.
+#cite {$http://jgap.sourceforge.net/|JGAP - WHAT IS JGAP?}
+###
+#p JGAP는 유전 알고리즘과 유전 프로그래밍 개념을 자바 프레임워크로써 제공됩니다. 이것은 문제 해결을 위해 진화 원리를 쉽게 적용할 수 있도록 기본 유전 매커니즘을 제공한다고 하네요.
+#p 이것도 한번 검토해볼 필요가 있겠습니다. :3
+#h4 마무리
+#p 나중에 신경망 알고리즘과 유전 알고리즘의 비교 및 심층석 분석을 해봐야겠어요. :3
