@@ -441,7 +441,6 @@ var postsInfo = (function(){
             "110":{
                 "title":"서버 어플리케이션 근황",
                 "created":"2015-04-08"
-                ,"version":"v1"
             },
             "111":{
                 "title":"Multivariate adaptive regression splines(MARS)",

@@ -1,0 +1,8 @@
+###info
+title=서버 어플리케이션 근황
+created=2015-04-08
+###
+#p  오랫동안 써왔던 정든 톰캣을 내렸습니다(?). 이제 SpringBoot와 Node.js 컨테이너로만 돌리게 되었네요. 뭐, 최근에 ROR로 만든 방명록도 내렸으니 이젠 정말 몇개 안남았군요. 
+#p  덕택에 톰캣과 생사를 같이하던 에스퍼(Esper) 및 스프링 웹소켓(Spring websocket)도 같이 내려갔습니다.  
+#p  나중에 시간나면 SpringBoot에 붙여볼까 싶지만, 그건 그때 가서 생각하는걸로 :3  
+#p  이제 board.jdm.kr, guest.jdm.kr은 순수하게 api.jdm.kr의 openAPI를 이용해서 동작합니다. :3 
