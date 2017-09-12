@@ -428,7 +428,6 @@ var postsInfo = (function(){
             "107":{
                 "title":"서버 메모리 압박 두번째.",
                 "created":"2015-04-06"
-                ,"version":"v1"
             },
             "108":{
                 "title":"SpringBoot 프로젝트를 API 서버로!",
