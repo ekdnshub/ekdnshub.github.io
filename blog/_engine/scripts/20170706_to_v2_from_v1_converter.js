@@ -25,7 +25,7 @@ result += "###\n";
 
 fs.readFileSync(V1_CONTENTS_PATH + number).toString().split('\n').forEach(function (_line) {
     var line = _line.toString();
-    if (line[0] == " ") line = line.substring(1,line.length-1);
+    if (line[0] == " ") line = line.substring(1,line.length);
     line = line.replace("<p>", "#p ").replace("</p>", "");
     line = line.replace('<p class="refer">', "#p {=");
     line = line.replace("<h1>", "#h1 ").replace("</h1>", "");
