@@ -452,7 +452,6 @@ var postsInfo = (function(){
             "113":{
                 "title":"머신 러닝(Machine learning)",
                 "created":"2015-04-10"
-                ,"version":"v1"
             },
             "114":{
                 "title":"STS 오류 \"populate auto detected configs\"",
