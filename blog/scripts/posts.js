@@ -444,7 +444,6 @@ var postsInfo = (function(){
             "111":{
                 "title":"Multivariate adaptive regression splines(MARS)",
                 "created":"2015-04-09"
-                ,"version":"v1"
             },
             "112":{
                 "title":"Support vector machine(SVMs)",
