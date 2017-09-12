@@ -436,7 +436,6 @@ var postsInfo = (function(){
             "109":{
                 "title":"Caused by: java.net.SocketException: 파이프가 깨어짐",
                 "created":"2015-04-08"
-                ,"version":"v1"
             },
             "110":{
                 "title":"서버 어플리케이션 근황",
