@@ -35,7 +35,7 @@ $(document).ready(function(){
     };
 
     function isEndScroll() {
-        if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
             return true;
         }
         return false;
