@@ -265,9 +265,6 @@ $( document ).ready(function(){
 	var currentSeq = Number(currentLocationToken[currentLocationToken.length-1]);
 	
 	/* 블로그 부가 효과 선처리 */
-	// smooth wheel
-	o.wheel.init(200,800);
-	
 	// ie 사용자에게 크롬 브라우저 사용 유도
 	if( o.browser.isLowerIE(10) ){
 		o.toast.info("IE를 업그레이드 해주시거나 다른 브라우저를 이용하세요.");
