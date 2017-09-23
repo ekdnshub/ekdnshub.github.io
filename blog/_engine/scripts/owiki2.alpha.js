@@ -8,30 +8,6 @@
         return org;
     };
 
-    // TODO delete keywordProcess Func
-    var keywordProcess = function(matcher, line, start, end) {
-        if (line == null || line == undefined) {
-            return null;
-        }
-        var matcher = new RegExp(matcher);
-        var checker = line.match(matcher);
-        if (checker == null) { // 매칭되는게 없는 경우 해당 라인 그대로 반환
-            return line;
-        }
-
-
-        // 첫번째 매칭이 된 경우
-        var doubleChecker = checker[1].match(matcher); // 더블 체킹, 같은 정규식으로 매칭되는게 또 있는지.
-        if (doubleChecker == null) { // 해당 라인에 같은 정규식이 더 이상 없는 경우 라인 변환해서 반환.
-            var replaceStr = start+checker[1]+end;
-            return line.replace(checker[0], replaceStr);
-        } else { // 같은 내용의 정규식이 또 있다면
-            var result = start+keywordProcess(matcher, checker[1])+end;
-            return line.replace(checker[0], result);
-        }
-    }
-
-
     // 1. 키워드 프로세스는 중첩형은 처리 가능하지만 복합형은 처리 불가하다. 단 {+...} 형식은 중복 가능.
     // ex) {@{={+help}}} (O), {@...{+help}{$help}} (X)
     // 2. {$...} 같은 링크형식의 경우는 중첩형이라도 불가하다.
@@ -54,32 +30,32 @@
             ["{+warn", function(line){ // warn {+warn}
                 return line.replace(/\{\+warn\}/g, "<i class=\"fa fa-exclamation-triangle fa-lg\"></i>");
             }],
-            ["{==", function(line){ // span.error {==...}
-                return keywordProcess("\{==(.*)\}", line, "<span class=\"error\">", "</span>");
-            }],
             ["{@", function(line){ // span.command {@...}
                 return line.replace(/\{\@([^\{]*)\}/g,"<span class=\"command\">$1</span>")
             }],
             ["{=", function(line){ // span.refer {=...}
-                return keywordProcess("\{=(.*)\}", line, "<span class=\"refer\">", "</span>");
+                return line.replace(/\{=([^\{]*)\}/g,"<span class=\"refer\">$1</span>");
+            }],
+            ["{==", function(line){ // span.error {==...}
+                return line.replace(/\{==([^\{]*)\}/g,"<span class=\"error\">$1</span>");
             }],
             ["{!!", function(line){ // italic {!!...}
-                return keywordProcess("\{!!(.*)\}", line, "<i>", "</i>");
+                return line.replace(/\{!!([^\{]*)\}/g,"<i>$1</i>");
             }],
             ["{!", function(line){ // strong {!...}
                 return line.replace(/\{\!([^\{]*)\}/g,"<strong>$1</strong>")
             }],
             ["{~~~", function(line){ // blue {~~~...}
-                return keywordProcess("\{~~~(.*)\}", line, "<span class=\"blue\">", "</span>");
+                return line.replace(/\{~~~([^\{]*)\}/g,"<span class=\"blue\">$1</span>");
             }],
             ["{~~", function(line){ // red {~~...}
                 return line.replace(/\{~~([^\{]*)\}/g,"<span class=\"red\">$1</span>");
             }],
             ["{~", function(line){ // light {~...}
-                return keywordProcess("\{~(.*)\}", line, "<span class=\"light\">", "</span>");
+                return line.replace(/\{~([^\{]*)\}/g,"<span class=\"light\">$1</span>");
             }],
-            ["{$$", function(line){ // img {$$link}
-                return keywordProcess("\{\\$\\$(.*)\}", line, "<img src=\"", "\">");
+            ["{\\$\\$", function(line){ // img {$$link}
+                return line.replace(/\{\$\$([^\{]*)\}/g,"<img src=\"$1\">");
             }],
             ["{\\$", function(line){ // a {$link|name} or {$link}
                 if (line.match(/\{\$/) == null) {
