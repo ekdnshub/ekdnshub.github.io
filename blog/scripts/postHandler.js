@@ -78,6 +78,9 @@ function applyContentEffect(){
 			$(this).hide();
 		});
 	});
+
+	// 본문에 아이프레임이 있으면 너비를 맞춰준다.
+	o.util.autoWidth("#content", "#content iframe");
 	
 	// 본문이 끝나면 처음으로 돌아갈 수 있는 링크 하나를 만들어준다.
 	$("#content").after("<p class=\"text-right\"><a href=\"#\">Go Top(문서 처음으로)</a></p>");
