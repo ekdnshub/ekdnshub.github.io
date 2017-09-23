@@ -456,7 +456,6 @@ var postsInfo = (function(){
             "114":{
                 "title":"STS 오류 \"populate auto detected configs\"",
                 "created":"2015-04-10"
-                ,"version":"v1"
             },
             "115":{
                 "title":"비트코인(Bitcoin)",
