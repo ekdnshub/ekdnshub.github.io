@@ -4,6 +4,6 @@ created=2015-04-10
 ###
 #p {@sts 3.6.4 RELEASE} 버전을 쓰고 있는데 갑자기 {@{~~populate auto detected configs}}라는 프로세스가 실행 되고서는 응답이 없는것이다. 반복해서 껐다 켰다 해봤지만 가끔 에디터 화면이 나온다 하더라도 어떤 커맨드가 됐건 기다리라는 메시지만 나올뿐이었다.
 #p 그래서 검색해봤더니({$http://stackoverflow.com/questions/26089282/eclipse-crashes-not-responding-while-populate-auto-detected-configs|링크}) {@-clearPersistedState} 옵션을 주면 된다고 한다. 그래서 {@STS.ini} 파일 마지막에 다음처럼 추가했더니 놀랍게도 잘 된다. -_-
-###console
+###pre
 -clearPersistedState
 ###
