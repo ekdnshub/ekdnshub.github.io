@@ -87,13 +87,6 @@
 				<h2>블로그</h2>
 				<p>개인적인 일상과 프로그래밍 관련된 내용을 볼 수 있는 공간입니다.</p>
 			</div>
-
-			<div class="col-md-3 services" data-link="pause">
-				<img class="img-responsive" src="/images/main-2.png" alt="이미지">
-				<hr class="small">
-				<h2>게시판</h2>
-				<p>시범적으로 동영상 게시판을 만들어봤습니다. 추후에 다른 게시판도 많이 생길 예정입니다.</p>
-			</div>
 			<div class="col-md-3 services" data-link="//jdm.kr/guest/">
 				<img class="img-responsive" src="/images/main-3.png" alt="이미지">
 				<hr class="small">
@@ -124,16 +117,10 @@
 	$(document).ready(function(){
 		$(".services").each(function(){
 			$(this).click(function(){
-				if ($(this).attr("data-link") == "pause") {
-					alert("새로운 서비스로 찾아뵙겠습니다! :3");
-				} else {
-					window.location.href = $(this).attr("data-link");
-				}
+				window.location.href = $(this).attr("data-link");
 			});
 		});
-		o.wheel.init(200, 800);
 	});
-
 	</script>
 	<script src="/lib/scripts/footer.js"></script>
 </body>
