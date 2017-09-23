@@ -73,7 +73,7 @@
                 return keywordProcess("\{~~~(.*)\}", line, "<span class=\"blue\">", "</span>");
             }],
             ["{~~", function(line){ // red {~~...}
-                return keywordProcess("\{~~(.*)\}", line, "<span class=\"red\">", "</span>");
+                return line.replace(/\{~~([^\{]*)\}/g,"<span class=\"red\">$1</span>");
             }],
             ["{~", function(line){ // light {~...}
                 return keywordProcess("\{~(.*)\}", line, "<span class=\"light\">", "</span>");
