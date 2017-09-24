@@ -1,20 +1,10 @@
  var owiki2 = (function(){
 
-    var lastReplace = function(org, input, replaceStr) {
-        var last = org.lastIndexOf(input);
-        if (last >= 0) {
-            org = org.substring(0, last) + replaceStr + org.substring(last+1);
-        }
-        return org;
-    };
-
     // 1. 키워드 프로세스는 중첩형은 처리 가능하지만 복합형은 처리 불가하다. 단 {+...} 형식은 중복 가능.
     // ex) {@{={+help}}} (O), {@...{+help}{$help}} (X)
     // 2. {$...} 같은 링크형식의 경우는 중첩형이라도 불가하다.
     // ex) {$....{+help}...} (X)
     var processKeyword = function(data) {
-        var tokens = data.split("\n");
-        var convertKeywordData = "";
 
         // 키워드 리스트 [0] 키워드(정규식), [1] 처리 프로세스
         var keywordList = [
@@ -57,25 +47,16 @@
             ["{\\$\\$", function(line){ // img {$$link}
                 return line.replace(/\{\$\$([^\{]*)\}/g,"<img src=\"$1\">");
             }],
-            ["{\\$", function(line){ // a {$link|name} or {$link}
-                if (line.match(/\{\$/) == null) {
-                    return line;
-                }
-                var start = line.indexOf("{$");
-                var subStr = line.substr(start, line.length - 1);
-                var end = start + subStr.indexOf("}");
-                var orgString = line.substring(start, end+1); // {$...|....}
-                var href = orgString.substring(2, orgString.length - 1); // ...|....
-                if (href.split("|").length == 2) {
-                    var linkMap = href.split("|");
-                    href = "<a href=\"" + linkMap[0] + "\">" + linkMap[1] + "</a>"
-                } else {
-                    href = "<a href=\"" + href + "\">" + href + "</a>";
-                }
-                line = line.replace(orgString, href);
-                return line;
+            ["{\\$", function(line){ // {$...|...}
+                return line.replace(/\{\$([^\{\|]*)\|([^\{]*)\}/g,"<a href=\"$1\">$2</a>");
+            }],
+            ["{\\$", function(line){ // {$...}
+                return line.replace(/\{\$([^\{\|]*)\}/g,"<a href=\"$1\">$1</a>");
             }]
         ];
+
+        var tokens = data.split("\n");
+        var convertKeywordData = "";
 
         for (var _i = 0 ; _i < tokens.length; _i++){
             var token = tokens[_i];
@@ -134,7 +115,7 @@
 
 
         for (var _i = 0 ; _i < lines.length; _i++){
-            var line = lines[_i];
+            var line = lines[_i].trim();
             var singleLine = line.match(singleLineKeywordRex);
             var resultLine = "";
             if (singleLine != null) {
