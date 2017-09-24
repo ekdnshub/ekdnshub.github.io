@@ -115,8 +115,6 @@ background-image: -o-linear-gradient(left, #259CE0, #fff);
 
 /* pre */
 #content pre { word-wrap: normal; font-family: "Nanum Gothic Coding", sans-serif !important; padding:0.5em; font-size:1rem; margin-top:0.25em; margin-bottom:0.25em; border-radius: 4px; }
-#content pre.green { border: 1px solid #00B321; background-color:#F3FEF3; color:black; }
-#content pre.blue { border: 1px solid #0054B3; background-color:#F3F8FE; color:black; }
 #content pre.console { background-color:#222; color:white; }
 #content pre.diagram { line-height: 1rem; }
 
