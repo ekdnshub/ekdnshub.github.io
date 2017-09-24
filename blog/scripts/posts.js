@@ -460,7 +460,6 @@ var postsInfo = (function(){
             "115":{
                 "title":"비트코인(Bitcoin)",
                 "created":"2015-04-13"
-                ,"version":"v1"
             },
             "116":{
                 "title":"템플릿 메소드 패턴(Template Method Pattern)",
