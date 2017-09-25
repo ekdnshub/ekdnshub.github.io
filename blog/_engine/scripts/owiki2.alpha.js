@@ -115,7 +115,7 @@
 
 
         for (var _i = 0 ; _i < lines.length; _i++){
-            var line = lines[_i].trim();
+            var line = lines[_i];
             var singleLine = line.match(singleLineKeywordRex);
             var resultLine = "";
             if (singleLine != null) {
