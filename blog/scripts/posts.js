@@ -496,7 +496,6 @@ var postsInfo = (function(){
             "124":{
                 "title":"최근의 추세와 개인적인 생각",
                 "created":"2015-04-22"
-                ,"version":"v1"
             },
             "125":{
                 "title":"아파치 주키퍼(Apache Zookeeper)",
