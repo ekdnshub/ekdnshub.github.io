@@ -464,7 +464,6 @@ var postsInfo = (function(){
             "116":{
                 "title":"템플릿 메소드 패턴(Template Method Pattern)",
                 "created":"2015-04-14"
-                ,"version":"v1"
             },
             "117":{
                 "title":"자바스크립트 호이스팅(javascript hoisting)",
