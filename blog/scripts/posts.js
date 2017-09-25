@@ -492,7 +492,6 @@ var postsInfo = (function(){
             "123":{
                 "title":"SpringBoot AOP 예제",
                 "created":"2015-04-22"
-                ,"version":"v1"
             },
             "124":{
                 "title":"최근의 추세와 개인적인 생각",
