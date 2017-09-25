@@ -64,7 +64,7 @@ created=2015-04-20
 <p>전산학에서 관점 지향 프로그래밍(AOP)은 횡단 분할 기법(separation of cross-cutting concerns)을 사용함으로써 <a href="http://en.wikipedia.org/wiki/Modular_programming">모듈러리티(modularity)</a>를 증가시키는 것에 촛점을 맞춘 프로그래밍 패러다임입니다. AOP는 관점 지향 소프트웨어 개발을 위한 기초 형태입니다.</p>
 <p>AOP는 프로그래밍 메소드와 도구들을 포함합니다. 이것들은 전체 엔지니어링 분야에서 "관점 지향 소프트웨어 개발(aspect-oriented software development)"를 참조하는 동안 소스 코드 레벨 단에서의 모듈화를 지원합니다.</p>
 <p>관점 지향 프로그래밍은 프로그램 로직을 분리된 파트로 변화시키는 것을 의미합니다. 거의 모든 프로그래밍 패러다임은 추상화를 제공(예를 들자면 함수, 프로시저, 모듈, 클래스, 메소드)합니다. 그리고 이것을 구현 하거나 추상화 및 복합적으로 사용해서 분리 및 독립적인 엔티티들을 고려해 그룹화와 캔슐화하는 것을 일부 레벨 지원합니다. 고려할 것이 약간 있는데 "컷 크로스(cut cross)"가 있습니다. 컷 크로스는 프로그램의 구현 양식을 무시하면서 복합적인 중첩을 말합니다. 이것을 "크로스 커팅 관계(cross-cutting concerns)"라고 합니다.</p>
-<p>로깅(Logging)은 로깅 전략(반드시 시스템의 모든 로깅된 파트의 영향을 준다.) 때문에 횡분할 관계를 주시합니다. 로깅은 모든 로깅된 클래스와 메소드들 근처에서 undefined합니다.</p>
+<p>로깅(Logging)은 로깅 전략(반드시 시스템의 모든 로깅된 파트의 영향을 준다.) 때문에 횡분할 관계를 주시합니다. 로깅은 모든 로깅된 클래스와 메소드들 근처에서 크로스 컷(crosscuts)합니다.</p>
 <p>모든 AOP 구현(implementations)은 한 장소에서 각각의 관계를 캡슐화하는 약간의 횡분할 표현식(crosscutting expressions)을 가집니다. 구현마다 제공된 구조의 성능, 안정성 그리고 유용성이 다릅니다. 예를 들자면, 차단하기 위한 특별한 메소드들인 인터셉터(interceptors)는 타입 안정성(type-safety)과 디버깅을 위한 많은 지원 없이 크로스커팅의 제한된 양식을 표현합니다.</p>
 <p>AspectJ는 다수의 표현식과 aspect라는 특별한 클래스를 캡슐화하는 것을 가집니다. 예를 들면, aspect는 pointcut(join point와 매칭이 되는지 검출하는)이라 불리는 특별한 쿼리와 여러 join points(프로그램의 특정 지점) 상에서 advice(추가적인 행위)를 지원함으로써 기반 코드(프로그램의 aspect 파트가 아닌 부분)의 행위를 변경할 수 있습니다. aspect는 또한 멤버 또는 부모를 추가하는 것처럼 바이너리에 적합한 구조로 다른 클래스의 변경을 할 수 있습니다.</p>
 <h4>동기 및 기본 컨셉(Motivation and basic concepts)</h4>
@@ -104,9 +104,9 @@ void transfer(Account fromAcc, Account toAcc, int amount, User user,
  logger.info("Transaction successful.");
 }
 </pre>
-<p>이 예제는 기본 함수적인 것들로 undefined라 불리기도 합니다. 트랜잭션, 보안, 그리고 로깅 모든것들은 횡분할 관계 예시입니다.</p>
+<p>이 예제는 기본 함수적인 것들로 얽혀지게 됩니다. 때때로 비니지스 로직 관심사라 불리기도 합니다. 트랜잭션, 보안, 그리고 로깅 모든것들은 횡분할 관계 예시입니다.</p>
 <p>지금부터 만약 우리가 갑자기 안전성을 고려해서 어플리케이션을 수정한다고 가정을 해봅시다. 프로그램의 현재 버전에서 보안 관련 동작을 추가 하는겁니다. 그렇게 한다면 분명히 많은 메소드들에 엄청난 영향을 끼치게 됩니다.</p>
-<p>AOP는 이러한 문제를 해결하기 위해 시도합니다. 프로그래머에게 undefined라 불리는 stand-alone 모듈 내의 크로스 커팅 관계를 표현하도록 허용함으로써 말이죠. Aspects는 advice(프로그램내에서 특별한 지점에 있는 코드) 및 inter-type delarations(구조적인 멤버를 다른 클래스에 추가)을 가질 수 있습니다. 예를 들면, 보안 모듈은 은행 계좌에 접근하기 전에 보안 검증을 허용하는 advice를 포함할 수 있습니다. pointcut은 은행 계좌에 접근할 때 시기(join points)를 정의합니다. 그리고 advice 몸체에 어떻게 보안 검증이 구현되었는지 정의합니다. 이 방법은 검증과 장소를 한 곳으로 유지할 수 있습니다. 그리고, 좋은 pointcut은 추후 프로그램 변화를 에측할 수 있습니다. 그래서 만약 다른 개발자가 새로운 메소드를 만들었다면 advice는 새로운 메소드에서도 그것이 실행 될때 지원합니다.</p>
+<p>AOP는 이러한 문제를 해결하기 위해 시도합니다. 프로그래머에게 aspects라 불리는 stand-alone 모듈 내의 크로스 커팅 관계를 표현하도록 허용함으로써 말이죠. Aspects는 advice(프로그램내에서 특별한 지점에 있는 코드) 및 inter-type delarations(구조적인 멤버를 다른 클래스에 추가)을 가질 수 있습니다. 예를 들면, 보안 모듈은 은행 계좌에 접근하기 전에 보안 검증을 허용하는 advice를 포함할 수 있습니다. pointcut은 은행 계좌에 접근할 때 시기(join points)를 정의합니다. 그리고 advice 몸체에 어떻게 보안 검증이 구현되었는지 정의합니다. 이 방법은 검증과 장소를 한 곳으로 유지할 수 있습니다. 그리고, 좋은 pointcut은 추후 프로그램 변화를 에측할 수 있습니다. 그래서 만약 다른 개발자가 새로운 메소드를 만들었다면 advice는 새로운 메소드에서도 그것이 실행 될때 지원합니다.</p>
 <p>다음은 aspect 로깅을 포함한 예제입니다.</p>
 <pre class="prettyprint lang-java">
 aspect Logger {
@@ -135,7 +135,7 @@ aspect Logger {
 <p>해당 글의 전문은 <a href="http://en.wikipedia.org/wiki/AspectJ">AspectJ</a>를 참조하세요.</p>
 <div class="tab">
 <p>AspectJ에서 조인 포인트는 메소드 또는 생성자 또는 표현식, 클래스 &amp; 객체의 초기화, 필드 읽기와 쓰기 접근, 핸들러 예외, 기타를 포함합니다. 그들은 반복(loop), spuer 메소드 호출(super calls), 예외 패스(throws clauses), 중첩 구문(multiple statements), 기타를 포함하지 않습니다.</p>
-<p>포인트컷은 undefined(PCDs)의 조합으로써 정의됩니다. "친절한" PCDs는 각각 조인 포인트(e.g, method execution - 메소드 표현식)의 종류를 맞춰봅니다. 그리고 입력은 자바 언어 같은 시그니처를 사용하는 경향이 있습니다. 이러한 포인트컷의 예를 들면 아래와 같습니다.</p>
+<p>포인트컷은 primitive pointcut designators(PCDs)의 조합으로써 정의됩니다. "친절한" PCDs는 각각 조인 포인트(e.g, method execution - 메소드 표현식)의 종류를 맞춰봅니다. 그리고 입력은 자바 언어 같은 시그니처를 사용하는 경향이 있습니다. 이러한 포인트컷의 예를 들면 아래와 같습니다.</p>
 <pre class="prettyprint lang-js">
 execution(* set*(*))
 </pre>
@@ -151,14 +151,14 @@ within(com.company.*)
 <pre class="prettyprint lang-js">
 pointcut set() : execution(* set*(*) ) &amp;&amp; this(Point) &amp;&amp; within(com.company.*);
 </pre>
-<p>이 포인트컷은 만약 메소드 이름이 "set"으로 시작하고 undefined" 이름으로 사용하는 것을 참조할 수 있습니다.</p>
+<p>이 포인트컷은 만약 메소드 이름이 "set"으로 시작하고 this 오브젝트가 com.company패키지의 Point 타입의 인스턴스면 메소드-실행 조인 포인트를 맞춰봅니다. 이것은 "set()" 이름으로 사용하는 것을 참조할 수 있습니다.</p>
 <p>Advice는 조인 포인트(before, after, around)에서 포함한 코드를 실행하기 위해 정의합니다. AOP 런타임은 포인트컷이 조인 포인트에 맞춰지면 Advice를 자동적으로 발생시킵니다. 예를 들자면:</p>
 <pre class="prettyprint lang-js">
 after() : set() {
   Display.update();
 }
 </pre>
-<p>이것은 특별하게 정의합니다 : 만약 undefined 코드를 조인 포인트 완료 이후에 실행하라.</p>
+<p>이것은 특별하게 정의합니다 : 만약 Display.update() 코드를 조인 포인트 완료 이후에 실행하라.</p>
 </div>
 <h5>Other potential join point models</h5>
 <p>JPMs의 다른 종류도 있습니다. 모든 advice 언어들은 그들의 JPM 형태로 정의 될 수 있습니다. UML을 위한 가상 aspect 언어(hypothetical aspect language)는 아마도 JPM을 따릅니다 :</p>
@@ -168,7 +168,7 @@ after() : set() {
 <li>포인트 영향의 뜻은 모든 매치된 조인 포인트의 시각화다.</li>
 </ul>
 <h5>Inter-type declarations</h5>
-<p>undefined은 아마도 AspectJ에서 다음처럼 보입니다 :</p>
+<p>Inter-type declarations은 아마도 AspectJ에서 다음처럼 보입니다 :</p>
 <pre class="prettyprint lang-java">
 aspect DisplayUpdate {
 	void Point.acceptVisitor(Visitor v) {
@@ -187,10 +187,10 @@ aspect DisplayUpdate {
 <li>궁극적인 인터프리터 또는 환경은 구현된 AOP 특징과 이해로 업데이트 됩니다.</li>
 </ol>
 </div>
-<p>변화하는 환경의 가장 구현하기 어려운 것은 대부분 undefined(weaving - 프로그램 변환의 특별한 경우)으로써 알려진 프로세스를 통하여 적합한 결합 프로그램을 생성하는 것입니다. aspect weaver는 관점 지향 코드를 읽고 aspect가 통합된 적당한 객체 지향 코드를 생성합니다. 같은 AOP 언어는 위빙 메소드(weaving methods)의 다양성을 통해 구현될 수 있습니다. 그리고 언어의 시맨틱(semantics)은 위빙 구현의 형태로 이해 되서는 안됩니다. 단지 구현의 속도와 개발의 편의는 결합이 사용된 메소드에 의해 영향을 받게 됩니다.</p>
+<p>변화하는 환경의 가장 구현하기 어려운 것은 대부분 위빙(weaving - 프로그램 변환의 특별한 경우)으로써 알려진 프로세스를 통하여 적합한 결합 프로그램을 생성하는 것입니다. aspect weaver는 관점 지향 코드를 읽고 aspect가 통합된 적당한 객체 지향 코드를 생성합니다. 같은 AOP 언어는 위빙 메소드(weaving methods)의 다양성을 통해 구현될 수 있습니다. 그리고 언어의 시맨틱(semantics)은 위빙 구현의 형태로 이해 되서는 안됩니다. 단지 구현의 속도와 개발의 편의는 결합이 사용된 메소드에 의해 영향을 받게 됩니다.</p>
 <p>시스템은 전처리기(preprocessors)를 사용해 소스 레벨 위빙(source-level weaving)을 구현할 수 있습니다. 그러나 자바의 잘 정의된 바이너리 폼은 바이트코드 위버(bytecode weavers)를 활성화합니다. 바이트코드 위버는 .class 파일 형태의 어떠한 자바 프로그램에서도 동작합니다. 바이트코드 위버는 빌드 프로세스 동안 또는 만약 위브 모델(weave model)이 per-class거나, 클래스 로딩 중에 배포 될 수 있습니다. AspectJ는 소스 레벨 위빙을 2001년부터 시작했습니다. per-class 바이트코드 위버는 2002년도부터 시작했고 2005년 AspectWerkz의 통합 이후 향상된 적재 시간(load-time) 지원을 제공합니다.</p>
-<p>런타임에 프로그램을 결합하는 어떠한 솔루션은 시각들을 제공합니다. 이 시각이란 프로그래머의 분리된 모델을 유지하기 위해 적당하게 분리된것입니다. 다중 소스 파일을 위한 자바 바이트코드 지원은 적절하게 짠 소스 에디터의 .class 파일을 통해서 차근차근 진행하도록 디버거를 활성화 합니다. 그러나 몇몇 서드 파티 디컴파일러는 이러한 undefined 코드를 처리할 수 없습니다. 왜냐하면 그들은 Javac로써 제공된 코드를 기대하기 때문입니다.</p>
-<p>배포 시각 위빙(Deploy-time weaving)은 다른 접근을 제공합니다. 이것은 기본적으로 후처리를 의미합니다, 그러나 생성 코드를 덧붙이기보다는 이 위빙은 기존 클래스의 undefined로 접근합니다. 기존 클래스 수정은 메소드 오버라이딩(method-overriding)으로 처리합니다. 기존 클래스는 건들지 않는 것을 유지합니다. 심지어 런타임 중에서나 모든 존재하는 도구들(디버거, 프로파일러, 기타)은 개발하는 동안 사용할 수 있습니다. 이와 유사한 접근은 이미 IBM사의 WebSphere 같은 Java EE 어플리케이션 서버등으로 많이 제공되어 있습니다.</p>
+<p>런타임에 프로그램을 결합하는 어떠한 솔루션은 시각들을 제공합니다. 이 시각이란 프로그래머의 분리된 모델을 유지하기 위해 적당하게 분리된것입니다. 다중 소스 파일을 위한 자바 바이트코드 지원은 적절하게 짠 소스 에디터의 .class 파일을 통해서 차근차근 진행하도록 디버거를 활성화 합니다. 그러나 몇몇 서드 파티 디컴파일러는 이러한 짠 코드를 처리할 수 없습니다. 왜냐하면 그들은 Javac로써 제공된 코드를 기대하기 때문입니다.</p>
+<p>배포 시각 위빙(Deploy-time weaving)은 다른 접근을 제공합니다. 이것은 기본적으로 후처리를 의미합니다, 그러나 생성 코드를 덧붙이기보다는 이 위빙은 기존 클래스의 서브 클래스로 접근합니다. 기존 클래스 수정은 메소드 오버라이딩(method-overriding)으로 처리합니다. 기존 클래스는 건들지 않는 것을 유지합니다. 심지어 런타임 중에서나 모든 존재하는 도구들(디버거, 프로파일러, 기타)은 개발하는 동안 사용할 수 있습니다. 이와 유사한 접근은 이미 IBM사의 WebSphere 같은 Java EE 어플리케이션 서버등으로 많이 제공되어 있습니다.</p>
 <h5>용어(Terminology)</h5>
 <p>관점 지향 프로그래밍에서의 표준 용어는 다음과 같습니다.</p>
 <ul>
