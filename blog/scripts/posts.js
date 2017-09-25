@@ -476,7 +476,6 @@ var postsInfo = (function(){
             "119":{
                 "title":"무료 이미지 제공 사이트(Provide Free Image Site)",
                 "created":"2015-04-15"
-                ,"version":"v1"
             },
             "120":{
                 "title":"구글 기념일 로고 자료실",
