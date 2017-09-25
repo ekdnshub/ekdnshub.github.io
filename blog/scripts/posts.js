@@ -472,7 +472,6 @@ var postsInfo = (function(){
             "118":{
                 "title":"자바스크립트 네임스페이스(javascript namespace)",
                 "created":"2015-04-15"
-                ,"version":"v1"
             },
             "119":{
                 "title":"무료 이미지 제공 사이트(Provide Free Image Site)",
