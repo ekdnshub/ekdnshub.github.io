@@ -480,7 +480,6 @@ var postsInfo = (function(){
             "120":{
                 "title":"구글 기념일 로고 자료실",
                 "created":"2015-04-16"
-                ,"version":"v1"
             },
             "121":{
                 "title":"SpringBoot JPA 예제",
