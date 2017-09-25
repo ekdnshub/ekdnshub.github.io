@@ -66,6 +66,8 @@ fs.readFileSync(V1_CONTENTS_PATH + number).toString().split('\n').forEach(functi
     line = line.replace(/<a href="(.*)">(.*)<\/a>/g, "{__$1|$2}");
     line = line.replace(/\{\_\_/, "{$");
 
+    line = line.replace(/<cite>(.*)<\/cite>/g, "#cite $1");
+
     if (line.indexOf("<") >= 0) console.log("missing html tag : " + line);
     result += line + "\n";
 });
