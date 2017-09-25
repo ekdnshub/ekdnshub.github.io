@@ -488,7 +488,6 @@ var postsInfo = (function(){
             "122":{
                 "title":"관점 지향 프로그래밍(Aspect-oriented programming)",
                 "created":"2015-04-20"
-                ,"version":"v1"
             },
             "123":{
                 "title":"SpringBoot AOP 예제",
