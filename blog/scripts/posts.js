@@ -484,7 +484,6 @@ var postsInfo = (function(){
             "121":{
                 "title":"SpringBoot JPA 예제",
                 "created":"2015-04-16"
-                ,"version":"v1"
             },
             "122":{
                 "title":"관점 지향 프로그래밍(Aspect-oriented programming)",
