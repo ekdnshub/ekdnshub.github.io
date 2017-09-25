@@ -35,7 +35,6 @@ fs.readFileSync(V1_CONTENTS_PATH + number).toString().split('\n').forEach(functi
     line = line.replace("<h5>", "#h5 ").replace("</h5>", "");
     line = line.replace("<h5>", "#h5 ").replace("</h5>", "");
     line = line.replace("<li>", "#li ").replace("</li>", "");
-    line = line.replace(/<i>(.*)<\/i>/g).replace("$1");
     line = line.replace("<ul>", "###ul ");
     line = line.replace("</ul>", "###");
     line = line.replace("<ol>", "###ol ");
