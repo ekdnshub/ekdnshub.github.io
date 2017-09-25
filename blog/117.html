@@ -1,21 +1,21 @@
 <!DOCTYPE HTML>
 <html lang="ko">
-<head>
+	<head>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
+    
     <!-- # font -->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -26,11 +26,11 @@
     <!--[if gt IE 9]><!-->
     <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <!--<![endif]-->
-
+    
     <!-- # front view lib # -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+    
     <!-- # blog library # -->
     <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
     <script src="/lib/o/1.0.2.min.js"></script>
@@ -41,25 +41,29 @@
     <script src="/blog/scripts/postHandler.js"></script>
     <script src="/blog/scripts/copyright.js"></script>
     <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"> <p> 자바스크립트를 공부하다보면 다른 언어와 다른점이 몇가지 있습니다. 그 중 호이스팅(Hoisting)이라 불리는 것이 있는데 이 포스팅은 호이스팅에 대해 알아보는 것에 촛점을 맞췄습니다. </p>
-                <h4>호이스팅(hoisting)</h4>
-                <p> hoisting은 hoist라는 단어에서 출발합니다. "끌어 올리는 장치", "끌어 올리기"라는 뜻입니다. 자바스크립트에서도 호이스팅은 마찬가지로 <strong>끌어 올린다</strong>는 것이 포인트입니다. </p>
-                <p> 그렇다면 끌어올려지는건 무엇일까요? 바로 변수(variable)입니다. 호이스팅은 변수를 끌어올리는 것을 말합니다. 실제로 코드를 볼까요. </p>
- <pre class="prettyprint linenums lang-js">
+	</head>
+	<body>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+					<!-- 본문 -->
+					<div id="content"><div style="display:none;">
+title=자바스크립트 호이스팅(javascript hoisting)
+created=2015-04-15
+</div>
+<p>자바스크립트를 공부하다보면 다른 언어와 다른점이 몇가지 있습니다. 그 중 호이스팅(Hoisting)이라 불리는 것이 있는데 이 포스팅은 호이스팅에 대해 알아보는 것에 촛점을 맞췄습니다.</p>
+<h4>호이스팅(hoisting)</h4>
+<p>hoisting은 hoist라는 단어에서 출발합니다. "끌어 올리는 장치", "끌어 올리기"라는 뜻입니다. 자바스크립트에서도 호이스팅은 마찬가지로 <strong>끌어 올린다</strong>는 것이 포인트입니다.</p>
+<p>그렇다면 끌어올려지는건 무엇일까요? 바로 변수(variable)입니다. 호이스팅은 변수를 끌어올리는 것을 말합니다. 실제로 코드를 볼까요.</p>
+<pre class="prettyprint lang-js">
 function getX(){
 	console.log(x); // undefined
 	var x = 100;
@@ -68,8 +72,8 @@ function getX(){
 
 getX();
 </pre>
-                <p> 위의 코드를 보면 나오는 값을 추측할 수 있습니다. 다만 C++같은 언어로 위와 같은 소스 코드를 짠다면 아래처럼 됩니다. </p>
- <pre class="prettyprint linenums lang-cpp">
+<p>위의 코드를 보면 나오는 값을 추측할 수 있습니다. 다만 C++같은 언어로 위와 같은 소스 코드를 짠다면 아래처럼 됩니다.</p>
+<pre class="prettyprint lang-cpp">
 void getX(){
 	// error: 'x' was not declared in this scope
 	cout &lt;&lt; x &lt;&lt; endl;
@@ -80,9 +84,9 @@ int main(void){
 	getX();
 }
 </pre>
-                <p> 보다시피 변수 x를 찾지 못해 컴파일 오류가 납니다. 하지만 자바스크립트는 단지 undefined라 출력하고 이후의 진행을 계속합니다. 자바스크립트는 느슨한 언어니까 자동으로 그런건 넘어가는걸까요? </p>
-                <p> 이것에 대한 해답은 <strong>호이스팅</strong>에 있습니다. 자바스크립트 호이스팅에 의해 처음에 봤던 자바스크립트 코드는 다음처럼 자바스크립트 엔진이 처리합니다. </p>
- <pre class="prettyprint linenums lang-js">
+<p>보다시피 변수 x를 찾지 못해 컴파일 오류가 납니다. 하지만 자바스크립트는 단지 <span class="command">undefined</span>라 출력하고 이후의 진행을 계속합니다. 자바스크립트는 느슨한 언어니까 자동으로 그런건 넘어가는걸까요?</p>
+<p>이것에 대한 해답은 <strong>호이스팅</strong>에 있습니다. 자바스크립트 호이스팅에 의해 처음에 봤던 자바스크립트 코드는 다음처럼 자바스크립트 엔진이 처리합니다.</p>
+<pre class="prettyprint lang-js">
 function getX(){
 	var x;
 	console.log(x); // undefined
@@ -92,15 +96,18 @@ function getX(){
 
 getX();
 </pre>
-                <p> var x; 구문이 끌어 올려진 것이 바로 호이스팅입니다. 다만 실제 값이 할당되는 것은 그 이후이기 때문에 그전에는 콘솔로 출력해봐도 "undefined"만 나옵니다. </p>
-                <p> 가능하면 변수는 함수 내 최상단에 먼저 선언(declare)한 이후에 사용하는 습관을 들여야 할 것 같네요. </p>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+<p><span class="command">var x;</span> 구문이 끌어 올려진 것이 바로 호이스팅입니다. 다만 실제 값이 할당되는 것은 그 이후이기 때문에 그전에는 콘솔로 출력해봐도 "undefined"만 나옵니다.</p>
+<p>가능하면 변수는 함수 내 최상단에 먼저 선언(declare)한 이후에 사용하는 습관을 들여야 할 것 같네요.</p>
+
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

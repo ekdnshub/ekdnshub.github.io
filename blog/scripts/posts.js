@@ -468,7 +468,6 @@ var postsInfo = (function(){
             "117":{
                 "title":"자바스크립트 호이스팅(javascript hoisting)",
                 "created":"2015-04-15"
-                ,"version":"v1"
             },
             "118":{
                 "title":"자바스크립트 네임스페이스(javascript namespace)",
