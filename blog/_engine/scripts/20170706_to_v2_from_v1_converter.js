@@ -63,6 +63,8 @@ fs.readFileSync(V1_CONTENTS_PATH + number).toString().split('\n').forEach(functi
 
     line = line.replace("</pre>", "###");
     line = line.replace("</div>", "###");
+    line = line.replace(/<a href="(.*)">(.*)<\/a>/g, "{__$1|$2}");
+    line = line.replace(/\{\_\_/, "{$");
 
     if (line.indexOf("<") >= 0) console.log("missing html tag : " + line);
     result += line + "\n";
