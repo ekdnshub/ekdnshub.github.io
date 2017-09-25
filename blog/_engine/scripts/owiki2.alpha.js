@@ -151,6 +151,7 @@
             }, function(line){ return "</div>"; }, null],
             ["###script", function(line){ return "<script>"; }, function(line){ return "</script>"; }, null],
             ["###ul", function(line){ return "<ul>"; }, function(line){ return "</ul>"; }, null],
+            ["###ol", function(line){ return "<ol>"; }, function(line){ return "</ol>"; }, null],
             ["###pre", function(line){ return "<pre>"; }, function(line){ return "</pre>"; }, null],
             ["###include", function(line){ return "<blockquote>"; }, function(line){ return "</blockquote>"; }, null],
             ["###info", function(line){ return "<div style=\"display:none;\">"; }, function(line){ return "</div>"; }, null],
@@ -174,6 +175,7 @@
                 return line;
             }],
             ["###p", function(line){ return "<p>"; }, function(line){ return "</p>"; }, function(line){ return line+"<br>"; }],
+            ["###tab", function(line){ return "<div class=\"tab\">"; }, function(line){ return "</div>"; }, null],
             ["###", function(line){ // 블록 종료 키워드로 [2],[3] 함수가 존재하지 않는다.
                 var prevOp = opStack[opStack.length-1];
                 var result = line;
