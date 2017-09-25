@@ -112,6 +112,7 @@ background-image: -o-linear-gradient(left, #259CE0, #fff);
 #content div.red { font-family:"Nanum Gothic"; border: 1px solid #B30000; background-color:#FEF3F3; color:black; }
 #content div.yellow { font-family:"Nanum Gothic"; border: 1px solid #BAA900; background-color:#FFFDEB; color:black; }
 #content div.console { font-family: "Nanum Gothic Coding"; background-color:#2D2D2D; color:white; word-wrap: normal; }
+#content div.tab { padding-left: 2em; }
 
 /* pre */
 #content pre { word-wrap: normal; font-family: "Nanum Gothic Coding", sans-serif !important; padding:0.5em; font-size:1rem; margin-top:0.25em; margin-bottom:0.25em; border-radius: 4px; }
