@@ -500,7 +500,6 @@ var postsInfo = (function(){
             "125":{
                 "title":"아파치 주키퍼(Apache Zookeeper)",
                 "created":"2015-04-24"
-                ,"version":"v1"
             },
             "126":{
                 "title":"자바스크립트 클로저(Javascript Closure)",
