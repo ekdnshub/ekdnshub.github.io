@@ -78,7 +78,7 @@ background-image: -o-linear-gradient(left, #259CE0, #fff);
 #content del{ color: #999; }
 #content ul { list-style-type: circle; padding-left: 2em; margin:0; }
 #content ul.num { list-style-type: decimal; }
-#content ul li { padding:0.125em; font-family:"Nanum Gothic"; }
+#content ul li { padding:0.125em; font-family:"Nanum Gothic"; line-height:1.75rem;}
 #content ol { list-style-type: decimal; padding-left: 2em; margin:0; }
 #content ol li { padding:0.125em; font-family:"Nanum Gothic"; }
 #content .refer { font-size: 0.75rem; color: gray; }
