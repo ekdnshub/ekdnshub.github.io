@@ -22,7 +22,7 @@ body { font-family: "Nanum Gothic Coding", sans-serif !important;}
 }
 #about{
 	height:100%;
-	background-image: url('http://jdm.kr/images/main-2-trans.png'); 
+	background-image: url('//jdm.kr/images/main-2-trans.png'); 
 	background-position: center;
 	background-size: cover;
 }
