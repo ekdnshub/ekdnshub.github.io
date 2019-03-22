@@ -256,6 +256,21 @@ function showAnimationForReferenecePost( _obj, order, loopCnt, delay ){
 };
 // end : ReferencePost
 
+function addGoogleAdsence() {
+	var ad = o.util.multiLine(function() {
+	/*
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script>
+		     (adsbygoogle = window.adsbygoogle || []).push({
+			  google_ad_client: "ca-pub-4675654622926623",
+			  enable_page_level_ads: true
+		     });
+		</script>
+	*/
+	});
+	$("head").append(ad);
+}
+
 $( document ).ready(function(){
 	var maxPostsCnt = o.util.getObjectSize(postsInfo.getMeta()); // 포스트 총 개수
 	
@@ -325,4 +340,7 @@ $( document ).ready(function(){
 	
 	/* Bottom 처리(SideBar) */
 	Bottom.init(maxPostsCnt);
+	
+	/* 구글 애드센스 */
+	addGoogleAdsence();
 });
