@@ -4,7 +4,7 @@
 
 <h2>Install Spark</h2>
 <p>
-스파크를 설치하는 방법은 <a href="/164">Apache Spark Overview & Example</a> 항목을 참조하시기 바랍니다.
+스파크를 설치하는 방법은 <a href="/blog/164">Apache Spark Overview & Example</a> 항목을 참조하시기 바랍니다.
 </p>
 
 <h2>Setup & Start Spark Cluster</h2>

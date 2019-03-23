@@ -1,6 +1,6 @@
  <p> Springboot JPA 2탄입니다. Springboot나 Spring이나 JPA 적용하는 법은 같아요. 이번에는 PK가 하나가 아닌 2개인 경우의 테이블을 JPA Repository로 구성하는 법을 알아봅니다. </p>
  <h2>준비</h2> 
- <p> 이 포스팅은 <a href="/121">SpringBoot JPA 예제</a>에서 파생되었습니다. JPA에 대해 기본적인 사용 방법을 설명해 놓았습니다. </p> 
+ <p> 이 포스팅은 <a href="/blog/121">SpringBoot JPA 예제</a>에서 파생되었습니다. JPA에 대해 기본적인 사용 방법을 설명해 놓았습니다. </p>
  <p> 또한 이번 포스팅에서 사용하는 DB는 MariaDB입니다. </p> 
  <h2>예제</h2> 
  <p> 실제 소스 코드를 하나씩 구성해 보면서 알아가 봅시다. </p> 

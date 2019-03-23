@@ -27,4 +27,4 @@ public static void main(String[] args) throws IOException {
 }// end 'main'
 ###
 
-#p Java8을 이용한 파일 읽기 코드는 {$/226|[Java] Reading File using Stream} 포스팅을 참고하세요.
+#p Java8을 이용한 파일 읽기 코드는 {$/blog/226|[Java] Reading File using Stream} 포스팅을 참고하세요.

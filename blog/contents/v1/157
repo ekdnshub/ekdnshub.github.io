@@ -1,5 +1,5 @@
 <p>
-저번 포스팅인 <a href="/139">Redis 설치 및 사용법</a>에 이어서 이번엔 Redis Replication에 대해 알아봅니다.
+저번 포스팅인 <a href="/blog/139">Redis 설치 및 사용법</a>에 이어서 이번엔 Redis Replication에 대해 알아봅니다.
 </p>
 
 <h2>Replication</h2>

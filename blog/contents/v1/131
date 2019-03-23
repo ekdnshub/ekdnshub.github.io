@@ -1,8 +1,8 @@
- <p> 이 포스팅은 <a href="/111">Multivariate adaptive regression splines(MARS)</a> 포스트에서 파생되었습니다. R 언어 - Earth 패키지를 다룹니다. </p>
+ <p> 이 포스팅은 <a href="/blog/111">Multivariate adaptive regression splines(MARS)</a> 포스트에서 파생되었습니다. R 언어 - Earth 패키지를 다룹니다. </p>
  <h2>R language - Earth Package</h2> 
  <p> R language에서 Earth 패키지를 설치하는것부터 예제 실행까지 진행해 봅시다. 이후 진행 되는 일부 정보는 <a href="http://www.inside-r.org/packages/cran/earth/docs/earth">inside-R earth</a>에서 참조 되었습니다. </p> 
  <h2>Prepare R</h2> 
- <p> Earth 패키지를 실행하려면 R을 설치해야 합니다. R을 설치하려면 <a href="/130">프로그래밍 언어 R(Programming language R)</a>을 참조하세요. </p> 
+ <p> Earth 패키지를 실행하려면 R을 설치해야 합니다. R을 설치하려면 <a href="/blog/130">프로그래밍 언어 R(Programming language R)</a>을 참조하세요. </p>
  <h2>Earth Package Download</h2> 
  <p> <a href="http://cran.r-project.org/web/packages/earth/index.html">earth: Multivariate Adaptive Regression Splines</a>에서 earth_4.2.0.zip(r-release) 파일을 다운로드 받습니다. 그 뒤, 다운로드 받은 파일의 압축 해제 후 R이 설치된 디렉토리/library에 복사합니다. <span class="refer">* Windows7(32bit) 기준, RGui에서 package - Install packages로도 설치 가능합니다.</span> </p> 
  <h2>Example</h2> 

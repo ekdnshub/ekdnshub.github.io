@@ -2,8 +2,8 @@
  <h2>준비</h2> 
  <p> 이 포스트는 다음과 같은 포스트에서 파생 되었습니다. </p> 
  <ul> 
-  <li><a href="/141">SpringBoot JPA 예제(@OneToMany, 단방향)</a></li> 
-  <li><a href="/142">SpringBoot JPA 예제(@ManyToOne, 단방향)</a></li> 
+  <li><a href="/blog/141">SpringBoot JPA 예제(@OneToMany, 단방향)</a></li>
+  <li><a href="/blog/142">SpringBoot JPA 예제(@ManyToOne, 단방향)</a></li>
  </ul> 
  <h2>양방향(bidirectional) 1:N 관계</h2> 
  <p> 1:N 양방향 관계는 이전에 봤던 @OneToMany, @ManyToOne 어노테이션을 사용합니다. 이번에는 살짝 코드를 분리시켰기 때문에 코드량이 많아졌습니다. </p> 

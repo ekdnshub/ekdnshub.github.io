@@ -6,7 +6,7 @@ created=2015-11-03
 #p 기존에도 주키퍼 클러스터 설정에 대해 간간히 포스팅한 것이 있었습니다. 이번 포스트는 주키퍼 클러스터만 뽑아서 설명드립니다.
 
 #h2 What is Apache Zookeeper?
-#p 주키퍼에 대한 자세한 내용은 {$/125|아파치 주키퍼(Apache Zookeeper)}를 참조해주세요.
+#p 주키퍼에 대한 자세한 내용은 {$/blog/125|아파치 주키퍼(Apache Zookeeper)}를 참조해주세요.
 
 #h2 Setup Zookeeper Cluster
 #p 이제 본격적으로 주키퍼 클러스터{=Zookeeper Cluster}를 구축해 봅시다.
