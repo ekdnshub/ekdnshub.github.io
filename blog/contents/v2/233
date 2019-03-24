@@ -1,0 +1,48 @@
+###info
+title=Windows 10 IntelliJ Github 연동
+created=2019-03-24
+category=Windows 10
+tags=Windows 10, Git, IntelliJ
+###
+
+#h1 개요
+#p 이번에는 Windows 10 환경에서 IntelliJ 설치 및 GitHub 연동을 해보기 위해 Git을 설치하는 것을 알아봅니다.
+
+#h1 Install Git For Windows 10
+###p
+{$https://git-scm.com/downloads|Git 다운로드}버튼을 클릭해서 Git 인스톨러를 다운로드 하세요. 현재 최신 버전은 {@2.21.0} 이군요.
+설치에 어려움은 크게 없을것이나 기록을 위해 아래처럼 설치 과정을 이미지로 나열하곘습니다. 필요하신 분들만 펼쳐보세요.
+###
+###fold.설치 과정
+{$$/blog/images/233/001.png}
+{$$/blog/images/233/002.png}
+{$$/blog/images/233/003.png}
+{$$/blog/images/233/004.png}
+{$$/blog/images/233/005.png}
+{$$/blog/images/233/006.png}
+{$$/blog/images/233/007.png}
+{$$/blog/images/233/008.png}
+{$$/blog/images/233/009.png}
+###
+
+#h1 Install IntelliJ For Windows 10
+
+#p 이번엔 인텔리J를 설치해봅시다. {$https://www.jetbrains.com/idea/download/#section=windows|다운로드} 페이지에서 자신에게 알맞는 버전을 다운로드 하세요.
+#p 저 같은 경우엔 Community{=2018.3.5} 버전을 다운로드 받아서 진행했습니다. 인스톨러에서 자신에게 맞는 것들을 체크하고 Next 버튼을 클릭하세요.
+{$$/blog/images/233/013.png}
+
+#p 처음 실행시키면 Customiaz IntelliJ IDEA 윈도우가 활성화 되면서 몇가지 설정을 할 수 있게 되는데요. 입맛대로 설정해주세요. 저같은 경우 Android, Swing 등 필요없는 플러그인들은 비활성화 시켰습니다.
+
+#h1 인텔리J Github 프로젝트 추가
+#p 아래 이미지처럼 Git 프로젝트로 시작합니다.
+{$$/blog/images/233/010.png}
+
+#p 자신의 저장소 주소를 넣어서 Test 해보세요. 초록색 레이어와 함께 successful 이라는 문구가 나오면 정상적으로 연결된겁니다.
+{$$/blog/images/233/011.png}
+
+#p 클론뿐만 아니라 실제로 깃헙에 커밋까지 할수 있으려면 해당 저장소에 접근할 수 있다는 것을 증명해야합니다. {@Log in to Github} 버튼을 클릭해서 인증을 진행합시다.
+#p 깃헙 2차 인증{=Two-factor authentication}을 사용하지 않는다면 Login / Password 필드를 채워주시면 되고 만약 2차 인증을 사용중이면 Enter token 으로 전환해서 입력하세요.
+{$$/blog/images/233/012.png}
+
+#h1 마무리
+#p 사실 Windows 10 환경에서 블로그 관리를 해볼까하다가 만들게된 포스트입니다. 잘못된 부분 있으면 피드백은 언제나 환영이에요. :)
