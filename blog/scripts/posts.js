@@ -999,6 +999,10 @@ var postsInfo = (function(){
             "232":{
                 "title":"2016년 6월 개발 이야기",
                 "created":"2016-06-28"
+            },
+            "233":{
+                "title":"Windows 10 IntelliJ Github 연동",
+                "created":"2019-03-24"
             }
         }
 
