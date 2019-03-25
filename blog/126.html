@@ -148,9 +148,7 @@ TestMain.main(String[]) line: 15
 
 <p>하지만 아까전에 봤던 자바스크립트의 doubleMulti, tripleMulti 함수는 분명 처리가 되서 끝났음에도 불구하고 살아 남아서 자신의 구현부를 보여줍니다. 결론적으로는 각각의 함수가 "고유의 범위"를 가지고 있다는 것입니다. 이것이 바로 "클로저"입니다. 일반적으로 자바스크립트의 함수 내의 지역 변수는 함수가 종료되면 삭제됩니다. 그런데 클로저는 그렇지 않습니다. 자신의 고유 블록(+환경)을 가진 상태로 소멸하지 않고 외부 함수에 의해 호출되는 함수를 만드는 것, 바로 이것이 클로저입니다.</p>
 
-<p class='refer'>
-* "고유의 범위" 부분에 대해서는 자바스크립트의 Scope에 대한 이해가 필요합니다. 자세한 내용은 <a href="http://en.wikipedia.org/wiki/Scope_(computer_science)#JavaScript">Wikipedia - Scope (computer science)#JavaScript</a>를 참조 바랍니다.<br>
-</p>
+<p><span class="refer">* "고유의 범위" 부분에 대해서는 자바스크립트의 Scope에 대한 이해가 필요합니다. 자세한 내용은 <a href="http://en.wikipedia.org/wiki/Scope_(computer_science)#JavaScript">Wikipedia - Scope (computer science)#JavaScript</a>를 참조 바랍니다.</span></p>
 
 <p>클로저와 일반 지역 변수의 차이점은 클로저는 자신의 만들어질 당시의 환경을 그대로 유지하고 일반 지역 변수는 삭제된다는 것이죠.</p>
 
@@ -252,9 +250,7 @@ function addClosureAlert(){
 
 <p>위 실행 버튼을 클릭하고 다섯개가 있던 버튼을 눌러봅시다. 원하는대로 해당 버튼에 있는 값이 나올겁니다. 아까 전에 말씀드렸던대로 함수 안에 함수를 만들어 반환하면 됩니다. 이렇게 하게 되면 어떤 현상이 일어날까요? 아까전에는 같은 환경을 공유 했던 콜백 함수들은 이제 각자 "클로저"로 인해 별도의 환경 변수를 가지게 되었습니다.</p>
 
-<p class='refer'>
-* 클로저를 선언할 때 사용한 방식은 "즉시 실행 함수"입니다. 자세한 내용은 <a href="/blog/118">자바스크립트 네임스페이스(javascript namespace)</a>를 참조하세요.<br>
-</p>
+<p><span class="refer">* 클로저를 선언할 때 사용한 방식은 "즉시 실행 함수"입니다. 자세한 내용은 <a href="/blog/118">자바스크립트 네임스페이스(javascript namespace)</a>를 참조하세요.</span></p>
 
 <p>addAlert 함수와 비교해 보세요. 버튼별로 별도의 환경 변수를 가지지 않았기 때문에 클릭 이벤트가 발생했을 당시 "콜백"을 통해 자신이 속한 범위에서 가장 근접한 <span class="command">i</span>값을 가져옵니다. 자신이 가지고 있는 <span class="command">i</span>값은 별도로 구성 되지 않았기 때문에 상위 블록에 있던 <span class="command">i</span>값을 가져오게 되었죠.</p>
 

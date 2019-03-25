@@ -182,7 +182,6 @@
                 return line;
             }],
             ["###p", function(line){ return "<p>"; }, function(line){ return "</p>"; }, function(line){ return line+"<br>"; }],
-            ["###ref", function(line){ return "<p class='refer'>"; }, function(line){ return "</p>"; }, function(line){ return line+"<br>"; }],
             ["###tab", function(line){ return "<div class=\"tab\">"; }, function(line){ return "</div>"; }, null],
             ["###", function(line){ // 블록 종료 키워드로 [2],[3] 함수가 존재하지 않는다.
                 var prevOp = opStack[opStack.length-1];
