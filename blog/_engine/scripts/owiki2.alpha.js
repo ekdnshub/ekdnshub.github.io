@@ -20,38 +20,45 @@
             ["{+warn", function(line){ // warn {+warn}
                 return line.replace(/\{\+warn\}/g, "<i class=\"fa fa-exclamation-triangle fa-lg\"></i>");
             }],
-            ["{@", function(line){ // span.command {@...}
-                return line.replace(/\{\@([^\{]*)\}/g,"<span class=\"command\">$1</span>")
+            ["{@", function(line){ // {@...} => `...` 사용
+                const reg = /\{\@([^\{\}]*)\}/g;
+                if (reg.test(line)) {
+                    console.log("{@...} 명령어는 사용하지 마세요.");
+                }
+                return line.replace(/\{\@([^\{\}]*)\}/g,"<span class=\"command\">$1</span>")
+            }],
+            ["`", function(line){ // span.command `...`
+                return line.replace(/`([^`]+)`/g,"<span class=\"command\">$1</span>")
             }],
             ["{=", function(line){ // span.refer {=...}
-                return line.replace(/\{=([^\{]*)\}/g,"<span class=\"refer\">$1</span>");
+                return line.replace(/\{=([^\{\}]*)\}/g,"<span class=\"refer\">$1</span>");
             }],
             ["{==", function(line){ // span.error {==...}
-                return line.replace(/\{==([^\{]*)\}/g,"<span class=\"error\">$1</span>");
+                return line.replace(/\{==([^\{\}]*)\}/g,"<span class=\"error\">$1</span>");
             }],
             ["{!!", function(line){ // italic {!!...}
-                return line.replace(/\{!!([^\{]*)\}/g,"<i>$1</i>");
+                return line.replace(/\{!!([^\{\}]*)\}/g,"<i>$1</i>");
             }],
             ["{!", function(line){ // strong {!...}
-                return line.replace(/\{\!([^\{]*)\}/g,"<strong>$1</strong>")
+                return line.replace(/\{\!([^\{\}]*)\}/g,"<strong>$1</strong>")
             }],
             ["{~~~", function(line){ // blue {~~~...}
-                return line.replace(/\{~~~([^\{]*)\}/g,"<span class=\"blue\">$1</span>");
+                return line.replace(/\{~~~([^\{\}]*)\}/g,"<span class=\"blue\">$1</span>");
             }],
             ["{~~", function(line){ // red {~~...}
-                return line.replace(/\{~~([^\{]*)\}/g,"<span class=\"red\">$1</span>");
+                return line.replace(/\{~~([^\{\}]*)\}/g,"<span class=\"red\">$1</span>");
             }],
             ["{~", function(line){ // light {~...}
-                return line.replace(/\{~([^\{]*)\}/g,"<span class=\"light\">$1</span>");
+                return line.replace(/\{~([^\{\}]*)\}/g,"<span class=\"light\">$1</span>");
             }],
             ["{\\$\\$", function(line){ // img {$$link}
-                return line.replace(/\{\$\$([^\{]*)\}/g,"<img src=\"$1\">");
+                return line.replace(/\{\$\$([^\{\}]*)\}/g,"<img src=\"$1\">");
             }],
             ["{\\$", function(line){ // {$...|...}
-                return line.replace(/\{\$([^\{\|]*)\|([^\{]*)\}/g,"<a href=\"$1\">$2</a>");
+                return line.replace(/\{\$([^\{\}\|]*)\|([^\{\}]*)\}/g,"<a href=\"$1\">$2</a>");
             }],
             ["{\\$", function(line){ // {$...}
-                return line.replace(/\{\$([^\{\|]*)\}/g,"<a href=\"$1\">$1</a>");
+                return line.replace(/\{\$([^\{\}\|]*)\}/g,"<a href=\"$1\">$1</a>");
             }]
         ];
 
@@ -175,6 +182,7 @@
                 return line;
             }],
             ["###p", function(line){ return "<p>"; }, function(line){ return "</p>"; }, function(line){ return line+"<br>"; }],
+            ["###ref", function(line){ return "<p class='refer'>"; }, function(line){ return "</p>"; }, function(line){ return line+"<br>"; }],
             ["###tab", function(line){ return "<div class=\"tab\">"; }, function(line){ return "</div>"; }, null],
             ["###", function(line){ // 블록 종료 키워드로 [2],[3] 함수가 존재하지 않는다.
                 var prevOp = opStack[opStack.length-1];

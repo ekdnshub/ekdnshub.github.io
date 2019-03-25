@@ -504,7 +504,6 @@ var postsInfo = (function(){
             "126":{
                 "title":"자바스크립트 클로저(Javascript Closure)",
                 "created":"2015-04-24"
-                ,"version":"v1"
             },
             "127":{
                 "title":"아파치 머하웃(Apache Mahout)",
