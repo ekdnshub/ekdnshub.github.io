@@ -508,7 +508,6 @@ var postsInfo = (function(){
             "127":{
                 "title":"아파치 머하웃(Apache Mahout)",
                 "created":"2015-04-27"
-                ,"version":"v1"
             },
             "128":{
                 "title":"Shebang",
