@@ -169,7 +169,7 @@ function notiAlert(input){
 
 function addClosureAlert(){
     var length = $(".button-test").size();
-    for(var i = 0 ; i &lt; length; i++){
+    for(var i = 0 ; i < length; i++){
         $($(".button-test")[i]).unbind("click");
         $($(".button-test")[i]).click(
             (function(i){
