@@ -111,8 +111,8 @@ created=2015-03-11
             </tr>
             <tr>
             <td>#</td>
-            <td>Caret, Crosshatch</td>
-            <td>캐럿, 크로스해치</td>
+            <td>Crosshatch</td>
+            <td>크로스해치</td>
             </tr>
             <tr>
             <td>.</td>
@@ -126,8 +126,8 @@ created=2015-03-11
             </tr>
             <tr>
             <td>^</td>
-            <td>Circumflex</td>
-            <td>써쿰플렉스</td>
+            <td>Caret, Circumflex</td>
+            <td>캐럿, 써쿰플렉스</td>
             </tr>
             <tr>
             <td>%</td>
