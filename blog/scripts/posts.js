@@ -537,7 +537,6 @@ var postsInfo = (function(){
             "133":{
                 "title":"MariaDB - ERROR 2003",
                 "created":"2015-05-06"
-                ,"version":"v1"
             },
             "134":{
                 "title":"libsvm 설치 및 예제",

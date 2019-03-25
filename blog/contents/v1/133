@@ -1,5 +1,0 @@
- <p> 갑자기 윈도우7에서 돌리던 로컬 마리아DB에서 오류 메시지가 출력 됐다. </p>
- <pre class="console">
-ERROR 2003 &lt;HY000&gt;:Can't connect to Mysql server on 'localhost'&lt;10061&gt;
-</pre> 
- <p> 일단 해결 방법으로는 작업관리자에서 서비스 탭의 MySql 상태가 중지 되어 있던 것을 다시 시작시켰더니 됐다. 왜 내려가 있었지?? -_- </p>
