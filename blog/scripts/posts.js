@@ -540,7 +540,6 @@ var postsInfo = (function(){
             "135":{
                 "title":"Jenetics 설치 및 예제",
                 "created":"2015-05-08"
-                ,"version":"v1"
             },
             "136":{
                 "title":"협업 도구 Trello",

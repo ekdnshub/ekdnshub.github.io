@@ -1,29 +1,41 @@
- <p> 이 포스트는 <a href="/blog/104">유전 알고리즘(Genetic Algorithms)</a>에서 파생되었습니다. 유전 알고리즘으로 구현된 라이브러리인 <strong>Jenetics</strong>에 대해 알아봅시다. </p>
- <h4>준비</h4> 
- <p> JDK8이 필요합니다. 현 시점에서 가장 최신 버전인데 바로 사용하는 라이브러리군요. -_-; 일단 오라클에서 JDK8을 설치하고 다음절을 진행합니다. </p> 
- <p> <a href="http://jenetics.io/">jenetics</a>에서 Maven을 클릭하면 플랫폼별로 받을 수 있는 링크로 연결됩니다. 음, 전 우선 Maven 프로젝트로 구성하겠습니다. 따라서 POM.xml 파일에 jenectics 부분을 추가합시다. 그리고 zip 파일도 다운로드 받습니다. </p> 
- <h4>예제 검토</h4> 
- <p> 다운로드 받은 zip 파일의 압축을 해제 하면 example 디렉토리가 있습니다. 그 중 <strong>Sorting.java</strong>라는 파일의 소스를 검토해봤습니다. </p> 
- <pre class="prettyprint lang-java">
+###info
+title=Jenetics 설치 및 예제
+created=2015-05-08
+ad=false
+###
+
+#p  이 포스트는 {$/blog/104|유전 알고리즘(Genetic Algorithms)}에서 파생되었습니다. 유전 알고리즘으로 구현된 라이브러리인 {!Jenetics}에 대해 알아봅시다. 
+
+#h4 준비
+
+#p  JDK8이 필요합니다. 현 시점에서 가장 최신 버전인데 바로 사용하는 라이브러리군요. -_-; 일단 오라클에서 JDK8을 설치하고 다음절을 진행합니다.
+
+#p  {$http://jenetics.io/|jenetics}에서 Maven을 클릭하면 플랫폼별로 받을 수 있는 링크로 연결됩니다. 음, 전 우선 Maven 프로젝트로 구성하겠습니다. 따라서 POM.xml 파일에 jenectics 부분을 추가합시다. 그리고 zip 파일도 다운로드 받습니다.
+
+#h4 예제 검토
+
+#p  다운로드 받은 zip 파일의 압축을 해제 하면 example 디렉토리가 있습니다. 그 중 {!Sorting.java}라는 파일의 소스를 검토해봤습니다.
+
+###code.java
 /*
- * Java Genetic Algorithm Library (@__identifier__@).
- * Copyright (c) @__year__@ Franz Wilhelmstötter
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Author:
- *    Franz Wilhelmstötter (franz.wilhelmstoetter@gmx.at)
- */
+* Java Genetic Algorithm Library (@__identifier__@).
+* Copyright (c) @__year__@ Franz Wilhelmstötter
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+* Author:
+*    Franz Wilhelmstötter (franz.wilhelmstoetter@gmx.at)
+*/
 package org.jenetics.example;
 
 import java.util.function.Function;
@@ -107,9 +119,9 @@ public class Sorting {
 		System.out.println(result.getBestPhenotype());
 	}
 }
-</pre> 
- <p> 대부분의 내용은 주석을 달았습니다. 전부 맞다고 하기엔 애매하고 참조 정도로 봐주시면 되겠습니다. </p> 
- <pre class="console">
+### 
+#p  대부분의 내용은 주석을 달았습니다. 전부 맞다고 하기엔 애매하고 참조 정도로 봐주시면 되겠습니다.  
+###console
 +---------------------------------------------------------------------------+
 |  Time statistics                                                          |
 +---------------------------------------------------------------------------+
@@ -135,5 +147,5 @@ public class Sorting {
 |                      var  = 64200.536123362730                            |
 +---------------------------------------------------------------------------+
 [4|6|7|9|11|14|17|19|18|16|15|13|12|10|8|5|3|2|1|0] --&gt; 70
-</pre> 
- <p> 위는 결과를 출력해본건데 소스에 있는대로 하면 딱히 잘 맞진 않네요. 정렬할 항목을 줄이거나 populationSize를 크게 주면 정렬이 잘 됩니다. </p>
+### 
+#p  위는 결과를 출력해본건데 소스에 있는대로 하면 딱히 잘 맞진 않네요. 정렬할 항목을 줄이거나 populationSize를 크게 주면 정렬이 잘 됩니다. 
