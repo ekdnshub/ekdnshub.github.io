@@ -520,7 +520,6 @@ var postsInfo = (function(){
             "130":{
                 "title":"프로그래밍 언어 R(Programming language R)",
                 "created":"2015-04-28"
-                ,"version":"v1"
             },
             "131":{
                 "title":"R Language - Earth Package",
