@@ -536,7 +536,6 @@ var postsInfo = (function(){
             "134":{
                 "title":"libsvm 설치 및 예제",
                 "created":"2015-05-07"
-                ,"version":"v1"
             },
             "135":{
                 "title":"Jenetics 설치 및 예제",

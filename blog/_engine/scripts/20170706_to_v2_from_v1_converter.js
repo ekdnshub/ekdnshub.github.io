@@ -48,6 +48,8 @@ fs.readFileSync(V1_CONTENTS_PATH + number).toString().split('\n').forEach(functi
     line = line.replace(/<\/span>/gi, "}");
     line = line.replace('<div class="console">', "###console");
     line = line.replace('<pre class="console">', "###console");
+    line = line.replace('<pre class="green">', "###console");
+    line = line.replace('<pre class="blue">', "###console");
     line = line.replace('<div class="box">', "###box.none");
     line = line.replace('<div class="blue">', "###box.blue");
     line = line.replace('<div class="green">', "###box.green");
