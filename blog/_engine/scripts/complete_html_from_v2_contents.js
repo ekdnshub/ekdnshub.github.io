@@ -7,8 +7,8 @@ $ node ./20170706_to_v2_from_v1_converter.js {number}
 
 var owiki = require("./owiki2.alpha.js");
 
-var BASE_TEMPLATE = "../../templates/base.html";
-var AD_TEMPLATE = "../../templates/ad.html";
+var BASE_TEMPLATE = "../../_templates/base.html";
+var AD_TEMPLATE = "../../_templates/ad.html";
 var V2_CONTENTS_PATH = "../../contents/v2/";
 var HTML_PATH = "../../"
 var fs = require("fs");
