@@ -528,7 +528,6 @@ var postsInfo = (function(){
             "132":{
                 "title":"MariaDB 데이터베이스 생성",
                 "created":"2015-05-06"
-                ,"version":"v1"
             },
             "133":{
                 "title":"MariaDB - ERROR 2003",

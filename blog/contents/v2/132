@@ -1,0 +1,64 @@
+###info
+title=MariaDB 데이터베이스 생성
+created=2015-05-06
+ad=false
+###
+#p MariaDB에서 데이터베이스를 생성하고 계정에 권한을 주는것까지 알아보는 포스팅입니다. 이 포스팅은 CentOS 6.X 및 MariaDB 10.0.15(mysql Ver 15.1 Distrib 10.0.15-MariaDB)을 기준으로 작성했습니다.
+
+#h4 Console 접속
+
+#p  아래와 같은 리눅스 커맨드를 통해 MariaDB 콘솔로 접속합시다.
+
+###code.sh
+$ mysql -uroot -pYYYY
+###
+
+#p  우선 root로 접속을 했는데 혹시라도 다른 계정으로 만들 경우엔 root 부분을 해당 계정으로 바꿔주면 됩니다. YYYY는 계정 비밀번호를 입력하세요.
+
+###console
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 5222
+Server version: 10.0.15-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2014, Oracle, SkySQL Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]&gt; 
+###
+
+#p  위와 같은 결과가 출력이 되며 MariaDB 콘솔을 사용할 수 있습니다.
+
+#h4 데이터베이스 생성
+
+#p  데이터 베이스를 만들기 전에 혹시 같은 이름으로 만드는것은 아닌지 `show databases;`를 통해 먼저 확인해 보세요. 그 뒤에 중복되는 데이터베이스 이름이 없다면 아래와 같은 커맨드를 실행하세요.
+
+###code.sql
+create database db_name;
+###
+
+#h4 계정 생성
+
+#p  새로운 데이터베이스를 책임질 계정을 하나 만들어 봅시다. 아래와 같은 커맨드를 실행하면 새로운 계정을 만들 수 있습니다.
+
+###code.sql
+create user 'user_name'@'XXX.XXX.XXX.XXX' identified by 'input_password';
+###
+
+#p  user_name 부분에 원하는 계정명을 쓰고 @ 이후에는 접속할 IP를 입력하시면 됩니다. 그리고 `input_password`에는 해당 계정의 비밀번호를 입력해 주세요. {=* 'user_name'@'localhost'도 생성하시면 로컬에서도 접속 가능합니다.}
+
+#h4 권한 추가 
+#p  새로 만든 계정에 데이터베이스 권한을 추가합니다. 아래와 같은 커맨드를 실행하면 됩니다.
+
+###code.sql
+grant all privileges on db_name.* to 'user_name'@'XXX.XXX.XXX.XXX';
+flush privileges;
+###
+
+#h4 Tip
+
+#p  혹시 지금 MariaDB의 유저 목록을 보고 싶다면 아래 커맨드를 실행하세요.
+
+###code.sql
+select host, user from mysql.user;
+###
