@@ -64,6 +64,7 @@ fs.readFileSync(V1_CONTENTS_PATH + number).toString().split('\n').forEach(functi
     line = line.replace('<pre class="prettyprint linenums lang-scala">', "###code.scala");
     line = line.replace('<pre class="prettyprint linenums lang-html">', "###code.html");
     line = line.replace('<pre class="prettyprint linenums lang-js">', "###code.js");
+    line = line.replace('<pre class="prettyprint lang-js">', "###code.js");
     line = line.replace('<pre class="prettyprint linenums lang-sh">', "###code.sh");
     line = line.replace('<pre class="prettyprint lang-sh">', "###code.sh");
     line = line.replace('<pre class="prettyprint linenums lang-r">', "###code.r");

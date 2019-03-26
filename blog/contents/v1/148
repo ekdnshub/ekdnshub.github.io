@@ -1,9 +1,0 @@
-<p>
-간혹 브라우저 console 객체를 하위 버전의 익스플로러 같은 브라우저에서 인식 못하는 경우가 있다.
-</p>
-<p>
-이럴때 아래와 같은 코드를 넣어주면 처리가 가능하다.
-</p>
-<pre class="prettyprint lang-js">
-var console = window.console || { log: function() {/* implement code. */} };
-</pre>

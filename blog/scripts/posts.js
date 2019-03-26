@@ -601,7 +601,6 @@ var postsInfo = (function(){
             "148":{
                 "title":"자바스크립트 console 객체 유효성 처리",
                 "created":"2015-06-05"
-                ,"version":"v1"
             },
             "149":{
                 "title":"RawGit",
