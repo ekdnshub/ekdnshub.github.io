@@ -516,7 +516,6 @@ var postsInfo = (function(){
             "129":{
                 "title":"스칼라 JDBC 연결(Scala JDBC Connection)",
                 "created":"2015-04-27"
-                ,"version":"v1"
             },
             "130":{
                 "title":"프로그래밍 언어 R(Programming language R)",
