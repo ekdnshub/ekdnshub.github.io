@@ -21,7 +21,7 @@ var result = "";
 result += "###info\n";
 result += "title=\n";
 result += "created=\n";
-result += "ad=\n";
+result += "ad=false\n";
 result += "###\n";
 
 fs.readFileSync(V1_CONTENTS_PATH + number).toString().split('\n').forEach(function (_line) {
@@ -62,6 +62,7 @@ fs.readFileSync(V1_CONTENTS_PATH + number).toString().split('\n').forEach(functi
     line = line.replace('<pre class="prettyprint linenums lang-html">', "###code.html");
     line = line.replace('<pre class="prettyprint linenums lang-js">', "###code.js");
     line = line.replace('<pre class="prettyprint linenums lang-sh">', "###code.sh");
+    line = line.replace('<pre class="prettyprint linenums lang-r">', "###code.r");
 
 
     line = line.replace('<pre class="prettyprint lang-sql">', "###code.sql");

@@ -524,7 +524,6 @@ var postsInfo = (function(){
             "131":{
                 "title":"R Language - Earth Package",
                 "created":"2015-05-04"
-                ,"version":"v1"
             },
             "132":{
                 "title":"MariaDB 데이터베이스 생성",

@@ -161,7 +161,7 @@
             ["###ol", function(line){ return "<ol>"; }, function(line){ return "</ol>"; }, null],
             ["###pre", function(line){ return "<pre>"; }, function(line){ return "</pre>"; }, null],
             ["###include", function(line){ return "<blockquote>"; }, function(line){ return "</blockquote>"; }, null],
-            ["###info", function(line){ return "<div style=\"display:none;\">"; }, function(line){ return "</div>"; }, null],
+            ["###info", function(line){ return ""; }, function(line){ return ""; }, function(line) { return ""; }],
             ["###box", function(line){
                 var color = line.match(/###box\.(.*)/)[1];
                 return "<div class=\""+color+"\">";
