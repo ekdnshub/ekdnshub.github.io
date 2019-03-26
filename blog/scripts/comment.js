@@ -30,7 +30,7 @@ var Comment = (function(){
       */
     });
 
-    var url = "http://jdm.kr/blog/"+seq;
+    var url = "https://jdm.kr/blog/"+seq;
     var identifier = "20170725_"+seq; // 1번, 222번 댓글이 같은게 나와서 임의의 prefix를 붙였더니 해결됨.
     var body = o.mapper.toHtml(commentBody, {url: url, identifier: identifier});
     
