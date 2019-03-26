@@ -8,6 +8,7 @@ var CONTENTS_PATH = "../../contents/v2";
 var CHK_KEYS = [
 	{ name: "title", type: "string" },
 	{ name: "created", type: "string" },
+	{ name: "ad", type: "boolean"},
 //	{ name: "category", type: "string" },
 //	{ name: "tags", type: "array" }
 ];
@@ -35,6 +36,9 @@ var extractMeta = function (file) {
 							case "array":
 								data[name] = value.split(",");
 
+							break;
+							case "boolean":
+							    data[name] = value === "true" ? true : false;
 							break;
 							default:
 							case "string":

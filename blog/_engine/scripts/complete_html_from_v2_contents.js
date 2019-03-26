@@ -7,7 +7,8 @@ $ node ./20170706_to_v2_from_v1_converter.js {number}
 
 var owiki = require("./owiki2.alpha.js");
 
-var BASE_TEMPLATE = "../../base.html";
+var BASE_TEMPLATE = "../../templates/base.html";
+var AD_TEMPLATE = "../../templates/ad.html";
 var V2_CONTENTS_PATH = "../../contents/v2/";
 var HTML_PATH = "../../"
 var fs = require("fs");
@@ -17,10 +18,15 @@ if (process.argv.length < 3) {
     return;
 }
 
+function extractMeta(key, body) {
+    return body.split("\n").filter((line) => line.indexOf(key + "=") >= 0).map((line) => line.replace(key + "=", "")).map((line) => line.slice(0, line.length - 1)).reduce((old, _new) => old);
+}
+
 var number = process.argv[2];
 
 var v2content = fs.readFileSync(V2_CONTENTS_PATH + number, "utf8");
-var title = v2content.split("\n").filter((line) => line.indexOf("title=") >= 0).map((line) => line.replace("title=", "")).map((line) => line.slice(0, line.length - 1)).reduce((old, _new) => old);
+var title = extractMeta("title", v2content);
+var ad = extractMeta("ad", v2content)
 
 var completeHtmlPath = HTML_PATH + number + ".html";
 try {
@@ -30,8 +36,10 @@ try {
 }
 
 var baseHtml = fs.readFileSync(BASE_TEMPLATE, "utf8");
+var adHtml = fs.readFileSync(AD_TEMPLATE, "utf8");
 
 var completeHtml = baseHtml.replace("{{body}}", owiki.getIns().interpreter(v2content))
-                           .replace("{{title}}", title);
+                           .replace("{{title}}", title)
+                           .replace("{{ad}}", ad === "true" ? adHtml : "");
 
 fs.appendFileSync(completeHtmlPath, completeHtml);
