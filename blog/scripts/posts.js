@@ -512,7 +512,6 @@ var postsInfo = (function(){
             "128":{
                 "title":"Shebang",
                 "created":"2015-04-27"
-                ,"version":"v1"
             },
             "129":{
                 "title":"스칼라 JDBC 연결(Scala JDBC Connection)",
