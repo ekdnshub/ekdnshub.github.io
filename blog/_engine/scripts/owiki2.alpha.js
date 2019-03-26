@@ -179,7 +179,6 @@
             }, function(line){ return "</pre>"}, function(line){
                 line = line.replace(/</g,"&lt;");
                 line = line.replace(/>/g,"&gt;");
-                line = line.replace(/#/g,"&#35;");
                 return line;
             }],
             ["###p", function(line){ return "<p>"; }, function(line){ return "</p>"; }, function(line){ return line+"<br>"; }],
