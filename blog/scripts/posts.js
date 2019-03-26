@@ -544,7 +544,6 @@ var postsInfo = (function(){
             "136":{
                 "title":"협업 도구 Trello",
                 "created":"2015-05-11"
-                ,"version":"v1"
             },
             "137":{
                 "title":"멤캐시드(Memcached) 정의 및 사용법",
