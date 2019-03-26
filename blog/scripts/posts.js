@@ -548,7 +548,6 @@ var postsInfo = (function(){
             "137":{
                 "title":"멤캐시드(Memcached) 정의 및 사용법",
                 "created":"2015-05-14"
-                ,"version":"v1"
             },
             "138":{
                 "title":"RabbitMQ 정의 및 사용법",

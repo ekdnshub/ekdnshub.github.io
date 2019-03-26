@@ -1,0 +1,156 @@
+###info
+title=멤캐시드(Memcached) 정의 및 사용법
+created=2015-05-14
+ad=false
+###
+
+#p Memcached. 메모리 캐싱 시스템으로 유명합니다. 이 포스트는 Memcached가 무엇인지, 어떻게 설치하고 사용하는지 알아봅니다.
+
+#h3 Memcached 정의
+
+#p  Memcached는 분산 메모리 캐시 시스템입니다. RAM에 데이터 및 오브젝트를 캐시함으로써 데이터베이스 및 API에서 읽어와야 하는 횟수를 줄일 수 있습니다.
+
+#p  또한 Memached는 무료면서 오픈 소스 소프트웨어입니다. 라이센스는 BSD 라이센스를 따르고 있어요. 유닉스 같은 OS에서 동작하면서 윈도우에서도 사용가능 합니다.
+###include
+#p  Memcached (Mem-Cache-D) is a general-purpose distributed memory caching system. It is often used to speed up dynamic database-driven websites by caching data and objects in RAM to reduce the number of times an external data source (such as a database or API) must be read.
+#p  Memcached is free and open-source software, subject to the terms of the Revised BSD license. Memcached runs on Unix-like (at least Linux and OS X) operating systems and on Microsoft Windows. There is a strict dependency on libevent.
+#p  Memcached's APIs provide a very large hash table distributed across multiple machines. When the table is full, subsequent inserts cause older data to be purged in least recently used (LRU) order. Applications using Memcached typically layer requests and additions into RAM before falling back on a slower backing store, such as a database.
+#p  The size of this hash table is often very large. It is limited by available memory across a large number of servers in a data centre. Where high volume, wide audience web publishing requires it, this may stretch to many GB. Memcached can be equally valuable for situations where either the number of requests for content is high, or the cost of generating a particular piece of content is high.
+#cite {$http://en.wikipedia.org/wiki/Memcached|Wikipedia - Memcached}
+### 
+#h3 Memcached 설치 
+#h4 CentOS 
+#h5 yum 패키지 관리자 
+#p  우선, yum 패키지 관리자를 이용해서 설치를 진행해 봅시다. 일단 패키지가 있는지 확인을 해봅시다.  
+###code.sh
+# command
+$ yum list | grep memcached
+# command result
+libmemcached.i686                      0.31-1.1.el6                     base    
+libmemcached.x86_64                    0.31-1.1.el6                     base    
+libmemcached-devel.i686                0.31-1.1.el6                     base    
+libmemcached-devel.x86_64              0.31-1.1.el6                     base    
+memcached.x86_64                       1.4.4-3.el6                      base    
+memcached-devel.i686                   1.4.4-3.el6                      base    
+memcached-devel.x86_64                 1.4.4-3.el6                      base    
+python-memcached.noarch                1.43-6.el6                       base 
+### 
+#p  관련 패키지가 있어보이네요. 그럼 아래 커맨드를 실행해서 설치를 해봅시다.  
+###code.sh
+# command
+$ yum install memcached
+# result
+==============================================================================================================================
+Package                        Arch                        Version                           Repository                 Size
+==============================================================================================================================
+Installing:
+memcached                      x86_64                      1.4.4-3.el6                       base                       68 k
+Installing for dependencies:
+libevent                       x86_64                      1.4.13-4.el6                      base                       66 k
+
+Transaction Summary
+==============================================================================================================================
+Install       2 Package(s)
+
+Total download size: 134 k
+Installed size: 374 k
+Is this ok [y/N]: y
+Downloading Packages:
+(1/2): libevent-1.4.13-4.el6.x86_64.rpm                                                                |  66 kB     00:00     
+(2/2): memcached-1.4.4-3.el6.x86_64.rpm                                                                |  68 kB     00:00     
+------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                         1.6 MB/s | 134 kB     00:00     
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+ Installing : libevent-1.4.13-4.el6.x86_64                                                                               1/2 
+ Installing : memcached-1.4.4-3.el6.x86_64                                                                               2/2 
+ Verifying  : libevent-1.4.13-4.el6.x86_64                                                                               1/2 
+ Verifying  : memcached-1.4.4-3.el6.x86_64                                                                               2/2 
+
+Installed:
+ memcached.x86_64 0:1.4.4-3.el6                                                                                              
+
+Dependency Installed:
+ libevent.x86_64 0:1.4.13-4.el6                                                                                              
+
+Complete!
+### 
+#h5 memcached 설정 
+#p  패키지 설치가 됐다면 다음엔 환경 구성이 어떻게 되어 있는지 확인해 봅시다. 아래의 커맨드를 실행하세요.  
+###code.sh
+# command
+$ vi /etc/sysconfig/memcached
+# result
+PORT="11211"
+USER="memcached"
+MAXCONN="1024"
+CACHESIZE="64"
+OPTIONS="-l 127.0.0.1" # 기본 설정값은 비어있습니다.
+### 
+###ul  
+#li PORT : memcached가 사용할 포트를 지정합니다.
+#li USER : 만약 root로 실행한다면 이때 사용할 memcached 사용자 이름입니다.
+#li MAXCONN : 최대 연결할 수 있는 커넥션 개수입니다.
+#li CACHESIZE : 사용할 메모리를 결정합니다. MB단위입니다. 1024라고 지정하면 1GB가 되겠죠. 여기선 64MB만 사용합니다.
+#li OPTIONS : -l 옵션은 바인드 IP를 설정합니다. Apache, NginX는 여기 설정된 값으로 연결을 시도합니다. 로컬호스트(127.0.0.1)로 지정한 경우 외부 접근은 불가합니다.
+### 
+#h5 자동 재시작 설정 
+#p  설치가 끝났지만 이제 서버를 재시작해도 memcached 데몬이 구동되도록 변경합시다. 다음의 커맨드를 실행합니다.  
+###code.sh
+$ chkconfig --levels 235 memcached on
+### 
+#h5 memcached 데몬 관리 
+#p  데몬은 아래와 같은 커맨드로 관리할 수 있습니다.  
+###code.sh
+$ /etc/init.d/memcached start
+$ /etc/init.d/memcached restart
+$ /etc/init.d/memcached stop
+$ /etc/init.d/memcached status
+$ memcached-tool
+### 
+#h5 memcached 데몬 확인 
+#p  실제로 데몬이 떠있는지 확인합시다. 아래의 커맨드로 확인 가능 합니다.  
+###code.sh
+$ ps -ef | grep memcached # 프로세스가 떠있는지 확인합니다.
+$ netstat -an | grep 11211 # 포트가 리슨중인지 확인합니다.
+### 
+#p  만약 실행 되어 있지 않다면 `/etc/init.d/memcached start` 커맨드로 실행하고 다시 확인해 보세요.
+#h5 실행중인 memcached 데몬 정보 
+#p 실행중인 데몬의 상세 정보는 아래의 커맨드로 확인 가능합니다. 
+###code.sh
+$ memcached-tool 127.0.0.1 stats
+### 
+#h4 Memcached 예제 
+#h5 Java 
+#p  자바로 입력 테스트 및 출력 테스트를 해봅시다. 준비물은 {$https://code.google.com/p/spymemcached/|spymemcached}입니다. 여기서 최신버전을 다운로드 받으세요.  
+#p  소스를 아래처럼 작성합니다.  
+###code.java
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import net.spy.memcached.MemcachedClient;
+
+public class MemcachedExample {
+	public static void main(String[] args) throws IOException {
+		MemcachedClient c = new MemcachedClient(new InetSocketAddress(
+				"localhost", 11211));
+		// 1시간 동안 값을 저장
+		c.set("exam", 3600, "example");
+		// 값을 가져온다.
+		String exam = (String) c.get("exam");
+		// 출력
+		System.out.println(exam);
+	}
+}
+### 
+#p  매우 심플한 소스입니다. MemcachedExample.java 라는 이름으로 파일을 저장합니다. 그리고 컴파일 하고 실행해 보세요. spymemcached 라이브러리가 같은 디렉토리가 있다면 다음과 같은 예제 커맨드로 클래스 파일을 컴파일 합니다.  
+#p {= * Java 실행 예제는 linux OS 기반으로 작성 되었습니다.  
+###code.sh
+$ javac -cp .:./spymemcached-2.8.4.jar MemcachedExample.java
+### 
+#p  생성된 MemcachedExample.class 파일을 실행해봅시다.  
+###code.sh
+$ java -cp .:./spymemcached-2.8.4.jar MemcachedExample
+### 
+#p  실행해서 {!example}이라는 문구가 출력되면 예제는 끝입니다. :) 
