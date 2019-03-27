@@ -14,7 +14,7 @@ const uglifyJS = require('@node-minify/uglify-js');
 
 minify({
   compressor: uglifyJS,
-  input: ["../resources/core.js"],
+  input: ["../resources/core.js", "../../scripts/posts.js"],
   output: '../../scripts/resources.min.js',
   callback: function(err, min) {}
 });
