@@ -34,7 +34,7 @@ var resourcesMinify = (function() {
         console.log("블로그 메인용 리소스 미니파이 시작...");
                 minify({
                   compressor: gcc,
-                  input: ["../resources/core.js", "../resources/main.js", "../../scripts/posts.js", "../../scripts/ArchiveGroup.js"],
+                  input: ["../resources/core.js", "../../scripts/posts.js", "../../scripts/ArchiveGroup.js", "../resources/main.js"],
                   output: '../../scripts/main.min.js',
                   options: {
                     compilationLevel: 'SIMPLE'
