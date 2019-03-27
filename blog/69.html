@@ -113,7 +113,7 @@ public class ThreadTest extends Thread {
 }
 </pre>
 
-<p>이 코드에서 알 수 있는 것은 <span class="command">Thread</span> 클래스를 상속받아 <span class="command">run()</span><span class="command"> 메소드를 오버라이드<span class="refer">Override</span>했다는 것을 알 수 있습니다. </span>run()<span class="command"> 메소드 안에서 </span>Thread.sleep()<span class="command"> 메소드를 이용해 쓰레드를 잠시 멈출 수 있다는 것과 </span>main()<span class="command"> 메소드에서 쓰레드를 생성하고 </span>start()` 메소드를 이용해 쓰레드를 실행하는 것까지 알 수 있습니다.</p>
+<p>이 코드에서 알 수 있는 것은 <span class="command">Thread</span> 클래스를 상속받아 <span class="command">run()</span> 메소드를 오버라이드<span class="refer">Override</span>했다는 것을 알 수 있습니다. <span class="command">run()</span> 메소드 안에서 <span class="command">Thread.sleep()</span> 메소드를 이용해 쓰레드를 잠시 멈출 수 있다는 것과 <span class="command">main()</span> 메소드에서 쓰레드를 생성하고 <span class="command">start()</span> 메소드를 이용해 쓰레드를 실행하는 것까지 알 수 있습니다.</p>
 <p><span class="command">start()</span>를 실행하면 내부적으로 쓰레드의 <span class="command">run()</span> 메소드를 실행합니다. 만약 <span class="command">Thread</span>를 상속받았는데도 <span class="command">run()</span> 메소드를 오버라이드 하지 않는다면 아무런 동작을 안하는 것처럼 보일겁니다. 그리고 위 프로그램의 실행 결과는 다음과 같습니다.</p>
 <pre class="console">
 Start main method.
