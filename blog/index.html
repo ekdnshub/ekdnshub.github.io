@@ -11,7 +11,7 @@
 
 		<!-- # css -->
 		<link rel="stylesheet" type="text/css" href="/css/reset.css">
-		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="/blog/css/main.css">
 
@@ -30,10 +30,11 @@
 		<script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 		<!--<![endif]-->
 
-		<script src="/lib/o/1.0.2.min.js"></script>
-		<script src="/blog/scripts/posts.js"></script>
-		<script src="/blog/scripts/ArchiveGroup.js"></script>
 		<script src="/blog/scripts/header.js"></script>
+		<script>
+			Header.directGnb();
+			Header.directTopSubject("JDM's Blog", "/blog", "온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3");
+		</script>
 	</head>
 	<body>
 
@@ -57,7 +58,7 @@
 				</div>
 			</div>
 		</script>
-		<script src="/blog/scripts/main.js"></script>
+		<script src="/blog/scripts/main.min.js"></script>
 		<script src="/lib/scripts/footer.js"></script>
 	</body>
 </html>
