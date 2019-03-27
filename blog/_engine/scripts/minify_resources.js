@@ -15,7 +15,7 @@ const gcc = require('@node-minify/google-closure-compiler');
 var resourcesMinify = (function() {
 
     var execute = function() {
-        console.log("minify start....");
+        console.log("블로그 본문용 리소스 미니파이 시작...");
         minify({
           compressor: gcc,
           input: ["../resources/core.js", "../../scripts/posts.js", "../../scripts/ArchiveGroup.js"],
@@ -27,9 +27,25 @@ var resourcesMinify = (function() {
             if (err) {
               console.log("error:", err);
             }
-              console.log("minify end!");
+              console.log("블로그 본문용 리소스 미니파이 완료!");
           }
         });
+
+        console.log("블로그 메인용 리소스 미니파이 시작...");
+                minify({
+                  compressor: gcc,
+                  input: ["../resources/core.js", "../resources/main.js", "../../scripts/posts.js", "../../scripts/ArchiveGroup.js"],
+                  output: '../../scripts/main.min.js',
+                  options: {
+                    compilationLevel: 'SIMPLE'
+                  },
+                  callback: function(err, min) {
+                    if (err) {
+                      console.log("error:", err);
+                    }
+                      console.log("블로그 메인용 리소스 미니파이 완료!");
+                  }
+                });
     }
 
     return {

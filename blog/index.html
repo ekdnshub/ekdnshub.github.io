@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="ko">
 	<head>
+		<title>블로그 메인 :: JDM's Blog</title>
 		<!-- # common resource # -->
 		<link rel="shortcut icon" href="/images/favicon.ico">
 		<meta charset="utf-8">
@@ -10,7 +11,9 @@
 
 		<!-- # css -->
 		<link rel="stylesheet" type="text/css" href="/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/blog/css/main.css">
 
 		<!-- # font -->
 		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
@@ -24,19 +27,9 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
 		<![endif]-->
 		<!--[if gt IE 9]><!-->
-		<script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+		<script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 		<!--<![endif]-->
 
-		<!-- # front view lib # -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-		<!-- # blog library # -->
-		<title>블로그 메인 :: JDM's Blog</title>
-		<link rel="stylesheet" type="text/css" href="/blog/css/main.css">
-		<meta name="naver-site-verification" content="1cdff501692ee1d9be3af5687afc16f4ce558bc8"/>
-		<script src="/lib/o/1.0.2.min.js"></script>
-		<script src="/blog/scripts/posts.js"></script>
-		<script src="/blog/scripts/ArchiveGroup.js"></script>
 		<script src="/blog/scripts/header.js"></script>
 	</head>
 	<body>
@@ -57,7 +50,16 @@
 			</div>
 		</div>
 
-		<script src="/blog/scripts/main.js"></script>
+		<script id="postBody" type="text/template">
+			<div class="card mb-3">
+                <div class="card-body">
+                    <h4 class="card-title"><a href="/blog/{{seq}}" style="">{{title}}</a></h4>
+                    <p class="card-text"><small class="text-muted">{{category}} | {{created}}</small></p>
+                </div>
+            </div>
+		</script>
+
+		<script src="/blog/scripts/resources.min.js"></script>
 		<script src="/lib/scripts/footer.js"></script>
 	</body>
 </html>
