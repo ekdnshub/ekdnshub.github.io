@@ -1,6 +1,22 @@
 var Header = (function(){
 
-	var gnb = o.util.multiLine(function(){
+    function multiLine(func) {
+        var matches = func.toString().match(/\*\!?\s*([\s\S]+?)\s*\*\//);
+        if (!matches) return false;
+        return matches[1];
+    };
+
+    function toHtml( template, object ){
+        var propMatcher = null;
+        var result = template;
+        for (var prop in object ) {
+            propMatcher = new RegExp("{{\\s*"+prop+"\\s*}}","g");
+            result = result.replace( propMatcher, object[prop] );
+        };
+        return result;
+    };
+
+	var gnb = multiLine(function(){
 		/*!
 			<div id="_gnb" class="text-right" style="font-size:0.8em; padding:1px; background-color:#259CE0;">
 				<a style="color:white; text-decoration:none;" href="//www.jdm.kr">Home</a>│<a style="color:white; text-decoration:none;" href="//blog.jdm.kr">Blog</a>│<a style="color:white; text-decoration:none;" href="//jdm.kr/guest/">Guestbook</a>│<a style="color:white; text-decoration:none;" href="//jdm.kr/lab/">Lab</a>&nbsp;
@@ -8,7 +24,7 @@ var Header = (function(){
 		*/
 	});
 
-	var template = o.util.multiLine(function(){
+	var template = multiLine(function(){
 		/*!
 			<div id="top_subject" class="jumbotron" style="margin-bottom:2em; padding:1em; background-color:#259CE0; filter:alpha(opacity=80); opacity:0.8; -moz-opacity:0.8; color:white; border-radius: 0;">
 				<p style="font-size:3em;" class="text-center">
@@ -27,7 +43,7 @@ var Header = (function(){
 		map.href = href;
 		map.content = content;
 
-		var html = o.mapper.toHtml( template, map );
+		var html = toHtml( template, map );
 
 		switch( type ){
 			case "direct":
