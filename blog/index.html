@@ -29,6 +29,9 @@
 		<!--[if gt IE 9]><!-->
 		<script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 		<!--<![endif]-->
+
+		<script src="/blog/scripts/resources.min.js"></script>
+		<script src="/blog/scripts/header.js"></script>
 	</head>
 	<body>
 
@@ -38,6 +41,11 @@
 		  브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
 		</noscript>
 		<!-- // noscript -->
+		<script>
+			Header.directGnb();
+			Header.directTopSubject("JDM's Blog", "/blog", "온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3");
+		</script>
+
 		<div class="container">
 			<div id="list_wrap">
 			</div>
@@ -52,8 +60,6 @@
             </div>
 		</script>
 
-		<script src="/blog/scripts/header.js"></script>
-		<script src="/blog/scripts/resources.min.js"></script>
 		<script src="/lib/scripts/footer.js"></script>
 	</body>
 </html>
