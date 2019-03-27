@@ -1,3 +1,4 @@
+/* Deprecated */
 var Header = (function(){
 
     function multiLine(func) {

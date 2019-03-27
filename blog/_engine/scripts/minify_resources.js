@@ -18,7 +18,7 @@ var resourcesMinify = (function() {
         console.log("블로그 본문용 리소스 미니파이 시작...");
         minify({
           compressor: gcc,
-          input: ["../resources/core.js", "../../scripts/posts.js", "../../scripts/ArchiveGroup.js"],
+          input: ["../resources/common/core.js", "../../scripts/posts.js", "../../scripts/ArchiveGroup.js"],
           output: '../../scripts/resources.min.js',
           options: {
             compilationLevel: 'SIMPLE'
@@ -32,20 +32,20 @@ var resourcesMinify = (function() {
         });
 
         console.log("블로그 메인용 리소스 미니파이 시작...");
-                minify({
-                  compressor: gcc,
-                  input: ["../resources/core.js", "../../scripts/posts.js", "../../scripts/ArchiveGroup.js", "../resources/main.js"],
-                  output: '../../scripts/main.min.js',
-                  options: {
-                    compilationLevel: 'SIMPLE'
-                  },
-                  callback: function(err, min) {
-                    if (err) {
-                      console.log("error:", err);
-                    }
-                      console.log("블로그 메인용 리소스 미니파이 완료!");
-                  }
-                });
+        minify({
+          compressor: gcc,
+          input: ["../resources/common/core.js", "../resources/common/header.js", "../../scripts/posts.js", "../../scripts/ArchiveGroup.js", "../resources/main/main.js"],
+          output: '../../scripts/main.min.js',
+          options: {
+            compilationLevel: 'SIMPLE'
+          },
+          callback: function(err, min) {
+            if (err) {
+              console.log("error:", err);
+            }
+              console.log("블로그 메인용 리소스 미니파이 완료!");
+          }
+        });
     }
 
     return {
