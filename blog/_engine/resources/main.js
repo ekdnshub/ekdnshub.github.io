@@ -16,7 +16,7 @@ $(document).ready(function(){
 
     function addPost(printingId){
         var html = "";
-        var template = $("#postBody").html();
+        var template = $("#postBody").text();
 
         if( postsMeta[printingId] != null ){
             var data = postsMeta[printingId];
