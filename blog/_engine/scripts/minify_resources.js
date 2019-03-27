@@ -16,5 +16,7 @@ minify({
   compressor: uglifyJS,
   input: ["../resources/core.js", "../../scripts/posts.js"],
   output: '../../scripts/resources.min.js',
-  callback: function(err, min) {}
+  callback: function(err, min) {
+      console.log("error:", err);
+  }
 });

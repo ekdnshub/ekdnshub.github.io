@@ -244,7 +244,12 @@ function showAnimationForReferenecePost( _obj, order, loopCnt, delay ){
         if( delay != null ){
             _delay = delay;
         }
-        $(obj).delay(_delay).fadeIn("slow");
+        if (o.animate) {
+            o.animate.fadeIn($(obj)[0], 100, _delay);
+        } else {
+            // deprecated
+            $(obj).delay(_delay).fadeIn("slow");
+        }
     } else {
         if( order == "next" ){
             $("#top_more_before").hide();

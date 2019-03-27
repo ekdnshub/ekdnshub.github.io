@@ -314,12 +314,88 @@ var o = (function($){
         };
     })();
 
+    /*-----------------------------------------------------------------------*/
+    /* animate                                                               */
+    /*-----------------------------------------------------------------------*/
+
+    var animate = (function() {
+
+        var startOpacityVal = -1;
+        var minOpacityVal = 0;
+        var maxOpacityVal = 10;
+        var opacityMultiply = 10;
+        var fadeInAction = "in";
+        var fadeOutAction = "out";
+
+        function fadeObj(el, speed) {
+            this.name = el;
+            this.opacity = startOpacityVal;
+            this.timer;
+
+            this.fadeOut = function(delay) {
+                if (this.opacity == startOpacityVal) {
+                    setOpacity(this.name, maxOpacityVal);
+                    this.opacity = maxOpacityVal;
+                }
+                var that = this;
+                setTimeout(function(){that.timer = setInterval(function() { fade(that,fadeOutAction); },speed)},delay);
+            };
+
+            this.fadeIn = function(delay) {
+                if (this.opacity == startOpacityVal) {
+                    setOpacity(this.name, minOpacityVal);
+                    this.opacity = minOpacityVal;
+                }
+                var that = this;
+                setTimeout(function(){that.timer = setInterval(function() { fade(that,fadeInAction); },speed)},delay);
+            };
+
+            return this;
+        }
+
+        function fade(obj,direction) {
+            if (direction == fadeOutAction) {
+                obj.opacity--;
+                if (obj.opacity >= minOpacityVal) {
+                    setOpacity(obj.name,obj.opacity);
+                } else {
+                    clearInterval(obj.timer);
+                }
+            } else {
+                obj.opacity++;
+                if (obj.opacity <= opacityMultiply) {
+                    setOpacity(obj.name,obj.opacity);
+                } else {
+                    clearInterval(obj.timer);
+                }
+            }
+        }
+
+        function setOpacity(el, value) {
+            document.getElementById(el).style.MozOpacity = value / opacityMultiply;
+            document.getElementById(el).style.opacity = value / opacityMultiply;
+            document.getElementById(el).style.filter = 'alpha(opacity=' + value * opacityMultiply + ')';
+        }
+
+        return {
+            fadeIn: function(el, speed, delay) {
+                var obj = fadeObj(el, speed);
+                obj.fadeIn(delay);
+            },
+            fadeOut: function(el, speed, delay) {
+                var obj = fadeObj(el, speed);
+                obj.fadeOut(delay);
+            }
+        };
+    })();
+
     return {
         browser:browser,
         toast:toast,
         util:util,
         popup:popup,
         mapper:mapper,
-        checker:checker
+        checker:checker,
+        animate:animate
     };
 })(jQuery);
