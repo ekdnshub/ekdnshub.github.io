@@ -4,4 +4,11 @@
 
 var resourcesMinify = require("./minify_resources.js");
 
-resourcesMinify.getIns().execute();
+if (process.argv.length < 3) {
+    console.log("need to argument. all | view | main");
+    return;
+}
+
+var type = process.argv[2];
+
+resourcesMinify.getIns().execute(type);

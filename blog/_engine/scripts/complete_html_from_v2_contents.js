@@ -49,4 +49,4 @@ console.log("신규 파일 저장 중...");
 fs.appendFileSync(completeHtmlPath, completeHtml);
 console.log("신규 파일 저장 완료!")
 
-resourcesMinify.getIns().execute();
+resourcesMinify.getIns().execute("view");
