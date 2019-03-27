@@ -245,7 +245,7 @@ function showAnimationForReferenecePost( _obj, order, loopCnt, delay ){
             _delay = delay;
         }
         if (o.animate) {
-            o.animate.fadeIn($(obj)[0], 100, _delay);
+            o.animate.fadeIn(obj.attr("id"), _delay, 600);
         } else {
             // deprecated
             $(obj).delay(_delay).fadeIn("slow");

@@ -330,7 +330,7 @@ var o = (function($){
         function fadeObj(el, speed) {
             this.name = el;
             this.opacity = startOpacityVal;
-            this.timer;
+            this.timeCounter = null;
 
             this.fadeOut = function(delay) {
                 if (this.opacity == startOpacityVal) {
@@ -338,7 +338,7 @@ var o = (function($){
                     this.opacity = maxOpacityVal;
                 }
                 var that = this;
-                setTimeout(function(){that.timer = setInterval(function() { fade(that,fadeOutAction); },speed)},delay);
+                setTimeout(function(){that.timeCounter = setInterval(function() { fade(that,fadeOutAction); },speed)},delay);
             };
 
             this.fadeIn = function(delay) {
@@ -347,7 +347,7 @@ var o = (function($){
                     this.opacity = minOpacityVal;
                 }
                 var that = this;
-                setTimeout(function(){that.timer = setInterval(function() { fade(that,fadeInAction); },speed)},delay);
+                setTimeout(function(){that.timeCounter = setInterval(function() { fade(that,fadeInAction); },speed)},delay);
             };
 
             return this;
@@ -359,14 +359,14 @@ var o = (function($){
                 if (obj.opacity >= minOpacityVal) {
                     setOpacity(obj.name,obj.opacity);
                 } else {
-                    clearInterval(obj.timer);
+                    clearInterval(obj.timeCounter);
                 }
             } else {
                 obj.opacity++;
                 if (obj.opacity <= opacityMultiply) {
                     setOpacity(obj.name,obj.opacity);
                 } else {
-                    clearInterval(obj.timer);
+                    clearInterval(obj.timeCounter);
                 }
             }
         }
