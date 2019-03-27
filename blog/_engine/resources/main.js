@@ -1,3 +1,6 @@
+Header.directGnb();
+Header.directTopSubject("JDM's Blog", "/blog", "온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3");
+
 $(document).ready(function(){
 
     var totalPostCount = o.util.getObjectSize(postsInfo.getMeta());
