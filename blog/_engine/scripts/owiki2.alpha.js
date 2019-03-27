@@ -9,7 +9,7 @@
         // 키워드 리스트 [0] 키워드(정규식), [1] 처리 프로세스
         var keywordList = [
             ["n", function(line){ // check \n
-                return line.replace(/\\n/g, "<br>");
+                return line.replace(/\\n[^\w'"]/g, "<br>");
             }],
             ["{+help", function(line){ // check {+help}
                 return line.replace(/\{\+help\}/g, "<i class=\"fa fa-check fa-lg\"></i>");

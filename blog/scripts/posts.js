@@ -708,7 +708,6 @@ var postsInfo = (function(){
             "170":{
                 "title":"C++ 파일 읽기/쓰기(C++ File Read/Write Example)",
                 "created":"2015-07-07"
-                ,"version":"v1"
             },
             "171":{
                 "title":"JSP redirect vs forward",
@@ -762,7 +761,6 @@ var postsInfo = (function(){
             "181":{
                 "title":"자바 람다식(Lambda Expressions in Java)",
                 "created":"2015-07-23"
-                ,"version":"v1"
             },
             "182":{
                 "title":"CentOS 서버 시간 동기화(using ntp daemon)",

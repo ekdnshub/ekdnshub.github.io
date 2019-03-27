@@ -58,6 +58,7 @@ fs.readFileSync(V1_CONTENTS_PATH + number).toString().split('\n').forEach(functi
     line = line.replace("</blockquote>", "###");
     line = line.replace('<pre class="prettyprint linenums">', "###console");
     line = line.replace('<pre class="prettyprint linenums lang-cpp">', "###code.cpp");
+    line = line.replace('<pre class="prettyprint lang-cpp">', "###code.cpp");
     line = line.replace('<pre class="prettyprint linenums lang-java">', "###code.java");
     line = line.replace('<pre class="prettyprint lang-java">', "###code.java");
     line = line.replace('<pre class="prettyprint linenums lang-xml">', "###code.xml");

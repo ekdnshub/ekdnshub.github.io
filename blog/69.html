@@ -1,21 +1,22 @@
 <!DOCTYPE HTML>
 <html lang="ko">
-<head>
+	<head>
+    <title>자바 쓰레드 기초(Java Thread Basic) :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
+    
     <!-- # font -->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -27,10 +28,19 @@
     <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <!--<![endif]-->
 
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
+    <!-- # front view lib # -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+    
     <!-- # blog library # -->
     <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
     <script src="/lib/o/1.0.2.min.js"></script>
@@ -41,24 +51,35 @@
     <script src="/blog/scripts/postHandler.js"></script>
     <script src="/blog/scripts/copyright.js"></script>
     <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><div style="display:none;">title=자바 쓰레드 기초(Java Thread Basic)
-                created=2015-02-13
-            </div><p>이번엔 Java Thread에 대해 알아보고자 합니다. 시작합니다!</p><h2>Java Thread Definition</h2><p>자바 쓰레드<span class="refer">Java Thread</span>의 정의를 알기 전에 프로세스<span class="refer">Process</span>에 대해 알아야 합니다. 보통 우리가 만드는 프로그래밍 언어<span class="refer">Java, C/C++ 등</span>로 소스를 짜서 만든 것을 "프로그램"이라고 합니다. 그리고 이 프로그램을 "실행" 시켜서 동작하게 만들면 이것을 "프로세스"라고 합니다. 이 프로세스는 보통 하나의 루틴<span class="refer">프로그램 처리 경로</span>을 가지고 있습니다. 이 루틴은 직렬적입니다. 즉 어떠한 일을 수행하는 것에 있어 프로그래머가 원하는 순서대로 일을 처리합니다. 그러나 생각해보면 굳이 앞뒤 순서가 필요 없는 일들이 있을 때 분리해서 동시에 처리하고 싶은 생각이 들 때가 있습니다. 이 때 자바에서 사용할 수 있는 것이 쓰레드<span class="refer">Thread</span>입니다.</p><p>자바 쓰레드를 이용하면 하나의 프로세스에서도 병렬적으로 처리, 즉 여러 개의 처리 루틴을 가질 수 있습니다. 단순 반복의 코드를 실행할 때도 여러 개의 쓰레드를 만들어서 분리 시킨 뒤 결과 데이터를 받아 합치면 그만큼 시간을 절약할 수 있습니다.</p><p>백문이불여일견(不如一見), 실제로 간단한 쓰레드 프로그램을 구동해 봅시다.</p>
-                <h2>Simple Thread Program</h2><p>자바 쓰레드를 만들어서 구동하는 것 중 대표적인 것은 <span class="command">Thread</span> 클래스를 상속 받는 것입니다. 실제로 쓰레드를 만들때 상속이 간편하고 편리합니다. 다음과 같은 코드를 봅시다.</p><pre class="prettyprint lang-java">/* 간단한 쓰레드 프로그램 */
+	</head>
+	<body>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+					<!-- 본문 -->
+					<div id="content">
+
+
+
+
+<p>이번엔 Java Thread에 대해 알아보고자 합니다. 시작합니다!</p>
+<h2>Java Thread Definition</h2>
+<p>자바 쓰레드<span class="refer">Java Thread</span>의 정의를 알기 전에 프로세스<span class="refer">Process</span>에 대해 알아야 합니다. 보통 우리가 만드는 프로그래밍 언어<span class="refer">Java, C/C++ 등</span>로 소스를 짜서 만든 것을 "프로그램"이라고 합니다. 그리고 이 프로그램을 "실행" 시켜서 동작하게 만들면 이것을 "프로세스"라고 합니다. 이 프로세스는 보통 하나의 루틴<span class="refer">프로그램 처리 경로</span>을 가지고 있습니다. 이 루틴은 직렬적입니다. 즉 어떠한 일을 수행하는 것에 있어 프로그래머가 원하는 순서대로 일을 처리합니다. 그러나 생각해보면 굳이 앞뒤 순서가 필요 없는 일들이 있을 때 분리해서 동시에 처리하고 싶은 생각이 들 때가 있습니다. 이 때 자바에서 사용할 수 있는 것이 쓰레드<span class="refer">Thread</span>입니다.</p>
+<p>자바 쓰레드를 이용하면 하나의 프로세스에서도 병렬적으로 처리, 즉 여러 개의 처리 루틴을 가질 수 있습니다. 단순 반복의 코드를 실행할 때도 여러 개의 쓰레드를 만들어서 분리 시킨 뒤 결과 데이터를 받아 합치면 그만큼 시간을 절약할 수 있습니다.</p>
+<p>백문이불여일견(不如一見), 실제로 간단한 쓰레드 프로그램을 구동해 봅시다.</p>
+
+<h2>Simple Thread Program</h2>
+<p>자바 쓰레드를 만들어서 구동하는 것 중 대표적인 것은 <span class="command">Thread</span> 클래스를 상속 받는 것입니다. 실제로 쓰레드를 만들때 상속이 간편하고 편리합니다. 다음과 같은 코드를 봅시다.</p>
+<pre class="prettyprint lang-java">
+/* 간단한 쓰레드 프로그램 */
 import java.util.Random;
 public class ThreadTest extends Thread {
 	private int id = -1;
@@ -74,24 +95,28 @@ public class ThreadTest extends Thread {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		
 		System.out.println( id + "번 쓰레드 동작 종료..." );
 	}
-
+	
 	public static void main(String[] args) {
-
+		
 		System.out.println("Start main method.");
-
+		
 		for(int i = 0 ; i &lt; 10 ; i++ ){
 			ThreadTest test = new ThreadTest(i);
 			test.start(); // 이 메소드를 실행하면 Thread 내의 run()을 수행한다.
 		}
-
+		
 		System.out.println("End main method.");
 	}
 }
 </pre>
-                <p>이 코드에서 알 수 있는 것은 <span class="command">Thread</span> 클래스를 상속받아 <span class="command">run()</span> 메소드를 오버라이드<span class="refer">Override</span>했다는 것을 알 수 있습니다. <span class="command">run()</span> 메소드 안에서 <span class="command">Thread.sleep()</span> 메소드를 이용해 쓰레드를 잠시 멈출 수 있다는 것과 <span class="command">main()</span> 메소드에서 쓰레드를 생성하고 <span class="command">start()</span> 메소드를 이용해 쓰레드를 실행하는 것까지 알 수 있습니다.</p><p><span class="command">start()</span>를 실행하면 내부적으로 쓰레드의 <span class="command">run()</span> 메소드를 실행합니다. 만약 <span class="command">Thread</span>를 상속받았는데도 <span class="command">run()</span> 메소드를 오버라이드 하지 않는다면 아무런 동작을 안하는 것처럼 보일겁니다. 그리고 위 프로그램의 실행 결과는 다음과 같습니다.</p><pre class="console">Start main method.
+
+<p>이 코드에서 알 수 있는 것은 <span class="command">Thread</span> 클래스를 상속받아 <span class="command">run()</span><span class="command"> 메소드를 오버라이드<span class="refer">Override</span>했다는 것을 알 수 있습니다. </span>run()<span class="command"> 메소드 안에서 </span>Thread.sleep()<span class="command"> 메소드를 이용해 쓰레드를 잠시 멈출 수 있다는 것과 </span>main()<span class="command"> 메소드에서 쓰레드를 생성하고 </span>start()` 메소드를 이용해 쓰레드를 실행하는 것까지 알 수 있습니다.</p>
+<p><span class="command">start()</span>를 실행하면 내부적으로 쓰레드의 <span class="command">run()</span> 메소드를 실행합니다. 만약 <span class="command">Thread</span>를 상속받았는데도 <span class="command">run()</span> 메소드를 오버라이드 하지 않는다면 아무런 동작을 안하는 것처럼 보일겁니다. 그리고 위 프로그램의 실행 결과는 다음과 같습니다.</p>
+<pre class="console">
+Start main method.
 0번 쓰레드 동작 중...
 2번 쓰레드 동작 중...
 1번 쓰레드 동작 중...
@@ -113,13 +138,16 @@ End main method.
 2번 쓰레드 동작 종료...
 5번 쓰레드 동작 종료...
 3번 쓰레드 동작 종료...
-</pre><p>여기서 <span class="command">main()</span> 메소드가 자신이 실행 시킨 쓰레드들이 종료가 되지 않았음에도 먼저 끝나버리는 것을 볼 수 있습니다. 지금 프로그램에서는 별 문제가 없어보일 수도 있습니다만 코드를 조금만 바꿔서 다시 봅시다.</p>
-<pre class="prettyprint lang-java">/* 간단한 쓰레드 프로그램(변경 1) */
+</pre>
+<p>여기서 <span class="command">main()</span> 메소드가 자신이 실행 시킨 쓰레드들이 종료가 되지 않았음에도 먼저 끝나버리는 것을 볼 수 있습니다. 지금 프로그램에서는 별 문제가 없어보일 수도 있습니다만 코드를 조금만 바꿔서 다시 봅시다.</p>
+
+<pre class="prettyprint lang-java">
+/* 간단한 쓰레드 프로그램(변경 1) */
 import java.util.Random;
 public class ThreadTest extends Thread {
 	// index 변수를 추가해서 스레드가 동작시에 해당 변수를 증가시키도록 할겁니다.
-	private static int index = 0;
-
+	private static int index = 0; 
+	
 	private int id = -1;
 	public ThreadTest(int id){
 		this.id = id;
@@ -134,24 +162,27 @@ public class ThreadTest extends Thread {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		
 		System.out.println( id + "번 쓰레드 동작 종료..." );
 	}
-
+	
 	public static void main(String[] args) {
-
+		
 		System.out.println("Start main method.");
-
+		
 		for(int i = 0 ; i &lt; 10 ; i++ ){
 			ThreadTest test = new ThreadTest(i);
 			test.start(); // 이 메소드를 실행하면 Thread 내의 run()을 수행한다.
 		}
-
+		
 		System.out.println("current Index: "+ index); // index의 값을 반환합니다.
 		System.out.println("End main method.");
 	}
 }
-</pre><p>프로그래머 입장이라면 스레드가 하나씩 증가시킬 것이라 예상을 하고 <span class="command">index</span> 변수를 프로그램 마지막에 출력해보면 10이 찍힐 것이라 예상할 수 있습니다. 실행 시킨 쓰레드는 총 10개이니까요. 하지만 결과는 다음과 같습니다.</p><pre class="console">Start main method.
+</pre>
+<p>프로그래머 입장이라면 스레드가 하나씩 증가시킬 것이라 예상을 하고 <span class="command">index</span> 변수를 프로그램 마지막에 출력해보면 10이 찍힐 것이라 예상할 수 있습니다. 실행 시킨 쓰레드는 총 10개이니까요. 하지만 결과는 다음과 같습니다.</p>
+<pre class="console">
+Start main method.
 0번 쓰레드 동작 중...
 1번 쓰레드 동작 중...
 2번 쓰레드 동작 중...
@@ -174,12 +205,15 @@ End main method.
 8번 쓰레드 동작 종료...
 9번 쓰레드 동작 종료...
 7번 쓰레드 동작 종료...
-</pre><p>문제가 생겼습니다. 프로그래머의 의도대로 코드가 동작하지 않는것이죠. 만약 <span class="command">index</span> 변수를 가지고 다른 작업을 처리하는 코드가 포함 됐다면 이 프로그램은 오류를 만들어낼 것이 틀림 없습니다. 그래서 <span class="command">main()</span> 메소드도 쓰레드라는 것을 생각하고선 다음처럼 만들어 봤습니다.</p><pre class="prettyprint lang-java">/* 간단한 쓰레드 프로그램(변경 2) */
+</pre>
+<p>문제가 생겼습니다. 프로그래머의 의도대로 코드가 동작하지 않는것이죠. 만약 <span class="command">index</span> 변수를 가지고 다른 작업을 처리하는 코드가 포함 됐다면 이 프로그램은 오류를 만들어낼 것이 틀림 없습니다. 그래서 <span class="command">main()</span> 메소드도 쓰레드라는 것을 생각하고선 다음처럼 만들어 봤습니다.</p>
+<pre class="prettyprint lang-java">
+/* 간단한 쓰레드 프로그램(변경 2) */
 import java.util.Random;
 public class ThreadTest extends Thread {
 	// index 변수를 추가해서 스레드가 동작시에 해당 변수를 증가시키도록 할겁니다.
-	private static int index = 0;
-
+	private static int index = 0; 
+	
 	private int id = -1;
 	public ThreadTest(int id){
 		this.id = id;
@@ -194,31 +228,34 @@ public class ThreadTest extends Thread {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		
 		System.out.println( id + "번 쓰레드 동작 종료..." );
 	}
-
+	
 	public static void main(String[] args) {
-
+		
 		System.out.println("Start main method.");
-
+		
 		for(int i = 0 ; i &lt; 10 ; i++ ){
 			ThreadTest test = new ThreadTest(i);
 			test.start(); // 이 메소드를 실행하면 Thread 내의 run()을 수행한다.
 		}
-
+		
 		try {
 			Thread.sleep(5000); // 쓰레드가 종료할 때까지의 충분한 시간을 기다립니다.
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		
 		System.out.println("current Index: "+ index); // index의 값을 반환합니다.
 		System.out.println("End main method.");
 	}
 }
-</pre><p>아까와 다르게 메인 메소드 내에서 <span class="command">sleep()</span> 메소드를 추가했습니다. 프로그램 내에서 쓰레드가 3초 내로 끝난다는 것을 알고 있기 때문에 일부러 메인 메소드에선 5초를 멈추게 했습니다. 그럼 의도대로 실행이 될까요?</p>
-<pre class="console">Start main method.
+</pre>
+<p>아까와 다르게 메인 메소드 내에서 <span class="command">sleep()</span> 메소드를 추가했습니다. 프로그램 내에서 쓰레드가 3초 내로 끝난다는 것을 알고 있기 때문에 일부러 메인 메소드에선 5초를 멈추게 했습니다. 그럼 의도대로 실행이 될까요?</p>
+
+<pre class="console">
+Start main method.
 0번 쓰레드 동작 중...
 1번 쓰레드 동작 중...
 2번 쓰레드 동작 중...
@@ -242,15 +279,20 @@ public class ThreadTest extends Thread {
 current Index: 7
 End main method.
 </pre>
-                <p>이 방법은 코드가 예쁘지도 않고 나쁜 코드에 속하며 게다가 결과값도 의도치 않는 값이 나옵니다. <span class="command">index</span> 값은 프로그램 실행 할때마다 달라질텐데 이건 추후에 다른 측면으로 설명하고자 하고 이 코드는 폐기합니다. <span class="red">이런 코드 쓰면 안되요.</span></p>
-                <h2>Thread Join</h2><p>메인 메소드가 자신이 실행시킨 쓰레드들이 전부 종료되기도 전에 먼저 종료가 되는 것을 해결하는 좋은 방법은 쓰레드 조인<span class="refer">Thread Join</span>을 이용하는 것입니다. 쓰레드 조인은 현재 스레드가 동작중이면 동작이 끝날때까지 기다리는 메소드입니다. 물론 기다리는 시간도 정해줄 수 있습니다만, 여기에선 간단하게 작성해 봅니다.</p>
-<pre class="prettyprint lang-java">/* 간단한 쓰레드 프로그램(변경 3) */
+
+<p>이 방법은 코드가 예쁘지도 않고 나쁜 코드에 속하며 게다가 결과값도 의도치 않는 값이 나옵니다. <span class="command">index</span> 값은 프로그램 실행 할때마다 달라질텐데 이건 추후에 다른 측면으로 설명하고자 하고 이 코드는 폐기합니다. <span class="red">이런 코드 쓰면 안되요.</span></p>
+
+<h2>Thread Join</h2>
+<p>메인 메소드가 자신이 실행시킨 쓰레드들이 전부 종료되기도 전에 먼저 종료가 되는 것을 해결하는 좋은 방법은 쓰레드 조인<span class="refer">Thread Join</span>을 이용하는 것입니다. 쓰레드 조인은 현재 스레드가 동작중이면 동작이 끝날때까지 기다리는 메소드입니다. 물론 기다리는 시간도 정해줄 수 있습니다만, 여기에선 간단하게 작성해 봅니다.</p>
+
+<pre class="prettyprint lang-java">
+/* 간단한 쓰레드 프로그램(변경 3) */
 import java.util.ArrayList;
 import java.util.Random;
 public class ThreadTest extends Thread {
 	// index 변수를 추가해서 스레드가 동작시에 해당 변수를 증가시키도록 할겁니다.
-	private static int index = 0;
-
+	private static int index = 0; 
+	
 	private int id = -1;
 	public ThreadTest(int id){
 		this.id = id;
@@ -265,23 +307,23 @@ public class ThreadTest extends Thread {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		
 		System.out.println( id + "번 쓰레드 동작 종료..." );
 	}
-
+	
 	public static void main(String[] args) {
-
+		
 		System.out.println("Start main method.");
-
+		
 		ArrayList&lt;Thread&gt; threadList = new ArrayList&lt;Thread&gt;();
 
 		for(int i = 0 ; i &lt; 10 ; i++ ){
 			ThreadTest test = new ThreadTest(i);
-
+			
 			test.start(); // 이 메소드를 실행하면 Thread 내의 run()을 수행한다.
 			threadList.add(test); // 생성한 쓰레드를 리스트에 삽입
 		}
-
+		
 		for(int i = 0 ; i &lt; threadList.size(); i++){
 			try {
 				threadList.get(i).join(); // 쓰레드의 처리가 끝날때까지 기다립니다.
@@ -289,12 +331,15 @@ public class ThreadTest extends Thread {
 				e.printStackTrace();
 			}
 		}
-
+		
 		System.out.println("current Index: "+ index); // index의 값을 반환합니다.
 		System.out.println("End main method.");
 	}
 }
-</pre><p>추가가 된 것은 <span class="command">threadList</span>에 쓰레드를 삽입하고 이후 <span class="command">threadList</span>를 순회하며 각 쓰레드에서 <span class="command">join()</span> 메소드를 실행시켜주는 것입니다. 이렇게 작성하고 프로그램을 돌리면 어떤 결과가 나올까요?</p><pre class="console">Start main method.
+</pre>
+<p>추가가 된 것은 <span class="command">threadList</span>에 쓰레드를 삽입하고 이후 <span class="command">threadList</span>를 순회하며 각 쓰레드에서 <span class="command">join()</span> 메소드를 실행시켜주는 것입니다. 이렇게 작성하고 프로그램을 돌리면 어떤 결과가 나올까요?</p>
+<pre class="console">
+Start main method.
 0번 쓰레드 동작 중...
 1번 쓰레드 동작 중...
 2번 쓰레드 동작 중...
@@ -317,15 +362,20 @@ public class ThreadTest extends Thread {
 9번 쓰레드 동작 종료...
 current Index: 9
 End main method.
-</pre><p>운이 좋으면 <span class="command">current Index</span> 값이 10으로 출력 될 수도 있겠습니다만, 대부분은 오차가 나옵니다. 하지만 원래 의도했던 쓰레드가 모두 종료 된 뒤 메인 메소드 종료라는 문제는 해결이 됐습니다. 그러면 이제 남은 것은 <span class="command">index</span>의 값이 멋대로 바뀌는 현상이 왜 생기는지 알아봅시다.</p>
-                <h2>Thread Synchronized</h2><p>쓰레드 사이에서 공통적으로 사용해야할 객체가 있다면 동기화<span class="refer">synchronization</span>에 대해 고민을 해야 합니다. 동기화가 무엇인지에 대한 것은 다른 포스팅에서 설명 하기로 하고 지금 포스팅에서는 동기화 문제를 해결하기 위한 코드를 삽입하겠습니다.</p>
-<pre class="prettyprint lang-java">/* 간단한 쓰레드 프로그램(변경 4) */
+</pre>
+<p>운이 좋으면 <span class="command">current Index</span> 값이 10으로 출력 될 수도 있겠습니다만, 대부분은 오차가 나옵니다. 하지만 원래 의도했던 쓰레드가 모두 종료 된 뒤 메인 메소드 종료라는 문제는 해결이 됐습니다. 그러면 이제 남은 것은 <span class="command">index</span>의 값이 멋대로 바뀌는 현상이 왜 생기는지 알아봅시다.</p>
+
+<h2>Thread Synchronized</h2>
+<p>쓰레드 사이에서 공통적으로 사용해야할 객체가 있다면 동기화<span class="refer">synchronization</span>에 대해 고민을 해야 합니다. 동기화가 무엇인지에 대한 것은 다른 포스팅에서 설명 하기로 하고 지금 포스팅에서는 동기화 문제를 해결하기 위한 코드를 삽입하겠습니다.</p>
+
+<pre class="prettyprint lang-java">
+/* 간단한 쓰레드 프로그램(변경 4) */
 import java.util.ArrayList;
 import java.util.Random;
 public class ThreadTest extends Thread {
 	// index 변수를 추가해서 스레드가 동작시에 해당 변수를 증가시키도록 할겁니다.
-	private static int index = 0;
-
+	private static int index = 0; 
+	
 	private int id = -1;
 	public ThreadTest(int id){
 		this.id = id;
@@ -340,27 +390,27 @@ public class ThreadTest extends Thread {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		
 		System.out.println( id + "번 쓰레드 동작 종료..." );
 	}
-
+	
 	public synchronized static void setIndex(){
 		index++; // index 변수를 증가시킵니다.
 	}
-
+	
 	public static void main(String[] args) {
-
+		
 		System.out.println("Start main method.");
-
+		
 		ArrayList&lt;Thread&gt; threadList = new ArrayList&lt;Thread&gt;();
 
 		for(int i = 0 ; i &lt; 10 ; i++ ){
 			ThreadTest test = new ThreadTest(i);
-
+			
 			test.start(); // 이 메소드를 실행하면 Thread 내의 run()을 수행한다.
 			threadList.add(test); // 생성한 쓰레드를 리스트에 삽입
 		}
-
+		
 		for(int i = 0 ; i &lt; threadList.size(); i++){
 			try {
 				threadList.get(i).join(); // 쓰레드의 처리가 끝날때까지 기다립니다.
@@ -368,14 +418,17 @@ public class ThreadTest extends Thread {
 				e.printStackTrace();
 			}
 		}
-
+		
 		System.out.println("current Index: "+ index); // index의 값을 반환합니다.
 		System.out.println("End main method.");
 	}
 }
 </pre>
-                <p>새로운 정적 메소드인 <span class="command">setIndex()</span>가 추가 되었습니다. 그리고 동기화를 위한 키워드인 <span class="command">synchronized</span>도 붙어 있습니다. 이 키워드가 있는 한 <span class="command">setIndex()</span>를 쓰레드들이 동시에 접근할 수 없습니다. 한번에 하나씩만 접근할 수 있습니다. 따라서 이렇게 만들어진 프로그램을 구동하면 다음과 같은 결과가 나옵니다.</p>
-<pre class="console">Start main method.
+
+<p>새로운 정적 메소드인 <span class="command">setIndex()</span>가 추가 되었습니다. 그리고 동기화를 위한 키워드인 <span class="command">synchronized</span>도 붙어 있습니다. 이 키워드가 있는 한 <span class="command">setIndex()</span>를 쓰레드들이 동시에 접근할 수 없습니다. 한번에 하나씩만 접근할 수 있습니다. 따라서 이렇게 만들어진 프로그램을 구동하면 다음과 같은 결과가 나옵니다.</p>
+
+<pre class="console">
+Start main method.
 0번 쓰레드 동작 중...
 1번 쓰레드 동작 중...
 2번 쓰레드 동작 중...
@@ -398,14 +451,20 @@ public class ThreadTest extends Thread {
 0번 쓰레드 동작 종료...
 current Index: 10
 End main method.
-</pre><p>아무리 프로그램을 재실행해도 아까처럼 이상한 <span class="command">index</span>가 잡히진 않습니다. 원하는대로 구현이 된것입니다. 그러나 이렇게 난잡한 코드를 예제로 쓰는것도 처음입니다. -_-; 실무에서 쓰면 상사에게 뒷통수 맞기 좋습니다. 예제로만 봐주세요.</p>
-                <h2>Closing Remarks</h2><p>해당 포스팅에서 자바 쓰레드를 만들어 실행하는 것과 <span class="command">join()</span> 메소드, 동기화에 대한 문제 해결까지 간략하게 알아 봤습니다. 그러나 처음에 말씀 드렸던 것처럼 자바 쓰레드를 만드는 법은 <span class="command">Thread</span> 클래스를 상속 받는 것 외에 또 다른 방법이 있습니다. 바로 <span class="command">Runnable</span> 인터페이스를 사용하는 것인데 이 포스팅이 너무 길어질것 같아서 이 방법은 다음 포스팅에서 다루겠습니다. 그때까지 Bye ~ :)</p></div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+</pre>
+<p>아무리 프로그램을 재실행해도 아까처럼 이상한 <span class="command">index</span>가 잡히진 않습니다. 원하는대로 구현이 된것입니다. 그러나 이렇게 난잡한 코드를 예제로 쓰는것도 처음입니다. -_-; 실무에서 쓰면 상사에게 뒷통수 맞기 좋습니다. 예제로만 봐주세요.</p>
+
+<h2>Closing Remarks</h2>
+<p>해당 포스팅에서 자바 쓰레드를 만들어 실행하는 것과 <span class="command">join()</span> 메소드, 동기화에 대한 문제 해결까지 간략하게 알아 봤습니다. 그러나 처음에 말씀 드렸던 것처럼 자바 쓰레드를 만드는 법은 <span class="command">Thread</span> 클래스를 상속 받는 것 외에 또 다른 방법이 있습니다. 바로 <span class="command">Runnable</span> 인터페이스를 사용하는 것인데 이 포스팅이 너무 길어질것 같아서 이 방법은 다음 포스팅에서 다루겠습니다. 그때까지 Bye ~ :)</p>
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

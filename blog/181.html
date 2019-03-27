@@ -1,21 +1,22 @@
 <!DOCTYPE HTML>
 <html lang="ko">
-<head>
+	<head>
+    <title>자바 람다식(Lambda Expressions in Java) :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
+    
     <!-- # font -->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -27,10 +28,19 @@
     <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <!--<![endif]-->
 
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
+    <!-- # front view lib # -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+    
     <!-- # blog library # -->
     <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
     <script src="/lib/o/1.0.2.min.js"></script>
@@ -41,62 +51,61 @@
     <script src="/blog/scripts/postHandler.js"></script>
     <script src="/blog/scripts/copyright.js"></script>
     <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><p>
-                자바 8에서 람다식(Lambda Expressions)이 추가 되었습니다. 이번 포스팅은 간단하게 람다식에 대해 알아보고자 합니다.
-            </p>
+	</head>
+	<body>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+					<!-- 본문 -->
+					<div id="content">
 
-                <h2>Lambda Expressions</h2>
-                <p>
-                    람다식을 간단히 정의하면 다음과 같습니다.
-                </p>
-                <div class="green">
-                    식별자 없이 실행 가능한 함수 표현식
-                </div>
-                <p>
-                    요즘은 정의만 보면 잘 모르겠어요. 부연 설명을 조금 해봅시다. 람다식은 자바 8의 가장 특징적인 기능입니다. 또한 기존의 불필요한 코드를 줄이고 가독성을 향상시키는것에 목적을 두고 있습니다.
-                </p>
-                <p>
-                    대표적으로 반복문이나 비교문이 있겠습니다. 어떤식으로 코드를 줄이는지 한번 알아봅시다.
-                </p>
 
-                <h2>Lambda Expressions Example</h2>
-                <p>
-                    자바에서 람다식을 사용하려면 다음과 같은 방법으로 사용이 가능합니다.
-                </p>
+
+
+<p>자바 8에서 람다식(Lambda Expressions)이 추가 되었습니다. 이번 포스팅은 간단하게 람다식에 대해 알아보고자 합니다.</p>
+
+<h2>Lambda Expressions</h2>
+
+<p>람다식을 간단히 정의하면 다음과 같습니다.</p>
+
+<div class="green">
+식별자 없이 실행 가능한 함수 표현식
+</div>
+
+<p>요즘은 정의만 보면 잘 모르겠어요. 부연 설명을 조금 해봅시다. 람다식은 자바 8의 가장 특징적인 기능입니다. 또한 기존의 불필요한 코드를 줄이고 가독성을 향상시키는것에 목적을 두고 있습니다.</p>
+
+<p>대표적으로 반복문이나 비교문이 있겠습니다. 어떤식으로 코드를 줄이는지 한번 알아봅시다.</p>
+
+<h2>Lambda Expressions Example</h2>
+
+<p>자바에서 람다식을 사용하려면 다음과 같은 방법으로 사용이 가능합니다.</p>
+
 <pre class="prettyprint lang-java">
-( parameters ) -> expression body
-( parameters ) -> { expression body }
-() -> { expression body }
-() -> expression body
+( parameters ) -&gt; expression body
+( parameters ) -&gt; { expression body }
+() -&gt; { expression body }
+() -&gt; expression body
 ...
 </pre>
-                <p>
-                    너무 단순한가요? 실제 코드로 확인을 해봅시다.
-                </p>
 
-                <h3>Basic</h3>
-                <p>
-                    "Hello World."라는 단어를 출력하고 종료하는 쓰레드를 만들어봅시다. 처음으로는 기존에 존재하던 방식으로 작성해보고 다음은 람다식으로 작성해봅니다.
-                </p>
+<p>너무 단순한가요? 실제 코드로 확인을 해봅시다.</p>
 
-                <h4>Traditional Code</h4>
-                <p>
-                    기존에 있던 방식으로 만든 코드는 다음과 같습니다.
-                </p>
+<h3>Basic</h3>
+
+<p><span class="command">Hello World.</span>라는 단어를 출력하고 종료하는 쓰레드를 만들어봅시다. 처음으로는 기존에 존재하던 방식으로 작성해보고 다음은 람다식으로 작성해봅니다.</p>
+
+<h4>Traditional Code</h4>
+
+<p>기존에 있던 방식으로 만든 코드는 다음과 같습니다.</p>
+
 <pre class="prettyprint lang-java">
 // Thread - traditional
 new Thread(new Runnable() {
@@ -106,70 +115,58 @@ new Thread(new Runnable() {
 	}
 }).start();
 </pre>
-                <p>
-                    쓰레드를 돌리기 위해 Runnable 인터페이스를 새롭게 작성해서 매개변수로 넣었습니다. 이 코드를 람다식으로 바꾸면 어떻게 될까요?
-                </p>
 
-                <h4>Lambda Expression Code</h4>
-                <p>
-                    아래에 있는 코드는 위에 있던 코드를 람다식으로 다시 작성한 것입니다.
-                </p>
+<p>쓰레드를 돌리기 위해 <span class="command">Runnable</span> 인터페이스를 새롭게 작성해서 매개변수로 넣었습니다. 이 코드를 람다식으로 바꾸면 어떻게 될까요?</p>
+
+<h4>Lambda Expression Code</h4>
+
+<p>아래에 있는 코드는 위에 있던 코드를 람다식으로 다시 작성한 것입니다.</p>
+
 
 <pre class="prettyprint lang-java">
 // Thread - Lambda Expression
-new Thread(()->{
+new Thread(()-&gt;{
 	System.out.println("Hello World.");
 }).start();
 </pre>
 
-                <p>
-                    기존에 있던 코드량이 줄어든 것을 볼 수 있습니다. 인자가 없기 때문에 <span class="command">()</span>로 작성하고 실제로 동작할 코드를 <span class="command">->{ ... }</span>의 내부에 작성했습니다. 처음에 적어두었던 <span class="command">() -> { expression body }</span> 구조입니다. 하지만 이것은 꽤나 단순한 예제이고 이것으로 람다식이 끝은 아닙니다.
-                </p>
+<p>기존에 있던 코드량이 줄어든 것을 볼 수 있습니다. 인자가 없기 때문에 <span class="command">()</span>로 작성하고 실제로 동작할 코드를 <span class="command">->{ ... }</span>의 내부에 작성했습니다. 처음에 적어두었던 <span class="command">() -> { expression body }</span> 구조입니다. 하지만 이것은 꽤나 단순한 예제이고 이것으로 람다식이 끝은 아닙니다.</p>
 
-                <h3>Using @FunctionalInterface</h3>
-                <p>
-                    객체지향 언어인 자바에서 값이나 객체가 아닌 하나의 함수(Funtion)을 변수에 담아둔다는 것은 이해가 되지 않을 것입니다. 하지만 자바 8에서 람다식이 추가 되고 나서는 하나의 변수에 하나의 함수를 매핑할 수 있습니다.
-                </p>
-                <p>
-                    실제로 다음과 같은 구문을 실행시키고자 한다면 어떻게 해야할까요?
-                </p>
+<h3>Using @FunctionalInterface</h3>
+
+<p>객체지향 언어인 자바에서 값이나 객체가 아닌 하나의 함수(Funtion)을 변수에 담아둔다는 것은 이해가 되지 않을 것입니다. 하지만 자바 8에서 람다식이 추가 되고 나서는 하나의 변수에 하나의 함수를 매핑할 수 있습니다.</p>
+
+<p>실제로 다음과 같은 구문을 실행시키고자 한다면 어떻게 해야할까요?</p>
+
 <pre class="prettyprint lang-java">
-Func add = (int a, int b) -> a + b;
+Func add = (int a, int b) -&gt; a + b;
 </pre>
-                <p>
-                    분명히 int형 매개 변수 a,b를 받아 그것을 합치는 것을 람다식으로 표현한것입니다. 그러면 <span class="command">Func</span>는 무엇이어야 할까요?
-                </p>
-                <p>
-                    답은 <span class="command">interface</span>입니다. 위와 같은 람다식을 구현하려면 <span class="command">Func</span> 인터페이스를 아래처럼 작성합니다.
-                </p>
+<p>분명히 int형 매개 변수 a,b를 받아 그것을 합치는 것을 람다식으로 표현한것입니다. 그러면 <span class="command">Func</span>는 무엇이어야 할까요?</p>
+
+<p>답은 <span class="command">interface</span>입니다. 위와 같은 람다식을 구현하려면 <span class="command">Func</span> 인터페이스를 아래처럼 작성합니다.</p>
 
 <pre class="prettyprint lang-java">
 interface Func {
 	public int calc(int a, int b);
 }
 </pre>
-                <p>
-                    이 인터페이스에서는 하나의 추상 메소드를 가지고 있습니다. 바로 <span class="command">calc</span>라는 메소드입니다. 이 메소드는 int형 매개 변수 2개를 받아 하나의 int형 변수를 반환합니다. 아직 내부 구현은 어떻게 할지 정해지지 않았죠.
-                </p>
-                <p>
-                    이 내부 구현을 람다식으로 만든것이 처음에 보셨던 코드입니다. 아래의 코드죠.
-                </p>
+
+<p>이 인터페이스에서는 하나의 추상 메소드를 가지고 있습니다. 바로 <span class="command">calc</span>라는 메소드입니다. 이 메소드는 int형 매개 변수 2개를 받아 하나의 int형 변수를 반환합니다. 아직 내부 구현은 어떻게 할지 정해지지 않았죠.</p>
+
+<p>이 내부 구현을 람다식으로 만든것이 처음에 보셨던 코드입니다. 아래의 코드죠.</p>
+
 <pre class="prettyprint lang-java">
-Func add = (int a, int b) -> a + b;
+Func add = (int a, int b) -&gt; a + b;
 </pre>
 
-                <p>
-                    여기까지는 진행에 무리가 없어보입니다. 그러면 혹시 <span class="command">Func</span> 인터페이스에 메소드를 추가하게 되면 어떻게 될까요?
-                </p>
-                <p>
-                    람다식으로 구현했던 <span class="command">add</span> 함수 코드에서 오류가 납니다. <strong>기본적으로 람다식을 위한 인터페이스에서 추상 메소드는 단 하나여야 합니다.</strong> 하지만 이러한 사실을 알고 있다 하더라도 람다식으로 사용하는 인터페이스나 그냥 메소드가 하나뿐인 인터페이스나 구별을 하기 힘들뿐더러 혹시라도 누군가 람다식으로 사용하는 인터페이스에 메소드를 추가하더라도 해당 인터페이스에서는 오류가 나지 않습니다.
-                </p>
-                <p>
-                    따라서 이 인터페이스는 람다식을 위한 것이다라는 표현을 위해 어노테이션 <span class="command">@FunctionalInterface</span>을 사용합니다. 실제로 저 어노테이션을 선언하면 해당 인터페이스에 메소드를 두 개 이상 선언하면 유효하지 않다는 오류를 냅니다. 즉, 컴파일러 수준에서 오류를 확인 할 수 있습니다.
-                </p>
-                <p>
-                    다음처럼 <span class="command">Func</span> 인터페이스의 코드가 변경됩니다.
-                </p>
+<p>여기까지는 진행에 무리가 없어보입니다. 그러면 혹시 <span class="command">Func</span> 인터페이스에 메소드를 추가하게 되면 어떻게 될까요?</p>
+
+<p>람다식으로 구현했던 <span class="command">add</span> 함수 코드에서 오류가 납니다. <strong>기본적으로 람다식을 위한 인터페이스에서 추상 메소드는 단 하나여야 합니다.</strong> 하지만 이러한 사실을 알고 있다 하더라도 람다식으로 사용하는 인터페이스나 그냥 메소드가 하나뿐인 인터페이스나 구별을 하기 힘들뿐더러 혹시라도 누군가 람다식으로 사용하는 인터페이스에 메소드를 추가하더라도 해당 인터페이스에서는 오류가 나지 않습니다.</p>
+
+<p>따라서 이 인터페이스는 람다식을 위한 것이다라는 표현을 위해 어노테이션 <span class="command">@FunctionalInterface</span>을 사용합니다. 실제로 저 어노테이션을 선언하면 해당 인터페이스에 메소드를 두 개 이상 선언하면 유효하지 않다는 오류를 냅니다. 즉, 컴파일러 수준에서 오류를 확인 할 수 있습니다.</p>
+
+<p>다음처럼 <span class="command">Func</span> 인터페이스의 코드가 변경됩니다.</p>
+
 <pre class="prettyprint lang-java">
 @FunctionalInterface
 interface Func {
@@ -177,132 +174,116 @@ interface Func {
 }
 </pre>
 
-                <h4>Various uses</h4>
-                <p>
-                    물론 <span class="command">add</span> 함수처럼 내부 구현을 할 수 있지만 조금 더 다양하게 구현을 해봅시다. 다음의 코드는 조금씩 내부 구현을 바꿔본 예제 코드입니다.
-                </p>
+<h4>Various uses</h4>
+
+<p>물론 <span class="command">add</span> 함수처럼 내부 구현을 할 수 있지만 조금 더 다양하게 구현을 해봅시다. 다음의 코드는 조금씩 내부 구현을 바꿔본 예제 코드입니다.</p>
+
 
 <pre class="prettyprint lang-java">
-Func sub = (int a, int b) -> a - b;
-Func add2 = (int a, int b) -> { return a + b; };
+Func sub = (int a, int b) -&gt; a - b;
+Func add2 = (int a, int b) -&gt; { return a + b; };
 </pre>
 
-                <p>
-                    뺄셈을 위한 <span class="command">sub</span> 함수도 만들었고 <span class="command">add</span> 함수와 비슷하지만 expression body에 <span class="command">return</span> 키워드를 붙인 <span class="command">add2</span> 함수도 있습니다.
-                </p>
+<p>뺄셈을 위한 <span class="command">sub</span> 함수도 만들었고 <span class="command">add</span> 함수와 비슷하지만 expression body에 <span class="command">return</span> 키워드를 붙인 <span class="command">add2</span> 함수도 있습니다.</p>
 
-                <h4>Using Function</h4>
-                <p>
-                    그러면 실제로 람다식을 통해 내부를 구현한 함수 <span class="command">add</span>는 어떻게 사용할까요? 다음의 코드를 봅시다.
-                </p>
+
+<h4>Using Function</h4>
+<p>그러면 실제로 람다식을 통해 내부를 구현한 함수 <span class="command">add</span>는 어떻게 사용할까요? 다음의 코드를 봅시다.</p>
+
 
 <pre class="prettyprint lang-java">
 int result = add.calc(1,2) + add2.calc(3, 4); // 10
 </pre>
 
-                <p>
-                    위에서 만들어뒀던 <span class="command">add</span> 함수와 <span class="command">add2</span> 함수를 사용했습니다. 따라서 result 변수의 결과값으로 10이라는 것을 알 수 있습니다.
-                </p>
+<p>위에서 만들어뒀던 <span class="command">add</span> 함수와 <span class="command">add2</span> 함수를 사용했습니다. 따라서 result 변수의 결과값으로 10이라는 것을 알 수 있습니다.</p>
 
-                <h2>Stream API</h2>
-                <p>
-                    람다식을 소개하면서 Stream API를 소개 하지 않을 수 없겠지요. 람다식을 추가하면서 같이 추가된 Stream API를 살펴봅시다. 이번 포스팅은 람다식이 주요 내용이었기 때문에 간단하게 사용법만 알아봅시다.
-                </p>
 
-                <h3>Get Stream</h3>
-                <p>
-                    먼저 Stream API를 사용하려면 stream을 얻어와야 합니다. 얻는 방법은 다음과 같습니다.
-                </p>
+<h2>Stream API</h2>
+<p>람다식을 소개하면서 Stream API를 소개 하지 않을 수 없겠지요. 람다식을 추가하면서 같이 추가된 Stream API를 살펴봅시다. 이번 포스팅은 람다식이 주요 내용이었기 때문에 간단하게 사용법만 알아봅시다.</p>
+
+
+<h3>Get Stream</h3>
+<p>먼저 Stream API를 사용하려면 stream을 얻어와야 합니다. 얻는 방법은 다음과 같습니다.</p>
+
 <pre class="prettyprint lang-java">
 Arrays.asList(1,2,3).stream(); // (1)
 Arrays.asList(1,2,3).parallelStream(); // (2)
 </pre>
-                <p>
-                    콜렉션 관련 객체라면 stream을 얻어올 수 있습니다. (1)번 방법은 일반적인 stream을 가져오는 것이고 (2)번 방법은 병렬로 stream을 가져옵니다.
-                </p>
+<p>콜렉션 관련 객체라면 stream을 얻어올 수 있습니다. (1)번 방법은 일반적인 stream을 가져오는 것이고 (2)번 방법은 병렬로 stream을 가져옵니다.</p>
 
-                <h3>Working Stream</h3>
-                <p>
-                    실제로 얻어온 stream에 연산을 해봅시다. 주요하게 쓰이는 몇가지 API만 살펴봅시다.
-                </p>
 
-                <h4>forEach</h4>
-                <p>
-                    stream의 요소를 순회해야 한다면 forEach를 활용할 수 있습니다.
-                </p>
+<h3>Working Stream</h3>
+<p>실제로 얻어온 stream에 연산을 해봅시다. 주요하게 쓰이는 몇가지 API만 살펴봅시다.</p>
+
+
+<h4>forEach</h4>
+<p>stream의 요소를 순회해야 한다면 forEach를 활용할 수 있습니다.</p>
+
 <pre class="prettyprint lang-java">
 Arrays.asList(1,2,3).stream()
 					.forEach(System.out::println); // 1,2,3
 </pre>
 
-                <h4>map</h4>
-                <p>
-                    stream의 개별 요소마다 연산을 할 수 있습니다. 아래의 코드는 리스트에 있는 요소의 제곱 연산을 합니다.
-                </p>
+<h4>map</h4>
+<p>stream의 개별 요소마다 연산을 할 수 있습니다. 아래의 코드는 리스트에 있는 요소의 제곱 연산을 합니다.</p>
+
 <pre class="prettyprint lang-java">
 Arrays.asList(1,2,3).stream()
-					.map(i -> i*i)
+					.map(i -&gt; i*i)
 					.forEach(System.out::println); // 1,4,9
 </pre>
 
-                <h4>limit</h4>
-                <p>
-                    stream의 최초 요소부터 선언한 인덱스까지의 요소를 추출해 새로운 stream을 만듭니다.
-                </p>
+<h4>limit</h4>
+<p>stream의 최초 요소부터 선언한 인덱스까지의 요소를 추출해 새로운 stream을 만듭니다.</p>
+
 <pre class="prettyprint lang-java">
 Arrays.asList(1,2,3).stream()
 					.limit(1)
 					.forEach(System.out::println); // 1
 </pre>
 
-                <h4>skip</h4>
-                <p>
-                    stream의 최초 요소로부터 선언한 인덱스까지의 요소를 제외하고 새로운 stream을 만듭니다.
-                </p>
+<h4>skip</h4>
+<p>stream의 최초 요소로부터 선언한 인덱스까지의 요소를 제외하고 새로운 stream을 만듭니다.</p>
+
 <pre class="prettyprint lang-java">
 Arrays.asList(1,2,3).stream()
 					.skip(1)
 					.forEach(System.out::println); // 2,3
 </pre>
 
-                <h4>filter</h4>
-                <p>
-                    stream의 요소마다 비교를 하고 비교문을 만족하는 요소로만 구성된 stream을 반환합니다.
-                </p>
+<h4>filter</h4>
+<p>stream의 요소마다 비교를 하고 비교문을 만족하는 요소로만 구성된 stream을 반환합니다.</p>
+
 <pre class="prettyprint lang-java">
 Arrays.asList(1,2,3).stream()
-					.filter(i-> 2>=i)
+					.filter(i-&gt; 2&gt;=i)
 					.forEach(System.out::println); // 1,2
 </pre>
 
-                <h4>flatMap</h4>
-                <p>
-                    stream의 내부에 있는 객체들을 연결한 stream을 반환합니다.
-                </p>
+<h4>flatMap</h4>
+<p>stream의 내부에 있는 객체들을 연결한 stream을 반환합니다.</p>
+
 
 <pre class="prettyprint lang-java">
 Arrays.asList(Arrays.asList(1,2),Arrays.asList(3,4,5),Arrays.asList(6,7,8,9)).stream()
-					.flatMap(i -> i.stream())
+					.flatMap(i -&gt; i.stream())
 					.forEach(System.out::println); // 1,2,3,4,5,6,7,8,9
 </pre>
 
-                <h4>reduce</h4>
-                <p>
-                    stream을 단일 요소로 반환합니다.
-                </p>
+<h4>reduce</h4>
+<p>stream을 단일 요소로 반환합니다.</p>
+
 <pre class="prettyprint lang-java">
 Arrays.asList(1,2,3).stream()
-					.reduce((a,b)-> a-b)
+					.reduce((a,b)-&gt; a-b)
 					.get(); // -4
 </pre>
-                <p>
-                    이 코드는 조금 설명이 필요할 것 같습니다. 우선, 첫번째 연산으로 1과 2가 선택되고 계산식은 앞의 값에서 뒤의 값을 빼는 것이기 때문에 결과는 -1이 됩니다. 그리고 이상태에서 -1과 3이 선택되고 계산식에 의해 -1-3이 되기 때문에 결과로 -4가 나옵니다. 뒤로 추가 요소가 있다면 차근차근 앞에서부터 차례대로 계산식에 맞춰 계산하면 됩니다.
-                </p>
+<p>이 코드는 조금 설명이 필요할 것 같습니다. 우선, 첫번째 연산으로 1과 2가 선택되고 계산식은 앞의 값에서 뒤의 값을 빼는 것이기 때문에 결과는 -1이 됩니다. 그리고 이상태에서 -1과 3이 선택되고 계산식에 의해 -1-3이 되기 때문에 결과로 -4가 나옵니다. 뒤로 추가 요소가 있다면 차근차근 앞에서부터 차례대로 계산식에 맞춰 계산하면 됩니다.</p>
 
-                <h4>collection</h4>
-                <p>
-                    아래의 코드들은 각각의 메소드로 콜렉션 객체를 만들어서 반환합니다.
-                </p>
+
+<h4>collection</h4>
+<p>아래의 코드들은 각각의 메소드로 콜렉션 객체를 만들어서 반환합니다.</p>
+
 <pre class="prettyprint lang-java">
 Arrays.asList(1,2,3).stream()
 					.collect(Collectors.toList());
@@ -310,17 +291,18 @@ Arrays.asList(1,2,3).stream()
 					.iterator();
 </pre>
 
-                <h2>Closing Remarks</h2>
-                <p>
-                    람다식과 간단한 Stream API 사용법을 알아 봤습니다. :3
-                </p>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+<h2>Closing Remarks</h2>
+<p>람다식과 간단한 Stream API 사용법을 알아 봤습니다. :3</p>
+
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>
