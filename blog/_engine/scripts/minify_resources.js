@@ -12,14 +12,34 @@ $ npm install @node-minify/google-closure-compiler
 const minify = require('@node-minify/core');
 const gcc = require('@node-minify/google-closure-compiler');
 
-minify({
-  compressor: gcc,
-  input: ["../resources/core.js", "../../scripts/posts.js"],
-  output: '../../scripts/resources.min.js',
-  options: {
-    compilationLevel: 'SIMPLE'
-  },
-  callback: function(err, min) {
-      console.log("error:", err);
-  }
-});
+var resourcesMinify = (function() {
+
+    var execute = function() {
+        console.log("minify start....");
+        minify({
+          compressor: gcc,
+          input: ["../resources/core.js", "../../scripts/posts.js", "../../scripts/ArchiveGroup.js"],
+          output: '../../scripts/resources.min.js',
+          options: {
+            compilationLevel: 'SIMPLE'
+          },
+          callback: function(err, min) {
+            if (err) {
+              console.log("error:", err);
+            }
+              console.log("minify end!");
+          }
+        });
+    }
+
+    return {
+        execute: execute
+    }
+})();
+
+// for node.js require
+try{
+  exports.getIns = function() { return resourcesMinify; }
+}catch(ex){
+
+}

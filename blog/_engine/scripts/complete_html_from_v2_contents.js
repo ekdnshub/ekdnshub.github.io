@@ -6,6 +6,7 @@ $ node ./20170706_to_v2_from_v1_converter.js {number}
 */
 
 var owiki = require("./owiki2.alpha.js");
+var resourcesMinify = require("./minify_resources.js");
 
 var BASE_TEMPLATE = "../../_templates/base.html";
 var AD_TEMPLATE = "../../_templates/ad.html";
@@ -19,6 +20,7 @@ if (process.argv.length < 3) {
 }
 
 function extractMeta(key, body) {
+    console.log(key + " 추출 중...");
     return body.split("\n").filter((line) => line.indexOf(key + "=") >= 0).map((line) => line.replace(key + "=", "")).map((line) => line.slice(0, line.length - 1)).reduce((old, _new) => old);
 }
 
@@ -30,6 +32,7 @@ var ad = extractMeta("ad", v2content)
 
 var completeHtmlPath = HTML_PATH + number + ".html";
 try {
+    console.log("기존 파일 삭제 중...")
     fs.unlinkSync(completeHtmlPath);
 } catch (e) {
     console.log("삭제할 html 파일이 없습니다.");
@@ -42,4 +45,8 @@ var completeHtml = baseHtml.replace("{{body}}", owiki.getIns().interpreter(v2con
                            .replace("{{title}}", title)
                            .replace("{{ad}}", ad === "true" ? adHtml : "");
 
+console.log("신규 파일 저장 중...");
 fs.appendFileSync(completeHtmlPath, completeHtml);
+console.log("신규 파일 저장 완료!")
+
+resourcesMinify.getIns().execute();

@@ -244,6 +244,8 @@
 
 
     var interpreter = function(data) {
+        console.log("위키 인터프리터 변환 시작...");
+
         // step1. 키워드 변환
         var convertKeywordData = processKeyword(data);
 
@@ -258,7 +260,7 @@
         var convertMultiLineData = processMultiLine(convertLineData);
         // console.log(convertMultiLineData);
 
-
+        console.log("위키 인터프리터 변환 완료!");
         return convertMultiLineData;
     };
 
