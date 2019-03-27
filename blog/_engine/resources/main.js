@@ -13,7 +13,14 @@ $(document).ready(function(){
 
     function addPost(printingId){
         var html = "";
-        var template = $("#postBody").text();
+        var template = `
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h4 class="card-title"><a href="/blog/{{seq}}" style="">{{title}}</a></h4>
+                    <p class="card-text"><small class="text-muted">{{category}} | {{created}}</small></p>
+                </div>
+            </div>
+        `;
 
         if( postsMeta[printingId] != null ){
             var data = postsMeta[printingId];
