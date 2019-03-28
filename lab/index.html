@@ -36,10 +36,17 @@
 			body {
 				font-family: "Nanum Gothic Coding", sans-serif !important;
 			}
-			.jumbotron a {
-				color:white;
-			}
 			hr.bar { max-width: 100px;  border-color: #259CE0;  border-width: 2px; }
+
+			/* GNB */
+			#_gnb { font-size:0.8em; padding:1px; background-color:#259CE0; }
+			#_gnb a { color:white; text-decoration:none; }
+
+			/* Header */
+			#top_subject { margin-bottom:2em; padding:1em; background-color:#259CE0; filter:alpha(opacity=80); opacity:0.8; -moz-opacity:0.8; color:white; border-radius: 0; }
+			#tob_subject_p1 { font-size:3em; }
+			#tob_subject_p1 a { text-decoration: none; color:white; text-shadow:2px 2px 2px #06476C; }
+			#tob_subject_p2 { font-size:0.75em; }
 		</style>
 
 		<!-- # o library # -->
@@ -50,17 +57,14 @@
 	</head>
 		
 	<body>
-		<div id="_gnb" class="text-right" style="font-size:0.8em; padding:1px; background-color:#259CE0;">
-			<a style="color:white; text-decoration:none;" href="//jdm.kr">Home</a>&nbsp;
-		</div>
-		<div id="top_subject" class="jumbotron" style="margin-bottom:2em; padding:1em; background-color:#259CE0; filter:alpha(opacity=80); opacity:0.8; -moz-opacity:0.8; color:white; border-radius: 0;">
-			<p style="font-size:3em;" class="text-center">
-				<a style="text-decoration: none; color:white; text-shadow:2px 2px 2px #06476C;" href="/lab">JDM's Lab Intro</a>
+		<div id="_gnb" class="text-right">
+			<a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+		<div id="top_subject" class="jumbotron">
+			<p id="tob_subject_p1" class="text-center">
+				<a href="/lab/">JDM's Lab Intro</a>
 			</p>
-			<p style="font-size:0.75em;" class="text-center">
-				개인적인 잡다한(?) 것들을 모아놓은 곳입니다.<br>
-				이곳의 URL들은 추가 개발이 더 이상 없거나 또는 누락의 위험으로 제대로 실행이 되지 않을 수 있습니다.
-			</p>
+			<p id="tob_subject_p2"class="text-center">개인적인 잡다한(?) 것들을 모아놓은 곳입니다.<br>
+				이곳의 URL들은 추가 개발이 더 이상 없거나 또는 누락의 위험으로 제대로 실행이 되지 않을 수 있습니다.</p>
 		</div>
 		<div class="container">
 			<h1 class="text-center">Active Test</h1>

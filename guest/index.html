@@ -22,6 +22,16 @@
 		<style>
 			@charset "utf-8";
 			body { font-family: "Nanum Gothic Coding", sans-serif !important; }
+
+			/* GNB */
+			#_gnb { font-size:0.8em; padding:1px; background-color:#259CE0; }
+			#_gnb a { color:white; text-decoration:none; }
+
+			/* Header */
+			#top_subject { margin-bottom:2em; padding:1em; background-color:#259CE0; filter:alpha(opacity=80); opacity:0.8; -moz-opacity:0.8; color:white; border-radius: 0; }
+			#tob_subject_p1 { font-size:3em; }
+			#tob_subject_p1 a { text-decoration: none; color:white; text-shadow:2px 2px 2px #06476C; }
+			#tob_subject_p2 { font-size:0.75em; }
 		</style>
 	</head>
 	<body>
@@ -31,17 +41,14 @@
 		  브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
 		</noscript>
 		<!-- // noscript -->
-		<div id="_gnb" class="text-right" style="font-size:0.8em; padding:1px; background-color:#259CE0;">
-			<a style="color:white; text-decoration:none;" href="//jdm.kr">Home</a>&nbsp;
-		</div>
-		<div id="top_subject" class="jumbotron" style="margin-bottom:2em; padding:1em; background-color:#259CE0; filter:alpha(opacity=80); opacity:0.8; -moz-opacity:0.8; color:white; border-radius: 0;">
-			<p style="font-size:3em;" class="text-center">
-				<a style="text-decoration: none; color:white; text-shadow:2px 2px 2px #06476C;" href="/guest">JDM's Guestbook</a>
+		<div id="_gnb" class="text-right">
+			<a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+		<div id="top_subject" class="jumbotron">
+			<p id="tob_subject_p1" class="text-center">
+				<a href="/guest/">JDM's Guestbook</a>
 			</p>
-			<p style="font-size:0.75em;" class="text-center">
-				방명록에 오셨으니 눈팅 말고 글을 씁시다. :3<br>
-				과거 방명록은 <a href="/guest/old" target="_blank" style="font-weight:bold; color:white;">여기</a>를 클릭하세요.
-			</p>
+			<p id="tob_subject_p2"class="text-center">방명록에 오셨으니 눈팅 말고 글을 씁시다. :3<br>
+				과거 방명록은 <a href="/guest/old" target="_blank" style="font-weight:bold; color:white;">여기</a>를 클릭하세요.</p>
 		</div>
 		<div class="container">	
 			<div class="col-md-10 col-md-offset-1">
