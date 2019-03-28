@@ -163,8 +163,8 @@ var o = (function($){
     var util = (function(browser){
 
         // 페이지 스크롤 마지막 체크
-        function isEndScroll() {
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        function isEndScroll(adjust) { // adjust 값이 클수록 미리 캐치한다.
+            if ((window.innerHeight + window.scrollY + adjust) >= document.body.offsetHeight) {
                 return true;
             }
             return false;

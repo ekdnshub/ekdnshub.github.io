@@ -39,7 +39,7 @@ $(document).ready(function(){
     };
 
     $(window).scroll(function(){
-        if (isEndScroll()) load(6);
+        if (isEndScroll(100)) load(6);
     });
 
     load(15);
