@@ -31,15 +31,8 @@ $(document).ready(function(){
         $("#list_wrap").append("<div class=\"card-deck\">"+html+"</div>");
     };
 
-    function isEndScroll() {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-            return true;
-        }
-        return false;
-    };
-
     $(window).scroll(function(){
-        if (isEndScroll(100)) load(6);
+        if (o.util.isEndScroll(300)) load(6);
     });
 
     load(15);
