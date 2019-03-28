@@ -66,8 +66,6 @@ var resourcesMinify = (function() {
               input: [
                   "../resources/common/core.js",
                   "../resources/common/header.js",
-                  "../../scripts/posts.js",
-                  "../../scripts/ArchiveGroup.js",
                   "../resources/main/main.js"
               ],
               output: '../../scripts/main.min.js',
