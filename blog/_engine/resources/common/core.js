@@ -95,27 +95,9 @@ var o = (function($){
             return 999;
         };
 
-        /* public */
-        // IE인지?
-        // 0.9.10
-        // ie 11버전 체크 가능하게 변경
-        function isIE() {
-            if (/msie/i.test(ua)){ return true; }
-            if (/trident/i.test(ua)) { return true; } // ie11이 mise 문자열 포함 안하고 있다. trident는 ie 렌더링 엔진명이다.
-            return false;
-        };
-
         // 익스플로러 지정 버전(포함)보다 낮은지?
         function isLowerIE(version) {
             if (_getIeBrowserVersion() <= version) {
-                return true;
-            }
-            return false;
-        };
-        
-        // 익스플로러 지정 버전인지?
-        function isEqualIE(version) {
-            if (_getIeBrowserVersion() == version) {
                 return true;
             }
             return false;
@@ -129,31 +111,9 @@ var o = (function($){
             return false;
         };
 
-        // 크롬인지?
-        // 0.9.9 ~
-        function isChrome(){
-            if (/chrom(e|ium)/i.test( ua )) {
-                return true;
-            }
-            return false;
-        };
-
-        // 맥 OS 인지 체크
-        // 1.0.1 ~
-        function isMac() {
-            if(/mac/i.test(ua)) {
-                return true;
-            }
-            return false;
-        };
-
         return {
-            isIE: isIE,
             isLowerIE: isLowerIE,
-            isEqualIE: isEqualIE,
-            isMobile: isMobile,
-            isChrome: isChrome,
-            isMac: isMac
+            isMobile: isMobile
         };
     })();
 
@@ -284,118 +244,11 @@ var o = (function($){
         };
     })();
 
-    /*-----------------------------------------------------------------------*/
-    /* checker                                                               */
-    /*-----------------------------------------------------------------------*/
-
-    var checker = (function(){
-        // 한글 체크
-        function isKoreaLang(str){
-            if( /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/i.test( str ) ){ return true; }
-            return false;
-        };
-
-        // 숫자 체크
-        function isNumber(str){
-            if( /[^0-9]/i.test( str ) ){ return false; }
-            return true;
-        };
-
-        // 영문 체크
-        function isEnglish(str){
-            if( /[^a-zA-Z]/i.test( str ) ){ return false; }
-            return true;
-        };
-
-        return{
-            isKoreaLang:isKoreaLang,
-            isNumber:isNumber,
-            isEnglish:isEnglish
-        };
-    })();
-
-    /*-----------------------------------------------------------------------*/
-    /* animate                                                               */
-    /*-----------------------------------------------------------------------*/
-
-    var animate = (function() {
-
-        var startOpacityVal = -1;
-        var minOpacityVal = 0;
-        var maxOpacityVal = 10;
-        var opacityMultiply = 10;
-        var fadeInAction = "in";
-        var fadeOutAction = "out";
-
-        function fadeObj(el, speed) {
-            this.name = el;
-            this.opacity = startOpacityVal;
-            this.timeCounter = null;
-
-            this.fadeOut = function(delay) {
-                if (this.opacity == startOpacityVal) {
-                    setOpacity(this.name, maxOpacityVal);
-                    this.opacity = maxOpacityVal;
-                }
-                var that = this;
-                setTimeout(function(){that.timeCounter = setInterval(function() { fade(that,fadeOutAction); },speed)},delay);
-            };
-
-            this.fadeIn = function(delay) {
-                if (this.opacity == startOpacityVal) {
-                    setOpacity(this.name, minOpacityVal);
-                    this.opacity = minOpacityVal;
-                }
-                var that = this;
-                setTimeout(function(){that.timeCounter = setInterval(function() { fade(that,fadeInAction); },speed)},delay);
-            };
-
-            return this;
-        }
-
-        function fade(obj,direction) {
-            if (direction == fadeOutAction) {
-                obj.opacity--;
-                if (obj.opacity >= minOpacityVal) {
-                    setOpacity(obj.name,obj.opacity);
-                } else {
-                    clearInterval(obj.timeCounter);
-                }
-            } else {
-                obj.opacity++;
-                if (obj.opacity <= opacityMultiply) {
-                    setOpacity(obj.name,obj.opacity);
-                } else {
-                    clearInterval(obj.timeCounter);
-                }
-            }
-        }
-
-        function setOpacity(el, value) {
-            document.getElementById(el).style.MozOpacity = value / opacityMultiply;
-            document.getElementById(el).style.opacity = value / opacityMultiply;
-            document.getElementById(el).style.filter = 'alpha(opacity=' + value * opacityMultiply + ')';
-        }
-
-        return {
-            fadeIn: function(el, speed, delay) {
-                var obj = fadeObj(el, speed);
-                obj.fadeIn(delay);
-            },
-            fadeOut: function(el, speed, delay) {
-                var obj = fadeObj(el, speed);
-                obj.fadeOut(delay);
-            }
-        };
-    })();
-
     return {
         browser:browser,
         toast:toast,
         util:util,
         popup:popup,
-        mapper:mapper,
-        checker:checker,
-        animate:animate
+        mapper:mapper
     };
 })(jQuery);
