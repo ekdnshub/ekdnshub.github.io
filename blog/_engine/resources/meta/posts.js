@@ -567,7 +567,6 @@ var postsInfo = (function(){
             "141":{
                 "title":"SpringBoot JPA 예제(@OneToMany, 단방향)",
                 "created":"2015-05-22"
-                ,"version":"v1"
             },
             "142":{
                 "title":"SpringBoot JPA 예제(@ManyToOne, 단방향)",

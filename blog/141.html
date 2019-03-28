@@ -1,21 +1,24 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>SpringBoot JPA 예제(@OneToMany, 단방향) :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
 
     <!-- # font -->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -24,95 +27,107 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
     <![endif]-->
     <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <!--<![endif]-->
 
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">SpringBoot JPA 예제(@OneToMany, 단방향)</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"> <p> 이번에도 JPA입니다. @OneToMany 어노테이션을 이용해서 Entity간의 관계를 맺어봅시다. 이 포스팅에서는 단방향 관계(unidirectional relationships)만 다루겠습니다. </p>
-                <h2>단방향 or 양방향</h2>
-                <p> 포스트 처음에 언급했지만 Entity간의 관계를 맺을 때에는 방향이 있습니다. 예를 들면 아래와 같은 두 테이블이 있다고 가정합니다. </p>
- <pre class="prettyprint lang-sql">
-CREATE TABLE `member` (
-	`seq` INT(10) NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(50) NULL DEFAULT NULL,
-	PRIMARY KEY (`seq`)
+
+
+
+<p>이번에도 JPA입니다. <span class="command">@OneToMany</span> 어노테이션을 이용해서 Entity간의 관계를 맺어봅시다. 이 포스팅에서는 단방향 관계(unidirectional relationships)만 다루겠습니다.</p>
+<h2>단방향 or 양방향</h2>
+<p>포스트 처음에 언급했지만 Entity간의 관계를 맺을 때에는 방향이 있습니다. 예를 들면 아래와 같은 두 테이블이 있다고 가정합니다.</p>
+<pre class="prettyprint lang-sql">
+CREATE TABLE &#96;member&#96; (
+	&#96;seq&#96; INT(10) NOT NULL AUTO_INCREMENT,
+	&#96;name&#96; VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (&#96;seq&#96;)
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=1;
 </pre>
- <pre class="prettyprint lang-sql">
-CREATE TABLE `phone` (
-	`seq` INT(10) NOT NULL AUTO_INCREMENT,
-	`member_id` INT(10) NULL DEFAULT NULL,
-	`no` VARCHAR(50) NULL DEFAULT NULL,
-	PRIMARY KEY (`seq`)
+<pre class="prettyprint lang-sql">
+CREATE TABLE &#96;phone&#96; (
+	&#96;seq&#96; INT(10) NOT NULL AUTO_INCREMENT,
+	&#96;member_id&#96; INT(10) NULL DEFAULT NULL,
+	&#96;no&#96; VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (&#96;seq&#96;)
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=1;
 </pre>
-                <p> 외래키(foreign key) 제약 조건은 걸지 않았습니다. DB는 MariaDB입니다. </p>
-                <p> 위의 테이블은 각각 회원(member)과 핸드폰(phone)을 가리킵니다. 회원들은 핸드폰을 가지지 않거나 여러 개를 가질 수 있습니다. 핸드폰에서는 자신의 주인이 누구인지 회원 번호를 가지고 있습니다. </p>
-                <p> 여기서 방향이라 하는 것은 해당 Entity가 다른 Entity를 가질 수 있느냐로 보시면 됩니다. 예를 들어 위의 회원 Entity에서 핸드폰 Entity를 멤버 변수로 가지고 있다면 회원 -&gt; 핸드폰이라는 방향성을 가집니다. 이렇게 한쪽의 방향만 가지면 단방향(unidirectional)이라고 하죠. </p>
-                <p> 만약, 위와 같은 상황에서 핸드폰 Entity에서도 회원 Entity를 가진다면 회원 &lt;-&gt; 핸드폰이라는 관계가 성립됩니다. 이런것을 양방향(bidirectional) 관계라고 합니다. </p>
-                <p> 물론 회원 &lt;- 핸드폰 관계도 가능합니다. 이때는 단방향 관계를 가지지만 아까와 방향이 다를 뿐입니다. </p>
-                <h2>@OneToMany</h2>
-                <p> 이제 회원과 핸드폰 테이블을 기반으로 해서 설명을 진행합니다. 회원은 기본적으로 핸드폰이 없거나 1개 이상을 소지할 수 있습니다. 그러면 회원 하나에 핸드폰을 여러개 가지니 1:N 관계가 됩니다. 이것을 JPA 어노테이션으로는 @OneToMany라고 표현합니다. </p>
-                <h3>@OneToMany 속성</h3>
-                <p> @OneToMany 속성에는 다음과 같은 것들이 있습니다. </p>
-                <ul>
-                    <li>targetEntity</li>
-                    <li>cascade</li>
-                    <li>fetch</li>
-                    <li>mappedBy</li>
-                    <li>orphanRemoval</li>
-                </ul>
-                <h4>targetEntity</h4>
-                <p>관계를 맺을 Entity Class를 정의합니다.</p>
-                <h4>cascade</h4>
-                <p>현 Entity의 변경에 대해 관계를 맺은 Entity도 변경 전략을 결정합니다.</p>
-                <p> 속성값에는 CascadeType라는 enum에 정의 되어 있으며 enum값에는 ALL, PERSIST, MERGE, REMOVE, REFRESH, DETACH가 있습니다. </p>
-                <h4>fetch</h4>
-                <p>관계 Entity의 데이터 읽기 전략을 결정합니다.</p>
-                <p> FetchType.EAGER, FetchType.LAZY로 전략을 변경 할 수 있습니다. 두 전략의 차이점은 EAGER인 경우 관계된 Entity의 정보를 미리 읽어오는 것이고 LAZY는 실제로 요청하는 순간 가져오는겁니다. </p>
-                <h4>mappedBy</h4>
-                <p>양방향 관계 설정시 관계의 주체가 되는 쪽에서 정의합니다.</p>
-                <h4>orphanRemoval</h4>
-                <p>관계 Entity에서 변경이 일어난 경우 DB 변경을 같이 할지 결정합니다. cascade와 다른것은 cascade는 JPA 레이어 수준이고 이것은 DB레이어에서 처리합니다. 기본은 false입니다.</p>
-                <h3>단방향 @OneToMany 예제</h3>
-                <p> 실제로 예제를 보면 더 이해가 빠를듯 합니다. 예제를 진행합시다. </p>
-                <h4>Entity</h4>
-                <p> 회원 Entity 및 핸드폰 Entity를 만듭니다. </p>
-                <h5>Member Entity</h5>
- <pre class="prettyprint linenums lang-java">
+<p>외래키(foreign key) 제약 조건은 걸지 않았습니다. DB는 MariaDB입니다.</p>
+<p>위의 테이블은 각각 회원(member)과 핸드폰(phone)을 가리킵니다. 회원들은 핸드폰을 가지지 않거나 여러 개를 가질 수 있습니다. 핸드폰에서는 자신의 주인이 누구인지 회원 번호를 가지고 있습니다.</p>
+<p>여기서 방향이라 하는 것은 해당 Entity가 다른 Entity를 가질 수 있느냐로 보시면 됩니다. 예를 들어 위의 회원 Entity에서 핸드폰 Entity를 멤버 변수로 가지고 있다면 회원 -&gt; 핸드폰이라는 방향성을 가집니다. 이렇게 한쪽의 방향만 가지면 단방향(unidirectional)이라고 하죠.</p>
+<p>만약, 위와 같은 상황에서 핸드폰 Entity에서도 회원 Entity를 가진다면 회원 &lt;-&gt; 핸드폰이라는 관계가 성립됩니다. 이런것을 양방향(bidirectional) 관계라고 합니다.</p>
+<p>물론 회원 &lt;- 핸드폰 관계도 가능합니다. 이때는 단방향 관계를 가지지만 아까와 방향이 다를 뿐입니다.</p>
+<h2>@OneToMany</h2>
+<p>이제 회원과 핸드폰 테이블을 기반으로 해서 설명을 진행합니다. 회원은 기본적으로 핸드폰이 없거나 1개 이상을 소지할 수 있습니다. 그러면 회원 하나에 핸드폰을 여러개 가지니 1:N 관계가 됩니다. 이것을 JPA 어노테이션으로는 @OneToMany라고 표현합니다.</p>
+<h3>@OneToMany 속성</h3>
+<p>@OneToMany 속성에는 다음과 같은 것들이 있습니다.</p>
+<ul>
+<li>targetEntity</li>
+<li>cascade</li>
+<li>fetch</li>
+<li>mappedBy</li>
+<li>orphanRemoval</li>
+</ul>
+<h4>targetEntity</h4>
+<p>관계를 맺을 Entity Class를 정의합니다.</p>
+<h4>cascade</h4>
+<p>현 Entity의 변경에 대해 관계를 맺은 Entity도 변경 전략을 결정합니다.</p>
+<p>속성값에는 CascadeType라는 enum에 정의 되어 있으며 enum값에는 ALL, PERSIST, MERGE, REMOVE, REFRESH, DETACH가 있습니다.</p>
+<h4>fetch</h4>
+<p>관계 Entity의 데이터 읽기 전략을 결정합니다.</p>
+<p>FetchType.EAGER, FetchType.LAZY로 전략을 변경 할 수 있습니다. 두 전략의 차이점은 EAGER인 경우 관계된 Entity의 정보를 미리 읽어오는 것이고 LAZY는 실제로 요청하는 순간 가져오는겁니다.</p>
+<h4>mappedBy</h4>
+<p>양방향 관계 설정시 관계의 주체가 되는 쪽에서 정의합니다.</p>
+<h4>orphanRemoval</h4>
+<p>관계 Entity에서 변경이 일어난 경우 DB 변경을 같이 할지 결정합니다. cascade와 다른것은 cascade는 JPA 레이어 수준이고 이것은 DB레이어에서 처리합니다. 기본은 false입니다.</p>
+<h3>단방향 @OneToMany 예제</h3>
+<p>실제로 예제를 보면 더 이해가 빠를듯 합니다. 예제를 진행합시다.</p>
+<h4>Entity</h4>
+<p>회원 Entity 및 핸드폰 Entity를 만듭니다.</p>
+<h5>Member Entity</h5>
+<pre class="prettyprint lang-java">
 package jpa3;
 
 import java.util.ArrayList;
@@ -131,21 +146,21 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Member {
-
+	
 	@Id
 	@Column(name="seq")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int seq;
-
+	
 	@Column(name="name")
 	private String name;
-
-	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	
+	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL) // (1)
 	@JoinColumn(name="member_id")
 	private Collection&lt;Phone&gt; phone;
 
 	public Member(){}
-
+	
 	public Member(String name){
 		this.name = name;
 	}
@@ -165,7 +180,7 @@ public class Member {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public Collection&lt;Phone&gt; getPhone() {
 		return phone;
 	}
@@ -173,14 +188,14 @@ public class Member {
 	public void setPhone(List&lt;Phone&gt; phone) {
 		this.phone = phone;
 	}
-
+	
 	public void addPhone(Phone p){
 		if( phone == null ){
 			phone = new ArrayList&lt;Phone&gt;();
 		}
 		phone.add(p);
 	}
-
+	
 	@Override
 	public String toString() {
 		String result = "["+seq+"] " + name;
@@ -191,9 +206,11 @@ public class Member {
 	}
 }
 </pre>
-                <p> 28번 라인에서 @OneToMany 어노테이션을 정의하고 있습니다. 그리고 멤버 변수로 핸드폰 Entity를 가리키고 있습니다. 따라서 회원 -&gt; 핸드폰이라는 단방향 1:N 관계를 만든 것입니다. 또한 FetchType.EAGER 전략을 취해 항상 Phone 목록을 가져오게 되어 있습니다. 불필요한 조회를 막으려면 FetchType.LAZY를 설정해야 합니다. </p>
-                <h5>Phone Entity</h5>
- <pre class="prettyprint lang-java">
+<p>(1)에서 <span class="command">@OneToMany</span> 어노테이션을 정의하고 있습니다. 그리고 멤버 변수로 핸드폰 Entity를 가리키고 있습니다. 따라서 회원 -&gt; 핸드폰이라는 단방향 1:N 관계를 만든 것입니다. 또한 <span class="command">FetchType.EAGER</span> 전략을 취해 항상 Phone 목록을 가져오게 되어 있습니다. 불필요한 조회를 막으려면 <span class="command">FetchType.LAZY</span>를 설정해야 합니다.</p>
+
+<h5>Phone Entity</h5>
+
+<pre class="prettyprint lang-java">
 package jpa3;
 
 import javax.persistence.Column;
@@ -204,18 +221,18 @@ import javax.persistence.Id;
 
 @Entity
 public class Phone {
-
+	
 	@Id
 	@Column(name="seq")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int seq;
-
+	
 	@Column(name="member_id")
 	private int memberId;
-
+	
 	@Column(name="no")
 	private String no;
-
+		
 	public Phone() {}
 	public Phone(String no){
 		this.no = no;
@@ -244,7 +261,7 @@ public class Phone {
 	public void setNo(String no) {
 		this.no = no;
 	}
-
+	
 	@Override
 	public String toString() {
 		String result = "[phone_"+seq+"] " + no;
@@ -252,25 +269,25 @@ public class Phone {
 	}
 }
 </pre>
-                <h4>Repository</h4>
-                <p> Repository는 간단하게 코드만 보고 넘어가겠습니다. </p>
- <pre class="prettyprint lang-java">
+<h4>Repository</h4>
+<p>Repository는 간단하게 코드만 보고 넘어가겠습니다.</p>
+<pre class="prettyprint lang-java">
 package jpa3;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberRepository extends JpaRepository&lt;Member, Integer&gt;{}
 </pre>
- <pre class="prettyprint lang-java">
+<pre class="prettyprint lang-java">
 package jpa3;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PhoneRepository extends JpaRepository&lt;Phone, Integer&gt; {}
 </pre>
-                <h3>Application</h3>
-                <p> 실제로 위의 코드를 돌려보는 프로그램을 작성합니다. </p>
- <pre class="prettyprint linenums lang-java">
+<h3>Application</h3>
+<p>실제로 위의 코드를 돌려보는 프로그램을 작성합니다.</p>
+<pre class="prettyprint lang-java">
 package jpa3;
 
 import java.util.List;
@@ -287,41 +304,41 @@ public class Jpa3Application implements CommandLineRunner{
 
 	@Autowired
 	private MemberRepository mr;
-
+	
 	@Autowired
 	private PhoneRepository pr;
-
-    public static void main(String[] args) {
-        SpringApplication.run(Jpa3Application.class, args);
-    }
+	
+   public static void main(String[] args) {
+       SpringApplication.run(Jpa3Application.class, args);
+   }
 
 	@Override
 	public void run(String... args) throws Exception {
-
-		Member first = new Member("Jung");
+		
+		Member first = new Member("Jung"); // (1)
 		first.addPhone(new Phone("010-XXXX-XXXX"));
 		first.addPhone(new Phone("010-YYYY-YYYY"));
-
+		
 		Member second = new Member("Dong");
 		second.addPhone(new Phone("010-ZZZZ-ZZZZ"));
-
-		Member third = new Member("Min");
-
-		mr.save(first);
+		
+		Member third = new Member("Min"); // (2)
+		
+		mr.save(first); // (3)
 		mr.save(second);
-		mr.save(third);
-
-		List&lt;Member&gt; list = mr.findAll();
-
+		mr.save(third); // (4)
+		
+		List&lt;Member&gt; list = mr.findAll(); // (5)
+		
 		for( Member m : list ){
 			System.out.println(m.toString());
-		}
-
-		mr.deleteAll();
+		} // (6)
+		
+		mr.deleteAll(); // (7)
 	}
 }
 </pre>
- <pre class="console">
+<pre class="console">
 [106] Jung
 [phone_97] 010-XXXX-XXXX
 [phone_98] 010-YYYY-YYYY
@@ -329,37 +346,40 @@ public class Jpa3Application implements CommandLineRunner{
 [phone_99] 010-ZZZZ-ZZZZ
 [108] Min
 </pre>
-                <p> <strong>28~35번째 라인</strong>은 새로운 회원을 생성하고 해당 회원들의 핸드폰을 정의했습니다. 그리고 <strong>37~39번째 라인</strong>에서 해당 정보를 DB에 저장합니다. <strong>41~45번째 라인</strong>은 DB에 저장된 정보를 다시 읽어서 해당 정보를 출력합니다. 최종적으로 <strong>47번째 라인</strong>에서 모든 정보를 삭제합니다. 삭제할 때 @OneToMany 설정시 CascadeType.ALL 을 취했기 때문에 관련 Entity의 내용도 같이 삭제가 됩니다. </p>
-                <p> 결과 출력은 제가 수많은(?) 테스트 이후 복사한 것이기 때문에 seq 값들이 커진 상태입니다. :) </p>
-                <h4>참조</h4>
-                <p> 만약 Member Entity의 @OneToMany 항목중 fetch 타입을 FetchType.LAZY로 바꾸면 어떻게 될까요? 바로 <span class="error">org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role</span> 오류가 나올겁니다. </p>
-                <p> 해당 오류는 데이터가 영속성(persistence)을 잃었을 경우 생깁니다. 영속성이란 데이터를 생성한 프로그램이 실행이 종료되더라도 사라지지 않는 특징을 말합니다. 따라서 영속성을 잃었다는 것은 데이터를 생성한 프로그램이 종료되면 해당 데이터는 더 이상 추가 적재 및 갱신이 안됩니다. 메모리에만 남아있을 뿐입니다. </p>
-                <p> 따라서, 현재 LAZY 전략을 취한 경우 Member Entity의 멤버 변수는 살아 있는것처럼 보이지만 @OneToMany로 묶인 Phone Entity는 호출한 이후 영속성을 잃었기 때문에 <span class="error">LazyInitializationException</span> 오류를 내는겁니다. </p>
-                <p> 이를 해결하려면 전략을 다시 EAGER로 바꿔주면 됩니다. 하지만 이러한 방법은 경우에 따라 불필요한 조회를 하게 만들고 볼륨이 큰 데이터일 경우 더욱 성능을 나쁘게 만듭니다. </p>
-                <p> 다른 방법은 @Transactional 어노테이션을 메소드에 설정하면 됩니다. 만약 현재 포스트에 있는 예제를 사용한다면 다음처럼 바뀝니다. </p>
- <pre class="prettyprint linenums lang-java">
+<p><strong>(1) ~ (2)</strong> 범위는 새로운 회원을 생성하고 해당 회원들의 핸드폰을 정의했습니다. 그리고 <strong>(3) ~ (4)</strong> 범위에서 해당 정보를 DB에 저장합니다. <strong>(5) ~ (6)</strong> 범위는 DB에 저장된 정보를 다시 읽어서 해당 정보를 출력합니다. 최종적으로 <strong>(7)</strong>에서 모든 정보를 삭제합니다. 삭제할 때 <span class="command">@OneToMany</span> 설정시 <span class="command">CascadeType.ALL</span> 을 취했기 때문에 관련 Entity의 내용도 같이 삭제가 됩니다.</p>
+<p>결과 출력은 제가 수많은(?) 테스트 이후 복사한 것이기 때문에 seq 값들이 커진 상태입니다. :)</p>
+<h4>참조</h4>
+<p>만약 Member Entity의 @OneToMany 항목중 fetch 타입을 FetchType.LAZY로 바꾸면 어떻게 될까요? 바로 <span class="command"><span class="red">org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role</span></span> 오류가 나올겁니다.</p>
+<p>해당 오류는 데이터가 영속성(persistence)을 잃었을 경우 생깁니다. 영속성이란 데이터를 생성한 프로그램이 실행이 종료되더라도 사라지지 않는 특징을 말합니다. 따라서 영속성을 잃었다는 것은 데이터를 생성한 프로그램이 종료되면 해당 데이터는 더 이상 추가 적재 및 갱신이 안됩니다. 메모리에만 남아있을 뿐입니다.</p>
+<p>따라서, 현재 LAZY 전략을 취한 경우 Member Entity의 멤버 변수는 살아 있는것처럼 보이지만 @OneToMany로 묶인 Phone Entity는 호출한 이후 영속성을 잃었기 때문에 <span class="command"><span class="red">LazyInitializationException</span></span> 오류를 내는겁니다.</p>
+<p>이를 해결하려면 전략을 다시 EAGER로 바꿔주면 됩니다. 하지만 이러한 방법은 경우에 따라 불필요한 조회를 하게 만들고 볼륨이 큰 데이터일 경우 더욱 성능을 나쁘게 만듭니다.</p>
+<p>다른 방법은 @Transactional 어노테이션을 메소드에 설정하면 됩니다. 만약 현재 포스트에 있는 예제를 사용한다면 다음처럼 바뀝니다.</p>
+<pre class="prettyprint lang-java">
 @SpringBootApplication
 public class Jpa3Application implements CommandLineRunner{
 	...
 	@Override
 	@Transactional
-	public void run(String... args) throws Exception {
+	public void run(String... args) throws Exception {	
 		...
 	}
 }
 </pre>
-                <p> 위 코드는 Application 항목의 코드를 가져온 겁니다. </p>
-                <p> run 메소드가 실행되는 동안은 영속성을 잃지 않게 해줍니다. 따라서 오류 없이 처리 가능하게 됩니다. 다만 <strong>주의할 것</strong>은 @Transactional 어노테이션이 설정된 구간 내에서 모델 객체에 변경이 일어나면 변경된 상태로 DB에 저장됩니다. 이것은 Repository에서 꺼내온 객체라도 동일하게 적용되기 때문에 주의해야 합니다. </p>
-                <p> JPA Web MVC 애플리케이션이라면 보통 Controller - Service(or implement) - Repository의 구성을 가지게 됩니다. 이 경우 Service 클래스에서 LAZY 전략이 가미된 Entity를 사용한다면 해당 메소드에 @Transactional 어노테이션을 정의해주면 됩니다. 아니면 Service 클래스 자체에 @Transactional을 줘도 됩니다. 상황에 맞게 쓰시면 되요. </p>
-                <h2>마무리</h2>
-                <p> @OneToMany 단방향 예제에 대해 알아봤습니다. 다음번엔 @ManyToOne에 대해 알아보아요. :) </p>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+<p>위 코드는 Application 항목의 코드를 가져온 겁니다.</p>
+<p>run 메소드가 실행되는 동안은 영속성을 잃지 않게 해줍니다. 따라서 오류 없이 처리 가능하게 됩니다. 다만 <strong>주의할 것</strong>은 @Transactional 어노테이션이 설정된 구간 내에서 모델 객체에 변경이 일어나면 변경된 상태로 DB에 저장됩니다. 이것은 Repository에서 꺼내온 객체라도 동일하게 적용되기 때문에 주의해야 합니다.</p>
+<p>JPA Web MVC 애플리케이션이라면 보통 Controller - Service(or implement) - Repository의 구성을 가지게 됩니다. 이 경우 Service 클래스에서 LAZY 전략이 가미된 Entity를 사용한다면 해당 메소드에 @Transactional 어노테이션을 정의해주면 됩니다. 아니면 Service 클래스 자체에 @Transactional을 줘도 됩니다. 상황에 맞게 쓰시면 되요.</p>
+<h2>마무리</h2>
+<p>@OneToMany 단방향 예제에 대해 알아봤습니다. 다음번엔 @ManyToOne에 대해 알아보아요. :)</p>
+
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>
