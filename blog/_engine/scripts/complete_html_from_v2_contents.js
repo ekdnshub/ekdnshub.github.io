@@ -41,12 +41,12 @@ try {
 var baseHtml = fs.readFileSync(BASE_TEMPLATE, "utf8");
 var adHtml = fs.readFileSync(AD_TEMPLATE, "utf8");
 
-var completeHtml = baseHtml.replace("{{body}}", owiki.getIns().interpreter(v2content))
-                           .replace("{{title}}", title)
-                           .replace("{{ad}}", ad === "true" ? adHtml : "");
+var completeHtml = baseHtml.replace("{{{body}}}", owiki.getIns().interpreter(v2content))
+                           .replace(/{{{title}}}/g, title)
+                           .replace("{{{ad}}}", ad === "true" ? adHtml : "");
 
 console.log("신규 파일 저장 중...");
 fs.appendFileSync(completeHtmlPath, completeHtml);
 console.log("신규 파일 저장 완료!")
 
-resourcesMinify.getIns().execute("view");
+resourcesMinify.getIns().execute("meta");

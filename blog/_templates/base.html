@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
-    <title>{{title}} :: JDM's Blog</title>
+    <title>{{{title}}} :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
@@ -30,16 +30,20 @@
     <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <!--<![endif]-->
 
-    {{ad}}
-    
-    <!-- # blog library # -->
-    <script src="/blog/scripts/resources.min.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
+    {{{ad}}}
+
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
 	</head>
 	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
 		<!-- noscript -->
 		<noscript>
       이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
@@ -51,8 +55,10 @@
 			<div id="left_wrap" class="col-md-10 col-md-offset-1">
 				<!-- 블로그 전문 -->
 				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">{{{title}}}</h1>
 					<!-- 본문 -->
-					<div id="content">{{body}}</div>
+					<div id="content">{{{body}}}</div>
 				</article>
 			</div>
 			<!-- // content 영역 -->

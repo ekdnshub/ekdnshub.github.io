@@ -5,7 +5,7 @@
 var resourcesMinify = require("./minify_resources.js");
 
 if (process.argv.length < 3) {
-    console.log("need to argument. all | view | main");
+    console.log("need to argument. [all | view | main | post]");
     return;
 }
 
