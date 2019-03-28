@@ -65,7 +65,6 @@ var resourcesMinify = (function() {
               compressor: gcc,
               input: [
                   "../resources/common/core.js",
-                  "../resources/common/header.js",
                   "../resources/main/main.js"
               ],
               output: '../../scripts/main.min.js',
