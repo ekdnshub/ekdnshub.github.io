@@ -552,7 +552,6 @@ var postsInfo = (function(){
             "138":{
                 "title":"RabbitMQ 정의 및 사용법",
                 "created":"2015-05-15"
-                ,"version":"v1"
             },
             "139":{
                 "title":"Redis 설치 및 사용법",
