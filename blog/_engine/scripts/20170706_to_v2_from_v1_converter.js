@@ -21,7 +21,7 @@ var result = "";
 result += "###info\n";
 result += "title=\n";
 result += "created=\n";
-result += "ad=false\n";
+result += "ad=true\n";
 result += "###\n";
 
 fs.readFileSync(V1_CONTENTS_PATH + number).toString().split('\n').forEach(function (_line) {
