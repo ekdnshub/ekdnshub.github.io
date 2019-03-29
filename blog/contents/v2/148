@@ -1,7 +1,7 @@
 ###info
 title=자바스크립트 console 객체 유효성 처리
 created=2015-06-05
-ad=false
+ad=never
 ###
 #p 간혹 브라우저 console 객체를 하위 버전의 익스플로러 같은 브라우저에서 인식 못하는 경우가 있다.
 
