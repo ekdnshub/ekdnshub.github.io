@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&subset=korean');
+
 html { font-size:16px; }
 body { font-family: "Nanum Gothic Coding", sans-serif !important;}
 .services { cursor:pointer; padding:2em; opacity: 0.75; transition: opacity 1s linear; }
