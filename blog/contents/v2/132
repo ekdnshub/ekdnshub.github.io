@@ -1,7 +1,7 @@
 ###info
 title=MariaDB 데이터베이스 생성
 created=2015-05-06
-ad=false
+ad=true
 ###
 #p MariaDB에서 데이터베이스를 생성하고 계정에 권한을 주는것까지 알아보는 포스팅입니다. 이 포스팅은 CentOS 6.X 및 MariaDB 10.0.15(mysql Ver 15.1 Distrib 10.0.15-MariaDB)을 기준으로 작성했습니다.
 

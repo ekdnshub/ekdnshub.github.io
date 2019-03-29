@@ -1,7 +1,7 @@
 ###info
 title=멤캐시드(Memcached) 정의 및 사용법
 created=2015-05-14
-ad=false
+ad=true
 ###
 
 #p Memcached. 메모리 캐싱 시스템으로 유명합니다. 이 포스트는 Memcached가 무엇인지, 어떻게 설치하고 사용하는지 알아봅니다.

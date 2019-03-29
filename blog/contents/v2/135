@@ -1,7 +1,7 @@
 ###info
 title=Jenetics 설치 및 예제
 created=2015-05-08
-ad=false
+ad=true
 ###
 
 #p  이 포스트는 {$/blog/104|유전 알고리즘(Genetic Algorithms)}에서 파생되었습니다. 유전 알고리즘으로 구현된 라이브러리인 {!Jenetics}에 대해 알아봅시다. 
