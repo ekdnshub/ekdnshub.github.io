@@ -7,7 +7,7 @@ ad=true
 #h2 준비 
 #p  이 포스트는 {$/blog/141|SpringBoot JPA 예제(@OneToMany, 단방향)}에서 파생 되었습니다. 예제 코드도 링크를 클릭해서 확인 해보시면 됩니다. 
 #h2 @ManyToOne 
-#p `@ManyToOne` 어노테이션은 `@OneToMany`와 크게 다르지 않습니다. 다만 `@OneToMany`가 1:N이라고 한다면 `@ManyToOne`은 N:1 관계라고 보면 됩니다. 예를 들머 회원과 핸드폰의 관계에서 핸드폰을 보면 됩니다. 핸드폰은 자신을 소유한 회원이 있습니다. 하지만 이 회원은 핸드폰을 여러개 소지할 수도 있고 하나만 소지할 수도 있겠죠. 회원쪽에서 핸드폰을 바라본다면 @OneToMany 관계지만 핸드폰이 회원을 바라본다면 `@ManyToOne`이 되는겁니다.
+#p `@ManyToOne` 어노테이션은 `@OneToMany`와 크게 다르지 않습니다. 다만 `@OneToMany`가 1:N이라고 한다면 `@ManyToOne`은 N:1 관계라고 보면 됩니다. 예를 들머 회원과 핸드폰의 관계에서 핸드폰을 보면 됩니다. 핸드폰은 자신을 소유한 회원이 있습니다. 하지만 이 회원은 핸드폰을 여러개 소지할 수도 있고 하나만 소지할 수도 있겠죠. 회원쪽에서 핸드폰을 바라본다면 `@OneToMany` 관계지만 핸드폰이 회원을 바라본다면 `@ManyToOne`이 되는겁니다.
 #h3 @ManyToOne 속성 
 #p `@ManyToOne` 속성에는 다음과 같은 것들이 있습니다.
 ###ul  
@@ -121,8 +121,8 @@ public class Phone {
 	@Column(name="no")
 	private String no;
 
-	@ManyToOne(targetEntity=Member.class, fetch=FetchType.LAZY)
-	@JoinColumn(name="member_id")
+	@ManyToOne(targetEntity=Member.class, fetch=FetchType.LAZY) // (1)
+	@JoinColumn(name="member_id") // (2)
 	private Member member;
 	
 	public Phone() {}
@@ -162,7 +162,7 @@ public class Phone {
 	
 }
 ### 
-#p  {!23번째 라인}에 `@ManyToOne` 어노테이션이 붙어 있습니다. 여기에서 관계를 설정할 매핑 정보를 넣습니다. 이 포스트에서는 LAZY 전략을 사용합니다. 그리고 Member Entity를 사용한다고 명시적으로 정의를 했습니다. {!24번째 라인}에 `@JoinColumn` 어노테이션이 있는데 여기에 현재 Entity에서 관계할 Entity에 매핑할 키 값을 정의합니다. 즉, phone 테이블의 member_id 컬럼이 member 테이블 seq로 정의 됩니다. member entity에서 seq가 `@Id` 어노테이션으로 정의가 되어 있음을 살펴보세요.
+#p  {!(1)}에 `@ManyToOne` 어노테이션이 붙어 있습니다. 여기에서 관계를 설정할 매핑 정보를 넣습니다. 이 포스트에서는 LAZY 전략을 사용합니다. 그리고 Member Entity를 사용한다고 명시적으로 정의를 했습니다. {!(2)}에 `@JoinColumn` 어노테이션이 있는데 여기에 현재 Entity에서 관계할 Entity에 매핑할 키 값을 정의합니다. 즉, phone 테이블의 member_id 컬럼이 member 테이블 seq로 정의 됩니다. member entity에서 seq가 `@Id` 어노테이션으로 정의가 되어 있음을 살펴보세요.
 #h4 Repository 
 #p  Repository는 간단하게 코드만 보고 넘어가겠습니다.  
 ###code.java
