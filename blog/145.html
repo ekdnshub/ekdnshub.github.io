@@ -1,21 +1,24 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>jQuery 이벤트 바인딩(on 함수 이용) :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
 
     <!-- # font -->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -24,57 +27,78 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
     <![endif]-->
     <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <!--<![endif]-->
 
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">jQuery 이벤트 바인딩(on 함수 이용)</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"> <p> jQuery에서 이벤트를 바인드 하는 방법은 여러가지가 있지만 이번엔 on() 함수를 이용해서 이벤트를 바인드하는 것을 알아보자. </p>
-                <h2>on Function</h2>
-                <p> jQuery on 함수는 1.7버전부터 추가 되었다. 앞으로 이벤트를 바인드 하려면 on 함수를 쓰는것이 좋아보인다. 기존에 있던 bind, live, delegate등의 함수들이 없어질 예정이니 on을 쓰자. 물론 click 함수는 on 함수의 숏컷 모양으로 남아있다(기존대로 사용하자). </p>
-                <p> on 함수의 종료는 off 함수가 있다. 이 외에도 한번만 실행하고 삭제되는 one 함수도 있으니 추후에 살펴보면 좋을 것 같다. </p>
-                <p> on 함수는 기본적으로 다음처럼 작성한다. </p>
- <pre class="prettyprint lang-js">
+
+
+
+<p>jQuery에서 이벤트를 바인드 하는 방법은 여러가지가 있지만 이번엔 <span class="command">on()</span> 함수를 이용해서 이벤트를 바인드하는 것을 알아보자.</p>
+
+<h2>on Function</h2>
+
+<p>jQuery on 함수는 1.7버전부터 추가 되었다. 앞으로 이벤트를 바인드 하려면 on 함수를 쓰는것이 좋아보인다. 기존에 있던 bind, live, delegate등의 함수들이 없어질 예정이니 on을 쓰자. 물론 click 함수는 on 함수의 숏컷 모양으로 남아있다(기존대로 사용하자).</p>
+
+<p>on 함수의 종료는 <span class="command">off()</span> 함수가 있다. 이 외에도 한번만 실행하고 삭제되는 <span class="command">one()</span> 함수도 있으니 추후에 살펴보면 좋을 것 같다.</p>
+
+<p>on 함수는 기본적으로 다음처럼 작성한다.</p>
+<pre class="prettyprint lang-js">
 $(selector).on(eventType, function(){
 	// ...something
 });
 </pre>
-                <p> 가장 기본적인 사용법인다. 예를 들어 아래처럼 자바스크립트 코드를 작성한다면, </p>
- <pre class="prettyprint lang-js">
+
+<p>가장 기본적인 사용법인다. 예를 들어 아래처럼 자바스크립트 코드를 작성한다면,</p>
+
+<pre class="prettyprint lang-js">
 $("pre").on("click", function(){
 	o.toast.info("소스 코드를 클릭하셨군요!");
 });
 </pre>
-                <button class="btn btn-xs btn-info" id="test1">테스트</button>
-                <p> o.toast.info는 개인적으로 만든 래핑 함수니까 신경 쓰지 않아도 된다. 아무튼 위와 같은 코드를 테스트 버튼을 클릭해 실행시켜보자. 그리고 예제 소스 코드를 아무거나 클릭해보자. </p>
-                <p> 모든 pre 태그 객체에 클릭하면 토스트 레이어를 띄우도록 한것이다. 그리고 on 함수는 굳이 핸들러로 사용할 함수가 하나일 필요는 없다. 다음처럼 중복 처리도 가능하다. </p>
- <pre class="prettyprint lang-js">
+
+<button class="btn btn-xs btn-info" id="test1">테스트</button>
+<p><span class="command">o.toast.info</span>는 개인적으로 만든 래핑 함수니까 신경 쓰지 않아도 된다. 아무튼 위와 같은 코드를 테스트 버튼을 클릭해 실행시켜보자. 그리고 예제 소스 코드를 아무거나 클릭해보자.</p>
+
+<p>모든 <span class="command">pre</span> 태그 객체에 클릭하면 토스트 레이어를 띄우도록 한것이다. 그리고 on 함수는 굳이 핸들러로 사용할 함수가 하나일 필요는 없다. 다음처럼 중복 처리도 가능하다.</p>
+
+<pre class="prettyprint lang-js">
 function func1(){
 	o.toast.error("func1");
 };
@@ -86,9 +110,11 @@ $("#test2").click(function(){
 	$("pre").on("click", func2);
 });
 </pre>
-                <button class="btn btn-xs btn-info" id="test2">테스트</button>
-                <p> 테스트 버튼을 클릭해서 스크립트를 활성화 하고 소스 코드 부분을 클릭해 보자. 알록달록한 레이어들이 나오면서 중복 적용이 되었다는 것을 알 수 있다. </p>
-                <script>
+
+<button class="btn btn-xs btn-info" id="test2">테스트</button> 
+<p>테스트 버튼을 클릭해서 스크립트를 활성화 하고 소스 코드 부분을 클릭해 보자. 알록달록한 레이어들이 나오면서 중복 적용이 되었다는 것을 알 수 있다.</p>
+
+<script>
 $("#test1").click(function(){
 	$("pre").on("click", function(){o.toast.info("소스 코드를 클릭하셨군요!");});
 });
@@ -103,10 +129,10 @@ $("#test2").click(function(){
 	$("pre").on("click", func2);
 });
 </script>
-                <h2>심화 사용 팁</h2>
-                <p> 요소들이 매우 많은 ul 객체의 li 요소에 on 함수를 바인드 하려면 어떻게 하는것이 좋을까? </p>
-                <p> 일단 HTML 코드는 아래와 같다고 가정한다, </p>
- <pre class="prettyprint lang-html">
+<h2>심화 사용 팁</h2>
+<p>요소들이 매우 많은 ul 객체의 li 요소에 on 함수를 바인드 하려면 어떻게 하는것이 좋을까?</p>
+<p>일단 HTML 코드는 아래와 같다고 가정한다,</p>
+<pre class="prettyprint lang-html">
 &lt;html&gt;
 	&lt;body&gt;
 		&lt;ul&gt;
@@ -118,28 +144,38 @@ $("#test2").click(function(){
 	&lt;/body&gt;
 &lt;/html&gt;
 </pre>
-                <p> 일단 가장 먼저 생각나는 코드는 아래와 같다. </p>
- <pre class="prettyprint lang-js">
+
+<p>일단 가장 먼저 생각나는 코드는 아래와 같다.</p>
+
+<pre class="prettyprint lang-js">
 $("ul li").on("click", function(){
 	// ...
 });
 </pre>
-                <p> 동작은 할것으로 보이지만 이렇게 코드를 작성하는 경우 이벤트 바인드 개수가 li 요소 개수만큼이다. 어떻게 보면 비효율처럼 보인다. 이런 경우를 위해 다음과 같은 방식도 존재한다. </p>
- <pre class="prettyprint lang-js">
+
+<p>동작은 할것으로 보이지만 이렇게 코드를 작성하는 경우 이벤트 바인드 개수가 li 요소 개수만큼이다. 어떻게 보면 비효율처럼 보인다. 이런 경우를 위해 다음과 같은 방식도 존재한다.</p>
+
+<pre class="prettyprint lang-js">
 $("ul").on("click", "li", function(){
 	// ...
 });
+
 </pre>
-                <p> 위 같은 코드는 ul 태그 하나에 이벤트를 붙인다. 하지만 하위 li 요소에 대해 이벤트를 지정할 수 있다. 따라서 하나의 이벤트 바인딩으로 깔끔한 처리가 가능한 것이다. </p>
-                <h2>더욱 많은 사용법</h2>
-                <p> on 함수의 더욱 자세한 사용법은 <a href="http://api.jquery.com/on/">http://api.jquery.com/on</a>에서 확인할 수 있다. </p>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+<p>위 같은 코드는 ul 태그 하나에 이벤트를 붙인다. 하지만 하위 li 요소에 대해 이벤트를 지정할 수 있다. 따라서 하나의 이벤트 바인딩으로 깔끔한 처리가 가능한 것이다.</p>
+
+<h2>더욱 많은 사용법</h2>
+
+<p>on 함수의 더욱 자세한 사용법은 <a href="http://api.jquery.com/on/">http://api.jquery.com/on</a>에서 확인할 수 있다.</p>
+
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

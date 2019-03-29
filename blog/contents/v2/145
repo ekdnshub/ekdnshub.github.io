@@ -1,0 +1,101 @@
+###info
+title=jQuery 이벤트 바인딩(on 함수 이용)
+created=2015-05-26
+ad=true
+###
+#p jQuery에서 이벤트를 바인드 하는 방법은 여러가지가 있지만 이번엔 `on()` 함수를 이용해서 이벤트를 바인드하는 것을 알아보자.
+
+#h2 on Function
+
+#p jQuery on 함수는 1.7버전부터 추가 되었다. 앞으로 이벤트를 바인드 하려면 on 함수를 쓰는것이 좋아보인다. 기존에 있던 bind, live, delegate등의 함수들이 없어질 예정이니 on을 쓰자. 물론 click 함수는 on 함수의 숏컷 모양으로 남아있다(기존대로 사용하자).
+
+#p on 함수의 종료는 `off()` 함수가 있다. 이 외에도 한번만 실행하고 삭제되는 `one()` 함수도 있으니 추후에 살펴보면 좋을 것 같다.
+
+#p on 함수는 기본적으로 다음처럼 작성한다.
+###code.js
+$(selector).on(eventType, function(){
+	// ...something
+});
+###
+
+#p 가장 기본적인 사용법인다. 예를 들어 아래처럼 자바스크립트 코드를 작성한다면,
+
+###code.js
+$("pre").on("click", function(){
+	o.toast.info("소스 코드를 클릭하셨군요!");
+});
+### 
+
+<button class="btn btn-xs btn-info" id="test1">테스트</button>
+#p `o.toast.info`는 개인적으로 만든 래핑 함수니까 신경 쓰지 않아도 된다. 아무튼 위와 같은 코드를 테스트 버튼을 클릭해 실행시켜보자. 그리고 예제 소스 코드를 아무거나 클릭해보자.
+
+#p 모든 `pre` 태그 객체에 클릭하면 토스트 레이어를 띄우도록 한것이다. 그리고 on 함수는 굳이 핸들러로 사용할 함수가 하나일 필요는 없다. 다음처럼 중복 처리도 가능하다.
+
+###code.js
+function func1(){
+	o.toast.error("func1");
+};
+function func2(){
+	o.toast.warning("func2");
+};
+$("#test2").click(function(){
+	$("pre").on("click", func1);
+	$("pre").on("click", func2);
+});
+###
+
+<button class="btn btn-xs btn-info" id="test2">테스트</button> 
+#p 테스트 버튼을 클릭해서 스크립트를 활성화 하고 소스 코드 부분을 클릭해 보자. 알록달록한 레이어들이 나오면서 중복 적용이 되었다는 것을 알 수 있다.
+
+###script
+$("#test1").click(function(){
+	$("pre").on("click", function(){o.toast.info("소스 코드를 클릭하셨군요!");});
+});
+function func1(){
+	setTimeout(function(){o.toast.error("func1");},100);
+};
+function func2(){
+	setTimeout(function(){o.toast.warning("func2");},200);
+};
+$("#test2").click(function(){
+	$("pre").on("click", func1);
+	$("pre").on("click", func2);
+});
+###
+#h2 심화 사용 팁 
+#p 요소들이 매우 많은 ul 객체의 li 요소에 on 함수를 바인드 하려면 어떻게 하는것이 좋을까?
+#p 일단 HTML 코드는 아래와 같다고 가정한다,
+###code.html
+&lt;html&gt;
+	&lt;body&gt;
+		&lt;ul&gt;
+			&lt;li&gt;1...&lt;/li&gt;
+			...
+			&lt;li&gt;1000...&lt;/li&gt;
+			&lt;!-- 이런 li가 1000개! --&gt;
+		&lt;/ul&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+###
+
+#p 일단 가장 먼저 생각나는 코드는 아래와 같다.
+
+###code.js
+$("ul li").on("click", function(){
+	// ...
+});
+###
+
+#p 동작은 할것으로 보이지만 이렇게 코드를 작성하는 경우 이벤트 바인드 개수가 li 요소 개수만큼이다. 어떻게 보면 비효율처럼 보인다. 이런 경우를 위해 다음과 같은 방식도 존재한다.
+
+###code.js
+$("ul").on("click", "li", function(){
+	// ...
+});
+
+###
+#p  위 같은 코드는 ul 태그 하나에 이벤트를 붙인다. 하지만 하위 li 요소에 대해 이벤트를 지정할 수 있다. 따라서 하나의 이벤트 바인딩으로 깔끔한 처리가 가능한 것이다.
+
+#h2 더욱 많은 사용법
+
+#p  on 함수의 더욱 자세한 사용법은 {$http://api.jquery.com/on/|http://api.jquery.com/on}에서 확인할 수 있다. 

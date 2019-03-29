@@ -585,7 +585,6 @@ var postsInfo = (function(){
             "145":{
                 "title":"jQuery 이벤트 바인딩(on 함수 이용)",
                 "created":"2015-05-26"
-                ,"version":"v1"
             },
             "146":{
                 "title":"웹 이미지 편집기(PIXLR)",
