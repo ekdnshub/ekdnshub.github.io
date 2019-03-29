@@ -556,7 +556,6 @@ var postsInfo = (function(){
             "139":{
                 "title":"Redis 설치 및 사용법",
                 "created":"2015-05-19"
-                ,"version":"v1"
             },
             "140":{
                 "title":"SpringBoot JPA 예제(결합 인덱스)",
