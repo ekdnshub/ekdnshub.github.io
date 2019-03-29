@@ -1,21 +1,24 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>SpringBoot JPA 예제(결합 인덱스) :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
 
     <!-- # font -->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -24,58 +27,70 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
     <![endif]-->
     <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <!--<![endif]-->
 
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">SpringBoot JPA 예제(결합 인덱스)</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"> <p> Springboot JPA 2탄입니다. Springboot나 Spring이나 JPA 적용하는 법은 같아요. 이번에는 PK가 하나가 아닌 2개인 경우의 테이블을 JPA Repository로 구성하는 법을 알아봅니다. </p>
-                <h2>준비</h2>
-                <p> 이 포스팅은 <a href="/blog/121">SpringBoot JPA 예제</a>에서 파생되었습니다. JPA에 대해 기본적인 사용 방법을 설명해 놓았습니다. </p>
-                <p> 또한 이번 포스팅에서 사용하는 DB는 MariaDB입니다. </p>
-                <h2>예제</h2>
-                <p> 실제 소스 코드를 하나씩 구성해 보면서 알아가 봅시다. </p>
-                <h3>DB Table</h3>
- <pre class="prettyprint lang-sql">
-CREATE TABLE `member` (
-	`id` INT(10) NULL,
-	`name` VARCHAR(50) NULL,
-	`age` INT NULL,
-	PRIMARY KEY (`id`, `name`)
+
+
+
+<p>Springboot JPA 2탄입니다. Springboot나 Spring이나 JPA 적용하는 법은 같아요. 이번에는 PK가 하나가 아닌 2개인 경우의 테이블을 JPA Repository로 구성하는 법을 알아봅니다.</p>
+<h2>준비</h2>
+<p>이 포스팅은 <a href="/blog/121">SpringBoot JPA 예제</a>에서 파생되었습니다. JPA에 대해 기본적인 사용 방법을 설명해 놓았습니다.</p>
+<p>또한 이번 포스팅에서 사용하는 DB는 MariaDB입니다.</p>
+<h2>예제</h2>
+<p>실제 소스 코드를 하나씩 구성해 보면서 알아가 봅시다.</p>
+<h3>DB Table</h3>
+<pre class="prettyprint lang-sql">
+CREATE TABLE &#96;member&#96; (
+	&#96;id&#96; INT(10) NULL,
+	&#96;name&#96; VARCHAR(50) NULL,
+	&#96;age&#96; INT NULL,
+	PRIMARY KEY (&#96;id&#96;, &#96;name&#96;)
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 </pre>
-                <p> MariaDB에 위와 같은 member 테이블을 구축합니다. 이 테이블은 id, name, age를 컬럼으로 가지고 있으며 id와 name을 묶어서 결합 인덱스(PK)를 가집니다. 이제 이 테이블을 자바 JPA Entity로 바꿔봅시다. </p>
-                <h3>EntityPK</h3>
-                <p> 먼저 결합 인덱스를 표현할 클래스를 하나 만듭니다. 클래스 이름은 MemberPK입니다. 소스 코드는 아래와 같습니다. </p>
- <pre class="prettyprint lang-java">
+<p>MariaDB에 위와 같은 member 테이블을 구축합니다. 이 테이블은 id, name, age를 컬럼으로 가지고 있으며 id와 name을 묶어서 결합 인덱스(PK)를 가집니다. 이제 이 테이블을 자바 JPA Entity로 바꿔봅시다.</p>
+<h3>EntityPK</h3>
+<p>먼저 결합 인덱스를 표현할 클래스를 하나 만듭니다. 클래스 이름은 MemberPK입니다. 소스 코드는 아래와 같습니다.</p>
+<pre class="prettyprint lang-java">
 package jpa2;
 
 import java.io.Serializable;
@@ -89,12 +104,12 @@ public class MemberPK implements Serializable {
 
 	@Column(name="id", nullable=false)
 	private Long id;
-
+	
 	@Column(name="name", nullable=false)
 	private String name;
-
+	
 	public MemberPK(){}
-
+	
 	public MemberPK(long id, String name) {
 		super();
 		this.id = id;
@@ -102,10 +117,10 @@ public class MemberPK implements Serializable {
 	}
 }
 </pre>
-                <p> 여기서 @Embeddable 어노테이션을 정의해야 합니다. 그리고 내부 멤버 변수로는 결합할 컬럼들을 넣어줍니다. 그리고 <strong>"기본 생성자"</strong>는 꼭 넣어주세요. </p>
-                <h3>Entity</h3>
-                <p> 그리고 MemberPK를 가진 Member Entity 클래스를 만듭니다. 소스 코드는 아래와 같습니다. </p>
- <pre class="prettyprint lang-java">
+<p>여기서 <span class="command">@Embeddable</span> 어노테이션을 정의해야 합니다. 그리고 내부 멤버 변수로는 결합할 컬럼들을 넣어줍니다. 그리고 <strong>"기본 생성자"</strong>는 꼭 넣어주세요.</p>
+<h3>Entity</h3>
+<p>그리고 MemberPK를 가진 Member Entity 클래스를 만듭니다. 소스 코드는 아래와 같습니다.</p>
+<pre class="prettyprint lang-java">
 package jpa2;
 
 import javax.persistence.Column;
@@ -145,10 +160,10 @@ public class Member {
 	}
 }
 </pre>
-                <p> 여기서 결합 인덱스와 age 컬럼을 가지는 Member Entity를 만들었습니다. 하지만 별도로 id, name 컬럼을 더 넣으면 컬럼이 반복되었다는 오류가 나오니 넣지 않습니다. 결합 인덱스를 나타내기 위해 일반 @Id 어노테이션이 아닌 @EmbeddedId 어노테이션을 선언합니다. </p>
-                <h3>Repository</h3>
-                <p> 마지막으로 Member Repository 인터페이스를 만듭니다. 소스 코드는 아래와 같습니다. </p>
- <pre class="prettyprint lang-java">
+<p>여기서 결합 인덱스와 age 컬럼을 가지는 Member Entity를 만들었습니다. 하지만 별도로 id, name 컬럼을 더 넣으면 컬럼이 반복되었다는 오류가 나오니 넣지 않습니다. 결합 인덱스를 나타내기 위해 일반 <span class="command">@Id</span> 어노테이션이 아닌 <span class="command">@EmbeddedId</span> 어노테이션을 선언합니다.</p>
+<h3>Repository</h3>
+<p>마지막으로 Member Repository 인터페이스를 만듭니다. 소스 코드는 아래와 같습니다.</p>
+<pre class="prettyprint lang-java">
 package jpa2;
 
 import org.springframework.data.repository.CrudRepository;
@@ -156,17 +171,17 @@ import org.springframework.data.repository.CrudRepository;
 public interface MemberRepository extends CrudRepository&lt;Member, MemberPK&gt; {
 }
 </pre>
-                <p> CrudRepository를 상속 받았지만 JpaRepository를 상속 받아도 됩니다. 두 Repository의 차이점은 JpaRepository가 CrudRepository 및 PagingAndSortingRepository를 포함하고 있습니다. 따라서 일반적인 CRUD 기능만 사용한다면 CrudRepository를 상속받고 그 외 기능이 필요하면 JpaRepository를 상속 받으세요. </p>
-                <p> 한번 더 정리하면 아래처럼 되어 있습니다. </p>
- <pre class="prettyprint lang-java">
+<p>CrudRepository를 상속 받았지만 JpaRepository를 상속 받아도 됩니다. 두 Repository의 차이점은 JpaRepository가 CrudRepository 및 PagingAndSortingRepository를 포함하고 있습니다. 따라서 일반적인 CRUD 기능만 사용한다면 CrudRepository를 상속받고 그 외 기능이 필요하면 JpaRepository를 상속 받으세요.</p>
+<p>한번 더 정리하면 아래처럼 되어 있습니다.</p>
+<pre class="prettyprint lang-java">
 public interface JpaRepository&lt;T, ID extends Serializable&gt; extends PagingAndSortingRepository&lt;T, ID&gt;
 public interface PagingAndSortingRepository&lt;T, ID extends Serializable&gt; extends CrudRepository&lt;T, ID&gt;
 public interface CrudRepository&lt;T, ID extends Serializable&gt; extends Repository&lt;T, ID&gt;
 public interface Repository&lt;T, ID extends Serializable&gt;
 </pre>
-                <h3>실행</h3>
-                <p> 스프링 부트 어플리케이션이니 실행시키기 위해 아래와 같은 소스 코드를 짰습니다. </p>
- <pre class="prettyprint lang-java">
+<h3>실행</h3>
+<p>스프링 부트 어플리케이션이니 실행시키기 위해 아래와 같은 소스 코드를 짰습니다.</p>
+<pre class="prettyprint lang-java">
 package jpa2;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -176,7 +191,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Jpa2Application implements CommandLineRunner {
-
+	
 	@Autowired
 	MemberRepository memberRepository;
 
@@ -190,14 +205,17 @@ public class Jpa2Application implements CommandLineRunner {
 	}
 }
 </pre>
-                <p> 위 소스 코드는 결합 인덱스키를 가진 Member 테이블에 새로운 Row를 삽입하는 예제입니다. 위 프로그램을 실행 시키고 DB 데이터를 확인해 보면 예쁘게 들어가 있는 것을 확인 할 수 있습니다. </p>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+<p>위 소스 코드는 결합 인덱스키를 가진 Member 테이블에 새로운 Row를 삽입하는 예제입니다. 위 프로그램을 실행 시키고 DB 데이터를 확인해 보면 예쁘게 들어가 있는 것을 확인 할 수 있습니다.</p>
+
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

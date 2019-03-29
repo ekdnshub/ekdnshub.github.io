@@ -560,7 +560,6 @@ var postsInfo = (function(){
             "140":{
                 "title":"SpringBoot JPA 예제(결합 인덱스)",
                 "created":"2015-05-21"
-                ,"version":"v1"
             },
             "141":{
                 "title":"SpringBoot JPA 예제(@OneToMany, 단방향)",
