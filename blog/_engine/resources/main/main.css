@@ -4,6 +4,12 @@
 
 body { font-family: "Nanum Gothic Coding", sans-serif !important;}
 
+/* 스크롤색 변경 */
+::-webkit-scrollbar { width: 0.5em; background: transparent; }
+::-webkit-scrollbar-thumb { background: #259CE0; }
+::-webkit-scrollbar:horizontal { height: 0.5em; background: transparent; }
+::-webkit-scrollbar-thumb:horizontal { background: #259CE0; }
+
 h4 { font-weight: bold; }
 a { color: #333; }
 a:hover{ color: #333; text-decoration:none; }
