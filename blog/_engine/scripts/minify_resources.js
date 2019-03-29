@@ -17,6 +17,23 @@ var resourcesMinify = (function() {
 
     var execute = function(type) {
 
+        if (type == "all" || type == "common") {
+            console.log("사이트 전체 커먼 css 미니파이 시작...");
+            minify({
+              compressor: cleanCSS,
+              input: [
+                  "../resources/common/common.css"
+              ],
+              output: "../../../css/common.min.css",
+              callback: function(err, min) {
+                if (err) {
+                  console.log("error:", err);
+                }
+                  console.log("사이트 전체 커먼 css 미니파이 완료!");
+              }
+            });
+        }
+
         if (type == "all" || type == "meta") {
             console.log("블로그 포스트 정보 미니파이 시작...");
             minify({
@@ -43,6 +60,7 @@ var resourcesMinify = (function() {
             minify({
               compressor: cleanCSS,
               input: [
+                  "../resources/common/common.css",
                   "../../css/view.css"
               ],
               output: "../../css/view.min.css",
@@ -79,6 +97,7 @@ var resourcesMinify = (function() {
             minify({
               compressor: cleanCSS,
               input: [
+                  "../resources/common/common.css",
                   "../resources/main/main.css"
               ],
               output: "../../css/main.min.css",
