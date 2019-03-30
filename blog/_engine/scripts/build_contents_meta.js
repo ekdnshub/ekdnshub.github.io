@@ -38,7 +38,7 @@ var extractMeta = function (file) {
 
 							break;
 							case "boolean":
-							    if (value !== "true" && value !== "false") throw file + "번 ad 값이 잘못 되었습니다.";
+							    if (value !== "true" && value !== "false") throw file + "번 boolean 값이 잘못 되었습니다.";
 							    data[name] = value === "true" ? true : false;
 							break;
 							default:
