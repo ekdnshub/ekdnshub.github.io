@@ -1,6 +1,7 @@
 ###info
 title=sts를 이용한 github 저장소 업로드
 created=2015-04-03
+ad=true
 ###
 #p 이번엔 sts에서 바로 Githup으로 프로젝트 업로드 방법을 알아봅시다.
 #h4 예제 프로젝트 

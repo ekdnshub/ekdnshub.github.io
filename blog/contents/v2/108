@@ -1,11 +1,12 @@
 ###info
 title=SpringBoot 프로젝트를 API 서버로!
 created=2015-04-07
+ad=false
 ###
 
 #p api.jdm.kr가 Spring MVC 프로젝트 기반이었지만 최근 스터디겸 Spring Boot로 변경했습니다. 적용하면서 삽질한것도 꽤 많은데 전체적으로 마이그레이션 진행까지 되서 깔끔한 느낌이네요.
 #p Spring Boot에는 AOP, jpa, Logging, Profile, DB, Web, Gradle 등등... 나름 공부할거 다 집어넣느라고 삽질 + 고생 엄청... TT
 #p 결론은 Spring Boot + Gradle 조합 강추합니다. :)
 #line
-#p {!2015.10.30} 좋은 SpringBoot 공부처였던 {@api.jdm.kr}은 제할일을 이제 마치고 슬슬 해당 업무를 {@xapi.jdm.kr}이 넘겨 받을 예정입니다. :)
-#p 그리고 {@xapi.jdm.kr}은 nodejs + express + cors 가 적용될 예정이에요!
+#p {!2015.10.30} 좋은 SpringBoot 공부처였던 `api.jdm.kr`은 제할일을 이제 마치고 슬슬 해당 업무를 `xapi.jdm.kr`이 넘겨 받을 예정입니다. :)
+#p 그리고 `xapi.jdm.kr`은 nodejs + express + cors 가 적용될 예정이에요!
