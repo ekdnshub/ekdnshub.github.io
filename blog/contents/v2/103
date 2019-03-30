@@ -14,8 +14,10 @@ ad=true
 #h5 Perceptron
 #p  퍼셉트론은 신경망 알고리즘에서 기본적인 개념입니다. 자세한 내용은 다음 링크를 클릭해서 확인합시다. {=2015.04.03} 
 ###box.green
-{$http://www.aistudy.com/neural/perceptron.htm|Perceptron} {=2015.04.03}
-{$http://www.aistudy.com/neural/multilayer_perceptron.htm|Multilayer Perceptron} {=2015.04.03}
+###ul
+#li {$http://www.aistudy.com/neural/perceptron.htm|Perceptron} {=2015.04.03}
+#li {$http://www.aistudy.com/neural/multilayer_perceptron.htm|Multilayer Perceptron} {=2015.04.03}
+###
 ###
 #h4 관련 라이브러리
 #h5 Java Neural Network Framework Neuroph(Neuroph)
