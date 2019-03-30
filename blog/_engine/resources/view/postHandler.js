@@ -1,15 +1,12 @@
 function applyContentEffect(){
 
-	// bootstrap class add
-	if( !o.browser.isLowerIE(8) ){
-		$( "#content img" ).each(function(){
-			$(this).addClass("img-responsive");
-			$(this).addClass("img-rounded");
-			if( $(this).attr("alt") == null){
-				$(this).attr("alt", "첨부이미지");
-			}
-		});
-	}
+	$( "#content img" ).each(function(){
+        $(this).addClass("img-responsive");
+        $(this).addClass("img-rounded");
+        if( $(this).attr("alt") == null){
+            $(this).attr("alt", "첨부이미지");
+        }
+    });
 
 	// 본문 소제목에 번호를 붙이자.
 	var map = { "h1":0, "h2":0, "h3":0, "h4":0, "h5":0 };
