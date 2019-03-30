@@ -1,6 +1,7 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
 	<head>
+    <title>비트코인(Bitcoin) :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
@@ -9,12 +10,9 @@
     <meta name="author" content="Jung DongMin">
     
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
     
     <!-- # jquery -->
     <!--[if lte IE 9]>
@@ -24,25 +22,30 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
     <![endif]-->
     <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <!--<![endif]-->
-    
 
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
+
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
 	</head>
 	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
 		<!-- noscript -->
 		<noscript>
       이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
@@ -54,11 +57,14 @@
 			<div id="left_wrap" class="col-md-10 col-md-offset-1">
 				<!-- 블로그 전문 -->
 				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">비트코인(Bitcoin)</h1>
 					<!-- 본문 -->
-					<div id="content"><div style="display:none;">
-title=비트코인(Bitcoin)
-created=2015-04-13
-</div>
+					<div id="content">
+
+
+
+
 <p>작년 이맘때쯤 조사를 해봤던 내용인 비트코인(Bitcoin)에 대해 사용법 및 최근 추세가 어떤지 검토해 보는 포스팅입니다. :3</p>
 <h4>비트코인 정의(Definition of Bitcoin)</h4>
 <blockquote>
@@ -66,7 +72,7 @@ created=2015-04-13
 <cite><a href="http://ko.wikipedia.org/wiki/%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8">위키백과 - 비트코인</a></cite>
 </blockquote>
 <blockquote>
-<p>비트코인은 중앙권한이나 은행이 없는 운영을 위해 피어투피어 기술을 사용합니다. 거래의 관리와 비트코인의 발행은 네트워크에 의해 공동으로 이루어집니다. <strong>비트코인은 오픈소스입니다. 공개적으로 개발되었으며 그 누구도 비트코인을 소유하거나 조종하지 않습니다. 또한 <a href="https://bitcoin.org/ko/support-bitcoin">누구나 비트코인을 사용하고 비트코인에 참여할 수 있습니다</strong></a>. 독특한 기능들을 통해 비트코인은 그 어떤 결제시스템도 하지못한 일들을 가능하게 합니다</p>
+<p>비트코인은 중앙권한이나 은행이 없는 운영을 위해 피어투피어 기술을 사용합니다. 거래의 관리와 비트코인의 발행은 네트워크에 의해 공동으로 이루어집니다. <strong>비트코인은 오픈소스입니다. 공개적으로 개발되었으며 그 누구도 비트코인을 소유하거나 조종하지 않습니다. 또한 <a href="https://bitcoin.org/ko/support-bitcoin">누구나 비트코인을 사용하고 비트코인에 참여할 수 있습니다</a></strong>. 독특한 기능들을 통해 비트코인은 그 어떤 결제시스템도 하지못한 일들을 가능하게 합니다</p>
 <cite><a href="https://bitcoin.org/ko/">Bitcoin.org</a></cite>
 </blockquote>
 <h5>단위 및 가격</h5>
@@ -222,7 +228,7 @@ created=2015-04-13
 			<!-- // content 영역 -->
 		</div>
 		<!-- # code highlight -->
-		<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
 		<script src="/lib/scripts/footer.js"></script>
 	</body>
 </html>

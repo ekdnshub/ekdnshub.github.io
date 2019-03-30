@@ -1,6 +1,7 @@
 ###info
 title=비트코인(Bitcoin)
 created=2015-04-13
+ad=true
 ###
 #p 작년 이맘때쯤 조사를 해봤던 내용인 비트코인(Bitcoin)에 대해 사용법 및 최근 추세가 어떤지 검토해 보는 포스팅입니다. :3
 #h4 비트코인 정의(Definition of Bitcoin) 
@@ -29,7 +30,7 @@ created=2015-04-13
 #h4 비트코인 특징 
 #p {$https://bitcoin.org/ko/bitcoin-for-individuals|비트 코인의 특징}을 간략하게 알아봅시다. 개인, 사업자, 개발자 순으로 나눠서 특징을 설명합니다.
 #h5 개인 
-###box.green 
+###box.green
 ###ul
 #li 보다 쉬운 모바일 결제
 #li 당신의 돈에 대한 보안과 통제
@@ -40,7 +41,7 @@ created=2015-04-13
 ###
 ### 
 #h5 사업자 
-###box.green 
+###box.green
 ###ul
 #li 가장 낮은 수수료
 #li 금융사기로부터 보호
@@ -52,7 +53,7 @@ created=2015-04-13
 ###
 ### 
 #h5 개발자 
-###box.green 
+###box.green
 ###ul
 #li 가장 간단한 결제 시스템
 #li 많은 3사 API
@@ -101,11 +102,11 @@ created=2015-04-13
 #h4 비트코인 사용
 #h5 지갑 만들기 
 #p 다양한 사이트가 비트코인 지갑을 지원하고 있습니다. 대표적으로 두가지만 적어봤습니다.
-###box.green 
- ###ul  
-  #li <a href="https://blockchain.info/ko/wallet">https://blockchain.info/ko/wallet</a> 
-  #li <a href="https://bitcoin.org/ko/choose-your-wallet">https://bitcoin.org/ko/choose-your-wallet</a> 
- ### 
+###box.green
+###ul
+#li {$https://blockchain.info/ko/wallet}
+#li {$https://bitcoin.org/ko/choose-your-wallet}
+###
 ### 
 #h5 채굴 방법 
 #p 우선 {$https://guiminer.org/|GUIMiner}라 불리는 프로그램으로 채굴을 한번 해봅시다. 해당 사이트에서 프로그램을 다운로드 해주세요.
@@ -119,15 +120,15 @@ created=2015-04-13
 #h4 최근 추세 
 #h5 뉴스 
 #p 최근 추세라고 한다면 대략 2014년 초부터 2015년 현재(4월)까지의 뉴스를 살펴봐야겠습니다.
-###box.green 
- ###ul  
-  #li {$http://www.bloter.net/archives/181894|전세계 비트코인 규제 현황 지도(2014.02)}
-  #li {$http://www.mt.co.kr/view/mtview.php?type=1&amp;no=2014041317294740889&amp;outlink=1|中 폭발적 성장하는 인터넷금융 놓고 찬반 격론(2014.04)}
-  #li {$http://www.thebell.co.kr/front/free/contents/news/article_view.asp?key=201410080100014980000956|코인플러그, 기술력·시장 미래성 투자자 사로잡아(2014.10)}
-  #li {$http://www.etnews.com/20150312000208|세계 비트코인, 80%가 위안화로 환전된다(2015.03)}
-  #li {$http://view.asiae.co.kr/news/view.htm?idxno=2015040314421898348|비트코인, 금·마리화나로 제2전성기맞이할까?(2015.04)}
-  #li {$http://view.asiae.co.kr/news/view.htm?idxno=2015041313140215834|비트코인 모의투자대회 국내최초 열린다(2015.04)}
- ### 
+###box.green
+###ul
+#li {$http://www.bloter.net/archives/181894|전세계 비트코인 규제 현황 지도(2014.02)}
+#li {$http://www.mt.co.kr/view/mtview.php?type=1&amp;no=2014041317294740889&amp;outlink=1|中 폭발적 성장하는 인터넷금융 놓고 찬반 격론(2014.04)}
+#li {$http://www.thebell.co.kr/front/free/contents/news/article_view.asp?key=201410080100014980000956|코인플러그, 기술력·시장 미래성 투자자 사로잡아(2014.10)}
+#li {$http://www.etnews.com/20150312000208|세계 비트코인, 80%가 위안화로 환전된다(2015.03)}
+#li {$http://view.asiae.co.kr/news/view.htm?idxno=2015040314421898348|비트코인, 금·마리화나로 제2전성기맞이할까?(2015.04)}
+#li {$http://view.asiae.co.kr/news/view.htm?idxno=2015041313140215834|비트코인 모의투자대회 국내최초 열린다(2015.04)}
+###
 ### 
 #p 제목만 봤을 때 좋은/나쁜쪽으로 반반씩 뽑아봤습니다. 비트코인에 대해 금융으로 접근하는 것으로 우려를 나타내는것도 있지만 반대로 비트코인을 이용해 새로운 방법으로 접근하는 뉴스도 있습니다.
 #h5 위키백과 
@@ -148,11 +149,11 @@ created=2015-04-13
 #p 비교적 최근에 우리나라에서도 행사가 있었습니다. 나름대로 비트코인은 알게 모르게 조금씩 주변으로 녹아들고 있는 듯 하네요.
 #h4 거래소 
 #p 비트코인 거래소도 다양하게 존재합니다.
-###box.blue 
- ###ul  
-  #li {$https://www.korbit.co.kr/|KORBIT(코빗)}
-  #li {$https://www.xcoin.co.kr/|Xcoin(엑스코인)}
-  #li {$https://www.coinbase.com/|coinbase}
-  #li {$https://bitpay.com/|bitpay}
- ### 
+###box.blue
+###ul
+#li {$https://www.korbit.co.kr/|KORBIT(코빗)}
+#li {$https://www.xcoin.co.kr/|Xcoin(엑스코인)}
+#li {$https://www.coinbase.com/|coinbase}
+#li {$https://bitpay.com/|bitpay}
+###
 ###
