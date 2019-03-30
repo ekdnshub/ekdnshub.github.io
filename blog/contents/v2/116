@@ -1,6 +1,7 @@
 ###info
 title=템플릿 메소드 패턴(Template Method Pattern)
 created=2015-04-14
+ad=true
 ###
 #p 이 포스팅은 템플릿 메소드(Template Method) 패턴에 대해서입니다. 간단하게 최종 코드를 먼저 보고 그 뒤 하나씩 구현해보겠습니다.
 #h4 최종 코드 
@@ -25,7 +26,7 @@ public class TemplateMain {
 	}
 }
 ### 
-#p 하지만 최종코드만 봐서는 딱히 뭐가 다르게 구현되었는지 모르겠네요. 다만 주석 내용에 {@readyToBattle} 메소드를 실행하기 위한 정보가 있습니다. 비슷한것도 있고 다른것도 있네요. 일단 전사, 궁사, 마법사가 같이 사용할 수 있도록 공통의 추상 클래스(abstract class)를 만들어 봅시다. 일단 전부 인간이라는 가정이니 "Person" 정도가 좋겠네요.
+#p 하지만 최종코드만 봐서는 딱히 뭐가 다르게 구현되었는지 모르겠네요. 다만 주석 내용에 `readyToBattle` 메소드를 실행하기 위한 정보가 있습니다. 비슷한것도 있고 다른것도 있네요. 일단 전사, 궁사, 마법사가 같이 사용할 수 있도록 공통의 추상 클래스(abstract class)를 만들어 봅시다. 일단 전부 인간이라는 가정이니 "Person" 정도가 좋겠네요.
 #h4 공통 추상 클래스 
 ###code.java
 public abstract class Person {
@@ -62,8 +63,8 @@ public abstract class Person {
 	void prepareOther(){};
 }
 ### 
-#p 간략하게 살펴보면 {@readyToBattle} 메소드를 실행하면 나머지 메소드가 차례대로 실행되는 것을 볼 수 있습니다. 이 중 {@startBodyTraining} 메소드는 전사, 궁사, 마법사가 전부 체력 단련을 하는 공통점이 있기 때문에 {@abtract} 키워드가 붙지 않았습니다.
-#p 여기서 특이한 메소드가 있는데 바로 {@isUsingPrepareOther} 메소드입니다. 이 메소드는 후킹(Hooking)이라고 하는 용도로 사용합니다. 지금은 사용하지 않지만 상속 받은 클래스에서 오버라이드 해서 추가적으로 알고리즘을 변경할 수 있죠.
+#p 간략하게 살펴보면 `readyToBattle` 메소드를 실행하면 나머지 메소드가 차례대로 실행되는 것을 볼 수 있습니다. 이 중 `startBodyTraining` 메소드는 전사, 궁사, 마법사가 전부 체력 단련을 하는 공통점이 있기 때문에 `abtract` 키워드가 붙지 않았습니다.
+#p 여기서 특이한 메소드가 있는데 바로 `isUsingPrepareOther` 메소드입니다. 이 메소드는 후킹(Hooking)이라고 하는 용도로 사용합니다. 지금은 사용하지 않지만 상속 받은 클래스에서 오버라이드 해서 추가적으로 알고리즘을 변경할 수 있죠.
 #p 후킹을 어떻게 쓰는지는 다음 절에서 확인해 봅시다. 이제부터 전사, 궁사, 마법사 클래스를 만듭니다.
 #h5 훅 메소드(hook method) 
 #p {!abstract 키워드를 붙이면 상속 받은 클래스는 반드시 해당 메소드를 구현해야 하지만 abstract 키워드를 붙이지 않고 훅 메소드로 만들면 반드시 구현할 필요가 없습니다.} 상속 받은 클래스에서는 선택적으로 오버라이드할 수 있다는 얘기가 됩니다.
@@ -83,7 +84,7 @@ public class Warrior extends Person {
 	}
 }
 ### 
-#p  전사 클래스는 내용이 별 것 없습니다. 전투 준비를 위해서 {@prepareWeapon} 메소드와 {@prepareArmor} 메소드에 준비할 것을 입력했습니다.
+#p  전사 클래스는 내용이 별 것 없습니다. 전투 준비를 위해서 `prepareWeapon` 메소드와 `prepareArmor` 메소드에 준비할 것을 입력했습니다.
 #h5 궁사 
 ###code.java
 public class Archer extends Person {
@@ -107,7 +108,7 @@ public class Archer extends Person {
 	}
 }
 ### 
-#p  궁사 클래스에서는 후킹(Hooking)이 필요합니다. 화살을 준비하려면 기존에 처리 하지 않았던 {@prepareOther} 메소드를 활성화 시켜야 하죠. 따라서 {@isUsingPrepareOther} 메소드를 오버라이드하고 값을 {@true}로 바꿔줬습니다. 앞으로 궁사 클래스가 전투 준비를 하면 {@prepareOther} 메소드도 실행됩니다. 다만 갑옷은 입지 않아서 {@prepareArmor} 메소드에는 공백으로 놔뒀습니다.
+#p  궁사 클래스에서는 후킹(Hooking)이 필요합니다. 화살을 준비하려면 기존에 처리 하지 않았던 `prepareOther` 메소드를 활성화 시켜야 하죠. 따라서 `isUsingPrepareOther` 메소드를 오버라이드하고 값을 `true`로 바꿔줬습니다. 앞으로 궁사 클래스가 전투 준비를 하면 `prepareOther` 메소드도 실행됩니다. 다만 갑옷은 입지 않아서 `prepareArmor` 메소드에는 공백으로 놔뒀습니다.
 #h5 마법사 
 ###code.java
 public class Wizard extends Person {
