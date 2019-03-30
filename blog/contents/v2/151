@@ -9,14 +9,18 @@ ad=true
 #p 네티는 유지하기 쉬운 높은 성능의 프로토콜 서버 및 클라이언트를 신속한 개발을 위한 비동기 이벤트 드리븐 네트워크 어플리케이션 프레임워크입니다.
 
 ###fold.원문 #1
+###include
 #p Netty is an asynchronous event-driven network application framework for rapid development of maintainable high performance protocol servers & clients.
 #cite {$http://netty.io/|Netty Project}
+###
 ###
 #p 네티는 프로토콜 서버 및 클라이언트 같은 네트워크 어플리케이션의 빠르고 쉬운 개발을 가능하게 하는 {$http://en.wikipedia.org/wiki/Non-blocking_I/O_(Java)|NIO} 클라이언트 서버 프레임워크입니다. 이는 TCP 또는 UDP 소켓 서버와 같은 네트워크 프로그래밍을 간단하게 할 수 있습니다.
 
 ###fold.원문 #1
+###include
 #p Netty is a NIO client server framework which enables quick and easy development of network applications such as protocol servers and clients. It greatly simplifies and streamlines network programming such as TCP and UDP socket server.
 #cite {$http://netty.io/|Netty Project}
+###
 ###
 
 #h2 Getting Started
