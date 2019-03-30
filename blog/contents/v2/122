@@ -1,6 +1,7 @@
 ###info
 title=관점 지향 프로그래밍(Aspect-oriented programming)
 created=2015-04-20
+ad=true
 ###
 #p  Spring 프레임워크가 생긴 이후에 처음으로 AOP(Aspect-oriented programming)라는 단어를 접했었습니다. -_- 무식이 죄지요. 이번에는 AOP를 철저하게 해부해보고자 합니다. 이 포스팅은 전부 {$http://en.wikipedia.org/wiki/Aspect-oriented_programming|Wikipedia - Aspect-oriented programming}에서 가져온 정보를 토대로 작성했습니다. 
 #h4 관점 지향 프로그래밍(Aspect-oriented programming)
@@ -137,12 +138,12 @@ aspect DisplayUpdate {
 #h5 용어(Terminology) 
 #p  관점 지향 프로그래밍에서의 표준 용어는 다음과 같습니다.  
 ###ul  
-#li  {!Cross-cutting concerns} \n 객체 지향 모델에서 대부분의 클래스는 하나의 특정 기능을 수행하더라도 그들은 종종 공통적이거나 다른 클래스의 보조 요구 사항을 공유합니다. 예를 들어, 스레드가 들어가거나 메소드가 종료할때마다 우리가 데이터 액세스 레이어와 UI 레이어의 클래스에 로깅을 추가할 수 있습니다. 그리고 이러한 관계를 접근 제어(access control)나 정보 흐름 제어(information flow control)같은 보안쪽으로도 연계할 수 있습니다. 심지어 매우 다른 함수를 가지는 클래스라도 코드는 종종 동일한 보조 함수 실행을 필요로 합니다.
-#li  {!Join Point} \n advice가 실행 가능할 때, 그들은 joint points라 불립니다.
-#li  {!Advice} \n 이것은 당신이 당신의 기존 모델에 지원하기 원하는 추가적인 코드입니다. 포인트컷에 의해 조인 포인트가 실행 된다면 실제 구현체로써 코드가 실행됩니다.
-#li  {!Pointcut} \n 이것은 크로스 커팅 관계(Cross-cutting concerns)가 적용될 필요가 있는 어플리케이션 내의 실행의 시점을 나타내는 용어입니다. 조인 포인트를 지정하고 어드바이스(advice)를 실행하는데 사용합니다.
-#li  {!Aspect} \n 포인트컷(pointcut)과 어드바이스(advice)의 결합을 aspect라는 용어로 정의합니다. 예를 들면, 우리가 포인트컷과 정확한 어드바이스를 정의함으로써 우리의 어플리케이션에 logging aspect를 추가합니다.
-#li  {!Weaving} \n 위빙은 포인트컷에 의해 지정된 어드바이스를 기존 코드에 덧붙이거나 특별한 처리을 하는 것을 말합니다.
+#li {!Cross-cutting concerns}  객체 지향 모델에서 대부분의 클래스는 하나의 특정 기능을 수행하더라도 그들은 종종 공통적이거나 다른 클래스의 보조 요구 사항을 공유합니다. 예를 들어, 스레드가 들어가거나 메소드가 종료할때마다 우리가 데이터 액세스 레이어와 UI 레이어의 클래스에 로깅을 추가할 수 있습니다. 그리고 이러한 관계를 접근 제어(access control)나 정보 흐름 제어(information flow control)같은 보안쪽으로도 연계할 수 있습니다. 심지어 매우 다른 함수를 가지는 클래스라도 코드는 종종 동일한 보조 함수 실행을 필요로 합니다.
+#li  {!Join Point}  advice가 실행 가능할 때, 그들은 joint points라 불립니다.
+#li  {!Advice}  이것은 당신이 당신의 기존 모델에 지원하기 원하는 추가적인 코드입니다. 포인트컷에 의해 조인 포인트가 실행 된다면 실제 구현체로써 코드가 실행됩니다.
+#li  {!Pointcut}  이것은 크로스 커팅 관계(Cross-cutting concerns)가 적용될 필요가 있는 어플리케이션 내의 실행의 시점을 나타내는 용어입니다. 조인 포인트를 지정하고 어드바이스(advice)를 실행하는데 사용합니다.
+#li  {!Aspect}  포인트컷(pointcut)과 어드바이스(advice)의 결합을 aspect라는 용어로 정의합니다. 예를 들면, 우리가 포인트컷과 정확한 어드바이스를 정의함으로써 우리의 어플리케이션에 logging aspect를 추가합니다.
+#li  {!Weaving}  위빙은 포인트컷에 의해 지정된 어드바이스를 기존 코드에 덧붙이거나 특별한 처리을 하는 것을 말합니다.
 ### 
 #h4 다른 프로그래밍 패러다임과 비교(Comparison to other programming paradigms) 
 #p  Aspect는 객체 지향 프로그래밍과 전산적 리플렉션으로부터 등장했습니다. AOP 언어는 함수적으로 유사함을 가집니다. 그러나 메타오브젝트 프로토콜보다도 엄격합니다. Aspect는 서브젝트(subjects), 믹스인(mixins), 위임(delegation) 프로그래밍 컨셉과 긴밀하게 관련합니다. 관점 지향 프로그래밍 패러다임을 사용하는 다른 방법은 복합 필터와 하이퍼슬라이스(hyperslices)한 접근을 포함합니다. 1970년대 이후로 개발자들은 AOP에 대한 구현 메소드들의 일부를 닮은 interception 및 dispatch-patching 형태를 사용해 왔습니다. 하지만 이것은 의미적으로 한 곳에 쓰여져 제공하는 크로스커팅 명세가 아니었습니다.  

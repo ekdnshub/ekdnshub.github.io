@@ -1,6 +1,7 @@
 ###info
 title=아파치 머하웃(Apache Mahout)
 created=2015-04-27
+ad=true
 ###
 #p 아파치 머하웃(Apache Mahout)이라는 프로젝트를 최근에 알게 됐습니다. 실제 개발이 시작된건 2011년처럼 보이는데 2015년 4월 11일 0.10.0 버전이 릴리즈 됐습니다. {={$https://mahout.apache.org/|[출처] https://mahout.apache.org/}}
 

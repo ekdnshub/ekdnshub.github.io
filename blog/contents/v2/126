@@ -1,6 +1,7 @@
 ###info
 title=자바스크립트 클로저(Javascript Closure)
 created=2015-04-24
+ad=true
 ###
 
 #p 자바스크립트에는 클로저(Closure)라는 용어가 있습니다. 사실 이걸 이해하면 자바스크립트는 끝났다라는 말도 간혹 보이긴 합니다만. 그만큼 중요한 개념이기도 합니다. 물론 자바스크립트는 접근하기 쉬운 언어에 속하긴 해도 자세히 뜯어보면 또 다른 맛이 납니다.
@@ -103,11 +104,7 @@ TestMain.main(String[]) line: 15
 #p 밑에 있는 버튼들은 실제로 위에 있는 html 코드를 현재 포스트에 적용한 결과 입니다.
 
 ###box.green
-<button class="button-test">0</button>
-<button class="button-test">1</button>
-<button class="button-test">2</button>
-<button class="button-test">3</button>
-<button class="button-test">4</button>
+<button class="button-test">0</button> <button class="button-test">1</button> <button class="button-test">2</button> <button class="button-test">3</button> <button class="button-test">4</button>
 ###
 
 #p 이제 여기에 기능을 추가해 봅시다. 버튼을 클릭시에 자신의 값을 alert으로 띄우는 것이 목적입니다. 1번 버튼을 클릭하면 "1"이라는 값이 alert으로 나오는거죠. 그래서 아래처럼 코드를 먼저 짜봤습니다.
