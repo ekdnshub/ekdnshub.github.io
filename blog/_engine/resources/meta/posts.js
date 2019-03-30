@@ -584,7 +584,6 @@ var postsInfo = (function(){
             "146":{
                 "title":"웹 이미지 편집기(PIXLR)",
                 "created":"2015-05-29"
-                ,"version":"v1"
             },
             "147":{
                 "title":"jQuery contents() 함수",
@@ -598,7 +597,6 @@ var postsInfo = (function(){
             "149":{
                 "title":"RawGit",
                 "created":"2015-06-08"
-                ,"version":"v1"
             },
             "150":{
                 "title":"CHAP Links Library",
@@ -632,7 +630,6 @@ var postsInfo = (function(){
             "156":{
                 "title":"Redis 공부 중...",
                 "created":"2015-06-16"
-                ,"version":"v1"
             },
             "157":{
                 "title":"레디스 레플리케이션 예제(Redis Replication)",
@@ -725,7 +722,6 @@ var postsInfo = (function(){
             "175":{
                 "title":"RSS 페이지를 만들었습니다.",
                 "created":"2015-07-13"
-                ,"version":"v1"
             },
             "176":{
                 "title":"Scala IDE + Spark 연동 예제(for Windows7)",
