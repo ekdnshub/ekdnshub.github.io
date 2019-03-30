@@ -588,7 +588,6 @@ var postsInfo = (function(){
             "147":{
                 "title":"jQuery contents() 함수",
                 "created":"2015-06-02"
-                ,"version":"v1"
             },
             "148":{
                 "title":"자바스크립트 console 객체 유효성 처리",
@@ -605,7 +604,6 @@ var postsInfo = (function(){
             "151":{
                 "title":"Netty 개요 및 에코 서버 예제",
                 "created":"2015-06-09"
-                ,"version":"v1"
             },
             "152":{
                 "title":"Hbase Shell Script Example",
