@@ -572,7 +572,6 @@ var postsInfo = (function(){
             "143":{
                 "title":"SpringBoot JPA 예제(1:N, 양방향)",
                 "created":"2015-05-26"
-                ,"version":"v1"
             },
             "144":{
                 "title":"jQuery 상위 요소 가져오기(parents, closest)",

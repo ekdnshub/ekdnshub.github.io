@@ -1,41 +1,46 @@
- <p> 양방향 1:N JPA 관계를 맺어봅시다. </p>
- <h2>준비</h2> 
- <p> 이 포스트는 다음과 같은 포스트에서 파생 되었습니다. </p> 
- <ul> 
-  <li><a href="/blog/141">SpringBoot JPA 예제(@OneToMany, 단방향)</a></li>
-  <li><a href="/blog/142">SpringBoot JPA 예제(@ManyToOne, 단방향)</a></li>
- </ul> 
- <h2>양방향(bidirectional) 1:N 관계</h2> 
- <p> 1:N 양방향 관계는 이전에 봤던 @OneToMany, @ManyToOne 어노테이션을 사용합니다. 이번에는 살짝 코드를 분리시켰기 때문에 코드량이 많아졌습니다. </p> 
- <h3>양방향 1:N 예제</h3> 
- <p> 양방향 1:N 예제를 진행합니다. </p> 
- <h4>Table</h4> 
- <p> 테이블은 아래처럼 구성 되어있습니다. MariaDB입니다. </p> 
- <pre class="prettyprint lang-sql">
-CREATE TABLE `member` (
-	`seq` INT(10) NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(50) NULL DEFAULT NULL,
-	PRIMARY KEY (`seq`)
+###info
+title=SpringBoot JPA 예제(1:N, 양방향)
+created=2015-05-26
+ad=true
+###
+#p 양방향 1:N JPA 관계를 맺어봅시다.
+#h2 준비 
+#p 이 포스트는 다음과 같은 포스트에서 파생 되었습니다.
+###ul  
+#li {$/blog/141|SpringBoot JPA 예제(@OneToMany, 단방향)}
+#li {$/blog/142|SpringBoot JPA 예제(@ManyToOne, 단방향)}
+### 
+#h2 양방향(bidirectional) 1:N 관계 
+#p 1:N 양방향 관계는 이전에 봤던 @OneToMany, @ManyToOne 어노테이션을 사용합니다. 이번에는 살짝 코드를 분리시켰기 때문에 코드량이 많아졌습니다.
+#h3 양방향 1:N 예제 
+#p 양방향 1:N 예제를 진행합니다.  
+#h4 Table 
+#p 테이블은 아래처럼 구성 되어있습니다. MariaDB입니다.
+###code.sql
+CREATE TABLE &#96;member&#96; (
+	&#96;seq&#96; INT(10) NOT NULL AUTO_INCREMENT,
+	&#96;name&#96; VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (&#96;seq&#96;)
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=1;
-</pre> 
- <pre class="prettyprint lang-sql">
-CREATE TABLE `phone` (
-	`seq` INT(10) NOT NULL AUTO_INCREMENT,
-	`member_id` INT(10) NULL DEFAULT NULL,
-	`no` VARCHAR(50) NULL DEFAULT NULL,
-	PRIMARY KEY (`seq`)
+### 
+###code.sql
+CREATE TABLE &#96;phone&#96; (
+	&#96;seq&#96; INT(10) NOT NULL AUTO_INCREMENT,
+	&#96;member_id&#96; INT(10) NULL DEFAULT NULL,
+	&#96;no&#96; VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (&#96;seq&#96;)
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=1;
-</pre> 
- <h4>Entity</h4> 
- <p> 회원 Entity 및 핸드폰 Entity를 만듭니다. </p> 
- <h5>Member Entity</h5> 
- <pre class="prettyprint lang-java">
+### 
+#h4 Entity 
+#p 회원 Entity 및 핸드폰 Entity를 만듭니다.  
+#h5 Member Entity 
+###code.java
 package jpa3;
 
 import java.util.ArrayList;
@@ -109,10 +114,10 @@ public class Member {
 		return result;
 	}
 }
-</pre> 
- <p> 회원 Entity에 @OneToMany 어노테이션이 사용되었습니다. 그리고 mappedBy 라는 속성이 사용 되었습니다. 여기서 mappedBy의 값으로 사용된 "member"는 Phone Entity에서 Member 클래스 변수명입니다. 기본적으로 @OneToMany는 fetch 타입이 <strong>LAZY</strong>입니다. </p> 
- <h5>Phone Entity</h5> 
- <pre class="prettyprint lang-java">
+### 
+#p 회원 Entity에 `@OneToMany` 어노테이션이 사용되었습니다. 그리고 mappedBy 라는 속성이 사용 되었습니다. 여기서 mappedBy의 값으로 사용된 "member"는 Phone Entity에서 Member 클래스 변수명입니다. 기본적으로 `@OneToMany`는 fetch 타입이 {!LAZY}입니다.  
+#h5 Phone Entity 
+###code.java
 package jpa3;
 
 import javax.persistence.CascadeType;
@@ -176,29 +181,29 @@ public class Phone {
 		return result;
 	}	
 }
-</pre> 
- <p> Phone Entity에서는 @ManyToOne 어노테이션이 사용되었습니다. 여기에서 Member 클래스를 가진 멤버 변수 이름이 "member" 입니다. 아까 Member Entity에서 봤던 mappedBy에서 "member"의 값을 뜻합니다. 그리고 @ManyToOne 어노테이션의 기본 fetch 전략은 <strong>EAGER</strong>입니다. </p> 
- <h4>Repository</h4> 
- <p> Repository는 간단하게 코드만 보고 넘어가겠습니다. </p> 
- <pre class="prettyprint lang-java">
+### 
+#p Phone Entity에서는 `@ManyToOne` 어노테이션이 사용되었습니다. 여기에서 Member 클래스를 가진 멤버 변수 이름이 "member" 입니다. 아까 Member Entity에서 봤던 mappedBy에서 "member"의 값을 뜻합니다. 그리고 `@ManyToOne` 어노테이션의 기본 fetch 전략은 {!EAGER}입니다.
+#h4 Repository 
+#p Repository는 간단하게 코드만 보고 넘어가겠습니다.  
+###code.java
 package jpa3;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberRepository extends JpaRepository&lt;Member, Integer&gt;{}
-</pre> 
- <pre class="prettyprint lang-java">
+### 
+###code.java
 package jpa3;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PhoneRepository extends JpaRepository&lt;Phone, Integer&gt; {}
-</pre> 
- <h3>Application</h3> 
- <p> 실제로 위의 코드를 돌려보는 프로그램을 작성합니다. 이번 포스트에서는 바로 Repository를 최상위 애플리케이션 클래스에서 실행하지 않고 서비스 클래스를 별도로 만들어 분리하고 실행합니다. </p> 
- <h4>RespositoryService</h4> 
- <p> 서비스 메소드를 정의할 인터페이스를 만듭니다. </p> 
- <pre class="prettyprint lang-java">
+### 
+#h3 Application 
+#p 실제로 위의 코드를 돌려보는 프로그램을 작성합니다. 이번 포스트에서는 바로 Repository를 최상위 애플리케이션 클래스에서 실행하지 않고 서비스 클래스를 별도로 만들어 분리하고 실행합니다.  
+#h4 RespositoryService 
+#p 서비스 메소드를 정의할 인터페이스를 만듭니다.  
+###code.java
 package jpa3;
 
 public interface RepositoryService {
@@ -208,10 +213,10 @@ public interface RepositoryService {
 	public void lazyPrint2();
 	public void deletAll();
 }
-</pre> 
- <h4>RespositoryServiceImpl</h4> 
- <p> 실제 서비스할 비즈니스 로직을 구현합니다. 자세한 내용은 주석으로 처리했습니다. </p> 
- <pre class="prettyprint lang-java">
+### 
+#h4 RespositoryServiceImpl 
+#p 실제 서비스할 비즈니스 로직을 구현합니다. 자세한 내용은 주석으로 처리했습니다.  
+###code.java
 package jpa3;
 
 import java.util.List;
@@ -283,10 +288,10 @@ public class RepositoryServiceImpl implements RepositoryService {
 		pr.deleteAll();
 	}	
 }
-</pre> 
- <h4>Application</h4> 
- <p> RepositoryService의 메소드들을 실행합니다. 트랜잭션이 걸린것도 있고 아닌것도 있지만 콘솔 화면에 출력은 문제가 없습니다. </p> 
- <pre class="prettyprint lang-java">
+### 
+#h4 Application 
+#p RepositoryService의 메소드들을 실행합니다. 트랜잭션이 걸린것도 있고 아닌것도 있지만 콘솔 화면에 출력은 문제가 없습니다.  
+###code.java
 package jpa3;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -300,9 +305,9 @@ public class Jpa3Application implements CommandLineRunner{
 	@Autowired
 	private RepositoryService rs;
 	
-    public static void main(String[] args) {
-        SpringApplication.run(Jpa3Application.class, args);
-    }
+   public static void main(String[] args) {
+       SpringApplication.run(Jpa3Application.class, args);
+   }
 	@Override
 	public void run(String... args) throws Exception {
 		rs.deletAll();
@@ -312,8 +317,8 @@ public class Jpa3Application implements CommandLineRunner{
 		rs.lazyPrint2();
 	}	
 }
-</pre> 
- <pre class="console">
+### 
+###console
 [phone_161] 010-XXXX-YYYY [member_336] Jung
 [member_336] Jung
 [phone_161] 010-XXXX-YYYY
@@ -322,7 +327,7 @@ public class Jpa3Application implements CommandLineRunner{
 [member_336] Jung
 [member_337] Dong
 [member_338] Min
-</pre> 
- <h2>마무리</h2> 
- <p> 1:N 양방향 예제에 대해 알아봤습니다. JPA 잘 쓰면 정말 빠르고 유연한 어플리케이션 개발이 될것 같네요! </p> 
- <p> 이 외에도 @OneToOne, @ManyToMany 어노테이션 등도 존재합니다. 추후에 이것들도 포스팅할 기회가 있으면 해볼게요. :) </p>
+### 
+#h2 마무리 
+#p 1:N 양방향 예제에 대해 알아봤습니다. JPA 잘 쓰면 정말 빠르고 유연한 어플리케이션 개발이 될것 같네요!  
+#p 이 외에도 `@OneToOne`, `@ManyToMany` 어노테이션 등도 존재합니다. 추후에 이것들도 포스팅할 기회가 있으면 해볼게요. :) 

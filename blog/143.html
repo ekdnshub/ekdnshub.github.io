@@ -1,21 +1,19 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>SpringBoot JPA 예제(1:N, 양방향) :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -24,75 +22,87 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
     <![endif]-->
     <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <!--<![endif]-->
 
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">SpringBoot JPA 예제(1:N, 양방향)</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"> <p> 양방향 1:N JPA 관계를 맺어봅시다. </p>
-                <h2>준비</h2>
-                <p> 이 포스트는 다음과 같은 포스트에서 파생 되었습니다. </p>
-                <ul>
-                    <li><a href="/blog/141">SpringBoot JPA 예제(@OneToMany, 단방향)</a></li>
-                    <li><a href="/blog/142">SpringBoot JPA 예제(@ManyToOne, 단방향)</a></li>
-                </ul>
-                <h2>양방향(bidirectional) 1:N 관계</h2>
-                <p> 1:N 양방향 관계는 이전에 봤던 @OneToMany, @ManyToOne 어노테이션을 사용합니다. 이번에는 살짝 코드를 분리시켰기 때문에 코드량이 많아졌습니다. </p>
-                <h3>양방향 1:N 예제</h3>
-                <p> 양방향 1:N 예제를 진행합니다. </p>
-                <h4>Table</h4>
-                <p> 테이블은 아래처럼 구성 되어있습니다. MariaDB입니다. </p>
- <pre class="prettyprint lang-sql">
-CREATE TABLE `member` (
-	`seq` INT(10) NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(50) NULL DEFAULT NULL,
-	PRIMARY KEY (`seq`)
+
+
+
+<p>양방향 1:N JPA 관계를 맺어봅시다.</p>
+<h2>준비</h2>
+<p>이 포스트는 다음과 같은 포스트에서 파생 되었습니다.</p>
+<ul>
+<li><a href="/blog/141">SpringBoot JPA 예제(@OneToMany, 단방향)</a></li>
+<li><a href="/blog/142">SpringBoot JPA 예제(@ManyToOne, 단방향)</a></li>
+</ul>
+<h2>양방향(bidirectional) 1:N 관계</h2>
+<p>1:N 양방향 관계는 이전에 봤던 @OneToMany, @ManyToOne 어노테이션을 사용합니다. 이번에는 살짝 코드를 분리시켰기 때문에 코드량이 많아졌습니다.</p>
+<h3>양방향 1:N 예제</h3>
+<p>양방향 1:N 예제를 진행합니다.</p>
+<h4>Table</h4>
+<p>테이블은 아래처럼 구성 되어있습니다. MariaDB입니다.</p>
+<pre class="prettyprint lang-sql">
+CREATE TABLE &#96;member&#96; (
+	&#96;seq&#96; INT(10) NOT NULL AUTO_INCREMENT,
+	&#96;name&#96; VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (&#96;seq&#96;)
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=1;
 </pre>
- <pre class="prettyprint lang-sql">
-CREATE TABLE `phone` (
-	`seq` INT(10) NOT NULL AUTO_INCREMENT,
-	`member_id` INT(10) NULL DEFAULT NULL,
-	`no` VARCHAR(50) NULL DEFAULT NULL,
-	PRIMARY KEY (`seq`)
+<pre class="prettyprint lang-sql">
+CREATE TABLE &#96;phone&#96; (
+	&#96;seq&#96; INT(10) NOT NULL AUTO_INCREMENT,
+	&#96;member_id&#96; INT(10) NULL DEFAULT NULL,
+	&#96;no&#96; VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (&#96;seq&#96;)
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=1;
 </pre>
-                <h4>Entity</h4>
-                <p> 회원 Entity 및 핸드폰 Entity를 만듭니다. </p>
-                <h5>Member Entity</h5>
- <pre class="prettyprint lang-java">
+<h4>Entity</h4>
+<p>회원 Entity 및 핸드폰 Entity를 만듭니다.</p>
+<h5>Member Entity</h5>
+<pre class="prettyprint lang-java">
 package jpa3;
 
 import java.util.ArrayList;
@@ -110,20 +120,20 @@ import javax.transaction.Transactional;
 
 @Entity
 public class Member {
-
+	
 	@Id
 	@Column(name="seq")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int seq;
-
+	
 	@Column(name="name")
 	private String name;
-
+	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="member")
 	private Collection&lt;Phone&gt; phone;
 
 	public Member(){}
-
+	
 	public Member(String name){
 		this.name = name;
 	}
@@ -143,14 +153,14 @@ public class Member {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public Collection&lt;Phone&gt; getPhone() {
 		if( phone == null ){
 			phone = new ArrayList&lt;Phone&gt;();
 		}
 		return phone;
 	}
-
+	
 	public void addPhone(Phone p){
 		Collection&lt;Phone&gt; phone = getPhone();
 		phone.add(p);
@@ -158,8 +168,8 @@ public class Member {
 
 	public void setPhone(Collection&lt;Phone&gt; phone) {
 		this.phone = phone;
-	}
-
+	}	
+	
 	@Override
 	public String toString() {
 		String result = "[member_"+seq+"] " + name;
@@ -167,9 +177,9 @@ public class Member {
 	}
 }
 </pre>
-                <p> 회원 Entity에 @OneToMany 어노테이션이 사용되었습니다. 그리고 mappedBy 라는 속성이 사용 되었습니다. 여기서 mappedBy의 값으로 사용된 "member"는 Phone Entity에서 Member 클래스 변수명입니다. 기본적으로 @OneToMany는 fetch 타입이 <strong>LAZY</strong>입니다. </p>
-                <h5>Phone Entity</h5>
- <pre class="prettyprint lang-java">
+<p>회원 Entity에 <span class="command">@OneToMany</span> 어노테이션이 사용되었습니다. 그리고 mappedBy 라는 속성이 사용 되었습니다. 여기서 mappedBy의 값으로 사용된 "member"는 Phone Entity에서 Member 클래스 변수명입니다. 기본적으로 <span class="command">@OneToMany</span>는 fetch 타입이 <strong>LAZY</strong>입니다.</p>
+<h5>Phone Entity</h5>
+<pre class="prettyprint lang-java">
 package jpa3;
 
 import javax.persistence.CascadeType;
@@ -184,7 +194,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Phone {
-
+	
 	@Id
 	@Column(name="seq")
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -196,7 +206,7 @@ public class Phone {
 	@ManyToOne(optional=false)
 	@JoinColumn(name="member_id")
 	private Member member;
-
+	
 	public Phone() {}
 	public Phone(Member member, String no){
 		this.no = no;
@@ -218,44 +228,44 @@ public class Phone {
 	public void setNo(String no) {
 		this.no = no;
 	}
-
+	
 	public Member getMember() {
 		return member;
 	}
-
+	
 	public void setMember(Member member) {
 		this.member = member;
-	}
-
+	}	
+	
 	@Override
 	public String toString() {
 		String result = "[phone_"+seq+"] " + no;
 		return result;
-	}
+	}	
 }
 </pre>
-                <p> Phone Entity에서는 @ManyToOne 어노테이션이 사용되었습니다. 여기에서 Member 클래스를 가진 멤버 변수 이름이 "member" 입니다. 아까 Member Entity에서 봤던 mappedBy에서 "member"의 값을 뜻합니다. 그리고 @ManyToOne 어노테이션의 기본 fetch 전략은 <strong>EAGER</strong>입니다. </p>
-                <h4>Repository</h4>
-                <p> Repository는 간단하게 코드만 보고 넘어가겠습니다. </p>
- <pre class="prettyprint lang-java">
+<p>Phone Entity에서는 <span class="command">@ManyToOne</span> 어노테이션이 사용되었습니다. 여기에서 Member 클래스를 가진 멤버 변수 이름이 "member" 입니다. 아까 Member Entity에서 봤던 mappedBy에서 "member"의 값을 뜻합니다. 그리고 <span class="command">@ManyToOne</span> 어노테이션의 기본 fetch 전략은 <strong>EAGER</strong>입니다.</p>
+<h4>Repository</h4>
+<p>Repository는 간단하게 코드만 보고 넘어가겠습니다.</p>
+<pre class="prettyprint lang-java">
 package jpa3;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberRepository extends JpaRepository&lt;Member, Integer&gt;{}
 </pre>
- <pre class="prettyprint lang-java">
+<pre class="prettyprint lang-java">
 package jpa3;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PhoneRepository extends JpaRepository&lt;Phone, Integer&gt; {}
 </pre>
-                <h3>Application</h3>
-                <p> 실제로 위의 코드를 돌려보는 프로그램을 작성합니다. 이번 포스트에서는 바로 Repository를 최상위 애플리케이션 클래스에서 실행하지 않고 서비스 클래스를 별도로 만들어 분리하고 실행합니다. </p>
-                <h4>RespositoryService</h4>
-                <p> 서비스 메소드를 정의할 인터페이스를 만듭니다. </p>
- <pre class="prettyprint lang-java">
+<h3>Application</h3>
+<p>실제로 위의 코드를 돌려보는 프로그램을 작성합니다. 이번 포스트에서는 바로 Repository를 최상위 애플리케이션 클래스에서 실행하지 않고 서비스 클래스를 별도로 만들어 분리하고 실행합니다.</p>
+<h4>RespositoryService</h4>
+<p>서비스 메소드를 정의할 인터페이스를 만듭니다.</p>
+<pre class="prettyprint lang-java">
 package jpa3;
 
 public interface RepositoryService {
@@ -266,9 +276,9 @@ public interface RepositoryService {
 	public void deletAll();
 }
 </pre>
-                <h4>RespositoryServiceImpl</h4>
-                <p> 실제 서비스할 비즈니스 로직을 구현합니다. 자세한 내용은 주석으로 처리했습니다. </p>
- <pre class="prettyprint lang-java">
+<h4>RespositoryServiceImpl</h4>
+<p>실제 서비스할 비즈니스 로직을 구현합니다. 자세한 내용은 주석으로 처리했습니다.</p>
+<pre class="prettyprint lang-java">
 package jpa3;
 
 import java.util.List;
@@ -283,24 +293,24 @@ public class RepositoryServiceImpl implements RepositoryService {
 
 	@Autowired
 	private MemberRepository mr;
-
+	
 	@Autowired
 	private PhoneRepository pr;
-
+	
 	public void saveMember(){
 		Member first = new Member("Jung");
 		Member second = new Member("Dong");
 		Member third = new Member("Min");
-
+		
 		Phone p = new Phone(first, "010-XXXX-YYYY");
-
+		
 		mr.save(first);
 		mr.save(second);
 		mr.save(third);
-
+		
 		pr.save(p);
 	}
-
+	
 	public void print(){
 		// @ManyToOne의 fetch 기본전략은 EAGER이다.
 		// 따라서 @Transactional 어노테이션이 없더라도
@@ -310,11 +320,11 @@ public class RepositoryServiceImpl implements RepositoryService {
 			System.out.println(p.toString()+ " " + p.getMember().toString());
 		}
 	}
-
+	
 	@Transactional
 	public void lazyPrint(){
-		// @OneToMany의 fetch 기본전략은 LAZY이다.
-		// 따라서 Member Entity 내부의 Phone 콜렉션은
+		// @OneToMany의 fetch 기본전략은 LAZY이다.		
+		// 따라서 Member Entity 내부의 Phone 콜렉션은 
 		// LAZY 전략이기 때문에 @Transactional 어노테이션이 있어야 한다.
 		List&lt;Member&gt; member = mr.findAll();
 		for( Member m : member ) {
@@ -324,9 +334,9 @@ public class RepositoryServiceImpl implements RepositoryService {
 			}
 		}
 	}
-
+	
 	public void lazyPrint2(){
-		// Entity가 LAZY 전략일지라도
+		// Entity가 LAZY 전략일지라도 
 		// LAZY 전략을 쓰는 객체를 사용하지 않는다면
 		// @Transactional 어노테이션이 없어도 된다.
 		List&lt;Member&gt; member = mr.findAll();
@@ -338,12 +348,12 @@ public class RepositoryServiceImpl implements RepositoryService {
 	public void deletAll() {
 		mr.deleteAll();
 		pr.deleteAll();
-	}
+	}	
 }
 </pre>
-                <h4>Application</h4>
-                <p> RepositoryService의 메소드들을 실행합니다. 트랜잭션이 걸린것도 있고 아닌것도 있지만 콘솔 화면에 출력은 문제가 없습니다. </p>
- <pre class="prettyprint lang-java">
+<h4>Application</h4>
+<p>RepositoryService의 메소드들을 실행합니다. 트랜잭션이 걸린것도 있고 아닌것도 있지만 콘솔 화면에 출력은 문제가 없습니다.</p>
+<pre class="prettyprint lang-java">
 package jpa3;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -356,10 +366,10 @@ public class Jpa3Application implements CommandLineRunner{
 
 	@Autowired
 	private RepositoryService rs;
-
-    public static void main(String[] args) {
-        SpringApplication.run(Jpa3Application.class, args);
-    }
+	
+   public static void main(String[] args) {
+       SpringApplication.run(Jpa3Application.class, args);
+   }
 	@Override
 	public void run(String... args) throws Exception {
 		rs.deletAll();
@@ -367,10 +377,10 @@ public class Jpa3Application implements CommandLineRunner{
 		rs.print();
 		rs.lazyPrint();
 		rs.lazyPrint2();
-	}
+	}	
 }
 </pre>
- <pre class="console">
+<pre class="console">
 [phone_161] 010-XXXX-YYYY [member_336] Jung
 [member_336] Jung
 [phone_161] 010-XXXX-YYYY
@@ -380,16 +390,19 @@ public class Jpa3Application implements CommandLineRunner{
 [member_337] Dong
 [member_338] Min
 </pre>
-                <h2>마무리</h2>
-                <p> 1:N 양방향 예제에 대해 알아봤습니다. JPA 잘 쓰면 정말 빠르고 유연한 어플리케이션 개발이 될것 같네요! </p>
-                <p> 이 외에도 @OneToOne, @ManyToMany 어노테이션 등도 존재합니다. 추후에 이것들도 포스팅할 기회가 있으면 해볼게요. :) </p>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+<h2>마무리</h2>
+<p>1:N 양방향 예제에 대해 알아봤습니다. JPA 잘 쓰면 정말 빠르고 유연한 어플리케이션 개발이 될것 같네요!</p>
+<p>이 외에도 <span class="command">@OneToOne</span>, <span class="command">@ManyToMany</span> 어노테이션 등도 존재합니다. 추후에 이것들도 포스팅할 기회가 있으면 해볼게요. :)</p>
+
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>
