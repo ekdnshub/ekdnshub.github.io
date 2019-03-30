@@ -608,22 +608,18 @@ var postsInfo = (function(){
             "152":{
                 "title":"Hbase Shell Script Example",
                 "created":"2015-06-10"
-                ,"version":"v1"
             },
             "153":{
                 "title":"자바스크립트 정렬(Javascript Sort)",
                 "created":"2015-06-11"
-                ,"version":"v1"
             },
             "154":{
                 "title":"자바 동기(synchronous) 소켓 프로그래밍",
                 "created":"2015-06-12"
-                ,"version":"v1"
             },
             "155":{
                 "title":"CentOS telnet 설치",
                 "created":"2015-06-15"
-                ,"version":"v1"
             },
             "156":{
                 "title":"Redis 공부 중...",
@@ -632,17 +628,14 @@ var postsInfo = (function(){
             "157":{
                 "title":"레디스 레플리케이션 예제(Redis Replication)",
                 "created":"2015-06-18"
-                ,"version":"v1"
             },
             "158":{
                 "title":"Java File Encoding Read/Write",
                 "created":"2015-06-18"
-                ,"version":"v1"
             },
             "159":{
                 "title":"레디스 센티널 예제(Redis Sentinel)",
                 "created":"2015-06-22"
-                ,"version":"v1"
             },
             "160":{
                 "title":"SpringBoot JPA Pagination",

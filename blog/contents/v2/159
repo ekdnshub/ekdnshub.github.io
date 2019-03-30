@@ -1,0 +1,260 @@
+###info
+title=레디스 센티널 예제(Redis Sentinel)
+created=2015-06-22
+ad=true
+###
+#h2 Redis Sentinel
+#p 이번 포스팅은 지난번 {$/blog/157|Redis Replication}에 이어서 Redis Sentinel이라는 도구를 설명합니다. Redis Sentinel은 Redis 고가용성{=High Availablility}을 위한 기능을 제공합니다. 대표적으로 아래와 같은 기능들을 보다 사용하기 쉽게 해줍니다.
+
+###ul 
+#li 모니터링(Monitoring)
+#li 알림(Notification)
+#li 자동 페일오버(Automatic failover)
+#li 환경 구성 프로바이더(Configuration provider)
+###
+#p 해당 부분에 대한 자세한 내용은 {$http://redis.io/topics/sentinel|Redis Sentinel Documentation}에서 검토 하실 수 있습니다.
+
+
+#h2 Example
+#p 지난번 Master/Slave 구조를 위해 만들어뒀던 내용에서 Sentinel(이하 "센티널")들을 덧붙여 볼 예정입니다.
+
+
+#h3 Architecture
+###diagram
+             ╋─────────╋  ╋─────────╋
+             ┃Slave             ┃  ┃Slave             ┃
+             ┃PORT : 10001      ┃  ┃PORT : 10002      ┃
+             ╋─────────╋  ╋─────────╋
+                       ┃                      ┃
+                       ╋─────╋─────╋
+                                   ┃
+                         ╋─────────╋
+                         ┃Master            ┃
+                         ┃PORT : 10000      ┃
+                         ╋─────────╋
+                                   ┃
+         ╋────────────╋────────────╋
+         ┃                        ┃                        ┃
+╋─────────╋    ╋─────────╋    ╋─────────╋
+┃Sentinel          ┃    ┃Sentinel          ┃    ┃Sentinel          ┃
+┃PORT : 11001      ┃    ┃PORT : 11002      ┃    ┃PORT : 11003      ┃
+╋─────────╋    ╋─────────╋    ╋─────────╋
+###
+#p 센티널을 활용하기 위해 아래의 사항을 체크해주세요.
+
+###box.green
+###ul 
+#li Redis 버전은 2.8 이상이 권장됩니다.
+#li 센티널은 {!최소 3개} 이상 그리고, 홀수로 만들기를 권장합니다.
+#li 센티널들은 기본으로 {!TCP port 26379}번 포트를 이용합니다.
+###
+###
+
+#h3 Sentinel Config
+#p Redis가 설치된 디렉토리에 `sentinel.conf`라는 이름으로 환경 설정 파일이 있습니다. 자세한 주석은 해당 파일을 참조하세요. 참고로 위의 구조도에서 사용할 센티널들의 포트는 각각 11001~11003 입니다. 밑의 환경 설정 파일을 각 포트별로 만들어주면 됩니다.
+
+###code.sh
+# 11001.conf ~ 11003.conf
+
+# 센티널이 실행될 포트입니다. (이부분은 포트별로 다르게 설정)
+port 11001
+# 센티널이 감시할 레디스 Master 인스턴스 정보를 넣어줍니다.
+# sentinel monitor mymaster &lt;redis master host> &lt;redis master port> &lt;quorum>
+sentinel monitor mymaster 127.0.0.1 10000 2
+# 센티널이 Master 인스턴스에 접속하기 위한 패스워드를 넣어줍니다.
+sentinel auth-pass mymaster foobared
+# 센티널이 Master 인스턴스와 접속이 끊겼다는 것을 알기 위한 최소한의 시간입니다.
+sentinel down-after-milliseconds mymaster 30000
+# 페일오버 작업 시간의 타임오버 시간을 정합니다.
+# 기본값은 3분입니다.
+sentinel failover-timeout mymaster 180000
+# 이 값은 Master로부터 동기화 할 수 있는 slave의 개수를 지정합니다.
+# 값이 클수록 Master에 부하가 가중됩니다.
+# 값이 1이라면 Slave는 한대씩 Master와 동기화를 진행합니다.
+sentinel parallel-syncs mymaster 1
+###
+#p 부가적으로 설명 드리면 `quorum`이라는 값은 Master 인스턴스에 접속을 할 수 없을 때 새로운 Master를 설정할 수 있는 최소한의 센티널 개수 입니다. 즉 2라는 값이 뜻하는 바는 "Master Redis Instance와 접속이 안되는 경우 최소 2대 이상 센티널이 동의 하면 Master을 재선출하는 플래그를 설정한다."는 것입니다. 그리고 현재 구조도상 센티널은 3대이기 때문에 2라는 값을 만족과 동시에 "과반수"가 넘어서게 되고 그러면 새로운 Master를 선출하기 위해 센티널들이 새로운 Master를 투표합니다.
+
+#p 그래서 센티널은 3+2n을 유지해서 홀수를 유지하는 이유가 "과반수" 때문입니다. 짝수면 50:50으로 비길수도 있으니까요.
+
+###box.blue
+###p
+{+help} {!SDOWN vs ODOWN}
+
+{$http://redis.io/topics/sentinel#more-advanced-concepts|More advanced concepts}이라는 페이지에서 SDOWN과 ODOWN이라는 단어가 나옵니다. SDOWN은 Subjectively Down condition의 축약어이고 ODOWN은 Objectively Down condition의 축약어입니다.
+
+{!SDOWN}은 센티널 인스턴스가 Master와 접속이 끊긴 경우 {!주관적인 다운} 상태로 바뀝니다. 이것은 잠시 네트워크 순단 등으로 인해 일시적인 현상일 수 있으므로 우선 SDOWN 상태가 됩니다.
+
+그러나 SDOWN 상태인 센티널들이 많아진다면 이는 {!ODOWN} 상태, 즉 {!객관적인 다운} 상태로 바뀝니다. 이때부터 실질적인 페일오버(failover) 작업이 시작됩니다.
+###
+###
+
+#h3 Master/Slave Config
+#p 센티널 환경 설정이 끝나면 이번엔 Master/Slave의 환경 설정을 조금 바꿔줘야 합니다. {$/blog/157|Redis Replication} 포스팅을 따라하셨다면 Master/Slave의 안전(?)을 위해 `masterauth`와 `requirepass`의 값을 줬던 것을 기억하실겁니다. 이제 Master/Slave는 전부 두 값을 가져야 합니다. 나중에 센티널이 페일오버 작업을 하게 된다면 Slave가 Master가 될 수 있고 Master가 Slave로 될 수 있습니다. 따라서 모든 가정을 염두하고 값을 넣어야 합니다.
+
+#p 아래는 Master/Slave의 설정 파일 값 중 일부입니다. 아래 부분을 추가 또는 바꿔주셔야합니다.
+
+###code.sh
+# 10000.conf ~ 10002.conf
+masterauth foobared
+requirepass foobared
+###
+
+#h3 Execute Sentinel
+#p 이제 센티널들을 가동할 때입니다. 아래처럼 세 개의 센티널들을 띄우면 됩니다.
+
+###code.sh
+$ ./redis-sentinel 11001.conf &
+$ ./redis-sentinel 11002.conf &
+$ ./redis-sentinel 11003.conf &
+###
+#p 그리고 `ps -ef | grep redis`를 콘솔에 입력해보면 아래처럼 여섯개의 인스턴스가 잡힙니다.
+###console
+./redis-server *:10000
+./redis-server *:10001
+./redis-server *:10002
+./redis-sentinel *:11001 [sentinel]
+./redis-sentinel *:11002 [sentinel]
+./redis-sentinel *:11003 [sentinel]
+###
+
+#h3 check log
+#p 이번엔 센티널에 접속해서 어떤 정보가 있는지 확인해 봅시다.
+
+###console
+$ ./redis-cli -p 11001
+127.0.0.1:11001> <span class="light">info}
+# Server
+redis_version:3.0.1
+...(중략)
+config_file:/home/redis/11001.conf
+
+# Sentinel
+sentinel_masters:1
+sentinel_tilt:0
+sentinel_running_scripts:0
+sentinel_scripts_queue_length:0
+master0:name=mymaster,status=ok,address=127.0.0.1:10000,slaves=2,sentinels=3
+###
+#p 마지막 줄을 보시면 master는 10000번 포트에 있고 slave는 2대, 센티널은 3대가 바라보고 있다는 것을 알 수 있습니다. 그러면 정말 failover가 되는지 확인을 해봅시다.
+
+
+#h3 Test FailOver
+#p 페일오버 시나리오는 다음과 같습니다.
+
+###ul 
+#li Master 인스턴스 셧다운(10000번 포트)
+#li Slave -> Master 변환 체크
+#li Old Master 재기동(10000번 포트)
+#li 작업 결과 확인
+###
+
+#h4 Master Instance ShutDown
+#p 실제로 Master를 떨궈봅시다.
+
+###console
+$ 10000.sh stop
+###
+#p 센티널 실행시 로그 파일을 별도로 지정하지 않았기 때문에 터미널 세션을 종료하지 않으셨다면 갑작스럽게 엄청난 문자열이 출력되는 걸 보실 수 있습니다.
+
+###console
+# +sdown master mymaster 127.0.0.1 10000
+# +odown master mymaster 127.0.0.1 10000 #quorum 2/2
+# +new-epoch 1
+# +try-failover master mymaster 127.0.0.1 10000
+# +vote-for-leader da320d6df7f817ed2ded0333c00c036aec4875ff 1
+# +new-epoch 1
+# +new-epoch 1
+# +vote-for-leader da320d6df7f817ed2ded0333c00c036aec4875ff 1
+# 127.0.0.1:11001 voted for da320d6df7f817ed2ded0333c00c036aec4875ff 1
+# +elected-leader master mymaster 127.0.0.1 10000
+# +failover-state-select-slave master mymaster 127.0.0.1 10000
+# +vote-for-leader da320d6df7f817ed2ded0333c00c036aec4875ff 1
+# +sdown master mymaster 127.0.0.1 10000
+# 127.0.0.1:11002 voted for da320d6df7f817ed2ded0333c00c036aec4875ff 1
+# +odown master mymaster 127.0.0.1 10000 #quorum 3/2
+# Next failover delay: I will not start a failover before Mon Jun 22 16:33:34 2015
+# +selected-slave slave 127.0.0.1:10002 127.0.0.1 10002 @ mymaster 127.0.0.1 10000
+* +failover-state-send-slaveof-noone slave 127.0.0.1:10002 127.0.0.1 10002 @ mymaster 127.0.0.1 10000
+* +failover-state-wait-promotion slave 127.0.0.1:10002 127.0.0.1 10002 @ mymaster 127.0.0.1 10000
+# +odown master mymaster 127.0.0.1 10000 #quorum 3/2
+# Next failover delay: I will not start a failover before Mon Jun 22 16:33:33 2015
+# +promoted-slave slave 127.0.0.1:10002 127.0.0.1 10002 @ mymaster 127.0.0.1 10000
+# +failover-state-reconf-slaves master mymaster 127.0.0.1 10000
+* +slave-reconf-sent slave 127.0.0.1:10001 127.0.0.1 10001 @ mymaster 127.0.0.1 10000
+# +config-update-from sentinel 127.0.0.1:11003 127.0.0.1 11003 @ mymaster 127.0.0.1 10000
+# +switch-master mymaster 127.0.0.1 10000 127.0.0.1 10002
+* +slave slave 127.0.0.1:10001 127.0.0.1 10001 @ mymaster 127.0.0.1 10002
+* +slave slave 127.0.0.1:10000 127.0.0.1 10000 @ mymaster 127.0.0.1 10002
+# +config-update-from sentinel 127.0.0.1:11003 127.0.0.1 11003 @ mymaster 127.0.0.1 10000
+# +switch-master mymaster 127.0.0.1 10000 127.0.0.1 10002
+* +slave slave 127.0.0.1:10001 127.0.0.1 10001 @ mymaster 127.0.0.1 10002
+* +slave slave 127.0.0.1:10000 127.0.0.1 10000 @ mymaster 127.0.0.1 10002
+# -odown master mymaster 127.0.0.1 10000
+* +slave-reconf-inprog slave 127.0.0.1:10001 127.0.0.1 10001 @ mymaster 127.0.0.1 10000
+* +slave-reconf-done slave 127.0.0.1:10001 127.0.0.1 10001 @ mymaster 127.0.0.1 10000
+# +failover-end master mymaster 127.0.0.1 10000
+# +switch-master mymaster 127.0.0.1 10000 127.0.0.1 10002
+* +slave slave 127.0.0.1:10001 127.0.0.1 10001 @ mymaster 127.0.0.1 10002
+* +slave slave 127.0.0.1:10000 127.0.0.1 10000 @ mymaster 127.0.0.1 10002
+# +sdown slave 127.0.0.1:10000 127.0.0.1 10000 @ mymaster 127.0.0.1 10002
+# +sdown slave 127.0.0.1:10000 127.0.0.1 10000 @ mymaster 127.0.0.1 10002
+# +sdown slave 127.0.0.1:10000 127.0.0.1 10000 @ mymaster 127.0.0.1 10002
+###
+#p 10001번 포트가 Master가 될줄 알았는데 예상 외로 10002번 포트가 Master입니다. 이 상태에서 10002번 포트로 접속을 해서 `info` 명령어를 쳐봅시다.
+
+###console
+$ ./redis-cli -p 10002 -a foobared
+127.0.0.1:10002> info
+...(중략)
+# Replication
+role:master
+connected_slaves:1
+slave0:ip=127.0.0.1,port=10001,state=online,offset=36590,lag=1
+master_repl_offset:36590
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:2
+repl_backlog_histlen:36589
+...(하략)
+###
+#p 지금 역할(role)이 master로 되어 있군요. 그리고 slave는 1로 표시 되고 있습니다.
+
+
+#h4 Restart Old Master
+#p 이번에 정상적으로 예전 Master(Port:10000)가 복구 되었다고 가정합니다.
+
+###console
+$ ./10000.sh start
+...
+* +convert-to-slave slave 127.0.0.1:10000 127.0.0.1 10000 @ mymaster 127.0.0.1 10002
+###
+#p 현재 마스터인 10002번 포트에 잘 달라붙습니다. 10000.conf 파일의 `slaveof`값이 변경되어 있네요. 반대로 10002.conf에는 `slaveof`가 없어졌어요. 센티널이 처리하는 것으로 보입니다.
+
+###console
+$ ./redis-cli -p 10000 -a foobared
+127.0.0.1:10000> info
+...(중략)
+# Replication
+role:slave
+master_host:127.0.0.1
+master_port:10002
+master_link_status:up
+master_last_io_seconds_ago:0
+master_sync_in_progress:0
+slave_repl_offset:244993
+slave_priority:100
+slave_read_only:1
+connected_slaves:0
+master_repl_offset:0
+repl_backlog_active:0
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:0
+repl_backlog_histlen:0
+...(하략)
+###
+#p 실제로 레디스 콘솔에 접속해서 10000번 포트의 정보를 살펴보면 slave로 역할이 바뀌어 있음을 알 수 있습니다.
+
+
+#h2 마무리
+#p Redis Replication + Sentinel 조합에 대해 알아 봤습니다. 다음은 레디스 클러스터(Redis Cluster)에 대해 시간이 나면 포스팅하는 것으로 하고, 이만 줄이겠습니다. :3

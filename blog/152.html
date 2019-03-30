@@ -1,86 +1,90 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>Hbase Shell Script Example :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
-    <!-- # jquery -->
-    <!--[if lte IE 9]>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
-    <![endif]-->
-    <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <!--<![endif]-->
-
-
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><p>
-                hbase를 사용하다보면 hbase shell을 통해서 일을 처리하는 경우가 왕왕 있습니다. 까먹지 않기 위해 이곳에 남겨둡니다. :3
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
+
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
             </p>
-                <h4>In hbase console</h4>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">Hbase Shell Script Example</h1>
+					<!-- 본문 -->
+					<div id="content">
+
+
+
+
+<p>hbase를 사용하다보면 hbase shell을 통해서 일을 처리하는 경우가 왕왕 있습니다. 까먹지 않기 위해 이곳에 남겨둡니다. :3</p>
+
+<h4>In hbase console</h4>
 <pre class="prettyprint lang-sh">
 # get + filter
-get 'TABLE_NAME', 'ROWKEY', { COLUMN=>'COLUMN_NAME', FILTER=> "ValueFilter(=, 'binary:YOUR_KEYWORD')" }
+get 'TABLE_NAME', 'ROWKEY', { COLUMN=&gt;'COLUMN_NAME', FILTER=&gt; "ValueFilter(=, 'binary:YOUR_KEYWORD')" }
 
 # get + filter (substring)
-get 'TABLE_NAME', 'ROWKEY', { COLUMN=>'COLUMN_NAME', FILTER=> "ValueFilter(=, 'substring:YOUR_KEYWORD')" }
+get 'TABLE_NAME', 'ROWKEY', { COLUMN=&gt;'COLUMN_NAME', FILTER=&gt; "ValueFilter(=, 'substring:YOUR_KEYWORD')" }
 </pre>
-                <h4>linux shell console</h4>
+
+<h4>linux shell console</h4>
+
 <pre class="prettyprint lang-sh">
 # get + filter + file dump
-echo "get 'TABLE_NAME', 'ROWKEY', { COLUMN=>'COLUMN_NAME', FILTER=> \"ValueFilter(=, 'substring:YOUR_KEYWORD')\" }" | ./hbase shell | grep "^ " > result.txt
+echo "get 'TABLE_NAME', 'ROWKEY', { COLUMN=&gt;'COLUMN_NAME', FILTER=&gt; \"ValueFilter(=, 'substring:YOUR_KEYWORD')\" }" | ./hbase shell | grep "^ " &gt; result.txt
 
 # delete + shell
 echo "delete 'TABLE_NAME', 'ROWKEY', 'COLUMN_NAME:Qualifier'" | ./hbase shell
 </pre>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

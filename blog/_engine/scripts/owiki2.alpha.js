@@ -205,7 +205,10 @@
         for (var _i = 0 ; _i < multiLines.length; _i++){
             var line = multiLines[_i];
             var resultMultiLine = "";
-            var multiLine = line.match(multiLineKeywordRex);
+            var multiLine = null;
+            if (line.indexOf("####") < 0) { // 멀티라인 prefix는 항상 ### 으로 시작하기 때문에 그 이상은 인정 안함.
+                multiLine = line.match(multiLineKeywordRex);
+            }
             if (multiLine != null) {
                 var findKey = multiLine[0];
                 multiLineKeywordList.forEach(function(process){

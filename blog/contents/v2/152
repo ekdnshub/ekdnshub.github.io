@@ -1,19 +1,25 @@
-<p>
-hbase를 사용하다보면 hbase shell을 통해서 일을 처리하는 경우가 왕왕 있습니다. 까먹지 않기 위해 이곳에 남겨둡니다. :3
-</p>
-<h4>In hbase console</h4>
-<pre class="prettyprint lang-sh">
+###info
+title=Hbase Shell Script Example
+created=2015-06-10
+ad=true
+###
+#p hbase를 사용하다보면 hbase shell을 통해서 일을 처리하는 경우가 왕왕 있습니다. 까먹지 않기 위해 이곳에 남겨둡니다. :3
+
+#h4 In hbase console
+###code.sh
 # get + filter
 get 'TABLE_NAME', 'ROWKEY', { COLUMN=>'COLUMN_NAME', FILTER=> "ValueFilter(=, 'binary:YOUR_KEYWORD')" }
 
 # get + filter (substring)
 get 'TABLE_NAME', 'ROWKEY', { COLUMN=>'COLUMN_NAME', FILTER=> "ValueFilter(=, 'substring:YOUR_KEYWORD')" }
-</pre>
-<h4>linux shell console</h4>
-<pre class="prettyprint lang-sh">
+###
+
+#h4 linux shell console
+
+###code.sh
 # get + filter + file dump
 echo "get 'TABLE_NAME', 'ROWKEY', { COLUMN=>'COLUMN_NAME', FILTER=> \"ValueFilter(=, 'substring:YOUR_KEYWORD')\" }" | ./hbase shell | grep "^ " > result.txt
 
 # delete + shell
 echo "delete 'TABLE_NAME', 'ROWKEY', 'COLUMN_NAME:Qualifier'" | ./hbase shell
-</pre>
+###

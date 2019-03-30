@@ -1,0 +1,44 @@
+###info
+title=CentOS telnet 설치
+created=2015-06-15
+ad=true
+###
+#p centOS 6.X에서 `telnet`이 설치가 안되 있는 경우를 상정해 포스트를 진행합니다.
+
+#h2 telnet 설치
+#h3 yum으로 패키지 설치
+#p yum 패키지 관리자를 이용해 telnet 패키지를 설치합니다.
+
+###console
+# 설치 하기 전에 패키지가 깔려 있는지 체크합니다.
+$ rpm -qa | grep telnet
+# telnet 패키지를 설치합니다.
+$ yum install telnet
+# telnet-server 패키지를 설치합니다.
+$ yum install telnet-server
+###
+
+#h3 telnet 설정
+#p `/etc/xinetd.d/telnet` 파일을 열어서 아래 부분을 바꿔줍니다.
+
+###code.sh
+# default: on
+# description: The telnet server serves telnet sessions; it uses \
+#       unencrypted username/password pairs for authentication.
+service telnet
+{
+       flags           = REUSE
+       socket_type     = stream
+       wait            = no
+       user            = root
+       server          = /usr/sbin/in.telnetd
+       log_on_failure  += USERID
+       disable         = no # 이부분을 yes에서 no로 바꿔줍니다.
+}
+###
+
+#h3 서비스 재시작
+#p 아래처럼 서비스를 재시작합니다. (또는 시작만)
+###console
+/etc/init.d/xinetd restart
+###
