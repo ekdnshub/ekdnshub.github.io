@@ -1,6 +1,7 @@
 ###info
 title=Java Json 다루기(Java Jackson Examples)
 created=2016-01-04
+ad=true
 ###
 #p 새해 첫 포스팅입니다. 오늘은 자바에서 JSON을 다룰 수 있게 도와주는 Jackson 라이브러리에 대해 알아봅니다.
 

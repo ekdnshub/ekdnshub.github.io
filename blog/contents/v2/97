@@ -1,6 +1,7 @@
 ###info
 title=자바스크립트 타이밍 이벤트(javascript timing events)
 created=2015-03-26
+ad=true
 ###
 #p  자바스크립트에서 일정시간마다 특정 함수를 호출하고 싶은 경우가 종종 있습니다. 이런 경우에 사용할 수 있는 자바스크립트 이벤트 중에는 타이밍 이벤트(Timing Events)가 있어요. 타이밍 이벤트가 무엇인지 알아보고 사용법도 조금 살펴볼까 합니다. 
 #h4 타이밍 이벤트(Timing Events)

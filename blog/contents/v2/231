@@ -1,6 +1,7 @@
 ###info
 title=Jolokia 사용법 소개
 created=2016-06-12
+ad=true
 ###
 
 #h2 Jolokia가 무엇인가요?
@@ -45,5 +46,5 @@ created=2016-06-12
 ###
 
 ###box.green
-#p {+help} Java JDK에 포함된 {@jconsole}을 이용해 미리 mbean 값을 찾는것이 정신건강에 이로울 수 있습니다.
+#p {+help} Java JDK에 포함된 `jconsole`을 이용해 미리 mbean 값을 찾는것이 정신건강에 이로울 수 있습니다.
 ###

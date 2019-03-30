@@ -1,21 +1,19 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>Oracle leading hint :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -24,54 +22,80 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
     <![endif]-->
     <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <!--<![endif]-->
 
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">Oracle leading hint</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><div style="display:none;">title=Oracle leading hint
-                created=2015-01-14
-            </div><p>Oracle LEADING 힌트를 써보게 되었다. 음... 간단한 사용법은 아래처럼..</p><pre class="prettyprint lang-sql">select /*+ leading(b) */ *
+
+
+
+<p>Oracle LEADING 힌트를 써보게 되었다. 음... 간단한 사용법은 아래처럼..</p>
+<pre class="prettyprint lang-sql">
+select /*+ leading(b) */ *
 from tbl a, tbl2 b
 where a.id = b.id
-</pre><p>leading 힌트는 join을 할 때 먼저 읽어들일 테이블을 지정하는 힌트 구문이다. 대체적으로 다음과 같은 특징을 가지고 있다.</p><div class="green"><ul><li>테이블 조인시 지정 테이블을 먼저 수행</li><li>ORDERED 힌트와 같이 사용할땐 쓰지 않음</li></ul></div><p>어쨌든, FROM절에 있는 테이블 기술 순서와는 다르게 제어할 수 있다는 것이 마음에 든다. ORDERED하고 같이 쓰면 무시 된다는 점은 까먹지 말아야지. 테이블이 2개보다 많은 경우엔...</p><pre class="prettyprint lang-sql">select /*+ leading(b c) */ *
+</pre>
+<p>leading 힌트는 join을 할 때 먼저 읽어들일 테이블을 지정하는 힌트 구문이다. 대체적으로 다음과 같은 특징을 가지고 있다.</p>
+<div class="green">
+<ul>
+<li>테이블 조인시 지정 테이블을 먼저 수행</li>
+<li>ORDERED 힌트와 같이 사용할땐 쓰지 않음</li>
+</ul>
+</div>
+<p>어쨌든, FROM절에 있는 테이블 기술 순서와는 다르게 제어할 수 있다는 것이 마음에 든다. ORDERED하고 같이 쓰면 무시 된다는 점은 까먹지 말아야지. 테이블이 2개보다 많은 경우엔...</p>
+<pre class="prettyprint lang-sql">
+select /*+ leading(b c) */ *
 from tbl a, tbl2 b, tbl3 c
 where a.id = b.id
 and b.id = c.id
 ...
-</pre><p>b c a 순으로 조인을 하겠다는 뜻... 기억하자.</p></div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+</pre>
+<p>b c a 순으로 조인을 하겠다는 뜻... 기억하자.</p>
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

@@ -1,21 +1,19 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>C언어 파일 권한 체크 - access() 사용법 :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -24,54 +22,80 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
     <![endif]-->
     <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <!--<![endif]-->
 
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">C언어 파일 권한 체크 - access() 사용법</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><div style="display:none;">title=C언어 파일 권한 체크 - access() 사용법
-                created=2015-02-24
-            </div><p>오늘은 C언어에서 <span class="command">.access()</span> 함수에 대해 알아고보자 합니다. 기준 OS는 centOS(gcc version 4.1.2)입니다.</p>
-                <h2>.access() function definition</h2><p><span class="command">.access()</span> 함수는 파일 또는 디렉토리의 사용자 권한을 체크합니다.</p>
-                <h2>use .access() function</h2><p><span class="command">.access()</span> 함수의 사용법은 다음과 같습니다.</p>
-<pre class="prettyprint lang-c">#include &lt;unistd.h&gt;
-int access(const char *pathname, int mode);
+
+
+
+<p>오늘은 C언어에서 <span class="command">.access()</span> 함수에 대해 알아고보자 합니다. 기준 OS는 centOS(gcc version 4.1.2)입니다.</p>
+
+<h2>.access() function definition</h2>
+<p><span class="command">.access()</span> 함수는 파일 또는 디렉토리의 사용자 권한을 체크합니다.</p>
+
+<h2>use .access() function</h2>
+<p><span class="command">.access()</span> 함수의 사용법은 다음과 같습니다.</p>
+
+<pre class="prettyprint lang-c">
+#include &lt;unistd.h&gt;
+int access(const char *pathname, int mode); 
 </pre>
-                <p>사용하고자 하는 프로그램상에 <span class="command">unistd.h</span> 헤더 파일을 포함하고 <span class="command">.access()</span> 함수에 매개 인자를 넘겨주면 됩니다.</p><p>pathname에는 체크하고자할 디렉토리 또는 파일명을 넣고 mode 변수에는 적절한 마스크<span class="refer">mask</span> 값을 넣으면 됩니다. mode 변수에 들어갈 수 있는 마스크 값은 다음과 같습니다.</p><pre class="console"><span class="light">R_OK</span> : 파일 존재 여부, 읽기 권한 여부
-<span class="light">W_OK</span> : 파일 존재 여부, 쓰기 권한 여부
-<span class="light">X_OK</span> : 파일 존재 여부, 실행 권한 여부
-<span class="light">F_OK</span> : 파일 존재 여부
+
+<p>사용하고자 하는 프로그램상에 <span class="command">unistd.h</span> 헤더 파일을 포함하고 <span class="command">.access()</span> 함수에 매개 인자를 넘겨주면 됩니다.</p>
+<p>pathname에는 체크하고자할 디렉토리 또는 파일명을 넣고 mode 변수에는 적절한 마스크<span class="refer">mask</span> 값을 넣으면 됩니다. mode 변수에 들어갈 수 있는 마스크 값은 다음과 같습니다.</p>
+<pre class="console">
+&lt;span class="light"&gt;R_OK&lt;/span&gt; : 파일 존재 여부, 읽기 권한 여부
+&lt;span class="light"&gt;W_OK&lt;/span&gt; : 파일 존재 여부, 쓰기 권한 여부
+&lt;span class="light"&gt;X_OK&lt;/span&gt; : 파일 존재 여부, 실행 권한 여부
+&lt;span class="light"&gt;F_OK&lt;/span&gt; : 파일 존재 여부 
 </pre>
-                <p><span class="command">.access()</span> 함수의 결과 값은 int형으로 <strong>성공하면</strong> <span class="command">0</span>을, <strong>실패하면</strong> <span class="error">-1</span>을 반환합니다. 오류의 원인에 대해서는 errno에 세팅됩니다. 해당 부분에 대한 자세한 내용은 C 컴파일러가 설치되었다는 가정 하에 콘솔에 <span class="command">man access</span>를 실행해 보세요.</p>
-<pre class="prettyprint lang-sh">$ man access # access 함수에 대한 자세한 설명을 출력합니다.
+
+<p><span class="command">.access()</span> 함수의 결과 값은 int형으로 <strong>성공하면</strong> <span class="command">0</span>을, <strong>실패하면</strong> <span class="error">-1</span>을 반환합니다. 오류의 원인에 대해서는 errno에 세팅됩니다. 해당 부분에 대한 자세한 내용은 C 컴파일러가 설치되었다는 가정 하에 콘솔에 <span class="command">man access</span>를 실행해 보세요.</p>
+
+<pre class="prettyprint lang-sh">
+$ man access # access 함수에 대한 자세한 설명을 출력합니다.
 </pre>
-                <h2>Example</h2><pre class="prettyprint lang-c">#include &lt;stdio.h&gt;
+
+<h2>Example</h2>
+<pre class="prettyprint lang-c">
+#include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 
 int main(void){
@@ -85,13 +109,17 @@ int main(void){
 	}
 }
 </pre>
-                <p>프로그램을 보면 알수 있듯이 mode 변수가 들어갈 곳에 비트 연산으로 여러가지를 한번에 체크할 수 있습니다. 하나씩만 체크할 필요는 없어요.</p></div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+
+<p>프로그램을 보면 알수 있듯이 mode 변수가 들어갈 곳에 비트 연산으로 여러가지를 한번에 체크할 수 있습니다. 하나씩만 체크할 필요는 없어요.</p>
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

@@ -1,21 +1,19 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>Setting up NginX for CentOS :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -24,66 +22,114 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
     <![endif]-->
     <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <!--<![endif]-->
 
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">Setting up NginX for CentOS</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><div style="display:none;">title=Setting up NginX for CentOS
-                created=2015-11-25
-            </div>
-                <p>이번 포스트는 CentOS에서 NginX를 설치하는 방법을 알아봅니다.</p>
-                <h2>Download Nginx</h2><p>NginX를 다운로드 받습니다. 다운로드 받고자 하는 디렉토리에서 아래의 커맨드를 실행합니다.</p><pre class="prettyprint lang-sh">$ wget http://nginx.org/download/nginx-1.8.0.tar.gz
+
+
+
+
+<p>이번 포스트는 CentOS에서 NginX를 설치하는 방법을 알아봅니다.</p>
+
+<h2>Download Nginx</h2>
+<p>NginX를 다운로드 받습니다. 다운로드 받고자 하는 디렉토리에서 아래의 커맨드를 실행합니다.</p>
+<pre class="prettyprint lang-sh">
+$ wget http://nginx.org/download/nginx-1.8.0.tar.gz
 $ tar -xvf nginx-1.8.0.tar.gz
 </pre>
-                <h2>Test Configuration</h2>
-                <p>우선 NginX가 설치 가능한 환경인지 테스트를 해봅니다. 아래의 커맨드를 실행하세요.</p>
-<pre class="prettyprint lang-sh">$ cd nginx-1.8.0
+
+<h2>Test Configuration</h2>
+
+<p>우선 NginX가 설치 가능한 환경인지 테스트를 해봅니다. 아래의 커맨드를 실행하세요.</p>
+
+<pre class="prettyprint lang-sh">
+$ cd nginx-1.8.0
 $ ./configure
 </pre>
-                <p><span class="command">./configure</span> 실행시 빌드가 가능한 상태인지 체크를 하게 되는데 여기서 누락된 모듈이 있으면 콘솔로 출력 해줍니다. 콘솔로 출력된 해당 모듈을 옵션으로 제외를 시키던지 또는 설치하라는 안내문구가 출력되는데 이 부분을 모두 처리하고 다음 단계로 갑니다.</p>
-                <div class="green"><p><strong><i class="fa fa-check fa-lg"></i> TIP.</strong> 포스트 작성중에는 <span class="command">PCRE</span>가 없었기 때문 해당 부분을 처리해야 했습니다.</p><p>PCRE는 <a href="http://www.pcre.org/">http://www.pcre.org/</a> 에서 관리하고 있는데 여기서 Download 부분을 보면 됩니다. 현재 가장 최신 버전은 8.37 버전인듯 하네요.</p><pre class="prettyprint lang-sh">$ wget http://sourceforge.net/projects/pcre/files/pcre/8.37/pcre-8.37.tar.gz
+
+<p><span class="command">./configure</span> 실행시 빌드가 가능한 상태인지 체크를 하게 되는데 여기서 누락된 모듈이 있으면 콘솔로 출력 해줍니다. 콘솔로 출력된 해당 모듈을 옵션으로 제외를 시키던지 또는 설치하라는 안내문구가 출력되는데 이 부분을 모두 처리하고 다음 단계로 갑니다.</p>
+
+<div class="green">
+<p><strong><i class="fa fa-check fa-lg"></i> TIP.</strong> 포스트 작성중에는 <span class="command">PCRE</span>가 없었기 때문 해당 부분을 처리해야 했습니다.</p>
+<p>PCRE는 <a href="http://www.pcre.org/">http://www.pcre.org/</a> 에서 관리하고 있는데 여기서 Download 부분을 보면 됩니다. 현재 가장 최신 버전은 8.37 버전인듯 하네요.</p>
+<pre class="prettyprint lang-sh">
+$ wget http://sourceforge.net/projects/pcre/files/pcre/8.37/pcre-8.37.tar.gz
 $ tar -xvf pcre-8.37.tar.gz
-</pre><p>ftp와 소스 포지 미러를 제공하는데 소스 포지에서 내려 받아서 했습니다. 그 이후 압축을 해제하시면 설치 끝!</p><p>다시 한번 nginx-1.8.0/configure를 실행시켜봤습니다다. <span class="command">--with-pcre</span> 옵션에는 위에서 설치한 pcre의 위치를 잡아줍니다. 아래처럼 실행하면 됩니다.</p><pre class="prettyprint lang-sh">$ ./configure --with-pcre=&lt;path&gt;
-</pre></div>
-                <h2>build make file</h2><p><span class="command">./configure</span>에서 에러가 나지 않는다면 make 파일을 생성해줍니다. 그럼 다음처럼 설치를 진행합니다.</p><pre class="prettyprint lang-sh">$ make
+</pre>
+<p>ftp와 소스 포지 미러를 제공하는데 소스 포지에서 내려 받아서 했습니다. 그 이후 압축을 해제하시면 설치 끝!</p>
+<p>다시 한번 nginx-1.8.0/configure를 실행시켜봤습니다다. <span class="command">--with-pcre</span> 옵션에는 위에서 설치한 pcre의 위치를 잡아줍니다. 아래처럼 실행하면 됩니다.</p>
+<pre class="prettyprint lang-sh">
+$ ./configure --with-pcre=&lt;path&gt;
+</pre>
+</div>
+
+<h2>build make file</h2>
+<p><span class="command">./configure</span>에서 에러가 나지 않는다면 make 파일을 생성해줍니다. 그럼 다음처럼 설치를 진행합니다.</p>
+<pre class="prettyprint lang-sh">
+$ make
 $ sudo make install
 </pre>
-                <p>설치를 끝냈다면 기본적인 NginX의 설치 위치는 <span class="command">/usr/local/nginx</span> 입니다.</p>
-                <h2>Handling NginX</h2><p>기본적인 NginX 사용법을 알아봅니다. 우선 아래와 같은 커맨드로 NginX를 구동할 수 있습니다.</p><pre class="prettyprint lang-sh">$ sudo /usr/local/nginx/sbin/nginx
-</pre><p>메뉴얼이 필요하다면 <span class="command">-?</span> 옵션을 주면 됩니다. 자주 쓰이는 옵션은 <span class="command">-s</span>인데 이것은 다음처럼 사용합니다.</p><pre class="prettyprint lang-sh">$ nginx -s stop # 빠른 종료. (강제로 Kill)
+
+<p>설치를 끝냈다면 기본적인 NginX의 설치 위치는 <span class="command">/usr/local/nginx</span> 입니다.</p>
+
+<h2>Handling NginX</h2>
+<p>기본적인 NginX 사용법을 알아봅니다. 우선 아래와 같은 커맨드로 NginX를 구동할 수 있습니다.</p>
+<pre class="prettyprint lang-sh">
+$ sudo /usr/local/nginx/sbin/nginx
+</pre>
+<p>메뉴얼이 필요하다면 <span class="command">-?</span> 옵션을 주면 됩니다. 자주 쓰이는 옵션은 <span class="command">-s</span>인데 이것은 다음처럼 사용합니다.</p>
+<pre class="prettyprint lang-sh">
+$ nginx -s stop # 빠른 종료. (강제로 Kill)
 $ nginx -s quit # 부드러운 종료. (기존 처리 내역이 있다면 처리하고 종료)
 $ nginx -s reopen # 로그 파일들을 다시 오픈.
 $ nginx -s reload # 환경 설정 파일을 다시 읽음.
-</pre><p>그리고 <span class="command">-V</span> 옵션을 사용하면 nginx 빌드할때 사용했던 옵션을 알 수 있습니다.</p>
-                <h2>Nginx Configration</h2><p>NginX의 환경설정은 기본 위치일때 <span class="command">/usr/local/nginx/conf/nginx.conf</span> 입니다. 파일을 열어보면 기본 root 설정이 html로 되어 있는데 이것의 위치는 <span class="command">/usr/local/nginx/html</span> 입니다. 더 자세한 설명은 <a href="https://www.nginx.com/resources/wiki/start/topics/examples/full/">https://www.nginx.com/resources/wiki/start/topics/examples/full/</a>을 참조하세요.</p>
-                <h2>Simple Example</h2><p>가상 호스트를 적용하는법을 간단하게 하나 투척하고 갑니다.</p><pre class="prettyprint lang-sh">server {
+</pre>
+<p>그리고 <span class="command">-V</span> 옵션을 사용하면 nginx 빌드할때 사용했던 옵션을 알 수 있습니다.</p>
+
+<h2>Nginx Configration</h2>
+<p>NginX의 환경설정은 기본 위치일때 <span class="command">/usr/local/nginx/conf/nginx.conf</span> 입니다. 파일을 열어보면 기본 root 설정이 html로 되어 있는데 이것의 위치는 <span class="command">/usr/local/nginx/html</span> 입니다. 더 자세한 설명은 <a href="https://www.nginx.com/resources/wiki/start/topics/examples/full/">https://www.nginx.com/resources/wiki/start/topics/examples/full/</a>을 참조하세요.</p>
+
+<h2>Simple Example</h2>
+<p>가상 호스트를 적용하는법을 간단하게 하나 투척하고 갑니다.</p>
+<pre class="prettyprint lang-sh">
+server {
     listen &lt;port&gt;; # ex. 80
     server_name &lt;your domain&gt;; # ex. blog.jdm.kr
     root &lt;rootDir&gt;; # ex. /home/blog
@@ -109,16 +155,26 @@ $ nginx -s reload # 환경 설정 파일을 다시 읽음.
     }
 }
 </pre>
-                <div class="green"><p><strong><i class="fa fa-check fa-lg"></i> TIP.</strong> <span class="command">location</span> 구문은 선언한 순서대로 동작하지 않고 우선 순위대로 동작합니다. 해당 부분에 대해서는 <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#location">http://nginx.org/en/docs/http/ngx_http_core_module.html#location</a>를 확인하세요.</p></div>
-                <h2>Etc.</h2><p>부가적이긴 하지만 아래의 옵션을 켜주면 좋습니다.</p><pre class="console">gzip on; # 패킷 압축 사용
-server_tokens off; # 응답 헤더의 NginX 버전 감춤
-</pre></div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+
+<div class="green">
+<p><strong><i class="fa fa-check fa-lg"></i> TIP.</strong> <span class="command">location</span> 구문은 선언한 순서대로 동작하지 않고 우선 순위대로 동작합니다. 해당 부분에 대해서는 <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#location">http://nginx.org/en/docs/http/ngx_http_core_module.html#location</a>를 확인하세요.</p>
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+
+<h2>Etc.</h2>
+<p>부가적이긴 하지만 아래의 옵션을 켜주면 좋습니다.</p>
+<pre class="console">
+gzip on; # 패킷 압축 사용
+server_tokens off; # 응답 헤더의 NginX 버전 감춤
+</pre>
+
+
+</div>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

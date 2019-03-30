@@ -1,6 +1,7 @@
 ###info
 title=off the apache2 test page on the CentOS 6.x
 created=2014-12-22
+ad=true
 ###
 #p apache2에서 여러개의 가상호스트를 사용하고 있는데, 가끔 특정한(?) 이유로 인해 apache2 test page가 나오는 경우가 있다. 이럴때는 {@/etc/httpd/conf.d/weblcome.conf} 내의 모든 내용을 주석처리하면 된다. (CentOS 6.x 기준)
 ###code.xml

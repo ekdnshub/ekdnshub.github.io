@@ -1,6 +1,7 @@
 ###info
 title=Oracle Replace() & Regexp_replace() 의 차이
 created=2014-10-07
+ad=true
 ###
 
 #p 오라클에서 정규식으로 처리해야 할 경우가 종종 있다. 예를 들자면 date 타입이 아니라 char 타입으로 박혀 있는 날짜 데이터라던가... 하던것들을 편집해야할 때가 있다. 예를 들자면 다음과 같다.

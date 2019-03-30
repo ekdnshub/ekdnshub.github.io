@@ -1,6 +1,7 @@
 ###info
 title=AngularJS ngRepeat dupes Error
 created=2014-11-03
+ad=true
 ###
 #p angularJS를 테스트 해보다가 ng-repeat를 쓸일이 생겼는데 같은 값이 배열에 입력 되면 "dupes"라는 오류가 났다. 이 문제를 고치려고 구글링을 해보니 {$https://docs.angularjs.org/error/ngRepeat/dupes}에서 해결법을 제시해 줬다.
 

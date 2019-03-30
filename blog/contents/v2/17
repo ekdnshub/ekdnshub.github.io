@@ -1,6 +1,7 @@
 ###info
 title=MongoDB Document & Collection & Insert
 created=2014-10-13
+ad=true
 ###
 
 #p {$/blog/16|저번 포스팅}에서 몽고DB의 설치 및 간단한 환경 구성과 데이터베이스 생성까지 해봤다. 이번엔 Windows7 상에서 기본적인 쿼리를 사용해보려 한다.

@@ -1,6 +1,7 @@
 ###info
-title=
-created=
+title=스칼라 문법 요약(Scala Cheatsheets)
+created=2015-03-11
+ad=true
 ###
 
 #p  간단하게 스칼라 기본 문법에 대해 알아보고자 합니다. 이 포스팅은 {$https://creativecommons.org/licenses/by-sa/3.0/deed.ko|CC-BY-SA 3.0 License}를 준수합니다. 원문 링크는 {$http://docs.scala-lang.org/cheatsheets} 입니다. 작성자는 Brendan T. O'Connor씨에요. 이 포스팅 문서는 원문 링크의 내용 번역 및 자의적 분석도 포함합니다. {!번역이나 분석의 오류가 발견되면 댓글로 남겨주세요.} 그럼 시작합니다. :3

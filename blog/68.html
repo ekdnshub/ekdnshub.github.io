@@ -1,21 +1,19 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>자바 리플렉션 테스트(Java Reflection Test) :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -24,64 +22,76 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
     <![endif]-->
     <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <!--<![endif]-->
 
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">자바 리플렉션 테스트(Java Reflection Test)</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><div style="display:none;">title=자바 리플렉션 테스트(Java Reflection Test)
-                created=2015-02-04
-            </div><p>자바 기본기 공부가 필요하다 생각 되서 리플렉션을 연습하기 위해 짤막한 예제를 하나 만들어서 돌렸다. 이걸 어떻게 응용을 할까 고민이 된다.</p>
-<pre class="prettyprint lang-java">/* 리플렉션 테스트 (ReflectTest.java) */
+
+
+
+<p>자바 기본기 공부가 필요하다 생각 되서 리플렉션을 연습하기 위해 짤막한 예제를 하나 만들어서 돌렸다. 이걸 어떻게 응용을 할까 고민이 된다.</p>
+
+<pre class="prettyprint lang-java">
+/* 리플렉션 테스트 (ReflectTest.java) */
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class ReflectTest {
-	public static void main(String[] args) throws ClassNotFoundException
+	public static void main(String[] args) throws ClassNotFoundException 
 	{
 		// 클래스 정보를 가져온다.
 		Class&lt;?&gt; cls = Class.forName("ReflectCls");
-
+		
 		// 가지고 있는 멤버 변수를 출력해보자. public 멤버 변수만 가져온다.
 		Field[] fields = cls.getFields();
 		for( Field field : fields ){
 			System.out.println(field.getType().getName()+" "+field.getName());
 		}
 		System.out.println("--------------------------------------------");
-
+		
 		// 가지고 있는 메소드의 이름을 출력 해보자. public 메소드만 가져온다.
 		Method[] methods = cls.getMethods();
 		StringBuffer sb = new StringBuffer();
 		for( Method method : methods ){
 			sb.append(method.getName());
-
+			
 			// 메소드 인자가 있다면 출력하자.
 			Class&lt;?&gt;[] argTypes = method.getParameterTypes();
 			sb.append("(");
@@ -94,79 +104,81 @@ public class ReflectTest {
 				}
 			}
 			sb.append(")");
-
+			
 			// 리턴 인자를 출력하자.
 			Class&lt;?&gt; returnType = method.getReturnType();
 			sb.append(" : " + returnType.getName());
-
+			
 			System.out.println(sb);
 			sb.setLength(0);
 		}
 		System.out.println("--------------------------------------------");
-
+		
 		// 가지고 있는 메소드를 써보자
 		try {
 			// 객체 하나 생성
 			Object obj = cls.newInstance();
-
+			
 			// sum 메소드를 가져와서 합 구하기 (인자 파라미터 나열)
 			Method method = cls.getMethod("sum", int.class, int.class);
 			System.out.println(method.invoke(obj, 1, 2));
-
+			
 			// sum 메소드를 가져와서 합 구하기 (클래스 배열 파라미터)
 			Class[] param = {int.class, int.class};
 			method = cls.getMethod("sum", param);
-			System.out.println(method.invoke(obj, 5, 2));
-
+			System.out.println(method.invoke(obj, 5, 2)); 
+			
 			// sum 메소드를 가져와서 합 구하기 (다이렉트)
 			method = cls.getMethod("sum", new Class[]{int.class, int.class});
-			System.out.println(method.invoke(obj, new Object[]{1, 5}));
-
+			System.out.println(method.invoke(obj, new Object[]{1, 5})); 
+			
 			// sub static 메소드를 가져와서 차이 구하기
 			method = cls.getMethod("sub", int.class, int.class);
 			// static 메소드는 클래스 객체가 필요 없다.
-			System.out.println(method.invoke(null, 3,1 ));
+			System.out.println(method.invoke(null, 3,1 )); 
 			// 있어도 상관은 없다.
 			System.out.println(method.invoke(obj,  3,1 ));
 			System.out.println(method.invoke(cls,  3,1 ));
-
+			
 			// 오버로딩 - 매개 인자가 없는 메소드 실행하기
 			method = cls.getMethod("getArrayList", (Class&lt;?&gt;[]) null);
 			method.invoke(obj);
 			method = cls.getMethod("getArrayList");
 			method.invoke(obj);
-
+			
 			// 오버로딩 - 매개 인자가 있는 메소드 실행하기
 			method = cls.getMethod("getArrayList", new Class[]{int.class});
 			method.invoke(obj, new Object[]{1});
-
+			
 			// 클래스를 형변환해서 테스트
 			ReflectCls c = (ReflectCls)obj;
 			System.out.println(c.sum(5, 2));
 			System.out.println(c.sub(5, 2));
 			System.out.println(ReflectCls.sub(5, 2));
-
+			
 
 		} catch (
-				InstantiationException   | IllegalAccessException |
-				NoSuchMethodException    | SecurityException |
+				InstantiationException   | IllegalAccessException | 
+				NoSuchMethodException    | SecurityException | 
 				IllegalArgumentException | InvocationTargetException e
-				)
+				) 
 		{
 			e.printStackTrace();
 		}
 	}
-
+	
 }
-</pre><pre class="prettyprint lang-java">/* 리플렉션 테스트 (ReflectCls.java) */
+</pre>
+<pre class="prettyprint lang-java">
+/* 리플렉션 테스트 (ReflectCls.java) */
 import java.util.ArrayList;
 
 public class ReflectCls {
-
+	
 	private String privateStr;
 	protected String protectedStr;
 	public String publicStr;
-
+	
 	public ArrayList&lt;String&gt; getArrayList(){
 		System.out.println("인자 없는 getArrayList");
 		return new ArrayList&lt;String&gt;();
@@ -174,7 +186,7 @@ public class ReflectCls {
 	public ArrayList&lt;String&gt; getArrayList(int a){
 		System.out.println("인자 있는 getArrayList");
 		return new ArrayList&lt;String&gt;();
-	}
+	}	
 	public String[] getStringArray(){
 		return new String[5];
 	}
@@ -187,7 +199,9 @@ public class ReflectCls {
 	private void setStringArray(String[] a){
 	}
 }
-</pre><pre class="console">java.lang.String publicStr
+</pre>
+<pre class="console">
+java.lang.String publicStr
 --------------------------------------------
 sum(int val, int val) : int
 getArrayList() : java.util.ArrayList
@@ -216,13 +230,16 @@ wait() : void
 7
 3
 3
-</pre></div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+</pre>
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

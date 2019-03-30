@@ -1,3 +1,9 @@
+###info
+title=MongoDB CRUD 동작의 이해
+created=2014-10-13
+ad=true
+###
+
 #p 이번 포스팅은 몽고DB의 Document 및 Collection의 정의 그리고 CRUD 동작에 대해 알아보고자 합니다.
 
 #h2 Document & Collection 정의

@@ -1,21 +1,19 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>Sublime Text 2 :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -24,45 +22,69 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
     <![endif]-->
     <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <!--<![endif]-->
 
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">Sublime Text 2</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><div style="display:none;">title=Sublime Text 2
-                created=2015-10-23
-            </div>
-                <p>불과 얼마 전에 <a href="/blog/201">TextWrangler</a>에 대해 포스팅을 했었는데 이번에도 Mac을 위한 텍스트 에디터인 Sublime Text 2에 대해 소개하고자 합니다.</p><p>사실 TextWrangler도 좋은 에디터이긴 하지만 서브라임 텍스트2<span class="refer">Sublime Text 2</span>도 만만치 않게 좋은 에디터입니다. 요즘은 이것을 사용하고 있어요.</p>
-                <h2>공식 홈페이지</h2><p>서브라임 텍스트2의 공식 홈페이지는 <a href="http://www.sublimetext.com/">http://www.sublimetext.com/</a>입니다. 이곳에서 서브라임 텍스트2를 다운로드 받을수 있어요.</p>
-                <h2>라이센스</h2><p>라이센스가 걱정이 되어 검색을 좀 했더니 다음과 같은 내용이 있었습니다.</p><blockquote><p>Sublime Text 2 may be downloaded and evaluated for free, however a license must bepurchased for continued use. There is currently no enforced time limit for the evaluation.</p><cite><a href="http://www.sublimetext.com/2">http://www.sublimetext.com/2</a></cite></blockquote><p>일단 무료라는 점이지만 지속적인 사용을 하려면 구매를 하라고 되어 있네요. 구매를 하지 않으면 파일을 Save 할때마다 가끔 결제를 유도하는 윈도우가 나옵니다.</p>
-                <h2>단축키(hot key)</h2><p>단축키는 공식 홈페이지에서도 소개가 되어 있지만 개인적으로 자주 써볼만한 커맨드를 정리해 봤습니다.</p>
-<pre class="console">* Command + P
+
+
+
+
+<p>불과 얼마 전에 <a href="/blog/201">TextWrangler</a>에 대해 포스팅을 했었는데 이번에도 Mac을 위한 텍스트 에디터인 Sublime Text 2에 대해 소개하고자 합니다.</p>
+<p>사실 TextWrangler도 좋은 에디터이긴 하지만 서브라임 텍스트2<span class="refer">Sublime Text 2</span>도 만만치 않게 좋은 에디터입니다. 요즘은 이것을 사용하고 있어요.</p>
+
+<h2>공식 홈페이지</h2>
+<p>서브라임 텍스트2의 공식 홈페이지는 <a href="http://www.sublimetext.com/">http://www.sublimetext.com/</a>입니다. 이곳에서 서브라임 텍스트2를 다운로드 받을수 있어요.</p>
+
+<h2>라이센스</h2>
+<p>라이센스가 걱정이 되어 검색을 좀 했더니 다음과 같은 내용이 있었습니다.</p>
+<blockquote>
+<p>Sublime Text 2 may be downloaded and evaluated for free, however a license must bepurchased for continued use. There is currently no enforced time limit for the evaluation.</p>
+<cite><a href="http://www.sublimetext.com/2">http://www.sublimetext.com/2</a></cite>
+</blockquote>
+<p>일단 무료라는 점이지만 지속적인 사용을 하려면 구매를 하라고 되어 있네요. 구매를 하지 않으면 파일을 Save 할때마다 가끔 결제를 유도하는 윈도우가 나옵니다.</p>
+
+<h2>단축키(hot key)</h2>
+<p>단축키는 공식 홈페이지에서도 소개가 되어 있지만 개인적으로 자주 써볼만한 커맨드를 정리해 봤습니다.</p>
+
+<pre class="console">
+* Command + P
 접두사 #을 붙이면 파일 내부 일치하는 내용 찾기( #import )
 접두사 :을 붙이면 해당 라인으로 이동( :20 )
 
@@ -84,13 +106,16 @@ Replace 명령, 정규식으로도 바꿀 수 있다.
 * Command + [ , Command + ]
 선택된 블록 들여쓰기/내어쓰기
 </pre>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

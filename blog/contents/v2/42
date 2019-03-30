@@ -1,5 +1,6 @@
 ###info
 title=DyGraphs 테스트
 created=2014-12-04
+ad=false
 ###
 #p {@Dygraphs}라는 라이브러리가 있네요. {@d3.js}처럼 차트를 그리게 도와주는 자바스크립트 라이브러리입니다. 꽤 간결하고 심플하게 사용할 수 있어서 좋네요. {$http://lab.jdm.kr/dygraphs.html|이곳}을 눌러서 확인해보세요. ^^

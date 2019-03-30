@@ -1,6 +1,7 @@
 ###info
-title=
-created=
+title=jQuery 테이블 데이터 정렬(using tablesorter)
+created=2015-03-11
+ad=true
 ###
 
 #p  이번 포스팅은 jquery 테이블 정렬할 때 간편하게 쓸만한 플러그인을 소개하려고 합니다. 이름은 {!tablesorter}에요. 라이센스는 MIT, GPL을 사용하고 있네요. 
@@ -57,9 +58,9 @@ $(document).ready(function(){
 ###
 #h4 조금 더 자세히 원한다면...
 ###p
-만약 정적 테이블이 아닌 ajax를 사용한 동적 테이블이라고 한다면 다음 링크를 검토 해보시면 됩니다.\n
-{$http://tablesorter.com/docs/example-ajax.html}\n
-다른 예제를 보고 싶으시면 다음 링크를 확인하세요.\n
+만약 정적 테이블이 아닌 ajax를 사용한 동적 테이블이라고 한다면 다음 링크를 검토 해보시면 됩니다.
+{$http://tablesorter.com/docs/example-ajax.html}
+다른 예제를 보고 싶으시면 다음 링크를 확인하세요.
 {$http://tablesorter.com/docs/#Examples}
 ###
 #h4 Tip

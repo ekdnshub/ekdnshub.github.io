@@ -1,6 +1,7 @@
 ###info
 title=Tomcat document root 설정
 created=2015-03-17
+ad=true
 ###
 #p  요즘 톰캣으로 이것저것 하고 있는데 설정 부분은 매번 까먹는 듯 합니다. 이번엔 톰캣 Document Root 설정 방법에 대해 알아봅시다. {=이 포스팅에서는 tomcat7을 기준으로 하고 있습니다.} 
 #h4 server.xml

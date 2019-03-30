@@ -1,6 +1,7 @@
 ###info
 title=Esper + d3.js + socket.io + Node.js
 created=2014-10-16
+ad=false
 ###
 #p 아쉽게도 에스퍼로 구축된 테스트 페이지는 에스퍼를 구동하던 스프링 컨테이너를 내림으로 인해 더 이상 접근이 되지 않습니다. TT
 #line

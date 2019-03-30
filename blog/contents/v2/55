@@ -1,6 +1,7 @@
 ###info
 title=Oracle leading hint
 created=2015-01-14
+ad=true
 ###
 #p Oracle LEADING 힌트를 써보게 되었다. 음... 간단한 사용법은 아래처럼..
 ###code.sql

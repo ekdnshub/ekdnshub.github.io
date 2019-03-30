@@ -1,6 +1,7 @@
 ###info
 title=텍스트 기반 웹 게임 소개(a Dark Room, Candy box)
 created=2015-02-13
+ad=false
 ###
 #p 간단한 웹게임이 하나 있어서 공유하고자 합니다. 다크 룸이라는 게임인데요. 그냥 부연 설명은 필요가 없을 것 같고... 해보시면 될 것 같네요.
 #p {$http://adarkroom.doublespeakgames.com/|a Dark Room}

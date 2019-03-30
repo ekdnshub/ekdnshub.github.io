@@ -1,6 +1,7 @@
 ###info
 title=Install Oracle Instant Client
 created=2014-11-20
+ad=true
 ###
 #p 오라클을 매번 FULL로 내려 받는것이 귀찮았는데, 최근에서야 인스턴트 클라이언트가 있다는 걸 알게 됐다. -_- 진즉에 알았더라면 정말 좋았을 것을 아쉬운 느낌이다.
 #p 이번 포스팅은 oracle instant client를 설치하는 방법에 대해 알아보고자 한다. 한번 내려 받으면 포터블하게 사용도 가능하니까 알아두면 좋을 것 같다!

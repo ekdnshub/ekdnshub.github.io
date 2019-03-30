@@ -1,5 +1,6 @@
 ###info
 title=구글 다트(Google Dart)를 공부 해보자!
 created=2014-11-06
+ad=false
 ###
 #p 몇년 전에 언뜻 Google {$https://www.dartlang.org/|Dart}라는 언어에 대해 본 적이 있었습니다. 최근에 어쩌다 다시 한번 Dart를 보게 됐는데 흥미롭네요. 한번 공부해두면 좋을 것 같아서 틈틈히 Dart로 페이지를 만들어볼까 합니다. ^^

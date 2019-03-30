@@ -1,6 +1,7 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
 	<head>
+    <title>sbt 설치하기(Installing Simple Build Tool) :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
@@ -9,12 +10,9 @@
     <meta name="author" content="Jung DongMin">
     
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
     
     <!-- # jquery -->
     <!--[if lte IE 9]>
@@ -24,25 +22,30 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
     <![endif]-->
     <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <!--<![endif]-->
-    
 
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
+
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
 	</head>
 	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
 		<!-- noscript -->
 		<noscript>
       이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
@@ -54,11 +57,27 @@
 			<div id="left_wrap" class="col-md-10 col-md-offset-1">
 				<!-- 블로그 전문 -->
 				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">sbt 설치하기(Installing Simple Build Tool)</h1>
 					<!-- 본문 -->
-					<div id="content"><div style="display:none;">title=sbt 설치하기(Installing Simple Build Tool)
-created=2015-03-13
-</div>
-<p>스칼라를 위한 빌드 툴이 있습니다. 심플 빌드 툴(simple build tool, 이하 sbt)이라는 이름을 가진 라이브러리입니다. 이 포스팅은 sbt를 설치하는 방법에 대해 다루고자 합니다. 추후에 스칼라를 공부하다보면 sbt라는 것이 자주 눈에 띄는데 이참에 설치를 해두는 것도 나쁘지 않을 것 같네요!</p><h4>홈페이지(HomePage)</h4><p>sbt의 상세한 정보가 필요하면 <a href="http://www.scala-sbt.org">http://www.scala-sbt.org</a>를 참조하세요.</p><h4>다운로드(download)</h4><p>sbt는 <a href="http://www.scala-sbt.org/download.html">이곳</a>에서 다운로드 할 수 있습니다. 각각의 OS에 맞는 것을 받으시면 됩니다.</p><h4>설치(Install)</h4><p>OS에 맞게 설치하는 법을 알아봅시다.</p><h5>Windows</h5><p>다운로드 받은 파일을 실행해 봅시다. 별다른 옵션 체크 없이 라이센스 동의후 계속 Next를 클릭하면 됩니다. <span class="refer"> 저의 실행 환경은 Windows7(32bit), 파일명은 SBT-0.13.7.MSI이였습니다. </span></p><p>설치된 디렉토리로 가보니 sbt.bat 라는 파일이 있네요. 이 파일을 실행 시키면 다음처럼 콘솔이 뜨며 뭔가를 입력할 수 있게 됩니다. <span class="refer"> C:\Program Files\sbt\bin\ 에 있었습니다. </span></p><pre class="console">Getting org.fusesource.jansi jansi 1.11 ...
+					<div id="content">
+
+
+
+
+
+<p>스칼라를 위한 빌드 툴이 있습니다. 심플 빌드 툴(simple build tool, 이하 sbt)이라는 이름을 가진 라이브러리입니다. 이 포스팅은 sbt를 설치하는 방법에 대해 다루고자 합니다. 추후에 스칼라를 공부하다보면 sbt라는 것이 자주 눈에 띄는데 이참에 설치를 해두는 것도 나쁘지 않을 것 같네요!</p>
+<h4>홈페이지(HomePage)</h4>
+<p>sbt의 상세한 정보가 필요하면 <a href="http://www.scala-sbt.org">http://www.scala-sbt.org</a>를 참조하세요.</p>
+<h4>다운로드(download)</h4>
+<p>sbt는 <a href="http://www.scala-sbt.org/download.html">이곳</a>에서 다운로드 할 수 있습니다. 각각의 OS에 맞는 것을 받으시면 됩니다.</p>
+<h4>설치(Install)</h4>
+<p>OS에 맞게 설치하는 법을 알아봅시다.</p>
+<h5>Windows</h5>
+<p>다운로드 받은 파일을 실행해 봅시다. 별다른 옵션 체크 없이 라이센스 동의후 계속 Next를 클릭하면 됩니다. <span class="refer"> 저의 실행 환경은 Windows7(32bit), 파일명은 SBT-0.13.7.MSI이였습니다. </span></p>
+<p>설치된 디렉토리로 가보니 sbt.bat 라는 파일이 있네요. 이 파일을 실행 시키면 다음처럼 콘솔이 뜨며 뭔가를 입력할 수 있게 됩니다. <span class="refer"> C:\Program Files\sbt\bin\ 에 있었습니다. </span></p>
+<pre class="console">
+Getting org.fusesource.jansi jansi 1.11 ...
 downloading https://repo1.maven.org/maven2/org/fusesource/jansi/jansi/1.11/jansi-1.11.jar ...
 [SUCCESSFUL ] org.fusesource.jansi#jansi;1.11!jansi.jar (1138ms)
 :: retrieving :: org.scala-sbt#boot-jansi
@@ -83,16 +102,35 @@ confs: [default]
 5 artifacts copied, 0 already retrieved (24459kB/50ms)
 [info] Set current project to bin (in build file:/C:/Program%20Files/sbt/bin/)
 &gt;
-</pre><p>help 를 입력해보니 여러가지 명령어와 함께 사용법이 간략히 출력됩니다. 이제 윈도우의 명령 프롬프트 창에서 sbt를 입력하면 언제든 sbt를 실행 할 수 있습니다.</p><h4>Hello World!</h4><p>설치를 끝냈으니 이번엔 실행을 해봅시다.</p><h5>Windows</h5><p>테스트할 디렉토리를 만들고 이동합시다.</p><pre class="console">mkdir hello
+</pre>
+<p>help 를 입력해보니 여러가지 명령어와 함께 사용법이 간략히 출력됩니다. 이제 윈도우의 명령 프롬프트 창에서 sbt를 입력하면 언제든 sbt를 실행 할 수 있습니다.</p>
+<h4>Hello World!</h4>
+<p>설치를 끝냈으니 이번엔 실행을 해봅시다.</p>
+<h5>Windows</h5>
+<p>테스트할 디렉토리를 만들고 이동합시다.</p>
+<pre class="console">
+mkdir hello
 cd hello
-</pre><p>이번엔 간단히 사용할 스칼라 파일을 만듭시다. 아래 커맨드를 입력하면 메모장이 뜹니다.</p><pre class="console">start notepad hello.scala
-</pre><p>hello.scala 파일 내부에 다음처럼 코드를 입력합시다.</p><pre class="prettyprint lang-scala/* hello.scala */">object Hello {
+</pre>
+<p>이번엔 간단히 사용할 스칼라 파일을 만듭시다. 아래 커맨드를 입력하면 메모장이 뜹니다.</p>
+<pre class="console">
+start notepad hello.scala
+</pre>
+<p>hello.scala 파일 내부에 다음처럼 코드를 입력합시다.</p>
+<pre class="prettyprint lang-scala/* hello.scala */">
+object Hello {
 def main(args: Array[String]) = println("Hello World!")
 }
-</pre><p>코드를 저장한 뒤에 다시 콘솔창으로 돌아가서 다음처럼 입력합니다.</p><pre class="console">sbt
+</pre>
+<p>코드를 저장한 뒤에 다시 콘솔창으로 돌아가서 다음처럼 입력합니다.</p>
+<pre class="console">
+sbt
 [info] Set current project to hello (in build file:/C:/Users/Jung/hello/)
 &gt;
-</pre><p>sbt를 입력하면 해당 디렉토리를 세팅한다는 알림 문구가 출력됩니다. 이 상태에서 run을 입력하면 아래처럼 콘솔 화면이 나오며 Hello World!가 출력됩니다.</p><pre class="console">&gt; run
+</pre>
+<p>sbt를 입력하면 해당 디렉토리를 세팅한다는 알림 문구가 출력됩니다. 이 상태에서 run을 입력하면 아래처럼 콘솔 화면이 나오며 Hello World!가 출력됩니다.</p>
+<pre class="console">
+&gt; run
 [info] Updating {file:/C:/Users/Jung/hello/}hello...
 [info] Resolving org.scala-lang#scala-library;2.10.4 ...
 [info] Resolving org.scala-lang#scala-compiler;2.10.4 ...
@@ -104,7 +142,12 @@ def main(args: Array[String]) = println("Hello World!")
 [info] Running Hello
 Hello World!
 [success] Total time: 2 s, completed 2015. 3. 12 오후 10:42:24
-</pre><h4>마무리</h4><p>sbt 설치하는 법에 대해 알아봤습니다. 이제 스칼라의 세계로 더욱 더 깊이 빠져들 수 있겠네요! :3</p>
+</pre>
+<h4>마무리</h4>
+<p>sbt 설치하는 법에 대해 알아봤습니다. 이제 스칼라의 세계로 더욱 더 깊이 빠져들 수 있겠네요! :3</p>
+
+
+
 
 </div>
 				</article>
@@ -112,7 +155,7 @@ Hello World!
 			<!-- // content 영역 -->
 		</div>
 		<!-- # code highlight -->
-		<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
 		<script src="/lib/scripts/footer.js"></script>
 	</body>
 </html>

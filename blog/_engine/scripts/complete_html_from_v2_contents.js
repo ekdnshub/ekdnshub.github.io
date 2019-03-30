@@ -25,28 +25,46 @@ function extractMeta(key, body) {
 }
 
 var number = process.argv[2];
+var newPost = process.argv[3];
 
-var v2content = fs.readFileSync(V2_CONTENTS_PATH + number, "utf8");
-var title = extractMeta("title", v2content);
-var ad = extractMeta("ad", v2content)
+var completeHtml = function(number) {
+    console.log(`${number}번 콘텐츠 html 변환 시작`);
+    var v2content = fs.readFileSync(V2_CONTENTS_PATH + number, "utf8");
+    var title = extractMeta("title", v2content);
+    var ad = extractMeta("ad", v2content);
+    if (ad !== "true" && ad !== "false") {
+        throw "ad 값을 확인하세요.";
+    }
 
-var completeHtmlPath = HTML_PATH + number + ".html";
-try {
-    console.log("기존 파일 삭제 중...")
-    fs.unlinkSync(completeHtmlPath);
-} catch (e) {
-    console.log("삭제할 html 파일이 없습니다.");
+    var completeHtmlPath = HTML_PATH + number + ".html";
+    try {
+        console.log("기존 파일 삭제 중...")
+        fs.unlinkSync(completeHtmlPath);
+    } catch (e) {
+        console.log("삭제할 html 파일이 없습니다.");
+    }
+
+    var baseHtml = fs.readFileSync(BASE_TEMPLATE, "utf8");
+    var adHtml = fs.readFileSync(AD_TEMPLATE, "utf8");
+
+    var completeHtml = baseHtml.replace("{{{body}}}", owiki.getIns().interpreter(v2content))
+                               .replace(/{{{title}}}/g, title)
+                               .replace("{{{ad}}}", ad === "true" ? adHtml : "");
+
+    console.log("신규 파일 저장 중...");
+    fs.appendFileSync(completeHtmlPath, completeHtml);
+    console.log("신규 파일 저장 완료!")
 }
 
-var baseHtml = fs.readFileSync(BASE_TEMPLATE, "utf8");
-var adHtml = fs.readFileSync(AD_TEMPLATE, "utf8");
+if (number == "all") {
+    var files = fs.readdirSync(V2_CONTENTS_PATH);
+    files.forEach((file) => {
+        completeHtml(file);
+    });
+} else {
+    completeHtml(number);
+}
 
-var completeHtml = baseHtml.replace("{{{body}}}", owiki.getIns().interpreter(v2content))
-                           .replace(/{{{title}}}/g, title)
-                           .replace("{{{ad}}}", ad === "true" ? adHtml : "");
-
-console.log("신규 파일 저장 중...");
-fs.appendFileSync(completeHtmlPath, completeHtml);
-console.log("신규 파일 저장 완료!")
-
-resourcesMinify.getIns().execute("meta");
+if (newPost) {
+    resourcesMinify.getIns().execute("meta");
+}

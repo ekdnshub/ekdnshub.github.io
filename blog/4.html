@@ -1,21 +1,19 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>리눅스 특수 문자 정리(Linux Shell) :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
+    
     <!-- # jquery -->
     <!--[if lte IE 9]>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -24,80 +22,130 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
     <![endif]-->
     <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <!--<![endif]-->
 
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">리눅스 특수 문자 정리(Linux Shell)</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><div style="display:none;">title=리눅스 특수 문자 정리(Linux Shell)
-                created=2014-09-30
-            </div>
-                <p><span class="refer">* 이 포스팅은 네이버 블로그에서 작성(2013.02.19)한 내용을 옮겨온 것입니다.</span></p><p>음, 다른 내용이 아니고 리눅스로 개발할 때 초기 시절 각종 명령어와 쉘스크립트 속에서 허우적거렸던 적이 있었다. 그중에서도 날 멘붕하게 만든것은 다름 아닌 "특수문자" 들이었는데, 이 특수문자라는 녀석들은 각자 고유의 명령이 존재하니 지금 한번 정리해 두고자 한다.</p>
-                <h2>표준 출력</h2><p>표준 출력을 뜻하는 특수 문자는 "&gt;"이다. 이 특수문자를 사용하면 다음과 같은 명령이 가능해진다.</p><pre class="prettyprint lang-sh"># '&gt;' 표준 출력 (new)
+
+
+
+
+<p><span class="refer">* 이 포스팅은 네이버 블로그에서 작성(2013.02.19)한 내용을 옮겨온 것입니다.</span></p>
+<p>음, 다른 내용이 아니고 리눅스로 개발할 때 초기 시절 각종 명령어와 쉘스크립트 속에서 허우적거렸던 적이 있었다. 그중에서도 날 멘붕하게 만든것은 다름 아닌 "특수문자" 들이었는데, 이 특수문자라는 녀석들은 각자 고유의 명령이 존재하니 지금 한번 정리해 두고자 한다.</p>
+
+<h2>표준 출력</h2>
+<p>표준 출력을 뜻하는 특수 문자는 "&gt;"이다. 이 특수문자를 사용하면 다음과 같은 명령이 가능해진다.</p>
+<pre class="prettyprint lang-sh">
+# '&gt;' 표준 출력 (new)
 $ ls &gt; test.txt # 표준 출력을 파일에 기록한다.
-</pre><p>ls 명령어를 통해 출력된 내용을 test.txt 파일에 기록한다. 다만 test.txt 파일은 업데이트가 아닌 새로 작성을 하게 되므로 주의하자. 그 외에도 표준 출력을 두번 연속으로 사용하게 되면 다음처럼 쓰겠다는 이야기다.</p><pre class="prettyprint lang-sh"># '&gt;&gt;' 표준 출력 (append)
+</pre>
+<p>ls 명령어를 통해 출력된 내용을 test.txt 파일에 기록한다. 다만 test.txt 파일은 업데이트가 아닌 새로 작성을 하게 되므로 주의하자. 그 외에도 표준 출력을 두번 연속으로 사용하게 되면 다음처럼 쓰겠다는 이야기다.</p>
+<pre class="prettyprint lang-sh">
+# '&gt;&gt;' 표준 출력 (append)
 $ ls &gt;&gt; test.txt # 표준 출력을 파일 끝에 덧붙인다.
-</pre><p>ls 명령어를 통해 출력된 내용을 test.txt 파일에 <strong>덧붙여</strong> 기록한다.</p>
-                <h2>표준 입력</h2><p>표준 입력을 뜻하는 특수 문자는 "&lt;"이다. 이 특수 문자를 사용하면 다음과 같은 명령이 가능하다.</p><pre class="prettyprint lang-sh"># '&lt;' 표준 입력
+</pre>
+<p>ls 명령어를 통해 출력된 내용을 test.txt 파일에 <strong>덧붙여</strong> 기록한다.</p>
+
+<h2>표준 입력</h2>
+<p>표준 입력을 뜻하는 특수 문자는 "&lt;"이다. 이 특수 문자를 사용하면 다음과 같은 명령이 가능하다.</p>
+<pre class="prettyprint lang-sh">
+# '&lt;' 표준 입력
 $ cat &lt; test.txt # 파일에서 표준 입력으로 읽어들인다.
-</pre><p>test.txt의 내용을 cat 명령어로 읽어 들인 뒤 화면에 노출한다.</p>
-                <h2>와일드 카드</h2><p>명령어 중 여러가지로 조합할 수 있는 특수문자들이다. *, ? 가 있다. 두가지의 차이점은 일치하는 문자의 개수다. * 특수 문자는 모든 문자와 일치하는 와일드 카드 특수 문자이며, ? 문자는 하나의 문자와 일치하는 특수 문자다. 명령어로는 다음처럼 나타낼 수 있다.</p><pre class="prettyprint lang-sh"># '*' 모든 문자와 일치하는 와일드 카드 문자
+</pre>
+<p>test.txt의 내용을 cat 명령어로 읽어 들인 뒤 화면에 노출한다.</p>
+
+<h2>와일드 카드</h2>
+<p>명령어 중 여러가지로 조합할 수 있는 특수문자들이다. *, ? 가 있다. 두가지의 차이점은 일치하는 문자의 개수다. * 특수 문자는 모든 문자와 일치하는 와일드 카드 특수 문자이며, ? 문자는 하나의 문자와 일치하는 특수 문자다. 명령어로는 다음처럼 나타낼 수 있다.</p>
+<pre class="prettyprint lang-sh">
+# '*' 모든 문자와 일치하는 와일드 카드 문자
 $ ls tes* # test.txt, tes/123.txt 등 일치하는 모든 파일/디렉토리(내부)가 출력된다.
 # '?' 하나의 문자와 일치하는 와일드 카드 문자
 $ ls test.tx? # test.txt, test.txx 등 하나 일치한 파일을 출력한다.
-</pre><h2>파이프 문자</h2><p>어떠한 프로세스의 표준 출력을 다른 프로세스의 표준 입력으로 보내는 문자<span class="command">|</span>. 주로 파이프 문자라고 불린다.</p><pre class="prettyprint lang-sh"># 파이프 문자 예제
+</pre>
+<h2>파이프 문자</h2>
+<p>어떠한 프로세스의 표준 출력을 다른 프로세스의 표준 입력으로 보내는 문자<span class="command">|</span>. 주로 파이프 문자라고 불린다.</p>
+<pre class="prettyprint lang-sh">
+# 파이프 문자 예제
 # ps 명령어를 통한 표준 출력을 프로세스 정보 중 "tomcat"이 들어간 프로세스를 찾기 위해 표준 입력으로 삽입한다.
 $ ps -ef | grep tomcat
 </pre>
-                <h2>명령 문자</h2><p>해당 부분은 주로 명령(Command)에 관련된 문자로 다음과 같다.</p><pre class="console">; # 명령의 끝을 나타낸다.
+
+<h2>명령 문자</h2>
+<p>해당 부분은 주로 명령(Command)에 관련된 문자로 다음과 같다.</p>
+<pre class="console">
+; # 명령의 끝을 나타낸다.
 || # 이전의 명령이 실패하면 실행하는 조건문 문자
 && # 이전의 명령이 성공하면 실행하는 조건문 문자
 & # 명령을 백그라운드에서 실행한다.
 $ # 변수에 접근할 수 있는 문자
-</pre><p>이 외에도 "#" 문자를 쓰게 되면 주석 처리가 가능하다.</p>
-                <h2>변수 접근 기호</h2><p>위의 특수 문자들을 이용하면 조금 더 응용 가능한 쉘 커맨드가 가능해진다. 그 전에 변수에 접근 할 수 있는 특수 문자가 있는데 다음과 같다.</p>
-<pre class="console">0 # stdin (표준 입력)
+</pre>
+<p>이 외에도 "#" 문자를 쓰게 되면 주석 처리가 가능하다.</p>
+
+<h2>변수 접근 기호</h2>
+<p>위의 특수 문자들을 이용하면 조금 더 응용 가능한 쉘 커맨드가 가능해진다. 그 전에 변수에 접근 할 수 있는 특수 문자가 있는데 다음과 같다.</p>
+
+<pre class="console">
+0 # stdin (표준 입력)
 1 # stdout (표준 출력)
 2 # stderr (에러 출력)
-</pre><p>위와 같은 문자와 변수 접근 문자를 합치면 &1, &2 같은 명령도 가능해진다. 다음과 같은 커맨드도 가능하다.</p>
-<pre class="prettyprint lang-sh"># 표준 에러 리다이렉션 ( stderr 만 출력 )
+</pre>
+<p>위와 같은 문자와 변수 접근 문자를 합치면 &1, &2 같은 명령도 가능해진다. 다음과 같은 커맨드도 가능하다.</p>
+
+<pre class="prettyprint lang-sh">
+# 표준 에러 리다이렉션 ( stderr 만 출력 )
 $ ./test.sh &gt;&gt; ./test.log 2&gt;&1
-</pre><p>위처럼 test.sh을 실행하면서 나온 표준 에러를 test.log 파일에 덧붙여 쓸 수도 있다. 그러나 log 파일이 필요 없을 경우 다음처럼 쓸 수도 있다.</p>
-<pre class="prettyprint lang-sh"># 표준 출력이 필요 없다.
+</pre>
+<p>위처럼 test.sh을 실행하면서 나온 표준 에러를 test.log 파일에 덧붙여 쓸 수도 있다. 그러나 log 파일이 필요 없을 경우 다음처럼 쓸 수도 있다.</p>
+
+<pre class="prettyprint lang-sh">
+# 표준 출력이 필요 없다.
 $ ./test.sh &gt;&gt; /dev/null 2&gt;&1
-</pre></div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+</pre>
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

@@ -1,6 +1,7 @@
 ###info
 title=자바 Runnable를 이용해 쓰레드 만들기 (Java Runnable Interface)
 created=2015-02-17
+ad=true
 ###
 
 #p 저번 포스팅에서 얘기했던대로 이번엔 Runnable 인터페이스를 이용한 쓰레드 작성 방법에 대해 알아고보자 합니다.

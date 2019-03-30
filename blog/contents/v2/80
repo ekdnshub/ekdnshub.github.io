@@ -1,6 +1,7 @@
 ###info
 title=C++ map 예제(C++ map example)
 created=2015-03-05
+ad=true
 ###
 
 #p C++에서 map을 쓸일이 생겼습니다. 간단한 예제 프로그램을 굴려봤어요.
