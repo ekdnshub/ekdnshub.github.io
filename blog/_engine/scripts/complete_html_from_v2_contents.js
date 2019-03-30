@@ -21,7 +21,7 @@ if (process.argv.length < 3) {
 
 function extractMeta(key, body) {
     console.log(key + " 추출 중...");
-    return body.split("\n").filter((line) => line.indexOf(key + "=") >= 0).map((line) => line.replace(key + "=", "")).map((line) => line.slice(0, line.length - 1)).reduce((old, _new) => old);
+    return body.split("\n").filter((line) => line.indexOf(key + "=") >= 0).map((line) => line.replace(key + "=", "")).reduce((old, _new) => old);
 }
 
 var number = process.argv[2];
