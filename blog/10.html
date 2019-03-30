@@ -72,7 +72,7 @@
 
 <h2>정의</h2>
 <div class="green">
-<p>단 하나의 유일한 객체를 만들기 위한 디자인 패턴</p>
+<p>단 하나의 유일한 객체를 만들기 위한 디자인 패턴</p><br>
 </div>
 
 <h2>구현</h2>
@@ -92,8 +92,8 @@ public class Singleton {
 }
 </pre>
 <div class="red">
-<p><strong><i class="fa fa-exclamation-triangle fa-lg"></i> 주의하세요.</strong></p>
-<p>이 소스 코드는 실무에서 사용하면 위험합니다.</p>
+<p><strong><i class="fa fa-exclamation-triangle fa-lg"></i> 주의하세요.</strong></p><br>
+<p>이 소스 코드는 실무에서 사용하면 위험합니다.</p><br>
 </div>
 <p>정말 필요한 코드로만 구성된 싱글턴 클래스입니다.</p>
 <p><strong>생성자가 private 라는 것에 주목하세요.</strong> 외부에서 new 를 사용한 객체 생성이 불가능합니다. 따라서 getInstance 메소드를 호출해서 객체를 받아와야 합니다. <strong>getInstance() 가 static 메소드인 것도 주목해야 합니다.</strong></p>
@@ -118,8 +118,8 @@ Work Flow   ┃(1) ┃    ┃    ┃   표시된 (1)과 (2)번 코드라인입�
 <p>T1의 (1)번 플로우로 인해 인스턴스가 <span class="command">null</span>임을 알고 새로운 객체를 만들기 위해 (2)번 플로우로 갑니다. 그리고 T1의 (2)번 플로우가 실행되는 그 순간 T2의 (1)번 플로우가 실행이 되면 아직까진 싱글턴 객체가 없기 때문에 <span class="command">null</span>을 반환 받고 새로운 객체를 만드려 하겠죠. 그리고 T1에서는 이미 싱글턴 객체가 완성이 됩니다. 그 다음 T3의 (1)번 플로우가 실행이 되는 순간엔 T2의 (2)번 플로우도 실행이 되며 결국 싱글튼 객체가 2개가 되어버립니다.</p>
 
 <div class="yellow">
-<p><strong><i class="fa fa-check fa-lg"></i> TIP. 이것은 예제입니다.</strong></p>
-<p>상기에 기술한 스레드의 동작은 제가 설명한 부분과 일치하지 않을 수 있습니다. 이해를 돕기 위한 예제일 뿐입니다. :)</p>
+<p><strong><i class="fa fa-check fa-lg"></i> TIP. 이것은 예제입니다.</strong></p><br>
+<p>상기에 기술한 스레드의 동작은 제가 설명한 부분과 일치하지 않을 수 있습니다. 이해를 돕기 위한 예제일 뿐입니다. :)</p><br>
 </div>
 
 <p>이러한 <span class="command">멀티 스레드 문제점</span>으로 인해 이 싱글턴 클래스는 자기멋대로 객체가 두개 이상이 되어 버립니다. 이러면 싱글튼 패턴을 사용한 클래스가 아니게 되버립니다. (다만, 싱글 스레드에서는 안전합니다.)</p>
@@ -181,7 +181,7 @@ public class Singleton {
 </pre>
 
 <div class="green">
-<p><i class="fa fa-check fa-lg"></i> 이 포스팅에서는 제대로 소개를 안했지만 DCL(Double Checking Locking)라는 테크닉도 존재합니다. 자세한 사항은 <a href="https://en.wikipedia.org/wiki/Double-checked_locking">Double-checked locking</a>을 참고하세요.</p>
+<p><i class="fa fa-check fa-lg"></i> 이 포스팅에서는 제대로 소개를 안했지만 DCL(Double Checking Locking)라는 테크닉도 존재합니다. 자세한 사항은 <a href="https://en.wikipedia.org/wiki/Double-checked_locking">Double-checked locking</a>을 참고하세요.</p><br>
 </div>
 
 <h2>Using Class</h2>
