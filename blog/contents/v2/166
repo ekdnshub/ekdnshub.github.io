@@ -1,0 +1,98 @@
+###info
+title=Node.js cluster(for using Multi Core CPU)
+created=2015-07-06
+ad=true
+###
+#p node.js는 기본적으로 싱글 스레드 기반입니다. 따라서 싱글 코어 CPU에서는 CPU 자원을 전부(?) 쓸 수 있는데요. 하지만 멀티 코어 CPU가 보편화 된 추세에 일반적으로만 node.js를 쓴다면 서버 CPU 자원이 낭비가 될겁니다.
+
+#p 이번 포스팅은 가용한 모든 CPU 코어를 사용할 수 있게 해주는 모듈인 {!!cluster}에 대해 알아봅니다.
+
+
+#h2 Ready to Work
+#p 이번 포스팅을 위한 Cluster에 대한 정보는 {$https://nodejs.org/api/cluster.html|nodejs.org - cluster}에서 원문으로 보실 수 있습니다.
+
+#p Node.js 설치를 위한 다운로드는 {$https://nodejs.org/download/|nodejs.org - Download}를 참조하세요.
+
+#h2 Example
+#p 실행 테스트를 위해서 별도의 디렉토리를 만들었습니다. 저는 `/your/path/nodejs/cluster`라고 만들었습니다. 앞으로의 쉘 커맨드는 해당 경로에서부터 시작합니다.
+
+
+#h3 Source Code
+#p API 문서에서 제공하는 소스 코드에서 살짝 변경을 가했습니다. 제가 express 프레임워크를 사용하는 관계로 해당 프레임워크를 이용한 웹 서버를 띄우도록 변경했습니다. :)
+
+###code.js
+// cluster.js
+var cluster = require('cluster'); // 클러스터 모듈 로드
+var express = require('express'); // express 프레임워크 로드
+var numCPUs = require('os').cpus().length; // CPU 개수 가져오기
+var SERVER_PORT = 8000; // 애플리케이션 포트 지정
+
+if (cluster.isMaster) { // 마스터 처리
+	for (var i = 0; i < numCPUs; i++) {
+		cluster.fork(); // CPU 개수만큼 fork
+	}
+	// 워커 종료시 다잉 메시지 출력
+	cluster.on('exit', function(worker, code, signal) {
+		console.log('worker ' + worker.process.pid + ' died');
+	});
+}
+else { // 워커 처리
+
+	console.log( 'current worker pid is ' + process.pid );
+	var app = express();
+	app.get('/', function(req, res){
+		console.log( 'execute worker pid is ' + process.pid );
+		res.send('execute wokrer pid is ' + process.pid );
+	});
+
+	var server = app.listen(SERVER_PORT, function () {
+
+		var host = server.address().address;
+		var port = server.address().port;
+
+		console.log('app listening at http://%s:%s', host, port);
+	});
+}
+###
+
+#h3 Execute App
+#p 만약 위의 소스 코드를 실행해보시려면 `express`를 설치해야 합니다.
+
+###console
+$ npm install express
+# 만약 package.json 사용중이면 --save 옵션을 추가하셔도 됩니다.
+###
+#p 설치가 끝나면 아래의 커맨드를 이용해 애플리케이션을 띄울 수 있습니다.
+
+###console
+$ node cluster.js
+current worker pid is 5284
+current worker pid is 3884
+current worker pid is 5400
+current worker pid is 3020
+app listening at http://localhost:8000
+app listening at http://localhost:8000
+app listening at http://localhost:8000
+app listening at http://localhost:8000
+###
+
+#h3 Test
+#p 정말로 잘 돌아가는지 확인을 하려면 여러가지 방법이 있겠지만 저는 {$http://jmeter.apache.org/|Apache JMeter}를 이용했습니다. 사용법은 {$http://jmeter.apache.org/usermanual/build-web-test-plan.html|build web test plan}에서 확인 가능합니다.
+
+#p 여튼, 이것으로 테스트를 해보면 서버 콘솔에서 다음과 같은 결과를 얻을 수 있습니다.
+
+###console
+...
+execute worker pid is 5284
+execute worker pid is 5284
+execute worker pid is 5284
+...
+execute worker pid is 3020
+...
+###
+#p 코어를 놀리지 않고 전부 다 쓰는 알뜰한 애플리케이션이 되겠네요.
+
+
+#h2 Closing Remarks
+#p 멀티 코어 CPU를 최대한 활용할 수 있는 node.js {!!cluster} 모듈에 대해 알아봤습니다. :D
+

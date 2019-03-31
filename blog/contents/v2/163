@@ -1,0 +1,125 @@
+###info
+title=SpringBoot Logging
+created=2015-06-30
+ad=true
+###
+#p 이번 포스팅은 SpringBoot에서 Logging을 하기 위한 설정을 다뤄봅니다. 여기서는 slf4j를 이용한 방법을 다룹니다.
+
+
+#h2 Logging
+#p SpringBoot에서 로깅을 하는 방법 중 하나는 slf4j를 사용하는겁니다. 그리고 slf4j를 사용할때엔 `logback.xml`을 작성해서 환경 구성을 하게 됩니다. 물론 해당 파일이 없어도 동작은 하겠지만 가능하면 넣어주는 것이 좋습니다.
+
+
+#h3 logback.xml
+#p SpringBoot에서 `logback.xml`의 위치는 `src/main/resource`입니다. 이 부분에 `logback.xml` 파일을 생성하면 됩니다. 일반적인 템플릿은 아래와 같습니다.
+
+###code.xml
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;configuration>
+
+	&lt;!-- Application Loggers -->
+	&lt;!-- 여기서 name 값은 프로젝트 package 명입니다. -->
+	&lt;logger name="logger" level="INFO">
+		&lt;appender-ref ref="consoleAppender" />
+	&lt;/logger>
+
+	&lt;appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		&lt;layout class="ch.qos.logback.classic.PatternLayout">
+			&lt;Pattern>
+				[%d{MM/dd HH:mm:ss.SSS}] [%thread] %-5level %logger{24} - %msg %n
+			&lt;/Pattern>
+		&lt;/layout>
+	&lt;/appender>
+
+	&lt;root level="INFO">
+		&lt;appender-ref ref="consoleAppender" />
+	&lt;/root>
+&lt;/configuration>
+###
+
+#h3 application.properties
+#p `logback.xml` 파일을 만들었다면 `application.properties` 파일을 수정해줍니다.
+
+
+###console
+logging.level.logger: INFO
+# logging.level.logger.Test: TRACE
+###
+#p package명으로 logger를 지정했기 때문에 위와 같은 속성 접근이 필요합니다. 만약 package명이 api라면 `logging.level.api: TRACE`가 되겠죠. 그리고 로그 레벨의 경우 TRACE뿐만 아니라 INFO, WARN, ERROR, DEBUG등으로도 설정이 가능합니다.
+
+#p 또한 특정 서브 클래스만 별도의 레벨로 지정할 수도 있습니다. logger 패키지 및에 Test라는 클래스를 아래처럼 만들었습니다.
+
+
+###code.java
+package logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class Test {
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	public Test() {
+		logger.trace("Test Trace");
+	}
+}
+###
+
+#p 상단에 정의된 `logging.level.logger.Test: TRACE` 주석을 해제하면 Test 클래스 생성자에 있는 Trace 로그가 출력됩니다.
+
+
+#h2 Execute Application
+#p 실제로 애플리케이션 구동을 시켜봅시다. 아래와 같은 기동 코드를 만들었습니다. `application.properties` 파일의 모든 로그 레벨은 "TRACE"로 맞췄습니다.
+
+
+###code.java
+package logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class LoggerApplication implements CommandLineRunner{
+
+	private static final Logger logger = LoggerFactory.getLogger(LoggerApplication.class);
+
+   public static void main(String[] args) {
+       SpringApplication.run(LoggerApplication.class, args);
+   }
+
+	@Override
+	public void run(String... args) throws Exception {
+
+		logger.info("INFO {}, {}", "args", 0.3); // (1)
+		logger.warn("WARN");
+		logger.debug("DEBUG");
+		logger.trace("TRACE");
+		logger.error("ERROR");
+
+		Test t = new Test();
+	}
+}
+###
+#p `(1)`로 표시된 코드를 보면 다음처럼 되어 있습니다.
+
+###code.java
+logger.info("INFO {}, {}", "args", 0.3);
+###
+#p 위에 있는 코드처럼 `{}`로 표시된 부분에 차례대로 매핑된 변수 및 값을 출력합니다. 위 코드에서는 2개의 `{}` 기호가 있고 그에 따라서 메시지 뒤에 오는 매개 변수도 2개입니다.
+
+
+#h3 Console Result
+###console
+[main] INFO  logger.LoggerApplication - INFO args, 0.3
+[main] WARN  logger.LoggerApplication - WARN
+[main] DEBUG logger.LoggerApplication - DEBUG
+[main] TRACE logger.LoggerApplication - TRACE
+[main] ERROR logger.LoggerApplication - ERROR
+[main] TRACE logger.Test - Test Trace
+###
+
+#h2 마무리
+#p 간단하게 SpringBoot에서 Logging 하는 법을 알아봤습니다. 추가적으로 하이버네이트나 JPA 로그 레벨 지정하는 법도 있으나 그건 추후에 포스팅할 기회가 있으면... :D
+

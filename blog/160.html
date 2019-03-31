@@ -1,108 +1,104 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>SpringBoot JPA Pagination :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
-    <!-- # jquery -->
-    <!--[if lte IE 9]>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
-    <![endif]-->
-    <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <!--<![endif]-->
-
-
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><p>
-                JPA를 쓰는건 참 편리하고 좋은데, 페이징도 자동으로 해주면 참 좋겠죠? 간단하게 페이징을 할 수 있는 방법을 알아봅니다.
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
+
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
             </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">SpringBoot JPA Pagination</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-                <h2>JPA Pagination</h2>
-                <p>
-                    이번 포스팅은 아래의 포스트들을 기반으로 작성되었습니다.
-                </p>
-                <div class="green">
-                    <ul>
-                        <li><a href="/blog/105">Spring Boot with STS(Spring Tool Suite)</a></li>
-                        <li><a href="/blog/121">SpringBoot JPA 예제</a></li>
-                    </ul>
-                </div>
-                <p>
-                    미리 읽고 오시면 더욱 좋습니다. :D
-                </p>
 
-                <h2>Create Project</h2>
-                <p>
-                    페이징 데모를 위해서 프로젝트를 생성합니다.
-                </p>
 
-                <div class="blue">
-                    Name : pagination<br>
-                    Type : Gradle Project<br>
-                    Packaging : Jar<br>
-                    Java Version : 1.7<br>
-                    Language : Java<br>
-                    Boot Version : 1.2.4<br>
-                    Group : kr.jdm<br>
-                    Artifact : pagination<br>
-                    Version : 0.0.1-SNAPSHOT<br>
-                    Description : Demo project for Spring Boot<br>
-                    Package : jpa<br>
-                    Dependencies : H2, JPA
-                </div>
 
-                <h2>Example</h2>
-                <p>
-                    이제 실제로 코드를 짜봅니다. 시나리오는 정해진 아이템 개수만큼 N번째 페이지에 있는 게시물 목록을 호출하는겁니다.
-                </p>
+<p>JPA를 쓰는건 참 편리하고 좋은데, 페이징도 자동으로 해주면 참 좋겠죠? 간단하게 페이징을 할 수 있는 방법을 알아봅니다.</p>
 
-                <h3>Entity</h3>
-                <p>
-                    간단한 게시물 Entity입니다.
-                </p>
-<pre class="prettyprint lang-java fold" data-title="Open Source">
+<h2>JPA Pagination</h2>
+<p>이번 포스팅은 아래의 포스트들을 기반으로 작성되었습니다.</p>
+
+<div class="green">
+<ul>
+<li><a href="/blog/105">Spring Boot with STS(Spring Tool Suite)</a></li>
+<li><a href="/blog/121">SpringBoot JPA 예제</a></li>
+</ul>
+</div>
+<p>미리 읽고 오시면 더욱 좋습니다. :D</p>
+
+
+<h2>Create Project</h2>
+<p>페이징 데모를 위해서 프로젝트를 생성합니다.</p>
+
+
+<div class="blue">
+<pre>
+Name : pagination
+Type : Gradle Project
+Packaging : Jar
+Java Version : 1.7
+Language : Java
+Boot Version : 1.2.4
+Group : kr.jdm
+Artifact : pagination
+Version : 0.0.1-SNAPSHOT
+Description : Demo project for Spring Boot
+Package : jpa
+Dependencies : H2, JPA
+</pre>
+</div>
+
+<h2>Example</h2>
+<p>이제 실제로 코드를 짜봅니다. 시나리오는 정해진 아이템 개수만큼 N번째 페이지에 있는 게시물 목록을 호출하는겁니다.</p>
+
+
+<h3>Entity</h3>
+<p>간단한 게시물 Entity입니다.</p>
+
+<div class='fold' data-title='Open Source'>
+<pre class="prettyprint lang-java">
 package pagination;
 
 import javax.persistence.Column;
@@ -162,12 +158,13 @@ public class BoardEntity {
 	}
 }
 </pre>
+</div>
 
-                <h3>Repository</h3>
-                <p>
-                    게시물 Repostiory입니다. @Query 메소드도 있고 Name 기반 메소드도 있습니다.
-                </p>
-<pre class="prettyprint lang-java fold" data-title="Open Source">
+<h3>Repository</h3>
+<p>게시물 Repostiory입니다. <span class="command">@Query</span> 메소드도 있고 Name 기반 메소드도 있습니다.</p>
+
+<div class='fold' data-title='Open Source'>
+<pre class="prettyprint lang-java">
 package pagination;
 
 import org.springframework.data.domain.Page;
@@ -176,22 +173,23 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
-public interface BoardRepository extends PagingAndSortingRepository&lt;BoardEntity, Integer> {
-	Page&lt;BoardEntity> findAll(Pageable pageable);
-	Page&lt;BoardEntity> findAllByOrderBySeqDesc(Pageable pageable);
-	Page&lt;BoardEntity> findAllByAuthor(String author, Pageable pageable);
+public interface BoardRepository extends PagingAndSortingRepository&lt;BoardEntity, Integer&gt; {
+	Page&lt;BoardEntity&gt; findAll(Pageable pageable);
+	Page&lt;BoardEntity&gt; findAllByOrderBySeqDesc(Pageable pageable);
+	Page&lt;BoardEntity&gt; findAllByAuthor(String author, Pageable pageable);
 
 	@Query("select t  from BoardEntity t where content like concat('%', :searchString ,'%')")
-	Page&lt;BoardEntity> findAllSearch(@Param("searchString") String searchString, Pageable pageable);
+	Page&lt;BoardEntity&gt; findAllSearch(@Param("searchString") String searchString, Pageable pageable);
 
 }
 </pre>
+</div>
 
-                <h3>Application</h3>
-                <p>
-                    실제로 구동 시키기 위한 코드입니다. 테스트 코드가 아닙니다. 테스트 코드는 Junit으로 작성합시다. :)
-                </p>
-<pre class="prettyprint lang-java fold" data-title="Open Source">
+<h3>Application</h3>
+<p>실제로 구동 시키기 위한 코드입니다. 테스트 코드가 아닙니다. 테스트 코드는 Junit으로 작성합시다. :)</p>
+
+<div class='fold' data-title='Open Source'>
+<pre class="prettyprint lang-java">
 package pagination;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -209,9 +207,9 @@ public class PaginationApplication implements CommandLineRunner {
 	@Autowired
 	private BoardRepository boardRepository;
 
-    public static void main(String[] args) {
-        SpringApplication.run(PaginationApplication.class, args);
-    }
+   public static void main(String[] args) {
+       SpringApplication.run(PaginationApplication.class, args);
+   }
 
 	@Override
 	public void run(String... arg0) throws Exception {
@@ -233,7 +231,7 @@ public class PaginationApplication implements CommandLineRunner {
 		}
 
 		// 한 페이지 아이템 10개, 0번째 페이지 호출
-		Page&lt;BoardEntity> page = boardRepository.findAll(new PageRequest(0, 10));
+		Page&lt;BoardEntity&gt; page = boardRepository.findAll(new PageRequest(0, 10));
 		printPageData("simple", page);
 
 		// 한 페이지 아이템 10개, 글번호 내림차순으로, 0번째 페이지 호출
@@ -259,7 +257,7 @@ public class PaginationApplication implements CommandLineRunner {
 	}
 
 	// 페이지 데이터 출력
-	private void printPageData(String label, Page&lt;BoardEntity> page){
+	private void printPageData(String label, Page&lt;BoardEntity&gt; page){
 		if( page == null || page.getSize() &lt;= 0 ) return;
 
 		for( int i = 0 ; i &lt; page.getSize(); i++ ){
@@ -278,12 +276,13 @@ public class PaginationApplication implements CommandLineRunner {
 	}
 }
 </pre>
+</div>
 
-                <h3>check result</h3>
-                <p>
-                    결과 화면을 봅시다.
-                </p>
-<pre class="console fold" data-title="Open Console">
+<h3>check result</h3>
+<p>결과 화면을 봅시다.</p>
+
+<div class='fold' data-title='Open Source'>
+<pre class="console">
 [simple] 1 first bcd
 [simple] 2 second cde
 [simple] 3 third def
@@ -345,13 +344,16 @@ public class PaginationApplication implements CommandLineRunner {
 [sort_search_desc] 42 third bcd
 [sort_search_desc] 41 second bcd
 </pre>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+
+
+</div>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

@@ -640,27 +640,22 @@ var postsInfo = (function(){
             "160":{
                 "title":"SpringBoot JPA Pagination",
                 "created":"2015-06-26"
-                ,"version":"v1"
             },
             "161":{
                 "title":"Spring DispatcherServlet",
                 "created":"2015-06-30"
-                ,"version":"v1"
             },
             "162":{
                 "title":"Zen Coding 사용법",
                 "created":"2015-06-30"
-                ,"version":"v1"
             },
             "163":{
                 "title":"SpringBoot Logging",
                 "created":"2015-06-30"
-                ,"version":"v1"
             },
             "164":{
                 "title":"Apache Spark Overview & Example",
                 "created":"2015-07-02"
-                ,"version":"v1"
             },
             "165":{
                 "title":"Spring MockMvc(spring-test)",
@@ -669,22 +664,18 @@ var postsInfo = (function(){
             "166":{
                 "title":"Node.js cluster(for using Multi Core CPU)",
                 "created":"2015-07-06"
-                ,"version":"v1"
             },
             "167":{
                 "title":"Apache Spark Cluster(Standalone)",
                 "created":"2015-07-06"
-                ,"version":"v1"
             },
             "168":{
                 "title":"결합 인덱스 컬럼 순서(Composite Index Column Ordering)",
                 "created":"2015-07-07"
-                ,"version":"v1"
             },
             "169":{
                 "title":"데이터베이스 분포도(Database Selectivity)",
                 "created":"2015-07-07"
-                ,"version":"v1"
             },
             "170":{
                 "title":"C++ 파일 읽기/쓰기(C++ File Read/Write Example)",

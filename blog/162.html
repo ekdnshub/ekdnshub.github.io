@@ -1,177 +1,184 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>Zen Coding 사용법 :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
-    <!-- # jquery -->
-    <!--[if lte IE 9]>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
-    <![endif]-->
-    <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <!--<![endif]-->
-
-
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><p>Zen Coding(이하 "젠 코딩")이라는 새로운 HTML 및 CSS 코드 작성하는 방법이 있습니다. 블로그를 운영하다가 또는 개인 웹사이트를 운영하다보면 HTML과 CSS 코드를 작성해야하는 일이 종종 있는데 젠 코딩을 이용해서 빠르게 프로토 타이핑을 할 수 있었습니다. :D</p>
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
-                <h2>Zen Coding</h2>
-                <p>
-                    젠 코딩은 구글 코드로 제공이 됩니다. 다운로드 가능한 주소는 <a href="https://code.google.com/p/zen-coding/">Zen Coding</a>입니다. 각자 사용하는 에디터에 맞게 지원된 코드가 있으면 내려 받읍시다. 저 또한 Zen Coding을 지원하는 별도의 에디터 프로그램을 사용합니다. :)
-                </p>
-
-                <h2>Example</h2>
-                <p>
-                    젠 코딩의 좋은 점은 불필요한 반복적인 타이핑을 줄여줍니다. 예를 들어서 하나씩 살펴봅시다.
-                </p>
-
-                <h3>Looping</h3>
-                <p>
-                    단순 반복적인것은 <strong><span class="command">*</span></strong> 기호를 통해 가능합니다.
-                </p>
-                <pre class="console">div*5</pre>
-<pre class="prettyprint lang-html">
-&lt;div>&lt;/div>
-&lt;div>&lt;/div>
-&lt;div>&lt;/div>
-&lt;div>&lt;/div>
-&lt;div>&lt;/div>
-</pre>
-
-                <h3>add class</h3>
-                <p>
-                    DOM 객체에 class 속성을 넣고 싶으면 <strong><span class="command">.</span></strong> 기호를 통해 할 수 있습니다.
-                </p>
-                <pre class="console">div.blue*5</pre>
-<pre class="prettyprint lang-html">
-&lt;div class="blue">&lt;/div>
-&lt;div class="blue">&lt;/div>
-&lt;div class="blue">&lt;/div>
-&lt;div class="blue">&lt;/div>
-&lt;div class="blue">&lt;/div>
-</pre>
-
-                <h3>add Id</h3>
-                <p>
-                    DOM 객체에 id 속성을 넣고 싶으면 <strong><span class="command">#</span></strong> 기호를 통해 할 수 있습니다.
-                </p>
-
-                <pre class="console">div#myId</pre>
-<pre class="prettyprint lang-html">
-&lt;div id="myId">&lt;/div>
-</pre>
-
-                <h3>add multi var</h3>
-                <p>
-                    DOM 객체에 id, class등을 차례로 부여하고 싶다면 <strong><span class="command">$</span></strong> 기호를 통해 할 수 있습니다.
-                </p>
-
-                <pre class="console">div#myId-$*2</pre>
-<pre class="prettyprint lang-html">
-&lt;div id="myId-1">&lt;/div>
-&lt;div id="myId-2">&lt;/div>
-</pre>
-
-                <h3>add child object</h3>
-                <p>
-                    만약 하위 DOM 객체를 넣고 싶다면 <strong><span class="command">></span></strong> 기호를 통해 할 수 있습니다.
-                </p>
-                <pre class="console">ul>li</pre>
-<pre class="prettyprint lang-html">
-&lt;ul>
-	&lt;li>&lt;/li>
-&lt;/ul>
-</pre>
-
-                <h3>add brother object</h3>
-                <p>만약 동일한 위치에 DOM 객체를 넣고 싶다면 <strong><span class="command">+</span></strong> 기호를 통해 할 수 있습니다.</p>
-                <pre class="console">ul>li>strong+p</pre>
-<pre class="prettyprint lang-html">
-&lt;ul>
-	&lt;li>
-		&lt;strong>&lt;/strong>
-		&lt;p>&lt;/p>
-	&lt;/li>
-&lt;/ul>
-</pre>
-
-                <h3>complex</h3>
-                <p>
-                    약간 응용을 하자면 다음처럼도 가능합니다.
-                </p>
-                <pre class="console">div.blue.green>ul>li#id-$*3>strong+p</pre>
-<pre class="prettyprint lang-html">
-&lt;div class="blue green">
-	&lt;ul>
-		&lt;li id="id-1">
-			&lt;strong>&lt;/strong>
-			&lt;p>&lt;/p>
-		&lt;/li>
-		&lt;li id="id-2">
-			&lt;strong>&lt;/strong>
-			&lt;p>&lt;/p>
-		&lt;/li>
-		&lt;li id="id-3">
-			&lt;strong>&lt;/strong>
-			&lt;p>&lt;/p>
-		&lt;/li>
-	&lt;/ul>
-&lt;/div>
-</pre>
-
-                <h2>마무리</h2>
-                <p>
-                    제가 주로 사용하는 부분만 예제로 작성했습니다만, 이 외에도 더 많은 사용법이 있습니다. :D
-                </p>
-            </div>
-        </article>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
     </div>
-    <!-- // content 영역 -->
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">Zen Coding 사용법</h1>
+					<!-- 본문 -->
+					<div id="content">
+
+
+
+
+<p>Zen Coding(이하 "젠 코딩")이라는 새로운 HTML 및 CSS 코드 작성하는 방법이 있습니다. 블로그를 운영하다가 또는 개인 웹사이트를 운영하다보면 HTML과 CSS 코드를 작성해야하는 일이 종종 있는데 젠 코딩을 이용해서 빠르게 프로토 타이핑을 할 수 있었습니다. :D</p>
+
+<h2>Zen Coding</h2>
+<p>젠 코딩은 구글 코드로 제공이 됩니다. 다운로드 가능한 주소는 <a href="https://code.google.com/p/zen-coding/">Zen Coding</a>입니다. 각자 사용하는 에디터에 맞게 지원된 코드가 있으면 내려 받읍시다. 저 또한 Zen Coding을 지원하는 별도의 에디터 프로그램을 사용합니다. :)</p>
+
+
+<h2>Example</h2>
+<p>젠 코딩의 좋은 점은 불필요한 반복적인 타이핑을 줄여줍니다. 예를 들어서 하나씩 살펴봅시다.</p>
+
+
+<h3>Looping</h3>
+<p>단순 반복적인것은 <span class="command"><strong>*</strong></span> 기호를 통해 가능합니다.</p>
+
+<pre class="console">
+div*5
+</pre>
+<pre class="prettyprint lang-html">
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+</pre>
+
+<h3>add class</h3>
+<p>DOM 객체에 class 속성을 넣고 싶으면 <span class="command"><strong>.</strong></span> 기호를 통해 할 수 있습니다.</p>
+
+<pre class="console">
+div.blue*5
+</pre>
+<pre class="prettyprint lang-html">
+&lt;div class="blue"&gt;&lt;/div&gt;
+&lt;div class="blue"&gt;&lt;/div&gt;
+&lt;div class="blue"&gt;&lt;/div&gt;
+&lt;div class="blue"&gt;&lt;/div&gt;
+&lt;div class="blue"&gt;&lt;/div&gt;
+</pre>
+
+<h3>add Id</h3>
+<p>DOM 객체에 id 속성을 넣고 싶으면 <span class="command"><strong>#</strong></span> 기호를 통해 할 수 있습니다.</p>
+
+<pre class="console">
+div#myId
+</pre>
+<pre class="prettyprint lang-html">
+&lt;div id="myId"&gt;&lt;/div&gt;
+</pre>
+
+<h3>add multi var</h3>
+<p>DOM 객체에 id, class등을 차례로 부여하고 싶다면 <span class="command"><strong>$</strong></span> 기호를 통해 할 수 있습니다.</p>
+
+<pre class="console">
+div#myId-$*2
+</pre>
+<pre class="prettyprint lang-html">
+&lt;div id="myId-1"&gt;&lt;/div&gt;
+&lt;div id="myId-2"&gt;&lt;/div&gt;
+</pre>
+
+<h3>add child object</h3>
+<p>만약 하위 DOM 객체를 넣고 싶다면 <span class="command"><strong>></strong></span> 기호를 통해 할 수 있습니다.</p>
+
+<pre class="console">
+ul&gt;li
+</pre>
+
+<pre class="prettyprint lang-html">
+&lt;ul&gt;
+	&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<h3>add brother object</h3>
+<p>만약 동일한 위치에 DOM 객체를 넣고 싶다면 <span class="command"><strong>+</strong></span> 기호를 통해 할 수 있습니다.</p>
+<pre class="console">
+ul&gt;li&gt;strong+p
+</pre>
+<pre class="prettyprint lang-html">
+&lt;ul&gt;
+	&lt;li&gt;
+		&lt;strong&gt;&lt;/strong&gt;
+		&lt;p&gt;&lt;/p&gt;
+	&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<h3>complex</h3>
+<p>약간 응용을 하자면 다음처럼도 가능합니다.</p>
+
+<pre class="console">
+div.blue.green&gt;ul&gt;li#id-$*3&gt;strong+p
+</pre>
+<pre class="prettyprint lang-html">
+&lt;div class="blue green"&gt;
+	&lt;ul&gt;
+		&lt;li id="id-1"&gt;
+			&lt;strong&gt;&lt;/strong&gt;
+			&lt;p&gt;&lt;/p&gt;
+		&lt;/li&gt;
+		&lt;li id="id-2"&gt;
+			&lt;strong&gt;&lt;/strong&gt;
+			&lt;p&gt;&lt;/p&gt;
+		&lt;/li&gt;
+		&lt;li id="id-3"&gt;
+			&lt;strong&gt;&lt;/strong&gt;
+			&lt;p&gt;&lt;/p&gt;
+		&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+
+<h2>마무리</h2>
+<p>제가 주로 사용하는 부분만 예제로 작성했습니다만, 이 외에도 더 많은 사용법이 있습니다. :D</p>
+
+
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

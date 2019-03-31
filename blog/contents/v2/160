@@ -1,51 +1,49 @@
-<p>
-JPA를 쓰는건 참 편리하고 좋은데, 페이징도 자동으로 해주면 참 좋겠죠? 간단하게 페이징을 할 수 있는 방법을 알아봅니다.
-</p>
+###info
+title=SpringBoot JPA Pagination
+created=2015-06-26
+ad=true
+###
+#p JPA를 쓰는건 참 편리하고 좋은데, 페이징도 자동으로 해주면 참 좋겠죠? 간단하게 페이징을 할 수 있는 방법을 알아봅니다.
 
-<h2>JPA Pagination</h2>
-<p>
-이번 포스팅은 아래의 포스트들을 기반으로 작성되었습니다.
-</p>
-<div class="green">
-<ul>
-<li><a href="/blog/105">Spring Boot with STS(Spring Tool Suite)</a></li>
-<li><a href="/blog/121">SpringBoot JPA 예제</a></li>
-</ul>
-</div>
-<p>
-미리 읽고 오시면 더욱 좋습니다. :D
-</p>
+#h2 JPA Pagination
+#p 이번 포스팅은 아래의 포스트들을 기반으로 작성되었습니다.
 
-<h2>Create Project</h2>
-<p>
-페이징 데모를 위해서 프로젝트를 생성합니다.
-</p>
+###box.green
+###ul 
+#li {$/blog/105|Spring Boot with STS(Spring Tool Suite)}
+#li {$/blog/121|SpringBoot JPA 예제}
+###
+###
+#p 미리 읽고 오시면 더욱 좋습니다. :D
 
-<div class="blue">
-Name : pagination<br>
-Type : Gradle Project<br>
-Packaging : Jar<br>
-Java Version : 1.7<br>
-Language : Java<br>
-Boot Version : 1.2.4<br>
-Group : kr.jdm<br>
-Artifact : pagination<br>
-Version : 0.0.1-SNAPSHOT<br>
-Description : Demo project for Spring Boot<br>
-Package : jpa<br>
+
+#h2 Create Project
+#p 페이징 데모를 위해서 프로젝트를 생성합니다.
+
+###pre
+Name : pagination
+Type : Gradle Project
+Packaging : Jar
+Java Version : 1.7
+Language : Java
+Boot Version : 1.2.4
+Group : kr.jdm
+Artifact : pagination
+Version : 0.0.1-SNAPSHOT
+Description : Demo project for Spring Boot
+Package : jpa
 Dependencies : H2, JPA
-</div>
+###
 
-<h2>Example</h2>
-<p>
-이제 실제로 코드를 짜봅니다. 시나리오는 정해진 아이템 개수만큼 N번째 페이지에 있는 게시물 목록을 호출하는겁니다.
-</p>
+#h2 Example
+#p 이제 실제로 코드를 짜봅니다. 시나리오는 정해진 아이템 개수만큼 N번째 페이지에 있는 게시물 목록을 호출하는겁니다.
 
-<h3>Entity</h3>
-<p>
-간단한 게시물 Entity입니다.
-</p>
-<pre class="prettyprint lang-java fold" data-title="Open Source">
+
+#h3 Entity
+#p 간단한 게시물 Entity입니다.
+
+###fold.Open Source
+###code.java
 package pagination;
 
 import javax.persistence.Column;
@@ -104,13 +102,14 @@ public class BoardEntity {
 		this.content = content;
 	}
 }
-</pre>
+###
+###
 
-<h3>Repository</h3>
-<p>
-게시물 Repostiory입니다. @Query 메소드도 있고 Name 기반 메소드도 있습니다.
-</p>
-<pre class="prettyprint lang-java fold" data-title="Open Source">
+#h3 Repository
+#p 게시물 Repostiory입니다. `@Query` 메소드도 있고 Name 기반 메소드도 있습니다.
+
+###fold.Open Source
+###code.java
 package pagination;
 
 import org.springframework.data.domain.Page;
@@ -128,13 +127,14 @@ public interface BoardRepository extends PagingAndSortingRepository&lt;BoardEnti
 	Page&lt;BoardEntity> findAllSearch(@Param("searchString") String searchString, Pageable pageable);
 
 }
-</pre>
+###
+###
 
-<h3>Application</h3>
-<p>
-실제로 구동 시키기 위한 코드입니다. 테스트 코드가 아닙니다. 테스트 코드는 Junit으로 작성합시다. :)
-</p>
-<pre class="prettyprint lang-java fold" data-title="Open Source">
+#h3 Application
+#p 실제로 구동 시키기 위한 코드입니다. 테스트 코드가 아닙니다. 테스트 코드는 Junit으로 작성합시다. :)
+
+###fold.Open Source
+###code.java
 package pagination;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,9 +152,9 @@ public class PaginationApplication implements CommandLineRunner {
 	@Autowired
 	private BoardRepository boardRepository;
 
-    public static void main(String[] args) {
-        SpringApplication.run(PaginationApplication.class, args);
-    }
+   public static void main(String[] args) {
+       SpringApplication.run(PaginationApplication.class, args);
+   }
 
 	@Override
 	public void run(String... arg0) throws Exception {
@@ -220,13 +220,14 @@ public class PaginationApplication implements CommandLineRunner {
 		return dummy[rand];
 	}
 }
-</pre>
+###
+###
 
-<h3>check result</h3>
-<p>
-결과 화면을 봅시다.
-</p>
-<pre class="console fold" data-title="Open Console">
+#h3 check result
+#p 결과 화면을 봅시다.
+
+###fold.Open Source
+###console
 [simple] 1 first bcd
 [simple] 2 second cde
 [simple] 3 third def
@@ -287,4 +288,5 @@ public class PaginationApplication implements CommandLineRunner {
 [sort_search_desc] 47 second abc
 [sort_search_desc] 42 third bcd
 [sort_search_desc] 41 second bcd
-</pre>
+###
+###

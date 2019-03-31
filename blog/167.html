@@ -1,175 +1,153 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>Apache Spark Cluster(Standalone) :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
-    <!-- # jquery -->
-    <!--[if lte IE 9]>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
-    <![endif]-->
-    <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <!--<![endif]-->
-
-
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><p>
-                이번 포스팅은 Spark(이하 "스파크")에서 "Standalone" 배포하는 법에 알아고보자 합니다. 여기서는 호스트 한대로만 진행 할 예정입니다. 호스트(혹은 노드)가 두대 이상인 경우 ssh 구성을 해야 하지만 여기서는 제가 가진 자원의 한계로(...) 한대로만 진행합니다. 이 포스팅은 <a href="https://spark.apache.org/docs/latest/spark-standalone.html">spark-standalone</a>의 정보에 기반합니다.
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
+
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
             </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">Apache Spark Cluster(Standalone)</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-                <h2>Install Spark</h2>
-                <p>
-                    스파크를 설치하는 방법은 <a href="/blog/164">Apache Spark Overview & Example</a> 항목을 참조하시기 바랍니다.
-                </p>
 
-                <h2>Setup & Start Spark Cluster</h2>
-                <p>
-                    스파크 Standalone 클러스터 구축은 간단합니다. 우선 Master 인스턴스를 띄우고 그 뒤에 Worker 인스턴스를 붙여주면 됩니다.
-                </p>
 
-                <h3>Start Master</h3>
-                <p>
-                    Master 인스턴스를 띄우기 위해서는 <span class="command">SPARK_HOME/sbin/start-master.sh</span>을 실행해야 합니다.
-                </p>
+
+<p>이번 포스팅은 Spark(이하 "스파크")에서 "Standalone" 배포하는 법에 알아고보자 합니다. 여기서는 호스트 한대로만 진행 할 예정입니다. 호스트(혹은 노드)가 두대 이상인 경우 ssh 구성을 해야 하지만 여기서는 제가 가진 자원의 한계로(...) 한대로만 진행합니다. 이 포스팅은 <a href="https://spark.apache.org/docs/latest/spark-standalone.html">spark-standalone</a>의 정보에 기반합니다.</p>
+
+<h2>Install Spark</h2>
+<p>스파크를 설치하는 방법은 <a href="/blog/164">Apache Spark Overview & Example</a> 항목을 참조하시기 바랍니다.</p>
+
+
+<h2>Setup & Start Spark Cluster</h2>
+<p>스파크 Standalone 클러스터 구축은 간단합니다. 우선 Master 인스턴스를 띄우고 그 뒤에 Worker 인스턴스를 붙여주면 됩니다.</p>
+
+
+<h3>Start Master</h3>
+<p>Master 인스턴스를 띄우기 위해서는 <span class="command">SPARK_HOME/sbin/start-master.sh</span>을 실행해야 합니다.</p>
+
 <pre class="console">
-$ <span class="light">./start-master.sh</span>
+$ ./start-master.sh
 </pre>
-                <p>
-                    위와 같은 쉘 커맨드를 입력하게 되면 스파크 Master 인스턴스가 올라갑니다. 기본적으로 7077번 포트를 사용합니다.
-                </p>
+<p>위와 같은 쉘 커맨드를 입력하게 되면 스파크 Master 인스턴스가 올라갑니다. 기본적으로 7077번 포트를 사용합니다.</p>
 
-                <h4>Access Spark Web UI</h4>
-                <p>
-                    Master 인스턴스 기동 후 <span class="command">http://localhost:8080</span>으로 접속하게 되면 Master 및 클러스터에 대한 구성 정보가 일목요연하게 나옵니다. 아직 Workers 항목은 기동된 Worker 인스턴스가 없기 때문에 아무것도 없습니다. 만약 8080 포트가 다른 프로세스(ex. 톰캣)등에 선점 되어 있다면 8081 포트로 접속이 가능합니다.
-                </p>
+<h4>Access Spark Web UI</h4>
+<p>Master 인스턴스 기동 후 <span class="command">http://localhost:8080</span>으로 접속하게 되면 Master 및 클러스터에 대한 구성 정보가 일목요연하게 나옵니다. 아직 Workers 항목은 기동된 Worker 인스턴스가 없기 때문에 아무것도 없습니다. 만약 8080 포트가 다른 프로세스(ex. 톰캣)등에 선점 되어 있다면 8081 포트로 접속이 가능합니다.</p>
 
-                <h3>Setup Worker Configuration</h3>
-                <p>
-                    Master 인스턴스 기동 후 이번엔 Worker 인스턴스 환경 설정을 해줘야 합니다.
-                </p>
+<h3>Setup Worker Configuration</h3>
+<p>Master 인스턴스 기동 후 이번엔 Worker 인스턴스 환경 설정을 해줘야 합니다.</p>
+
 
 <pre class="console">
-$ <span class="light">cd SPARK_HOME/conf</span>
-$ <span class="light">cp spark-env.sh.template spark-env.sh</span>
+$ cd SPARK_HOME/conf
+$ cp spark-env.sh.template spark-env.sh
 </pre>
 
-                <p>
-                    복사된 spark-env.sh 파일에 다음과 같은 정보를 입력합니다.
-                </p>
+<p>복사된 <span class="command">spark-env.sh</span> 파일에 다음과 같은 정보를 입력합니다.</p>
 
 <pre class="prettyprint lang-sh">
 # spark-env.sh
 export SPARK_WORKER_INSTANCES=3
 </pre>
 
-                <p>
-                    이 값은 Worker로 돌릴 인스턴스의 개수를 지정합니다. 적당히 지정하면 됩니다.
-                </p>
+<p>이 값은 Worker로 돌릴 인스턴스의 개수를 지정합니다. 적당히 지정하면 됩니다.</p>
 
-                <h3>Start Worker</h3>
-                <p>
-                    환경 설정이 끝났다면 <span class="command">SPARK_HOME/sbin/start-slave.sh</span>을 실행해야 합니다.
-                </p>
+
+<h3>Start Worker</h3>
+<p>환경 설정이 끝났다면 <span class="command">SPARK_HOME/sbin/start-slave.sh</span>을 실행해야 합니다.</p>
+
 
 <pre class="console">
-$ <span class="light">./start-slave.sh spark://your_host_name:7077</span>
+$ ./start-slave.sh spark://your_host_name:7077
 # ./start-slave.sh spark://your_host_name:7077 -m 512M -c 1
 # -m 은 워커가 사용할 메모리 지정
 # -c 은 워커가 사용할 코어 개수 지정
 </pre>
 
-                <p>
-                    위에서 <span class="command">spark://</span>값은 Master Web UI에 최상단에 <strong>URL</strong>이라는 항목에 있는 값입니다.
-                </p>
-                <p>
-                    여기까지 진행이 잘 됐다면 Web UI의 <strong>Workers</strong> 항목에 3개의 워커가 등록됩니다.
-                </p>
+<p>위에서 <span class="command">spark://</span>값은 Master Web UI에 최상단에 <strong>URL</strong>이라는 항목에 있는 값입니다.</p>
 
-                <h2>Test Spark Cluster</h2>
-                <p>
-                    간단하게 클러스터 구축이 끝났습니다. 이제는 써봐야겠지요. Master 인스턴스에 접속하기 위해 <span class="command">SPARK_HOME/bin/spark-shell</span>을 이용합시다.
-                </p>
+<p>여기까지 진행이 잘 됐다면 Web UI의 <strong>Workers</strong> 항목에 3개의 워커가 등록됩니다.</p>
 
-                <h3>Test Console</h3>
-                <p>
-                    다음과 같은 커맨드로 스파크 클러스터에 접속합니다.
-                </p>
+<h2>Test Spark Cluster</h2>
+<p>간단하게 클러스터 구축이 끝났습니다. 이제는 써봐야겠지요. Master 인스턴스에 접속하기 위해 <span class="command">SPARK_HOME/bin/spark-shell</span>을 이용합시다.</p>
+
+
+<h3>Test Console</h3>
+<p>다음과 같은 커맨드로 스파크 클러스터에 접속합니다.</p>
+
 <pre class="console">
-$ <span class="light">./spark-shell --master spark://your_host_name:7077</span>
+$ ./spark-shell --master spark://your_host_name:7077
 </pre>
-                <p>
-                    <a href="https://spark.apache.org/docs/latest/quick-start.html">간단한 예제</a> 하나 돌려보면서 Master의 Web UI에서 어떤 것이 추가 되는지 지켜보세요. :D
-                </p>
-                <div class="fold" data-title="Example">
+<p><a href="https://spark.apache.org/docs/latest/quick-start.html">간단한 예제</a> 하나 돌려보면서 Master의 Web UI에서 어떤 것이 추가 되는지 지켜보세요. :D</p>
+
+<div class='fold' data-title='Example'>
 <pre class="console">
-scala> <span class="light">val textFile = sc.textFile("README.md")</span>
+scala&gt; &lt;span class="light"&gt;val textFile = sc.textFile("README.md")}
 ...
-scala> <span class="light">textFile.count()</span>
+scala&gt; &lt;span class="light"&gt;textFile.count()}
 </pre>
-                </div>
+</div>
 
-                <h4>Log4j Properties</h4>
-                <p>
-                    스파크 콘솔을 시작할 때 log4j 프로퍼티를 지정하라고 뜨는데 아래와 같은 커맨드로 log4j 프로퍼티 파일을 복사 하신 뒤 세부 설정을 하시면 됩니다.
-                </p>
+<h4>Log4j Properties</h4>
+<p>스파크 콘솔을 시작할 때 log4j 프로퍼티를 지정하라고 뜨는데 아래와 같은 커맨드로 log4j 프로퍼티 파일을 복사 하신 뒤 세부 설정을 하시면 됩니다.</p>
+
 <pre class="console">
-$ <span class="light">cd SPARK_HOME/conf</span>
-$ <span class="light">cp log4j.properties.template log4j.properties</span>
+$ cd SPARK_HOME/conf
+$ cp log4j.properties.template log4j.properties
 </pre>
 
-                <p>
-                    아래는 console 대신 file에 출력하도록 일부 설정을 변경한 log4j.properties 파일입니다.
-                </p>
+<p>아래는 console 대신 file에 출력하도록 일부 설정을 변경한 log4j.properties 파일입니다.</p>
+
 <pre class="console">
 # Set everything to be logged to the console
 log4j.rootCategory=INFO, console
-log4j.appender.console=org.apache.log4j.<span class="light">FileAppender</span>
+log4j.appender.console=org.apache.log4j.&lt;span class="light"&gt;FileAppender}
 log4j.appender.console.target=System.err
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=%d{yy/MM/dd HH:mm:ss} %p %c{1}: %m%n
-<span class="light">log4j.appender.console.file=SPARK_HOME/your_log_file.log</span>
+log4j.appender.console.file=SPARK_HOME/your_log_file.log
 
 # Settings to quiet third party logs that are too verbose
 log4j.logger.org.spark-project.jetty=WARN
@@ -178,22 +156,22 @@ log4j.logger.org.apache.spark.repl.SparkIMain$exprTyper=INFO
 log4j.logger.org.apache.spark.repl.SparkILoop$SparkILoopInterpreter=INFO
 </pre>
 
-                <h3>Worker Monitoring</h3>
-                <p>
-                    각 Worker의 작업 내역은 Master의 Web UI에서 확인하거나 또는 <span class="command">SPARK_HOME/work/</span>에서 확인 가능합니다.
-                </p>
+<h3>Worker Monitoring</h3>
+<p>각 Worker의 작업 내역은 Master의 Web UI에서 확인하거나 또는 <span class="command">SPARK_HOME/work/</span>에서 확인 가능합니다.</p>
 
-                <h2>Closing Remarks</h2>
-                <p>
-                    스파크 클러스터 "Standalone" 모드로 실행 및 테스트를 해봤습니다. :D
-                </p>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+
+<h2>Closing Remarks</h2>
+<p>스파크 클러스터 "Standalone" 모드로 실행 및 테스트를 해봤습니다. :D</p>
+
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>
