@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/ekdnshub.github.io/blog/css/view.css">
+    <link rel="stylesheet" type="text/css" href="/ekdnshub.github.io/blog/css/view.min.css">
 
     <!-- # jquery -->
     <!--[if lte IE 9]>
@@ -102,6 +102,12 @@ public abstract class Person {
 	void prepareOther(){};
 }
 </pre>
+                <ol>
+                    <li>새로운 노드를 단말 노드로 추가합니다.</li>
+                    <li>추가된 단말 노드를 부모 노드와 값을 비교하여 선별(sift) 후 위치를 교환합니다.</li>
+                    <li>교체된 노드가 있다면 교체된 노드와 부모 노드를 비교하여 선별 후 위치를 교환합니다.</li>
+                    <li>힙의 요건을 만족할 때까지 3번 동작을 반복합니다.</li>
+                </ol>
 <pre>
 ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
 </pre>
