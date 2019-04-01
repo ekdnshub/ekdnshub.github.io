@@ -1,111 +1,94 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>자바 간단한 쓰레드풀 구현(Java Simple ThreadPool) :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
-    <!-- # jquery -->
-    <!--[if lte IE 9]>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
-    <![endif]-->
-    <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <!--<![endif]-->
-
-
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><p>
-                ThreadPool(이하 "쓰레드풀")의 개념은 학부생 시절에도 배웁니다. 하지만 개념으로만 파악하고 있기엔 뜬구름 잡는 느낌이 없지 않아 있어서 이번 포스팅은 실제로 ThreadPool을 구현해보려고 합니다. 정말 간단한 ThreadPool을 구현하는 것이니 참고만 해주셨으면 합니다. :3
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
+
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
             </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">자바 간단한 쓰레드풀 구현(Java Simple ThreadPool)</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-                <h2>ThreadPool</h2>
-                <p>
-                    쓰레드풀의 설명은 <a href="https://en.wikipedia.org/wiki/Thread_pool_pattern">Wikipedia - Thread pool pattern</a>에서 참조하시기 바랍니다. 해당 링크의 패턴을 참조해서 쓰레드풀을 구현해 보려고 합니다.
-                </p>
 
-                <h2>Structure</h2>
-                <p>
-                    이번에 만들고자 하는 쓰레드풀의 클래스들은 다음과 같습니다.
-                </p>
 
-                <ul>
-                    <li>
-                        <strong>ThreadPool</strong>
-                        <p>
-                            이 클래스는 추후에 기술될 ThreadPoolQueue, ThreadPoolRunnable를 가지는 쓰레드풀 메인 객체입니다. 사용자들은 이 클래스를 이용해서 쓰레드풀을 생성 할 수 있습니다.
-                        </p>
-                    </li>
-                    <li>
-                        <strong>ThreadPoolQueue</strong>
-                        <p>
-                            이 클래스는 쓰레드풀 내의 쓰레드에서 공유할 Task 큐입니다. 처리할 Task를 Runnable 형태로 삽입하고 꺼낼 수 있습니다.
-                        </p>
-                    </li>
-                    <li>
-                        <strong>ThreadPoolRunnable</strong>
-                        <p>
-                            쓰레드풀에서 실제로 Task를 처리할 Runnable 클래스입니다. ThreadPoolQueue에서 Task를 꺼낸 후 처리합니다.
-                        </p>
-                    </li>
-                </ul>
 
-                <h2>Source Code</h2>
-                <p>
-                    이제부터 코드를 하나씩 만들어 봅시다.
-                </p>
+<p>ThreadPool(이하 "쓰레드풀")의 개념은 학부생 시절에도 배웁니다. 하지만 개념으로만 파악하고 있기엔 뜬구름 잡는 느낌이 없지 않아 있어서 이번 포스팅은 실제로 ThreadPool을 구현해보려고 합니다. 정말 간단한 ThreadPool을 구현하는 것이니 참고만 해주셨으면 합니다. :3</p>
 
-                <h3>ThreadPoolQueue</h3>
-                <p>
-                    우선적으로 Task를 삽입하고 꺼낼 수 있는 ThreadPoolQueue 클래스부터 만들어봅시다. 코드는 다음과 같습니다.
-                </p>
-<pre class="prettyprint lang-java fold" data-title="View Source Code">
+
+<h2>ThreadPool</h2>
+<p>쓰레드풀의 설명은 <a href="https://en.wikipedia.org/wiki/Thread_pool_pattern">Wikipedia - Thread pool pattern</a>에서 참조하시기 바랍니다. 해당 링크의 패턴을 참조해서 쓰레드풀을 구현해 보려고 합니다.</p>
+
+
+<h2>Structure</h2>
+<p>이번에 만들고자 하는 쓰레드풀의 클래스들은 다음과 같습니다.</p>
+
+
+<ul>
+<li><strong>ThreadPool</strong> <br> 이 클래스는 추후에 기술될 ThreadPoolQueue, ThreadPoolRunnable를 가지는 쓰레드풀 메인 객체입니다. 사용자들은 이 클래스를 이용해서 쓰레드풀을 생성 할 수 있습니다.</li>
+
+<li><strong>ThreadPoolQueue</strong> <br> 이 클래스는 쓰레드풀 내의 쓰레드에서 공유할 Task 큐입니다. 처리할 Task를 Runnable 형태로 삽입하고 꺼낼 수 있습니다.</li>
+
+<li><strong>ThreadPoolRunnable</strong> <br> 쓰레드풀에서 실제로 Task를 처리할 Runnable 클래스입니다. ThreadPoolQueue에서 Task를 꺼낸 후 처리합니다.</li>
+</ul>
+
+<h2>Source Code</h2>
+<p>이제부터 코드를 하나씩 만들어 봅시다.</p>
+
+
+<h3>ThreadPoolQueue</h3>
+<p>우선적으로 Task를 삽입하고 꺼낼 수 있는 ThreadPoolQueue 클래스부터 만들어봅시다. 코드는 다음과 같습니다.</p>
+
+<div class='fold' data-title='View Source Code'>
+<pre class="prettyprint lang-java">
 import java.util.LinkedList;
 
 public class ThreadPoolQueue {
 
 	/* item을 저장할 큐 선언 */
-	private LinkedList&lt;Object> queue = new LinkedList&lt;Object>();
+	private LinkedList&lt;Object&gt; queue = new LinkedList&lt;Object&gt;();
 
 	/* 큐 최대 사이즈 선언 */
 	private int MAX_QUEUE_SIZE = 5;
@@ -164,15 +147,15 @@ public class ThreadPoolQueue {
 	}
 }
 </pre>
-                <p>
-                    이 클래스는 Task를 받아서 삽입하고 꺼내주는 용도의 큐로써 작성했습니다. 큐에 Task가 없으면 <span class="command">.wait()</span> 메소드를 통해 잠시 멈춰 있고 반대로 큐에 Task가 가득 차 있으면 <span class="command">.notifyAll()</span> 메소드를 호출합니다.
-                </p>
+</div>
 
-                <h3>ThreadPoolRunnable</h3>
-                <p>
-                    이번엔 쓰레드풀에서 실제 Task 처리를 위한 쓰레드를 생성하는 클래스입니다.
-                </p>
-<pre class="prettyprint lang-java fold" data-title="View Source Code">
+<p>이 클래스는 Task를 받아서 삽입하고 꺼내주는 용도의 큐로써 작성했습니다. 큐에 Task가 없으면 <span class="command">.wait()</span> 메소드를 통해 잠시 멈춰 있고 반대로 큐에 Task가 가득 차 있으면 <span class="command">.notifyAll()</span> 메소드를 호출합니다.</p>
+
+<h3>ThreadPoolRunnable</h3>
+<p>이번엔 쓰레드풀에서 실제 Task 처리를 위한 쓰레드를 생성하는 클래스입니다.</p>
+
+<div class='fold' data-title='View Source Code'>
+<pre class="prettyprint lang-java">
 public class ThreadPoolRunnable implements Runnable {
 
 	private int id; // Runnable ID
@@ -220,21 +203,23 @@ public class ThreadPoolRunnable implements Runnable {
 	}
 }
 </pre>
-                <p>
-                    단순하게 생각한다면 ThreadPoolQueue에서 Task를 꺼내고 그것을 처리하는 것이 전부입니다.
-                </p>
-                <div class="yellow">
-                    <p>
-                        <strong>TIP</strong> <span class="command">volatile</span> vs <span class="command">syncronized</span><br>
-                        syncronized 키워드는 블럭으로 이루어진 코드의 동작(operation)에 대한 원자성 보장이라면 volatile는 선언된 변수의 원자성을 보장합니다. 자바 버전 1.5 이상이어야 제대로 동작합니다.
-                    </p>
-                </div>
+</div>
 
-                <h3>ThreadPool</h3>
-                <p>
-                    위의 두가지 클래스를 멤버 변수로 하는 쓰레드풀 객체입니다.
-                </p>
-<pre class="prettyprint lang-java fold" data-title="View Source Code">
+<p>단순하게 생각한다면 ThreadPoolQueue에서 Task를 꺼내고 그것을 처리하는 것이 전부입니다.</p>
+
+<div class="yellow">
+<p>
+<strong>TIP</strong> <span class="command">volatile</span> vs <span class="command">syncronized</span><br>
+<br>
+syncronized 키워드는 블럭으로 이루어진 코드의 동작(operation)에 대한 원자성 보장이라면 volatile는 선언된 변수의 원자성을 보장합니다. 자바 버전 1.5 이상이어야 제대로 동작합니다.<br>
+</p>
+</div>
+
+<h3>ThreadPool</h3>
+<p>위의 두가지 클래스를 멤버 변수로 하는 쓰레드풀 객체입니다.</p>
+
+<div class='fold' data-title='View Source Code'>
+<pre class="prettyprint lang-java">
 import java.util.ArrayList;
 import java.util.List;
 
@@ -242,7 +227,7 @@ import java.util.List;
 public class ThreadPool {
 
 	private ThreadPoolQueue queue;
-	private List&lt;ThreadPoolRunnable> runnableList = new ArrayList&lt;ThreadPoolRunnable>();
+	private List&lt;ThreadPoolRunnable&gt; runnableList = new ArrayList&lt;ThreadPoolRunnable&gt;();
 	private volatile boolean running = true;
 
 	/* 쓰레드풀 초기화 */
@@ -285,12 +270,13 @@ public class ThreadPool {
 	}
 }
 </pre>
+</div>
 
-                <h2>Test</h2>
-                <p>
-                    실제로 위에서 만든 쓰레드풀을 활용한 테스트 프로그램을 작성해봤습니다.
-                </p>
-<pre class="prettyprint lang-java fold" data-title="View Source Code">
+<h2>Test</h2>
+<p>실제로 위에서 만든 쓰레드풀을 활용한 테스트 프로그램을 작성해봤습니다.</p>
+
+<div class='fold' data-title='View Source Code'>
+<pre class="prettyprint lang-java">
 public class TestMain {
 
 	public static void main(String[] args) {
@@ -337,10 +323,12 @@ class TestRunnable implements Runnable{
 
 }
 </pre>
-                <p>
-                    프로그램을 실행시켜보면 작동하는것을 콘솔로 볼 수 있습니다. 정지 명령이 내려와도 하던 일은 마치고 죽는 아름다운 쓰레드들입니다. (--;)
-                </p>
-<pre class="console fold" data-title="View Console">
+</div>
+
+<p>프로그램을 실행시켜보면 작동하는것을 콘솔로 볼 수 있습니다. 정지 명령이 내려와도 하던 일은 마치고 죽는 아름다운 쓰레드들입니다. (--;)</p>
+
+<div class='fold' data-title='View Console'>
+<pre class="console">
 ...(생략)
 enqueue adding...
 enqueue adding...
@@ -371,12 +359,13 @@ ThreadPoolRunnable[4] is dead.
 ThreadPoolRunnable[2] is dead.
 ThreadPoolRunnable[3] is dead.
 </pre>
+</div>
 
-                <h2>java.util.concurrent package</h2>
-                <p>
-                    하지만 위처럼 직접 구현 방법 외에도 <span class="command">java.util.concurrent</span> 패키지를 이용해 정말로 간단한 쓰레드풀을 구현 할 수 있습니다.
-                </p>
-<pre class="prettyprint lang-java fold" data-title="View Source Code">
+<h2>java.util.concurrent package</h2>
+<p>하지만 위처럼 직접 구현 방법 외에도 <span class="command">java.util.concurrent</span> 패키지를 이용해 정말로 간단한 쓰레드풀을 구현 할 수 있습니다.</p>
+
+<div class='fold' data-title='View Source Code'>
+<pre class="prettyprint lang-java">
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -429,24 +418,26 @@ class TestRunnable implements Runnable{
 	}
 }
 </pre>
-                <p>
-                    참 쉽죠? :)
-                </p>
-                <p>
-                    부연 설명을 조금 넣자면 <span class="command">.newFixedThreadPool()</span>로 반환 받는 객체는 <span class="command">ThreadPoolExecutor</span> 클래스입니다. 이 클래스에서는 초기화 할 때에 <span class="command">LinkedBlockingQueue&lt;Runnable></span>라는 내부 큐를 이용하게 되어 있습니다. 단지 외부에 노출을 안할 뿐이에요. :3
-                </p>
-
-                <h2>Closing Remarks</h2>
-                <p>
-                    간단한 쓰레드풀 구현을 해봤습니다. :D
-                </p>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+
+<p>참 쉽죠? :)</p>
+
+<p>부연 설명을 조금 넣자면 <span class="command">.newFixedThreadPool()</span>로 반환 받는 객체는 <span class="command">ThreadPoolExecutor</span> 클래스입니다. 이 클래스에서는 초기화 할 때에 <span class="command">LinkedBlockingQueue&lt;Runnable></span>라는 내부 큐를 이용하게 되어 있습니다. 단지 외부에 노출을 안할 뿐이에요. :3</p>
+
+
+<h2>Closing Remarks</h2>
+<p>간단한 쓰레드풀 구현을 해봤습니다. :D</p>
+
+
+
+
+</div>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

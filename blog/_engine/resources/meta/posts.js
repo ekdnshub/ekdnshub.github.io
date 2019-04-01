@@ -684,22 +684,18 @@ var postsInfo = (function(){
             "171":{
                 "title":"JSP redirect vs forward",
                 "created":"2015-07-09"
-                ,"version":"v1"
             },
             "172":{
                 "title":"자바 벡터(Java Vector)",
                 "created":"2015-07-10"
-                ,"version":"v1"
             },
             "173":{
                 "title":"자바 ArrayList(Java ArrayList)",
                 "created":"2015-07-12"
-                ,"version":"v1"
             },
             "174":{
                 "title":"자바 간단한 쓰레드풀 구현(Java Simple ThreadPool)",
                 "created":"2015-07-13"
-                ,"version":"v1"
             },
             "175":{
                 "title":"RSS 페이지를 만들었습니다.",
@@ -708,17 +704,14 @@ var postsInfo = (function(){
             "176":{
                 "title":"Scala IDE + Spark 연동 예제(for Windows7)",
                 "created":"2015-07-14"
-                ,"version":"v1"
             },
             "177":{
                 "title":"자료구조 - 힙(Data Structure - Heap)",
                 "created":"2015-07-15"
-                ,"version":"v1"
             },
             "178":{
                 "title":"jQuery Plugin - bxSlider(제이쿼리 슬라이딩)",
                 "created":"2015-07-16"
-                ,"version":"v1"
             },
             "179":{
                 "title":"Space Engine으로 우주 여행 중...",

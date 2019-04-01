@@ -1,48 +1,36 @@
-<p>
-ThreadPool(이하 "쓰레드풀")의 개념은 학부생 시절에도 배웁니다. 하지만 개념으로만 파악하고 있기엔 뜬구름 잡는 느낌이 없지 않아 있어서 이번 포스팅은 실제로 ThreadPool을 구현해보려고 합니다. 정말 간단한 ThreadPool을 구현하는 것이니 참고만 해주셨으면 합니다. :3
-</p>
+###info
+title=자바 간단한 쓰레드풀 구현(Java Simple ThreadPool)
+created=2015-07-13
+ad=true
+###
+#p ThreadPool(이하 "쓰레드풀")의 개념은 학부생 시절에도 배웁니다. 하지만 개념으로만 파악하고 있기엔 뜬구름 잡는 느낌이 없지 않아 있어서 이번 포스팅은 실제로 ThreadPool을 구현해보려고 합니다. 정말 간단한 ThreadPool을 구현하는 것이니 참고만 해주셨으면 합니다. :3
 
-<h2>ThreadPool</h2>
-<p>
-쓰레드풀의 설명은 <a href="https://en.wikipedia.org/wiki/Thread_pool_pattern">Wikipedia - Thread pool pattern</a>에서 참조하시기 바랍니다. 해당 링크의 패턴을 참조해서 쓰레드풀을 구현해 보려고 합니다.
-</p>
 
-<h2>Structure</h2>
-<p>
-이번에 만들고자 하는 쓰레드풀의 클래스들은 다음과 같습니다.
-</p>
+#h2 ThreadPool
+#p 쓰레드풀의 설명은 {$https://en.wikipedia.org/wiki/Thread_pool_pattern|Wikipedia - Thread pool pattern}에서 참조하시기 바랍니다. 해당 링크의 패턴을 참조해서 쓰레드풀을 구현해 보려고 합니다.
 
-<ul>
-	<li>
-		<strong>ThreadPool</strong>
-		<p>
-		이 클래스는 추후에 기술될 ThreadPoolQueue, ThreadPoolRunnable를 가지는 쓰레드풀 메인 객체입니다. 사용자들은 이 클래스를 이용해서 쓰레드풀을 생성 할 수 있습니다.
-		</p>
-	</li>
-	<li>
-		<strong>ThreadPoolQueue</strong>
-		<p>
-		이 클래스는 쓰레드풀 내의 쓰레드에서 공유할 Task 큐입니다. 처리할 Task를 Runnable 형태로 삽입하고 꺼낼 수 있습니다.
-		</p>
-	</li>
-	<li>
-		<strong>ThreadPoolRunnable</strong>
-		<p>
-		쓰레드풀에서 실제로 Task를 처리할 Runnable 클래스입니다. ThreadPoolQueue에서 Task를 꺼낸 후 처리합니다.
-		</p>
-	</li>
-</ul>
 
-<h2>Source Code</h2>
-<p>
-이제부터 코드를 하나씩 만들어 봅시다.
-</p>
+#h2 Structure
+#p 이번에 만들고자 하는 쓰레드풀의 클래스들은 다음과 같습니다.
 
-<h3>ThreadPoolQueue</h3>
-<p>
-우선적으로 Task를 삽입하고 꺼낼 수 있는 ThreadPoolQueue 클래스부터 만들어봅시다. 코드는 다음과 같습니다.
-</p>
-<pre class="prettyprint lang-java fold" data-title="View Source Code">
+
+###ul 
+#li {!ThreadPool} <br> 이 클래스는 추후에 기술될 ThreadPoolQueue, ThreadPoolRunnable를 가지는 쓰레드풀 메인 객체입니다. 사용자들은 이 클래스를 이용해서 쓰레드풀을 생성 할 수 있습니다.
+
+#li {!ThreadPoolQueue} <br> 이 클래스는 쓰레드풀 내의 쓰레드에서 공유할 Task 큐입니다. 처리할 Task를 Runnable 형태로 삽입하고 꺼낼 수 있습니다.
+
+#li {!ThreadPoolRunnable} <br> 쓰레드풀에서 실제로 Task를 처리할 Runnable 클래스입니다. ThreadPoolQueue에서 Task를 꺼낸 후 처리합니다.
+###
+
+#h2 Source Code
+#p 이제부터 코드를 하나씩 만들어 봅시다.
+
+
+#h3 ThreadPoolQueue
+#p 우선적으로 Task를 삽입하고 꺼낼 수 있는 ThreadPoolQueue 클래스부터 만들어봅시다. 코드는 다음과 같습니다.
+
+###fold.View Source Code
+###code.java
 import java.util.LinkedList;
 
 public class ThreadPoolQueue {
@@ -106,16 +94,16 @@ public class ThreadPoolQueue {
 			System.out.println(msg);
 	}
 }
-</pre>
-<p>
-이 클래스는 Task를 받아서 삽입하고 꺼내주는 용도의 큐로써 작성했습니다. 큐에 Task가 없으면 <span class="command">.wait()</span> 메소드를 통해 잠시 멈춰 있고 반대로 큐에 Task가 가득 차 있으면 <span class="command">.notifyAll()</span> 메소드를 호출합니다.
-</p>
+###
+###
 
-<h3>ThreadPoolRunnable</h3>
-<p>
-이번엔 쓰레드풀에서 실제 Task 처리를 위한 쓰레드를 생성하는 클래스입니다.
-</p>
-<pre class="prettyprint lang-java fold" data-title="View Source Code">
+#p 이 클래스는 Task를 받아서 삽입하고 꺼내주는 용도의 큐로써 작성했습니다. 큐에 Task가 없으면 `.wait()` 메소드를 통해 잠시 멈춰 있고 반대로 큐에 Task가 가득 차 있으면 `.notifyAll()` 메소드를 호출합니다.
+
+#h3 ThreadPoolRunnable
+#p 이번엔 쓰레드풀에서 실제 Task 처리를 위한 쓰레드를 생성하는 클래스입니다.
+
+###fold.View Source Code
+###code.java
 public class ThreadPoolRunnable implements Runnable {
 
 	private int id; // Runnable ID
@@ -162,22 +150,24 @@ public class ThreadPoolRunnable implements Runnable {
 			System.out.println(msg);
 	}
 }
-</pre>
-<p>
-단순하게 생각한다면 ThreadPoolQueue에서 Task를 꺼내고 그것을 처리하는 것이 전부입니다.
-</p>
-<div class="yellow">
-<p>
-<strong>TIP</strong> <span class="command">volatile</span> vs <span class="command">syncronized</span><br>
-syncronized 키워드는 블럭으로 이루어진 코드의 동작(operation)에 대한 원자성 보장이라면 volatile는 선언된 변수의 원자성을 보장합니다. 자바 버전 1.5 이상이어야 제대로 동작합니다.
-</p>
-</div>
+###
+###
 
-<h3>ThreadPool</h3>
-<p>
-위의 두가지 클래스를 멤버 변수로 하는 쓰레드풀 객체입니다.
-</p>
-<pre class="prettyprint lang-java fold" data-title="View Source Code">
+#p 단순하게 생각한다면 ThreadPoolQueue에서 Task를 꺼내고 그것을 처리하는 것이 전부입니다.
+
+###box.yellow
+###p
+{!TIP} `volatile` vs `syncronized`
+
+syncronized 키워드는 블럭으로 이루어진 코드의 동작(operation)에 대한 원자성 보장이라면 volatile는 선언된 변수의 원자성을 보장합니다. 자바 버전 1.5 이상이어야 제대로 동작합니다.
+###
+###
+
+#h3 ThreadPool
+#p 위의 두가지 클래스를 멤버 변수로 하는 쓰레드풀 객체입니다.
+
+###fold.View Source Code
+###code.java
 import java.util.ArrayList;
 import java.util.List;
 
@@ -227,13 +217,14 @@ public class ThreadPool {
 		queue.toggleDebug(flag);
 	}
 }
-</pre>
+###
+###
 
-<h2>Test</h2>
-<p>
-실제로 위에서 만든 쓰레드풀을 활용한 테스트 프로그램을 작성해봤습니다.
-</p>
-<pre class="prettyprint lang-java fold" data-title="View Source Code">
+#h2 Test
+#p 실제로 위에서 만든 쓰레드풀을 활용한 테스트 프로그램을 작성해봤습니다.
+
+###fold.View Source Code
+###code.java
 public class TestMain {
 
 	public static void main(String[] args) {
@@ -279,11 +270,13 @@ class TestRunnable implements Runnable{
 	}
 
 }
-</pre>
-<p>
-프로그램을 실행시켜보면 작동하는것을 콘솔로 볼 수 있습니다. 정지 명령이 내려와도 하던 일은 마치고 죽는 아름다운 쓰레드들입니다. (--;)
-</p>
-<pre class="console fold" data-title="View Console">
+###
+###
+
+#p 프로그램을 실행시켜보면 작동하는것을 콘솔로 볼 수 있습니다. 정지 명령이 내려와도 하던 일은 마치고 죽는 아름다운 쓰레드들입니다. (--;)
+
+###fold.View Console
+###console
 ...(생략)
 enqueue adding...
 enqueue adding...
@@ -313,13 +306,14 @@ ThreadPoolRunnable[4] is dead.
 93
 ThreadPoolRunnable[2] is dead.
 ThreadPoolRunnable[3] is dead.
-</pre>
+###
+###
 
-<h2>java.util.concurrent package</h2>
-<p>
-하지만 위처럼 직접 구현 방법 외에도 <span class="command">java.util.concurrent</span> 패키지를 이용해 정말로 간단한 쓰레드풀을 구현 할 수 있습니다.
-</p>
-<pre class="prettyprint lang-java fold" data-title="View Source Code">
+#h2 java.util.concurrent package
+#p 하지만 위처럼 직접 구현 방법 외에도 `java.util.concurrent` 패키지를 이용해 정말로 간단한 쓰레드풀을 구현 할 수 있습니다.
+
+###fold.View Source Code
+###code.java
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -371,15 +365,14 @@ class TestRunnable implements Runnable{
 		System.out.println(index);
 	}
 }
-</pre>
-<p>
-참 쉽죠? :)
-</p>
-<p>
-부연 설명을 조금 넣자면 <span class="command">.newFixedThreadPool()</span>로 반환 받는 객체는 <span class="command">ThreadPoolExecutor</span> 클래스입니다. 이 클래스에서는 초기화 할 때에 <span class="command">LinkedBlockingQueue&lt;Runnable></span>라는 내부 큐를 이용하게 되어 있습니다. 단지 외부에 노출을 안할 뿐이에요. :3
-</p>
+###
+###
 
-<h2>Closing Remarks</h2>
-<p>
-간단한 쓰레드풀 구현을 해봤습니다. :D
-</p>
+#p 참 쉽죠? :)
+
+#p 부연 설명을 조금 넣자면 `.newFixedThreadPool()`로 반환 받는 객체는 `ThreadPoolExecutor` 클래스입니다. 이 클래스에서는 초기화 할 때에 `LinkedBlockingQueue&lt;Runnable>`라는 내부 큐를 이용하게 되어 있습니다. 단지 외부에 노출을 안할 뿐이에요. :3
+
+
+#h2 Closing Remarks
+#p 간단한 쓰레드풀 구현을 해봤습니다. :D
+
