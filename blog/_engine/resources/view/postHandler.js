@@ -28,7 +28,8 @@ function applyContentEffect(){
 		if( map["h4"] > 0) subIndex += map["h4"]+".";
 		if( map["h5"] > 0) subIndex += map["h5"]+".";
 
-		$(obj).html( subIndex + " " + $(obj).html() );
+        $(obj).attr("id", "index_" + subIndex); // 목차 기능에서 활용함.
+		$(obj).html(subIndex + " " + $(obj).html());
 	});
 
 	// 본문 내 a링크인데 _blank 옵션이 없으면 넣어준다.
@@ -92,6 +93,7 @@ function addInfoBody(currentSeq){
 				<button id="bigsize" class="btn btn-default btn-xs"><i id="bigsizeLabel" class="fa fa-expand"> Wide</i></button>
 				<button id="up_font_size" class="btn btn-default btn-xs"><i class="fa fa-text-height"></i> 확대</button>
 				<button id="down_font_size" class="btn btn-default btn-xs"><i class="fa fa-text-height"></i> 축소</button>
+				<button id="view_summary" class="btn btn-default btn-xs"><i class="fa fa-list"></i> 목차</button>
 			</div>
 		</div>
 		<hr>`;
@@ -126,6 +128,19 @@ function addInfoBody(currentSeq){
 		var fontSize = $("html").css("font-size").replace("px","")*0.9;
 		$("html").css("font-size", fontSize+"px");
 	});
+	$("#view_summary").click(function(){
+	    var summary = "";
+        $("#content h1,#content h2,#content h3,#content h4,#content h5").each(function(i, obj){
+            var tagNumber = $(obj).prop("tagName").toLowerCase().replace("h", "") - 2; // 콘텐츠 내에서는 h1부터 시작하진 않을거라고 view.css에 적어뒀었음. h2 부터 시작한다는 가정하에 매직 넘버!
+            if (tagNumber <= 0) tagNumber = 0;
+            summary += "<li style=\"margin-left:" + (tagNumber) + "em\"><a href=\"#" + $(obj).attr("id") + "\">" + $(obj).html() + "</a></li>";
+        });
+
+        if (summary != "") {
+            $("#content").prepend("<div class=\"tab\"><strong>목차</strong><ul>\n\n" + summary + "</ul></div>");
+            $("#view_summary").hide();
+        }
+    });
 	
 	// 카테고리 이름 출력
 	$("#content_category").html(ArchiveGroup.findName(currentSeq)).show();

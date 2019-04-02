@@ -107,6 +107,7 @@
             }],
             ["#h", function(line){
                 var size = line.match(/^#h(.)/)[1];
+                if (size == 1) console.log("h1은 타이틀에서만 적용해야 합니다.");
                 return "<h"+size+">"+line.substring(3,line.length).trim()+"</h"+size+">";
             }]
         ];
