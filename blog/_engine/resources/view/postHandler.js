@@ -138,8 +138,8 @@ function addInfoBody(currentSeq){
 
         if (summary != "") {
             $("#content").prepend("<div class=\"tab\"><strong>목차</strong><ul>\n\n" + summary + "</ul></div>");
-            $("#view_summary").hide();
         }
+        $("#view_summary").hide();
     });
 	
 	// 카테고리 이름 출력
