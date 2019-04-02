@@ -7,7 +7,7 @@ ad=true
 #h4 select query ordering
 ###box.blue
 ###ul
-{!FROM}
+#li {!FROM}
 #li ON
 #li JOIN
 #li {!WHERE}
@@ -17,7 +17,7 @@ ad=true
 #li {!SELECT}
 #li DISTINCT
 #li {!ORDER BY}
-TOP
+#li TOP
 ###
 ###
 #p  select 쿼리는 위부터 아래의 순서로 실행이 됩니다. 자주 사용하는 구문은 두껍게 해놨습니다. :3 
