@@ -825,7 +825,6 @@ var postsInfo = (function(){
             "202":{
                 "title":"Jedis - Redis Java Client",
                 "created":"2015-09-17"
-                ,"version":"v1"
             },
             "203":{
                 "title":"Install Maven for Mac",
