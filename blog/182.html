@@ -1,186 +1,172 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>CentOS 서버 시간 동기화(using ntp daemon) :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
-
-    <!-- # jquery -->
-    <!--[if lte IE 9]>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
-    <![endif]-->
-    <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <!--<![endif]-->
-
-
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><p>이번 포스팅은 NTP(Network Time Protocol)의 간단한 정의와 CentOS에서의 사용법을 알아보고자 합니다.</p>
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
-                <h2>NTP(Network Time Protocol)</h2>
-                <blockquote>
-                    <p>
-                        Network Time Protocol (NTP) is a networking protocol for clock synchronization between computer systems over packet-switched, variable-latency data networks
-                    </p>
-                    <cite><a href="https://en.wikipedia.org/wiki/Network_Time_Protocol">Wikipedia - Network Time Protocol</a></cite>
-                </blockquote>
-                <p>
-                    간단히 번역해본다면, NTP는 네트워크로 이뤄진 컴퓨터 시스템들 사이의 <strong>시간 동기화를 위한 네트워킹 프로토콜</strong>입니다.
-                </p>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">CentOS 서버 시간 동기화(using ntp daemon)</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-                <h2>When do I use NTP?</h2>
-                <p>
-                    언제 NTP를 사용할까요?
-                </p>
-                <p>
-                    제 서버에는 하루 단위 배치 프로그램이 있습니다. 그런데 어느 순간부터 미묘한 오차가 나더군요. 그래서 서버에서 <span class="command">date</span> 커맨드로 실행해보니 대략 5분 정도의 시간 차이가 났습니다. (-_-;;)
-                </p>
-                <p>
-                    그래서 서버 시간을 표준 시간과 동기화하기 위해 NTP를 사용하게 됩니다.
-                </p>
 
-                <h2>Install</h2>
-                <p>
-                    CentOS에서 NTP를 제공하는 패키지로 ntp가 있습니다. ntp 데몬을 설치해서 시간 동기화를 해봅시다.
-                </p>
 
-                <h3>Install ntp daemon using yum</h3>
-                <p>
-                    CentOS에서 ntp를 설치하기 위해 yum 패키지 관리자를 이용합니다.
-                </p>
+
+<p>이번 포스팅은 NTP(Network Time Protocol)의 간단한 정의와 CentOS에서의 사용법을 알아보고자 합니다.</p>
+
+<h2>NTP(Network Time Protocol)</h2>
+<blockquote>
+<p>Network Time Protocol (NTP) is a networking protocol for clock synchronization between computer systems over packet-switched, variable-latency data networks</p>
+<cite><a href="https://en.wikipedia.org/wiki/Network_Time_Protocol">Wikipedia - Network Time Protocol</a></cite>
+</blockquote>
+<p>간단히 번역해본다면, NTP는 네트워크로 이뤄진 컴퓨터 시스템들 사이의 <strong>시간 동기화를 위한 네트워킹 프로토콜</strong>입니다.</p>
+
+
+<h2>When do I use NTP?</h2>
+<p>언제 NTP를 사용할까요?</p>
+
+<p>제 서버에는 하루 단위 배치 프로그램이 있습니다. 그런데 어느 순간부터 미묘한 오차가 나더군요. 그래서 서버에서 <span class="command">date</span> 커맨드로 실행해보니 대략 5분 정도의 시간 차이가 났습니다. (-_-;;)</p>
+
+<p>그래서 서버 시간을 표준 시간과 동기화하기 위해 NTP를 사용하게 됩니다.</p>
+
+
+<h2>Install</h2>
+<p>CentOS에서 NTP를 제공하는 패키지로 ntp가 있습니다. ntp 데몬을 설치해서 시간 동기화를 해봅시다.</p>
+
+
+<h3>Install ntp daemon using yum</h3>
+<p>CentOS에서 ntp를 설치하기 위해 yum 패키지 관리자를 이용합니다.</p>
+
 <pre class="console">
 $ yum install ntp
 </pre>
 
-                <h3>config & start ntp daemon</h3>
-                <p>
-                    설치가 끝나면 ntp 데몬과 관련된 설정을 해줍니다. 기본 경로는 <span class="command">/etc/ntp.conf</span>입니다. 이 파일을 vi 편집기등을 이용해 열어서 다음 부분을 수정해줍니다. 형광색으로 되어 있는 부분입니다.
-                </p>
+<h3>config & start ntp daemon</h3>
+<p>설치가 끝나면 ntp 데몬과 관련된 설정을 해줍니다. 기본 경로는 <span class="command">/etc/ntp.conf</span>입니다. 이 파일을 vi 편집기등을 이용해 열어서 다음 부분을 수정해줍니다.</p>
+
 
 <pre class="console">
 ...
 # Use public servers from the pool.ntp.org project.
 # Please consider joining the pool (http://www.pool.ntp.org/join.html).
-<span class="light">#</span>server 0.centos.pool.ntp.org iburst
-<span class="light">#</span>server 1.centos.pool.ntp.org iburst
-<span class="light">#</span>server 2.centos.pool.ntp.org iburst
-<span class="light">#</span>server 3.centos.pool.ntp.org iburst
+# server 0.centos.pool.ntp.org iburst
+# server 1.centos.pool.ntp.org iburst
+# server 2.centos.pool.ntp.org iburst
+# server 3.centos.pool.ntp.org iburst
 
-<span class="light">server kr.pool.ntp.org</span>
+server kr.pool.ntp.org
 ...
 </pre>
-                <p>
-                    상기에 적혀있는 <a href="http://www.pool.ntp.org/ko/use.html">kr.pool.ntp.org</a>의 자세한 사용법은 링크를 확인하세요. 안전하게 다른 곳을 더 추가할 수도 있습니다. 해당 부분은 검색 사이트에서 <span class="command">국내 타임 서버</span>라고 검색해 봅시다.
-                </p>
-                <p>
-                    그리고 다음으로 서버가 재부팅 되더라도 시간을 동기화 할 수 있도록 <span class="command">chkconfig</span>를 해줍니다. 그리고 데몬을 구동시킵니다.
-                </p>
+<p>상기에 적혀있는 <a href="http://www.pool.ntp.org/ko/use.html">kr.pool.ntp.org</a>의 자세한 사용법은 링크를 확인하세요. 안전하게 다른 곳을 더 추가할 수도 있습니다. 해당 부분은 검색 사이트에서 <span class="command">국내 타임 서버</span>라고 검색해 봅시다.</p>
+
+<p>그리고 다음으로 서버가 재부팅 되더라도 시간을 동기화 할 수 있도록 <span class="command">chkconfig</span>를 해줍니다. 그리고 데몬을 구동시킵니다.</p>
+
 <pre class="console">
 $ chkconfig ntpd on
 $ /etc/init.d/ntpd start
 </pre>
-                <div class="yellow">
-                    <p>
-                        <strong><i class="fa fa-check fa-lg"></i> TIP. 주의사항!</strong><br>
-                        NTP 데몬이 시작되고 나서 바로 동기화가 이뤄지지 않습니다. 여유있게 기다려주세요. (5분 이내)<br>
-                        또한, NTP 데몬은 <strong>UDP 123</strong> 포트를 이용합니다. 방화벽에서 막고 있다면 원활한 실행을 보장 할 수 없습니다!
-                    </p>
-                </div>
+<div class="yellow">
+<p>
+<i class="fa fa-exclamation-triangle fa-lg"></i><strong>TIP. 주의사항!</strong><br>
+<br>
+NTP 데몬이 시작되고 나서 바로 동기화가 이뤄지지 않습니다. 여유있게 기다려주세요. (5분 이내)<br>
+또한, NTP 데몬은 <strong>UDP 123</strong> 포트를 이용합니다. 방화벽에서 막고 있다면 원활한 실행을 보장 할 수 없습니다!<br>
+</p>
+</div>
 
-                <h2>Check Time Server</h2>
-                <p>
-                    실제로 타임 서버에서 잘 받고 있는지 다음과 같은 커맨드로 확인합니다.
-                </p>
+<h2>Check Time Server</h2>
+<p>실제로 타임 서버에서 잘 받고 있는지 다음과 같은 커맨드로 확인합니다.</p>
+
 <pre class="console">
-$ <span class="light">ntpq -p</span>
-     remote           refid      st t when poll reach   delay   offset  jitter
+$ ntpq -p
+    remote           refid      st t when poll reach   delay   offset  jitter
 ==============================================================================
 *send.mx.cdnetwo ***.***.*.*      2 u  580 1024  377    1.104   12.566  14.660
 </pre>
-                <p>
-                    위에 결과를 보시면 <span class="command">remote</span> 부분에 있는 문자열이 있습니다. <span class="command">*send.mx.cdnetwo</span>인데요, 이 문자열에서도 제일 앞 문자가 하나 있습니다. 이부분을 <strong>tally</strong>라고 하는데요. tally에 대한 언급이 있는 곳은 <span class="command">man ntpq</span> 커맨드를 통해 확인 할 수 있습니다.
-                </p>
-                <p>
-                    여기서 tally인 <span class="command">*</span>가 뜻하는 것은 현재 동기화가 되어 있는 부분입니다. 만약 아무것도 없는 빈칸(blank)라면 접근할 수 없는 상태입니다. tally가 뜻하는 내용은 <a href="http://support.ntp.org/bin/view/Support/TroubleshootingNTP">TroubleshootingNTP</a>에서 자세한 내용을 확인 할 수 있습니다.
-                </p>
+<p>위에 결과를 보시면 <span class="command">remote</span> 부분에 있는 문자열이 있습니다. <span class="command">*send.mx.cdnetwo</span>인데요, 이 문자열에서도 제일 앞 문자가 하나 있습니다. 이부분을 <strong>tally</strong>라고 하는데요. tally에 대한 언급이 있는 곳은 <span class="command">man ntpq</span> 커맨드를 통해 확인 할 수 있습니다.</p>
 
-                <h2>Sync Interval</h2>
-                <p>
-                    그렇다면 ntp 데몬이 동기화하는 주기는 어느정도일까요? <span class="command">man ntp.conf</span>를 통해서 확인해봅시다. 다음과 같은 도움말을 볼 수 있습니다.
-                </p>
+<p>여기서 tally인 <span class="command">*</span>가 뜻하는 것은 현재 동기화가 되어 있는 부분입니다. 만약 아무것도 없는 빈칸(blank)라면 접근할 수 없는 상태입니다. tally가 뜻하는 내용은 <a href="http://support.ntp.org/bin/view/Support/TroubleshootingNTP">TroubleshootingNTP</a>에서 자세한 내용을 확인 할 수 있습니다.</p>
+
+
+<h2>Sync Interval</h2>
+<p>그렇다면 ntp 데몬이 동기화하는 주기는 어느정도일까요? <span class="command">man ntp.conf</span>를 통해서 확인해봅시다. 다음과 같은 도움말을 볼 수 있습니다.</p>
+
 <pre class="console">
 ...
 maxpoll maxpoll
-   These  options  specify  the minimum and maximum poll intervals for NTP messages, in seconds as a power of two. The
-   maximum poll interval defaults to 10 (1024 s), but can be increased by the maxpoll option to an upper limit  of  17
-   (36 h). The minimum poll interval defaults to 6 (64 s), but can be decreased by the minpoll option to a lower limit
-   of 3 (8 s).
+  These  options  specify  the minimum and maximum poll intervals for NTP messages, in seconds as a power of two. The
+  maximum poll interval defaults to 10 (1024 s), but can be increased by the maxpoll option to an upper limit  of  17
+  (36 h). The minimum poll interval defaults to 6 (64 s), but can be decreased by the minpoll option to a lower limit
+  of 3 (8 s).
 ...
 </pre>
-                <p>
-                    poll이라는 옵션으로 제공이 되어 있네요. NTP의 동기화 주기는 기본적으로 2^n초입니다. 최대값 poll에 의한 기본 주기는 2^10(1024초)이고 최대 2^17(36시간)까지 주기가 길어집니다. 반대로 최소값 poll에 의한 기본 주기는 2^6(64초)이고 최소 2^3(8초)까지 줄어듭니다. 이 주기값들에 대한 제어는 <span class="command">minpoll</span>과 <span class="command">maxpoll</span> 옵션으로 할 수 있습니다.
-                </p>
-                <p>
-                    두가지의 poll 값을 사용하는 것을 보면 내부적으로 표준 시간과 서버 시간 차이값으로 동기화 주기를 조절하지 않을까 예상해봅니다. :3
-                </p>
-                <div class="yellow">
-                    <p>
-                        <strong><i class="fa fa-check fa-lg"></i> TIP. poll value</strong><br>
-                        <span class="command">ntpq -p</span>를 통해 나오는 데이터 중 <span class="command">poll</span> 값을 확인하면 현재 동기화 주기를 알 수 있습니다.
-                    </p>
-                </div>
+<p>poll이라는 옵션으로 제공이 되어 있네요. NTP의 동기화 주기는 기본적으로 2^n초입니다. 최대값 poll에 의한 기본 주기는 2^10(1024초)이고 최대 2^17(36시간)까지 주기가 길어집니다. 반대로 최소값 poll에 의한 기본 주기는 2^6(64초)이고 최소 2^3(8초)까지 줄어듭니다. 이 주기값들에 대한 제어는 <span class="command">minpoll</span>과 <span class="command">maxpoll</span> 옵션으로 할 수 있습니다.</p>
 
-                <h2>Closing Remarks</h2>
-                <p>
-                    간단하게 NTP 서버 시간 동기화를 살펴봤습니다. :D
-                </p>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+<p>두가지의 poll 값을 사용하는 것을 보면 내부적으로 표준 시간과 서버 시간 차이값으로 동기화 주기를 조절하지 않을까 예상해봅니다. :3</p>
+
+<div class="green">
+<p>
+<i class="fa fa-check fa-lg"></i><strong>TIP. poll value</strong><br>
+<br>
+<span class="command">ntpq -p</span>를 통해 나오는 데이터 중 <span class="command">poll</span> 값을 확인하면 현재 동기화 주기를 알 수 있습니다.<br>
+</p>
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+
+<h2>Closing Remarks</h2>
+<p>간단하게 NTP 서버 시간 동기화를 살펴봤습니다. :D</p>
+
+
+
+</div>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>
