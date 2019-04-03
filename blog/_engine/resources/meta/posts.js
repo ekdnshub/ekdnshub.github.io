@@ -720,7 +720,6 @@ var postsInfo = (function(){
             "180":{
                 "title":"팩토리 메소드 패턴(Factory Method Pattern)",
                 "created":"2015-07-22"
-                ,"version":"v1"
             },
             "181":{
                 "title":"자바 람다식(Lambda Expressions in Java)",
@@ -729,12 +728,10 @@ var postsInfo = (function(){
             "182":{
                 "title":"CentOS 서버 시간 동기화(using ntp daemon)",
                 "created":"2015-07-26"
-                ,"version":"v1"
             },
             "183":{
                 "title":"아파치 카프카를 보고 있습니다.",
                 "created":"2015-07-27"
-                ,"version":"v1"
             },
             "184":{
                 "title":"Hbase 데이터 모델(Hbase Data Model)",
@@ -743,12 +740,10 @@ var postsInfo = (function(){
             "185":{
                 "title":"Linux find exec grep",
                 "created":"2015-07-28"
-                ,"version":"v1"
             },
             "186":{
                 "title":"swagger.io(json api docs tool)",
                 "created":"2015-08-02"
-                ,"version":"v1"
             },
             "187":{
                 "title":"매미가 우렁차게 우는 하루",
@@ -757,12 +752,10 @@ var postsInfo = (function(){
             "188":{
                 "title":"자바 JVM 정리(Java Virtual Machine)",
                 "created":"2015-08-09"
-                ,"version":"v1"
             },
             "189":{
                 "title":"Hbase Region & RegionServer",
                 "created":"2015-08-11"
-                ,"version":"v1"
             },
             "190":{
                 "title":"변화의 바람이 불고 있습니다.",
