@@ -112,7 +112,7 @@ TestMain.main(String[]) line: 15
 #h5 클로저가 될까?
 ###code.js
 function addAlert(){
-    var length = $(".button-test").size();
+    var length = $(".button-test").length;
     for(var i = 0 ; i < length; i++){
         $($(".button-test")[i]).unbind("click");
         $($(".button-test")[i]).click(function(){
@@ -124,7 +124,7 @@ function addAlert(){
 
 <script>
 function addAlert(){
-    var length = $(".button-test").size();
+    var length = $(".button-test").length;
     for(var i = 0 ; i < length; i++){
         $($(".button-test")[i]).unbind("click");
         $($(".button-test")[i]).click(function(){
@@ -144,7 +144,7 @@ function addAlert(){
 
 ###code.js
 function addClosureAlert(){
-    var length = $(".button-test").size();
+    var length = $(".button-test").length;
     for(var i = 0 ; i &lt; length; i++){
         $($(".button-test")[i]).unbind("click");
         $($(".button-test")[i]).click(
@@ -163,7 +163,7 @@ function notiAlert(input){
 };
 
 function addClosureAlert(){
-    var length = $(".button-test").size();
+    var length = $(".button-test").length;
     for(var i = 0 ; i < length; i++){
         $($(".button-test")[i]).unbind("click");
         $($(".button-test")[i]).click(

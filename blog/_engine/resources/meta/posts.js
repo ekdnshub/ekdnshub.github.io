@@ -760,12 +760,10 @@ var postsInfo = (function(){
             "190":{
                 "title":"변화의 바람이 불고 있습니다.",
                 "created":"2015-08-16"
-                ,"version":"v1"
             },
             "191":{
                 "title":"실시간 현재 접속자 위치 추가",
                 "created":"2015-08-16"
-                ,"version":"v1"
             },
             "192":{
                 "title":"추상 팩토리 패턴(Abstract Factory Pattern)",
@@ -788,7 +786,6 @@ var postsInfo = (function(){
             "196":{
                 "title":"Jsoup : Java HTML Parser",
                 "created":"2015-08-27"
-                ,"version":"v1"
             },
             "197":{
                 "title":"Hashtable, HashMap, ConcurrentHashMap 비교",
@@ -808,7 +805,6 @@ var postsInfo = (function(){
             "200":{
                 "title":"SpringBoot Profile",
                 "created":"2015-09-06"
-                ,"version":"v1"
             },
             "201":{
                 "title":"TextWrangler",
