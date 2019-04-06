@@ -237,7 +237,9 @@
                     resultMultiLine = line;
                 }
             }
-            convertMultiLineData += resultMultiLine + "\n";
+            if (resultMultiLine != "") {
+                convertMultiLineData += resultMultiLine + "\n";
+            }
         }
 
         return convertMultiLineData;

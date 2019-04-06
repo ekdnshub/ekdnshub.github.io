@@ -7,6 +7,7 @@ $ node ./20170706_to_v2_from_v1_converter.js {number}
 
 var owiki = require("./owiki2.alpha.js");
 var resourcesMinify = require("./minify_resources.js");
+var extractContentMetaUtil = require("./utils/ExtractContentMetaUtil.js").getIns();
 
 var BASE_TEMPLATE = "../../_templates/base.html";
 var AD_TEMPLATE = "../../_templates/ad.html";
@@ -19,22 +20,17 @@ if (process.argv.length < 3) {
     return;
 }
 
-function extractMeta(key, body) {
-    console.log(key + " 추출 중...");
-    return body.split("\n").filter((line) => line.indexOf(key + "=") >= 0).map((line) => line.replace(key + "=", "")).reduce((old, _new) => old);
-}
-
 var number = process.argv[2];
 var newPost = process.argv[3];
 
-var completeHtml = function(number) {
+var completeHtml = async function(number) {
     console.log(`${number}번 콘텐츠 html 변환 시작`);
     var v2content = fs.readFileSync(V2_CONTENTS_PATH + number, "utf8");
-    var title = extractMeta("title", v2content);
-    var ad = extractMeta("ad", v2content);
-    if (ad !== "true" && ad !== "false") {
-        throw "ad 값을 확인하세요.";
-    }
+
+    var meta = await extractContentMetaUtil.execute(number);
+
+    console.log("메타 정보 추출....")
+    console.log(meta);
 
     var completeHtmlPath = HTML_PATH + number + ".html";
     try {
@@ -47,13 +43,18 @@ var completeHtml = function(number) {
     var baseHtml = fs.readFileSync(BASE_TEMPLATE, "utf8");
     var adHtml = fs.readFileSync(AD_TEMPLATE, "utf8");
 
-    var completeHtml = baseHtml.replace("{{{body}}}", owiki.getIns().interpreter(v2content))
-                               .replace(/{{{title}}}/g, title)
-                               .replace("{{{ad}}}", ad === "true" ? adHtml : "");
+    var completeHtml = baseHtml.replace("{{{body}}}", "\n"+owiki.getIns().interpreter(v2content))
+                               .replace(/{{{title}}}/g, meta.title)
+                               .replace("{{{ad}}}", meta.ad === true ? adHtml : "");
 
     console.log("신규 파일 저장 중...");
     fs.appendFileSync(completeHtmlPath, completeHtml);
     console.log("신규 파일 저장 완료!")
+
+    if (newPost) {
+        console.log("meta 정보 미니파이...");
+        resourcesMinify.getIns().execute("meta");
+    }
 }
 
 if (number == "all") {
@@ -63,8 +64,4 @@ if (number == "all") {
     });
 } else {
     completeHtml(number);
-}
-
-if (newPost) {
-    resourcesMinify.getIns().execute("meta");
 }
