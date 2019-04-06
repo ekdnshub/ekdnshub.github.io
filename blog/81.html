@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,11 +51,6 @@
                     <h1 id="content_title">스프링 프로필 설정(Spring Profile)</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
-
 <p>Spring 프레임워크를 쓰다보면 로컬 머신, 개발 서버, 운영 서버등 여러 곳에서 같은 애플리케이션 코드를 사용하지만 몇가지 속성을 바꿔주고 싶을 때가 있습니다. 기존에는 property 파일이나 또는 별도의 설정 파일을 애플리케이션 외부에 두는 방식으로 쓰고 있었는데, 조금 늦었지만 Spring Profile이라는 기능에 대해 알아보고자 합니다.</p>
 <h4>스프링 프로필(Spring Profile)</h4>
 <p>가장 대표적인 것은 DB 설정 변경 같은 것이 있겠지만 이번 포스팅에서는 간단하게 Root Path만 바꿔보는걸로 하겠습니다. 만약 로컬 머신이 Windows 환경이고 개발/운영 서버가 Linux 환경일 때 Root Path가 달라서 생기는 문제가 종종 있었어요. 이것을 해결하려면 외부 property 파일 등에 rootPath=C:\home 이라던가, rootPath=/home/... 등으로 써두곤 해당 프로퍼티 파일을 읽어 내부 로직에서 활용했습니다. 하지만 이 방법은 war 파일로 묶어서 배포 할 때 문제점이 외부 프로퍼티 파일 신경 쓰기가 참 애매하다는거죠.</p>
@@ -153,10 +148,6 @@ public class Comp {
 </pre>
 <h4>마무리</h4>
 <p>간단하게 스프링 프로필 설정에 대해 알아봤습니다. 저도 공부하면서 정리하는 것이라서 부족한 것이 많겠지만 개선이나 오류에 대해서 질문 및 댓글은 언제나 환영합니다. :3</p>
-
-
-
-
 </div>
 				</article>
 			</div>

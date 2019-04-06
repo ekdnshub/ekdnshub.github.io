@@ -159,7 +159,7 @@
             ["###ol", function(line){ return "<ol>"; }, function(line){ return "</ol>"; }, null],
             ["###pre", function(line){ return "<pre>"; }, function(line){ return "</pre>"; }, null],
             ["###include", function(line){ return "<blockquote>"; }, function(line){ return "</blockquote>"; }, null],
-            ["###info", function(line){ return ""; }, function(line){ return ""; }, function(line) { return ""; }],
+            ["###info", function(line){ return null; }, function(line){ return null; }, function(line) { return null; }],
             ["###box", function(line){
                 var color = line.match(/###box\.(.*)/)[1];
                 return "<div class=\""+color+"\">";
@@ -205,7 +205,7 @@
         var convertMultiLineData = "";
         for (var _i = 0 ; _i < multiLines.length; _i++){
             var line = multiLines[_i];
-            var resultMultiLine = "";
+            var resultMultiLine = null;
             var multiLine = null;
             if (line.indexOf("####") < 0) { // 멀티라인 prefix는 항상 ### 으로 시작하기 때문에 그 이상은 인정 안함.
                 multiLine = line.match(multiLineKeywordRex);
@@ -233,11 +233,13 @@
                         }
                     });
                     if (!isOnce) resultMultiLine = line;
-                } else {
-                    resultMultiLine = line;
+                } else { // 이전 op 값이 없으면 해당 라인에 들어오는것은 특정 키워드 내에 있는 내용이 아님.
+                    if (line != "") {
+                        resultMultiLine = line;
+                    }
                 }
             }
-            if (resultMultiLine != "") {
+            if (resultMultiLine != null) {
                 convertMultiLineData += resultMultiLine + "\n";
             }
         }

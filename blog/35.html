@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,13 +51,8 @@
                     <h1 id="content_title">Oracle Sql Developer Error - not find jvm.dll</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>음, Oracle에서 제공하는 쿼리 툴인 <strong>SQL Developer</strong>를 설치하고 다음날 컴퓨터를 켜보니 오류가 났다. -_-</p>
 <p>jvm.dll을 못찾는 오류였는데 이 경우에 <span class="command">product.conf</span> 파일을 수정 해줘야한다. 해당 파일은 4.x버전대를 쓴다면 아래와 같은 경로로 찾을 수 있다.</p>
-
 <pre class="prettyprint lang-sh">
 C:\Users\{계정명}\AppData\Roaming\sqldeveloper\1.0.0.0.0 
 </pre>
@@ -67,8 +62,6 @@ C:\Users\{계정명}\AppData\Roaming\sqldeveloper\1.0.0.0.0
 <pre>
 AddVMOption -Xmx800M =====> AddVMOption -Xms256M
 </pre>
-
-
 </div>
 				</article>
 			</div>

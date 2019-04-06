@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,15 +51,9 @@
                     <h1 id="content_title">Netty 개요 및 에코 서버 예제</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>Netty를 공부하고자 하는 의지(?)는 충만했으나 매번 핑계를 대고 진행 하지 않았습니다. 그래서 이번엔 각잡고 Netty(이하 '네티')가 어떤것인지 감을 잡는 용도의 포스팅을 올리고자 합니다.</p>
-
 <h2>개요(OverView)</h2>
 <p>네티는 유지하기 쉬운 높은 성능의 프로토콜 서버 및 클라이언트를 신속한 개발을 위한 비동기 이벤트 드리븐 네트워크 어플리케이션 프레임워크입니다.</p>
-
 <div class='fold' data-title='원문 #1'>
 <blockquote>
 <p>Netty is an asynchronous event-driven network application framework for rapid development of maintainable high performance protocol servers & clients.</p>
@@ -67,24 +61,18 @@
 </blockquote>
 </div>
 <p>네티는 프로토콜 서버 및 클라이언트 같은 네트워크 어플리케이션의 빠르고 쉬운 개발을 가능하게 하는 <a href="http://en.wikipedia.org/wiki/Non-blocking_I/O_(Java)">NIO</a> 클라이언트 서버 프레임워크입니다. 이는 TCP 또는 UDP 소켓 서버와 같은 네트워크 프로그래밍을 간단하게 할 수 있습니다.</p>
-
 <div class='fold' data-title='원문 #1'>
 <blockquote>
 <p>Netty is a NIO client server framework which enables quick and easy development of network applications such as protocol servers and clients. It greatly simplifies and streamlines network programming such as TCP and UDP socket server.</p>
 <cite><a href="http://netty.io/">Netty Project</a></cite>
 </blockquote>
 </div>
-
 <h2>Getting Started</h2>
-
 <p>현재 포스팅 시점으로 네티 5.X 버전이 가장 최신입니다. 따라서 네티 5.X버전으로 포스팅을 진행합니다.</p>
-
 <h3>준비</h3>
 <p>네티 5.X버전은 JDK 1.6 이상이 필요합니다. 그리고 최신 네티 라이브러리를 다운로드 받아야 하죠. 다운로드는 <a href="http://netty.io/downloads.html">이 곳</a>을 클릭해서 받습니다. 여기서 저는 <span class="command">netty-5.0.0.Alpha2.tar.bz2</span>를 선택했습니다. 물론 Maven으로도 의존성 선언을 통해 받을 수 있습니다.</p>
-
 <h3>다운로드 파일 구조</h3>
 <p>다운로드 받은 <span class="command">netty-5.0.0.Alpha2.tar.bz2</span>을 압축을 해제해 봅시다. 그러면 다음과 같은 구조로 되어 있음을 알 수 있습니다.</p>
-
 <pre class="console">
 netty-5.0.0.Alpha2
 	ㄴ jar
@@ -100,15 +88,11 @@ netty-5.0.0.Alpha2
 	ㄴ CONTRIBUTING.md
 </pre>
 <p>여기서 실제 사용해 볼것은 <span class="command">all-in-one</span> 으로 이름 붙여진 디렉토리 하위의 <span class="command">netty-all-5.0.0.Alpha2.jar</span> 파일입니다. 이것을 가지고 예제 프로그래밍을 진행합니다.</p>
-
 <h3>Echo Server</h3>
 <p>다양한 예제가 있지만 그중 에코 서버를 직접 구동시켜 봅시다. 해당 부분의 원문은 <a href="http://netty.io/wiki/user-guide-for-5.x.html#wiki-h3-9">Writing an Echo Server</a>부분에서 확인 할 수 있습니다.</p>
-
 <h4>예제 코드</h4>
 <p>에코 서버를 구현한 Full Code는 <a href="https://github.com/netty/netty/tree/master/example/src/main/java/io/netty/example/echo">netty example(echo)</a>를 확인해 봅시다. 이 포스팅에서는 진행에 필요한 부분만 추출해서 코드를 새로 작성했습니다.</p>
-
 <p>기본적으로 필요한 클래스는 아래의 목록입니다.</p>
-
 <ul>
 <li>EchoServer</li>
 <li>EhcoServerHandler</li>
@@ -116,7 +100,6 @@ netty-5.0.0.Alpha2
 <li>EchoClientHandler</li>
 </ul>
 <p>하나씩 개별로 코드 리뷰를 해봅시다. 딱히 제가 깊숙히 파고 든 부분은 없어서 돌아가게끔만 작성한 내용입니다. TT</p>
-
 <h5>EchoServer</h5>
 <pre class="prettyprint lang-java">
 import io.netty.bootstrap.ServerBootstrap;
@@ -184,9 +167,7 @@ public class EchoServer {
 	}
 }
 </pre>
-
 <h5>EhcoServerHandler</h5>
-
 <pre class="prettyprint lang-java">
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
@@ -213,9 +194,7 @@ public class EhcoServerHandler extends ChannelHandlerAdapter {
 	}
 }
 </pre>
-
 <h5>EchoClient</h5>
-
 <pre class="prettyprint lang-java">
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -263,9 +242,7 @@ public class EchoClient {
 	}
 }
 </pre>
-
 <h5>EchoClientHandler</h5>
-
 <pre class="prettyprint lang-java">
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -329,10 +306,8 @@ public class EchoClientHandler extends ChannelHandlerAdapter{
 	}
 }
 </pre>
-
 <h4>실행 결과</h4>
 <p>아래는 에코 서버의 콘솔 출력 내용입니다.</p>
-
 <pre class="console">
 6월 08, 2015 22:22:12 오후 io.netty.handler.logging.LoggingHandler channelRegistered
 INFO: [id: 0x468a70d0] REGISTERED
@@ -344,17 +319,11 @@ INFO: [id: 0x468a70d0, /0:0:0:0:0:0:0:0:8080] ACTIVE
 INFO: [id: 0x468a70d0, /0:0:0:0:0:0:0:0:8080] RECEIVED: [id: 0xc3efda59, /127.0.0.1:51782 =&gt; /127.0.0.1:8080]
 </pre>
 <p>아래는 에코 클라이언트 콘솔 출력 내용입니다.</p>
-
 <pre class="console">
 abcefg
 </pre>
-
 <h2>마무리</h2>
 <p>네티의 개요 및 간단한 에코 서버 프로그래밍을 통해 아주 짧게(?) 네티를 알아봤습니다. 이제 이걸 기반으로 해서 조금씩 스터디할 분량을 잡아가야겠어요. :)</p>
-
-
-
-
 </div>
 				</article>
 			</div>

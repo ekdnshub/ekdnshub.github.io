@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,27 +51,17 @@
                     <h1 id="content_title">MongoDB 설치 및 환경설정(for Window7)</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
-
 <p>NoSQL 종류 중 하나인 몽고 DB는 설치 개발이 쉽고 다양한 언어의 API를 제공하기 때문에 많은 곳에서 사용한다고 한다. 그래서 실제로 윈도우7에서 몽고DB<span class="refer">Mongodb</span>를 설치해 봤다.</p>
-
 <h2>Download</h2>
 <p>다운로드는 다음 링크에서 할 수 있다.</p>
 <div class="green">
 <p><a href="http://www.mongodb.org/downloads">http://www.mongodb.org/downloads</a></p>
 </div>
-
 <p>로컬에서 테스트 해보기 위해 32Bit 윈도우 버전으로 받았다. <span class="refer">기준 파일명 : mongodb-win32-i386-2.6.5-signed.msi</span></p>
-
 <h2>Install</h2>
 <p>다운로드 받았다면 이젠 설치를 해야한다. mongodb-win32-i386-2.6.5-signed.msi 파일을 실행 시키면 설치 화면이 나온다. 해당 파일은 몽고DB 2.6.5 버전이다.</p>
 <p>Next를 하다보면 <strong>Choose Setup Type</strong>이 나온다. Typical, Custom, Complete인데 여기서는 <span class="command">Typical</span>을 선택한다. 선택하면 몽고 DB가 설치된다.</p>
-
 <h2>Configuration</h2>
-
 <p>설치 위치는 각자 다르겠지만 여기서는 <span class="command">C:\Program Files\MongoDB 2.6 Standard</span><span class="refer">이하 Root</span>를 기준으로 삼겠다. 해당 디렉토리 밑에 <span class="command">\bin</span> 디렉토리가 있는데 이곳에 여러가지 <span class="command">.exe</span> 파일이 있다.</p>
 <p>몽고DB는 기본적으로 데이터 디렉토리<span class="refer">data directory</span>를 필요로 하기 때문에 디렉토리 하나를 생성해준다. 위치는 <span class="command">Root/data/db</span>이다. 명령 프롬프트를 통해 다음 처럼 입력한다.</p>
 <pre class="console">
@@ -87,7 +77,6 @@ C:\Program Files\MongoDB 2.6 Standard\bin&gt;mongod.exe --dbpath "C:\Program Fil
 </pre>
 <p><span class="refer">* 위 커맨드는 bin 디렉토리 밑에서 실행해야 한다.</span></p>
 <p>해당 커맨드를 실행하면 콘솔에 다양한 결과가 출력 되고 간혹 방화벽을 해제해달라는 윈도우가 뜰 수 있는데 액세스 허용을 해준다.</p>
-
 <h2>Usage</h2>
 <p>설치를 끝냈다면 몇가지를 실제로 사용해보자.</p>
 <h3>Access MongoDB Shell</h3>
@@ -100,18 +89,14 @@ C:\Program Files\MongoDB 2.6 Standard\bin&gt;mongo.exe
 <div class="green">
 <p><i class="fa fa-check fa-lg"></i> 몽고DB 쉘에서 "help"를 입력하면 언제든지 명령어 도움말을 볼 수 있다.</p>
 </div>
-
 <h3>Create Database</h3>
 <p>새로운 데이터베이스를 만들어보자.</p>
 <pre class="console">
 use mydb
 </pre>
 <p>해당 커맨드를 실행하면 <strong>switched to db mydb</strong>라는 문구가 콘솔에 출력된다.</p>
-
 <h2>Reference</h2>
 <p>더 자세한 검토가 필요하다면 <a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows">Install MongoDB on Windows</a>를 확인해 보자.</p>
-
-
 </div>
 				</article>
 			</div>

@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,12 +51,7 @@
                     <h1 id="content_title">Hbase Shell Script Example</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>hbase를 사용하다보면 hbase shell을 통해서 일을 처리하는 경우가 왕왕 있습니다. 까먹지 않기 위해 이곳에 남겨둡니다. :3</p>
-
 <h4>In hbase console</h4>
 <pre class="prettyprint lang-sh">
 # get + filter
@@ -65,9 +60,7 @@ get 'TABLE_NAME', 'ROWKEY', { COLUMN=&gt;'COLUMN_NAME', FILTER=&gt; "ValueFilter
 # get + filter (substring)
 get 'TABLE_NAME', 'ROWKEY', { COLUMN=&gt;'COLUMN_NAME', FILTER=&gt; "ValueFilter(=, 'substring:YOUR_KEYWORD')" }
 </pre>
-
 <h4>linux shell console</h4>
-
 <pre class="prettyprint lang-sh">
 # get + filter + file dump
 echo "get 'TABLE_NAME', 'ROWKEY', { COLUMN=&gt;'COLUMN_NAME', FILTER=&gt; \"ValueFilter(=, 'substring:YOUR_KEYWORD')\" }" | ./hbase shell | grep "^ " &gt; result.txt
@@ -75,9 +68,6 @@ echo "get 'TABLE_NAME', 'ROWKEY', { COLUMN=&gt;'COLUMN_NAME', FILTER=&gt; \"Valu
 # delete + shell
 echo "delete 'TABLE_NAME', 'ROWKEY', 'COLUMN_NAME:Qualifier'" | ./hbase shell
 </pre>
-
-
-
 </div>
 				</article>
 			</div>

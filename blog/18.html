@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,17 +51,10 @@
                     <h1 id="content_title">MongoDB CRUD 동작의 이해</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
-
 <p>이번 포스팅은 몽고DB의 Document 및 Collection의 정의 그리고 CRUD 동작에 대해 알아보고자 합니다.</p>
-
 <h2>Document & Collection 정의</h2>
 <h3>Document</h3>
 <p>몽고DB Document는 key/value로 이뤄진 한쌍의 값들을 가지고 있는 오브젝트입니다. JSON과 흡사하게 구성하며 다음처럼 구성이 가능하죠.</p>
-
 <pre class="prettyprint lang-js">
 /* Document Sample */
 {
@@ -71,9 +64,7 @@
 	groups: ["programmer", "developer"]
 }
 </pre>
-
 <p>Document들은 disk에 저장될 때 BSON(json binary format)으로 저장된다고 합니다. 자세한건 나중에 들여다 보도록 합시다. Document를 구성할때 다음처럼 만들 수도 있습니다.</p>
-
 <pre class="prettyprint lang-js">
 /* Document Sample */
 var obj =
@@ -88,20 +79,16 @@ var obj =
 	wisdom: NumberLong(9999999)
 }
 </pre>
-
 <p>위처럼 생성한 obj 변수 값을 한번 몽고 DB에 삽입해 봅시다.</p>
 <pre class="console">
 db.t.insert( obj )
 </pre>
-
 <p>그 후 find() 명령어를 통해 확인 해보면 obj 값이 t 콜렉션에 삽입 되어 있는 것을 확인 할 수 있습니다. _id 필드는 별도 지정을 할 수 있지만 ObjectId()를 사용한다면 자릿수는 지켜줘야 합니다.</p>
 <h3>Collection</h3>
 <p>모든 Document들은 Collection에 속해 있어야 합니다. 콜렉션<span class="refer">Collection</span>이란 관계되어 있는 Document들의 그룹을 뜻합니다.</p>
-
 <h2>Query</h2>
 <h3>MongoDB Query vs RDBMS Query</h3>
 <p>몽고DB에서 쿼리<span class="refer">Query</span>는 RDBMS의 Query와 동일한 개념으로 보입니다. 몽고DB에선 특별한 기준을 가진 Document들을 추출해 콜렉션으로 만들 수 있죠. 쿼리에는 특별한 기준값(Query Criteria)과 추출할 값(projection), 그리고 Collection과 커서(cursor)를 정의할 수 있습니다. 예제 쿼리를 만들어봅시다.</p>
-
 <pre class="prettyprint lang-js">
 /* sample query */
 db.tbl.find(            ◀ collection
@@ -109,9 +96,7 @@ db.tbl.find(            ◀ collection
 { val1: 1, val2: 1 }    ◀ projection
 ).limit(10)             ◀ cursor modifier
 </pre>
-
 <p>위와 같은 쿼리를 기존의 RDBMS SQL로 나타내면 아래처럼 됩니다.</p>
-
 <pre class="prettyprint lang-sql">
 /* sample query */
 select _id, val1, val2 -- projection
@@ -119,15 +104,11 @@ select _id, val1, val2 -- projection
  where age &gt; 29        -- select criteria
  limit 5               -- cursor modifier
 </pre>
-
 <p>쿼리의 처리 순서는 Collection 선택 ▶ Query Criteria 수행 ▶ Modifier 수행 순입니다. 각각 구문이 수행 될때마다 콜렉션이 추출됩니다.</p>
-
 <h3>Query selection operator</h3>
 <p>몽고DB의 쿼리 중에서 $gt 같은 연산자를 <strong>쿼리 선택 연산자</strong>라고 합니다. 자세한 내용은 <a href="http://docs.mongodb.org/manual/reference/operator/">http://docs.mongodb.org/manual/reference/operator/</a>에서 operator 관련 정보를 확인해 보세요.</p>
-
 <h3>Projection</h3>
 <p>일반적인 SQL 쿼리문에서 "select" 구문에 해당하는 Projection은 find() 메소드의 두번째 인자값에 해당합니다.</p>
-
 <pre class="prettyprint lang-js">
 /* sample query */
 db.tbl.find(
@@ -135,40 +116,32 @@ db.tbl.find(
 { val1: 1, val2: 1 }    ◀ projection
 ).limit(10)
 </pre>
-
 <p>위의 코드에서 "projection"으로 표시된 부분입니다. 여기서 유의할 것이 있는데 만약 _id 필드를 projection에서 제외하면 추후에 projection을 합칠 때 문제가 생깁니다. 이건 추후에 다시 살펴보기로 합니다.</p>
 <p>위 구문에서 val1 필드 값인 1은 추출한 콜렉션에서 val1 필드를 포함하고 반대로 val1 필드 값이 0이라면 추출한 콜렉션에서 val1 필드를 제외합니다. 따라서 위 구문은 val1과 val2 필드를 포함하겠다는 뜻이 됩니다.</p>
  
 <h2>Query Examples</h2>
-
 <h3>Example1</h3>
 <pre class="prettyprint lang-js">
 db.t_col.find({ "view_count": { $gt: 29 }, { "title":0 })
 </pre>
 <p>추출할 콜렉션에서 특정 필드를 제외하는 쿼리입니다.</p>
 <p>위의 쿼리를 실행하면 view_count값이 29보다 큰 document들을 선택하고, 선택된 document들의 필드 중 "title" 필드를 제외합니다.</p>
-
 <h3>Example2</h3>
-
 <pre class="prettyprint lang-js">
 db.t_col.find({ "view_count": { $gt: 29 }, { "title":1, "cont":1 })
 </pre>
 <p>2개의 필드와 _id 필드를 포함하는 쿼리입니다.</p>
 <p>위의 쿼리를 실행하면 view_count값이 29보다 큰 document들을 선택하고, 선택된 document들의 필드 중 "title", "cont", "_id" 필드만 가져옵니다.</p>
-
 <h3>Example3</h3>
 <pre class="prettyprint lang-js">
 db.t_col.find({ "view_count": { $gt: 29 }, { "title":1, "cont":1, "_id":0 })
 </pre>
 <p>2개의 필드를 포함하고 _id 필드를 제외하는 쿼리입니다.</p>
 <p>위의 쿼리를 실행하면 view_count값이 29보다 큰 document들을 선택하고, 선택된 document들의 필드 중 "_id"필드를 제외하고 "title", "cont" 필드만 가져옵니다.</p>
-
 <h2>Data Modification</h2>
 <p>데이터 수정이란 몽고DB 내에서 create, update, delete 동작을 뜻합니다. 이 동작들은 하나의 콜렉션 내부의 데이터를 수정합니다. update 및 delete는 document들을 업데이트 하거나 삭제할 수 있습니다.</p>
-
 <h3>Insert</h3>
 <p>몽고DB에서 db.collection_name.insert() 메소드는 콜렉션에 새로운 document를 추가합니다.</p>
-
 <pre class="prettyprint lang-js">
 /* sample query */
     ▼ collection
@@ -180,22 +153,17 @@ db.tbl.insert(
 	}
 )
 </pre>
-
 <p>우선 콜렉션을 선택 후 document을 삽입합니다. insert()구문의 첫번째 인자를 document 객체로 넣으면 됩니다. 위의 구문을 RDBMS SQL로 나타내면 아래와 같습니다.</p>
-
 <pre class="prettyprint lang-sql">
 /* sample query */
 insert into tbl            -- table
             ( name , age ) -- columns
 values      ( "JDM", 29 )  -- values
 </pre>
-
 <p>여기에서 주의할 것은 _id 필드를 지정하지 않았다면 자체적으로 _id 필드값을 생성해서 같이 추가한다는 것입니다.</p>
 <p>만약 _id 필드 값을 임의로 설정했다면 반드시 콜렉션 내에서 고유한 값을 지정하도록 합시다. 하지만 이를 지키지 않는다면 몽고 DB에서는 _id 값이 겹칠 경우 <span class="error">duplicate key exception</span>을 보여줄겁니다.</p>
-
 <h3>Update</h3>
 <p>몽고DB에서 db.collection_name.update() 메소드는 콜렉션에 있는 문서를 수정합니다.</p>
-
 <pre class="prettyprint lang-js">
 /* sample query */
     ▼ collection
@@ -205,16 +173,13 @@ db.tbl.update(
 	{ multi : true}            ◀ update option
 )
 </pre>
-
 <p>위와 같은 쿼리를 RDBMS SQL로 나타내면 아래와 같습니다.</p>
-
 <pre class="prettyprint lang-sql">
 /* sample query */
 update tbl           -- table
 set    grade = 'SSS' -- update action
 where  age &gt;= 29     -- update criteria
 </pre>
-
 <p>기본적인 update 쿼리의 동작은 하나의 document만을 업데이트 합니다. 그러나 multi 옵션을 true로 주게 되면 update() 메소드에 추출된 모든 document들을 업데이트 합니다.</p>
 <p>만약에 기존에 있던 document보다 큰 사이즈의 document를 업데이트 한다면 디스크를 재할당하는 연산도 추가됩니다.</p>
 <p>하지만 update 쿼리에도 예외가 있을 수 있는데 그것은 다음과 같습니다.</p>
@@ -224,14 +189,11 @@ where  age &gt;= 29     -- update criteria
 <li>document 내의 필드들을 재정렬한 결과에서 별칭(renaming)을 포함한 경우</li>
 </ul>
 </div>
-
 <h3>Update Option - upsert</h3>
 <p>update 쿼리를 실행을 했지만 반영된 document들이 없는 경우 쿼리는 무용지물이 됩니다. 이를 대비해서 몽고DB에서는 <strong>upsert:true</strong> 구문을 제공하고 있습니다.</p>
 <p>이 구문은 update할 document가 없는 경우 document를 insert 해주는 옵션입니다. 만약 update 쿼리에 매칭된 document가 있는 경우 매칭된 document들을 수정합니다.</p>
-
 <h3>Remove</h3>
 <p>몽고DB에서 db.collection_name.remove() 메소드는 콜렉션 내의 매칭된 document들을 삭제합니다. 예를 들면 다음과 같은 쿼리가 되겠습니다.</p>
-
 <pre class="prettyprint lang-js">
 /* sample query */
     ▼ collection
@@ -245,33 +207,24 @@ db.tbl.remove(
 delete from tbl      -- table
 where  age &gt;= 29     -- delete criteria
 </pre>
-
 <p>일반적으로 삭제 동작은 조건에 매칭되는 모든 document들을 삭제합니다. 그러나 별도의 옵션을 통해 하나의 document를 삭제하거나 삭제할 document의 개수를 정할 수 있습니다.</p>
-
 <h3>Remove All Documents</h3>
 <p>만약 모든 document를 지우고 싶다면 아래와 같은 구문을 입력합니다.</p>
-
 <pre class="prettyprint lang-js">
 db.collection_name.remove({})
 </pre>
-
 <p>다만 drop() 메소드가 더 효율적일 수 있습니다. drop() 메소드는 모든 document들과 포함되어 있는 인덱스들까지 삭제합니다.</p>
-
 <h3>Remove a Single Document</h3>
 <p>만약 조건에 맞는 document 하나만을 삭제하고 싶은 경우 다음과 같은 구문을 사용합니다.</p>
-
 <pre class="prettyprint lang-js">
 db.collection_name.remove({ name:"JDM" }, 1 )
 </pre>
-
 <h2>Isolation of Write Operations</h2>
-
 <p>하나의 document에서의 수정은 언제나 원자성(atomic)을 가집니다. document내에서 내부의 sub document도 포함합니다.</p>
 <p>만약 여러개의 document를 수정한다면 전체의 동작에 대해서는 원자성을 보장하지 않습니다. 하지만 개별의 document는 원자성을 가집니다. 다른 동작들은 원자성을 가지지 않습니다. 그러나 <strong>분리 연산자($isolated)</strong>를 사용해 여러 document들에 영향을 줄 수도 있습니다. 자세한 내용은 다음 링크에서 확인 할 수 있습니다.</p>
 <p><a href="http://docs.mongodb.org/manual/reference/operator/update/isolated">http://docs.mongodb.org/manual/reference/operator/update/isolated</a></p>
 <p>분리 연산자를 사용하면 RDBMS의 트랜잭션처럼 "all or nothing" 결과를 가져옵니다. 하지만 <strong>클러스터(sharede clusters)</strong> 환경에서는 동작 하지 않습니다.</p>
 <p><span class="refer">* 이 포스팅에 언급은 안했지만 원문에는 있는 db.collection_name.save() 메소드와 분리 연산자($isolated)는 시간이 되면 별도로 포스팅 해보고 싶네요.</span></p>
-
 <h2>Reference</h2>
 <ul>
 <li><a href="http://docs.mongodb.org/manual/core/crud-introduction/#mongodb-crud-introduction">http://docs.mongodb.org/manual/core/crud-introduction/#mongodb-crud-introduction</a></li>
@@ -279,8 +232,6 @@ db.collection_name.remove({ name:"JDM" }, 1 )
 <li><a href="http://docs.mongodb.org/manual/core/write-operations-introduction">http://docs.mongodb.org/manual/core/write-operations-introduction</a></li>
 <li><a href="http://docs.mongodb.org/manual/tutorial/remove-documents">http://docs.mongodb.org/manual/tutorial/remove-documents</a></li>
 </ul>
-
-
 </div>
 				</article>
 			</div>

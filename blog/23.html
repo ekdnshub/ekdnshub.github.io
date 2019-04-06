@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,18 +51,12 @@
                     <h1 id="content_title">파이썬 명령행 인자 메뉴얼(Command Menual)</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p><span class="refer">* 이 포스팅은 네이버 블로그에서 작성(2012.11.07)한 내용을 옮겨온 것입니다.</span></p>
 <p>구글링하면서 문법 공부하는 중에 쓸만한 글을 찾아냈다. 메뉴얼까지 완벽하게 만들고자 하는 분은 아래링크를 참조하면 좋을듯.</p>
-
 <div class="green">
 <p><a href="http://forum.codecall.net/topic/47460-python-tutorial-handling-command-line-arguments/#axzz2BUaEbPhZ"">Python Tutorial - Handling Command Line Arguments</a></p>
 </div>
 <p>밑의 소스는 한번 테스트겸 만들어본 메모장 메뉴얼이다. (세부 로직은 귀찮아서 안짬. 심지어 옵션도 복붙... -_-)</p>
-
 <pre class="prettyprint lang-py">
 # memopad.py
 from optparse import OptionParser
@@ -86,13 +80,10 @@ elif options.readMemo:
 	print ("[System] "+args[0]+"을/를 출력합니다.")
 	# ... process
 </pre>
-
 <p>P.S 인자값 처리까지 해주진 않으니 if문을 조금 더 다듬어서 로직 처리에 필요한 인자를 다 받았는지 봐야 한다.</p>
 <p>P.S2 parser option에 들어가는 값들이 무엇인지 자세히 알고 싶으면 <a href="http://docs.python.org/2/library/optparse.html">Parser for command line options</a> 를 참조해보자.</p>
 <p>다음은 실행 화면이다.</p>
 <img src="/blog/images/23.png">
-
-
 </div>
 				</article>
 			</div>

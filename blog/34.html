@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,18 +51,11 @@
                     <h1 id="content_title">Install Oracle Instant Client</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>오라클을 매번 FULL로 내려 받는것이 귀찮았는데, 최근에서야 인스턴트 클라이언트가 있다는 걸 알게 됐다. -_- 진즉에 알았더라면 정말 좋았을 것을 아쉬운 느낌이다.</p>
 <p>이번 포스팅은 oracle instant client를 설치하는 방법에 대해 알아보고자 한다. 한번 내려 받으면 포터블하게 사용도 가능하니까 알아두면 좋을 것 같다!</p>
-
 <h2>Download oracle instant client</h2>
 <p>내려받기 위해서 <a href="http://www.oracle.com/technetwork/database/features/instant-client/index.html">링크</a>를 클릭하자. <span class="refer">만약 링크로 접속이 되지 않는다면 Google에서 "oracle instant client"라고 검색해보자.</span></p>
-
 <p>중간쯤에 Downolads & Installation 이라는 항목이 있는데 플랫폼을 선택할 수 있는 링크가 있다. 이 링크를 클릭하고 자신에게 맞는 OS를 선택하고 라이센스 동의 후에 필요한 버전을 내려받자!</p>
-
 <h2>Client Path Setting</h2>
 <p>클라이언트를 내려 받았다면 적당한 위치에 풀고, 여기서는 C:\oracle11.2 이라고 하자. 그 다음은 환경 변수를 잡아야 하는데 아래처럼 잡아주면 된다.</p>
 <pre class="prettyprint lang-sh">
@@ -71,11 +64,8 @@ ORACLE_HOME=C:\oracle11.2 # 없어도 된다면 삭제!
 TNS_ADMIN=C:\oracle11.2
 NLS_LANG=KOREAN_KOREA.KO16MSWIN949 
 </pre>
-
 <h2>tnsnames.ora</h2>
 <p>환경 변수까지 잡았다면 해당 인스턴트 클라이언트에 기존에 쓰던 tnsnames.ora 파일을 C:\oracle11.2에 복사한다.</p>
-
-
 </div>
 				</article>
 			</div>

@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,12 +51,7 @@
                     <h1 id="content_title">Javascript Objects</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>이 포스팅의 원본은 <a href="http://www.w3schools.com/js/js_object_definition.asp">이곳</a>입니다. 이 포스팅은 원본 문서를 한글로 번역한 것임을 밝힙니다. 중간중간 의역이 있습니다. 유의 부탁드립니다. :)</p>
-
 <h2>JavaScript Objects</h2>
 <div class="green">
 <p>자바스크립트에서 객체<span class="refer">Object</span>들은 킹<span class="refer">king</span>이다. 만약 이 글을 보고 있는 당신이 객체들을 이해한다면 당신은 자바스크립트를 안다고 할 수 있다.</p>
@@ -69,7 +64,6 @@
 <li><span class="command">Object</span> 타입은 객체다.</li>
 </ul>
 </div>
-
 <p>자바스크립트에서 기본 자료형을 제외한 모든 값들은 객체들이다.</p>
 <p>기본 자료형이란 다음과 같다.</p>
 <div class="yellow">
@@ -90,14 +84,11 @@ var person = "JDM";
 <pre class="prettyprint lang-js">
 var person = {firstName:"DM", lastName:"J", age:29, eyeColor:"black"};
 </pre>
-
 <div class="green">
 <p>자바스크립트 객체는 변수<span class="refer">(named values라 불리는)</span>들이 정렬 되지 않은 집합이다.</p>
 </div>
-
 <h2>Object Properties</h2>
 <p>자바스크립트 객체에서 named values는 <strong>속성</strong><span class="refer">properties</span>이라고도 한다.</p>
-
 <div class="none">
   <table> 
    <tbody>
@@ -124,7 +115,6 @@ var person = {firstName:"DM", lastName:"J", age:29, eyeColor:"black"};
    </tbody>
   </table> 
 </div>
-
 <p>객체들은 name value 한 쌍으로 유사하게 다음과 같은 곳에서 유사하게 쓰인다.</p>
 <ul>
 <li>PHP에서 Associative arrays</li>
@@ -133,7 +123,6 @@ var person = {firstName:"DM", lastName:"J", age:29, eyeColor:"black"};
 <li>자바<span class="refer">Java</span>에서 해시 맵<span class="refer">Hash maps</span></li>
 <li>루비<span class="refer">Ruby</span> 또는 펄<span class="refer">perl</span>에서 해시<span class="refer">hashes</span></li>
 </ul>
-
 <h2>Object Methods</h2>
 <p>메소드<span class="refer">Method</span>란 객체에서 수행될 수 있는 <strong>행동들</strong><span class="refer">actions</span>이다.</p>
 <p>객체 속성은 기본 자료형<span class="refer">primitive values</span>, 다른 객체, 그리고 함수들<span class="refer">functions</span>이 가능하다.</p>
@@ -171,7 +160,6 @@ var person = {firstName:"DM", lastName:"J", age:29, eyeColor:"black"};
 <div class="green">
 <p><i class="fa fa-check fa-lg"></i> <strong>TIP.</strong> <br>자바스크립트 객체는 named values, 속성 및 메소드들을 위한 컨테이너다.</p>
 </div>
-
 <h2>Creating a JavaScript Object</h2>
 <p>자바스크립트에서 사용자는 사용자 소유의 객체들을 만들거나 정의할 수 있다. 새로운 객체를 만드는 방법들은 다양하다.</p>
 <ul>
@@ -180,11 +168,9 @@ var person = {firstName:"DM", lastName:"J", age:29, eyeColor:"black"};
 <li>객체 생성자를 정의해서 구성할 수 있다.</li>
 </ul>
 <p>ECMAScript 5에서는 객체를 만들때 <span class="command">function() Object.create()</span>를 사용할 수 있다.</p>
-
 <h2>Using an Object Literal</h2>
 <p>자바스크립트 객체를 만들기 위한 쉬운 방법이 있다. <strong>객체 리터럴</strong>을 사용하면 사용자는 하나의 구문에서 객체를 만들거나 정의한다.</p>
 <p>객체 리터럴은 예를 들자면 {age:50} 같은 중괄호 안에 name:value 값을 넣어 구성된 목록이다.</p>
-
 <p>다음의 예제를 보자, 4개의 속성을 가진 새로운 자바스크립트 객체를 만드는 것이다.</p>
 <pre class="prettyprint lang-js">
 var person = {firstName:"DM", lastName:"J", age:29, eyeColor:"black"};
@@ -200,7 +186,6 @@ var person = {
 </pre>
 <h2>Using the JavaScript Keyword "new"</h2>
 <p>다음의 예제 또한 4개의 속성을 가진 새로운 자바스크립트 객체를 만든다.</p>
-
 <pre class="prettyprint lang-js">
 var person = new Object();
 person.firstName = "DM";
@@ -208,9 +193,7 @@ person.lastName = "J";
 person.age = 29;
 person.eyeColor = "black";
 </pre>
-
 <p><span class="command">new</span> 키워드를 사용하는것과 객체 리터럴을 사용하는 예제들은 완벽하게 같은 동작을 한다. new Object()를 사용하는 것은 필요하지 않다. 간단하게, 읽기 좋게, 실행 속도를 빠르게 하기 위해서는 객체 리터럴 메소드를 사용하라.</p>
-
 <h2>Using an Object Constructor</h2>
 <p>지금까지의 예제는 많은 상황을 제한하고 단지 단일 객체만을 만든다. 때때로 우리는 많은 객체들의 타입으로 이용될 "객체 타입"을 가지는 것을 선호한다.</p>
 <p>객체 타입을 만들기 위해 흔한 방법으로 객체 생성자 함수<span class="refer">object constructor function</span>를 사용하는 것이다.</p>
@@ -226,19 +209,16 @@ var myMother = new person("HR", "L", 3, "green");
 </pre>
 <p>여기서 <span class="command">person()</span> 함수는 객체 생성자다.</p>
 <p>사용자가 객체 생성자를 하나 만들면, 사용자는 같은 타입의 새로운 객체들을 만들어 낼 수 있다.</p>
-
 <h2>The "this" Keyword</h2>
 <p>자바스크립트에서 <strong>this</strong>라 불리는 것은 <strong>자기 자신</strong>을 뜻하는 자바스크립트 코드이자 객체다.</p>
 <p>함수 내에서 <strong>this</strong>의 값은 함수 "자신"의 객체다.</p>
 <p>객체 내에서 <strong>this</strong>의 값은 객체 "자신"이다.</p>
 <p>객체 생성자<span class="refer">object constructor</span>에서 <strong>this</strong> 키워드는 값을 가지지 않는다. 이것은 단지 새로운 객체를 대신하는 것이다.</p>
 <p>생성자가 객체를 만들때, <strong>this</strong>의 값은 새로운 객체가 될 것이다.</p>
-
 <div class="red">
 <p><i class="fa fa-exclamation-triangle fa-lg"></i> <strong>Warning</strong></p>
 <p><strong>this</strong>는 변수가 아니다. 이것은 "키워드"다. 사용자는 <strong>this</strong>의 값을 바꿀 수 없다.</p>
 </div>
-
 <h2>Built-in JavaScript Constructors</h2>
 <p>자바스크립트는 객체를 만들 수 있는 기본 생성자를 가지고 있다.</p>
 <pre class="prettyprint lang-js">
@@ -270,7 +250,6 @@ var x6 = /()/           // 새 기본 정규식 타입
 var x7 = function(){};  // 새 기본 함수 타입
 </pre>
 </div>
-
 <h2>JavaScript Objects are Mutable</h2>
 <p>객체는 변경할 수 있다. 객체는 by reference로 참조 가능하다. by value로 참조 하지 않는다.</p>
 <p>만약 y가 객체라면 밑에 기술된 구문은 y를 복사해서 가지지 않는다.</p>
@@ -284,11 +263,8 @@ var person = {firstName:"DM", lastName:"J", age:29, eyeColor:"black"}
 var x = person;
 x.age = 10; // 이것은 x.age를 변경했지만 x.age와 person.age의 값을 전부 변경한다.
 </pre>
-
 <h2>Closing Remarks</h2>
 <p>다음엔 자바스크립트 객체 속성<span class="refer">JavaScript Object Properties</span>에 대해 심도(?) 있는 파악을 해볼까 합니다. 그때까지 Bye~</p>
-
-
 </div>
 				</article>
 			</div>

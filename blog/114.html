@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,18 +51,11 @@
                     <h1 id="content_title">STS 오류 "populate auto detected configs"</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p><span class="command">sts 3.6.4 RELEASE</span> 버전을 쓰고 있는데 갑자기 <span class="command"><span class="red">populate auto detected configs</span></span>라는 프로세스가 실행 되고서는 응답이 없는것이다. 반복해서 껐다 켰다 해봤지만 가끔 에디터 화면이 나온다 하더라도 어떤 커맨드가 됐건 기다리라는 메시지만 나올뿐이었다.</p>
 <p>그래서 검색해봤더니(<a href="http://stackoverflow.com/questions/26089282/eclipse-crashes-not-responding-while-populate-auto-detected-configs">링크</a>) <span class="command">-clearPersistedState</span> 옵션을 주면 된다고 한다. 그래서 <span class="command">STS.ini</span> 파일 마지막에 다음처럼 추가했더니 놀랍게도 잘 된다. -_-</p>
 <pre>
 -clearPersistedState
 </pre>
-
-
-
 </div>
 				</article>
 			</div>

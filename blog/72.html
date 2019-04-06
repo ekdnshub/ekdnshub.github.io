@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,16 +51,9 @@
                     <h1 id="content_title">자바 Runnable를 이용해 쓰레드 만들기 (Java Runnable Interface)</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
-
 <p>저번 포스팅에서 얘기했던대로 이번엔 Runnable 인터페이스를 이용한 쓰레드 작성 방법에 대해 알아고보자 합니다.</p>
-
 <h2>Runnable 인터페이스(Runnable Interface)</h2>
 <p>기본적인 Runnable 인터페이스의 사용 방법은 다음과 같습니다.</p>
-
 <pre class="prettyprint lang-java">
 /* Using Runnable Interface */
 class foo implements Runnable{
@@ -70,7 +63,6 @@ class foo implements Runnable{
 	}
 }
 </pre>
-
 <p>위의 코드에서 <span class="command">run()</span> 메소드만 채워주면 Runnable 인터페이스를 구현하는 것은 간단합니다. 하지만 Thread를 상속받은 클래스처럼 <span class="command">start()</span> 메소드가 없습니다. 따라서 별도의 쓰레드를 생성 해 주고 구현한 Runnable 인터페이스를 인자로 넘겨주어야 합니다. 다음의 코드처럼요.</p>
 <pre class="prettyprint lang-java">
 /* Using Runnable Interface */
@@ -86,7 +78,6 @@ class foo implements Runnable{
 	public void run() {}
 }
 </pre>
-
 <h2>Simple Runnable Program</h2>
 <p>이번 포스팅에서는 상태를 체크할 index 변수를 전역 변수가 아닌 Runnable 인터페이스를 구현할 클래스<span class="refer">이하 ConcreteRunnable</span>에서 사용하도록 변경해보겠습니다. 코드를 봅시다.</p>
 <pre class="prettyprint lang-java">
@@ -146,10 +137,8 @@ class ConcreteRunnable implements Runnable{
 	
 }
 </pre>
-
 <p>하나의 ConcreteRunnable를 생성 후 여러 개의 쓰레드에 인자로 넘겨줬습니다. <strong>이렇게 하면 ConcreteRunnable 내의 멤버 변수는 모든 쓰레드가 공유하게 됩니다.</strong> 만약 모든 쓰레드에 새로운 ConcreteRunnable를 생성해 넣는다면 ConcreteRunnable의 멤버 변수는 공유하지 않습니다. 지금 예제에서는 ConcreteRunnable를 하나만 생성해 쓰레드를 만들었으므로 index 변수를 모든 쓰레드가 공유하게 됩니다.</p>
 <p>위의 프로그램을 실행시켜 본다면 다음과 같은 결과를 콘솔에서 볼 수 있습니다.</p>
-
 <pre class="console">
 Start main method.
 current index value: 1
@@ -164,19 +153,12 @@ current index value: 9
 current index value: 10
 End main method.
 </pre>
-
 <p>실제로 상기의 코드를 실무에서 사용할 일은 없을테지만 Runnable 인터페이스를 사용하는 방법에 대해선 괜찮을거라 생각합니다. (…)</p>
-
 <h2>Thread vs Runnable</h2>
-
 <p>쓰레드를 직접 상속 받는 방법과 이번 포스팅에서 설명한 것처럼 Runnable 인터페이스를 구현하는 방법의 차이점은 많이 있습니다. 하지만 가장 큰 것은 Thread를 상속<span class="refer">extends</span> 받게 되면 상속 받은 클래스는 다른 클래스를 상속 받을 수가 없지만 Runnable은 인터페이스이기 때문에 구현<span class="refer">implements</span>만 하면 되고 다른 필요한 클래스를 상속 받을 수 있다는 것입니다.</p>
 <p>언뜻 봐서는 Runnable 인터페이스를 구현하는 것이 어떠한 상황에서든 합당해 보이나 프로그래밍은 언제나 그렇듯이 일방적인 해답만 있는건 아니니 사용 프로그램의 케이스를 따져서 Thread를 상속 받을지 Runnable 인터페이스를 구현할지 결정하시기 바랍니다. :)</p>
-
 <h2>Closing Remarks</h2>
 <p>이렇게 자바에서 Thread를 만드는 방법 2가지를 알아봤습니다. 각각 <span class="command">Thread 상속</span>, <span class="command">Runnable 구현</span>입니다. 각자 사용처에 따라 입맛대로 쓸 수 있을때까지 열심히 코딩합시다. :)</p>
-
-
-
 </div>
 				</article>
 			</div>

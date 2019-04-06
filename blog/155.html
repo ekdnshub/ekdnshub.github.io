@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,16 +51,10 @@
                     <h1 id="content_title">CentOS telnet 설치</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>centOS 6.X에서 <span class="command">telnet</span>이 설치가 안되 있는 경우를 상정해 포스트를 진행합니다.</p>
-
 <h2>telnet 설치</h2>
 <h3>yum으로 패키지 설치</h3>
 <p>yum 패키지 관리자를 이용해 telnet 패키지를 설치합니다.</p>
-
 <pre class="console">
 # 설치 하기 전에 패키지가 깔려 있는지 체크합니다.
 $ rpm -qa | grep telnet
@@ -69,10 +63,8 @@ $ yum install telnet
 # telnet-server 패키지를 설치합니다.
 $ yum install telnet-server
 </pre>
-
 <h3>telnet 설정</h3>
 <p><span class="command">/etc/xinetd.d/telnet</span> 파일을 열어서 아래 부분을 바꿔줍니다.</p>
-
 <pre class="prettyprint lang-sh">
 # default: on
 # description: The telnet server serves telnet sessions; it uses \
@@ -88,15 +80,11 @@ service telnet
        disable         = no # 이부분을 yes에서 no로 바꿔줍니다.
 }
 </pre>
-
 <h3>서비스 재시작</h3>
 <p>아래처럼 서비스를 재시작합니다. (또는 시작만)</p>
 <pre class="console">
 /etc/init.d/xinetd restart
 </pre>
-
-
-
 </div>
 				</article>
 			</div>

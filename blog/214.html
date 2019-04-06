@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,19 +51,11 @@
                     <h1 id="content_title">주키퍼 클러스터 설치(Zookeeper Cluster on Multi Node)</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
-
 <p>기존에도 주키퍼 클러스터 설정에 대해 간간히 포스팅한 것이 있었습니다. 이번 포스트는 주키퍼 클러스터만 뽑아서 설명드립니다.</p>
-
 <h2>What is Apache Zookeeper?</h2>
 <p>주키퍼에 대한 자세한 내용은 <a href="/blog/125">아파치 주키퍼(Apache Zookeeper)</a>를 참조해주세요.</p>
-
 <h2>Setup Zookeeper Cluster</h2>
 <p>이제 본격적으로 주키퍼 클러스터<span class="refer">Zookeeper Cluster</span>를 구축해 봅시다.</p>
-
 <h3>Architecture</h3>
 <p><a href="http://zookeeper.apache.org/doc/r3.3.3/zookeeperAdmin.html#sc_zkMulitServerSetup">주키퍼 클러스터 구축</a>을 위해 아래와 같은 구성도를 그려봤습니다.</p>
 <pre class="diagram">
@@ -75,16 +67,13 @@
 ┗━━━━━━━━┛┗━━━━━━━━┛┗━━━━━━━━┛
 </pre>
 <p>3대의 호스트에 각각 주키퍼 서버를 하나씩 올릴 예정입니다. 호스트 정보는 위와 같은 <span class="command">zoo-1.jdm.kr</span>, <span class="command">zoo-2.jdm.kr</span>, <span class="command">zoo-3.jdm.kr</span>입니다.</p>
-
 <h3>Preparations</h3>
 <p>클러스터 구축을 위해서 몇가지 사전 준비 사항이 필요합니다. 그리고 이부분에 해당하는 내용은 <strong>모든 호스트가 동일</strong>하도록 진행해주세요.</p>
-
 <h4>Install Java JDK</h4>
 <p>CentOS라면 아래와 같은 커맨드로 자바 JDK를 설치할 수 있습니다. 이미 설치 되어 있다면 이 단계는 무시하셔도 됩니다.</p>
 <pre class="console">
 $ sudo yum install java
 </pre>
-
 <h4>Download Apache Zookeeper</h4>
 <p>주키퍼 서버 패키지를 다운로드 받고 환경 설정을 해봅시다. 아래의 커맨드를 순서대로 실행해서 주키퍼를 다운로드한 뒤 압축을 해제하고 환경설정 파일을 편집할 준비를 합니다.</p>
 <pre class="console">
@@ -107,24 +96,18 @@ server.2=zoo-2.jdm.kr:2888:3888
 server.3=zoo-3.jdm.kr:2888:3888
 </pre>
 <p><strong>반드시 myid 파일을 dataDir 속성에 넣었던 위치에 만들어야 합니다.</strong> 호스트마다 아이디를 넣으세요. 위의 구성이라면 1번 호스트<span class="refer">zoo-1.jdm.kr</span>에는 {dataDir}/myid 내부에 1이라는 값이 있어야 합니다. 그리고 이 값은 유일해야 하고 1~255 사이로 넣어주세요.</p>
-
 <h4>Start Apache Zookeeper</h4>
 <p>{zookeeper}/bin 디렉토리에서 다음과 같은 커맨드로 구동합니다. 호스트별로 전부 띄워주세요.</p>
 <pre class="console">
 $ ./zkServer.sh start
 </pre>
-
 <h4>Check Apache Zookeeper</h4>
 <p>주키퍼가 잘 떠 있다면 다음와 같은 스크립트 실행을 통해 주키퍼에 대한 내용을 점검하거나 확인 할 수 있습니다.</p>
 <pre class="console">
 $ ./zkCli.sh zoo-1.jdm.kr:2181
 </pre>
-
 <h2>Tip</h2>
 <p>주키퍼는 일정 간격으로 스냅샷<span class="refer">snapshot</span>을 떠서 파일로 만듭니다. 해당 파일들이 쌓이면 불필요한 디스크 공간을 차지하기 때문에 주기적으로 지워줘야 합니다. 이를 위해 주키퍼에서는 자체적으로 <span class="command">zkCleanup.sh</span>라는 스크립트를 제공하고 있으니 참고하시면 됩니다.</p>
-
-
-
 </div>
 				</article>
 			</div>

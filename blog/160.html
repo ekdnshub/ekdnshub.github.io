@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,15 +51,9 @@
                     <h1 id="content_title">SpringBoot JPA Pagination</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>JPA를 쓰는건 참 편리하고 좋은데, 페이징도 자동으로 해주면 참 좋겠죠? 간단하게 페이징을 할 수 있는 방법을 알아봅니다.</p>
-
 <h2>JPA Pagination</h2>
 <p>이번 포스팅은 아래의 포스트들을 기반으로 작성되었습니다.</p>
-
 <div class="green">
 <ul>
 <li><a href="/blog/105">Spring Boot with STS(Spring Tool Suite)</a></li>
@@ -67,13 +61,8 @@
 </ul>
 </div>
 <p>미리 읽고 오시면 더욱 좋습니다. :D</p>
-
-
 <h2>Create Project</h2>
 <p>페이징 데모를 위해서 프로젝트를 생성합니다.</p>
-
-
-<div class="blue">
 <pre>
 Name : pagination
 Type : Gradle Project
@@ -88,15 +77,10 @@ Description : Demo project for Spring Boot
 Package : jpa
 Dependencies : H2, JPA
 </pre>
-</div>
-
 <h2>Example</h2>
 <p>이제 실제로 코드를 짜봅니다. 시나리오는 정해진 아이템 개수만큼 N번째 페이지에 있는 게시물 목록을 호출하는겁니다.</p>
-
-
 <h3>Entity</h3>
 <p>간단한 게시물 Entity입니다.</p>
-
 <div class='fold' data-title='Open Source'>
 <pre class="prettyprint lang-java">
 package pagination;
@@ -159,10 +143,8 @@ public class BoardEntity {
 }
 </pre>
 </div>
-
 <h3>Repository</h3>
 <p>게시물 Repostiory입니다. <span class="command">@Query</span> 메소드도 있고 Name 기반 메소드도 있습니다.</p>
-
 <div class='fold' data-title='Open Source'>
 <pre class="prettyprint lang-java">
 package pagination;
@@ -184,10 +166,8 @@ public interface BoardRepository extends PagingAndSortingRepository&lt;BoardEnti
 }
 </pre>
 </div>
-
 <h3>Application</h3>
 <p>실제로 구동 시키기 위한 코드입니다. 테스트 코드가 아닙니다. 테스트 코드는 Junit으로 작성합시다. :)</p>
-
 <div class='fold' data-title='Open Source'>
 <pre class="prettyprint lang-java">
 package pagination;
@@ -277,10 +257,8 @@ public class PaginationApplication implements CommandLineRunner {
 }
 </pre>
 </div>
-
 <h3>check result</h3>
 <p>결과 화면을 봅시다.</p>
-
 <div class='fold' data-title='Open Source'>
 <pre class="console">
 [simple] 1 first bcd
@@ -345,8 +323,6 @@ public class PaginationApplication implements CommandLineRunner {
 [sort_search_desc] 41 second bcd
 </pre>
 </div>
-
-
 </div>
 				</article>
 			</div>

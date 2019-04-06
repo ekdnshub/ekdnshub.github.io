@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,10 +51,6 @@
                     <h1 id="content_title">SpringBoot JPA 예제(@OneToMany, 단방향)</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>이번에도 JPA입니다. <span class="command">@OneToMany</span> 어노테이션을 이용해서 Entity간의 관계를 맺어봅시다. 이 포스팅에서는 단방향 관계(unidirectional relationships)만 다루겠습니다.</p>
 <h2>단방향 or 양방향</h2>
 <p>포스트 처음에 언급했지만 Entity간의 관계를 맺을 때에는 방향이 있습니다. 예를 들면 아래와 같은 두 테이블이 있다고 가정합니다.</p>
@@ -192,9 +188,7 @@ public class Member {
 }
 </pre>
 <p>(1)에서 <span class="command">@OneToMany</span> 어노테이션을 정의하고 있습니다. 그리고 멤버 변수로 핸드폰 Entity를 가리키고 있습니다. 따라서 회원 -&gt; 핸드폰이라는 단방향 1:N 관계를 만든 것입니다. 또한 <span class="command">FetchType.EAGER</span> 전략을 취해 항상 Phone 목록을 가져오게 되어 있습니다. 불필요한 조회를 막으려면 <span class="command">FetchType.LAZY</span>를 설정해야 합니다.</p>
-
 <h5>Phone Entity</h5>
-
 <pre class="prettyprint lang-java">
 package jpa3;
 
@@ -355,9 +349,6 @@ public class Jpa3Application implements CommandLineRunner{
 <p>JPA Web MVC 애플리케이션이라면 보통 Controller - Service(or implement) - Repository의 구성을 가지게 됩니다. 이 경우 Service 클래스에서 LAZY 전략이 가미된 Entity를 사용한다면 해당 메소드에 @Transactional 어노테이션을 정의해주면 됩니다. 아니면 Service 클래스 자체에 @Transactional을 줘도 됩니다. 상황에 맞게 쓰시면 되요.</p>
 <h2>마무리</h2>
 <p>@OneToMany 단방향 예제에 대해 알아봤습니다. 다음번엔 @ManyToOne에 대해 알아보아요. :)</p>
-
-
-
 </div>
 				</article>
 			</div>

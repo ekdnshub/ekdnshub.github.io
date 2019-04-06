@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,54 +51,40 @@
                     <h1 id="content_title">아카이브 생성 및 해제(linux tar) 사용법</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p><span class="refer">* 이 포스팅은 네이버 블로그에서 작성(2013.03.29)한 내용을 옮겨온 것입니다.</span></p>
 <p>고급용어가 아닌것 같아서 별로 중요하지 않은 것 같지만 실상 tar 명령어는 리눅스 내에서 정말 자주 쓰이는 명령어일지도 모릅니다. :)</p>
 <p>보통 윈도우에서는 일반적인 유저들은 이스트소프트사의 알X을 쓰거나 혹은 아직까지 Winzip 을 쓰시는 분이 있을지도 모르겠네요. 혹은 7z 을 쓰시는분들이 있을지도 모르겠습니다.</p>
 <p>리눅스에서도 파일 압축 프로그램은 다양하지만 <span class="command">tar</span> 커맨드는 실상 <strong>파일을 압축을 하지 않습니다.</strong> 그저 묶는 역할만 하지요.</p>
 <p>파일을 묶는다는건 압축에 들어가는 시간이 줄어든다는 겁니다. 압축으로 인한 혹시 모를 데이터 손실을 미연에 방지하기도 하구요. 잡설이 길었습니다만 <span class="command">tar</span> 은 주로 백업이나 다른곳에 배포를 하기 위한 파일 묶음<span class="refer">(아카이브라고도 하지요.)</span>을 만들기 위한 리눅스 명령어입니다.</p>
 <p>천천히 살펴봅시다.</p>
-
 <p><span class="refer">* 참고로 커맨드 명령어 중 대괄호( [ , ] ) 는 인자 구별을 위한 기호이니 실제 사용하실땐 빼주셔야 합니다.</span></p>
-
 <h2>사용법</h2>
-
 <pre class="prettyprint lang-sh">
 # 아카이브 생성
 $ tar -cvf [createTarName.tar] [target] [target2] [...]
 </pre>
 <p>tar 파일을 생성하는 명령어 셋입니다. <span class="command">-cvf</span> 는 <span class="command">tar</span> 명령어의 옵션들이겠죠.</p>
 <p>하나씩 풀어보자면 <span class="command">-c</span> 는 <span class="command">--create</span> 의 줄임표현으로 파일을 생성하라는 옵션입니다. <span class="command">-v</span> 는 <span class="command">--vervose</span> 의 줄임표현으로 현재 작업중인 파일 또는 디렉토리 목록을 콘솔 화면에 출력해서 보여줍니다. 자세히 보고 싶으면 <span class="command">-vv</span> 옵션을 주면 됩니다. <span class="command">-f</span> 는 <span class="command">--file</span> 의 줄임표현으로 파일명을 지정하는겁니다. 그렇다면 crateTarName.tar 은 만들 tar 파일 이름을 지정하는 곳이겠죠. target 은 tar 파일로 묶을 디렉토리 또는 파일을 적으면 됩니다.</p>
-
 <pre class="prettyprint lang-sh">
 # 아카이브 해제
 $ tar -xvf [target.tar]
 </pre>
 <p><span class="command">-cvf</span> 와 비슷하지만 하나의 옵션만 다릅니다. <span class="command">-c</span> 옵션 대신 <span class="command">-x</span> 옵션이 있네요. <span class="command">-x</span> 는 아카이브를 해제하는 옵션입니다. 즉 묶여있던 파일이나 디렉토리를 다시 풀어버리는것이죠. target.tar 은 해제할 tar 파일을 지정합니다. 그리고 현재 디렉토리에 아카이브 파일을 해제합니다.</p>
-
 <pre class="prettyprint lang-sh">
 # 아카이브 확인
 $ tar -tvf [target.tar]
 </pre>
 <p>아카이브를 풀지 않고 내용만 뭐가 들어있는지 확인하고 싶을때 사용하면 됩니다. 앞서 봤던 옵션과 비슷하지만 <span class="command">-t</span> 옵션이 들어가 있습니다. 이 옵션이 아카이브를 풀지 않고 확인할 수 있게 해줍니다. 여기까지만 알면 기본적인 사용법은 알게 된 것이죠.</p>
-
 <h2>심화 사용법</h2>
 <p>지금부터는 쪼끔(?) 심화해서 알아봅시다. 이번엔 상황을 가정해봅시다.</p>
 <h3>파일 또는 디렉토리 추가</h3>
 <p>열심히 엄청난 크기의 tar 파일을 만들었는데 어떤 녀석이 제일 중요한 파일 하나를 다른 디렉토리에 넣어버려서 이것도 tar 파일 안에 넣어야 합니다. 그런데 다시 tar 파일로 만드려니 막막합니다. 그럴때 이 옵션을 써줍시다.</p>
-
 <pre class="prettyprint lang-sh">
 # 아카이브에 파일 추가
 $ tar -rvf [target.tar] [targetFile]
 </pre>
-
 <p><span class="command">-r</span> 옵션이 파일을 추가시키는 옵션입니다. 하지만, 같은 이름의 파일이 이미 있을 경우 덮어 쓰는것이 아니고 추가한 시간 순서대로 버전이름이 붙습니다. 아카이브를 해제할때는 최신 파일이 해제가 됩니다.</p>
-
 <h3>파일 업데이트</h3>
-
 <p>그렇게 빠진 파일을 넣어 놨는데 이번엔 어떤 녀석이 SVN 업데이트를 하지 않아 최신 파일과 과거 파일이 뒤죽박죽이라고 합니다. 짜증나지만 이것들도 아카이브에 넣어야 하는데 -r 옵션으로 넣으려니 과거 파일이 최신 파일로 둔갑하는(?) 현상이 나올까봐 열심히 메뉴얼을 찾아보니, 유레카! 이런 방법이 있었습니다.</p>
 </p>
 <pre class="prettyprint lang-sh">
@@ -106,30 +92,21 @@ $ tar -rvf [target.tar] [targetFile]
 $ tar -uvf [target.tar] [targeFile]
 </pre>
 <p>업데이트할 파일과 아카이브 내의 파일의 수정된 시간대를 비교해 업데이트 파일이 더 최신이면 업데이트를 합니다. 이때에도 덮어 씌우지 않고 버전별로 이름이 붙습니다. 물론 해제할땐 최신의 파일이 해제됩니다.</p>
-
 <h3>일부 해제</h3>
 <p>열심히 업데이트도 하고 해서 끝난줄 알았더니 이번엔 상사가 와서 특정 디렉토리의 소스를 달라고 합니다. 기존 아카이브로 만들기 전 소스를 찾아보니 동료녀석이 이미 지워놨습니다. 빡칩니다. 다시 이 엄청난 크기의 tar 파일을 다시 해제하려면 시간이 엄청나게 걸릴겁니다. 그래서 다시 메뉴얼을 찾아봤습니다. 신은 존재합니다.</p>
-
 <pre class="prettyprint lang-sh">
 # 아카이브 일부 해제
 $ tar -xvf [target.tar] [dir] [dir2] [...]
 </pre>
-
 <p>이미 알고 있던 명령어인데 추가적으로 뒤쪽에 풀어놓을 상세 디렉토리 경로를 붙이면 됩니다!</p>
-
 <h3>일부 삭제</h3>
-
 <p>열심히 추출해서 소스를 보내줬더니 상사가 보곤 이건 이미 필요 없어진것들이라고 합니다. 머릿속에 경종이 울립니다. 삭제 명령이 내려진것이죠. 이 엄청난 크기의 tar 파일을 풀어서 일부를 삭제하고 다시 묶을 생각을 하니 머리가 아파옵니다. 혹시나 해서 또 메뉴얼을 찾아봅니다. WOW!</p>
-
 <pre class="prettyprint lang-sh">
 # 아카이브 일부 삭제
 $ tar --delete --file=[target.tar] [deleteFileName]
 </pre>
-
 <p>다만 줄임표현이 없습니다. (<span class="command">-v</span> 같은) 그래서 삭제를 해줄땐 풀옵션을 써줘야 합니다. target.tar 에서 deleteFileName 을 가진 파일을 삭제합니다. 같은이름으로 버전별로 존재할 경우에도 전부 삭제합니다.</p>
-
 <h2>기타 사용법</h2>
-
 <h3>퍼미션 유지</h3>
 <p>리눅스는 파일 또는 디렉토리별로 권한이 설정 되어 있다는것은 다들 아실겁니다. 만약 퍼미션이 아주아주 중요한 아카이브라면 따로 옵션을 주어 확실하게 커미션을 유지할 수 있습니다. 바로 <span class="command">-p</span> 옵션입니다. 사용법은 아까 명령어들과 비슷합니다.</p>
 </p>
@@ -140,7 +117,6 @@ $ tar -cvfp [createTarName.tar] [target]
 $ tar -xvfp [target.tar]
 </pre>
 <p>비슷하지만 <span class="command">-p</span> 옵션만 있다는것이 다를 뿐입니다.</p>
-
 <h3>경로 설정 해제</h3>
 <p>만약 현재 디렉토리가 아닌 다른 디렉토리에 아카이브를 해제하고 싶다면 다음과 같은 명령어를 써줍니다.</p>
 <pre class="prettyprint lang-sh">
@@ -148,11 +124,8 @@ $ tar -xvfp [target.tar]
 $ tar -xvf [target.tar] -C [deployDir]
 </pre>
 <p><span class="command">-C</span> 옵션인데 대문자이므로 <span class="command">-c</span> 와 헷갈리지 않길 바랍니다. deployDir 에 풀어놓을 경로를 써주시면됩니다.</p>
-
 <h2>마무리</h2>
 <p>지금까지 tar 사용법에 대해 알아봤습니다. :) 이것 말고도 사용방법이 무궁무진한 리눅스의 tar 명령어입니다. 열심히 응용해봅시다! 혹시 틀린 부분 있다면 댓글 환영합니다.</p>
-
-
 </div>
 				</article>
 			</div>

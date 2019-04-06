@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,21 +51,13 @@
                     <h1 id="content_title">AngularJS ngRepeat dupes Error</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>angularJS를 테스트 해보다가 ng-repeat를 쓸일이 생겼는데 같은 값이 배열에 입력 되면 "dupes"라는 오류가 났다. 이 문제를 고치려고 구글링을 해보니 <a href="https://docs.angularjs.org/error/ngRepeat/dupes">https://docs.angularjs.org/error/ngRepeat/dupes</a>에서 해결법을 제시해 줬다.</p>
-
 <p>의외로 간단하게 <strong>"track by $index</strong>라는 값을 추가해서 해결할 수 있었다.</p>
-
 <pre class="prettyprint lang-html">
 &lt;div ng-repeat="value in [4, 4] track by $index"&gt;&lt;/div&gt;
 &lt;li ng-repeat="todo in todoList track by $index"&gt;{{todo}}&lt;/li&gt;
 </pre>
 <p>위에 있는 구문이 링크에서 제공한 방법이고 밑에 있는 구문이 내가 적용한 방법이다.</p>
-
-
 </div>
 				</article>
 			</div>

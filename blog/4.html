@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,14 +51,8 @@
                     <h1 id="content_title">리눅스 특수 문자 정리(Linux Shell)</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
-
 <p><span class="refer">* 이 포스팅은 네이버 블로그에서 작성(2013.02.19)한 내용을 옮겨온 것입니다.</span></p>
 <p>음, 다른 내용이 아니고 리눅스로 개발할 때 초기 시절 각종 명령어와 쉘스크립트 속에서 허우적거렸던 적이 있었다. 그중에서도 날 멘붕하게 만든것은 다름 아닌 "특수문자" 들이었는데, 이 특수문자라는 녀석들은 각자 고유의 명령이 존재하니 지금 한번 정리해 두고자 한다.</p>
-
 <h2>표준 출력</h2>
 <p>표준 출력을 뜻하는 특수 문자는 "&gt;"이다. 이 특수문자를 사용하면 다음과 같은 명령이 가능해진다.</p>
 <pre class="prettyprint lang-sh">
@@ -71,7 +65,6 @@ $ ls &gt; test.txt # 표준 출력을 파일에 기록한다.
 $ ls &gt;&gt; test.txt # 표준 출력을 파일 끝에 덧붙인다.
 </pre>
 <p>ls 명령어를 통해 출력된 내용을 test.txt 파일에 <strong>덧붙여</strong> 기록한다.</p>
-
 <h2>표준 입력</h2>
 <p>표준 입력을 뜻하는 특수 문자는 "&lt;"이다. 이 특수 문자를 사용하면 다음과 같은 명령이 가능하다.</p>
 <pre class="prettyprint lang-sh">
@@ -79,7 +72,6 @@ $ ls &gt;&gt; test.txt # 표준 출력을 파일 끝에 덧붙인다.
 $ cat &lt; test.txt # 파일에서 표준 입력으로 읽어들인다.
 </pre>
 <p>test.txt의 내용을 cat 명령어로 읽어 들인 뒤 화면에 노출한다.</p>
-
 <h2>와일드 카드</h2>
 <p>명령어 중 여러가지로 조합할 수 있는 특수문자들이다. *, ? 가 있다. 두가지의 차이점은 일치하는 문자의 개수다. * 특수 문자는 모든 문자와 일치하는 와일드 카드 특수 문자이며, ? 문자는 하나의 문자와 일치하는 특수 문자다. 명령어로는 다음처럼 나타낼 수 있다.</p>
 <pre class="prettyprint lang-sh">
@@ -95,7 +87,6 @@ $ ls test.tx? # test.txt, test.txx 등 하나 일치한 파일을 출력한다.
 # ps 명령어를 통한 표준 출력을 프로세스 정보 중 "tomcat"이 들어간 프로세스를 찾기 위해 표준 입력으로 삽입한다.
 $ ps -ef | grep tomcat
 </pre>
-
 <h2>명령 문자</h2>
 <p>해당 부분은 주로 명령(Command)에 관련된 문자로 다음과 같다.</p>
 <pre class="console">
@@ -106,29 +97,23 @@ $ ps -ef | grep tomcat
 $ # 변수에 접근할 수 있는 문자
 </pre>
 <p>이 외에도 "#" 문자를 쓰게 되면 주석 처리가 가능하다.</p>
-
 <h2>변수 접근 기호</h2>
 <p>위의 특수 문자들을 이용하면 조금 더 응용 가능한 쉘 커맨드가 가능해진다. 그 전에 변수에 접근 할 수 있는 특수 문자가 있는데 다음과 같다.</p>
-
 <pre class="console">
 0 # stdin (표준 입력)
 1 # stdout (표준 출력)
 2 # stderr (에러 출력)
 </pre>
 <p>위와 같은 문자와 변수 접근 문자를 합치면 &1, &2 같은 명령도 가능해진다. 다음과 같은 커맨드도 가능하다.</p>
-
 <pre class="prettyprint lang-sh">
 # 표준 에러 리다이렉션 ( stderr 만 출력 )
 $ ./test.sh &gt;&gt; ./test.log 2&gt;&1
 </pre>
 <p>위처럼 test.sh을 실행하면서 나온 표준 에러를 test.log 파일에 덧붙여 쓸 수도 있다. 그러나 log 파일이 필요 없을 경우 다음처럼 쓸 수도 있다.</p>
-
 <pre class="prettyprint lang-sh">
 # 표준 출력이 필요 없다.
 $ ./test.sh &gt;&gt; /dev/null 2&gt;&1
 </pre>
-
-
 </div>
 				</article>
 			</div>

@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,18 +51,9 @@
                     <h1 id="content_title">Oracle WHERE 1=1 구문에 대하여</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
-
-
 <p>이번엔 오라클에서 WHERE 1=1에 대하여 포스팅을 해보려고 한다. 그런데 해당 포스팅은 이미 네이버 블로그에서 한번 했었다(2013.03.18). 하지만 옛날 것이기도 하고 지금은 개발력(?)이 조금은 상승했으니 이번엔 다양한 각도로 조명해보고자 한다.</p>
-
 <h2>예전 네이버 포스트 내용</h2>
-
 <p>가끔 WHERE 1=1을 사용하는 SQL문을 본 적이 있었다. 개발의 '개'도 몰랐을 때는 왜 쓰는지 이유를 알 수 없었지만 지금은 이해가 됐다.</p>
-
 <pre class="prettyprint lang-sql">
 -- 예제 SQL
 SELECT *
@@ -72,9 +63,7 @@ AND first = '1'
 AND second = '2'
 </pre>
 <p>위와 같은 SQL 문이 있다고 치면 가끔 JDBC로 사용할 때에 인자 갯수가 지정 되 있지 않은, 즉 동적으로 변하는 인자 값들을 취하는 SQL 문이 필요할 때 WHERE 1=1 을 써주면 좋다. 예를 들어 first 인자값만 사용한다면 WHERE 1=1 이후에 first = '1' 만 써주면 되는 것이고 second 인자값만 사용한다면 WHERE 1=1 이후에 second = '1' 값만 써주면 되는 것이다. 물론 두 인자 값 모두를 사용할 땐 전부 써주면 된다.</p>
-
 <p>이러한 WHERE 1=1 문을 쓰지 않는다면 어떤 모습이 될까? 아마도 다음 처럼 되지 않을까. 소스의 간편함을 위해 <span class="command">PreparedStatement</span>는 사용하지 않는다 가정하고 생 소스를 작성해본다.</p>
-
 <pre class="prettyprint lang-java">
 StringBuffer sql = new StringBuffer();
 StringBuffer sub = new StringBuffer();
@@ -95,9 +84,7 @@ if( second != null){
 }
 sql.append( sub );
 </pre>
-
 <p>바로 에디터상에서 작성한 것이기 때문에 소스코드에 오류가 있을지는 알 수 없다. 하지만 무슨말을 하고자 했는지는 전달이 됐을거라 생각한다. 인자값이 하나가 더 늘어난다고 생각하면 아찔하다. 반대로 <span class="command">WHERE 1=1</span> 을 사용한 경우를 보면 다음과 같다.</p>
-
 <pre class="prettyprint lang-java">
 StringBuffer sql = new StringBuffer();
 
@@ -112,21 +99,16 @@ if( second != null ){
 	sql.append("\n AND second = '1' ");
 }
 </pre>
-
 <p>정말 원시적인 코드지만 WHERE 1=1 을 어디서 어떻게 사용해야 하는지 이해하기엔 부족함이 없을것이라 생각한다.</p>
 <p>이것이 가능한 이유는 WHERE 1=1 은 언제나 '참'이기 때문이다. 즉 뒤에 어떠한 조건구문이 와도 1=1 은 언제나 참이기 때문에 안심하고 AND 를 붙여가며 조건구문을 붙일 수 있는 것이다.</p>
 <p>WHERE 1=1 이나 WHERE 10=10이나 앞뒤가 같은 결과를 갖춘다면 어떤 값을 넣어도 관계가 없다.</p>
 <p>그러나 WHERE 1=1 이 관습처럼 굳어진듯 하니 WHERE 1=1 을 사용해 보는 것이 어떨까 한다.</p>
 <p>이 구문이 퍼포먼스 측면에서 어떻게 되는지는 정확히 모르기 때문에 알고 있다면 덧글 부탁!</p>
-
 <h2>현실로 복귀</h2>
 <p>작년엔 EJB를 다룰때가 많았는데 DB 매퍼가 없는 바람에 Stringbuffer로 쿼리를 짜야했던 시절이 있었다. 그때 작성한 포스트라 예제가 전부 생으로 쿼리 짜는것 밖에 없다. 슬프다. 여하튼, 지금 와서 보면 하이버네이트나 Mybatis같은 훌륭한 DB 매퍼가 찾아보면 꽤 있으니 상기에 적어놓은 코드들은 이제 볼 일이 없지 않을까 싶다.</p>
-
 <p>하지만 다양한 각도로 WHERE 1=1을 보려면 흑역사가 필요했기 때문에 꺼내온 것이다. 이제부터 다른 각도로 WHERE 1=1을 뜯어보자.</p>
-
 <h2>WHERE 1=1의 잠재된 위험성</h2>
 <p>분명 조회(select) 쿼리에서는 WHERE 1=1은 훌륭한 전략이 될 수도 있다. 매번 WHERE 절을 컨트롤하느니 그냥 파라미터를 전부 받아버리면 최소한 WHERE 절이 처음에 올지 AND가 올지 결정할 필요는 없어지니까 말이다. 그러나 반대로 갱신(Update) 쿼리 또는 삭제(Delete) 쿼리에서는 어떻게 될까. 아무런 예외 처리 없이 WHERE 1=1을 사용하면 다음처럼 된다.</p>
-
 <pre class="prettyprint lang-java">
 StringBuffer sql = new StringBuffer();
 
@@ -141,17 +123,13 @@ if( second != null ){
 	sql.append("\n AND second = '1' ");
 }
 </pre>
-
 <p>부끄러운 소스를 다시 한번 들고 나왔다. 이 소스를 보면 분명 first, second에 대해 null 처리가 된것처럼 보인다. 하지만 실제로 first, second가 null 값을 가지고 있다면 다음과 같은 쿼리가 완성된다.</p>
-
 <pre class="prettyprint lang-sql">
 SELECT *
 FROM test_tbl
 WHERE 1=1
 </pre>
-
 <p>위 쿼리가 돌아간다면 test_tbl에 해당하는 row가 전부 출력될 것이다. 이건 select 쿼리이기 때문에 그렇게 큰 문제가 없다고 할 수 있겠으나 정말 중요한 것은 update, delete 등의 쿼리이다. 아래의 코드를 보면 알 수 있다.</p>
-
 <pre class="prettyprint lang-java">
 StringBuffer sql = new StringBuffer();
 
@@ -165,19 +143,14 @@ if( second != null ){
 	sql.append("\n AND second = '1' ");
 }
 </pre>
-
 <p>분명히 정상적으로 파라미터가 입력된다면야 정확한 삭제가 될만한 쿼리가 나올것이다. 하지만 아까처럼 first, second 값이 <span class="command">null</span>로 들어온다면?</p>
-
 <pre class="prettyprint lang-sql">
 DELETE FROM test_tbl
 WHERE 1=1
 </pre>
-
 <p>위와 같은 쿼리가 되면서 DB 테이블 하나가 통째로 날아갈 수도 있다. 이것이 바로 <strong>잠재된 위험성</strong>이다. 그러니 예외 처리 확실히 하자. 두번 하자.</p>
-
 <h2>Mybatis</h2>
 <p>지금까지는 Java 파일에 직접 <span class="command">Stringbuffer</span>로 쿼리를 짜넣는 예제만 썼다. 그러면 이번엔 DB 매퍼에서도 이런 <strong>잠재된 위험성</strong>이 있을까? 한번 Mybatis로 짜보자.</p>
-
 <pre class="prettyprint lang-xml">
 &lt;update id="test"&gt;
 	update test_tbl
@@ -188,7 +161,6 @@ WHERE 1=1
 	&lt;/if&gt;
 &lt;/update&gt;
 </pre>
-
 <p>사실 별 달라질 건 없다. first 값이 null이라면 WHERE 1=1 구문이 되면서 test_tbl 테이블의 모든 use_yn 컬럼 값은 'N'이 될 것이다. 따라서 중요한 것은 WHERE 1=1을 쓰지 말라는 것보다도 <strong>'예외 처리'를 확실히 하는 것이 좋겠다.</strong></p>
 <p>아니면 아래의 <strong>Add Case</strong>처럼 처리하는 것이 좋을 것 같다.</p>
 <div class='fold' data-title='View Add Case'>
@@ -207,18 +179,14 @@ WHERE 1=1
 </pre>
 <p>여기서 where 태그는 단순히 객체가 반환되는 경우 문자열의 시작이 AND, OR인 경우엔 삭제하고 where 문자열을 추가한다. 관련된 자세한 정보는 <a href="https://mybatis.github.io/mybatis-3/ko/dynamic-sql.html">mybatis - 동적 SQL</a>부분을 참조하자.</p>
 </div>
-
 <h2>Performance</h2>
 <p>이번엔 성능적인 측면에서 바라보고자 한다. WHERE 1=1을 쓰면 인덱스를 태우지 못한다던가의 이유로 퍼포먼스에 영향을 줄까? 물론 애초에 동적쿼리라서 발생하게 되는 퍼포먼스 저하는 어쩔 수 없다. 어찌되었든 논점은 '인덱스'를 타는가인데... 그래서 테스트 해봤다.</p>
-
 <pre class="prettyprint lang-sql">
 SELECT COUNT(1)
 FROM test_tbl
 WHERE 1=1
 </pre>
-
 <p>아래는 위와 같은 쿼리를 돌려서 나온 실행 계획<span class="refer">Execute Plan</span>이다.</p>
-
 <pre class="diagram">
 ┏━┳━━┳━━━━━━━━━━━━┳━━━━┳━━┳━━━┳━━━━┳━━━━┓
 ┃ID┃PID ┃Operation               ┃Name    ┃Rows┃Cost  ┃CPU Cost┃IO Cost ┃
@@ -229,11 +197,8 @@ WHERE 1=1
 ┗━┻━━┻━━━━━━━━━━━━┻━━━━┻━━┻━━━┻━━━━┻━━━━┛
 </pre>
 <p>음, T.PK_SEQ가 있는것으로 봐선 인덱스를 타는 것으로 보인다. 그러나 이건 COUNT 커맨드를 통해 살펴본 것이므로 확실하지가 않다. -_- 이 부분은 댓글 부탁드립니다.(공손)</p>
-
 <h2>Closing Remarks</h2>
 <p>WHERE 1=1은 편리한점도 많지만 위험성도 같이 내포하고 있으니 조심스럽게 이용하는 습관을 기르자. :)</p>
-
-
 </div>
 				</article>
 			</div>

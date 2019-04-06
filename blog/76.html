@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,23 +51,15 @@
                     <h1 id="content_title">C언어 파일 권한 체크 - access() 사용법</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>오늘은 C언어에서 <span class="command">.access()</span> 함수에 대해 알아고보자 합니다. 기준 OS는 centOS(gcc version 4.1.2)입니다.</p>
-
 <h2>.access() function definition</h2>
 <p><span class="command">.access()</span> 함수는 파일 또는 디렉토리의 사용자 권한을 체크합니다.</p>
-
 <h2>use .access() function</h2>
 <p><span class="command">.access()</span> 함수의 사용법은 다음과 같습니다.</p>
-
 <pre class="prettyprint lang-c">
 #include &lt;unistd.h&gt;
 int access(const char *pathname, int mode); 
 </pre>
-
 <p>사용하고자 하는 프로그램상에 <span class="command">unistd.h</span> 헤더 파일을 포함하고 <span class="command">.access()</span> 함수에 매개 인자를 넘겨주면 됩니다.</p>
 <p>pathname에는 체크하고자할 디렉토리 또는 파일명을 넣고 mode 변수에는 적절한 마스크<span class="refer">mask</span> 값을 넣으면 됩니다. mode 변수에 들어갈 수 있는 마스크 값은 다음과 같습니다.</p>
 <pre class="console">
@@ -76,13 +68,10 @@ int access(const char *pathname, int mode);
 &lt;span class="light"&gt;X_OK&lt;/span&gt; : 파일 존재 여부, 실행 권한 여부
 &lt;span class="light"&gt;F_OK&lt;/span&gt; : 파일 존재 여부 
 </pre>
-
 <p><span class="command">.access()</span> 함수의 결과 값은 int형으로 <strong>성공하면</strong> <span class="command">0</span>을, <strong>실패하면</strong> <span class="error">-1</span>을 반환합니다. 오류의 원인에 대해서는 errno에 세팅됩니다. 해당 부분에 대한 자세한 내용은 C 컴파일러가 설치되었다는 가정 하에 콘솔에 <span class="command">man access</span>를 실행해 보세요.</p>
-
 <pre class="prettyprint lang-sh">
 $ man access # access 함수에 대한 자세한 설명을 출력합니다.
 </pre>
-
 <h2>Example</h2>
 <pre class="prettyprint lang-c">
 #include &lt;stdio.h&gt;
@@ -99,10 +88,7 @@ int main(void){
 	}
 }
 </pre>
-
 <p>프로그램을 보면 알수 있듯이 mode 변수가 들어갈 곳에 비트 연산으로 여러가지를 한번에 체크할 수 있습니다. 하나씩만 체크할 필요는 없어요.</p>
-
-
 </div>
 				</article>
 			</div>

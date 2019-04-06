@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,10 +51,6 @@
                     <h1 id="content_title">Caused by: java.net.SocketException: 파이프가 깨어짐</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>Spirng boot 프로젝트를 데몬으로 돌리는 중에 갑자기 "Caused by: java.net.SocketException: 파이프가 깨어짐" 라는 오류가 뜨더니 제대로 데이터가 전송 되지 않는 것을 발견했습니다. 그래서 검색을 이리저리 해본 결과 DB와 장시간 접속이 없는 경우 생길 수 있다고 하네요.</p>
 <p>그래서 application.properties 파일에 다음과 같은 내용을 추가했습니다. 잘 되는지는 지켜봐야겠네요.</p>
 <pre class="console">
@@ -62,8 +58,6 @@ spring.datasource.validation-query=SELECT 1
 spring.datasource.test-on-borrow=true
 spring.datasource.test-while-idle=true
 </pre>
-
-
 </div>
 				</article>
 			</div>

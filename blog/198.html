@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,19 +51,11 @@
                     <h1 id="content_title">Mac Terminal</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>부끄러운 일이지만 최근에서야 맥북을 써보고 있습니다. 스크롤부터 해서 트랙패드까지 적응이 안됐었어요. 그래도 하다보니 조금씩 익숙해지는 것 같습니다. 이번 포스팅은 제가 맥북에서 터미널 열고 삽질했던것 정리 차원에서 올리는 포스트가 될 예정입니다.</p>
-
-
 <h2>Open terminal for Mac</h2>
 <p>맥에서 터미널을 열려면 2가지 방법이 있습니다. 하나는 <strong>런치 패드</strong>에서 터미널 프로그램을 찾아서 실행하는 것이고 다른 하나는 스폿라이트에서 한글로 "터미널"을 검색하면 됩니다.</p>
-
 <h2>Change terminal color for dark theme</h2>
 <p>터미널을 실행하면 초기 화면은 하얀색 바탕의 테마가 적용된 터미널이 뜹니다. 테마를 바꾸고 싶다면 터미널 환경설정에서 바꿔주면 되는데 저 같은 경우는 "Pro"를 사용합니다. Pro 테마를 사용하면서 같이 적용하면 좋을 것 같은 배색을 공유 합니다. 터미널에서 아래의 작업을 수행하면 됩니다.</p>
-
 <pre class="prettyprint lang-sh">
 $ cd ~
 $ vi .profile
@@ -76,17 +68,12 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 
 $ source .profile
 </pre>
-
 <h3>Add etc alias at <span class="command">.profile</span> file</h3>
 <p>만약 맥 터미널에서 <span class="command">.profile</span> 파일을 열어보는 것이 처음이라면 아래의 <span class="command">alias</span>를 추가 시켜보세요. 유용합니다. :3</p>
-
 <pre class="prettyprint lang-sh">
 alias ll="ls -l"
 # 최근 변경일 기준 정렬은 alias ll="ls -lrt" 로도 대체 가능 합니다.
 </pre>
-
-
-
 </div>
 				</article>
 			</div>

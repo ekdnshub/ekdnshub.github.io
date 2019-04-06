@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,42 +51,27 @@
                     <h1 id="content_title">Install Maven for Mac</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>완연한 가을 하늘의 주말 토요일 오후입니다. 그래서 이번 포스팅은 가벼운 주제로 간단하게 끝냅니다! 바로 Mac X OS에 <span class="command">Maven</span>을 설치하는 포스팅이죠. 까먹지 않을겸 정리해두는 느낌으로 진행하겠습니다. :3</p>
-
 <h2>Download Maven</h2>
 <p>우선, Maven 압축 파일을 받습니다. <a href="https://maven.apache.org/download.cgi">Maven - Download</a> 링크에서 <span class="command">apache-maven-3.3.3-bin.tar.gz</span>을 다운로드 받습니다. 제가 작성한 시점은 <span class="command">3.3.3</span>버전이었으나 더 높은 버전이 있다면 해당 압축 파일을 받으시면 됩니다.</p>
-
 <h2>Install & Run test</h2>
 <p>다운로드 받은 압축 파일을 해제하면 <span class="command">apache-maven-3.3.3</span> 이라는 디렉토리가 생성됩니다. 이 디렉토리를 <span class="command">/usr/local/maven</span>에 이동시킵니다. 여기서 굳이 저 위치로 지정하지 않아도 좋습니다. 원하는 위치에 옮기셔도 무방합니다. 그리고 다음 커맨드를 터미널에서 입력합니다.</p>
-
 <pre class="prettyprint lang-sh">
 $ vi ~/.profile
 </pre>
 <p>그러면 <span class="command">profile</span> 편집을 할 수 있게 되는데 다음을 추가해서 넣어줍니다.</p>
-
 <pre class="prettyprint lang-sh">
 export PATH=/usr/local/maven/apache-maven-3.3.3/bin:$PATH
 </pre>
 <p>만약 <span class="command">/usr/local/maven</span>으로 지정하지 않으신 분들은 본인들이 직접 지정했던 디렉토리를 지정하시면 됩니다.</p>
-
 <p>터미널에서 바로 확인해보기 위해 다음처럼 입력해줍니다.</p>
-
 <pre class="prettyprint lang-sh">
 $ source ~/.profile
 $ mvn -v
 </pre>
 <p><span class="command">Maven</span>의 버전 및 환경에 대한 정보가 출력되면 정상적으로 설치 된겁니다. :D</p>
-
-
 <h2>Closing Remarks</h2>
 <p>간단하게 Mac X OS에 <span class="command">Maven</span>을 설치하는 법을 알아봤습니다.</p>
-
-
-
 </div>
 				</article>
 			</div>

@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,35 +51,21 @@
                     <h1 id="content_title">Scala IDE + Spark 연동 예제(for Windows7)</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>Apache Spark 라이브러리를 로컬 머신에서 한번 돌려보자는 생각에 포스팅을 쓰게 되었습니다. Windows7에서 구동한 포스팅입니다.</p>
-
-
 <h2>Preparation</h2>
 <p>이번 포스팅에서는 <a href="/blog/82">스칼라 IDE</a>를 사용해서 진행합니다. 따라서 스칼라 IDE가 별도로 없다면 링크를 클릭해서 진행하신 뒤에 포스팅을 이어서 보시기 바랍니다. :D</p>
-
 <h2>Import Spark Library</h2>
 <p>스파크 라이브러리를 받는 방법은 두가지가 있습니다. 하나는 스파크 홈페이지에서 직접 내려받은 라이브러리를 사용하는 것과 메이븐을 이용하는것입니다.</p>
-
 <p>두 방법 모두 다음과 같은 작업은 공통으로 진행합니다. 스칼라 IDE에서 다음과 같은 순서로 프로젝트를 생성 합니다.</p>
-
 <div class="yellow">
 <p>File > Scala Project > Project Name : spark, JRE : JavaSE-1.8 > Finish</p>
 </div>
-
 <h3>Using Maven</h3>
 <p>메이븐을 이용하기 위해 스칼라 프로젝트를 메이븐 프로젝트로 변환시켜 줍니다.</p>
-
-
 <div class="yellow">
 <p>프로젝트 탐색기에서 해당 프로젝트 오른쪽 클릭 > Configure > Convert To Maven Project</p>
 </div>
-
 <p>그 후 생성된 <span class="command">pom.xml</span> 파일에 다음을 추가해줍니다.</p>
-
 <pre class="prettyprint lang-xml">
 &lt;dependencies&gt;
 	&lt;dependency&gt;
@@ -95,17 +81,11 @@
 	&lt;/dependency&gt;
 &lt;/dependencies&gt;
 </pre>
-
 <p>버전은 각자 알맞게 설정하시면 됩니다.</p>
-
-
 <h3>Using Direct Library</h3>
 <p>이번 방법에서 진행하는 라이브러리는 스파크를 다운로드 받아야 합니다. 해당 내용은 <a href="/blog/164">Apache Spark Overview & Example</a> 포스트를 참조하세요.</p>
-
-
 <h4>Add Jar File</h4>
 <p>다음과 같은 목록의 jar 파일을 build path에 추가합니다.</p>
-
 <div class="tab">
 <ul>
 <li>datanucleus-api-jdo-3.2.6.jar</li>
@@ -116,25 +96,16 @@
 <li>spark-examples-1.4.0-hadoop2.6.0.jar</li>
 </ul>
 </div>
-
 <p>해당 압축 파일을 다운로드 받으려면 <a href="https://spark.apache.org/downloads.html">Spark 다운로드</a>를 클릭하세요. 여기서 <span class="command">spark-{version}.tgz</span> 파일을 내려 받으면 됩니다.</p>
-
 <p>위의 jar 파일은 <span class="command">spark-1.4.0-bin-hadoop2.6.tgz</span> 파일을 내려 받았다면 최하단 디렉토리 중 lib 디렉토리에 있습니다.</p>
-
 <p>build path에 jar 파일을 추가한 이후 스칼라 컴파일러 버전을 맞춰줍니다. 저는 2.10.x 버전대로 맞췄습니다.</p>
-
-
 <h4>Run Configuration</h4>
 <p>해당 프로젝트의 Run Configration을 설정해야 합니다. <span class="command">Run > Run Configuration</span>을 클릭해서 설정 윈도우를 띄웁니다.</p>
-
-<p>그리고 Environment 탭에서 Name을 <span class="command">HADOOP_HOME</span> 그리고 Value를 <span class="command">\YourPath\hadoop-common-2.2.0-bin-master</span>라고 맞춰줍니다.</p>
-
+<p>그리고 Environment 탭에서 Name을 <span class="command">HADOOP_HOME</span> 그리고 Value를 <span class="command">/YourPath/hadoop-common-2.2.0-bin-master</span>라고 맞춰줍니다.</p>
 <h4>hadoop-common-2.2.0-bin-master</h4>
 <p>윗절에서 지정한 HADOOP_HOME의 설정을 위해 추가로 다운로드 받을 것이 있습니다. <a href="https://github.com/srccodes/hadoop-common-2.2.0-bin">https://github.com/srccodes/hadoop-common-2.2.0-bin</a>를 클릭해서 Zip 데이터를 다운로드 받습니다. 그리고 이것을 아까 지정했던 HADOOP_HOME 경로에 맞춰서 압축을 해제해 줍니다.</p>
-
 <h2>Start Spark Context</h2>
 <p>스파크 관련 라이브러리를 import 했다면 이번엔 간단하게 테스트를 해봅시다. 다음과 같은 스칼라 코드를 작성합니다.</p>
-
 <pre class="prettyprint lang-scala">
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
@@ -150,22 +121,13 @@ object Spark {
  }
 }
 </pre>
-
 <p>저는 결과 값으로 <strong>8</strong>이 나오긴 했습니다. 이제 로컬에서 테스트가 가능하겠네요. :)</p>
-
-
 <h3>Using Remote Hadoop Server</h3>
 <p>만약, 하둡 서버를 별도로 돌리고 있다면 아래처럼 <span class="command">hdfs://</span>를 붙여서 직접 파일에 접근할 수도 있습니다.</p>
-
 <pre class="prettyprint lang-scala">
 val testFile = "hdfs://YOUR_HADOOP_NODE_IP_OR_NAME:9000/..."
 </pre>
-
 <p>이 경우에 스파크에 포함된 Hadoop 라이브러리와 Hadoop이 설치된 서버의 버전을 꼭 맞춰서 테스트 하시기 바랍니다. :)</p>
-
-
-
-
 </div>
 				</article>
 			</div>

@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,20 +51,13 @@
                     <h1 id="content_title">옵저버 패턴(Observer Pattern)</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <h2>Intro</h2>
 <p>옵저버 패턴을 생각나는대로 정리해보고자 한다. 정말 간단하게 이 패턴이 어떻게 쓰는지만 써놓으려 하는데, 혹시라도 이게 잘못될까 싶어 전전긍긍이다. 아무튼, 복잡하지 않게 정말 간단한 코드로 옵저버 패턴에 대해 알아보자!</p>
-
 <h2>Overview Observer Pattern</h2>
 <p>옵저버 패턴이란 어떤 연예인이 있는데 연예인의 주변을 둘러쌓는 팬들을 떠올리면 쉬울 것 같다. 연예인들은 팬들이 누군지 하나하나 알 필요는 없지만 노래를 하거나 소리를 치거나 해서 모든 팬들에게 자신의 의사를 전달 할 수 가 있다. 여기서 연예인은 "주체"가 되고 팬들은 "옵저버"가 된다.</p>
 <p>즉, 옵저버 패턴에서는 연예인과 팬을 구현하는 것이다. 이제부터 하나씩 알아보고자 한다.</p>
-
 <h2>Implement Observer Pattern for Java</h2>
 <p>Java를 이용해서 옵저버 패턴 예제를 구현해 보자.</p>
-
 <h3>Need Classes</h3>
 <div class="green">
 <ul>
@@ -74,12 +67,9 @@
 <li><strong>SingerFan Class</strong> - 가수를 좋아하는 팬을 구현하는 클래스.</li>
 </ul>
 </div>
-
 <p>위에서 보다시피 4가지의 클래스 및 인터페이스를 구현해야 한다. 이번 예제에서는 연예인 인터페이스를 포함하는 "가수"와 팬 인터페이스를 포함하는 "일반인"을 구현해서 옵저버 패턴을 익혀보자.</p>
-
 <h3>Coding Classes</h3>
 <p>윗절에서 기술된 것을 바탕으로 실제 코드로 구현을 해보고자 한다. 우선 연예인 인터페이스부터 구현한다.</p>
-
 <h4>Talent Interface</h4>
 <pre class="prettyprint lang-java">
 /* Talent Interface */
@@ -90,7 +80,6 @@ public interface Talent {
 }
 </pre>
 <p>이 인터페이스를 포함하면 어떠한 클래스든 "연예인"이 될 수 있다. 연예인은 자신의 팬들을 추가하거나 삭제할 수 있고 또한 말도 할 수 있다.</p>
-
 <h4>Singer Class</h4>
 <pre class="prettyprint lang-java">
 /* Singer Class */
@@ -148,9 +137,7 @@ public class SingerFan implements Fan{
 	}
 }
 </pre>
-
 <p>이 클래스는 팬 인터페이스를 상속 받은 "가수 팬" 클래스다. 가수팬은 가수에게 달라붙어서 나를 봐달라고 소리칠 것이고 어떤 가수에게든 가서 팬이 되거나 탈퇴할 수도 있다.</p>
-
 <h3>Execute Example Code</h3>
 <p>지금까지 4개의 자바 인터페이스 및 클래스를 구현했다. 실제로 이것들을 사용해서 콘솔에 출력해보는 간단한 메인 프로그램을 짜보자.</p>
 <pre class="prettyprint lang-java">
@@ -187,8 +174,6 @@ public static void main(String[] args) {
 </pre>
 <h2>Closing Remarks</h2>
 <p>이것만 보고 옵저버 패턴을 완벽히 알았다고 할 수는 <strong>"절대"</strong> 없다. 이 코드들은 옵저버 패턴의 정말 단순하고 단순한 것만을 표현한 것일 뿐이다. 더욱 복잡한 옵저버 패턴도 존재하고 많은 곳에서 사용도 되고 있다. 사실 듣고 보는것보다 한번 직접 코드를 짜보는것이 도움이 된다. 돌려보자!</p>
-
-
 </div>
 				</article>
 			</div>

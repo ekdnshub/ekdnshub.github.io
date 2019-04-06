@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,10 +51,6 @@
                     <h1 id="content_title">jQuery append()/prepend()</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>jQuery를 쓰다보면 관용구처럼 자주 쓰이는 함수들이 있다. 특정 DOM객체를 다른 부분에 붙인다던가, 앞 또는 뒤에 위치시킨다던가 하는 것을 가능하게 해주는 함수들이 오늘 포스팅할 내용이다.</p>
 <h2>Parent/Child Relation</h2>
 <p>부모/자식 관계라는 것은 상위 엘리멘트/하위 엘리멘트로 나뉘어져 있는 상태를 말한다. 즉 A라는 객체 안에 B라는 객체가 종속되어 있는 것이라고 생각하면 된다. 이럴 경우 다음과 같은 함수를 통해 객체를 처리할 수 있다.</p>
@@ -73,19 +69,14 @@ $(child).prependTo(parent) // chlid 객체를 parent 객체 내 첫번째 요소
 	&lt;p&gt;위에 있는 p 객체와 같은 레벨입니다.&lt;/p&gt;
 &lt;/div&gt;
 </pre>
-
 <p>p객체들은 같은 레벨에 있다고 볼 수 있다. 이럴 경우 사용하는 jQuery 함수들은 다음과 같다.</p>
-
 <pre class="prettyprint lang-js">
 $(first).before(second) // first 객체 앞쪽에 second 객체를 붙인다.
 $(first).after(second) // first 객체 뒤쪽에 second 객체를 붙인다.
 $(first).insertBefore(second) // first 객체를 second 객체의 앞쪽에 붙인다.
 $(first).insertAfter(second) // first 객체를 second 객체의 뒤쪽에 붙인다.
 </pre>
-
 <p>단순히 새로운 객체를 추가해서 붙이는 것 외에도, <strong>DOM 문서 내의 기존 객체를 가져다 쓰는것도 가능하다.</strong> 이것에 대해서는 별도로 jQuery API 문서를 찾아보는 것이 좋을 것 같다.</p>
-
-
 </div>
 				</article>
 			</div>

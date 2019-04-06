@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,20 +51,11 @@
                     <h1 id="content_title">Ehcache Usage & Example(Basic)</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
-
 <h2>Ehcache Overview</h2>
 <p>지금 소개해드릴 <a href="http://www.ehcache.org/">Ehcache</a>는 오픈소스(아파치 라이센스 2.0)이면서 표준 기반 cache 입니다. 자바 기반의 cache로 폭넓게 사용 되고 있는데 이것은 다른 인기있는 라이브러리 또는 프레임워크와 같이 통합해서 사용하고 있기 때문입니다.</p>
-
 <p>참고로 Ehcache는 독립적인 캐시 데몬을 가지지 않습니다. 이것은 memCached와 다른점이고 또한 원격 지원을 하는 Redis와도 다른점입니다.</p>
-
 <p>이말인즉슨 Ehcache는 어플리케이션 구동시 내부적으로 동작합니다. 따라서 원격 캐시 서버를 사용하며 생길 수 있는 네트워크 지연 또는 단절로 인한 데이터 유실이 거의 없을뿐더러 같은 로컬 머신일지라도 별도로 구동하는 memCached와는 다르게 EhCache는 라이프사이클을 애플리케이션과 함께 합니다.</p>
-
 <p>현재 최신 버전은 3.0.0.m3이 릴리즈 되었네요. 또한 JSR107 스펙을 지원합니다. 이 부분은 추후에 알아보는것으로 하고 기본적인 사용법에 대해 알아보고자 합니다.</p>
-
 <h2>Maven Dependency</h2>
 <p>Ehcache을 사용하기 위해서 다음과 같은 메이븐 의존성을 <span class="command">pom.xml</span> 파일에 추가해줍니다.</p>
 <pre class="prettyprint lang-xml">
@@ -74,13 +65,10 @@
     &lt;version&gt;3.0.0.m3&lt;/version&gt;
 &lt;/dependency&gt;
 </pre>
-
 <h2>Example</h2>
 <p>이제부터 실제 코드로 확인해 봅시다.</p>
-
 <h3>Basic</h3>
 <p>가장 기본적인 사용 방법입니다. 자세한 설명은 주석으로 대체합니다.</p>
-
 <pre class="prettyprint lang-java">
 import org.ehcache.Cache;
 import org.ehcache.CacheManager;
@@ -181,10 +169,8 @@ public class EhCacheTest {
     }
 }
 </pre>
-
 <h3>Ehcache 3.0 Feature</h3>
 <p>Ehcache 3버전에서 추가된 <span class="command">UserManagedCache</span> 클래스입니다. 자세한 설명은 주석으로 대체합니다.</p>
-
 <pre class="prettyprint lang-java">
 import org.ehcache.UserManagedCache;
 import org.ehcache.UserManagedCacheBuilder;
@@ -226,10 +212,8 @@ public class EhCache3Test {
     }
 }
 </pre>
-
 <h3>Limit Cache Size</h3>
 <p>아래의 코드는 heap, offheap, disk 용량을 결정해서 사용하는 코드입니다. 자세한 설명은 주석으로 대체합니다.</p>
-
 <pre class="prettyprint lang-java">
 import org.ehcache.CacheManager;
 import org.ehcache.CacheManagerBuilder;
@@ -279,10 +263,8 @@ public class EhCacheTieringTest {
     }
 }
 </pre>
-
 <h3>Xml Config for Ehcache</h3>
 <p>자바 코드로 캐시를 설정하는 것 외에도 XML 파일을 이용해서 손쉽게 캐시를 설정할 수 있습니다. 자세한 내용은 코드를 참조하세요.</p>
-
 <h4>Java Code</h4>
 <pre class="prettyprint lang-java">
 import org.ehcache.Cache;
@@ -328,9 +310,7 @@ public class EhCacheXmlTest {
 }
 </pre>
 <h4>Xml Configration</h4>
-
 <p>아래는 간단한 Ehcache XML 환경설정 파일입니다.</p>
-
 <pre class="prettyprint lang-xml">
 &lt;!-- ehCache-config.xml --&gt;
 &lt;ehcache:config xmlns:ehcache="http://www.ehcache.org/v3"&gt;
@@ -358,10 +338,8 @@ public class EhCacheXmlTest {
     &lt;/ehcache:cache&gt;
 &lt;/ehcache:config&gt;
 </pre>
-
 <h3>Expire Configuration</h3>
 <p>캐시를 얼마나 유지하고 있어야 하는지도 결정해준다면 보다 효율적인 캐시 메모리 관리를 할 수 있지 않을까요? 이번 절에서는 캐시의 생명 주기를 결정하는 방법을 알아 봅시다.</p>
-
 <pre class="prettyprint lang-java">
 UserManagedCache&lt;String, String&gt; cache = UserManagedCacheBuilder
         .newUserManagedCacheBuilder(String.class, String.class)
@@ -369,7 +347,6 @@ UserManagedCache&lt;String, String&gt; cache = UserManagedCacheBuilder
         .withExpiry(Expirations.timeToLiveExpiration(new Duration(120L, TimeUnit.SECONDS)))
         .build(true);
 </pre>
-
 <p>위와 같은 코드로 캐시의 저장 주기를 결정 할 수 있습니다. 여기서 눈여겨 봐야하는것은 <span class="command">timeToIdleExpiration</span> 메소드와 <span class="command">timeToLiveExpiration</span> 메소드인데요, 두가지 메소드는 차이가 있습니다.</p>
 <p>우선 <span class="command">timeToIdleExpiration</span> 메소드는 <strong>마지막 캐시 요청 이후 지정 시간동안 재 요청이 없다면 삭제 하는 시간</strong>을 결정합니다. <span class="command">timeToLiveExpiration</span> 메소드는 <strong>최초 캐시 저장 이후부터 지정시간이 되면 캐시를 삭제 하는 시간</strong>을 결정합니다. 보통은 <span class="command">timeToLiveExpiration</span> 값이 더 큰 경우가 많겠죠?</p>
 <p>따라서 위의 코드에 따르면 해당 캐시에 저장되는 값들은 최대 120초 동안 유지가 될 수 있고 60초동안 재 요청이 없으면 값을 삭제하는 것이 되겠습니다.</p>
@@ -378,12 +355,8 @@ UserManagedCache&lt;String, String&gt; cache = UserManagedCacheBuilder
 .withExpiry(Expirations.timeToLiveExpiration(Duration.FOREVER))
 </pre>
 <p>메모리가 있는 한 계속 저장할거에요. 물론 <span class="command">Duration.ZERO</span>라는 옵션도 존재는 합니다. 하지만 캐시를 써야하는 입장이라면 굳이 쓰일 이유는 없지 않을까요? :)</p>
-
 <h2>Closing Remarks</h2>
 <p>간단한 Ehcache 사용법에 대해 알아봤습니다. :)</p>
-
-
-
 </div>
 				</article>
 			</div>

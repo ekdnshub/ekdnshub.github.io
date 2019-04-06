@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,48 +51,35 @@
                     <h1 id="content_title">오라클 달, 일, 월 처음&마지막 날짜 구하기</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>음, 오라클 날짜 포맷 중 가끔 쓰이는 것들을 정리해 봅니다. 아래처럼 쓰면 월/주/일로 필요한 값을 사용할 수 있습니다.</p>
-
 <h5>현재 주간<span class="refer">current week</span>의 첫번째 날</h5>
 <pre class="prettyprint lang-sql">
 TRUNC(sysdate,'IW')
 </pre>
-
 <h5>이전 주간<span class="refer">prior week</span>의 첫번째 날</h5>
 <pre class="prettyprint lang-sql">
 TRUNC(sysdate-7,'IW')
 </pre>
-
 <h5>다음 주간<span class="refer">next week</span>의 첫번째 날</h5>
 <pre class="prettyprint lang-sql">
 NEXT_DAY(sysdate,'MONDAY')
 </pre>
-
 <h5>현재 달<span class="refer">current month</span>의 첫번째 날</h5>
 <pre class="prettyprint lang-sql">
 TRUNC(sysdate,'MM')
 </pre>
-
 <h5>이전 달<span class="refer">prior month</span>의 첫번째 날</h5>
 <pre class="prettyprint lang-sql">
 ADD_MONTHS( TRUNC(sysdate,'MM'), -1 )
 </pre>
-
 <h5>다음 달<span class="refer">next month</span>의 첫번째 날</h5>
 <pre class="prettyprint lang-sql">
 ADD_MONTHS( TRUNC(sysdate,'MM'), 1 )
 </pre>
-
 <h5>현재 달<span class="refer">current month</span>의 마지막 날</h5>
 <pre class="prettyprint lang-sql">
 LAST_DAY(sysdate)
 </pre>
-
-
 </div>
 				</article>
 			</div>

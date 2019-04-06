@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,13 +51,7 @@
                     <h1 id="content_title">빌더 패턴(Builder Pattern)</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
-
 <p>간만에 작성하는 디자인 패턴 포스트입니다. 이번 포스트에서는 빌더 패턴<span class="refer">Builder Pattern</span>에 대해 알아보고자 합니다.</p>
-
 <h2>Builder Pattern</h2>
 <p>빌더 패턴은 추상 팩토리 패턴이나 팩토리 메소드 패턴과는 조금 다릅니다. 빌더 패턴도 새로운 객체를 만들어서 반환하는 패턴이긴 하지만 실제 동작 방식은 조금 다릅니다.</p>
 <p>빌더 패턴은 생성자에 들어갈 매개 변수가 많든 적든 차례차례 매개 변수를 받아들이고 모든 매개 변수를 받은 뒤에 이 변수들을 통합해서 한번에 사용을 합니다.</p>
@@ -67,7 +61,6 @@
 <cite><a href="https://en.wikipedia.org/wiki/Builder_pattern">https://en.wikipedia.org/wiki/Builder_pattern</a></cite>
 </blockquote>
 </div>
-
 <h2>Why Use Builder Pattern?</h2>
 <p>그렇다면 어떤 경우에 빌더 패턴을 사용하면 좋을까요. 아래의 예제를 한번 봅시다.</p>
 <pre class="prettyprint lang-java">
@@ -138,7 +131,6 @@ new PersonInfo("cat", 20, "JDM", null, null);
 </pre>
 <p>이런 경우 찾아내기도 힘들뿐더러 매번 사용자가 체크를 해야하는 상황이 옵니다. <strong>조금 더 명시적이고 명확하게 객체를 만들어낼 순 없을까요?</strong></p>
 <p>그럼 이제 빌더 패턴을 적용 해봅시다.</p>
-
 <h2>Implement Builder Pattern</h2>
 <p>해결 해야하는 것은 다음과 같습니다.</p>
 <div class="green">
@@ -211,7 +203,6 @@ public class BuilderPattern {
 }
 </pre>
 <p>사용자 입장에서 <span class="command">PersonInfo</span> 객체를 만들어 낼 때 <span class="command">PersonInfoBuilder</span> 클래스를 이용한다면 조금 더 명확하게 이해하고 만들어 낼 수 있을겁니다.</p>
-
 <div class="green">
 <p><strong><i class="fa fa-check fa-lg"></i> TIP.</strong> 빌더 클래스를 꼭 객체를 만들어낼 클래스와 분리할 필요는 없습니다. 객체를 만들어낼 클래스 내부에 빌더 클래스를 포함할 수 있습니다. 예를 들자면 다음처럼 됩니다.</p>
 <pre class="prettyprint lang-java">
@@ -225,12 +216,8 @@ public static PersonInfoBuilder Builder(){
 }
 </pre>
 </div>
-
 <h2>Closing Remarks</h2>
 <p>간단하게 빌더 패턴에 대해 알아봤습니다. 응용하면 아름다운 코드를 만들어 낼 수 있을거라 믿어 의심치 않습니다. :)</p>
-
-
-
 </div>
 				</article>
 			</div>

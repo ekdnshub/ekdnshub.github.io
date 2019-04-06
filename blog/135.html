@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,23 +51,12 @@
                     <h1 id="content_title">Jenetics 설치 및 예제</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
-
 <p>이 포스트는 <a href="/blog/104">유전 알고리즘(Genetic Algorithms)</a>에서 파생되었습니다. 유전 알고리즘으로 구현된 라이브러리인 <strong>Jenetics</strong>에 대해 알아봅시다.</p>
-
 <h4>준비</h4>
-
 <p>JDK8이 필요합니다. 현 시점에서 가장 최신 버전인데 바로 사용하는 라이브러리군요. -_-; 일단 오라클에서 JDK8을 설치하고 다음절을 진행합니다.</p>
-
 <p><a href="http://jenetics.io/">jenetics</a>에서 Maven을 클릭하면 플랫폼별로 받을 수 있는 링크로 연결됩니다. 음, 전 우선 Maven 프로젝트로 구성하겠습니다. 따라서 POM.xml 파일에 jenectics 부분을 추가합시다. 그리고 zip 파일도 다운로드 받습니다.</p>
-
 <h4>예제 검토</h4>
-
 <p>다운로드 받은 zip 파일의 압축을 해제 하면 example 디렉토리가 있습니다. 그 중 <strong>Sorting.java</strong>라는 파일의 소스를 검토해봤습니다.</p>
-
 <pre class="prettyprint lang-java">
 /*
 * Java Genetic Algorithm Library (@__identifier__@).
@@ -201,9 +190,6 @@ public class Sorting {
 [4|6|7|9|11|14|17|19|18|16|15|13|12|10|8|5|3|2|1|0] --&gt; 70
 </pre>
 <p>위는 결과를 출력해본건데 소스에 있는대로 하면 딱히 잘 맞진 않네요. 정렬할 항목을 줄이거나 populationSize를 크게 주면 정렬이 잘 됩니다.</p>
-
-
-
 </div>
 				</article>
 			</div>

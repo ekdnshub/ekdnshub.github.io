@@ -11,7 +11,7 @@
     
     <!-- # css -->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
     <!-- # ad # -->
@@ -51,10 +51,6 @@
                     <h1 id="content_title">비트코인(Bitcoin)</h1>
 					<!-- 본문 -->
 					<div id="content">
-
-
-
-
 <p>작년 이맘때쯤 조사를 해봤던 내용인 비트코인(Bitcoin)에 대해 사용법 및 최근 추세가 어떤지 검토해 보는 포스팅입니다. :3</p>
 <h4>비트코인 정의(Definition of Bitcoin)</h4>
 <blockquote>
@@ -78,7 +74,6 @@
 <p>2개의 동영상을 준비했습니다. 원래 하나였는데 비교적 최근(2014/4/24)에 추가된 동영상이 하나 더 있네요.</p>
 <iframe width="1600" height="900" src="https://www.youtube.com/embed/Um63OQz3bjo" frameborder="0" allowfullscreen></iframe>
 <iframe width="1600" height="900" src="https://www.youtube.com/embed/Gc2en3nHxA4" frameborder="0" allowfullscreen></iframe>
-
 <h4>비트코인 특징</h4>
 <p><a href="https://bitcoin.org/ko/bitcoin-for-individuals">비트 코인의 특징</a>을 간략하게 알아봅시다. 개인, 사업자, 개발자 순으로 나눠서 특징을 설명합니다.</p>
 <h5>개인</h5>
@@ -117,19 +112,16 @@
 </div>
 <h4>비트코인 원리 & 용어</h4>
 <p><a href="https://bitcoin.org/ko/how-it-works">비트코인의 원리는 무엇입니까?</a>를 통해서 한번 읽어보시면 될 것 같습니다. 개발에 필요한 더 많은 정보는 <a href="https://bitcoin.org/en/developer-documentation">bitcoin :: developer documentation</a>을 참조하세요. 또한 <a href="http://ko.wikipedia.org/wiki/%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8#.EA.B8.B0.EC.88.A0">위키백과 :: 비트코인 기술</a>탭에서도 확인 가능합니다.</p>
-
 <h5>블록</h5>
 <p><a href="https://bitcoin.org/ko/vocabulary#block">블록</a>은 수많은 거래 명세를 가지고 승인 할 수 있도록 약 10분간 거래 내역을 모은 것입니다.</p>
 <h5>블록 체인</h5>
 <p>이러한 블록이 채굴을 통해 <a href="https://bitcoin.org/ko/vocabulary#block-chain">블록 체인</a>에 더해집니다. 블록 체인은 비트코인의 공공원장, 거래 기록을 가지고 있습니다.</p>
-
 <h5>채굴</h5>
 <p>채굴(mining)이란 무엇인지 알아봅시다.</p>
 <blockquote>
 <p>Mining is the process of adding transaction records to Bitcoin's public ledger of past transactions. This ledger of past transactions is called the block chain as it is a chain of blocks. The block chain serves to confirm transactions to the rest of the network as having taken place. Bitcoin nodes use the block chain to distinguish legitimate Bitcoin transactions from attempts to re-spend coins that have already been spent elsewhere.</p>
 <cite><a href="https://en.bitcoin.it/wiki/Mining">Bitcoin wiki - Mining</a></cite>
 </blockquote>
-
 <p>채굴은 과거 거래<span class="refer">(transaction을 거래라고 의역)</span>의 비트코인 공공원장에 거래 기록을 추가하는 과정입니다. 이 과거 거래의 원장은 블록 체인이라고 불립니다. 블록 체인은 거래를 확인 받기 위해 제공합니다. 비트코인 노드들은 블록 체인을 합법적인 비트코인 거래인지 구별하기 위해 사용합니다. 이미 사용한 비트코인을 다시 사용하려고 시도하는지를 구별하는 것입니다.</p>
 <p>비트코인으로 거래를 시도하면 블록 체인을 구성하고 이 블록 체인으로 거래를 확인하기 위한 특수한 작업을 "채굴"이라고 하는것이군요. 한마디로 채굴은 "거래의 증명 과정"과도 같습니다. 거래가 증명 되면 채굴자는 일정의 비트코인을 "보상"으로 받고 그 외에도 만약 송신자가 "수수료"를 지불하면 그것 또한 받습니다.</p>
 <h5>지갑</h5>
@@ -141,7 +133,6 @@
 <p>비트코인 네트워크에 참여하는 사람은 모두 임의의 암호화 키쌍을 담고 있는 지갑을 갖게 된다. 공개키는 비트코인 주소와 마찬가지인데 모든 지불의 발신자와 수신자 종단점으로 작동한다. 공개키의 짝이 되는 비밀키는 소유자만이 지불할 수 있도록 허가하는데 사용된다. 비트코인 주소에는 소유자에 대한 정보가 포함되지 않아서 익명성을 갖고 있다. 주소는 사람이 읽을 수 있게 표기될 경우 33글자 정도 되며 1rYK1YzEGa59pI314159KUF2Za4jAYYTd처럼 보인다. 비트코인 사용자는 여러 주소를 보유할 수 있고 새로운 주소를 제한 없이 생성할 수 있다. 어떤 네트워크 노드와도 접촉할 필요 없이 새로운 공개키와 암호키쌍을 간단히 생성하면 새로운 주소를 즉시 만들 수 있기 때문이다. 쉽게 주소를 무한대로 생성해 바꿔 사용한다면 익명성이 보장될 수 있다.</p>
 <cite><a href="http://ko.wikipedia.org/wiki/%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8#.EC.A3.BC.EC.86.8C">위키백과 - 비트코인(주소)</a></cite>
 </blockquote>
-
 <h5>거래</h5>
 <blockquote>
 <p>비트코인에는 현재 소유자의 공개키(주소)가 포함되어 있다. 사용자 갑이 사용자 을에게 무언가를 전송할 경우를 보자. 갑은 을의 공개키(주소)를 비트코인에 추가하고 갑이 소유한 개인키로 서명한다. 그 다음 갑은 이 비트코인을 적절한 메시지의 거래 내역으로 P2P 네트워크에 방송한다. 나머지 네트워크 노드들은 암호화된 서명과 거래량을 허가하기 전에 입증한다.</p>
@@ -209,9 +200,6 @@
 <li><a href="https://bitpay.com/">bitpay</a></li>
 </ul>
 </div>
-
-
-
 </div>
 				</article>
 			</div>
