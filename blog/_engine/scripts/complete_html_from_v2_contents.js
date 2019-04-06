@@ -27,10 +27,8 @@ var completeHtml = async function(number) {
     console.log(`${number}번 콘텐츠 html 변환 시작`);
     var v2content = fs.readFileSync(V2_CONTENTS_PATH + number, "utf8");
 
-    var meta = await extractContentMetaUtil.execute(number);
-
     console.log("메타 정보 추출....")
-    console.log(meta);
+    var meta = await extractContentMetaUtil.execute(number);
 
     var completeHtmlPath = HTML_PATH + number + ".html";
     try {
