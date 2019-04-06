@@ -2,6 +2,8 @@
 title=자바스크립트 정렬(Javascript Sort)
 created=2015-06-11
 ad=true
+category=JavaScript
+tags=JavaScript
 ###
 #p 자바스크립트에서 오름차순/내림차순 정렬 하고 싶다면! `.sort()` 함수가 있다는것!
 

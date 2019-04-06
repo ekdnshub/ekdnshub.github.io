@@ -2,6 +2,8 @@
 title=자바 리플렉션 테스트(Java Reflection Test)
 created=2015-02-04
 ad=true
+category=Java
+tags=Java
 ###
 #p 자바 기본기 공부가 필요하다 생각 되서 리플렉션을 연습하기 위해 짤막한 예제를 하나 만들어서 돌렸다. 이걸 어떻게 응용을 할까 고민이 된다.
 

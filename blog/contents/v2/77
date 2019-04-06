@@ -2,6 +2,8 @@
 title=오라클 Inner Join 구문 비교 (Implicit vs Explicit)
 created=2015-02-25
 ad=true
+category=Oracle
+tags=Oracle
 ###
 #p 이번 포스팅에서 던져볼 화두는, {@Inner Join}에 대해서입니다. 오라클을 이용하면서 자주 보거나 쓰고 있던 {@Inner Join}에도 종류가 있었다는 사실입니다.
 #p 이 포스팅에 대한 내용은 {$http://stackoverflow.com/questions/44917/explicit-vs-implicit-sql-joins|Explicit vs Implicit SQL joins}이란 글을 보고나서 작성했습니다.

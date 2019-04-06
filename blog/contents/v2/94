@@ -2,6 +2,8 @@
 title=스칼라 파일 읽기(read file with scala)
 created=2015-03-17
 ad=true
+category=Scala
+tags=Scala
 ###
 
 #p  스칼라를 이용해 줄(line)단위로 파일을 읽는 코드입니다.

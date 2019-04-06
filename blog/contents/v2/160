@@ -2,6 +2,8 @@
 title=SpringBoot JPA Pagination
 created=2015-06-26
 ad=true
+category=Spring
+tags=Spring
 ###
 #p JPA를 쓰는건 참 편리하고 좋은데, 페이징도 자동으로 해주면 참 좋겠죠? 간단하게 페이징을 할 수 있는 방법을 알아봅니다.
 

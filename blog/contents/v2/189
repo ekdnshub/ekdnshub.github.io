@@ -2,6 +2,8 @@
 title=Hbase Region & RegionServer
 created=2015-08-11
 ad=true
+category=Hbase
+tags=Hbase
 ###
 #p Hbase에서 Region(이하 "리전")이라는 용어가 있습니다. Hbase에서 리전은 매우 중요한 용어 중 하나인데요. 간단하게 살펴보는 포스팅입니다. 자료의 출처는 {$http://hbase.apache.org/book.html#regions.arch|Hbase - 66. Regions}입니다.
 

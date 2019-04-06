@@ -2,6 +2,8 @@
 title=자바 디컴파일러(Java Decompiler)
 created=2015-02-04
 ad=false
+category=Java
+tags=Java
 ###
 #p 예전 개인용 개발 메모를 뒤적거리다 발견한 "자바 디컴파일러" 섹션에서 링크를 하나 확인했다. 예전에 자바 클래스 파일을 디컴파일 할때 종종 쓰던 프로그램인데 까먹지 않게 여기다 적어둠.
 #p {$http://jd.benow.ca/|자바 디컴파일러}

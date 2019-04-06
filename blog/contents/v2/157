@@ -2,6 +2,8 @@
 title=레디스 레플리케이션 예제(Redis Replication)
 created=2015-06-18
 ad=true
+category=Redis
+tags=Redis
 ###
 #p 저번 포스팅인 {$/blog/139|Redis 설치 및 사용법}에 이어서 이번엔 Redis Replication에 대해 알아봅니다.
 

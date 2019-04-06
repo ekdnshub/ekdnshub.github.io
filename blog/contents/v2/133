@@ -2,6 +2,8 @@
 title=MariaDB - ERROR 2003
 created=2015-05-06
 ad=false
+category=MariaDB
+tags=MariaDB
 ###
 #p 갑자기 윈도우7에서 돌리던 로컬 마리아DB에서 오류 메시지가 출력 됐다.
 ###console

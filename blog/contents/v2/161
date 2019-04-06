@@ -2,6 +2,8 @@
 title=Spring DispatcherServlet
 created=2015-06-30
 ad=true
+category=Spring
+tags=Spring
 ###
 #p 스프링 프레임워크를 쓰다보면 DispatcherServlet(이하 "디스패처 서블릿")이라는 단어가 자주 보입니다. 이게 뭔데 자주 등장하는걸까요? 한 번 알아봅시다.
 

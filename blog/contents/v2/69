@@ -2,6 +2,8 @@
 title=자바 쓰레드 기초(Java Thread Basic)
 created=2015-02-13
 ad=true
+category=Java
+tags=Java
 ###
 #p 이번엔 Java Thread에 대해 알아보고자 합니다. 시작합니다!
 #h2 Java Thread Definition

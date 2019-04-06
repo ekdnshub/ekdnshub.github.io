@@ -2,6 +2,8 @@
 title=Hbase Shell Script Example
 created=2015-06-10
 ad=true
+category=Hbase
+tags=Hbase
 ###
 #p hbase를 사용하다보면 hbase shell을 통해서 일을 처리하는 경우가 왕왕 있습니다. 까먹지 않기 위해 이곳에 남겨둡니다. :3
 

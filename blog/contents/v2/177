@@ -2,6 +2,8 @@
 title=자료구조 - 힙(Data Structure - Heap)
 created=2015-07-15
 ad=true
+category=Terminology
+tags=Terminology
 ###
 #p 이 세상엔 자료구조가 참 많죠(...). 알아야 할 것도 많다고 생각합니다. 그 중에서도 대표적인 자료구조가 있는데 바로 힙(Heap)입니다. 이번 포스팅은 힙에 대해 전반적으로 알아보고자 합니다.
 

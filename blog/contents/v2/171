@@ -2,6 +2,8 @@
 title=JSP redirect vs forward
 created=2015-07-09
 ad=false
+category=ETC
+tags=jsp
 ###
 #p JSP에서 Redirect와 Forward의 차이점을 알기 위해 구글링 하는데 설명이 간단명료해서 공유합니다. :)
 

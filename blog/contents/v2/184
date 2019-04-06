@@ -2,6 +2,8 @@
 title=Hbase 데이터 모델(Hbase Data Model)
 created=2015-07-27
 ad=true
+category=Hbase
+tags=Hbase
 ###
 #p Hbase의 데이터 모델을 알아보는 포스팅입니다. 용어와 주요 특징은 {$http://hbase.apache.org/book.html#datamodel|Data Model}에서 참조했습니다.
 

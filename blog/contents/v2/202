@@ -2,6 +2,8 @@
 title=Jedis - Redis Java Client
 created=2015-09-17
 ad=true
+category=Java
+tags=Java
 ###
 #h2 Overview
 #p Jedis(이하 "제디스")는 Redis를 자바에서 사용하기 위한 클라이언트입니다. Redis를 보다 편하게 사용하게 해주는 라이브러리죠. 물론 Redis 자바 클라이언트에는 제디스뿐만은 아니지만 제디스가 쉽고 간결하게 사용할 수 있어서 소개해드리려고 합니다.

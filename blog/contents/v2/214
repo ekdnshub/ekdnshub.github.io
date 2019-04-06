@@ -2,6 +2,8 @@
 title=주키퍼 클러스터 설치(Zookeeper Cluster on Multi Node)
 created=2015-11-03
 ad=true
+category=ETC
+tags=zookeeper
 ###
 
 #p 기존에도 주키퍼 클러스터 설정에 대해 간간히 포스팅한 것이 있었습니다. 이번 포스트는 주키퍼 클러스터만 뽑아서 설명드립니다.

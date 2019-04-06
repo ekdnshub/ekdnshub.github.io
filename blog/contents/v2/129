@@ -2,6 +2,8 @@
 title=스칼라 JDBC 연결(Scala JDBC Connection)
 created=2015-04-27
 ad=true
+category=Scala
+tags=Scala
 ###
 
 #p 간만의 스칼라 포스팅입니다. 이번엔 MySQL(또는 MariaDB)와 스칼라를 연결해서 테스트 문자열을 출력해보는 포스팅입니다.

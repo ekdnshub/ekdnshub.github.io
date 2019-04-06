@@ -2,5 +2,7 @@
 title=아파치 카프카를 보고 있습니다.
 created=2015-07-27
 ad=false
+category=Dev Story
+tags=Dev Story
 ###
 #p 요즘은 {$http://kafka.apache.org/|아파치 카프카(apache kafka)}를 좀 살펴보고 있습니다. 아직 개요나 이론적인부분만 보고 있는데 흥미롭네요.

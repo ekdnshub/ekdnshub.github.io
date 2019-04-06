@@ -2,6 +2,8 @@
 title=jQuery show() / hide() / toggle() 사용법
 created=2014-10-23
 ad=true
+category=jQuery
+tags=jQuery
 ###
 #p {=* 이 포스팅은 네이버 블로그에서 작성(2013.04.02)한 내용을 옮겨온 것입니다.}
 #p 오늘은 자바스크립트 라이브러리 중 하나인 jQuery 에서 사용 가능한 이펙트 함수 중 가장 빈번하게 쓰이는 " show / hide / toggle " 에 대해 알아보고자 합니다.

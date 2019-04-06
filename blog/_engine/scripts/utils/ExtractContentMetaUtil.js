@@ -35,7 +35,7 @@ var extractContentMetaUtil = (function() {
                           }
                           switch (key.type) {
                               case "array":
-                                  data[name] = value.split(",");
+                                  data[name] = value.split(",").map(val => val.trim());
                               break;
                               case "boolean":
                                   if (value !== "true" && value !== "false") {

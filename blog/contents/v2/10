@@ -2,6 +2,8 @@
 title=싱글튼 패턴(Singleton Pattern)
 created=2014-10-09
 ad=true
+category=Design Patterns
+tags=Design Patterns
 ###
 
 #p 디자인 패턴은 일반적인 코딩이 아닌 조금 더 고차원적인 아키텍트를 설계하기 위해 알아야 할 몇가지 공통적인 코딩 방법들을 말합니다. 예전에 배웠던 내용을 상기시키며 복습 겸 하나씩 풀어가려 합니다.

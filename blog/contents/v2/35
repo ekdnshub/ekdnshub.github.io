@@ -2,6 +2,8 @@
 title=Oracle Sql Developer Error - not find jvm.dll
 created=2014-11-21
 ad=true
+category=Oracle
+tags=Oracle
 ###
 #p 음, Oracle에서 제공하는 쿼리 툴인 {!SQL Developer}를 설치하고 다음날 컴퓨터를 켜보니 오류가 났다. -_-
 #p  jvm.dll을 못찾는 오류였는데 이 경우에 {@product.conf} 파일을 수정 해줘야한다. 해당 파일은 4.x버전대를 쓴다면 아래와 같은 경로로 찾을 수 있다.

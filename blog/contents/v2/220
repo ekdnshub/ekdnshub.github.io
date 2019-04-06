@@ -2,6 +2,8 @@
 title=Setting up NginX for CentOS
 created=2015-11-25
 ad=true
+category=ETC
+tags=nginx, centos
 ###
 
 #p 이번 포스트는 CentOS에서 NginX를 설치하는 방법을 알아봅니다.

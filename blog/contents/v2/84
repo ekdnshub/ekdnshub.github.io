@@ -2,6 +2,8 @@
 title=C 파일 사이즈 구하기(Getting file size with C)
 created=2015-03-10
 ad=true
+category=C/C++
+tags=C/C++
 ###
 
 #p  파일 사이즈를 구하는것도 C에서 간단한 것은 아니군요. 다음처럼 이용합시다... 

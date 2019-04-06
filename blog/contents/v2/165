@@ -2,6 +2,8 @@
 title=Spring MockMvc(spring-test)
 created=2015-07-03
 ad=true
+category=Spring
+tags=Spring
 ###
 #p 스프링 프레임워크에서 단위 테스트의 중요성은 다들 아실거라 생각합니다. :D
 #p 이번 포스팅에서는 Spring 3.2부터 사용 가능한 {@MockMvc}를 활용한 단위 테스트에 대해 알아보고자 합니다.

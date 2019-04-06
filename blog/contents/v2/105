@@ -2,6 +2,8 @@
 title=Spring Boot with STS(Spring Tool Suite)
 created=2015-04-02
 ad=true
+category=Spring
+tags=Spring
 ###
 #p 스프링 프레임워크 개발을 위해서 보통은 이클립스를 많이 활용했습니다. 하지만 이번에 스프링 부트(Spring Boot)를 공부하게 되면서 이왕 별도의 IDE를 써보자는 생각 때문에 Spring Tool Suite(sts)를 사용해보려고 합니다. 본 포스팅은 sts의 설치 및 스프링 부트 프로젝트 실행까지 설명합니다. 설치 환경은 windows7 32bit 기준입니다.
 #h4 Spring Tool Suite

@@ -2,6 +2,8 @@
 title=Ruby on Rails 시작!!
 created=2014-12-01
 ad=false
+category=Dev Story
+tags=Dev Story
 ###
 #p Ruby on Rails 4를 시작했습니다. {$http://edgeguides.rubyonrails.org/getting_started.html|이곳}에서 튜토리얼을 진행했어요. 굉장히 빠르게 방명록 비스무리한 것을 만들어낼 수 있었습니다. 상당히 빠르긴 한데, 아직 익숙하지 않은게 많아서 바로 실전 투입하려면 개발속도는 비슷하지 않을까 생각 되네요.
 #p 그리고 튜토리얼 중간에 destroy 부분이 제대로 동작 안하는게 있었는데 {$http://stackoverflow.com/questions/24622677/issue-with-destroy-method-in-controller-ror|이곳}을 보고 수정할 수 있었습니다.

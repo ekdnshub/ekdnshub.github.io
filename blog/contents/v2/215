@@ -2,6 +2,8 @@
 title=자바 프로퍼티(Java Properties) 테스트
 created=2015-11-12
 ad=true
+category=Java
+tags=Java
 ###
 
 #p 간단하게 자바 프로퍼티{=Java Properties}에 대해 테스트 해봤다.

@@ -2,6 +2,8 @@
 title=jQuery API 정리 웹페이지 추천
 created=2015-01-14
 ad=false
+category=jQuery
+tags=jQuery
 ###
 #p 괜찮은 jQuery API 정리 웹페이지가 있어 공유해봅니다. 버전별로도 볼 수 있고 한눈에 필요한 부분이 있는지 확인할 수도 있어서 편리한 것 같네요.
 #p {$http://oscarotero.com/jquery/}

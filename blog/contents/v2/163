@@ -2,6 +2,8 @@
 title=SpringBoot Logging
 created=2015-06-30
 ad=true
+category=Spring
+tags=Spring
 ###
 #p 이번 포스팅은 SpringBoot에서 Logging을 하기 위한 설정을 다뤄봅니다. 여기서는 slf4j를 이용한 방법을 다룹니다.
 

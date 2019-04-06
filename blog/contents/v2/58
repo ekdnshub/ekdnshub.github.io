@@ -2,6 +2,8 @@
 title=Javascript parseInt() 함수
 created=2015-01-14
 ad=true
+category=JavaScript
+tags=JavaScript
 ###
 #p 자바스크립트 자체도 괜찮은 기능이 꽤 있는 편입니다. 그중 하나가 `parseInt` 라는 함수인데 이 함수가 하는 일은 다음과 같습니다.
 ###box.green

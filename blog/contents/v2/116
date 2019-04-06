@@ -2,6 +2,8 @@
 title=템플릿 메소드 패턴(Template Method Pattern)
 created=2015-04-14
 ad=true
+category=Design Patterns
+tags=Design Patterns
 ###
 #p 이 포스팅은 템플릿 메소드(Template Method) 패턴에 대해서입니다. 간단하게 최종 코드를 먼저 보고 그 뒤 하나씩 구현해보겠습니다.
 #h4 최종 코드 

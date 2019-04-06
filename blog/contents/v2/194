@@ -2,6 +2,8 @@
 title=블로그에 이력 보기 버튼이 추가 되었습니다.
 created=2015-08-25
 ad=false
+category=Dev Story
+tags=Dev Story
 ###
 
 #p {!2015.11.19} 깃헙으로 변경하면서 이력 추적이 쉬워졌습니다. 따라서 이력 버튼은 삭제되었습니다. TT

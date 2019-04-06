@@ -2,6 +2,8 @@
 title=Spring 4 업데이트 및 websocket 테스트
 created=2014-10-05
 ad=false
+category=Dev Story
+tags=Dev Story
 ###
 
 #p 스프링을 4버전으로 업데이트 했습니다. 그래서 websocket 쪽 테스트를 해봤는데, 이전에 진행했던 node.js와 socket.io를 이용한 웹 채팅처럼 구현할 수 있을 것 같네요. 진즉 알았다면 써봤을텐데...

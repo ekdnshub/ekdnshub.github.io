@@ -2,6 +2,8 @@
 title=톰캣 로드밸런서 사용법(tomcat loadbalancers)
 created=2015-03-12
 ad=false
+category=ETC
+tags=tomcat
 ###
 #p 톰캣은 요즘에도 광범위하게 쓰이는 웹 애플리케이션 컨테이너입니다. 그런데 로드밸런서 설정하는것을 간혹 가다 잊어버리는 경우가 있어서 참조할만한 링크를 남깁니다.
 ###ul

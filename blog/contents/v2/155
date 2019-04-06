@@ -2,6 +2,8 @@
 title=CentOS telnet 설치
 created=2015-06-15
 ad=true
+category=Linux
+tags=Linux
 ###
 #p centOS 6.X에서 `telnet`이 설치가 안되 있는 경우를 상정해 포스트를 진행합니다.
 

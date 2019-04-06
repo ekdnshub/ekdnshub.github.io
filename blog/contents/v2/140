@@ -2,6 +2,8 @@
 title=SpringBoot JPA 예제(결합 인덱스)
 created=2015-05-21
 ad=true
+category=Spring
+tags=Spring
 ###
 #p  Springboot JPA 2탄입니다. Springboot나 Spring이나 JPA 적용하는 법은 같아요. 이번에는 PK가 하나가 아닌 2개인 경우의 테이블을 JPA Repository로 구성하는 법을 알아봅니다. 
 #h2 준비 

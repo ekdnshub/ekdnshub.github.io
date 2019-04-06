@@ -2,6 +2,8 @@
 title=R Language - Earth Package
 created=2015-05-04
 ad=true
+category=Machine learning
+tags=Machine learning
 ###
 #p 이 포스팅은 {$/blog/111|Multivariate adaptive regression splines(MARS)} 포스트에서 파생되었습니다. R 언어 - Earth 패키지를 다룹니다.
 

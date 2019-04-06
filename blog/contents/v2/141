@@ -2,6 +2,8 @@
 title=SpringBoot JPA 예제(@OneToMany, 단방향)
 created=2015-05-22
 ad=true
+category=Spring
+tags=Spring
 ###
 #p 이번에도 JPA입니다. `@OneToMany` 어노테이션을 이용해서 Entity간의 관계를 맺어봅시다. 이 포스팅에서는 단방향 관계(unidirectional relationships)만 다루겠습니다.
 #h2 단방향 or 양방향 

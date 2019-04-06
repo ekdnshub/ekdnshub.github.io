@@ -2,6 +2,8 @@
 title=빌드 자동화 도구 Gradle 설치(install Gradle)
 created=2015-03-31
 ad=true
+category=ETC
+tags=gradle
 ###
 #p  Maven을 쓴지도 비교적 최근(?)의 일로 느껴졌는데, 요즘의 트렌드는 "Gradle"인가 봅니다. Spring 프레임워크도 Maven에서 Gradle로 바뀌고 있는 상태기도 하구요. 그래서 이번엔 Gradle을 설치하는 법을 포스팅해볼까 합니다. 
 #h4 Gradle은 무엇?

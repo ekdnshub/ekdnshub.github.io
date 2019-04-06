@@ -2,6 +2,8 @@
 title=SpringBoot AOP 예제
 created=2015-04-22
 ad=true
+category=Spring
+tags=Spring
 ###
 #p  이 포스팅은 SpringBoot AOP 적용을 위한 데모 프로젝트를 소개합니다. 
 #h2 AOP가 뭔가요?

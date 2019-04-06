@@ -2,6 +2,8 @@
 title=유전 알고리즘(Genetic Algorithms)
 created=2015-04-02
 ad=true
+category=Machine learning
+tags=Machine learning
 ###
 #p 이번엔 자바 기반의 유전 알고리즘(Genetic Algorithms)에 대해 조사해봤습니다. 신경망 알고리즘 외에도 유전 알고리즘도 굉장히 많은 라이브러리가 존재합니다.
 #h4 유전 알고리즘이란?

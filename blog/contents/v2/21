@@ -2,6 +2,8 @@
 title=Node.js & MongoDB 연동(with Mongoose)
 created=2014-10-19
 ad=true
+category=Node.js
+tags=Node.js
 ###
 
 #p 오늘은 node.js 와 mongodb의 연결을 해보려고 합니다. 이때 필요한건 {$http://docs.mongodb.org/ecosystem/drivers/node-js/|mongodb 드라이버}겠죠. 간단한 예제를 통해서 node.js와 mongodb를 연결해봅시다.

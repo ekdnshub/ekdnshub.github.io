@@ -2,6 +2,8 @@
 title=SpringBoot JPA 예제(@ManyToOne, 단방향)
 created=2015-05-22
 ad=true
+category=Spring
+tags=Spring
 ###
 #p  @ManyToOne 어노테이션을 이용한 단방향 JPA 관계 예제입니다. 
 #h2 준비 

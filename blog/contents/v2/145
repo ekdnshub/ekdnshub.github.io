@@ -2,6 +2,8 @@
 title=jQuery 이벤트 바인딩(on 함수 이용)
 created=2015-05-26
 ad=true
+category=jQuery
+tags=jQuery
 ###
 #p jQuery에서 이벤트를 바인드 하는 방법은 여러가지가 있지만 이번엔 `on()` 함수를 이용해서 이벤트를 바인드하는 것을 알아보자.
 

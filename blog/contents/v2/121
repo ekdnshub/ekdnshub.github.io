@@ -2,6 +2,8 @@
 title=SpringBoot JPA 예제
 created=2015-04-16
 ad=true
+category=Spring
+tags=Spring
 ###
 #p  SpringBoot에서는 JPA로 데이터를 접근하게끔 유도하고 있습니다. JPA가 무엇인지 알아보고 SpringBoot에서 어떻게 사용하는지도 알아봅시다! 
 #h4 JPA가 뭔가요?(What is JPA?) 

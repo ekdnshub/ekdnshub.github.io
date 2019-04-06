@@ -2,6 +2,8 @@
 title=Apache Kafka
 created=2015-10-10
 ad=true
+category=ETC
+tags=kafka
 ###
 #h2 Introduce
 #p 아파치 카프카를 공식 홈페이지에서 소개한 내용을 발췌해봤습니다.

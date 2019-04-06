@@ -2,6 +2,8 @@
 title=팩토리 메소드 패턴(Factory Method Pattern)
 created=2015-07-22
 ad=true
+category=Design Patterns
+tags=Design Patterns
 ###
 #p 이번 포스팅은 팩토리 메소드 패턴{=Factory Method Pattern}에 대해 알아보고자 합니다.
 

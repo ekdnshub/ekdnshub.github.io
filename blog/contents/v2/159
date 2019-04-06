@@ -2,6 +2,8 @@
 title=레디스 센티널 예제(Redis Sentinel)
 created=2015-06-22
 ad=true
+category=Redis
+tags=Redis
 ###
 #h2 Redis Sentinel
 #p 이번 포스팅은 지난번 {$/blog/157|Redis Replication}에 이어서 Redis Sentinel이라는 도구를 설명합니다. Redis Sentinel은 Redis 고가용성{=High Availablility}을 위한 기능을 제공합니다. 대표적으로 아래와 같은 기능들을 보다 사용하기 쉽게 해줍니다.

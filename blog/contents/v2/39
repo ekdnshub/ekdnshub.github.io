@@ -2,5 +2,7 @@
 title=Ruby 2.1.5 설치
 created=2014-11-29
 ad=false
+category=Dev Story
+tags=Dev Story
 ###
 #p 삽질 끝에 Ruby 2.1.5 버전을 설치했습니다. -_-... yum으로 하려다가 rvm으로 갈아타서 처리했어요. yum이면 만사형통일줄 알았는데 아닌것도 있군요...ㅠㅠ 이제 rails를 슬슬 설치해봐야겠네요.

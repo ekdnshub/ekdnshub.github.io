@@ -2,6 +2,8 @@
 title=Linux SSH 사용법
 created=2015-10-28
 ad=true
+category=Linux
+tags=Linux
 ###
 
 #p 이번 포스트는 리눅스(CentOS)에서 SSH의 사용법에 대해 알아보고자 합니다. 간단한 ssh의 설명부터 시작하겠습니다!

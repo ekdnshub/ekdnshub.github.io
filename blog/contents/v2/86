@@ -2,6 +2,8 @@
 title=jQuery 테이블 데이터 정렬(using tablesorter)
 created=2015-03-11
 ad=true
+category=jQuery
+tags=jQuery
 ###
 
 #p  이번 포스팅은 jquery 테이블 정렬할 때 간편하게 쓸만한 플러그인을 소개하려고 합니다. 이름은 {!tablesorter}에요. 라이센스는 MIT, GPL을 사용하고 있네요. 

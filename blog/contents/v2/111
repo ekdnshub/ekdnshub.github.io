@@ -2,6 +2,8 @@
 title=Multivariate adaptive regression splines(MARS)
 created=2015-04-09
 ad=true
+category=Machine learning
+tags=Machine learning
 ###
 
 #p  이 포스팅은 개인적으로 스터디한 {!Multivariate adaptive regression splines(MARS)}에 대해서입니다. 번역하자면 {!다변수 적응 회귀 스플라인}이 되겠네요. 사실 뭔 말인지는 잘 모르지만 스터디 하면서 알아갔으면 합니다.  

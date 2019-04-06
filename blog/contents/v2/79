@@ -2,6 +2,8 @@
 title=정규 표현식 문자열 테스터[web](regular expression tester)
 created=2015-03-04
 ad=true
+category=Link
+tags=Link
 ###
 
 #p 가끔 엄청나게 긴 정규 표현식 문자열 때문에 멘탈이 붕괴된 사람들 위한 링크가 여기있습니다. {$https://regex101.com} 이라는 곳인데요. 이곳에서 정규식 문자열을 입력하고 체크하고자 하는 데이터를 입력하면 빠른 시간 안에 잡아줍니다.

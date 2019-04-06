@@ -2,6 +2,8 @@
 title=SpringBoot JPA 예제(1:N, 양방향)
 created=2015-05-26
 ad=true
+category=Spring
+tags=Spring
 ###
 #p 양방향 1:N JPA 관계를 맺어봅시다.
 #h2 준비 

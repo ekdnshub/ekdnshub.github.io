@@ -2,6 +2,8 @@
 title=SpringBoot 프로젝트를 API 서버로!
 created=2015-04-07
 ad=false
+category=Dev Story
+tags=Dev Story
 ###
 
 #p api.jdm.kr가 Spring MVC 프로젝트 기반이었지만 최근 스터디겸 Spring Boot로 변경했습니다. 적용하면서 삽질한것도 꽤 많은데 전체적으로 마이그레이션 진행까지 되서 깔끔한 느낌이네요.

@@ -2,6 +2,8 @@
 title=Apache Spark Overview & Example
 created=2015-07-02
 ad=true
+category=Spark
+tags=Spark
 ###
 #p Apache Spark(이하 "스파크")를 설치하고 예제를 돌려보는 포스팅입니다. :D
 

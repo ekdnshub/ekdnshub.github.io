@@ -2,6 +2,8 @@
 title=[Java] System.nanoTime()
 created=2016-04-22
 ad=true
+category=Java
+tags=Java
 ###
 
 #p 이번 포스팅은 {!자바 코드 실행에 걸린 시간}을 측정 할 수 있는 {@System.nanoTime()}에 대해 알아봅니다.

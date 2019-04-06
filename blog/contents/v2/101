@@ -2,6 +2,8 @@
 title=Convention over configuration(CoC)의 이해
 created=2015-04-01
 ad=true
+category=Terminology
+tags=Terminology
 ###
 #p  최근에 기술적인 공부를 하다보면 CoC(Convention over configuration)에 대해 자주 언급하는 문장들이 있습니다. CoC가 대체 뭔지 한번 제대로 각잡고 공부하기 위한 포스팅입니다. 
 #h4 CoC의 정의

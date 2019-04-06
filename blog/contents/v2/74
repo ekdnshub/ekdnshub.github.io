@@ -2,6 +2,8 @@
 title=리눅스 리다이렉션 & 파이프(Linux redirection & pipe)
 created=2015-02-23
 ad=true
+category=Linux
+tags=Linux
 ###
 
 #p 이번엔 리눅스에서 리다이렉션(Redirection)과 파이프(pipe)에 대해 알아보고자 합니다.

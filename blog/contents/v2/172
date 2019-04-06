@@ -2,6 +2,8 @@
 title=자바 벡터(Java Vector)
 created=2015-07-10
 ad=true
+category=Java
+tags=Java
 ###
 #p 이번 포스팅의 주인공은 `Vector`입니다. 차근차근 자료구조 클래스들을 하나씩 뜯어보려고 하는데 `Vector`가 처음 시작하기에 좋을 것 같아서 `Vector` 클래스가 주인공이 되었습니다.
 

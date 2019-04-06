@@ -2,6 +2,8 @@
 title=Spring Boot Getting Started
 created=2015-04-01
 ad=true
+category=Spring
+tags=Spring
 ###
 #p  Spring 프레임워크는 자바 개발자라면 거의 필수로 익혀야 할 정도로 대중화 되어있고 유연한 기능성으로 개발자들에게 사랑을 받고 있습니다. 그리고 현시점에서 Spring 프레임워크를 더욱 간단하게 접근할 수 있도록 만들어진 프로젝트가 있어요. 바로 {!Spring Boot}입니다. 
 #h4 Spring Boot가 뭐죠?

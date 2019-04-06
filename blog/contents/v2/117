@@ -2,6 +2,8 @@
 title=자바스크립트 호이스팅(javascript hoisting)
 created=2015-04-15
 ad=true
+category=JavaScript
+tags=JavaScript
 ###
 #p 자바스크립트를 공부하다보면 다른 언어와 다른점이 몇가지 있습니다. 그 중 호이스팅(Hoisting)이라 불리는 것이 있는데 이 포스팅은 호이스팅에 대해 알아보는 것에 촛점을 맞췄습니다.
 #h4 호이스팅(hoisting) 

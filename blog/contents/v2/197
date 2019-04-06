@@ -2,6 +2,8 @@
 title=Hashtable, HashMap, ConcurrentHashMap 비교
 created=2015-08-31
 ad=true
+category=Java
+tags=Java
 ###
 #p 이번엔 `Map` 인터페이스를 구현한 콜렉션 객체들 중에서도 많이 사용되는 것으로 추정(?)되는 것들을 비교 분석하는 포스트가 되겠습니다.
 

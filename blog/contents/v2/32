@@ -2,6 +2,8 @@
 title=옵저버 패턴(Observer Pattern)
 created=2014-11-05
 ad=true
+category=Design Patterns
+tags=Design Patterns
 ###
 #h2 Intro
 #p 옵저버 패턴을 생각나는대로 정리해보고자 한다. 정말 간단하게 이 패턴이 어떻게 쓰는지만 써놓으려 하는데, 혹시라도 이게 잘못될까 싶어 전전긍긍이다. 아무튼, 복잡하지 않게 정말 간단한 코드로 옵저버 패턴에 대해 알아보자!

@@ -2,6 +2,8 @@
 title=자바 람다식(Lambda Expressions in Java)
 created=2015-07-23
 ad=true
+category=Java
+tags=Java
 ###
 #p 자바 8에서 람다식(Lambda Expressions)이 추가 되었습니다. 이번 포스팅은 간단하게 람다식에 대해 알아보고자 합니다.
 

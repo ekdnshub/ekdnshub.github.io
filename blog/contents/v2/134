@@ -2,6 +2,8 @@
 title=libsvm 설치 및 예제
 created=2015-05-07
 ad=true
+category=Machine learning
+tags=Machine learning
 ###
 #p 이 포스팅은 {$/blog/112|Support vector machine(SVMs)}에서 파생되었습니다. 실제로 SVMs 알고리즘이 적용된 libsvm이라는 라이브러리를 실제로 사용해 봅시다.
 

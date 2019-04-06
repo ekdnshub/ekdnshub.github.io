@@ -2,6 +2,8 @@
 title=Redis 설치 및 사용법
 created=2015-05-19
 ad=true
+category=Redis
+tags=Redis
 ###
 #p redis(이하 "레디스")를 설치 해봅시다. memcached와 비슷하면서도 다른(?) 레디스의 세계로!
 #h2 레디스가 뭔가요? 

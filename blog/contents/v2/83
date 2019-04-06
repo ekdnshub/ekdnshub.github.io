@@ -2,6 +2,8 @@
 title=Scala Hello World!
 created=2015-03-09
 ad=true
+category=Scala
+tags=Scala
 ###
 
 #p  처음 프로그래밍 언어를 배울땐 Hello, world!를 찍는게 기본이었던 것 같네요. 그래서 스칼라로도 한번은 해봐야죠! 

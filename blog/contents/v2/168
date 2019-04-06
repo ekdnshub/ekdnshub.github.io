@@ -2,6 +2,8 @@
 title=결합 인덱스 컬럼 순서(Composite Index Column Ordering)
 created=2015-07-07
 ad=true
+category=SQL
+tags=SQL
 ###
 #p DB에는 인덱스(Index)라는 개념이 있습니다. 주로 쓰는 비유로는 DB 테이블을 "책"이라고 했을 때, 인덱스는 "색인"이 됩니다. 알아보고 싶은 정보의 키워드를 이용해 색인을 검색하면 더욱 빠르게 정보를 찾아낼 수 있지요. 인덱스의 개념은 {$http://wiki.gurubee.net/pages/viewpage.action?pageId=1507544|구루비 DB 스터디 - 인덱스의 선정(BY-NC-SA)}에서 확인해 보세요. 이번 포스팅의 정보도 해당 게시글에서 부분 차용 되었습니다.
 

@@ -2,6 +2,8 @@
 title=SpringBoot @ControllerAdvice
 created=2015-09-05
 ad=true
+category=Spring
+tags=Spring
 ###
 #p 이번 포스팅은 Springboot에서 예외 처리를 간편하게 만들어주는 `@ControllerAdvice`에 대해 알아보고자 합니다.
 

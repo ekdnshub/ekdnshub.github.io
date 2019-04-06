@@ -2,6 +2,8 @@
 title=자바 JVM 정리(Java Virtual Machine)
 created=2015-08-09
 ad=true
+category=Java
+tags=Java
 ###
 #p Java 언어는 기본적으로 JVM(Java Virtual Machine) 위에서 실행되도록 고안된 언어입니다. 이번엔 JVM의 구조를 살펴보고 하나씩 점검해 보는 포스팅입니다.
 

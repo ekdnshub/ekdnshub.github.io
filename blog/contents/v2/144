@@ -2,6 +2,8 @@
 title=jQuery 상위 요소 가져오기(parents, closest)
 created=2015-05-26
 ad=true
+category=jQuery
+tags=jQuery
 ###
 #p 가끔 jQuery 사용시에 특정 상위 객체를 가져와야 하는 때가 종종 있다. 까먹지 않게 포스팅.
 

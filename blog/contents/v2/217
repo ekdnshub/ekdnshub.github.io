@@ -2,6 +2,8 @@
 title=빌더 패턴(Builder Pattern)
 created=2015-11-15
 ad=true
+category=Design Patterns
+tags=Design Patterns
 ###
 
 #p 간만에 작성하는 디자인 패턴 포스트입니다. 이번 포스트에서는 빌더 패턴{=Builder Pattern}에 대해 알아보고자 합니다.

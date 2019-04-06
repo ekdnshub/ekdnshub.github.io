@@ -2,6 +2,8 @@
 title=추상 팩토리 패턴(Abstract Factory Pattern)
 created=2015-08-19
 ad=true
+category=Design Patterns
+tags=Design Patterns
 ###
 #p 간만에 돌아오는 디자인 패턴 포스트입니다. 이번엔 추상 팩토리 패턴(Abstract Factory Pattern)에 대해 알아보고자 합니다.
 

@@ -2,6 +2,8 @@
 title=C언어 파일 권한 체크 - access() 사용법
 created=2015-02-24
 ad=true
+category=C/C++
+tags=C/C++
 ###
 #p 오늘은 C언어에서 {@.access()} 함수에 대해 알아고보자 합니다. 기준 OS는 centOS(gcc version 4.1.2)입니다.
 

@@ -2,6 +2,8 @@
 title=Jsoup : Java HTML Parser
 created=2015-08-27
 ad=false
+category=Link
+tags=Link
 ###
 #p 자바로 만들어진 HTML 파서를 찾아봤습니다. 검색하니 좋은게 있네요. {$http://jsoup.org/|jsoup: Java HTML Parser} 링크를 참조하세요. 간단한 예제도 하나 첨부합니다. :3
 

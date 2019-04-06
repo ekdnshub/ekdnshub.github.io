@@ -2,6 +2,8 @@
 title=Scala IDE + Spark 연동 예제(for Windows7)
 created=2015-07-14
 ad=true
+category=Spark
+tags=Spark
 ###
 #p Apache Spark 라이브러리를 로컬 머신에서 한번 돌려보자는 생각에 포스팅을 쓰게 되었습니다. Windows7에서 구동한 포스팅입니다.
 

@@ -2,6 +2,8 @@
 title=Apache Spark Cluster(Standalone)
 created=2015-07-06
 ad=true
+category=Spark
+tags=Spark
 ###
 #p 이번 포스팅은 Spark(이하 "스파크")에서 "Standalone" 배포하는 법에 알아고보자 합니다. 여기서는 호스트 한대로만 진행 할 예정입니다. 호스트(혹은 노드)가 두대 이상인 경우 ssh 구성을 해야 하지만 여기서는 제가 가진 자원의 한계로(...) 한대로만 진행합니다. 이 포스팅은 {$https://spark.apache.org/docs/latest/spark-standalone.html|spark-standalone}의 정보에 기반합니다.
 

@@ -2,6 +2,8 @@
 title=CORS 적용
 created=2014-12-15
 ad=false
+category=Dev Story
+tags=Dev Story
 ###
 #p CORS를 적용했습니다. 어지간한 API는 전부 api 서버에서 처리하는걸로...^^
 #p {!P.S.} IE9 이하에서는 CORS가 제대로 먹지 않는군요... -_- 스프링 설정과 스크립트를 좀 바꿔줬습니다.

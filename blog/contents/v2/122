@@ -2,6 +2,8 @@
 title=관점 지향 프로그래밍(Aspect-oriented programming)
 created=2015-04-20
 ad=true
+category=Terminology
+tags=Terminology
 ###
 #p  Spring 프레임워크가 생긴 이후에 처음으로 AOP(Aspect-oriented programming)라는 단어를 접했었습니다. -_- 무식이 죄지요. 이번에는 AOP를 철저하게 해부해보고자 합니다. 이 포스팅은 전부 {$http://en.wikipedia.org/wiki/Aspect-oriented_programming|Wikipedia - Aspect-oriented programming}에서 가져온 정보를 토대로 작성했습니다. 
 #h4 관점 지향 프로그래밍(Aspect-oriented programming)

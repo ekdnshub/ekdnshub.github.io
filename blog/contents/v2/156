@@ -2,6 +2,8 @@
 title=Redis 공부 중...
 created=2015-06-16
 ad=false
+category=Dev Story
+tags=Dev Story
 ###
 #p 요즘은 {$http://redis.io/|Redis}에서 {$http://redis.io/topics/sentinel|Sentinel}과 {$http://redis.io/topics/partitioning|Partitioning}부분을 유심히 보고 있습니다. 이걸 사용하게 될 수도 있다보니... -_-
 

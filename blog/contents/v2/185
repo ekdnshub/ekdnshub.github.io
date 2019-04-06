@@ -2,6 +2,8 @@
 title=Linux find exec grep
 created=2015-07-28
 ad=true
+category=Linux
+tags=Linux
 ###
 #p 리눅스를 사용하다보면 검색할 일이 정말 많아집니다. 그중에서도 `find`와 `grep`은 빠질 수가 없죠. 이번 포스팅은 이 두 명령어를 조합해서 사용할 수 있는 간단한 팁을 하나 공유하고자 합니다.
 

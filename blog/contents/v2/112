@@ -2,6 +2,8 @@
 title=Support vector machine(SVMs)
 created=2015-04-09
 ad=true
+category=Machine learning
+tags=Machine learning
 ###
 #p  이 포스팅은 개인적으로 스터디한 {!Support vector machine(SVMs)}에 대해서입니다. 서포트 벡터 머신이란 무엇인지 한번 탐구해볼까 합니다. 
 #h4 SVMs의 소개(Introduce of SVMs) 
