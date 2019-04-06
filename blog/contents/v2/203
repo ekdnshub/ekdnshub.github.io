@@ -1,0 +1,34 @@
+###info
+title=Install Maven for Mac
+created=2015-09-19
+ad=true
+###
+#p 완연한 가을 하늘의 주말 토요일 오후입니다. 그래서 이번 포스팅은 가벼운 주제로 간단하게 끝냅니다! 바로 Mac X OS에 `Maven`을 설치하는 포스팅이죠. 까먹지 않을겸 정리해두는 느낌으로 진행하겠습니다. :3
+
+#h2 Download Maven
+#p 우선, Maven 압축 파일을 받습니다. {$https://maven.apache.org/download.cgi|Maven - Download} 링크에서 `apache-maven-3.3.3-bin.tar.gz`을 다운로드 받습니다. 제가 작성한 시점은 `3.3.3`버전이었으나 더 높은 버전이 있다면 해당 압축 파일을 받으시면 됩니다.
+
+#h2 Install & Run test
+#p 다운로드 받은 압축 파일을 해제하면 `apache-maven-3.3.3` 이라는 디렉토리가 생성됩니다. 이 디렉토리를 `/usr/local/maven`에 이동시킵니다. 여기서 굳이 저 위치로 지정하지 않아도 좋습니다. 원하는 위치에 옮기셔도 무방합니다. 그리고 다음 커맨드를 터미널에서 입력합니다.
+
+###code.sh
+$ vi ~/.profile
+###
+#p 그러면 `profile` 편집을 할 수 있게 되는데 다음을 추가해서 넣어줍니다.
+
+###code.sh
+export PATH=/usr/local/maven/apache-maven-3.3.3/bin:$PATH
+###
+#p 만약 `/usr/local/maven`으로 지정하지 않으신 분들은 본인들이 직접 지정했던 디렉토리를 지정하시면 됩니다.
+
+#p 터미널에서 바로 확인해보기 위해 다음처럼 입력해줍니다.
+
+###code.sh
+$ source ~/.profile
+$ mvn -v
+###
+#p `Maven`의 버전 및 환경에 대한 정보가 출력되면 정상적으로 설치 된겁니다. :D
+
+
+#h2 Closing Remarks
+#p 간단하게 Mac X OS에 `Maven`을 설치하는 법을 알아봤습니다.

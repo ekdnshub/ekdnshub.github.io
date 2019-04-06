@@ -768,12 +768,10 @@ var postsInfo = (function(){
             "192":{
                 "title":"추상 팩토리 패턴(Abstract Factory Pattern)",
                 "created":"2015-08-19"
-                ,"version":"v1"
             },
             "193":{
                 "title":"지금은 영어 공부를 하고 있습니다.",
                 "created":"2015-08-24"
-                ,"version":"v1"
             },
             "194":{
                 "title":"블로그에 이력 보기 버튼이 추가 되었습니다.",
@@ -790,17 +788,14 @@ var postsInfo = (function(){
             "197":{
                 "title":"Hashtable, HashMap, ConcurrentHashMap 비교",
                 "created":"2015-08-31"
-                ,"version":"v1"
             },
             "198":{
                 "title":"Mac Terminal",
                 "created":"2015-09-05"
-                ,"version":"v1"
             },
             "199":{
                 "title":"SpringBoot @ControllerAdvice",
                 "created":"2015-09-05"
-                ,"version":"v1"
             },
             "200":{
                 "title":"SpringBoot Profile",
@@ -809,7 +804,6 @@ var postsInfo = (function(){
             "201":{
                 "title":"TextWrangler",
                 "created":"2015-09-12"
-                ,"version":"v1"
             },
             "202":{
                 "title":"Jedis - Redis Java Client",
@@ -818,12 +812,10 @@ var postsInfo = (function(){
             "203":{
                 "title":"Install Maven for Mac",
                 "created":"2015-09-19"
-                ,"version":"v1"
             },
             "204":{
                 "title":"Spring RestTemplate Basic",
                 "created":"2015-09-20"
-                ,"version":"v1"
             },
             "205":{
                 "title":"MariaDB - Multi In Query",

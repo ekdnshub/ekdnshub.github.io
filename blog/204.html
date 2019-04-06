@@ -1,79 +1,73 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
+	<head>
+    <title>Spring RestTemplate Basic :: JDM's Blog</title>
     <!-- # common resource # -->
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
     <meta name="author" content="Jung DongMin">
-
+    
     <!-- # css -->
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
 
-    <!-- # font -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
 
-    <!-- # jquery -->
-    <!--[if lte IE 9]>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js"></script>
-    <![endif]-->
-    <!--[if gt IE 9]><!-->
-    <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <!--<![endif]-->
-
-
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-    <!-- # blog library # -->
-    <link rel="stylesheet" type="text/css" href="/css/common.min.css">
-    <link rel="stylesheet" type="text/css" href="/blog/css/view.css">
-    <script src="/lib/o/1.0.2.min.js"></script>
-    <script src="/blog/scripts/posts.js"></script>
-    <script src="/blog/scripts/ArchiveGroup.js"></script>
-    <script src="/blog/scripts/header.js"></script>
-    <script src="/blog/scripts/comment.js"></script>
-    <script src="/blog/scripts/postHandler.js"></script>
-    <script src="/blog/scripts/copyright.js"></script>
-    <script src="/blog/scripts/bottom.js"></script>
-</head>
-<body>
-<!-- noscript -->
-<noscript>
-    이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
-    브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
-</noscript>
-<!-- container -->
-<div class="container" id="viewContainer">
-    <!-- content 영역 -->
-    <div id="left_wrap" class="col-md-10 col-md-offset-1">
-        <!-- 블로그 전문 -->
-        <article>
-            <!-- 본문 -->
-            <div id="content"><p>
-                서버 어플리케이션을 만들때 REST API를 호출하려면 예전엔 고전적인 방법으로 URL Connection을 맺고 작업을 했던 시절이 있었습니다. 하지만 Spring에서는 이조차도 템플릿으로 제공을 해줍니다. <span class="command">RestTemplate</span>이라는 클래스로 말이죠. 이번 포스팅은 <span class="command">RestTemplate</span>을 간단하게 사용해보는 예제를 올려봅니다.
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
             </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">Spring RestTemplate Basic</h1>
+					<!-- 본문 -->
+					<div id="content">
 
-                <h2>RestTemplate</h2>
-                <p>
-                    자세한 Doc 문서는 <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html">RestTemplate</a> 링크를 참조하시면 됩니다. 이번 포스팅은 설명보다는 예제 코드를 통해 실제 사용법을 알아보고자 합니다.
-                </p>
 
-                <h2>Example Code</h2>
-                <p>
-                    예제 코드를 위해서는 두개의 어플리케이션을 만들어줘야 합니다. 하나는 REST API를 구현한 어플리케이션 하나는 테스트를 위한 어플리케이션입니다.
-                </p>
 
-                <h3>REST API Application</h3>
-                <p>
-                    REST API를 구현한 어플리케이션은 다음 컨트롤러 클래스를 포함하고 있으면 됩니다.
-                </p>
+
+<p>서버 어플리케이션을 만들때 REST API를 호출하려면 예전엔 고전적인 방법으로 URL Connection을 맺고 작업을 했던 시절이 있었습니다. 하지만 Spring에서는 이조차도 템플릿으로 제공을 해줍니다. <span class="command">RestTemplate</span>이라는 클래스로 말이죠. 이번 포스팅은 <span class="command">RestTemplate</span>을 간단하게 사용해보는 예제를 올려봅니다.</p>
+
+<h2>RestTemplate</h2>
+<p>자세한 Doc 문서는 <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html">RestTemplate</a> 링크를 참조하시면 됩니다. 이번 포스팅은 설명보다는 예제 코드를 통해 실제 사용법을 알아보고자 합니다.</p>
+
+
+<h2>Example Code</h2>
+<p>예제 코드를 위해서는 두개의 어플리케이션을 만들어줘야 합니다. 하나는 REST API를 구현한 어플리케이션 하나는 테스트를 위한 어플리케이션입니다.</p>
+
+
+<h3>REST API Application</h3>
+<p>REST API를 구현한 어플리케이션은 다음 컨트롤러 클래스를 포함하고 있으면 됩니다.</p>
+
 <pre class="prettyprint lang-java">
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,16 +81,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @Bean(name="internalStorage")
-    public ArrayList&lt;String> getInternalStorage(){
-    	return new ArrayList&lt;String>();
-    }
+   @Bean(name="internalStorage")
+   public ArrayList&lt;String&gt; getInternalStorage(){
+   	return new ArrayList&lt;String&gt;();
+   }
 
-    @Autowired
-    @Qualifier("internalStorage")
-	private ArrayList&lt;String> internalStorage;
+   @Autowired
+   @Qualifier("internalStorage")
+	private ArrayList&lt;String&gt; internalStorage;
 
-    @RequestMapping(value = "/crud", method = RequestMethod.GET)
+   @RequestMapping(value = "/crud", method = RequestMethod.GET)
 	public String getList(){
 	    return internalStorage.toString();
 	}
@@ -125,14 +119,12 @@ public class TestController {
 	}
 }
 </pre>
-                <p>
-                    아주 간단하게 구현한 CRUD가 포함된 REST API 컨트롤러입니다. 이제 이것을 가지고 <span class="command">RestTemplate</span>를 사용하는 테스트 코드를 만듭니다.
-                </p>
+<p>아주 간단하게 구현한 CRUD가 포함된 REST API 컨트롤러입니다. 이제 이것을 가지고 <span class="command">RestTemplate</span>를 사용하는 테스트 코드를 만듭니다.</p>
 
-                <h3>TEST Application</h3>
-                <p>
-                    테스트를 위한 어플리케이션에는 다음과 같은 Junit 테스트 코드를 포함하면 됩니다.
-                </p>
+
+<h3>TEST Application</h3>
+<p>테스트를 위한 어플리케이션에는 다음과 같은 Junit 테스트 코드를 포함하면 됩니다.</p>
+
 <pre class="prettyprint lang-java">
 import static org.junit.Assert.assertTrue;
 
@@ -158,7 +150,7 @@ public class DemoApplicationTests {
 		RestTemplate restTemplate = new RestTemplate();
 
 		//지정 URL을 GET 타입으로 호출한다.
-		ResponseEntity&lt;String> response = restTemplate.getForEntity("http://local.net/crud", String.class);
+		ResponseEntity&lt;String&gt; response = restTemplate.getForEntity("http://local.net/crud", String.class);
 
 		// 정상적으로 처리가 되었는지 확인한다.
 		assertTrue( response.getStatusCode().is2xxSuccessful() );
@@ -178,7 +170,7 @@ public class DemoApplicationTests {
 		assertTrue( response.getStatusCode().is2xxSuccessful() );
 
 		// {}을 이용해 추가 파라미터 입력시 map도 사용할 수 있다.
-		Map&lt;String, Object> param = new HashMap&lt;String, Object>();
+		Map&lt;String, Object&gt; param = new HashMap&lt;String, Object&gt;();
 		param.put("index", 0);
 		response = restTemplate.getForEntity("http://local.net/crud/{index}", String.class, param);
 		assertTrue( response.getStatusCode().is2xxSuccessful() );
@@ -193,21 +185,22 @@ public class DemoApplicationTests {
 
 }
 </pre>
-                <p>
-                    심화 사용법은 추후에 다루도록(?) 하고 테스트 코드에 대한 설명은 코드 사이사이에 있는 주석으로 대체하겠습니다. :3
-                </p>
+<p>심화 사용법은 추후에 다루도록(?) 하고 테스트 코드에 대한 설명은 코드 사이사이에 있는 주석으로 대체하겠습니다. :3</p>
 
-                <h2>Closing Remarks</h2>
-                <p>
-                    간단하게 <span class="command">RestTemplate</span> 사용법에 대해 알아봤습니다.
-                </p>
-            </div>
-        </article>
-    </div>
-    <!-- // content 영역 -->
+
+<h2>Closing Remarks</h2>
+<p>간단하게 <span class="command">RestTemplate</span> 사용법에 대해 알아봤습니다.</p>
+
+
+
+
 </div>
-<!-- # code highlight -->
-<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=scala&lang=sql&skin=sons-of-obsidian"></script>
-<script src="/lib/scripts/footer.js"></script>
-</body>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
 </html>

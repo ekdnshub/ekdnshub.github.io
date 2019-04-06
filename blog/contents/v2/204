@@ -1,22 +1,22 @@
-<p>
-서버 어플리케이션을 만들때 REST API를 호출하려면 예전엔 고전적인 방법으로 URL Connection을 맺고 작업을 했던 시절이 있었습니다. 하지만 Spring에서는 이조차도 템플릿으로 제공을 해줍니다. <span class="command">RestTemplate</span>이라는 클래스로 말이죠. 이번 포스팅은 <span class="command">RestTemplate</span>을 간단하게 사용해보는 예제를 올려봅니다.
-</p>
+###info
+title=Spring RestTemplate Basic
+created=2015-09-20
+ad=true
+###
+#p 서버 어플리케이션을 만들때 REST API를 호출하려면 예전엔 고전적인 방법으로 URL Connection을 맺고 작업을 했던 시절이 있었습니다. 하지만 Spring에서는 이조차도 템플릿으로 제공을 해줍니다. `RestTemplate`이라는 클래스로 말이죠. 이번 포스팅은 `RestTemplate`을 간단하게 사용해보는 예제를 올려봅니다.
 
-<h2>RestTemplate</h2>
-<p>
-자세한 Doc 문서는 <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html">RestTemplate</a> 링크를 참조하시면 됩니다. 이번 포스팅은 설명보다는 예제 코드를 통해 실제 사용법을 알아보고자 합니다.
-</p>
+#h2 RestTemplate
+#p 자세한 Doc 문서는 {$http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html|RestTemplate} 링크를 참조하시면 됩니다. 이번 포스팅은 설명보다는 예제 코드를 통해 실제 사용법을 알아보고자 합니다.
 
-<h2>Example Code</h2>
-<p>
-예제 코드를 위해서는 두개의 어플리케이션을 만들어줘야 합니다. 하나는 REST API를 구현한 어플리케이션 하나는 테스트를 위한 어플리케이션입니다.
-</p>
 
-<h3>REST API Application</h3>
-<p>
-REST API를 구현한 어플리케이션은 다음 컨트롤러 클래스를 포함하고 있으면 됩니다.
-</p>
-<pre class="prettyprint lang-java">
+#h2 Example Code
+#p 예제 코드를 위해서는 두개의 어플리케이션을 만들어줘야 합니다. 하나는 REST API를 구현한 어플리케이션 하나는 테스트를 위한 어플리케이션입니다.
+
+
+#h3 REST API Application
+#p REST API를 구현한 어플리케이션은 다음 컨트롤러 클래스를 포함하고 있으면 됩니다.
+
+###code.java
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,16 +29,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @Bean(name="internalStorage")
-    public ArrayList&lt;String> getInternalStorage(){
-    	return new ArrayList&lt;String>();
-    }
+   @Bean(name="internalStorage")
+   public ArrayList&lt;String> getInternalStorage(){
+   	return new ArrayList&lt;String>();
+   }
 
-    @Autowired
-    @Qualifier("internalStorage")
+   @Autowired
+   @Qualifier("internalStorage")
 	private ArrayList&lt;String> internalStorage;
 
-    @RequestMapping(value = "/crud", method = RequestMethod.GET)
+   @RequestMapping(value = "/crud", method = RequestMethod.GET)
 	public String getList(){
 	    return internalStorage.toString();
 	}
@@ -66,16 +66,14 @@ public class TestController {
 	    return "success";
 	}
 }
-</pre>
-<p>
-아주 간단하게 구현한 CRUD가 포함된 REST API 컨트롤러입니다. 이제 이것을 가지고 <span class="command">RestTemplate</span>를 사용하는 테스트 코드를 만듭니다.
-</p>
+###
+#p 아주 간단하게 구현한 CRUD가 포함된 REST API 컨트롤러입니다. 이제 이것을 가지고 `RestTemplate`를 사용하는 테스트 코드를 만듭니다.
 
-<h3>TEST Application</h3>
-<p>
-테스트를 위한 어플리케이션에는 다음과 같은 Junit 테스트 코드를 포함하면 됩니다.
-</p>
-<pre class="prettyprint lang-java">
+
+#h3 TEST Application
+#p 테스트를 위한 어플리케이션에는 다음과 같은 Junit 테스트 코드를 포함하면 됩니다.
+
+###code.java
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
@@ -134,12 +132,10 @@ public class DemoApplicationTests {
 	}
 
 }
-</pre>
-<p>
-심화 사용법은 추후에 다루도록(?) 하고 테스트 코드에 대한 설명은 코드 사이사이에 있는 주석으로 대체하겠습니다. :3
-</p>
+###
+#p 심화 사용법은 추후에 다루도록(?) 하고 테스트 코드에 대한 설명은 코드 사이사이에 있는 주석으로 대체하겠습니다. :3
 
-<h2>Closing Remarks</h2>
-<p>
-간단하게 <span class="command">RestTemplate</span> 사용법에 대해 알아봤습니다.
-</p>
+
+#h2 Closing Remarks
+#p 간단하게 `RestTemplate` 사용법에 대해 알아봤습니다.
+

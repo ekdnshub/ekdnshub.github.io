@@ -1,0 +1,30 @@
+###info
+title=TextWrangler
+created=2015-09-12
+ad=true
+###
+#p 이전까지는 블로그 포스팅을 윈도우를 기반으로 해서 진행했었습니다. 이제는 Mac으로 진행을 해볼 예정입니다. :3
+
+#p 어쩌다보니 맥으로 OS를 전환 당했고(?) 맥에 익숙해지려면 역시 맥을 자주 사용해야할 것 같네요. 사실 키보드 단축키부터 외우는게 일인 것 같지만 익숙해지면 정말 편리하게 사용할 수 있을거라 생각해 봅니다. :)
+
+#h2 Text Editor for Mac
+#p 맥에서 사용할 텍스트 에디터를 검색하다보니 알게 된 어플리케이션입니다. 이름은 `TextWrangler`라 불립니다. 다운로드는 앱 스토어에서 해당 이름으로 검색하신 후 설치하시면 됩니다.
+
+
+#h2 Using TextWrangler
+#p 간단하게 사용 준비를 해보면서 유용할 것 같은 내용을 담았습니다.
+
+
+#h3 Color Theme
+#p 저는 기본적으로 검은색 배경의 테마 화면을 좋아합니다. 기본 테마는 "흰색" 바탕을 기본으로 하고 있었기 때문에 검은색 배경의 테마를 다운로드 받았습니다. 위치는 {$http://www.andrewhazelden.com/blog/2012/09/charcoal-color-scheme-for-textwrangler-and-bbedit/|다운로드} 링크를 참조하세요.
+
+
+#h3 Plugin - Zen Coding
+#p HTML 문서 작성을 위해 `Zen Cording` Scripts를 다운로드 받아 적용해서 써보고 있습니다. 필수적인 플러그인은 아니지만 개인적으로는 매우 편하게 사용하고 있어서 검색 해보니 별도의 젠 코딩을 위한 스크립트를 배포하고 있었습니다. 위치는 {$http://www.angelwatt.com/coding/zen-coding_bbedit.php|Zen Coding} 링크를 참조하세요.
+
+
+#h3 TIP
+#p `TextWrangler`에서 블록 설정을 위해서는 `option`를 눌러준 상태에서 원하는 모양으로 만드셔서 지정하면 됩니다. 만약 블록 설정이 제대로 안되는 것 같으면 `View > TextDisplay > Soft Wrap Text` 옵션을 꺼주시면 됩니다.
+#p 또한 블록 지정된 라인들의 Back tab하는 단축키는 `command + [` 입니다. 반대로 tab하는 단축키는 `command + ]` 입니다. :3
+
+#p 만약 {==The authenticated save for this file failed (application error code: 20004)}라는 오류가 나오면 App Store에서 받은 TextWrangler를 삭제하고 {$http://www.barebones.com/products/textwrangler/|홈페이지에서 직접 다운로드} 받은것으로 설치하면 됩니다.
