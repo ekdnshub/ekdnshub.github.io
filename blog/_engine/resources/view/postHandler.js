@@ -32,8 +32,6 @@ function applyContentEffect(){
 		$(obj).html(subIndex + " " + $(obj).html());
 	});
 
-	moveScrollForHash(); // 목차 id 삽입된 이후 실행함.
-
 	// 본문 내 a링크인데 _blank 옵션이 없으면 넣어준다.
 	$("#content a").each(function(index, obj){
 		var target = obj.getAttribute("target");
@@ -326,4 +324,5 @@ $( document ).ready(function(){
 	/* Bottom 처리(SideBar) */
 	Bottom.init(maxPostsCnt);
 
+	moveScrollForHash(); // 해시 있는 경우 이동
 });
