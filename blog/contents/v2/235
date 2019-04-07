@@ -176,8 +176,7 @@ class TextFileProvider {
 ###
 ###
 
-#p 따라서 `ProxyTextFile` 같은 프록시 클래스를 만들고 기존 `SecretTextFile` 클래스 대신 사용한것만으로도 초기 객체 생성 시간이 대폭 감소했습니다. 정말 필요한 시점에만 텍스트 복호화를 하게 되었죠.
-이렇게 초기 비용이 많이 드는 연산이 포함된 객체의 경우 가상 프록시를 사용했을 때 효과를 볼 수 있습니다.
+#p 따라서 `ProxyTextFile` 같은 프록시 클래스를 만들고 기존 `SecretTextFile` 클래스 대신 사용한것만으로도 초기 객체 생성 시간이 대폭 감소했습니다. 정말 필요한 시점에만 텍스트 복호화를 하게 되었죠. 이렇게 초기 비용이 많이 드는 연산이 포함된 객체의 경우 가상 프록시를 사용했을 때 효과를 볼 수 있습니다.
 #p 지금까지 구성한 코드들이 어떻게 구조를 이루고 있을까요? 아래의 그림을 봅시다.
 
 ###diagram
@@ -257,7 +256,7 @@ class NormalEmployee implements Employee {
 
 #p `Employee` 인터페이스는 한 명의 구성원을 표현합니다. 따라서 해당 인터페이스를 구체화하면 구성원이 된다는 것이죠. 그리고 구성원은 이름, 직책, 인사정보를 반환할 수 있어야 한다고 합니다.
 
-#p `NormalEmployee` 클래스는 단순히 `Employee` 인터페이스를 구현하기만 했습니다. `public String getInformation(Employee viewer)` 메서드는 조직원이 누구든 누구에게나 자신의 인사정보를 열람할 수 있도록 작성이 되었습니다.
+#p `NormalEmployee` 클래스는 단순히 `Employee` 인터페이스를 구현하기만 했습니다. `public String getInformation(Employee viewer)` 메서드는 조직원이 누구든 자신의 인사정보를 열람할 수 있도록 작성이 되었습니다.
 
 #p 이제 직책에 대한 클래스 검토가 끝났는데요. 지금 이 상태로만 놔둔다면 누구든지 `Employee` 객체에서 `getInformation()` 메서드를 호출하면 누가 조회하든 정보를 보여줄 겁니다. 이제부터 보호 프록시 클래스를 구성해봅시다. 이 클래스는 조회자의 직책을 확인하고 예외를 던지거나 인사 정보를 노출할 수 있도록 실제 객체에게 위임합니다.
 
@@ -309,7 +308,7 @@ class NotAuthorizedException extends RuntimeException {
 }
 ###
 
-#p 보호 프록시에서 메서드 호출시 호출자에게 권한이 없으면 {==NotAuthorizedException} 예외를 던질겁니다. 그럼 테스트 프로그램을 한번 만들어볼까요.
+#p 보호 프록시에서 메서드 호출시 조회자에게 권한이 없으면 {==NotAuthorizedException} 예외를 던질겁니다. 그럼 테스트 프로그램을 한번 만들어볼까요.
 
 ###code.java
 public void main() {
@@ -409,7 +408,7 @@ Display Staff 'Dark Kim' personnel information.
 Display Staff 'Pal Yoo' personnel information.
 ###
 
-#p 이제 남은일은 실환경 코드 변경뿐이네요.
+#p 이제 남은일은 프로젝트내 곳곳에 산재된 코드에 프록시 객체를 사용하게끔 수정하는겁니다.
 
 #h2 마무리
 #p 이번에 예제로 사용한 보호 프록시 코드들을 그림을 한번 그려보시는건 어떨까요? 처음에 말씀드렸던 클래스 다이어그램과 유사하게 나올겁니다. :)
