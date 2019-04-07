@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+    <title>프록시 패턴(Proxy Pattern) :: JDM's Blog</title>
+    <!-- # common resource # -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="author" content="Jung DongMin">
+    
+    <!-- # css -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/blog/css/view.min.css">
+
+    <!-- # ad # -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-4675654622926623",
+          enable_page_level_ads: true
+     });
+</script>
+
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="/blog/scripts/posts.min.js"></script>
+    <script src="/blog/scripts/view.min.js"></script>
+	</head>
+	<body>
+    <div id="_gnb" class="text-right">
+        <a href="/">Home</a>│<a href="/blog/">Blog</a>│<a href="/guest/">Guestbook</a>│<a href="/lab/">Lab</a>&nbsp;</div>
+        <div id="top_subject" class="jumbotron">
+            <p id="tob_subject_p1" class="text-center">
+                <a href="/blog/">JDM's Blog</a>
+            </p>
+            <p id="tob_subject_p2"class="text-center">온갖 테스트 결과가 기록되는 이곳은 JDM's Blog입니다. :3</p>
+    </div>
+		<!-- noscript -->
+		<noscript>
+      이 사이트의 기능을 모두 활용하기 위해서는 자바스크립트를 활성화 시킬 필요가 있습니다.
+      브라우저에서 자바스크립트를 활성화하는 방법(http://www.enable-javascript.com/ko/)을 참고 하세요.
+		</noscript>
+		<!-- container -->
+		<div class="container" id="viewContainer">	
+			<!-- content 영역 -->
+			<div id="left_wrap" class="col-md-10 col-md-offset-1">
+				<!-- 블로그 전문 -->
+				<article>
+                    <!-- 제목 -->
+                    <h1 id="content_title">프록시 패턴(Proxy Pattern)</h1>
+					<!-- 본문 -->
+					<div id="content">
+<h2>프록시 패턴 정의</h2>
+<p>실제 기능을 수행하는 객체<span class="refer">Real Object</span> 대신 가상의 객체<span class="refer">Proxy Object</span>를 사용해 로직의 흐름을 제어하는 디자인 패턴입니다.</p>
+<h2>프록시 패턴 특징</h2>
+<div class="tab">
+<ul>
+<li>원래 하려던 기능을 수행하며 그외의 부가적인 작업(로깅, 인증, 네트워크 통신 등)을 수행하기에 좋습니다.</li>
+<li>비용이 많이 드는 연산(DB 쿼리, 대용량 텍스트 파일 등)을 실제로 필요한 시점에 수행할 수 있습니다.</li>
+<li>사용자 입장에서는 프록시 객체나 실제 객체나 사용법은 유사하므로 사용성이 좋습니다.</li>
+</ul>
+</div>
+<h2>프록시 패턴의 간단한 클래스 다이어그램</h2>
+<pre class="diagram">
+            |---------------|     사용    |------|
+            |Inteface       |<──────|Client|
+            |---------------|             |------|
+            |+operation()   |
+            |---------------|
+                    △
+                    │구현
+        ┌────────────┐
+        │                        │
+|---------------|         |---------------|
+|Real Object    |  위임   |Proxy Object   |
+|---------------|<────|---------------|
+|+operation()   |         |+operation()   |
+|---------------|         |---------------|
+</pre>
+<div class="tab">
+<ul>
+<li>Real Object, Proxy Object는 동일한 인터페이스를 구현합니다.</li>
+<li>Proxy Object는 메서드 수행시 실제 객체(Real Object)의 메서드에 위임합니다.</li>
+</ul>
+</div>
+<h2>프록시의 종류</h2>
+<p>프록시 패턴에서 사용할 수 있는 프록시의 종류는 다양한데요. 이 포스팅에서는 가상 프록시<span class="refer">Virtual Proxy</span>와 보호 프록시<span class="refer">Protection Proxy</span>에 대해서 살펴봅니다.</p>
+<h2>가상 프록시(Virtual Proxy)</h2>
+<p>가상 프록시는 실제 객체의 사용 시점을 제어할 수 있습니다. 예를 들어 늦은 초기화<span class="refer">Lazy Initialisation</span>를 프록시를 사용해 구현해 봅시다.</p>
+<p>가령 아래처럼 텍스트 파일을 읽는 인터페이스가 있다고 가정합시다.</p>
+<pre class="prettyprint lang-java">
+interface TextFile {
+    String fetch();
+}
+</pre>
+<p>메서드가 하나밖에 없는 아주 간단한 인터페이스입니다. 앞으로 이 인터페이스를 구현하는 클래스는 반드시 <span class="command">fetch()</span> 메서드를 구현해야합니다.</p>
+<p>이제부터 시나리오를 가정합시다.</p>
+<div class="green">
+<p><i>저는 이제 보안 전자 서류 전문 업체에 근무하고 있는 개발자입니다.콘솔 프로그램으로 20개씩 난독화된 전자 서류의 본문을 복호화해서 보여주는 프로그램 작성을 할겁니다.</i></p>
+</div>
+<p>실제 업무를 수행하기에 앞서 협업 조직에 <span class="command">SecretTextFile</span> 이라는 클래스를 인수 받았습니다. 이 클래스는 다음과 같습니다.</p>
+<pre class="prettyprint lang-java">
+class SecretTextFile implements TextFile {
+	private String plainText;
+
+	public SecretTextFile(String fileName) {
+		// 특별한 복호화 기법을 이용해 데이터를 복원해서 내용을 반환합니다.
+		this.plainText = SecretFileHolder.decodeByFileName(fileName);
+	}
+
+	@Override
+	public String fetch() {
+		return plainText;
+	}
+}
+</pre>
+<div class='fold' data-title='SecretFileHolder Source'>
+<p>아래의 소스 코드는 더미 메서드로 사용할 예정입니다. 해당 메서드 사용시 0.3초의 대기 시간을 갖습니다.</p>
+<pre class="prettyprint lang-java">
+class SecretFileHolder {
+    public static String decodeByFileName(String name) {
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return name;
+    }
+}
+</pre>
+</div>
+<p><span class="command">SecretTextFile</span> 클래스는 난독화 되어 있는 텍스트 파일을 복호화해서 평문으로 바꿔주는 클래스입니다. 협업 조직에서 라이브러리로 제공한 클래스라고 가정합시다. 즉, 저는 이 클래스를 수정할 권한은 없습니다.</p>
+<p>이 클래스를 그대로 사용해서 콘솔 프로그램을 구성했습니다. 하지만 실행 시켜보고 첫 결과가 나오기까지 <strong>6초</strong>라는 시간이 걸리는 것을 알게 됩니다. 6초는 제대로 프로그램이 동작하고는 있는지 의심할 수 있는 충분한 시간입니다.</p>
+<p>이유를 확인해보니 <span class="command">SecretTextFile</span> 클래스에서 사용중인 <span class="command">SecretFileHolder.decodeByFileName()</span> 메서드의 수행속도가 <span class="red">0.3</span>초라는 것을 발견하게 됩니다. 그리고 목록에 20개의 파일 내용을 노출해야 하는 상태였기 때문에 문제가 된겁니다. 화면을 구성할 때 이 파일들을 전부 객체로 만들다 보니 6초 정도의 로딩 시간을 갖게 된것이죠.</p>
+<p>문제를 확인했으니 코드 리팩토링을 하기로 결심합니다. 그래서 프록시 패턴을 적용해 필요할때만 파일 복호화를 하도록 수정하기로 했습니다. 다음의 클래스를 볼까요. 이제 프록시 클래스를 구현할 때입니다.</p>
+<pre class="prettyprint lang-java">
+class ProxyTextFile implements TextFile {
+    private String fileName;
+    private TextFile textFile;
+
+    public ProxyTextFile(String fileName) {
+        this.fileName = fileName;
+    }
+
+    @Override
+    public String fetch() {
+        if (textFile == null) {
+            textFile = new SecretTextFile(fileName);
+        }
+        return "[proxy] " + textFile.fetch(); // 프록시 객체를 사용하는 경우를 확인하기 위해 [proxy] 문구를 넣었습니다.
+    }
+}
+</pre>
+<p><span class="command">ProxyTextFile</span> 클래스는 객체를 생성할때에는 별다른 동작을 하지 않습니다. 하지만 실제로 데이터를 가져와야 할때 실제 객체인 <span class="command">SecretTextFile</span> 객체를 만들어내고 기능을 위임합니다. 이제 프로그램 코드를 수정할 차례입니다. 다음의 코드는 처음 3개의 파일만 실제 객체를 사용하고 나머지는 프록시 객체를 사용해 프로그램에서 첫 결과가 나오는 것을 1초 내로 만듭니다.</p>
+<pre class="prettyprint lang-java">
+void main() {
+	List&lt;TextFile&gt; textFileList = new ArrayList&lt;&gt;();
+
+	textFileList.addAll(TextFileProvider.getSecretTextFile(0, 3));
+	textFileList.addAll(TextFileProvider.getProxyTextFile(3, 20));
+
+	textFileList.stream().map(TextFile::fetch).forEach(System.out::println);
+}
+</pre>
+<div class='fold' data-title='TextFileProvider Source'>
+<pre class="prettyprint lang-java">
+class TextFileProvider {
+    public static List&lt;SecretTextFile&gt; getSecretTextFile(int start, int end) {
+        return IntStream.range(start, end)
+                .mapToObj(i -&gt; new SecretTextFile(String.valueOf(i)))
+                .collect(Collectors.toList());
+    }
+
+    public static List&lt;ProxyTextFile&gt; getProxyTextFile(int start, int end) {
+        return IntStream.range(start, end)
+                .mapToObj(i -&gt; new ProxyTextFile(String.valueOf(i)))
+                .collect(Collectors.toList());
+    }
+}
+</pre>
+</div>
+<p><span class="command">textFileList</span>를 사용하는 입장에서는 별다른 조치없이 그대로 사용하면 됩니다. 콘솔에서 <span class="command">textFileList</span>를 순회하면서 노출한다고 하면 처음 세개는 이미 로딩이 되어 있는 상태이므로 바로 노출하고 그다음 아이템부터는 차근차근 노출할겁니다. 아래는 콘솔 결과입니다.</p>
+<div class='fold' data-title='main 메서드 실행 결과'>
+<pre class="prettyprint lang-console">
+0
+1
+2
+[proxy] 3
+[proxy] 4
+[proxy] 5
+[proxy] 6
+[proxy] 7
+[proxy] 8
+[proxy] 9
+[proxy] 10
+[proxy] 11
+[proxy] 12
+[proxy] 13
+[proxy] 14
+[proxy] 15
+[proxy] 16
+[proxy] 17
+[proxy] 18
+[proxy] 19
+</pre>
+</div>
+<p>따라서 <span class="command">ProxyTextFile</span> 같은 프록시 클래스를 만들고 기존 <span class="command">SecretTextFile</span> 클래스 대신 사용한것만으로도 초기 객체 생성 시간이 대폭 감소했습니다. 정말 필요한 시점에만 텍스트 복호화를 하게 되었죠.</p>
+이렇게 초기 비용이 많이 드는 연산이 포함된 객체의 경우 가상 프록시를 사용했을 때 효과를 볼 수 있습니다.
+<p>지금까지 구성한 코드들이 어떻게 구조를 이루고 있을까요? 아래의 그림을 봅시다.</p>
+<pre class="diagram">
+            |---------------|     사용    |------|
+            |TextFile       |<──────|Client|
+            |---------------|             |------|
+            |+fetch()       |
+            |---------------|
+                    △
+                    │구현
+        ┌────────────┐
+        │                        │
+|---------------|         |---------------|
+|SecretTextFile |  위임   |ProxyTextFile  |
+|---------------|<────|---------------|
+|+fetch()       |         |+fetch()       |
+|---------------|         |---------------|
+</pre>
+<p>앞서 설명드렸던 프록시 패턴의 간단한 클래스 다이어그램과 동일한 것을 볼 수 있습니다.</p>
+<h2>보호 프록시(Protection Proxy)</h2>
+<p>보호 프록시는 프록시 객체가 사용자의 실제 객체에 대한 접근을 제어합니다.</p>
+<p>이번엔 새로운 시나리오입니다.</p>
+<div class="green">
+<p><i>인사팀에서 인사정보에 대한 데이터 접근을 직책 단위로 세분화 하려고 합니다. 기존에는 오로지 인사팀에서만 사용했던 부분이었으나 최근 인사정보를 직책별로 공개해줘야 하는 경우가 생겼기 때문입니다. 따라서 전산팀에 근무중인 나는 직책에 따라서 조직원의 인사정보 접근을 제어하는 업무를 수행해야합니다.</i></p>
+</div>
+<p>저는 대대로 내려온 코드를 살펴봤습니다. 이미 아래와 같은 구조로 라이브러리화 되어 프로젝트의 많은 곳에서 사용중입니다. 가장 좋은것은 라이브러리를 제공한 조직에서 변경해주는 것이지만 기다릴 시간은 없어요.</p>
+<pre class="prettyprint lang-java">
+// 직책 등급(차례대로 조직원, 조직장, 부사장)
+enum GRADE {
+    Staff, Manager, VicePresident
+}
+
+// 구성원
+interface Employee {
+    String getName(); // 구성원의 이름
+    GRADE getGrade(); // 구성원의 직책
+    String getInformation(Employee viewer); // 구성원의 인사정보(매개변수는 조회자)
+}
+
+// 일반 구성원
+class NormalEmployee implements Employee {
+    private String name;
+    private GRADE grade;
+
+    public NormalEmployee(String name, GRADE grade) {
+        this.name = name;
+        this.grade = grade;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public GRADE getGrade() {
+        return grade;
+    }
+
+    // 기본적으로 자신의 인사정보는 누구나 열람할 수 있도록 되어있습니다.
+    @Override
+    public String getInformation(Employee viewer) {
+        return "Display " + getGrade().name() + " '" + getName() + "' personnel information.";
+    }
+}
+</pre>
+<p><span class="command">GRADE</span> enum은 직책에 대한 정의입니다. 차례대로 조직원<span class="refer">Staff</span>, 조직장<span class="refer">Manager</span>, 부사장<span class="refer">VicePresident</span>이라고 하겠습니다.</p>
+<p><span class="command">Employee</span> 인터페이스는 한 명의 구성원을 표현합니다. 따라서 해당 인터페이스를 구체화하면 구성원이 된다는 것이죠. 그리고 구성원은 이름, 직책, 인사정보를 반환할 수 있어야 한다고 합니다.</p>
+<p><span class="command">NormalEmployee</span> 클래스는 단순히 <span class="command">Employee</span> 인터페이스를 구현하기만 했습니다. <span class="command">public String getInformation(Employee viewer)</span> 메서드는 조직원이 누구든 누구에게나 자신의 인사정보를 열람할 수 있도록 작성이 되었습니다.</p>
+<p>이제 직책에 대한 클래스 검토가 끝났는데요. 지금 이 상태로만 놔둔다면 누구든지 <span class="command">Employee</span> 객체에서 <span class="command">getInformation()</span> 메서드를 호출하면 누가 조회하든 정보를 보여줄 겁니다. 이제부터 보호 프록시 클래스를 구성해봅시다. 이 클래스는 조회자의 직책을 확인하고 예외를 던지거나 인사 정보를 노출할 수 있도록 실제 객체에게 위임합니다.</p>
+<pre class="prettyprint lang-java">
+// 인사정보가 보호된 구성원(인사 정보 열람 권한 없으면 예외 발생)
+class ProtectedEmployee implements Employee {
+    private Employee employee;
+
+    public ProtectedEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    @Override
+    public String getInformation(Employee viewer) {
+        // 본인 인사정보 조회
+        if (this.employee.getGrade() == viewer.getGrade() && this.employee.getName().equals(viewer.getName())) {
+            return this.employee.getInformation(viewer);
+        }
+
+        switch (viewer.getGrade()) {
+            case VicePresident:
+            	// 부사장은 조직장, 조직원들을 볼 수 있다.
+                if (this.employee.getGrade() == GRADE.Manager || this.employee.getGrade() == GRADE.Staff) {
+                    return this.employee.getInformation(viewer);
+                }
+            case Manager:
+                if (this.employee.getGrade() == GRADE.Staff) { // 조직장은 조직원들을 볼 수 있다.
+                    return this.employee.getInformation(viewer);
+                }
+            case Staff:
+            default:
+                throw new NotAuthorizedException(); // 조직원들은 다른 사람의 인사정보를 볼 수 없다.
+        }
+    }
+
+    @Override
+    public String getName() {
+        return employee.getName();
+    }
+
+    @Override
+    public GRADE getGrade() {
+        return employee.getGrade();
+    }
+}
+
+class NotAuthorizedException extends RuntimeException {
+    private static final long serialVersionUID = -1714144282967712658L;
+}
+</pre>
+<p>보호 프록시에서 메서드 호출시 호출자에게 권한이 없으면 <span class="error">NotAuthorizedException</span> 예외를 던질겁니다. 그럼 테스트 프로그램을 한번 만들어볼까요.</p>
+<pre class="prettyprint lang-java">
+public void main() {
+	// 직원별 개인 객체 생성
+    Employee CTO = new NormalEmployee("Dragon Jung", GRADE.VicePresident);
+    Employee CFO = new NormalEmployee("Money Lee", GRADE.VicePresident);
+    Employee devManager = new NormalEmployee("Cats Chang", GRADE.Manager);
+    Employee financeManager = new NormalEmployee("Dell Choi", GRADE.Manager);
+    Employee devStaff = new NormalEmployee("Dark Kim", GRADE.Staff);
+    Employee financeStaff = new NormalEmployee("Pal Yoo", GRADE.Staff);
+
+    // 직원들을 리스트로 가공.
+    List&lt;Employee&gt; employees = Arrays.asList(CTO, CFO, devManager, financeManager, devStaff, financeStaff);
+
+    System.out.println("================================================================");
+    System.out.println("시나리오1. Staff(Dark Kim)가 회사 인원 인사 정보 조회");
+    System.out.println("================================================================");
+
+    // 자신의 직급에 관계 없이 모든 직급의 인사 정보를 열람 (문제!!)
+    printAllInformationInCompany(devStaff, employees);
+
+    System.out.println("================================================================");
+    System.out.println("보호 프록시 서비스를 가동.");
+    System.out.println("================================================================");
+    List&lt;Employee&gt; protectedEmployees = employees.stream().map(ProtectedEmployee::new).collect(Collectors.toList());
+
+    System.out.println("================================================================");
+    System.out.println("시나리오2. Staff(Dark Kim)가 회사 인원 인사 정보 조회");
+    System.out.println("================================================================");
+    printAllInformationInCompany(devStaff, protectedEmployees);
+
+    System.out.println("================================================================");
+    System.out.println("시나리오3. Manger(Cats Chang)가 회사 인원 인사 정보 조회");
+    System.out.println("================================================================");
+    printAllInformationInCompany(devManager, protectedEmployees);
+
+    System.out.println("================================================================");
+    System.out.println("시나리오4. VicePresident(Dragon Jung)가 회사 인원 인사 정보 조회");
+    System.out.println("================================================================");
+    printAllInformationInCompany(CTO, protectedEmployees);
+}
+
+public void printAllInformationInCompany(Employee viewer, List&lt;Employee&gt; employees) {
+    employees.stream()
+            .map(employee -&gt; {
+                try {
+                    return employee.getInformation(viewer);
+                } catch (NotAuthorizedException e) {
+                    return "Not authorized.";
+                }
+            })
+            .forEach(System.out::println);
+}
+</pre>
+<p>프로그램 결과는 아래처럼 됩니다.</p>
+<pre class="console">
+================================================================
+시나리오1. Staff(Dark Kim)가 회사 인원 인사 정보 조회
+================================================================
+Display VicePresident 'Dragon Jung' personnel information.
+Display VicePresident 'Money Lee' personnel information.
+Display Manager 'Cats Chang' personnel information.
+Display Manager 'Dell Choi' personnel information.
+Display Staff 'Dark Kim' personnel information.
+Display Staff 'Pal Yoo' personnel information.
+================================================================
+보호 프록시 서비스를 가동.
+================================================================
+================================================================
+시나리오2. Staff(Dark Kim)가 회사 인원 인사 정보 조회
+================================================================
+Not authorized.
+Not authorized.
+Not authorized.
+Not authorized.
+Display Staff 'Dark Kim' personnel information.
+Not authorized.
+================================================================
+시나리오3. Manger(Cats Chang)가 회사 인원 인사 정보 조회
+================================================================
+Not authorized.
+Not authorized.
+Display Manager 'Cats Chang' personnel information.
+Not authorized.
+Display Staff 'Dark Kim' personnel information.
+Display Staff 'Pal Yoo' personnel information.
+================================================================
+시나리오4. VicePresident(Dragon Jung)가 회사 인원 인사 정보 조회
+================================================================
+Display VicePresident 'Dragon Jung' personnel information.
+Not authorized.
+Display Manager 'Cats Chang' personnel information.
+Display Manager 'Dell Choi' personnel information.
+Display Staff 'Dark Kim' personnel information.
+Display Staff 'Pal Yoo' personnel information.
+</pre>
+<p>이제 남은일은 실환경 코드 변경뿐이네요.</p>
+<h2>마무리</h2>
+<p>이번에 예제로 사용한 보호 프록시 코드들을 그림을 한번 그려보시는건 어떨까요? 처음에 말씀드렸던 클래스 다이어그램과 유사하게 나올겁니다. :)</p>
+<p>이번 패턴 시나리오들이 뭔가 아귀가 잘 안맞는 것 같은데 그냥 올렸습니다... (ㅠㅠ)</p>
+<p><span class="refer">상기에 존재하는 예제 코드들은 Java 8 기반으로 작성 되었습니다.</span></p>
+</div>
+				</article>
+			</div>
+			<!-- // content 영역 -->
+		</div>
+		<!-- # code highlight -->
+		<script src="//cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=scala&lang=sql&lang=kotlin&lang=yaml&skin=sons-of-obsidian"></script>
+		<script src="/lib/scripts/footer.js"></script>
+	</body>
+</html>

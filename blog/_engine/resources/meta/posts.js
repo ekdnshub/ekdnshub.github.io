@@ -936,6 +936,10 @@ var postsInfo = (function(){
             "234":{
                 "title":"자바 옵셔널 (Java Optional)",
                 "created":"2019-04-02"
+            },
+            "235":{
+                "title":"프록시 패턴(Proxy Pattern)",
+                "created":"2019-04-07"
             }
         }
 
