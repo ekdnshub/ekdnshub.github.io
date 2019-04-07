@@ -32,6 +32,8 @@ function applyContentEffect(){
 		$(obj).html(subIndex + " " + $(obj).html());
 	});
 
+	moveScrollForHash(); // 목차 id 삽입된 이후 실행함.
+
 	// 본문 내 a링크인데 _blank 옵션이 없으면 넣어준다.
 	$("#content a").each(function(index, obj){
 		var target = obj.getAttribute("target");
@@ -83,6 +85,19 @@ function applyContentEffect(){
 	// 본문이 끝나면 처음으로 돌아갈 수 있는 링크 하나를 만들어준다.
 	$("#content").after("<p class=\"text-right\"><a href=\"#\">Go Top(문서 처음으로)</a></p>");
 };
+
+// 목차 링크를 따라왔다면 이동시켜주자. (hash 붙은것)
+function moveScrollForHash() {
+	try {
+        if (location.hash != "") {
+        var hash = location.hash.replace(".", "\\.");
+        var heading = $(hash);
+            $('html,body').animate({scrollTop: heading.offset().top}, 0);
+        }
+	} catch (e) {
+	    // hash 이동은 크리티컬한 것이 아니므로 무시함
+	}
+}
 
 function addInfoBody(currentSeq){
 	var body = `
