@@ -84,19 +84,6 @@ function applyContentEffect(){
 	$("#content").after("<p class=\"text-right\"><a href=\"#\">Go Top(문서 처음으로)</a></p>");
 };
 
-// 목차 링크를 따라왔다면 이동시켜주자. (hash 붙은것)
-function moveScrollForHash() {
-	try {
-        if (location.hash != "") {
-        var hash = location.hash.replace(".", "\\.");
-        var heading = $(hash);
-            $('html,body').animate({scrollTop: heading.offset().top}, 0);
-        }
-	} catch (e) {
-	    // hash 이동은 크리티컬한 것이 아니므로 무시함
-	}
-}
-
 function addInfoBody(currentSeq){
 	var body = `
 	  	<!-- 추가 정보 -->
@@ -317,12 +304,10 @@ $( document ).ready(function(){
 	/* 관련 게시글 목록 생성 */
 	initReferencePost();
 	makeReferencePost(currentSeq);
-	
+
 	/* 코멘트 관련 처리 */
 	Comment.init(currentSeq);
 	
 	/* Bottom 처리(SideBar) */
 	Bottom.init(maxPostsCnt);
-
-	moveScrollForHash(); // 해시 있는 경우 이동
 });
