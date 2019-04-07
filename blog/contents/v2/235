@@ -152,7 +152,7 @@ class TextFileProvider {
 #p `textFileList`를 사용하는 입장에서는 별다른 조치없이 그대로 사용하면 됩니다. 콘솔에서 `textFileList`를 순회하면서 노출한다고 하면 처음 세개는 이미 로딩이 되어 있는 상태이므로 바로 노출하고 그다음 아이템부터는 차근차근 노출할겁니다. 아래는 콘솔 결과입니다.
 
 ###fold.main 메서드 실행 결과
-###code.console
+###console
 0
 1
 2
