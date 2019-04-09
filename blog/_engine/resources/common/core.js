@@ -185,13 +185,28 @@ var o = (function($){
             }
             return size;
         };
+
+
+        function copyToClipboard(str) {
+            try {
+                var textarea = document.createElement("textarea");
+                document.body.appendChild(textarea);
+                textarea.value = str;
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            } catch(ex) {
+                // nothing...
+            }
+        };
         
         return{
             multiLine:multiLine,
             isEndScroll:isEndScroll,
             getTime:getTime,
             autoWidth:autoWidth,
-            getObjectSize:getObjectSize
+            getObjectSize:getObjectSize,
+            copyToClipboard:copyToClipboard
         };
     })(browser);
 

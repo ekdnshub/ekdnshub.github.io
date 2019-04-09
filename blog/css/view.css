@@ -60,9 +60,13 @@ background-image: -o-linear-gradient(left, #259CE0, #fff);
 /*#content h1:before, #content h2:before, #content h3:before, #content h4:before, #content h5:before{ content:'＃ '; }*/
 #content h1{ font-size:2.00rem; padding-top:0.60em; padding-bottom:0.60em; margin-top:2.00em; border-left-width:0.35em; }
 #content h2{ font-size:1.80rem; padding-top:0.50em; padding-bottom:0.50em; margin-top:1.75em; border-left-width:0.30em; }
+#content h2:hover { cursor:pointer }
 #content h3{ font-size:1.60rem; padding-top:0.40em; padding-bottom:0.40em; margin-top:1.50em; border-left-width:0.25em; }
+#content h3:hover { cursor:pointer }
 #content h4{ font-size:1.40rem; padding-top:0.30em; padding-bottom:0.30em; margin-top:1.25em; border-left-width:0.20em; }
+#content h4:hover { cursor:pointer }
 #content h5{ font-size:1.20rem; padding-top:0.20em; padding-bottom:0.20em; margin-top:1.00em; border-left-width:0.15em; }
+#content h5:hover { cursor:pointer }
 
 /* etc */
 #content i { font-style:italic; }

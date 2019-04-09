@@ -29,6 +29,15 @@ function applyContentEffect(){
 		if( map["h5"] > 0) subIndex += map["h5"]+".";
 
 		$(obj).html(subIndex + " " + $(obj).html());
+		$(obj).on("click", function() {
+            try {
+                var link = window.location.origin + window.location.pathname + "#" + $(obj).attr("id");
+                o.util.copyToClipboard(link);
+                o.toast.info("URL Copied!");
+            } catch (ex) {
+                // nothing...
+            }
+        });
 	});
 
 	// 본문 내 a링크인데 _blank 옵션이 없으면 넣어준다.
