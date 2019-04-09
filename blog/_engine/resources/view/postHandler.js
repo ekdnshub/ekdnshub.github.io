@@ -85,6 +85,18 @@ function applyContentEffect(){
 		});
 	});
 
+    // 코드 클릭해도 copy
+	$(".prettyprint").each(function(i, obj) {
+	    $(obj).on("click", function() {
+            try {
+                o.util.copyToClipboard($(obj).text());
+                o.toast.info("Code Copied!");
+            } catch (ex) {
+                // nothing...
+            }
+	    });
+	});
+
 	// 본문에 아이프레임이 있으면 너비를 맞춰준다.
 	o.util.autoWidth("#content", "#content iframe");
 	
