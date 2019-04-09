@@ -57,7 +57,7 @@
 <p><strong>"특정 시간에 특정 작업을 해야한다."</strong></p>
 </div>
 <p>라고 한다면 크론탭을 사용해 편하게 리눅스를 사용하실 수 있습니다.</p>
-<h2>크론탭 기본 (crontab basic)</h2>
+<h2 id="크론탭_기본_(crontab_basic)">크론탭 기본 (crontab basic)</h2>
 <p>일단 기본이 되는 크론탭 사용법을 한 번 볼까요. 리눅스 쉘에서 다음처럼 입력합니다.</p>
 <pre class="console">
 $ crontab -e
@@ -79,40 +79,40 @@ $ crontab -r
 </pre>
 <p>별이 다섯개나 있습니다. 그리고 뒤에는 명령어가 적혀 있네요. 이게 기본 사용법입니다. 물론 쉘스크립트 뿐만 아니라 리눅스 커맨드도 사용할 수 있습니다.여기서는 쉘스크립트를 사용하는 방법으로 설명하고 있습니다.</p>
 <p>별이 다섯개 있는 경우엔 "매분마다 실행" 하는겁니다. 별이 지칭하는 것이 무엇인지 자세히 살펴봅시다. <span class="refer">* 그 전에 위에 입력했던 크론잡은 다시 지우시기 바랍니다.</span></p>
-<h2>주기 결정</h2>
+<h2 id="주기_결정">주기 결정</h2>
 <pre class="console">
 *　　　　　　*　　　　　　*　　　　　　*　　　　　　*
 분(0-59)　　시간(0-23)　　일(1-31)　　월(1-12)　　　요일(0-7)
 </pre>
 <p>각 별 위치에 따라 주기를 다르게 설정 할 수 있습니다. 순서대로 <strong>분-시간-일-월-요일</strong> 순입니다. 그리고 괄호 안의 숫자 범위 내로 별 대신 입력 할 수 있습니다.</p>
 <p>요일에서 0과 7은 일요일입니다. 1부터 월요일이고 6이 토요일입니다.</p>
-<h2>주기별 예제</h2>
-<h3>매분 실행</h3>
+<h2 id="주기별_예제">주기별 예제</h2>
+<h3 id="매분_실행">매분 실행</h3>
 <pre class="console">
 # 매분 test.sh 실행
 * * * * * /home/script/test.sh
 </pre>
-<h3>특정 시간 실행</h3>
+<h3 id="특정_시간_실행">특정 시간 실행</h3>
 <pre class="console">
 # 매주 금요일 오전 5시 45분에 test.sh 를 실행
 45 5 * * 5 /home/script/test.sh
 </pre>
-<h3>반복 실행</h3>
+<h3 id="반복_실행">반복 실행</h3>
 <pre class="console">
 # 매일 매시간 0분, 20분, 40분에 test.sh 를 실행
 0,20,40 * * * * /home/script/test.sh
 </pre>
-<h3>범위 실행</h3>
+<h3 id="범위_실행">범위 실행</h3>
 <pre class="console">
 # 매일 1시 0분부터 30분까지 매분 tesh.sh 를 실행
 0-30 1 * * * /home/script/test.sh
 </pre>
-<h3>간격 실행</h3>
+<h3 id="간격_실행">간격 실행</h3>
 <pre class="console">
 # 매 10분마다 test.sh 를 실행
 */10 * * * * /home/script/test.sh
 </pre>
-<h3>조금 복잡하게 실행</h3>
+<h3 id="조금_복잡하게_실행">조금 복잡하게 실행</h3>
 <pre class="console">
 # 5일에서 6일까지 2시,3시,4시에 매 10분마다 test.sh 를 실행
 */10 2,3,4 5-6 * * /home/script/test.sh
@@ -120,8 +120,8 @@ $ crontab -r
 <div class="green">
 <p><i class="fa fa-check fa-lg"></i> 주기 입력 방법엔 * , - / 을 이용하는 방법이 있습니다. 위에서 보셨듯이 각각의 특수기호가 하는 기능이 다르고 조합을 어떻게 하느냐에 따라 입맛대로 주기를 설정 할 수 있습니다.</p>
 </div>
-<h2>크론 사용 팁</h2>
-<h3>한 줄에 하나의 명령만 씁시다.</h3>
+<h2 id="크론_사용_팁">크론 사용 팁</h2>
+<h3 id="한_줄에_하나의_명령만_씁시다.">한 줄에 하나의 명령만 씁시다.</h3>
 <pre class="console">
 # 잘못된 예
 * * * 5 5
@@ -131,7 +131,7 @@ $ crontab -r
 # 잘된 예
 * * * 5 5 /home/script/test.sh
 </pre>
-<h3>주석을 달아봅시다.</h3>
+<h3 id="주석을_달아봅시다.">주석을 달아봅시다.</h3>
 <pre class="console">
 # 주석 #
 #--------------------#
@@ -139,7 +139,7 @@ $ crontab -r
 #--------------------#
 </pre>
 <p><span class="command">#</span> 을 입력해서 그 뒤로 나오는 모든 문자를 주석 처리할 수 있습니다.</p>
-<h2>크론 로깅 (cron logging)</h2>
+<h2 id="크론_로깅_(cron_logging)">크론 로깅 (cron logging)</h2>
 <p>크론탭을 사용해서 정기적으로 작업을 처리하는 것은 좋은데, 해당 처리 내역에 대해 로그를 남기고 싶을 때가 있을겁니다. 그럴때 다음처럼 한번 써봅시다.</p>
 <pre class="console">
 * * * * * /home/script/test.sh &gt; /home/script/test.sh.log 2&gt;&1
@@ -154,7 +154,7 @@ $ crontab -r
 <pre class="console">
 * * * * * /home/script/test.sh &gt; /dev/null 2&gt;&1
 </pre>
-<h2>크론탭 백업 (crontab backup)</h2>
+<h2 id="크론탭_백업_(crontab_backup)">크론탭 백업 (crontab backup)</h2>
 <p>자, 혹시라도 <span class="command">crontab -r</span> 를 쓰거나 실수로 crontab 디렉토리를 날려버려서 기존 크론 내역들이 날아갔을때, 정말 황망할거 같은데 말이죠. 그러니 주기적으로 크론탭을 백업해 둡시다. 백업은 다음처럼 하는 방법이 있습니다.</p>
 <pre class="console">
 crontab -l &gt; /home/bak/crontab_bak.txt

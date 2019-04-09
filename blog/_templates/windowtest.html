@@ -17,7 +17,11 @@
 
     <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <script src="/ekdnshub.github.io/blog/scripts/posts.min.js"></script>
-    <script src="/ekdnshub.github.io/blog/scripts/view.min.js"></script>
+    <script src="/ekdnshub.github.io/blog/_engine/resources/common/core.js"></script>
+    <script src="/ekdnshub.github.io/blog/_engine/resources/view/bottom.js"></script>
+    <script src="/ekdnshub.github.io/blog/_engine/resources/view/comment.js"></script>
+    <script src="/ekdnshub.github.io/blog/_engine/resources/view/copyright.js"></script>
+    <script src="/ekdnshub.github.io/blog/_engine/resources/view/postHandler.js"></script>
 </head>
 <body>
 <div id="_gnb" class="text-right">
@@ -51,7 +55,7 @@
                 </div>
                 <p>라고 한다면 크론탭을 사용해 편하게 리눅스를 사용하실 수 있습니다.</p>
 
-                <h2>크론탭 기본 (crontab basic)</h2>
+                <h2 id="크론탭_기본_(crontab_basic)">크론탭 기본 (crontab basic)</h2>
                 <p>일단 기본이 되는 크론탭 사용법을 한 번 볼까요. 리눅스 쉘에서 다음처럼 입력합니다.</p>
 
                 <pre class="prettyprint lang-java">
@@ -121,7 +125,7 @@ $ crontab -r
                 <p>별이 다섯개나 있습니다. 그리고 뒤에는 명령어가 적혀 있네요. 이게 기본 사용법입니다. 물론 쉘스크립트 뿐만 아니라 리눅스 커맨드도 사용할 수 있습니다.여기서는 쉘스크립트를 사용하는 방법으로 설명하고 있습니다.</p>
                 <p>별이 다섯개 있는 경우엔 "매분마다 실행" 하는겁니다. 별이 지칭하는 것이 무엇인지 자세히 살펴봅시다. <span class="refer">* 그 전에 위에 입력했던 크론잡은 다시 지우시기 바랍니다.</span></p>
 
-                <h2>주기 결정</h2>
+                <h2 id="index_1">주기 결정</h2>
 
                 <pre class="console">
 *　　　　　　*　　　　　　*　　　　　　*　　　　　　*

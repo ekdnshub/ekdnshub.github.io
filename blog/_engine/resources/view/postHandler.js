@@ -28,7 +28,6 @@ function applyContentEffect(){
 		if( map["h4"] > 0) subIndex += map["h4"]+".";
 		if( map["h5"] > 0) subIndex += map["h5"]+".";
 
-        $(obj).attr("id", "index_" + subIndex); // 목차 기능에서 활용함.
 		$(obj).html(subIndex + " " + $(obj).html());
 	});
 

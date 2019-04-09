@@ -108,7 +108,8 @@
             ["#h", function(line){
                 var size = line.match(/^#h(.)/)[1];
                 if (size == 1) console.log("h1은 타이틀에서만 적용해야 합니다.");
-                return "<h"+size+">"+line.substring(3,line.length).trim()+"</h"+size+">";
+                var title = line.substring(3,line.length).trim();
+                return `<h${size} id="${title.replace(/\s/g, "_")}">${title}</h${size}>`;
             }]
         ];
         // 키워드는 순차적으로 매칭하기 때문에 가장 긴 키워드부터 순차적으로 정렬한다.
