@@ -52,18 +52,18 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>Maven을 쓴지도 비교적 최근(?)의 일로 느껴졌는데, 요즘의 트렌드는 "Gradle"인가 봅니다. Spring 프레임워크도 Maven에서 Gradle로 바뀌고 있는 상태기도 하구요. 그래서 이번엔 Gradle을 설치하는 법을 포스팅해볼까 합니다.</p>
-<h4>Gradle은 무엇?</h4>
+<h4 id="Gradle은_무엇?">Gradle은 무엇?</h4>
 <blockquote>
 <p>From <strong>command line to IDE to continuous integration</strong>, only one Enterprise build automation system to rule them all. Declare and execute all tasks necessary to compile, test, package and ship multi-language multi-platform multi-project and multi-channel software, SaaS and Mobile Apps.</p>
 <cite><a href="https://gradle.org">https://gradle.org</a></cite>
 </blockquote>
 <p>Gradle에 대해 알수 있는 것은 역시 공식 홈페이지 인트로에 걸려 있는 소개 문구겠죠. "지속적인 통합" 이라는 단어가 굵게 강조 되어 있네요. 커맨드 라인부터 IDE에 이르기까지 전반적으로 지속적인 통합을 제공하는 엔터프라이즈 빌드 자동화 시스템이라고 하네요.</p>
 <p>컴파일, 테스트, 패키지, 다중 언어, 다중 플랫폼, 다중 프로젝트, 다중 채널 소프트웨어, SaaS, 모바일 Apps… 정말 전반적으로 모든 곳에서 사용 가능한 빌드 자동화 도구입니다.</p>
-<h4>설치는 어떻게 하나요?(How to install Gradle)</h4>
+<h4 id="설치는_어떻게_하나요?(How_to_install_Gradle)">설치는 어떻게 하나요?(How to install Gradle)</h4>
 <p>이번 절에서는 실제로 Gradle을 다운로드 하고 설치하는 법을 알아봅시다. 현재 포스팅은 windows7 32bit 기준입니다.</p>
-<h5>다운로드(download)</h5>
+<h5 id="다운로드(download)">다운로드(download)</h5>
 <p><a href="https://gradle.org">https://gradle.org</a>에 접속하면 인트로에 엄청난 폰트 크기로 <strong>GET GRADLE</strong> 이라고 써져 있습니다. 그 바로 밑 <strong>Download Gradle 2.3</strong>을 클릭하세요. 그럼 gradle-2.3-all.zip 파일을 받을 수 있습니다.</p>
-<h5>gradle-2.3-all.zip 분석</h5>
+<h5 id="gradle-2.3-all.zip_분석">gradle-2.3-all.zip 분석</h5>
 <p>다운로드가 된 zip 파일을 압축 해제 해봅시다. 눈에 띄는것은 역시 getting-started.html 파일이네요. 열어서 내용을 확인해 보면 사전준비 사항이나 다운로드 하는법 언패킹하는법, 환경 변수 설정, 인스톨 후 구동 및 테스트 하는 법, JVM 옵션 등이 있습니다.</p>
 <p>그러면 다른 것도 봅시다. bin 디렉토리가 있네요. bin 디렉토리 안으로 들어가보면 gradle 과 gradle.bat 이 있습니다. 여기서는 windows7 기준이기 때문에 gradle.bat을 실행시켜 봐야겠어요.</p>
 <pre class="console">
@@ -128,7 +128,7 @@ USAGE: gradle [option...] [task...]
 &lt;/build_dir&gt;
 </pre>
 <p>넵, 엄청나게 많군요. 그중 눈에 띄는 것이 있는데 --gui 옵션입니다. Gradle GUI라고 되어 있네요. windows 사용자라면 이 옵션을 실행했을 때 자바로 실행되는 GUI 프로그램이 나옵니다.</p>
-<h5>Gradle 구동정보</h5>
+<h5 id="Gradle_구동정보">Gradle 구동정보</h5>
 <p>이번엔 Gradle의 구동 정보를 살펴봅시다. 실행은 "gradle -v" 입니다.</p>
 <pre class="console">
 C:\Users\Jung\Downloads\gradle-2.3-all\gradle-2.3\bin&gt;gradle -v

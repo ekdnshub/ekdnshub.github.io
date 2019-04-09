@@ -52,7 +52,7 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>예전에 학부생 시절에 배웠던 시스템 프로그래밍 과목이 문득 생각나네요. 어셈블리어를 직접 코딩해서 실행해보기도 했던 기억이 새록새록 납니다. 그래서 생각난김에 어셈블리어에 대해 포스팅을 해봅니다. :3</p>
-<h4>어셈블리어(Assembly language)</h4>
+<h4 id="어셈블리어(Assembly_language)">어셈블리어(Assembly language)</h4>
 <p>어셈블리어의 정확한 정의는 위키피디아에서 찾아봤습니다. 다음과 같은 내용이 첫문단에 있네요.</p>
 <blockquote>
 <p>An <strong>assembly language</strong> is a low-level programming language for a computer, or other programmable device, in which there is a very strong (generally one-to-one) correspondence between the language and the architecture's machine code instructions.</p>
@@ -61,9 +61,9 @@
 <p>어셈블리어는 컴퓨터를 위한 저급(low-level) 프로그래밍 언어라고 합니다. 뭐 기타 다른 장비들도 있겠지만요. 어셈블리어는 프로그래밍 언어와 아키텍처 컴퓨터 코드 명령어가(architecture's machine code instructions) 매우 정확하게(거의 1:1 수준으로) 일치한다고 하네요.</p>
 <p>일반적으로 우리가 알고 있는 고급(high-level) 프로그래밍 언어에는 C/C++, Java, Python 같은 것이 있겠네요. 이 프로그래밍 언어들은 일반적으로 컴파일(compile)을 하거나 인터프리터(interpreter) 등을 이용해 실행합니다.</p>
 <p>마찬가지로 어셈블리어도 일련의 변환 과정을 거칩니다. 어셈블리어는 <strong>어셈블러(assembler)</strong>를 이용해 실행 가능한 기계 코드로 변환해야 하죠. 이러한 변환 과정을 <strong>어셈블리(assembly) 또는 어셈블링(assembling)</strong>이라고 합니다.</p>
-<h4>니모닉(mnemonic)</h4>
+<h4 id="니모닉(mnemonic)">니모닉(mnemonic)</h4>
 <p>어셈블리어는 일반적으로 하나의 코드가 프로세서 명령어(processor instructions) 하나와 일치합니다. 프로세서 명령어는 일반적으로 기계어로 되어 있습니다. 뭐, 예를 들자면 "10110000" 같은 것이겠네요. 하지만 이러한 0과 1로 이루어진 기계어를 외우기란 쉽지 않습니다. 따라서 외우기 쉬운 키워드를 만듭니다. 예를 들면 "MOV" 같은것으로 말이죠. MOV는 MOVE의 축약어입니다. 이러한 키워드로 이루어진 코드를 니모닉이라고 합니다.</p>
-<h4>예제 코드(Example Code)</h4>
+<h4 id="예제_코드(Example_Code)">예제 코드(Example Code)</h4>
 <p>옛날에 버려뒀던 네이버 블로그가 있었는데 간만에 들어가보니 2008년에 어셈블리를 공부한 시절에 작성했던 코드가 남아 있었습니다. 그 코드를 공개해봅니다.</p>
 <pre class="console">
 MAIN SEGMENT
@@ -89,7 +89,7 @@ END
 </pre>
 <p>정확하게는 2008년 4월 23일 18시 34분에 올렸던 글이었네요. 처음으로 어셈블리를 배우고 나서 작성한 코드라고 리뷰도 했었어요. 지금은 이 코드를 보니 옛날 생각만 납니다만, 각설하고 혹시라도 코드 돌려보실 분은 확인해보시고 틀리면 댓글좀 주세요. :3</p>
 <p>어쨌든 예제 코드를 보시면 어셈블리어가 이런거구나! 하실 것 같습니다. 그리고 코드 실행을 해보려면 <strong>MASM</strong>을 설치해야 합니다. 구글에서 MASM 6.11을 검색하면 됩니다. 지금은 버전이 더 올라가 있을 것 같네요.</p>
-<h4>장/단점</h4>
+<h4 id="장/단점">장/단점</h4>
 <p>어셈블리어는 고수준의 서비스를 빠르게 작성하고 유지 보수하기에는 맞지 않아서 요즘은 잘 안보이긴 합니다. 그래도 사용처는 아직 남아있어요. 장점도 분명히 있으니까 말이죠. 반대로 단점도 많아요.</p>
 <div class="green">
 <strong>장점</strong>
@@ -115,7 +115,7 @@ END
 </ul>
 </div>
 <p>특수한 직군을 제외하면 어셈블리어를 직접 만질 일은 그다지 없을겁니다. 가능하다면 고급 프로그래밍 언어를 사용해서 정신 건강을 챙기는 것이 이득일 수도 있어요. :3</p>
-<h4>Closing Remarks</h4>
+<h4 id="Closing_Remarks">Closing Remarks</h4>
 <p>간단하게 어셈블리어에 대해 알아봤습니다. 이 포스팅에 다른 내용이 덧붙여질 그때를 기약하며 Bye :)</p>
 </div>
 				</article>

@@ -54,18 +54,18 @@
 <p>스프링 프레임워크에서 단위 테스트의 중요성은 다들 아실거라 생각합니다. :D</p>
 <p>이번 포스팅에서는 Spring 3.2부터 사용 가능한 <span class="command">MockMvc</span>를 활용한 단위 테스트에 대해 알아보고자 합니다.</p>
 <p><strong>또한 Springboot에서 같은 방법으로 사용가능합니다.</strong></p>
-<h2>Spring MockMvc</h2>
+<h2 id="Spring_MockMvc">Spring MockMvc</h2>
 <p>spring.io에서 <a href="https://spring.io/blog/2012/11/12/spring-framework-3-2-rc1-spring-mvc-test-framework">Spring Framework 3.2 RC1: Spring MVC Test Framework</a>라는 이름으로 포스팅이 되었습니다. 시간 나면 읽어보세요. :D</p>
 <p><span class="command">MockMvc</span>는 기존의 <span class="command">MockHttpServletRequest</span>, <span class="command">MockHttpServletResponse</span>을 활용한 단위 테스트에서 발전되었습니다. 기존의 Mock 객체들은 충분한 검증 결과<span class="refer">Annotaions, Request, etc. 를 포함한</span>를 보여 줄 수 없었기 때문입니다. 그래서 <span class="command">spring-test</span> 모듈을 스프링 프레임워크에 더했습니다.</p>
-<h2>How to use Spring MockMvc</h2>
+<h2 id="How_to_use_Spring_MockMvc">How to use Spring MockMvc</h2>
 <p>그럼 간단하게 스프링 테스트 모듈을 사용해 봅시다.</p>
-<h3>Create Project</h3>
+<h3 id="Create_Project">Create Project</h3>
 <p>프로젝트 생성부터 해야겠네요. IDE는 STS이고 다음과 같은 순서로 만듭니다.</p>
 <div class="green">
 File > New > Spring Project > Spring MVC Project
 </div>
 <p>패키지명은 <span class="command">kr.jdm.junit</span>으로 했습니다.</p>
-<h3>Update pom.xml for Spring</h3>
+<h3 id="Update_pom.xml_for_Spring">Update pom.xml for Spring</h3>
 <p><span class="command">pom.xml</span> 파일을 갱신해야 합니다. 아래와 같은 부분을 추가하거나 수정해 주세요. <strong>Springboot는 이 부분을 무시하셔도 됩니다.</strong></p>
 <pre class="prettyprint lang-xml">
 &lt;properties&gt;
@@ -92,7 +92,7 @@ File > New > Spring Project > Spring MVC Project
 &lt;/dependency&gt;
 </pre>
 <p>자바 버전이 낮은것이 흠이긴 하지만, 1.7 또는 1.8 이상으로 업그레이드 하셨다면 의존성 처리를 깨끗하게 하신 뒤에 다음으로 진행합니다.</p>
-<h3>Controller</h3>
+<h3 id="Controller">Controller</h3>
 <p>자동으로 생성된 컨트롤러의 소스 코드입니다. 이번 포스팅의 목표는 기존에 생성된 프로젝트를 최소한으로 수정해서 사용법을 알아 보는 것입니다. 따라서 기존 생성된 코드는 건들지 않습니다.</p>
 <div class='fold' data-title='View Source Code'>
 <pre class="prettyprint lang-java">
@@ -137,9 +137,9 @@ public class HomeController {
 }
 </pre>
 </div>
-<h3>Setup</h3>
+<h3 id="Setup">Setup</h3>
 <p>셋업 코드를 작성합니다. 두 가지의 테스트 클래스가 작성됩니다. 해당 클래스들은 <span class="command">src/test/java</span> 디렉토리 하위 <span class="command">kr.jdm.junit</span> 패키지 경로에 만들어집니다.</p>
-<h4>Setup with StandAlone</h4>
+<h4 id="Setup_with_StandAlone">Setup with StandAlone</h4>
 <p>먼저 볼 것은 컨트롤러 단독으로 테스트 하기 위한 테스트 클래스입니다.</p>
 <pre class="prettyprint lang-java">
 package kr.jdm.junit;
@@ -217,7 +217,7 @@ MockHttpServletResponse:
       Redirected URL = null
              Cookies = []
 </pre>
-<h4>Setup with Application Configuration</h4>
+<h4 id="Setup_with_Application_Configuration">Setup with Application Configuration</h4>
 <p>정의된 웹 어플리케이션 컨텍스트를 이용한 테스트 클래스를 작성합니다.</p>
 <pre class="prettyprint lang-java">
 package kr.jdm.junit;
@@ -300,11 +300,11 @@ MockHttpServletResponse:
       Redirected URL = null
              Cookies = []
 </pre>
-<h3>Result Console</h3>
+<h3 id="Result_Console">Result Console</h3>
 <p>위의 두가지 테스트 클래스의 Console 결과는 비슷하지만 조금씩 차이도 있습니다. 이부분은 우선 참고만 하시길 바랍니다.</p>
-<h2>Analyze MockMvc</h2>
+<h2 id="Analyze_MockMvc">Analyze MockMvc</h2>
 <p>간단하게 예제 코드를 통한 단위 테스트 방법을 확인 했습니다. 그럼 하나씩 뜯어봅시다.</p>
-<h3>MockMvc</h3>
+<h3 id="MockMvc">MockMvc</h3>
 <p>해당 클래스는 <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/test/web/servlet/MockMvc.html">MockMvc</a> Doc에서 확인 가능합니다. 지원하는 메소드는 <span class="command">.perform()</span>입니다. 이 메소드가 리턴하는 객체는 <span class="command">ResultActions</span>라는 인터페이스입니다.</p>
 <pre class="prettyprint lang-java">
 this.mockMvc.perform(get("/")) // basic
@@ -318,9 +318,9 @@ this.mockMvc.perform(get("/").accept(MediaType.ALL)) // select media type
 <p><i class="fa fa-check fa-lg"></i> <strong>TIP</strong></p>
 <p>혹시라도 Filter 처리를 하고 싶다면 MockMvc를 초기화 할때 build() 메소드 호출 전 .addFilter 또는 .addFilters 메소드를 호출해서 필터를 등록해주시면 됩니다.</p>
 </div>
-<h3>ResultActions</h3>
+<h3 id="ResultActions">ResultActions</h3>
 <p>MockMvc.perform 메소드로 리턴되는 인터페이스입니다. <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/test/web/servlet/ResultActions.html">ResultActions</a> Doc에서 확인 가능합니다. 지원 메소드는 andExpect, andDo, andReturn 입니다.</p>
-<h4>andExpert</h4>
+<h4 id="andExpert">andExpert</h4>
 <p>예상값을 검증합니다. <i>assert*</i> 메소드들과 유사합니다.</p>
 <pre class="prettyprint lang-java">
 // status 값이 정상인 경우를 기대하고 만든 체이닝 메소드 중 일부입니다.
@@ -336,12 +336,12 @@ this.mockMvc.perform(get("/").accept(MediaType.ALL)) // select media type
 </pre>
 <p>위처럼 produces 부분에 캐릭터셋도 확실하게 지정을 해줘야 합니다.</p>
 </div>
-<h4>andDo</h4>
+<h4 id="andDo">andDo</h4>
 <p>요청에 대한 처리를 합니다. <span class="command">print()</span> 메소드가 일반적입니다.</p>
 <pre class="prettyprint lang-java">
 .andDo(print())
 </pre>
-<h4>andReturn</h4>
+<h4 id="andReturn">andReturn</h4>
 <p>테스트 클래스에서 작성은 안했지만 테스트한 결과 객체를 받을 때 사용합니다.</p>
 <pre class="prettyprint lang-java">
 MvcResult result = this.mockMvc.perform(get("/"))
@@ -350,7 +350,7 @@ MvcResult result = this.mockMvc.perform(get("/"))
 .andExpect(model().attributeExists("serverTime"))
 .andReturn();
 </pre>
-<h2>Setup with Application Configuration for Springboot</h2>
+<h2 id="Setup_with_Application_Configuration_for_Springboot">Setup with Application Configuration for Springboot</h2>
 <p>Springboot에서는 아래처럼 테스트 클래스를 만듭니다.</p>
 <pre class="prettyprint lang-java">
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -374,7 +374,7 @@ public class TestClass {
 	}
 }
 </pre>
-<h2>jsonPath</h2>
+<h2 id="jsonPath">jsonPath</h2>
 <p>만약 응답 결과물이 <span class="command">json</span>이라면 <a href="https://github.com/jayway/JsonPath">JsonPath</a>를 한번 검토해보세요. 다음처럼 사용할 수 있습니다.</p>
 <pre class="prettyprint lang-java">
 /*
@@ -382,7 +382,7 @@ public class TestClass {
 */
 .andExpect(jsonPath("$.message").value("val"))
 </pre>
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p>새벽에 오류난 것을 고치는것보다 미리 테스트를 통한 검증으로 발뻗고 잡시다. :D</p>
 </div>
 				</article>

@@ -54,13 +54,13 @@
 <p><span class="refer">* 이 포스팅은 네이버 블로그에서 작성(2013.04.02)한 내용을 옮겨온 것입니다.</span></p>
 <p>오늘은 자바스크립트 라이브러리 중 하나인 jQuery 에서 사용 가능한 이펙트 함수 중 가장 빈번하게 쓰이는 " show / hide / toggle " 에 대해 알아보고자 합니다.</p>
 <p>검색해서 들어오셨다면 기본적인 jQuery 사용 방법은 숙지하셨다 생각하고 바로 본론으로 들어갑시다!</p>
-<h2>show() & hide() Example</h2>
+<h2 id="show()_&_hide()_Example">show() & hide() Example</h2>
 <pre class="prettyprint lang-js">
 $("#tagID").show(); // display 속성을 block 으로 바꾼다.
 $("#tagID").hide(); // display 속성을 none 으로 바꾼다. 
 </pre>
 <p>보여주거나 감추고 싶은 태그 ID를 넣어주면 됩니다. 간단합니다.</p>
-<h2>show() / hide() Syntax</h2>
+<h2 id="show()_/_hide()_Syntax">show() / hide() Syntax</h2>
 <p>더 정확한 문법은 다음과 같습니다.</p>
 <pre class="prettyprint lang-js">
 $(selector).show(speed,callback);
@@ -74,7 +74,7 @@ $(selector).hide(speed,callback);
 </ul>
 </div>
 <p>정확한 이해를 위해 예제 코드를 보면 좋겠죠? <a href="http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_hide_show">여기</a>를 클릭해서 연습합시다.</p>
-<h2>show() / hide() Complex Example</h2>
+<h2 id="show()_/_hide()_Complex_Example">show() / hide() Complex Example</h2>
 <p>예전엔 이런식의 코드도 많이 사용했었습니다. <span class="refer">지금도 사용 가능합니다.</span></p>
 <pre class="prettyprint lang-js">
 function toggle_layer() {
@@ -86,12 +86,12 @@ function toggle_layer() {
 }
 </pre>
 <p>위와 같은 함수를 만들땐 여러가지 복합적으로 처리를 할 때 가끔 사용하면 좋겠죠. 하지만 단순한 on/off 기능이 필요하다면 toggle() 함수를 써봅시다.</p>
-<h2>toggle() Example</h2>
+<h2 id="toggle()_Example">toggle() Example</h2>
 <pre class="prettyprint lang-js">
 $("#tagID").toggle(); // show -&gt; hide , hide -&gt; show
 </pre>
 <p>toggle()을 사용하게 되면 이전 상태에 따라 현재 상태를 반대로 바꿔줍니다.</p>
-<h2>toggle() Syntax</h2>
+<h2 id="toggle()_Syntax">toggle() Syntax</h2>
 <pre class="prettyprint lang-js">
 $(selector).toggle(speed,callback);
 </pre>
@@ -103,7 +103,7 @@ $(selector).toggle(speed,callback);
 </ul>
 </div>
 <p>정확한 이해를 위해 예제 코드를 봅시다. <a href="http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_toggle">여기</a>를 클릭해서 연습합시다.</p>
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p>간단하게 show() / hide() / toggle() 에 대해 알아봤습니다. 틀린 부분, 추가 보충해야 할 부분 전부 댓글에 적어주시면 고맙겠습니다!</p>
 </div>
 				</article>

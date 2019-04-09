@@ -52,12 +52,12 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>이 포스팅의 원본은 <a href="http://www.w3schools.com/js/js_properties.asp">이곳</a>입니다. 이 포스팅은 원본 문서를 한글로 번역한 것임을 밝힙니다. 중간중간 의역이 있습니다. 유의 부탁드립니다. :)</p>
-<h2>JavaScript Properties</h2>
+<h2 id="JavaScript_Properties">JavaScript Properties</h2>
 <div class="green">
 <p><i class="fa fa-check fa-lg"></i> 속성<span class="refer">Properties</span>은 자바스크립트 객체<span class="refer">object</span>에서 매우 중요한 부분이다.</p>
 </div>
 <p>속성은 자바스크립트 객체와 관련된 값들이다. 자바스크립트 객체는 정렬 되지 않은 속성들의 집합이기도 하다. 속성은 보통 값을 바꾸거나, 더하거나 삭제할 수 있고 그 중 몇몇은 읽기만 가능<span class="refer">read only</span>하다.</p>
-<h2>Accessing JavaScript Properties</h2>
+<h2 id="Accessing_JavaScript_Properties">Accessing JavaScript Properties</h2>
 <p>객체의 속성에 접근하기 위한 문법은 다음과 같다.</p>
 <pre class="prettyprint lang-js">
 objectName.property // person.age
@@ -71,7 +71,7 @@ objectName[expression] // x = "age"; person[x]
 person.firstname + " is " + person.age + " years old.";
 person["firstname"] + " is " + person["age"] + " years old.";
 </pre>
-<h2>JavaScript for...in Loop</h2>
+<h2 id="JavaScript_for...in_Loop">JavaScript for...in Loop</h2>
 <p>자바스크립트 <span class="command">for in loop</span> 구문은 객체의 속성을 나열할 수 있다.</p>
 <pre class="prettyprint lang-js">
 /* for in loop 문법 */
@@ -88,7 +88,7 @@ for (x in person) {
     txt += person[x];
 }
 </pre>
-<h2>Adding New Properties</h2>
+<h2 id="Adding_New_Properties">Adding New Properties</h2>
 <p>사용자는 이미 존재하고 있는 객체에 간단히 값을 주는 것만으로도 새로운 속성을 추가 할 수 있다.</p>
 <p>이미 존재하고 있는 person 객체가 있다고 가정하자. 사용자는 이 객체에 새로운 속성을 줄 수 있다.</p>
 <pre class="prettyprint lang-js">
@@ -97,22 +97,22 @@ person.nationality = "Korea";
 <div class="red">
 <p><i class="fa fa-ban fa-lg"></i> 사용자는 속성 또는 메소드 이름을 위해 예약된 키워드<span class="refer">reserved words</span>를 사용할 수 없다.</p>
 </div>
-<h2>Deleting Properties</h2>
+<h2 id="Deleting_Properties">Deleting Properties</h2>
 <p><i>delete</i> 키워드는 객체로부터 속성을 삭제한다.</p>
 <pre class="prettyprint lang-js">
 var person = {firstName:"DM", lastName:"J", age:29, eyeColor:"black"};
 delete person.age; // or delete person["age"]; 
 </pre>
 <p><i>delete</i> 키워드는 속성의 값과 자신의 속성 자체를 삭제한다. 삭제 후에 속성은 다시 추가 되기 전까진 사용할 수 없다. 삭제 연산자<span class="refer">delete operator</span>는 객체 속성에서 사용하도록 설계 되었다. 이것은 변수 또는 함수에 영향을 가지지 않는다. 그리고 삭제 연산자는 기본적으로 정의된<span class="refer">predefined</span> 자바스크립트 객체 속성에서 사용할 수 없다. 이는 사용자의 애플리케이션을 파괴할 수 있다.</p>
-<h2>Property Attributes</h2>
+<h2 id="Property_Attributes">Property Attributes</h2>
 <p><span class="refer">...Attributes를 어떻게 말해야 할까요. 이미 property가 속성으로 번역된 시점에서 말이죠...ㅠㅠ</span></p>
 <p>모든 속성은 이름을 가진다. 추가적으로 이 속성들은 값을 가질 수 있다. 이 값은 속성의 어트리뷰트 중 하나다. 다른 어트리뷰트는 열거되거나 구성되거나 쓰여질 수 있다. 이 어트리뷰트들은 어떻게 속성을 접근할 수 있는지 정의한다. (읽을 수 있는지? 아니면 쓸 수 있는지?)</p>
 <p>자바스크립트에서 모든 어트리뷰트는 읽을 수 있다, 그러나 값은 바뀔 수 있다. (단지 쓰기 가능한 속성에서만)</p>
 <p>ECMAScript 5에서 모든 속성 어트리뷰트의 값을 가져오거나 쓰기 위한 메소드들을 가지고 있다.</p>
-<h2>Prototype Properties</h2>
+<h2 id="Prototype_Properties">Prototype Properties</h2>
 <p>자바스크립트 객체는 그들의 프로토타입의 속성을 상속 받는다.</p>
 <p><i>delete</i> 키워드는 상속 받은 속성들을 삭제하지 않는다. 그러나 만약 사용자가 프로토타입 속성을 삭제한다면 이것은 프로토타입으로부터 상속된 모든 객체들에 영향을 끼칠 것이다.</p>
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p>그냥 전부 영글화 하면 어떨까요. 프로퍼티 어트리뷰트, 프로토타입 프로퍼티스... 번역의 의미가 없어지겠네요. 흠 -_- 오늘은 Attribute 때문에 멘탈 붕괴가 일어났네요.</p>
 </div>
 				</article>

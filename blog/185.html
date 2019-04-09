@@ -52,12 +52,12 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>리눅스를 사용하다보면 검색할 일이 정말 많아집니다. 그중에서도 <span class="command">find</span>와 <span class="command">grep</span>은 빠질 수가 없죠. 이번 포스팅은 이 두 명령어를 조합해서 사용할 수 있는 간단한 팁을 하나 공유하고자 합니다.</p>
-<h2>View Script</h2>
+<h2 id="View_Script">View Script</h2>
 <p>아래의 스크립트는 <strong>특정 키워드(YOUR_KEYWORD라 되어 있는 부분)가 있는 파일명과 줄번호를 보여줍니다.</strong></p>
 <pre class="prettyprint lang-sh">
 find . -type f -name "*" -exec grep -Hn --color "YOUR_KEYWORD" {} \;
 </pre>
-<h2>Analzye Script</h2>
+<h2 id="Analzye_Script">Analzye Script</h2>
 <p>위의 스크립트를 분석 단위로 분해를 해보면 아래처럼 됩니다.</p>
 <pre class="prettyprint lang-sh">
 find .                                         # (1)
@@ -78,9 +78,9 @@ find ... -exec Command {} \;
 
 <p>여기서 <span class="command">{}</span>는 앞서 find로 찾아낸 파일을 뜻하고 <span class="command">\;</span>는 <span class="command">-exec</span>의 옵션의 끝을 알립니다. 따라서 <span class="command">Command</span> 부분의 실행할 것에 <span class="command">find</span>로 찾아낸 파일 목록을 넘겨주는 셈입니다.</p>
 </div>
-<h2>TIP</h2>
+<h2 id="TIP">TIP</h2>
 <p>위의 스크립트를 응용할 수 있는 방법을 몇가지 소개하고자 합니다.</p>
-<h3>Operators</h3>
+<h3 id="Operators">Operators</h3>
 <p>리눅스 <span class="command">find</span> 커맨드에는 오퍼레이터(operators)가 존재합니다. 오퍼레이터라는건 일종의 연속적인 표현처리(?)라고 말할 수 있겠습니다. 아래의 형식처럼 사용합니다.</p>
 <pre class="prettyprint lang-sh">
 # 표현식을 and 연산합니다.
@@ -93,12 +93,12 @@ find . -type f -name "*.html" -o -name "*.js" # (2)
 </pre>
 <p>(1)번 커맨드는 파일명이 <span class="command">.html</span>로 끝나면서 시작은 in인 파일의 목록을 출력합니다. (2)번은 파일명이 <span class="command">.html</span>로 끝나거나 <span class="command">.js</span>가 끝나는 파일명을 출력하는 것입니다.</p>
 <p>위에 언급한 연산자 외에도 다른 연산자들이 많습니다. 연산자에 대한 자세한 내용은 <span class="command">man find</span>에서 찾아볼 수 있습니다.</p>
-<h3>more</h3>
+<h3 id="more">more</h3>
 <p>너무 파일이 많고 검색된 내용도 많아서 콘솔화면에 전부 표현할 수 없다면 <span class="command">more</span>을 활용해 봅시다. 쪽단위로 출력할 수 있게 해줍니다.</p>
 <pre class="prettyprint lang-sh">
 find . -type f -name "*" | more
 </pre>
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p>간단하게 <span class="command">find exec grep</span>에 대해 알아봤습니다. :)</p>
 </div>
 				</article>

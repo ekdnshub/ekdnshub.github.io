@@ -52,31 +52,31 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>음, 오라클 날짜 포맷 중 가끔 쓰이는 것들을 정리해 봅니다. 아래처럼 쓰면 월/주/일로 필요한 값을 사용할 수 있습니다.</p>
-<h5>현재 주간<span class="refer">current week</span>의 첫번째 날</h5>
+<h5 id="현재_주간<span_class="refer">current_week</span>의_첫번째_날">현재 주간<span class="refer">current week</span>의 첫번째 날</h5>
 <pre class="prettyprint lang-sql">
 TRUNC(sysdate,'IW')
 </pre>
-<h5>이전 주간<span class="refer">prior week</span>의 첫번째 날</h5>
+<h5 id="이전_주간<span_class="refer">prior_week</span>의_첫번째_날">이전 주간<span class="refer">prior week</span>의 첫번째 날</h5>
 <pre class="prettyprint lang-sql">
 TRUNC(sysdate-7,'IW')
 </pre>
-<h5>다음 주간<span class="refer">next week</span>의 첫번째 날</h5>
+<h5 id="다음_주간<span_class="refer">next_week</span>의_첫번째_날">다음 주간<span class="refer">next week</span>의 첫번째 날</h5>
 <pre class="prettyprint lang-sql">
 NEXT_DAY(sysdate,'MONDAY')
 </pre>
-<h5>현재 달<span class="refer">current month</span>의 첫번째 날</h5>
+<h5 id="현재_달<span_class="refer">current_month</span>의_첫번째_날">현재 달<span class="refer">current month</span>의 첫번째 날</h5>
 <pre class="prettyprint lang-sql">
 TRUNC(sysdate,'MM')
 </pre>
-<h5>이전 달<span class="refer">prior month</span>의 첫번째 날</h5>
+<h5 id="이전_달<span_class="refer">prior_month</span>의_첫번째_날">이전 달<span class="refer">prior month</span>의 첫번째 날</h5>
 <pre class="prettyprint lang-sql">
 ADD_MONTHS( TRUNC(sysdate,'MM'), -1 )
 </pre>
-<h5>다음 달<span class="refer">next month</span>의 첫번째 날</h5>
+<h5 id="다음_달<span_class="refer">next_month</span>의_첫번째_날">다음 달<span class="refer">next month</span>의 첫번째 날</h5>
 <pre class="prettyprint lang-sql">
 ADD_MONTHS( TRUNC(sysdate,'MM'), 1 )
 </pre>
-<h5>현재 달<span class="refer">current month</span>의 마지막 날</h5>
+<h5 id="현재_달<span_class="refer">current_month</span>의_마지막_날">현재 달<span class="refer">current month</span>의 마지막 날</h5>
 <pre class="prettyprint lang-sql">
 LAST_DAY(sysdate)
 </pre>

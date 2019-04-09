@@ -52,7 +52,7 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>저번 포스팅에서 얘기했던대로 이번엔 Runnable 인터페이스를 이용한 쓰레드 작성 방법에 대해 알아고보자 합니다.</p>
-<h2>Runnable 인터페이스(Runnable Interface)</h2>
+<h2 id="Runnable_인터페이스(Runnable_Interface)">Runnable 인터페이스(Runnable Interface)</h2>
 <p>기본적인 Runnable 인터페이스의 사용 방법은 다음과 같습니다.</p>
 <pre class="prettyprint lang-java">
 /* Using Runnable Interface */
@@ -78,7 +78,7 @@ class foo implements Runnable{
 	public void run() {}
 }
 </pre>
-<h2>Simple Runnable Program</h2>
+<h2 id="Simple_Runnable_Program">Simple Runnable Program</h2>
 <p>이번 포스팅에서는 상태를 체크할 index 변수를 전역 변수가 아닌 Runnable 인터페이스를 구현할 클래스<span class="refer">이하 ConcreteRunnable</span>에서 사용하도록 변경해보겠습니다. 코드를 봅시다.</p>
 <pre class="prettyprint lang-java">
 /* Runnable 쓰레드 프로그램 */
@@ -154,10 +154,10 @@ current index value: 10
 End main method.
 </pre>
 <p>실제로 상기의 코드를 실무에서 사용할 일은 없을테지만 Runnable 인터페이스를 사용하는 방법에 대해선 괜찮을거라 생각합니다. (…)</p>
-<h2>Thread vs Runnable</h2>
+<h2 id="Thread_vs_Runnable">Thread vs Runnable</h2>
 <p>쓰레드를 직접 상속 받는 방법과 이번 포스팅에서 설명한 것처럼 Runnable 인터페이스를 구현하는 방법의 차이점은 많이 있습니다. 하지만 가장 큰 것은 Thread를 상속<span class="refer">extends</span> 받게 되면 상속 받은 클래스는 다른 클래스를 상속 받을 수가 없지만 Runnable은 인터페이스이기 때문에 구현<span class="refer">implements</span>만 하면 되고 다른 필요한 클래스를 상속 받을 수 있다는 것입니다.</p>
 <p>언뜻 봐서는 Runnable 인터페이스를 구현하는 것이 어떠한 상황에서든 합당해 보이나 프로그래밍은 언제나 그렇듯이 일방적인 해답만 있는건 아니니 사용 프로그램의 케이스를 따져서 Thread를 상속 받을지 Runnable 인터페이스를 구현할지 결정하시기 바랍니다. :)</p>
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p>이렇게 자바에서 Thread를 만드는 방법 2가지를 알아봤습니다. 각각 <span class="command">Thread 상속</span>, <span class="command">Runnable 구현</span>입니다. 각자 사용처에 따라 입맛대로 쓸 수 있을때까지 열심히 코딩합시다. :)</p>
 </div>
 				</article>

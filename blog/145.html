@@ -52,7 +52,7 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>jQuery에서 이벤트를 바인드 하는 방법은 여러가지가 있지만 이번엔 <span class="command">on()</span> 함수를 이용해서 이벤트를 바인드하는 것을 알아보자.</p>
-<h2>on Function</h2>
+<h2 id="on_Function">on Function</h2>
 <p>jQuery on 함수는 1.7버전부터 추가 되었다. 앞으로 이벤트를 바인드 하려면 on 함수를 쓰는것이 좋아보인다. 기존에 있던 bind, live, delegate등의 함수들이 없어질 예정이니 on을 쓰자. 물론 click 함수는 on 함수의 숏컷 모양으로 남아있다(기존대로 사용하자).</p>
 <p>on 함수의 종료는 <span class="command">off()</span> 함수가 있다. 이 외에도 한번만 실행하고 삭제되는 <span class="command">one()</span> 함수도 있으니 추후에 살펴보면 좋을 것 같다.</p>
 <p>on 함수는 기본적으로 다음처럼 작성한다.</p>
@@ -99,7 +99,7 @@ $("#test2").click(function(){
 	$("pre").on("click", func2);
 });
 </script>
-<h2>심화 사용 팁</h2>
+<h2 id="심화_사용_팁">심화 사용 팁</h2>
 <p>요소들이 매우 많은 ul 객체의 li 요소에 on 함수를 바인드 하려면 어떻게 하는것이 좋을까?</p>
 <p>일단 HTML 코드는 아래와 같다고 가정한다,</p>
 <pre class="prettyprint lang-html">
@@ -128,7 +128,7 @@ $("ul").on("click", "li", function(){
 
 </pre>
 <p>위 같은 코드는 ul 태그 하나에 이벤트를 붙인다. 하지만 하위 li 요소에 대해 이벤트를 지정할 수 있다. 따라서 하나의 이벤트 바인딩으로 깔끔한 처리가 가능한 것이다.</p>
-<h2>더욱 많은 사용법</h2>
+<h2 id="더욱_많은_사용법">더욱 많은 사용법</h2>
 <p>on 함수의 더욱 자세한 사용법은 <a href="http://api.jquery.com/on/">http://api.jquery.com/on</a>에서 확인할 수 있다.</p>
 </div>
 				</article>

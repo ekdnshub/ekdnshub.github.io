@@ -52,7 +52,7 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>Hbase의 데이터 모델을 알아보는 포스팅입니다. 용어와 주요 특징은 <a href="http://hbase.apache.org/book.html#datamodel">Data Model</a>에서 참조했습니다.</p>
-<h2>Hbase Data Model</h2>
+<h2 id="Hbase_Data_Model">Hbase Data Model</h2>
 <p>Hbase는 RDB와 다른 데이터 구조를 갖습니다. 셀(Cell), 컬럼(Column), 컬럼패밀리(ColumnFamily), 로우(Row), 테이블(Table)이 그것입니다. 물론 타임스탬프(TimeStamp)도 존재합니다.</p>
 <p>이들은 각자의 역할을 충실히 수행하며 Hbase의 근간을 이루고 있습니다.</p>
 <pre class="console">
@@ -60,27 +60,27 @@
 </pre>
 <p>간단하게 Cell의 값을 읽기 위한 람다식을 만들어봤습니다. 위와 같은 방식으로 값에 접근을 할 수 있습니다. 전체적인 구조를 입체적으로 볼 순 없지만 대략적인 감을 잡는것엔 도움이 된다고 생각합니다.</p>
 <p>이제 하나씩 살펴봅시다.</p>
-<h3>Table</h3>
+<h3 id="Table">Table</h3>
 <p>테이블은 여러개의 로우(Row)들로 구성 되어 있습니다.</p>
-<h3>Row</h3>
+<h3 id="Row">Row</h3>
 <p>로우는 로우 키(Row Key)와 하나 또는 여러 개의 컬럼들로 구성 되어 있습니다. 로우들은 특징적으로 로우 키를 이용해 <strong>문자 정렬</strong>을 합니다. 따라서 로우 키를 디자인 하는 것이 매우 중요합니다.</p>
 <pre class="console">
 Row = Row Key + Column + [Column...]
 </pre>
-<h3>Column Family</h3>
+<h3 id="Column_Family">Column Family</h3>
 <p>컬럼패밀리는 컬럼들을 물리적으로 배치한 것입니다. 이것은 성능 향상을 위해서이기도 합니다. 각 컬럼패밀리들은 스토리지 프로퍼티(storage properties)를 가집니다. 예를 들자면 메모리의 캐쉬된 값이나 데이터가 압축이 되어 있는지 또는 로우 키들이 인코드(encoded)되었는지 등등이죠. <strong>테이블 내에서 각각의 로우들은 같은 컬럼 패밀리들을 가집니다.</strong></p>
-<h3>Column</h3>
+<h3 id="Column">Column</h3>
 <p>컬럼은 컬럼패밀리와 컬럼 퀄리파이어(Column Qualifier)로 구성되어 있습니다. 컬럼 퀄리파이어란 <span class="command">:</span> 문자로 구분됩니다.</p>
-<h3>Column Qualifier</h3>
+<h3 id="Column_Qualifier">Column Qualifier</h3>
 <p>컬럼 퀄리파이어는 데이터 인덱스를 제공하기 위해 컬럼패밀리에 더해집니다. 예를 들어 <span class="command">content</span>라는 컬럼패밀리가 있다면 컬럼 퀄리파이어는 <span class="command">content:html</span>쯤 될겁니다. 다른 것으로 <span class="command">content:pdf</span>도 될 수 있겠네요. 컬럼패밀리는 테이블 생성시 고정됩니다. 컬럼 퀄리파이어는 가변적이고 로우들마다 크기는 다를 수 있습니다.</p>
-<h3>Cell</h3>
+<h3 id="Cell">Cell</h3>
 <p>셀은 로우, 컬럼패밀리, 컬럼 퀄리파이어의 조합입니다. 내부적으로 값(value)과 타임스탬프(Timestamp)를 가지고 있습니다. 타임스탬프는 값의 버전(version)을 표현합니다.</p>
-<h3>Timestamp</h3>
+<h3 id="Timestamp">Timestamp</h3>
 <p>타임스탬프는 값(value)과 함께 쓰여집니다. 그리고 타임스탬프는 값의 버전(version)을 위해 식별자로도 활용합니다. 기본적으로 타임스탬프는 데이터가 쓰여질 때 리전서버(RegionServer)상의 시간을 기록합니다. 그러나 개별 설정으로 타임스탬프에 쓰여질 값을 다르게 할수도 있습니다.</p>
-<h2>Summary</h2>
+<h2 id="Summary">Summary</h2>
 <p>지금까지 알아본 것으로 만든 이미지입니다. 이미지 첨부를 좋아하는 편은 아니지만 이번엔 필요할 것 같아서 삽입했습니다.</p>
 <img src="/blog/images/184.png">
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p>간단하게 Hbase 데이터 모델에 대해 알아봤습니다. 잘못된 점이 있다면 댓글 요청드립니다. :)</p>
 </div>
 				</article>

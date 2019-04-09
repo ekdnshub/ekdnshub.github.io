@@ -51,9 +51,9 @@
                     <h1 id="content_title">프록시 패턴(Proxy Pattern)</h1>
 					<!-- 본문 -->
 					<div id="content">
-<h2>프록시 패턴 정의</h2>
+<h2 id="프록시_패턴_정의">프록시 패턴 정의</h2>
 <p>실제 기능을 수행하는 객체<span class="refer">Real Object</span> 대신 가상의 객체<span class="refer">Proxy Object</span>를 사용해 로직의 흐름을 제어하는 디자인 패턴입니다.</p>
-<h2>프록시 패턴 특징</h2>
+<h2 id="프록시_패턴_특징">프록시 패턴 특징</h2>
 <div class="tab">
 <ul>
 <li>원래 하려던 기능을 수행하며 그외의 부가적인 작업(로깅, 인증, 네트워크 통신 등)을 수행하기에 좋습니다.</li>
@@ -61,7 +61,7 @@
 <li>사용자 입장에서는 프록시 객체나 실제 객체나 사용법은 유사하므로 사용성이 좋습니다.</li>
 </ul>
 </div>
-<h2>프록시 패턴의 간단한 클래스 다이어그램</h2>
+<h2 id="프록시_패턴의_간단한_클래스_다이어그램">프록시 패턴의 간단한 클래스 다이어그램</h2>
 <pre class="diagram">
             |---------------|     사용    |------|
             |Inteface       |<──────|Client|
@@ -84,9 +84,9 @@
 <li>Proxy Object는 메서드 수행시 실제 객체(Real Object)의 메서드에 위임합니다.</li>
 </ul>
 </div>
-<h2>프록시의 종류</h2>
+<h2 id="프록시의_종류">프록시의 종류</h2>
 <p>프록시 패턴에서 사용할 수 있는 프록시의 종류는 다양한데요. 이 포스팅에서는 가상 프록시<span class="refer">Virtual Proxy</span>와 보호 프록시<span class="refer">Protection Proxy</span>에 대해서 살펴봅니다.</p>
-<h2>가상 프록시(Virtual Proxy)</h2>
+<h2 id="가상_프록시(Virtual_Proxy)">가상 프록시(Virtual Proxy)</h2>
 <p>가상 프록시는 실제 객체의 사용 시점을 제어할 수 있습니다. 예를 들어 늦은 초기화<span class="refer">Lazy Initialisation</span>를 프록시를 사용해 구현해 봅시다.</p>
 <p>가령 아래처럼 텍스트 파일을 읽는 인터페이스가 있다고 가정합시다.</p>
 <pre class="prettyprint lang-java">
@@ -224,7 +224,7 @@ class TextFileProvider {
 |---------------|         |---------------|
 </pre>
 <p>앞서 설명드렸던 프록시 패턴의 간단한 클래스 다이어그램과 동일한 것을 볼 수 있습니다.</p>
-<h2>보호 프록시(Protection Proxy)</h2>
+<h2 id="보호_프록시(Protection_Proxy)">보호 프록시(Protection Proxy)</h2>
 <p>보호 프록시는 프록시 객체가 사용자의 실제 객체에 대한 접근을 제어합니다.</p>
 <p>이번엔 새로운 시나리오입니다.</p>
 <div class="green">
@@ -419,7 +419,7 @@ Display Staff 'Dark Kim' personnel information.
 Display Staff 'Pal Yoo' personnel information.
 </pre>
 <p>이제 남은일은 프로젝트내 곳곳에 산재된 코드에 프록시 객체를 사용하게끔 수정하는겁니다.</p>
-<h2>마무리</h2>
+<h2 id="마무리">마무리</h2>
 <p>이번에 예제로 사용한 보호 프록시 코드들로 그림을 한번 그려보시는건 어떨까요? 처음에 말씀드렸던 클래스 다이어그램과 유사하게 나올겁니다. :)</p>
 <p>이번 패턴 시나리오들이 뭔가 아귀가 잘 안맞는 것 같은데 그냥 올렸습니다. 양해해주세요 :q</p>
 <p><span class="refer">상기에 존재하는 예제 코드들은 Java 8 기반으로 작성 되었습니다.</span></p>

@@ -51,9 +51,9 @@
                     <h1 id="content_title">자바 옵셔널 (Java Optional)</h1>
 					<!-- 본문 -->
 					<div id="content">
-<h2>개요</h2>
+<h2 id="개요">개요</h2>
 <p>자바 옵셔널<span class="refer">Java Optional</span>에 대해 알아보고 자바 8부터 시작해 9, 10까지 추가된 옵셔널 메서드를 소개합니다.</p>
-<h2>Java 8 Optional</h2>
+<h2 id="Java_8_Optional">Java 8 Optional</h2>
 <p>자바 옵셔널은 자바 8에서 최초로 도입 되었습니다. 도입이 된 이유는 너무 명확합니다. 바로 <span class="command">null</span> 때문입니다. <span class="command">null</span> 은 자바 프로그래머들에게 편안함보단 불편함을 더 많이 제공하게 되었습니다. 간단한 코드를 통해 알아볼까요?</p>
 <pre class="prettyprint lang-java">
 class Person {
@@ -135,9 +135,9 @@ void main() {
 </pre>
 <p>이렇게 다시 한번 요구 조건을 만족시켰습니다. 코드가 왜인지 모르겠지만 가독성이 좋아진거 같지 않나요?</p>
 <p>간단한 예제를 보았으니 지금부터 옵셔널에서 제공하는 메서드들을 살펴봅니다.</p>
-<h3>Optional 객체 생성</h3>
+<h3 id="Optional_객체_생성">Optional 객체 생성</h3>
 <p><span class="command">Optional</span> 객체를 생성하기 위해서는 아래와 같은 메서드들을 사용해야 합니다. 즉, 시작 연산자라고 보시면 됩니다.</p>
-<h4>Optional.of</h4>
+<h4 id="Optional.of">Optional.of</h4>
 <p>value가 <span class="command">null</span> 인 경우 <span class="command">NPE</span> 예외를 던집니다. 반드시 값이 있어야 하는 객체인 경우 해당 메서드를 사용하면 됩니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -145,7 +145,7 @@ public static &lt;T&gt; Optional&lt;T&gt; of(T value);
 // 예제
 Optional&lt;String&gt; opt = Optional.of("result");
 </pre>
-<h4>Optional.ofNullable</h4>
+<h4 id="Optional.ofNullable">Optional.ofNullable</h4>
 <p>value가 <span class="command">null</span> 인 경우 비어있는 <span class="command">Optional</span> 을 반환합니다. 값이 <span class="command">null</span> 일수도 있는 것은 해당 메서드를 사용하면 됩니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -153,7 +153,7 @@ public static &lt;T&gt; Optional&lt;T&gt; ofNullable(T value);
 // 예제
 Optional&lt;String&gt; opt = Optional.ofNullable(null);
 </pre>
-<h4>Optional.empty</h4>
+<h4 id="Optional.empty">Optional.empty</h4>
 <p>비어있는 옵셔널 객체를 생성합니다. 조건에 따라 분기를 태워야하고 반환할 값이 없는 경우에도 사용됩니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -183,9 +183,9 @@ Optional&lt;String&gt; emptyOpt = Optional.empty();
 ----------
 </pre>
 </div>
-<h3>Optional 중간 처리</h3>
+<h3 id="Optional_중간_처리">Optional 중간 처리</h3>
 <p>옵셔널 객체를 생성한 후 사용 가능한 메서드입니다. 해당 메서드들은 다시 옵셔널을 반환하므로 메서드 체이닝을 통해 원하는 로직을 반복 삽입할 수 있습니다.</p>
-<h4>filter</h4>
+<h4 id="filter">filter</h4>
 <p>predicate 값이 참이면 해당 필터를 통과시키고 거짓이면 통과 되지 않습니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -194,7 +194,7 @@ public Optional&lt;T&gt; filter(Predicate&lt;? super T&gt; predicate);
 Optional.of("True").filter((val) -&gt; "True".eqauls(val)).orElse("NO DATA"); // "True"
 Optional.of("False").filter((val) -&gt; "True".eqauls(val)).orElse("NO DATA"); // "NO DATA"
 </pre>
-<h4>map</h4>
+<h4 id="map">map</h4>
 <p>mapper 함수를 통해 입력값을 다른 값으로 변환하는 메서드입니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -202,7 +202,7 @@ public&lt;U&gt; Optional&lt;U&gt; map(Function&lt;? super T, ? extends U&gt; map
 // 예제
 Integer test = Optional.of("1").map(Integer::valueOf).orElseThrow(NoSuchElementException::new); // string to integer
 </pre>
-<h4>flatMap</h4>
+<h4 id="flatMap">flatMap</h4>
 <p>mapper 함수를 통해 입력값을 다른 값으로 변환하는 메서드입니다. <span class="command">map()</span> 메서드와 다른점은 메서드 시그니처의 매개변수입니다. <span class="command">map()</span> 에서는 제너릭으로 <span class="command">U</span>를 정의했지만 <span class="command">flatMap()</span> 에서는 제너릭으로 <span class="command">Optional(U)</span>를 정의했습니다.</p>
 <p>이것이 뜻하는 바는 <span class="command">flatMap()</span> 메서드가 반환해야 하는 값은 <span class="command">Optional</span> 이라는것입니다. 아래의 예제를 보세요.</p>
 <pre class="prettyprint lang-java">
@@ -214,9 +214,9 @@ String result = Optional.of("result")
         .get();
 System.out.println(result); // print 'good'
 </pre>
-<h3>Optional 종단 처리</h3>
+<h3 id="Optional_종단_처리">Optional 종단 처리</h3>
 <p>종단 처리라는 것은 옵셔널 객체의 체이닝을 끝낸다는 것입니다.</p>
-<h4>ifPresent</h4>
+<h4 id="ifPresent">ifPresent</h4>
 <p>최종적으로 연산을 끝낸 후 값이 비어있지 않다면 입력값으로 주어집니다. 이 값을 가지고 원하는 작업을 수행하면 됩니다. 하지만 중간 연산을 하다 비어있는 옵셔널 객체를 받게 되면 <span class="command">.ifPresent()</span> 메서드의 내용을 수행하지 않습니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -230,7 +230,7 @@ Optional.ofNullable(null).ifPresent((value) -&gt; {
 	// nothing to do
 });
 </pre>
-<h4>isPresent</h4>
+<h4 id="isPresent">isPresent</h4>
 <p>최종적으로 연산을 끝낸 후 객체가 존재하는지 여부를 판별합니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -239,7 +239,7 @@ public boolean isPresent();
 Optional.ofNullable("test").isPresent(); // true
 Optional.ofNullable("test").filter((val) -&gt; "result".eqauls(val)).isPresent(); // false
 </pre>
-<h4>get</h4>
+<h4 id="get">get</h4>
 <p>최종적으로 연산을 끝낸 후 객체를 꺼냅니다. 이 때, 비어있는 옵셔널 객체였다면 예외가 발생합니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -248,7 +248,7 @@ public T get();
 Optional.of("test").get(); // 'test'
 Optional.ofNullable(null).get(); // NoSuchElementException!
 </pre>
-<h4>orElse</h4>
+<h4 id="orElse">orElse</h4>
 <p>최종적으로 연산을 끝낸 후에도 옵셔널 객체가 비어있다면 기본값으로 제공할 객체를 지정합니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -257,7 +257,7 @@ public T orElse(T other);
 String result = Optional.ofNullable(null).orElse("default");
 System.out.println(result); // print 'default'
 </pre>
-<h4>orElseGet</h4>
+<h4 id="orElseGet">orElseGet</h4>
 <p>최종적으로 연산을 끝낸 후에도 옵셔널 객체가 비어있다면 기본값으로 제공할 공급자 함수<span class="refer">Supplier</span>를 지정합니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -266,7 +266,7 @@ public T orElseGet(Supplier&lt;? extends T&gt; other);
 String result = Optional.ofNullable("input").filter("test"::equals).orElseGet(() -&gt; "default");
 System.out.println(result); // print 'default'
 </pre>
-<h4>orElseThrow</h4>
+<h4 id="orElseThrow">orElseThrow</h4>
 <p>최종적으로 연산을 끝낸 후에도 옵셔널 객체가 비어있다면 예외 공급자 함수를 통해 예외를 발생시킵니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -306,9 +306,9 @@ if (!data.isEmpty()) {
 }
 </pre>
 </div>
-<h2>Java 9</h2>
+<h2 id="Java_9">Java 9</h2>
 <p>자바 9에 와서도 몇가지 추가된 옵셔널 메서드들이 있습니다. 자바 8 옵셔널에서 조금 부족했던 부분을 보완하는 메서드들입니다.</p>
-<h3>or</h3>
+<h3 id="or">or</h3>
 <p>중간 처리 메서드로 기본값을 제공할 수 있는 공급자 함수를 정의할 수 있습니다. 기존에 제공중인 <span class="command">.orElseGet()</span>과 유사하지만 다른점은 중간에 체이닝을 통해 우선 순위를 결정할 수 있다는 것입니다. 물론 <span class="command">.or()</span> 연산 중에 비어있는 옵셔널이 된다면 다음 <span class="command">.or()</span> 메서드로 진행하게 됩니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -321,7 +321,7 @@ String result = Optional.ofNullable("test")
         .orElse("final");
 System.out.println(result); // print 'second'
 </pre>
-<h3>.ifPresentOrElse</h3>
+<h3 id=".ifPresentOrElse">.ifPresentOrElse</h3>
 <p><span class="command">.ifPresentOrElse()</span>는 종단 처리 메서드입니다. <span class="command">.ifPresent</span>메서드와 유사해보이지만 한가지 매개변수를 더 받을 수 있습니다. 두번째 매개변수인 <span class="command">emptyAction</span>인데요. 첫번째 매개변수인 <span class="command">action</span>은 유효한 객체를 받을 경우 실행하고, 두번째 매개변수인 <span class="command">emptyAction</span>은 유효한 객체를 받지 못한 경우 실행합니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -332,7 +332,7 @@ Optional.ofNullable("test")
 Optional.ofNullable(null)
     .ifPresentOrElse(value -&gt; System.out.println(value), () -&gt; System.out.println("null")); // print 'null'
 </pre>
-<h3>.stream</h3>
+<h3 id=".stream">.stream</h3>
 <p><span class="command">.stream()</span> 메서드는 중간 처리 연산자로 기존 자바 8에서 옵셔널 객체가 바로 스트림 객체로 전환 되지 않아 불편했던 부분을 해소시켜줍니다. 아래의 예제는 리스트에서 일부 값만 추출하고 스트림으로 변환한 뒤 다시 리스트로 수집하는 과정을 보여줍니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -346,9 +346,9 @@ List&lt;String&gt; result = List.of(1, 2, 3, 4)
     .collect(Collectors.toList());
 System.out.println(result); // print '[2, 4]'
 </pre>
-<h2>Java 10</h2>
+<h2 id="Java_10">Java 10</h2>
 <p>자바 10에서도 하나의 메서드가 추가 되었습니다.</p>
-<h3>orElseThrow</h3>
+<h3 id="orElseThrow">orElseThrow</h3>
 <p>매개변수가 필요없는 예외 메서드를 추가했습니다. 이 메서드를 사용하면 기존에는 아래처럼 호출해야 했던 코드를 간결하게 해줍니다.</p>
 <pre class="prettyprint lang-java">
 // 메서드 시그니처
@@ -358,9 +358,9 @@ Optional.ofNullable(something).orElseThrow(NoSuchElementException::new);
 // 예제 (자바 10)
 Optional.ofNullable(something).orElseThrow();
 </pre>
-<h2>그외 Optional 클래스</h2>
+<h2 id="그외_Optional_클래스">그외 Optional 클래스</h2>
 <p>Optional 클래스는 기본형을 제외하고 <span class="command">OptionalInt</span>, <span class="command">OptionalLong</span>, <span class="command">OptionalDouble</span> 클래스를 별도로 제공하고 있습니다. 사용법은 기본형과 대동소이하니 직접 메서드 시그니처를 보면서 이해하는 것도 좋을 것 같네요.</p>
-<h2>마무리</h2>
+<h2 id="마무리">마무리</h2>
 <p>지금까지 자바 옵셔널에 대해서 알아봤습니다. 한마디 덧붙이고 싶은것은 <i>옵셔널이 있으니 if 분기문을 전부 Optional로 바꿔야지!</i> 같은 생각을 할 수도 있을것 같아요. 하지만 <span class="command">if</span> 분기문도 적절하게 필요한 곳에는 삽입 하는것이 오히려 코드 가독성이 더 좋아질 수 있다고 생각합니다.</p>
 <p>반드시 옵셔널로 해야한다는 생각보다는 무엇이든 적절한 위치에 적절한 코드로 넣어줍시다!</p>
 <p>잘못된 점이 있으면 편하게 피드백 부탁드려요. :)</p>

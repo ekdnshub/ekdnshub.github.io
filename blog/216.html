@@ -51,10 +51,10 @@
                     <h1 id="content_title">자바 어노테이션(Java Annotations)</h1>
 					<!-- 본문 -->
 					<div id="content">
-<h2>Annotation</h2>
+<h2 id="Annotation">Annotation</h2>
 <p>어노테이션<span class="refer">Annontion</span>은 잘만 쓰면 정말 유용한 자바의 구문입니다. 기본적인 종류는 몇가지에 한정 되지만 본인의 입맛대로 커스텀 어노테이션<span class="refer">Custom Annotation</span>도 만들어낼 수 있습니다. 따라서 어노테이션의 종류는 무궁무진하게 만들어 낼 수 있습니다.</p>
 <p>어노테이션은 본질적인 목적은 <strong>소스 코드에 메타데이터를 표현</strong>하는 것입니다. 단순히 부가적인 표현뿐만 아니라 리플렉션<span class="refer">reflection</span>을 이용하면 어노테이션 지정만으로도 원하는 클래스를 주입한다는지 하는 것이 가능합니다.</p>
-<h2>Bulit-in Annotation</h2>
+<h2 id="Bulit-in_Annotation">Bulit-in Annotation</h2>
 <p>자바에서는 기본적으로 제공하는 어노테이션들이 존재합니다.</p>
 <div class="none">
 <ul>
@@ -79,7 +79,7 @@ Annotations applied to Java code:
 <cite><a href="https://en.wikipedia.org/wiki/Java_annotation">https://en.wikipedia.org/wiki/Java_annotation</a></cite>
 </blockquote>
 </div>
-<h2>Meta Annotations</h2>
+<h2 id="Meta_Annotations">Meta Annotations</h2>
 <p>위에서 본 기본 어노테이션 외에도 메타 어노테이션<span class="refer">Meta Annotation</span>들이 있습니다. 이 메타 어노테이션을 이용해 커스텀 어노테이션을 만들어낼 수 있습니다.</p>
 <div class="none">
 <ul>
@@ -105,7 +105,7 @@ Annotations applied to other annotations (also known as "Meta Annotations"):
 <cite><a href="https://en.wikipedia.org/wiki/Java_annotation">https://en.wikipedia.org/wiki/Java_annotation</a></cite>
 </blockquote>
 </div>
-<h2>Declare Custom Annontation</h2>
+<h2 id="Declare_Custom_Annontation">Declare Custom Annontation</h2>
 <p>자바에서 커스텀 어노테이션을 선언하는 방법은 간단합니다. 다음처럼만 지정해주면 됩니다.</p>
 <pre class="prettyprint lang-java">
 public @interface MyAnnonation {}
@@ -144,7 +144,7 @@ public @interface MyAnnotation {
 }
 </pre>
 <p>설명이 필요할 것 같은 부분은 주석으로 대체했습니다.</p>
-<h2>Simple Example</h2>
+<h2 id="Simple_Example">Simple Example</h2>
 <p>다음 예제는 <span class="command">@StringInjector</span>라는 간단한 커스텀 어노테이션을 만듭니다. 이 어노테이션은 멤버 변수에 선언시 해당 멤버 변수 타입이 <span class="command">String</span>이라면 어노테이션에 정의된 값을 멤버 변수에 주입합니다.</p>
 <p>아래 코드는 어노테이션을 선언하는 것을 보여줍니다.</p>
 <pre class="prettyprint lang-java">
@@ -244,7 +244,7 @@ public class AnnotationDemo {
     }
 }
 </pre>
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p>이제 남발하지 않는 한도 내에서 적당한 커스텀 어노테이션을 만들고 활용해봅시다. :)</p>
 </div>
 				</article>

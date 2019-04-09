@@ -52,15 +52,15 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>스칼라에서 파일을 읽어 정규 표현식을 적용해 봤습니다. 로그 파일등을 분석할때 간단히 사용할 수 있을 정도로 숙련시켜 두면 좋을 것 같아요.</p>
-<h4>정규 표현식 사용</h4>
+<h4 id="정규_표현식_사용">정규 표현식 사용</h4>
 <p><strong>급하게 사용법만 알아야겠다고 한다면 해당 절만 읽으시면 됩니다.</strong> 간략하게 파일을 읽어서 해당 라인에서 정규 표현식을 이용해 케이스별로 값을 출력하는 예제입니다.</p>
-<h5>샘플 파일</h5>
+<h5 id="샘플_파일">샘플 파일</h5>
 <p>예제를 실행하기 위한 샘플 내용입니다. 내용을 담은 파일은 test.txt라고 지었습니다.</p>
 <pre class="console">
 http://blog.jdm.kr\n
 이 라인은 문자열만 있습니다.
 </pre>
-<h5>실행 코드</h5>
+<h5 id="실행_코드">실행 코드</h5>
 <pre class="prettyprint lang-scala">
 import scala.io.Source
 
@@ -79,13 +79,13 @@ object rexTest {
     }
 }
 </pre>
-<h5>실행 결과</h5>
+<h5 id="실행_결과">실행 결과</h5>
 <p>위의 코드를 실행한 결과는 다음과 같습니다.</p>
 <pre class="console">
 URL
 Not Found Regular Expression.
 </pre>
-<h4>코드 분석</h4>
+<h4 id="코드_분석">코드 분석</h4>
 <p>이제부터 위에서 사용된 실행 코드를 하나씩 뜯어보고자 합니다.</p>
 <pre class="prettyprint lang-scala">
 for(line &lt;- Source.fromFile("test.txt","euc-kr").getLines()){...}

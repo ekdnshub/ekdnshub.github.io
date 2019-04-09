@@ -52,7 +52,7 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>이번 포스팅은 <span class="command">commons-lang3</span> 패키지에 포함되어 있는 <span class="command">ToStringBuilder</span> 클래스에 대해 알아봅니다.</p>
-<h2>Why use ToStringBuilder?</h2>
+<h2 id="Why_use_ToStringBuilder?">Why use ToStringBuilder?</h2>
 <p><span class="command">ToStringBuilder</span>를 설명하기 전에 한가지 예제를 먼저 봅시다.</p>
 <p>우선 우리들이 특정 클래스를 만들었다고 가정합니다. 예를 들면 다음과 같은 클래스입니다.</p>
 <pre class="prettyprint lang-java">
@@ -164,7 +164,7 @@ public class Duck {
 </pre>
 <p>변경을 한것은 좋은데 문제가 있습니다. <span class="command">.toString()</span> 메소드에는 멤버 변수 <span class="command">fly</span>에 대한 값이 출력 되지 않는겁니다. 물론, 멤버 변수가 추가 될때마다 <span class="command">String.format()</span>을 사용해 <span class="command">.toString()</span> 에서 반환할 문자열을 바꿔주면 됩니다. 하지만 이것은 생각보다 번거로운 일이죠.</p>
 <p>이제 <span class="command">ToStringBuilder</span> 클래스를 사용해 볼 떄입니다.</p>
-<h2>How to use ToStringBuilder?</h2>
+<h2 id="How_to_use_ToStringBuilder?">How to use ToStringBuilder?</h2>
 <p><span class="command">ToStringBuilder</span>를 사용하기 위해서는 다음과 같은 의존성을 선언해 줘야 합니다. Maven 기준이긴 합니다만 별도의 패키지 저장소를 사용하지 않는다면 직접 jar 파일을 다운로드 받아서 사용하세요.</p>
 <pre class="prettyprint lang-xml">
 &lt;dependency&gt;
@@ -197,7 +197,7 @@ public class ToStringBuilderTest {
 {"name":"bob","age":1,"fly":true}
 </pre>
 <p>이젠 멤버 변수를 추가 하더라도 <span class="command">.toString()</span> 메소드에서 누락되는 일은 없을겁니다. <span class="command">ToStringBuilder</span> 클래스의 사용법은 이정도면 충분하게 활용할 수 있을것이라 봅니다.</p>
-<h2>ToStringBuilder.reflectionToString() Argument.</h2>
+<h2 id="ToStringBuilder.reflectionToString()_Argument.">ToStringBuilder.reflectionToString() Argument.</h2>
 <p>앞서 봤던 예제 코드에서는 <span class="command">Json</span> 형태의 문자열로 객체 정보를 반환했습니다. 이것이 가능한 이유는 <span class="command">.reflectionToString()</span> 메소드의 파라미터에 <span class="command">ToStringStyle.JSON_STYLE</span> 을 선언했기 때문입니다. 센스 있으신 분들은 이걸 보자마자 다른 형태도 제공하겠구나! 라고 생각하실텐데 맞습니다.</p>
 <p><span class="command">ToStringBuilder</span> 에서는 다양한 형태의 문자열 템플릿을 제공하고 있습니다. 다음처럼 설정할 수 있어요.</p>
 <pre class="prettyprint lang-java">
@@ -210,7 +210,7 @@ ToStringStyle.NO_CLASS_NAME_STYLE
 ToStringStyle.JSON_STYLE
 </pre>
 <p>다양하게 테스트 해보시고 취향(?)에 맞는 것을 사용하시면 됩니다.</p>
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p><span class="command">ToStringBuilder</span> 클래스를 활용해서 반복 작업에서 탈출합시다! :D</p>
 </div>
 				</article>

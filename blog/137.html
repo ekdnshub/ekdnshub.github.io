@@ -52,7 +52,7 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>Memcached. 메모리 캐싱 시스템으로 유명합니다. 이 포스트는 Memcached가 무엇인지, 어떻게 설치하고 사용하는지 알아봅니다.</p>
-<h3>Memcached 정의</h3>
+<h3 id="Memcached_정의">Memcached 정의</h3>
 <p>Memcached는 분산 메모리 캐시 시스템입니다. RAM에 데이터 및 오브젝트를 캐시함으로써 데이터베이스 및 API에서 읽어와야 하는 횟수를 줄일 수 있습니다.</p>
 <p>또한 Memached는 무료면서 오픈 소스 소프트웨어입니다. 라이센스는 BSD 라이센스를 따르고 있어요. 유닉스 같은 OS에서 동작하면서 윈도우에서도 사용가능 합니다.</p>
 <blockquote>
@@ -62,9 +62,9 @@
 <p>The size of this hash table is often very large. It is limited by available memory across a large number of servers in a data centre. Where high volume, wide audience web publishing requires it, this may stretch to many GB. Memcached can be equally valuable for situations where either the number of requests for content is high, or the cost of generating a particular piece of content is high.</p>
 <cite><a href="http://en.wikipedia.org/wiki/Memcached">Wikipedia - Memcached</a></cite>
 </blockquote>
-<h3>Memcached 설치</h3>
-<h4>CentOS</h4>
-<h5>yum 패키지 관리자</h5>
+<h3 id="Memcached_설치">Memcached 설치</h3>
+<h4 id="CentOS">CentOS</h4>
+<h5 id="yum_패키지_관리자">yum 패키지 관리자</h5>
 <p>우선, yum 패키지 관리자를 이용해서 설치를 진행해 봅시다. 일단 패키지가 있는지 확인을 해봅시다.</p>
 <pre class="prettyprint lang-sh">
 # command
@@ -121,7 +121,7 @@ Dependency Installed:
 
 Complete!
 </pre>
-<h5>memcached 설정</h5>
+<h5 id="memcached_설정">memcached 설정</h5>
 <p>패키지 설치가 됐다면 다음엔 환경 구성이 어떻게 되어 있는지 확인해 봅시다. 아래의 커맨드를 실행하세요.</p>
 <pre class="prettyprint lang-sh">
 # command
@@ -140,12 +140,12 @@ OPTIONS="-l 127.0.0.1" # 기본 설정값은 비어있습니다.
 <li>CACHESIZE : 사용할 메모리를 결정합니다. MB단위입니다. 1024라고 지정하면 1GB가 되겠죠. 여기선 64MB만 사용합니다.</li>
 <li>OPTIONS : -l 옵션은 바인드 IP를 설정합니다. Apache, NginX는 여기 설정된 값으로 연결을 시도합니다. 로컬호스트(127.0.0.1)로 지정한 경우 외부 접근은 불가합니다.</li>
 </ul>
-<h5>자동 재시작 설정</h5>
+<h5 id="자동_재시작_설정">자동 재시작 설정</h5>
 <p>설치가 끝났지만 이제 서버를 재시작해도 memcached 데몬이 구동되도록 변경합시다. 다음의 커맨드를 실행합니다.</p>
 <pre class="prettyprint lang-sh">
 $ chkconfig --levels 235 memcached on
 </pre>
-<h5>memcached 데몬 관리</h5>
+<h5 id="memcached_데몬_관리">memcached 데몬 관리</h5>
 <p>데몬은 아래와 같은 커맨드로 관리할 수 있습니다.</p>
 <pre class="prettyprint lang-sh">
 $ /etc/init.d/memcached start
@@ -154,20 +154,20 @@ $ /etc/init.d/memcached stop
 $ /etc/init.d/memcached status
 $ memcached-tool
 </pre>
-<h5>memcached 데몬 확인</h5>
+<h5 id="memcached_데몬_확인">memcached 데몬 확인</h5>
 <p>실제로 데몬이 떠있는지 확인합시다. 아래의 커맨드로 확인 가능 합니다.</p>
 <pre class="prettyprint lang-sh">
 $ ps -ef | grep memcached # 프로세스가 떠있는지 확인합니다.
 $ netstat -an | grep 11211 # 포트가 리슨중인지 확인합니다.
 </pre>
 <p>만약 실행 되어 있지 않다면 <span class="command">/etc/init.d/memcached start</span> 커맨드로 실행하고 다시 확인해 보세요.</p>
-<h5>실행중인 memcached 데몬 정보</h5>
+<h5 id="실행중인_memcached_데몬_정보">실행중인 memcached 데몬 정보</h5>
 <p>실행중인 데몬의 상세 정보는 아래의 커맨드로 확인 가능합니다.</p>
 <pre class="prettyprint lang-sh">
 $ memcached-tool 127.0.0.1 stats
 </pre>
-<h4>Memcached 예제</h4>
-<h5>Java</h5>
+<h4 id="Memcached_예제">Memcached 예제</h4>
+<h5 id="Java">Java</h5>
 <p>자바로 입력 테스트 및 출력 테스트를 해봅시다. 준비물은 <a href="https://code.google.com/p/spymemcached/">spymemcached</a>입니다. 여기서 최신버전을 다운로드 받으세요.</p>
 <p>소스를 아래처럼 작성합니다.</p>
 <pre class="prettyprint lang-java">

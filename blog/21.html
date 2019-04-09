@@ -52,13 +52,13 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>오늘은 node.js 와 mongodb의 연결을 해보려고 합니다. 이때 필요한건 <a href="http://docs.mongodb.org/ecosystem/drivers/node-js/">mongodb 드라이버</a>겠죠. 간단한 예제를 통해서 node.js와 mongodb를 연결해봅시다.</p>
-<h2>Ready for Test</h2>
+<h2 id="Ready_for_Test">Ready for Test</h2>
 <p>기본적으로 몽고DB<span class="refer">mongodb</span> 와 node.js를 설치했다고 가정합니다. 저 같은 경우 아래처럼 설치 했습니다.</p>
 <pre class="console">
 Node.js : C:\Program Files\nodejs
 mongodb : C:\Program Files\MongoDB 2.6 Standard
 </pre>
-<h2>Build node.js application</h2>
+<h2 id="Build_node.js_application">Build node.js application</h2>
 <p>이제 몽고DB를 띄운 뒤에 실제 연결해볼 node.js 애플리케이션을 작성해 봅시다. 그전 테스트할 프로젝트 디렉토리부터 생성해야겠네요. 아래와 같은 곳에 생성했습니다. 그리고 프로젝트까지 바로 초기화 해봅시다.</p>
 <pre class="console">
 C:\Program Files\nodejs\mongo
@@ -92,7 +92,7 @@ C:\Program Files\nodejs\mongo&gt;npm install mongoose --save
   }
 }
 </pre>
-<h2>Connect to MongoDB</h2>
+<h2 id="Connect_to_MongoDB">Connect to MongoDB</h2>
 <p><span class="command">Mongoose</span> 말고도 다른 오브젝트 매퍼들이 있지만 이 포스팅에서는 <a href="http://mongoosejs.com/docs/index.html">Mongoose</a>를 기준으로 작성하고 있습니다. 이제부터는 실제 구동할 소스 코드를 작성해 봅시다. 방금 절에서 만든 "mongo" 디렉토리에 가서 <span class="command">index.js</span> 파일을 만듭니다. 그리고 안에 다음처럼 소스 코드를 입력합니다.</p>
 <pre class="prettyprint lang-js">
 /* index.js */
@@ -104,13 +104,13 @@ db.once('open', function callback () {
 	console.log("mongo db connection OK.");
 });
 </pre>
-<h2>Connection Test</h2>
+<h2 id="Connection_Test">Connection Test</h2>
 <p>작성 후 아래처럼 입력해서 애플리케이션을 구동해 봅시다.</p>
 <pre class="console">
 C:\Program Files\nodejs\mongo&gt;node index 
 </pre>
 <p>실행 후에 <strong>"mongo db connection OK."</strong> 문구가 나오면 몽고DB와 연결에 성공한 것입니다.</p>
-<h2>Schema & Model</h2>
+<h2 id="Schema_&_Model">Schema & Model</h2>
 <p>RDBMS에서는 Create 구문 등을 통해 스키마<span class="refer">Schema</span>를 생성해서 사용합니다. 몽고DB는 스키마를 별도로 지정하지 않아도 되지만 <span class="command">Mongoose</span>에서는 스키마라는 함수를 통해 레퍼런스를 선언해 줄 수 있습니다. 다음처럼 입력해 봅시다.</p>
 <pre class="prettyprint lang-js">
 /* Schema 선언 */
@@ -167,7 +167,7 @@ TestModel.find(function(err, models){
 TestModel.find({name:/^testIns/}, callback);
 </pre>
 <p>위와 같은 구문은 name 프로퍼티가 "testIns"인 모델을 찾는 구문입니다. 자세한 사용처는 <a href="http://mongoosejs.com/docs/queries.html">querying</a>에서 찾아 볼 수 있습니다.</p>
-<h2>Summary Example</h2>
+<h2 id="Summary_Example">Summary Example</h2>
 <p>지금까지 단편적으로 살펴본 모든 구문을 하나로 합친 예제를 만들어 봅시다.</p>
 <pre class="prettyprint lang-js">
 /* index.js */
@@ -206,7 +206,7 @@ TestModel.find(function(err, models){
 
 TestModel.find({name:/^testIns/});
 </pre>
-<h2>몽고DB 확인</h2>
+<h2 id="몽고DB_확인">몽고DB 확인</h2>
 <p>정말로 데이터가 삽입 되었는지 확인을 해봅시다. 몽고DB 쉘에 접속해서 <span class="command">show collections</span>를 입력해 봅시다. 그러면 "testmodels" 라는 새로운 콜렉션이 보일겁니다. <span class="command">db.testmodels.find()</span> 구문을 통해 정말로 데이터가 삽입 됐는지 확인 해보고 삽입이 되어 있으면 성공적인 node.js + mongodb 첫 프로젝트가 완성 된 겁니다. :)</p>
 </div>
 				</article>

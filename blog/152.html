@@ -52,7 +52,7 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>hbase를 사용하다보면 hbase shell을 통해서 일을 처리하는 경우가 왕왕 있습니다. 까먹지 않기 위해 이곳에 남겨둡니다. :3</p>
-<h4>In hbase console</h4>
+<h4 id="In_hbase_console">In hbase console</h4>
 <pre class="prettyprint lang-sh">
 # get + filter
 get 'TABLE_NAME', 'ROWKEY', { COLUMN=&gt;'COLUMN_NAME', FILTER=&gt; "ValueFilter(=, 'binary:YOUR_KEYWORD')" }
@@ -60,7 +60,7 @@ get 'TABLE_NAME', 'ROWKEY', { COLUMN=&gt;'COLUMN_NAME', FILTER=&gt; "ValueFilter
 # get + filter (substring)
 get 'TABLE_NAME', 'ROWKEY', { COLUMN=&gt;'COLUMN_NAME', FILTER=&gt; "ValueFilter(=, 'substring:YOUR_KEYWORD')" }
 </pre>
-<h4>linux shell console</h4>
+<h4 id="linux_shell_console">linux shell console</h4>
 <pre class="prettyprint lang-sh">
 # get + filter + file dump
 echo "get 'TABLE_NAME', 'ROWKEY', { COLUMN=&gt;'COLUMN_NAME', FILTER=&gt; \"ValueFilter(=, 'substring:YOUR_KEYWORD')\" }" | ./hbase shell | grep "^ " &gt; result.txt

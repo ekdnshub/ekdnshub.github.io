@@ -52,7 +52,7 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>이번엔 리눅스에서 리다이렉션(Redirection)과 파이프(pipe)에 대해 알아보고자 합니다.</p>
-<h2>리눅스 리다이렉션(Linux Redirection)</h2>
+<h2 id="리눅스_리다이렉션(Linux_Redirection)">리눅스 리다이렉션(Linux Redirection)</h2>
 <p>리다이렉션은 표준 스트림<span class="refer">standard stream</span>의 흐름을 바꿔줍니다. 리눅스에서 리다이렉션을 쓰고 싶으면 특수 기호 <span class="command">></span> 또는 <span class="command"><</span>를 사용합니다. 더 상세한 설명을 하기 전에 기반 지식을 쌓고 갑시다.</p>
 <p>일반적으로 커맨드<span class="refer">command</span>로 실행되는 프로세스<span class="refer">process</span>는 표준 입력 스트림<span class="refer">standard input stream</span>, 표준 출력 스트림<span class="refer">standard output stream</span>과 오류 출력 스트림<span class="refer">standard error stream</span>을 가지고 있습니다. 총 하나의 입력 스트림과 두개의 출력 스트림을 가지고 있는것이죠. 기본적으로 이 모든 스트림은 일반적인 문자열<span class="refer">plain text</span>로 콘솔<span class="refer">console</span>에 출력 하게 되어 있습니다.</p>
 <p>그렇다면 다시 돌아가서 리다이렉션이란 스트림의 흐름을 바꿔주는 것이라고 앞서 말씀 드렸습니다. 결론부터 말하면 실행된 프로세스의 스트림을 콘솔이 아닌 파일로 사용하고 싶다면 리다이렉션을 사용하면 됩니다. 코드로 살펴봅시다.</p>
@@ -78,7 +78,7 @@ $ head &lt; ls.txt &gt; ls2.txt
 <li>head 명령어의 출력 스트림은 콘솔이 아닌 ls2.txt에 연결 되어 있으므로 출력 결과를 ls2.txt에 저장</li>
 </ul>
 </div>
-<h2>리눅스 파이프(Linux Pipe)</h2>
+<h2 id="리눅스_파이프(Linux_Pipe)">리눅스 파이프(Linux Pipe)</h2>
 <p>리다이렉션은 프로세스의 입력이나 출력을 파일로 사용하는 것이라면 파이프<span class="refer">pipe</span>는 프로세스간 사용하는 것입니다. 리눅스에서는 특수 기호로 <span class="command">|</span>를 사용합니다. 일반적으로 <strong>"A | B"</strong> 처럼 사용하는데 <span class="command">|</span>를 기준으로 A에 있는 커맨드의 표준 출력을 B에 있는 커맨드의 표준 입력으로 사용합니다.</p>
 <p>프로세스의 출력 스트림을 다른 프로세스의 입력 스트림으로 사용할 때 리다이렉션 기호를 쓰면 오류가 납니다. 아마도 일치하는 파일이 없거나 디렉토리가 없다고 오류 메시지가 나올겁니다. 이런 경우엔 파이프 기호를 씁시다.</p>
 <p>다음과 같은 코드를 보면 자연스럽게 파이프를 사용하고 있었다는 것을 알 수 있습니다.</p>
@@ -91,7 +91,7 @@ $ grep [-option] [pattern] [file or directory name]
 </pre>
 <p><span class="command">grep</span> 키워드 이후 옵션과 패턴, 그리고 파일이나 디렉토리 이름을 써주면 됩니다. 패턴은 정규식<span class="refer">Regular Expression</span>으로 사용 가능합니다. 이러한 일반적인 <span class="command">grep</span> 사용법 외에 <span class="command">grep</span>을 파이프로 입력 스트림을 주는 경우엔 필터처럼 동작합니다. 파일이나 디렉토리명을 써주지 않더라도 입력 스트림으로 받은 내용과 패턴을 바탕으로 <span class="command">grep</span> 명령어를 시행합니다.</p>
 <p>간단히 요약하면 프로세스간의 입력, 출력을 연결하고 싶으면 파이프 기호를 이용합시다.</p>
-<h2>Combine redirection and pipe</h2>
+<h2 id="Combine_redirection_and_pipe">Combine redirection and pipe</h2>
 <p>리다이렉션과 파이프는 조합이 가능합니다. 코드를 봅시다.</p>
 <pre class="prettyprint lang-sh">
 $ ls | grep ls.txt &gt; ls3.txt
@@ -103,7 +103,7 @@ $ head dummy.txt 2&gt;&gt; error.txt
 </pre>
 <p>상단의 코드를 실행 해봅시다. <span class="command">dummy.txt</span> 파일의 처음 10줄을 읽어서 출력하고 오류 스트림은 <span class="command">error.txt</span>에 연결해서 기록하도록 합니다. <span class="command">dummy.txt</span> 파일이 없으면 오류 메시지가 <span class="command">error.txt</span> 파일에 기록될 겁니다.</p>
 <p>말로 설명하면 굉장히 난잡하군요(…). 몇가지 코드를 시험 삼아 돌려보시면 이해하기 편할 듯 합니다.</p>
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p>이렇게 리다이렉션과 파이프에 대해 간략히 알아봤습니다. :)</p>
 </div>
 				</article>

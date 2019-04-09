@@ -52,12 +52,12 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>저번 포스팅인 <a href="/blog/139">Redis 설치 및 사용법</a>에 이어서 이번엔 Redis Replication에 대해 알아봅니다.</p>
-<h2>Replication</h2>
+<h2 id="Replication">Replication</h2>
 <p>기본적으로 Replication은 Master/Slave 구조로 되어 있습니다. Master는 문자 그대로 모든것을 처리합니다. Read 또는 Write 동작 같은것이 해당 되겠네요. 반대로 Slave 는 Master가 데이터를 Write 하면 해당 내용을 자신에게도 똑같이 복제합니다. 이것을 Replication이라고 합니다.</p>
 <p>Redis 공식 홈페이지에서는 Replication에 대해 <a href="http://www.redis.io/topics/replication">redis - replication</a> 항목으로 정리를 해뒀습니다.</p>
-<h2>Redis Replication Example</h2>
+<h2 id="Redis_Replication_Example">Redis Replication Example</h2>
 <p>그러면 이번엔 Redis에서 Replication(이하 "복제")을 어떻게 하는지 예제를 통해서 알아봅니다.</p>
-<h3>Architecture</h3>
+<h3 id="Architecture">Architecture</h3>
 <pre class="diagram">
           ╋────────╋
           ┃Master          ┃
@@ -73,10 +73,10 @@
 </pre>
 <p>제가 이번에 만들고 싶은 Redis 구조입니다. 가능하다면 Master 및 Slave 인스턴스들을 개별 장비에 올려놓고 싶었지만 서버가 한대인 관계로(...) 로컬에서 Redis 인스턴스를 여러개 띄워서 테스트 할 예정입니다.</p>
 <p>그림에서 보다시피 10000번 포트인 Master와 각각 10001,10002번 포트인 Slave Redis 인스턴스들이 있습니다. 위 구조를 실제로 만들어보고 데이터 복제가 일어나는지 확인해 봅시다.</p>
-<h3>Install Redis Server</h3>
+<h3 id="Install_Redis_Server">Install Redis Server</h3>
 <p>Redis에서는 개발자들에게 편의를 제공하기 위해서 각종 스크립트를 미리 준비해놨습니다. 대표적인 것 중 하나는 <span class="command">install_server.sh</span>라는 스크립트입니다. 이 스크립트는 Redis가 설치되어 있는 디렉토리의 하위 디렉토리인 "utils" 에 있습니다.</p>
 <p>그럼 <span class="command">install_server.sh</span>를 이용해서 Master와 Slave의 기본 골격을 갖춰봅시다.</p>
-<h4>Master (PORT:10000)</h4>
+<h4 id="Master_(PORT:10000)">Master (PORT:10000)</h4>
 <p>Master 인스턴스를 만들어 봅시다. 아래 <span class="command">$</span>로 표시한 라인이 실제로 입력한 부분입니다.</p>
 <pre class="console">
 $ ./install_server.sh
@@ -108,9 +108,9 @@ Installation successful!
 <pre class="console">
 $ mv /etc/init.d/redis_10000 /home/redis/10000.sh
 </pre>
-<h4>Slave (PORT:10001,10002)</h4>
+<h4 id="Slave_(PORT:10001,10002)">Slave (PORT:10001,10002)</h4>
 <p>위와 같은 작업을 <strong>반복</strong>합니다. 각각 10001, 10002를 붙여서요.</p>
-<h4>Checking Servers</h4>
+<h4 id="Checking_Servers">Checking Servers</h4>
 <p>여기까지 진행했다면 아래와 같은 커맨드를 실행시킵니다.</p>
 <pre class="console">
 $ ps -ef | grep redis
@@ -131,9 +131,9 @@ $ /home/redis/10002.sh stop
 Stopping ...
 Redis stopped
 </pre>
-<h3>Replication Config</h3>
+<h3 id="Replication_Config">Replication Config</h3>
 <p>이제 데이터 복제를 위해 설정 파일을 수정해봅시다.</p>
-<h4>Master (PORT:10000)</h4>
+<h4 id="Master_(PORT:10000)">Master (PORT:10000)</h4>
 <p>마스터가 될 <span class="command">/home/redis/10000.conf</span> 파일을 열어서 수정합시다. 190번째쯤 라인에서 다음과 같은 주석을 볼 수 있습니다. Replication 및 각 설정값에 대한 설명이 되어 있습니다.</p>
 <pre class="console">
 ...
@@ -162,14 +162,14 @@ requirepass foobared
 ...
 </pre>
 <p>그 외 설정값이 많아 보이지만 현재 Master 환경 구성은 <span class="command">/home/redis/10000.conf</span> 에서 <span class="command">requirepass foobared</span>을 주석해제 한거 말곤 없습니다. 나머지 옵션 설정은 필요할 때 살펴 봅시다.</p>
-<h4>Slave (PORT:10001,10002)</h4>
+<h4 id="Slave_(PORT:10001,10002)">Slave (PORT:10001,10002)</h4>
 <p>이번엔 Slave 환경 설정을 해줍니다. 각각 <span class="command">/home/redis/10001.conf</span>, <span class="command">/home/redis/10002.conf</span> 파일이 되겠네요.</p>
 <p>해당 파일들에서 <span class="command">slaveof</span>, <span class="command">masterauth</span>값을 찾아 아래처럼 바꿔줍니다.</p>
 <pre class="console">
 slaveof 127.0.0.1 10000
 masterauth foobared
 </pre>
-<h3>Start Server</h3>
+<h3 id="Start_Server">Start Server</h3>
 <p>이제 환경 설정까지 끝났으니 다시 한번 Redis 인스턴스들을 띄워봅시다. Master, Slave 순으로 띄워봅니다.</p>
 <pre class="console">
 $ /home/redis/10000.sh start
@@ -179,7 +179,7 @@ Starting Redis server...
 $ /home/redis/10002.sh start
 Starting Redis server...
 </pre>
-<h3>Check log file</h3>
+<h3 id="Check_log_file">Check log file</h3>
 <p>음, 뭐가 달라진건지 모르겠습니다. 달랑 한 줄 나오고 끝이네요. 로그 파일 한 번 열어 봐야겠어요.</p>
 <p>우선 Master의 로그 파일인 <span class="command">/home/redis/10000.log</span> 파일을 열어서 확인해봤습니다.</p>
 <pre class="console">
@@ -217,7 +217,7 @@ Starting Redis server...
 * MASTER &lt;-&gt; SLAVE sync: Finished with success
 </pre>
 <p>Slave의 로그에는 Master와 접속하는 로그가 찍혀 있습니다. 로그에는 정상적으로 Replication 처리가 되어 보이는데, 실제로 값을 넣어서 테스트를 해봐야겠네요.</p>
-<h3>Data Replication Test</h3>
+<h3 id="Data_Replication_Test">Data Replication Test</h3>
 <p>이번엔 Master 인스턴스에 접속해서 데이터를 넣어보고 제대로 복제가 되는지 확인해 봅시다.</p>
 <pre class="console">
 $ ./redis-cli -p 10000
@@ -240,10 +240,10 @@ $ ./redis-cli -p 10001
 127.0.0.1:10001&gt;
 </pre>
 <p>잘 나오는군요. 복제는 잘 되는 것 같네요.</p>
-<h3>Exception Handling</h3>
+<h3 id="Exception_Handling">Exception Handling</h3>
 <p>모든 게 "언제나" 정상이면 좋겠습니다만, 언제나 "예외"가 있는법입니다.</p>
 <p>혹시라도 Master, Slave가 죽으면 어떻게 될까요? 한번 알아봅시다.</p>
-<h4>Kill the Master</h4>
+<h4 id="Kill_the_Master">Kill the Master</h4>
 <p>테스트를 위해서 Master부터 내려봅니다.</p>
 <pre class="console">
 $ /home/redis/10000.sh stop
@@ -309,7 +309,7 @@ $ tail -n 12 /home/redis/10001.log
 * MASTER &lt;-&gt; SLAVE sync: Finished with success
 </pre>
 <p>네, Slave는 Master 다시 커넥션을 맺고 후속 작업을 처리 하네요.</p>
-<h4>Kill the Slave</h4>
+<h4 id="Kill_the_Slave">Kill the Slave</h4>
 <p>그럼, Slave를 떨군뒤에 Master에서 추가 데이터 삽입이 있었다고 한다면, 떨어졌던 Slave는 다시 살아났을 때 데이터 동기화를 할까요?</p>
 <p>테스트를 시작합니다!</p>
 <pre class="console">

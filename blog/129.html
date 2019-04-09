@@ -52,13 +52,13 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>간만의 스칼라 포스팅입니다. 이번엔 MySQL(또는 MariaDB)와 스칼라를 연결해서 테스트 문자열을 출력해보는 포스팅입니다.</p>
-<h4>준비</h4>
+<h4 id="준비">준비</h4>
 <p>우선 MySQL 접속 드라이버 Jar를 다운로드 받아야 합니다. 아래 링크에서 다운로드 받거나 Gradle, Maven을 이용해 의존성 추가를 해줍니다.</p>
 <div class="green ">
 <a href="http://mvnrepository.com/artifact/mysql/mysql-connector-java">http://mvnrepository.com/artifact/mysql/mysql-connector-java</a>
 </div>
 <p>Jar 파일을 예제로 실행할 프로젝트에 build path로 잡아주신 뒤에 진행합니다.</p>
-<h4>예제 소스 코드</h4>
+<h4 id="예제_소스_코드">예제 소스 코드</h4>
 <p>이제 다음과 같은 스칼라 코드를 작성합니다. DB 접속 부분은 알맞게 바꿔서 쓰시면 됩니다.</p>
 <pre class="prettyprint lang-scala">
 import java.sql.Connection

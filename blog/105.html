@@ -52,10 +52,10 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>스프링 프레임워크 개발을 위해서 보통은 이클립스를 많이 활용했습니다. 하지만 이번에 스프링 부트(Spring Boot)를 공부하게 되면서 이왕 별도의 IDE를 써보자는 생각 때문에 Spring Tool Suite(sts)를 사용해보려고 합니다. 본 포스팅은 sts의 설치 및 스프링 부트 프로젝트 실행까지 설명합니다. 설치 환경은 windows7 32bit 기준입니다.</p>
-<h4>Spring Tool Suite</h4>
-<h5>다운로드</h5>
+<h4 id="Spring_Tool_Suite">Spring Tool Suite</h4>
+<h5 id="다운로드">다운로드</h5>
 <p>sts는 이클립스(Eclipes)를 기반으로하는 IDE입니다. 스프링 어플리케이션을 개발하는 것에 커스터마이징 되어 있지요. 다운로드는 <a href="https://spring.io/tools/sts">https://spring.io/tools/sts</a> 링크를 클릭하세요.</p>
-<h5>실행</h5>
+<h5 id="실행">실행</h5>
 <p>다운로드 받은 파일을 압축 해제 이후 내부를 살펴봅시다. 저는 windows7 32bit 기반이고 다운로드 받은 파일명은 spring-tool-suite-3.6.4.RELEASE-e4.4.2-win32.zip입니다.</p>
 <p>적절한 위치에 압축을 해제 한 뒤에 구조를 살펴보면 다음과 같습니다.</p>
 <pre class="console">
@@ -67,8 +67,8 @@ spring-tool-suite-3.6.4.RELEASE-e4.4.2-win32.zip
 </pre>
 <p>여기서 sts-3.6.4.RELEASE 가 IDE 디렉토리입니다. 해당 디렉토리를 적절한 위치에 이동 후 실행시켜봅시다. 실행파일은 <strong>STS.exe</strong>입니다. 처음 실행시키면 workspace 디렉토리를 정해달라는 프롬프트가 뜨는데 이것 역시 적절한 디렉토리를 설정합시다.</p>
 <p>익숙한 이클립스의 화면이 보이면 sts의 실행까지 완료 되었습니다.</p>
-<h4>Spring Boot 프로젝트 만들기</h4>
-<h5>프로젝트 생성[1/2]</h5>
+<h4 id="Spring_Boot_프로젝트_만들기">Spring Boot 프로젝트 만들기</h4>
+<h5 id="프로젝트_생성[1/2]">프로젝트 생성[1/2]</h5>
 <p>[File]-[New]-[Spring Starter Project] 순으로 클릭해서 "New Spring Starter Project" 윈도우를 띄웁니다. 여러가지 입력할 내용이 보이는데 여기서는 다음과 같은 설정으로 진행합니다.</p>
 <pre class="console">
 Name : demo
@@ -85,9 +85,9 @@ Package : demo
 Dependencies : Web
 </pre>
 <p>위의 설정 이후 [Next]를 클릭해서 다음단계로 넘어갑시다.</p>
-<h5>프로젝트 생성[2/2]</h5>
+<h5 id="프로젝트_생성[2/2]">프로젝트 생성[2/2]</h5>
 <p>프로젝트를 생성할 위치를 결정하고 [Finish]를 클릭해서 프로젝트 생성을 완료합시다.</p>
-<h5>Gradle Project 선택시 오류</h5>
+<h5 id="Gradle_Project_선택시_오류">Gradle Project 선택시 오류</h5>
 <p>만약 "Can not use Gradle: STS Gradle Tooling is not installed. You can install it from the STS Dashboard."라는 오류 문구가 나온다면 Gradle 플러그인을 설치해야 합니다. 다음과 같은 순서로 실행해봅시다.</p>
 <pre class="console">
 1. [Help] - [Dashboard] 를 클릭합니다.
@@ -97,7 +97,7 @@ Dependencies : Web
 5. sts를 재시작합니다.
 </pre>
 <p>더욱 자세한 설치 방법은 <a href="http://docs.spring.io/sts/docs/2.9.0.old/reference/html/gradle/installation.html">이곳</a>에서 확인이 가능합니다.</p>
-<h5>Gradle Exception 오류</h5>
+<h5 id="Gradle_Exception_오류">Gradle Exception 오류</h5>
 <p>"Gradle Exception: Unable to start the daemon process." 같은 오류가 나온다면 Gradle 옵션을 설정해줘야 합니다. 다음과 같은 순서로 해결합시다.</p>
 <pre class="console">
 1. [Window] - [Preferences] 선택
@@ -110,7 +110,7 @@ Dependencies : Web
 <div class="red">
 GradleException: Unable to start the daemon process. This problem might be caused by incorrect configuration of the daemon. For example, an unrecognized jvm option is used. Please refer to the user guide chapter on the daemon at http://gradle.org/docs/2.2.1/userguide/gradle_daemon.html Please read the following process output to find out more: ----------------------- Error occurred during initialization of VM Could not reserve enough space for object heap Error: Could not create the Java Virtual Machine. Error: A fatal exception has occurred. Program will exit. java.lang.reflect.InvocationTargetException
 </div>
-<h5>프로젝트 구조</h5>
+<h5 id="프로젝트_구조">프로젝트 구조</h5>
 <p>프로젝트 생성이 끝났다면 sts의 좌측에 demo 프로젝트가 보일겁니다. demo 프로젝트의 구조는 다음과 같습니다.</p>
 <pre class="console">
 demo
@@ -123,7 +123,7 @@ demo
   ┖ .project
   ┖ build.gradle
 </pre>
-<h5>HelloController 추가하기</h5>
+<h5 id="HelloController_추가하기">HelloController 추가하기</h5>
 <p>웹 애플리케이션 구동하기 전에 HelloController라는 이름으로 컨트롤러를 만듭시다. 위치는 demo/src/main/java/demo/HelloController.java 입니다. 코드는 다음과 같습니다.</p>
 <pre class="prettyprint lang-java">
 package demo;
@@ -138,13 +138,13 @@ public class HelloController {
     }
 }
 </pre>
-<h5>Spring Boot App Start</h5>
+<h5 id="Spring_Boot_App_Start">Spring Boot App Start</h5>
 <p>이제 컨트롤러까지 추가를 했으니 Run 메뉴를 통해서 웹 어플리케이션을 실행하고 http://localhost:8080 을 접속해봅시다.</p>
 <pre class="console">
 Hello World!
 </pre>
 <p>위의 문구가 보이면 제대로 처리가 된 것입니다. :)</p>
-<h4>Closing Remarks</h4>
+<h4 id="Closing_Remarks">Closing Remarks</h4>
 <p>Spring Boot와 Gradle의 조합이 참 깔끔하네요.</p>
 </div>
 				</article>

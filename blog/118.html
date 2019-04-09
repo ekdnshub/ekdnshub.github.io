@@ -52,7 +52,7 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>자바스크립트는 변수의 선언 및 자용이 자유롭고 느슨합니다. 빠른 프로토타이핑을 가능하게 하고 반대로 디버깅을 할 때 미치게 만드는 요소이기도 합니다. 개인적으로는 작업할 때 간단한 로직 구성은 필요할 때마다 선언하고 사용하지만, 다른곳에서 사용할 가능성이 있는 경우에는 가능하면 하나의 네임스페이스를 구성해서 사용합니다.</p>
-<h4>네임스페이스의 필요성</h4>
+<h4 id="네임스페이스의_필요성">네임스페이스의 필요성</h4>
 <p>다음과 같은 코드가 있습니다.</p>
 <pre class="prettyprint lang-js">
 var x = 100;
@@ -88,7 +88,7 @@ var myLib = {
 myLib.x(); // inner
 </pre>
 <p>좋습니다. 이제 myLib 변수 안에 x 함수도 넣었습니다. 그런데 여기에 함수 y를 추가하고 싶은데 이건 외부에서 직접 사용하지 않게 하고 싶어요. 그러면 어떻게 해야 할까요?</p>
-<h4>익명 함수 &amp; 즉시 실행 함수</h4>
+<h4 id="익명_함수_&amp;_즉시_실행_함수">익명 함수 &amp; 즉시 실행 함수</h4>
 <pre class="prettyprint lang-js">
 var myLib = (function(){
 	var y = function(){ /* this is private func. */ };
@@ -106,7 +106,7 @@ myLib.y(); // undefined is not a function
 </pre>
 <p>갑자기 코드가 많이 바뀌었지만 차근차근 이해해 보면 됩니다. 위의 코드를 실행해 보면 x 함수는 외부에서 실행 가능하지만 y 함수는 외부에서 실행이 안됩니다. 하지만 같은 네임스페이스 내부에서는 호출이 가능합니다.</p>
 <p>이런 코드를 만들기 위해선 익명 함수(<a href="http://en.wikipedia.org/wiki/Anonymous_function#JavaScript">anonymous function</a>)을 알아야 합니다.</p>
-<h5>익명 함수(anonymous function)</h5>
+<h5 id="익명_함수(anonymous_function)">익명 함수(anonymous function)</h5>
 <p>익명 함수는 이미 자바스크립트를 공부 해봤다면 자주 볼 수 있습니다. 예를 들면 다음과 같은겁니다.</p>
 <pre class="prettyprint lang-js">
 var x = function(){};
@@ -116,13 +116,13 @@ var x = function(){};
 function(){}; // SyntaxError: Unexpected token (
 </pre>
 <p>이렇게 말이죠. 따라서 적절한 변수에 할당을 해야 합니다. 하지만 변수에 할당하지 않고 익명 함수를 실행 시키고 싶을 때가 있겠죠. 그럴때는 즉시 실행 함수 표현식(<a href="http://en.wikipedia.org/wiki/Immediately-invoked_function_expression">Immediately-invoked function expression</a>)을 사용합니다.</p>
-<h5>즉시 실행 함수 표현식(Immediately-invoked function expression)</h5>
+<h5 id="즉시_실행_함수_표현식(Immediately-invoked_function_expression)">즉시 실행 함수 표현식(Immediately-invoked function expression)</h5>
 <p>주로 다음처럼 사용합니다.</p>
 <pre class="prettyprint lang-js">
 (function(){/* code */})();
 </pre>
 <p>code로 주석 처리 된 부분에 한 번 실행할 코드를 넣어두면 해당 코드를 실행합니다. 하지만 변수에 할당 하지는 않았기 때문에 접근은 요원합니다.</p>
-<h5>다시 뜯어보기 &amp; 접근 제어</h5>
+<h5 id="다시_뜯어보기_&amp;_접근_제어">다시 뜯어보기 &amp; 접근 제어</h5>
 <p>그러면 다시 최종 코드를 가져와서 살펴보면 이젠 이해가 될겁니다.</p>
 <pre class="prettyprint lang-js">
 var myLib = (function(){
@@ -159,7 +159,7 @@ myLib.z(); // inner
 myLib.y(); // undefined is not a function
 </pre>
 <p>return 시킬 객체(object)에다가 key:value 형식으로 묶어주면 되는데 key는 외부에서 접근할 함수명이 되고 value값은 네임스페이스 내부의 함수명이 됩니다. 물론 인자값이 있어도 관계 없습니다. 인자값이 여러개더라도 이름만 명시하면 됩니다.</p>
-<h4>Closing Remarks</h4>
+<h4 id="Closing_Remarks">Closing Remarks</h4>
 <p>어쩌다보니 포스팅이 길게 써졌습니다. 그말인즉슨 두서가 없다는 말입니다. -_-; 나중에 보완해야겠지만 혹시라도 지적하실 점 있으면 즉시 수정토록 하겠습니다.</p>
 </div>
 				</article>

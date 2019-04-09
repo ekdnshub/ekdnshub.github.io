@@ -52,7 +52,7 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>스프링 프레임워크를 쓰다보면 DispatcherServlet(이하 "디스패처 서블릿")이라는 단어가 자주 보입니다. 이게 뭔데 자주 등장하는걸까요? 한 번 알아봅시다.</p>
-<h2>DispatcherServlet</h2>
+<h2 id="DispatcherServlet">DispatcherServlet</h2>
 <p><strong>디스패처 서블릿</strong>은 <strong>모든</strong> HTTP Request/Response를 관리하는 서블릿입니다. 간단하게 다이어그램을 그려보면 아래와 같습니다.</p>
 <pre class="diagram">
 ╋───────╋
@@ -99,9 +99,9 @@
 <li>(10) <strong>디스패처 서블릿</strong>은 전달받은 최종 View를 클라이언트에 응답(Response)으로 돌려줍니다.</li>
 </ul>
 </div>
-<h2>Analyze DispatcherServlet</h2>
+<h2 id="Analyze_DispatcherServlet">Analyze DispatcherServlet</h2>
 <p>전체적인 부분을 알아봤으니 이번엔 개별로 하나씩 차근차근 뜯어서 확인해봅시다.</p>
-<h3>HandlerMapping</h3>
+<h3 id="HandlerMapping">HandlerMapping</h3>
 <p>Handler Mapping(이하 "핸들러 매핑")은 디스패처 서블릿이 클라이언트에서 요청이 왔을 때 처리할 Controller를 참조할 용도로 사용합니다. 이 핸들러 매핑은 종류가 몇가지 있는데 간단하게 알아봅시다.</p>
 <div class="tab">
 <ul>
@@ -111,7 +111,7 @@
 </ul>
 </div>
 <p>더 많은 정보를 보시려면 <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/servlet/HandlerMapping.html">HandlerMapping</a>을 참조하세요.</p>
-<h3>ViewResovler</h3>
+<h3 id="ViewResovler">ViewResovler</h3>
 <p>ViewResolver(이하 "뷰 리졸버")는 디스패처 서블릿이 실제 Model data를 렌더링할 View를 참조할 때 사용합니다. 간단하게 몇가지만 알아봅시다.</p>
 <div class="tab">
 <ul>

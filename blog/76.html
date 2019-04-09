@@ -52,9 +52,9 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>오늘은 C언어에서 <span class="command">.access()</span> 함수에 대해 알아고보자 합니다. 기준 OS는 centOS(gcc version 4.1.2)입니다.</p>
-<h2>.access() function definition</h2>
+<h2 id=".access()_function_definition">.access() function definition</h2>
 <p><span class="command">.access()</span> 함수는 파일 또는 디렉토리의 사용자 권한을 체크합니다.</p>
-<h2>use .access() function</h2>
+<h2 id="use_.access()_function">use .access() function</h2>
 <p><span class="command">.access()</span> 함수의 사용법은 다음과 같습니다.</p>
 <pre class="prettyprint lang-c">
 #include &lt;unistd.h&gt;
@@ -72,7 +72,7 @@ int access(const char *pathname, int mode);
 <pre class="prettyprint lang-sh">
 $ man access # access 함수에 대한 자세한 설명을 출력합니다.
 </pre>
-<h2>Example</h2>
+<h2 id="Example">Example</h2>
 <pre class="prettyprint lang-c">
 #include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;

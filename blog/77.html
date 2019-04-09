@@ -53,7 +53,7 @@
 					<div id="content">
 <p>이번 포스팅에서 던져볼 화두는, <span class="command">Inner Join</span>에 대해서입니다. 오라클을 이용하면서 자주 보거나 쓰고 있던 <span class="command">Inner Join</span>에도 종류가 있었다는 사실입니다.</p>
 <p>이 포스팅에 대한 내용은 <a href="http://stackoverflow.com/questions/44917/explicit-vs-implicit-sql-joins">Explicit vs Implicit SQL joins</a>이란 글을 보고나서 작성했습니다.</p>
-<h2>Implicit Inner Join SQL</h2>
+<h2 id="Implicit_Inner_Join_SQL">Implicit Inner Join SQL</h2>
 <pre class="prettyprint lang-sql">
 select *
 from TBL1 A, TBL2 B
@@ -62,7 +62,7 @@ and A.id = 'Min'
 </pre>
 <p>일반적으로 사용했던<span class="refer">제가 말이죠….</span> <span class="command">암시적 조인 표현 방법</span>입니다. A테이블과 B테이블의 id 컬럼 사용해 조인을 하는 방식입니다. 무엇보다 프로토 타이핑이 빠르기 때문에 애용을 했었습니다.</p>
 <p>그러나 <span class="command">암시적 조인 표현 방법</span>은 1992년에 폐기 되었습니다. 다만 DBMS들이 아직 지원을 하고 있는 상태라서 문법 자체는 사용 가능합니다. 자세한 사항은 <a href="https://en.wikipedia.org/wiki/Join_(SQL)#Inner_join">Wikipedia - Join</a>을 참조 바랍니다.</p>
-<h2>Explicit Inner Join SQL</h2>
+<h2 id="Explicit_Inner_Join_SQL">Explicit Inner Join SQL</h2>
 <p>다음은 <span class="command">명시적 조인 표현 방법</span>입니다.</p>
 <pre class="prettyprint lang-sql">
 select *
@@ -78,7 +78,7 @@ on ( A.id = B.id and A.grade &gt; 90 )
 where A.id = 'Min'
 </pre>
 <p>위처럼도 사용이 가능합니다. 많은 응용 방법이 있어요. 명시적 조인 표현 문법을 이용하면 추후에 조인 구문 누락으로 생길수 있는 문제도 미연에 방지할 수 있을 것 같습니다.</p>
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p>추후에 다양한 조인 방법에 대해서도 포스팅을 해야겠어요. 공부도 할겸 말이죠. :)</p>
 </div>
 				</article>

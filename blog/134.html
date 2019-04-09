@@ -52,13 +52,13 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>이 포스팅은 <a href="/blog/112">Support vector machine(SVMs)</a>에서 파생되었습니다. 실제로 SVMs 알고리즘이 적용된 libsvm이라는 라이브러리를 실제로 사용해 봅시다.</p>
-<h4>libsvm 다운로드</h4>
+<h4 id="libsvm_다운로드">libsvm 다운로드</h4>
 <p>libsvm은 <a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/">LIBSVM -- A Library for Support Vector Machines</a>에서 다운로드가 가능합니다.</p>
-<h4>libsvm 사용법</h4>
+<h4 id="libsvm_사용법">libsvm 사용법</h4>
 <p><a href="http://ntu.csie.org/~piaip/svm/svm_tutorial.html">piaip's Using (lib)SVM Tutorial - Using SVM</a>부분을 참조하시기 바랍니다.</p>
-<h4>실사용 예제</h4>
+<h4 id="실사용_예제">실사용 예제</h4>
 <p>이제 실제로 사용을 해봅시다.</p>
-<h5>데이터 파일 구성</h5>
+<h5 id="데이터_파일_구성">데이터 파일 구성</h5>
 <pre>
 4		●		○
 3	●	●
@@ -78,7 +78,7 @@
 1 0:4 1:4
 </pre>
 <p>이 파일을 <span class="command">test.txt</span>라는 이름으로 저장해둡니다.</p>
-<h5>자바 프로그램</h5>
+<h5 id="자바_프로그램">자바 프로그램</h5>
 <p>내려 받은 libsvm 압축 파일에서 java라는 이름의 서브 디렉토리를 보면 여러가지 <span class="command">.java</span> 파일이 있습니다. 이중 <span class="command">svm_train.java</span>를 컴파일 하고 <span class="command">test.txt</span> 파일을 인자값으로 넣어봅시다.</p>
 <pre class="console">
 svm_train [option] traing_set_file [model_file]

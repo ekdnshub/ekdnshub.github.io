@@ -51,11 +51,11 @@
                     <h1 id="content_title">SpringBoot @ConfigurationProperties DataSource Setting</h1>
 					<!-- 본문 -->
 					<div id="content">
-<h2>이번 포스트는?</h2>
+<h2 id="이번_포스트는?">이번 포스트는?</h2>
 <p>이번 포스트는 SpringBoot에서 <strong>@ConfigurationProperties</strong> 어노테이션을 이용해 <span class="command">DataSource</span> 구성에 필요한 환경설정 값을 만들고 사용하는 법을 알아봅니다.</p>
-<h2>@ConfigurationProperties</h2>
+<h2 id="@ConfigurationProperties">@ConfigurationProperties</h2>
 <p>@ConfigurationProperties 어노테이션은 환경설정 파일<span class="refer">ex. application.properties</span>에서 값을 추출해 주입해줍니다. 이로써 환경설정 값도 추상화가 가능합니다.</p>
-<h2>환경 설정 파일 구성</h2>
+<h2 id="환경_설정_파일_구성">환경 설정 파일 구성</h2>
 <p>SpringBoot 프로젝트를 기본 생성한다면 <span class="command">application.properties</span> 파일에 어플리케이션 환경설정에 필요한 값을 삽입할 수 있습니다. 아래처럼 <strong>datasource</strong>를 prefix로 갖는 Datasource 환경설정을 삽입해 봅니다.</p>
 <pre class="console">
 datasource.driverClassName=com.mysql.jdbc.Driver
@@ -70,7 +70,7 @@ datasource.max-active=5
 datasource.test-while-idle=true
 datasource.validation-query=select 1
 </pre>
-<h2>예제 코드</h2>
+<h2 id="예제_코드">예제 코드</h2>
 <p>그리고 실제로 <strong>@ConfigurationProperties</strong> 어노테이션을 사용해 Datasource Bean을 만드는 예제 코드입니다. 상세 설명은 코드 라인별로 주석을 달았습니다.</p>
 <pre class="prettyprint lang-java">
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -135,7 +135,7 @@ public class DBConfig {
     }
 }
 </pre>
-<h3>Mybatis 설정 파일(mybatis-config.xml)</h3>
+<h3 id="Mybatis_설정_파일(mybatis-config.xml)">Mybatis 설정 파일(mybatis-config.xml)</h3>
 <p>위의 예제 코드에서 사용한 <span class="command">mybatis-config.xml</span> 파일입니다. 이번 포스팅의 주제와는 거리가 있지만 참고 차원에서 남겨봅니다. 자세한 설정 방법은 <a href="http://www.mybatis.org/mybatis-3/ko/configuration.html">Mybatis3 - 매퍼 설정</a>을 참고하세요.</p>
 <pre class="prettyprint lang-xml">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;

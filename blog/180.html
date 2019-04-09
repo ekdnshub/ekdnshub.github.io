@@ -52,15 +52,15 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>이번 포스팅은 팩토리 메소드 패턴<span class="refer">Factory Method Pattern</span>에 대해 알아보고자 합니다.</p>
-<h2>Factory Method Pattern</h2>
+<h2 id="Factory_Method_Pattern">Factory Method Pattern</h2>
 <p>기본적으로 팩토리는 공장이란 뜻을 내포하고 있습니다. 따라서 팩토리 메소드 패턴도 무언가를 위한 공장이라고 보면 됩니다. 일반적으로 팩토리 메소드 패턴은 다음처럼 말할 수 있습니다.</p>
 <div class="green">
 <p>객체를 만들어내는 부분을 서브 클래스<span class="refer">Sub-Class</span>에 위임하는 패턴.</p>
 </div>
 <p>즉, <span class="command">new</span> 키워드를 호출하는 부분을 서브 클래스에 위임하는 겁니다. 결국 팩토리 메소드 패턴은 <strong>객체를 만들어내는 공장(Factory 객체)을 만드는 패턴</strong>이라 이해하면 됩니다.</p>
-<h2>Example</h2>
+<h2 id="Example">Example</h2>
 <p>사실 위의 정의만으로는 알 수 없기 때문에 예제를 진행하고자 합니다. 예제로 쓸 소재는 "로봇"입니다. 여러 종류의 로봇을 생상하는 "공장"도 있어야 할 것입니다. 따라서 로봇과 로봇공장을 만들어서 예제를 돌려봅니다. 예제 코드의 패키지명은 <span class="command">pattern.factory</span>입니다. 혹시라도 코드를 그대로 사용하신다면 주의하시기 바랍니다.</p>
-<h3>Structure</h3>
+<h3 id="Structure">Structure</h3>
 <p>실제로 예제 코드를 작성하기 전에 간략히 구조를 살펴봅니다.</p>
 <pre>
 Robot(abstract class)
@@ -72,7 +72,7 @@ RobotFactory(abstract class)
 	┗ ModifiedSuperRobotFactory
 </pre>
 <p>두종류의 로봇(SuperRobot, PowerRobot)과 두종류의 로봇공장(SuperRobotFactory, ModifiedSuperRobotFactory)을 만들 예정입니다. 이제부터는 실제 코드를 봅시다.</p>
-<h3>Robot</h3>
+<h3 id="Robot">Robot</h3>
 <p>로봇 클래스는 다음처럼 작성했습니다. 각각 차례대로 Robot, SuperRobot, PowerRobot입니다. 여기서 설명드릴건 딱히 없습니다. 한가지 있다면 추후 클래스의 구별을 위해 개별적으로 이름(name)을 반환하는 메소드가 작성되어 있습니다.</p>
 <pre class="prettyprint lang-java">
 package pattern.factory;
@@ -101,7 +101,7 @@ public class PowerRobot extends Robot {
 	}
 }
 </pre>
-<h3>RobotFactory</h3>
+<h3 id="RobotFactory">RobotFactory</h3>
 <p>팩토리 메소드 패턴의 꽃은 역시 팩토리 클래스입니다. 차례대로 봅시다. 첫번째 보이는 코드는 기본 팩토리 클래스입니다.</p>
 <pre class="prettyprint lang-java">
 package pattern.factory;
@@ -142,7 +142,7 @@ public class ModifiedSuperRobotFactory extends RobotFactory {
 	}
 }
 </pre>
-<h3>Test Code</h3>
+<h3 id="Test_Code">Test Code</h3>
 <p>준비가 다 되었다면 메인 프로그램을 작성해서 돌려봅시다.</p>
 <pre class="prettyprint lang-java">
 package pattern.factory;
@@ -173,9 +173,9 @@ SuperRobot
 PowerRobot
 </pre>
 <p>메인 프로그램에서 <span class="command">new</span> 키워드가 없다는 것을 확인 할 수 있습니다. 객체 생성을 팩토리 클래스에 위임한 결과 입니다. 또한 메인 프로그램은 어떤 객체가 생성 되었는지 신경 쓰지 않고 단지 반환된 객체를 사용만 하면 됩니다. 또한 새로운 로봇이 추가 되고 새로운 팩토리가 추가 된다 하더라도 메인 프로그램에서 변경할 코드는 최소화됩니다.</p>
-<h2>Summary</h2>
+<h2 id="Summary">Summary</h2>
 <p>팩토리 메소드 패턴을 사용하는 이유는 클래스간의 결합도를 낮추기 위한것입니다. 결합도라는 것은 간단히 말해 <strong>클래스의 변경점이 생겼을 때 얼마나 다른 클래스에도 영향을 주는가</strong>입니다. 팩토리 메소드 패턴을 사용하는 경우 직접 객체를 생성해 사용하는 것을 방지하고 서브 클래스에 위임함으로써 보다 효율적인 코드 제어를 할 수 있고 의존성을 제거합니다. 결과적으로 결합도 또한 낮출 수 있습니다.</p>
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p>팩토리 메소드 패턴에 대해 알아봤습니다. 혹시라도 이슈 될만한 내용이 있다면 코멘트 부탁드립니다. :D</p>
 </div>
 				</article>

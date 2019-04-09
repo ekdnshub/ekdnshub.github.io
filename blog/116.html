@@ -52,7 +52,7 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>이 포스팅은 템플릿 메소드(Template Method) 패턴에 대해서입니다. 간단하게 최종 코드를 먼저 보고 그 뒤 하나씩 구현해보겠습니다.</p>
-<h4>최종 코드</h4>
+<h4 id="최종_코드">최종 코드</h4>
 <pre class="prettyprint lang-java">
 public class TemplateMain {
 	public static void main(String[] args) {
@@ -75,7 +75,7 @@ public class TemplateMain {
 }
 </pre>
 <p>하지만 최종코드만 봐서는 딱히 뭐가 다르게 구현되었는지 모르겠네요. 다만 주석 내용에 <span class="command">readyToBattle</span> 메소드를 실행하기 위한 정보가 있습니다. 비슷한것도 있고 다른것도 있네요. 일단 전사, 궁사, 마법사가 같이 사용할 수 있도록 공통의 추상 클래스(abstract class)를 만들어 봅시다. 일단 전부 인간이라는 가정이니 "Person" 정도가 좋겠네요.</p>
-<h4>공통 추상 클래스</h4>
+<h4 id="공통_추상_클래스">공통 추상 클래스</h4>
 <pre class="prettyprint lang-java">
 public abstract class Person {
 
@@ -114,10 +114,10 @@ public abstract class Person {
 <p>간략하게 살펴보면 <span class="command">readyToBattle</span> 메소드를 실행하면 나머지 메소드가 차례대로 실행되는 것을 볼 수 있습니다. 이 중 <span class="command">startBodyTraining</span> 메소드는 전사, 궁사, 마법사가 전부 체력 단련을 하는 공통점이 있기 때문에 <span class="command">abtract</span> 키워드가 붙지 않았습니다.</p>
 <p>여기서 특이한 메소드가 있는데 바로 <span class="command">isUsingPrepareOther</span> 메소드입니다. 이 메소드는 후킹(Hooking)이라고 하는 용도로 사용합니다. 지금은 사용하지 않지만 상속 받은 클래스에서 오버라이드 해서 추가적으로 알고리즘을 변경할 수 있죠.</p>
 <p>후킹을 어떻게 쓰는지는 다음 절에서 확인해 봅시다. 이제부터 전사, 궁사, 마법사 클래스를 만듭니다.</p>
-<h5>훅 메소드(hook method)</h5>
+<h5 id="훅_메소드(hook_method)">훅 메소드(hook method)</h5>
 <p><strong>abstract 키워드를 붙이면 상속 받은 클래스는 반드시 해당 메소드를 구현해야 하지만 abstract 키워드를 붙이지 않고 훅 메소드로 만들면 반드시 구현할 필요가 없습니다.</strong> 상속 받은 클래스에서는 선택적으로 오버라이드할 수 있다는 얘기가 됩니다.</p>
-<h4>직업별 클래스</h4>
-<h5>전사</h5>
+<h4 id="직업별_클래스">직업별 클래스</h4>
+<h5 id="전사">전사</h5>
 <pre class="prettyprint lang-java">
 public class Warrior extends Person {
 
@@ -133,7 +133,7 @@ public class Warrior extends Person {
 }
 </pre>
 <p>전사 클래스는 내용이 별 것 없습니다. 전투 준비를 위해서 <span class="command">prepareWeapon</span> 메소드와 <span class="command">prepareArmor</span> 메소드에 준비할 것을 입력했습니다.</p>
-<h5>궁사</h5>
+<h5 id="궁사">궁사</h5>
 <pre class="prettyprint lang-java">
 public class Archer extends Person {
 
@@ -157,7 +157,7 @@ public class Archer extends Person {
 }
 </pre>
 <p>궁사 클래스에서는 후킹(Hooking)이 필요합니다. 화살을 준비하려면 기존에 처리 하지 않았던 <span class="command">prepareOther</span> 메소드를 활성화 시켜야 하죠. 따라서 <span class="command">isUsingPrepareOther</span> 메소드를 오버라이드하고 값을 <span class="command">true</span>로 바꿔줬습니다. 앞으로 궁사 클래스가 전투 준비를 하면 <span class="command">prepareOther</span> 메소드도 실행됩니다. 다만 갑옷은 입지 않아서 <span class="command">prepareArmor</span> 메소드에는 공백으로 놔뒀습니다.</p>
-<h5>마법사</h5>
+<h5 id="마법사">마법사</h5>
 <pre class="prettyprint lang-java">
 public class Wizard extends Person {
 
@@ -173,7 +173,7 @@ public class Wizard extends Person {
 }
 </pre>
 <p>마법사 클래스는 전사 클래스와 동일하게 작성합니다. 전투 준비를 위해서 지팡이를 준비하고 로브를 입으면 되죠.</p>
-<h4>실행 결과</h4>
+<h4 id="실행_결과">실행 결과</h4>
 <p>이제 실제로 최종 코드를 돌릴 수 있게 되었습니다. 최종 코드를 돌려보면 다음과 같은 결과물이 출력됩니다.</p>
 <pre class="console">
 체력을 단련합니다.
@@ -193,7 +193,7 @@ public class Wizard extends Person {
 System.out.println("---");
 </pre>
 <p>결과물만 놓고 보면 처음에 최종 코드의 주석대로 잘 나오는 것 같네요.</p>
-<h4>왜 사용할까요?</h4>
+<h4 id="왜_사용할까요?">왜 사용할까요?</h4>
 <p>템플릿 메소드 패턴은 "알고리즘의 뼈대"를 맞추는 것에 있습니다. 즉, 전체적인 레이아웃을 통일 시키지만 상속받은 클래스로 하여금 어느정도 유연성을 주도록하는 디자인 패턴입니다.</p>
 <p>추상 메소드(abstrcat method)와 훅 메소드(hook method)를 적절히 사용해서 전체적인 알고리즘의 뼈대를 유지하되 유연하게 기능을 변경할 수 있도록 하고자 할 때 사용하면 유용하겠네요. :3</p>
 </div>

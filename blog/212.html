@@ -52,13 +52,13 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>이번 포스트는 리눅스(CentOS)에서 SSH의 사용법에 대해 알아보고자 합니다. 간단한 ssh의 설명부터 시작하겠습니다!</p>
-<h2>SSH?</h2>
+<h2 id="SSH?">SSH?</h2>
 <blockquote>
 <p>Secure Shell, or SSH, is a cryptographic (encrypted) network protocol to allow remote login and other network services to operate securely over an unsecured network.</p>
 <cite><a href="https://en.wikipedia.org/wiki/Secure_Shell">https://en.wikipedia.org/wiki/Secure_Shell</a></cite>
 </blockquote>
 <p>시큐어쉘<span class="refer">Secure Shell</span>은 암호화된 네트워크 프로토콜입니다. 일반적으로 암호화 하지 않는 네트워크 위에서 암호화된 접속 및 서비스 사용을 위해 사용합니다. 시큐어쉘을 통한 모든것은 암호화 되어 동작하기 때문에 중간에 메시지를 가로채더라도 원문은 알 수가 없죠.</p>
-<h2>Linux SSH</h2>
+<h2 id="Linux_SSH">Linux SSH</h2>
 <p>그러면 리눅스에서의 SSH는 어떻게 사용할까요? 일반적인 커맨드는 아래와 같습니다.</p>
 <pre class="console">
 # 1.
@@ -67,7 +67,7 @@ $ ssh user@hostname
 $ ssh user@127.0.0.1
 </pre>
 <p>기본적인 ssh 접속은 위와 같은 <span class="command">ssh</span> 커맨드를 이용하면 됩니다. 접속에 성공하면 그때부터는 원격 호스트의 쉘을 사용하게 됩니다. 언제든지 <span class="command">exit</span> 명령어를 통해 원격 호스트의 쉘을 종료하고 원래의 쉘로 돌아올 수 있습니다.</p>
-<h2>Linux .ssh Directory</h2>
+<h2 id="Linux_.ssh_Directory">Linux .ssh Directory</h2>
 <p>하지만 <span class="command">ssh</span> 접속을 할때 항상 비밀번호를 묻게 되어 있습니다. 신뢰할 수 없는 호스트에 한해서이긴 합니다. 호스트가 한대나 두대 정도라면 일일히 비밀번호를 입력하고 원격 호스트의 쉘로 접속할 수도 있겠지만, 요즘 같은 분산 처리가 흔한 상황이라면 기본적으로 돌리는 호스트 대수는 최소 몇대에서 몇십대에 이릅니다.</p>
 <p>효율적인 측면에서 좋지 않습니다. 따라서 <span class="command">ssh</span>로 접속시 비밀번호를 묻지 않게 할 수 있다면 일반적인 쉘스크립트<span class="refer">.sh</span>를 만들어서 일괄적으로 처리할 수 있겠죠.</p>
 <p>그래서 필요한 것이 소제목에 있던 <span class="command">.ssh</span> 디렉토리입니다. 해당 디렉토리는 모든 계정에 일반적으로 존재합니다.</p>
@@ -84,7 +84,7 @@ drwxr-xr-x+ 33 jdm  jdm  1122 10 27 11:35 ..
 -rw-r--r--   1 jdm  jdm   749  9  2 12:50 authorized_keys
 </pre>
 <p>여기서 보이는 파일들이 흔하게 접할 파일들입니다. 하나씩 알아봅시다.</p>
-<h3>id_rsa[.pub]</h3>
+<h3 id="id_rsa[.pub]">id_rsa[.pub]</h3>
 <p>이 파일은 일반적으로 <span class="command">ssh-keygen</span>이라는 커맨드를 통해 만들어집니다. 디폴트 파일명이 id_rsa로 되어 있는 경우가 많습니다. 이 파일을 한번 만들어 봅시다.</p>
 <pre class="console">
 $ &lt;span class="light"&gt;ssh-keygen&lt;/span&gt;
@@ -137,7 +137,7 @@ $ cat id_rsa
 -----END RSA PRIVATE KEY-----
 </pre>
 <p>공개키와는 확실히 다르고 <strong>PRIVATE KEY</strong>라고 대문짝만하게 쓰여 있습니다. 신뢰할수 없다면 비밀키는 공개하지 않는 것이 좋습니다.</p>
-<h3>authorized_keys</h3>
+<h3 id="authorized_keys">authorized_keys</h3>
 <p>이 파일은 현재 자신의 호스트에서 신뢰 할 수 있는 호스트들의 공개키들을 저장합니다. 여기서 <strong>신뢰 할 수 있다</strong>의 뜻은 비밀번호 없이 자신의 호스트로 접속 할 수 있다는 겁니다. 물론 방화벽이나 iptable같은 것에 막히지 않는다면 말이죠.</p>
 <p>따라서 다른 호스트에서 만든 공개키를 그대로 <span class="command">authorized_keys</span>파일 내부에 복사해 넣으면 비밀번호 없이 해당 호스트로 접근이 가능합니다.</p>
 <pre class="console">
@@ -148,7 +148,7 @@ ssh-rsa ...
 ....== other@other.host
 </pre>
 <p>위처럼 여러개의 공개키를 넣어놓을 수 있습니다.</p>
-<h2>Summary</h2>
+<h2 id="Summary">Summary</h2>
 <p>간단하게 예를 들어봅시다. A호스트와 B호스트가 있다고 가정했을때 A호스트에서 B호스트에 접근하려면 <span class="command">ssh</span> 커맨드를 통해 접속할 수 있습니다.</p>
 <pre class="console">
 $ ssh root@B.HOST

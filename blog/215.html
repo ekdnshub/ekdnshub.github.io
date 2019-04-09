@@ -52,7 +52,7 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>간단하게 자바 프로퍼티<span class="refer">Java Properties</span>에 대해 테스트 해봤다.</p>
-<h2>Setup</h2>
+<h2 id="Setup">Setup</h2>
 <pre class="prettyprint lang-sh">
 # application.properties
 demo.value=test
@@ -62,7 +62,7 @@ demo.type=dev
 # application-prod.properties
 demo.type=production
 </pre>
-<h2>Java Code</h2>
+<h2 id="Java_Code">Java Code</h2>
 <pre class="prettyprint lang-java">
 import java.io.IOException;
 import java.io.InputStream;
@@ -157,7 +157,7 @@ public class PropertiesDemo {
     }
 }
 </pre>
-<h2>Result</h2>
+<h2 id="Result">Result</h2>
 <pre class="console">
 -- listing properties --
 demo.type=dev

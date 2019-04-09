@@ -51,7 +51,7 @@
                     <h1 id="content_title">레디스 센티널 예제(Redis Sentinel)</h1>
 					<!-- 본문 -->
 					<div id="content">
-<h2>Redis Sentinel</h2>
+<h2 id="Redis_Sentinel">Redis Sentinel</h2>
 <p>이번 포스팅은 지난번 <a href="/blog/157">Redis Replication</a>에 이어서 Redis Sentinel이라는 도구를 설명합니다. Redis Sentinel은 Redis 고가용성<span class="refer">High Availablility</span>을 위한 기능을 제공합니다. 대표적으로 아래와 같은 기능들을 보다 사용하기 쉽게 해줍니다.</p>
 <ul>
 <li>모니터링(Monitoring)</li>
@@ -60,9 +60,9 @@
 <li>환경 구성 프로바이더(Configuration provider)</li>
 </ul>
 <p>해당 부분에 대한 자세한 내용은 <a href="http://redis.io/topics/sentinel">Redis Sentinel Documentation</a>에서 검토 하실 수 있습니다.</p>
-<h2>Example</h2>
+<h2 id="Example">Example</h2>
 <p>지난번 Master/Slave 구조를 위해 만들어뒀던 내용에서 Sentinel(이하 "센티널")들을 덧붙여 볼 예정입니다.</p>
-<h3>Architecture</h3>
+<h3 id="Architecture">Architecture</h3>
 <pre class="diagram">
              ╋─────────╋  ╋─────────╋
              ┃Slave             ┃  ┃Slave             ┃
@@ -91,7 +91,7 @@
 <li>센티널들은 기본으로 <strong>TCP port 26379</strong>번 포트를 이용합니다.</li>
 </ul>
 </div>
-<h3>Sentinel Config</h3>
+<h3 id="Sentinel_Config">Sentinel Config</h3>
 <p>Redis가 설치된 디렉토리에 <span class="command">sentinel.conf</span>라는 이름으로 환경 설정 파일이 있습니다. 자세한 주석은 해당 파일을 참조하세요. 참고로 위의 구조도에서 사용할 센티널들의 포트는 각각 11001~11003 입니다. 밑의 환경 설정 파일을 각 포트별로 만들어주면 됩니다.</p>
 <pre class="prettyprint lang-sh">
 # 11001.conf ~ 11003.conf
@@ -126,7 +126,7 @@ sentinel parallel-syncs mymaster 1
 그러나 SDOWN 상태인 센티널들이 많아진다면 이는 <strong>ODOWN</strong> 상태, 즉 <strong>객관적인 다운</strong> 상태로 바뀝니다. 이때부터 실질적인 페일오버(failover) 작업이 시작됩니다.<br>
 </p>
 </div>
-<h3>Master/Slave Config</h3>
+<h3 id="Master/Slave_Config">Master/Slave Config</h3>
 <p>센티널 환경 설정이 끝나면 이번엔 Master/Slave의 환경 설정을 조금 바꿔줘야 합니다. <a href="/blog/157">Redis Replication</a> 포스팅을 따라하셨다면 Master/Slave의 안전(?)을 위해 <span class="command">masterauth</span>와 <span class="command">requirepass</span>의 값을 줬던 것을 기억하실겁니다. 이제 Master/Slave는 전부 두 값을 가져야 합니다. 나중에 센티널이 페일오버 작업을 하게 된다면 Slave가 Master가 될 수 있고 Master가 Slave로 될 수 있습니다. 따라서 모든 가정을 염두하고 값을 넣어야 합니다.</p>
 <p>아래는 Master/Slave의 설정 파일 값 중 일부입니다. 아래 부분을 추가 또는 바꿔주셔야합니다.</p>
 <pre class="prettyprint lang-sh">
@@ -134,7 +134,7 @@ sentinel parallel-syncs mymaster 1
 masterauth foobared
 requirepass foobared
 </pre>
-<h3>Execute Sentinel</h3>
+<h3 id="Execute_Sentinel">Execute Sentinel</h3>
 <p>이제 센티널들을 가동할 때입니다. 아래처럼 세 개의 센티널들을 띄우면 됩니다.</p>
 <pre class="prettyprint lang-sh">
 $ ./redis-sentinel 11001.conf &
@@ -150,7 +150,7 @@ $ ./redis-sentinel 11003.conf &
 ./redis-sentinel *:11002 [sentinel]
 ./redis-sentinel *:11003 [sentinel]
 </pre>
-<h3>check log</h3>
+<h3 id="check_log">check log</h3>
 <p>이번엔 센티널에 접속해서 어떤 정보가 있는지 확인해 봅시다.</p>
 <pre class="console">
 $ ./redis-cli -p 11001
@@ -168,7 +168,7 @@ sentinel_scripts_queue_length:0
 master0:name=mymaster,status=ok,address=127.0.0.1:10000,slaves=2,sentinels=3
 </pre>
 <p>마지막 줄을 보시면 master는 10000번 포트에 있고 slave는 2대, 센티널은 3대가 바라보고 있다는 것을 알 수 있습니다. 그러면 정말 failover가 되는지 확인을 해봅시다.</p>
-<h3>Test FailOver</h3>
+<h3 id="Test_FailOver">Test FailOver</h3>
 <p>페일오버 시나리오는 다음과 같습니다.</p>
 <ul>
 <li>Master 인스턴스 셧다운(10000번 포트)</li>
@@ -176,7 +176,7 @@ master0:name=mymaster,status=ok,address=127.0.0.1:10000,slaves=2,sentinels=3
 <li>Old Master 재기동(10000번 포트)</li>
 <li>작업 결과 확인</li>
 </ul>
-<h4>Master Instance ShutDown</h4>
+<h4 id="Master_Instance_ShutDown">Master Instance ShutDown</h4>
 <p>실제로 Master를 떨궈봅시다.</p>
 <pre class="console">
 $ 10000.sh stop
@@ -243,7 +243,7 @@ repl_backlog_histlen:36589
 ...(하략)
 </pre>
 <p>지금 역할(role)이 master로 되어 있군요. 그리고 slave는 1로 표시 되고 있습니다.</p>
-<h4>Restart Old Master</h4>
+<h4 id="Restart_Old_Master">Restart Old Master</h4>
 <p>이번에 정상적으로 예전 Master(Port:10000)가 복구 되었다고 가정합니다.</p>
 <pre class="console">
 $ ./10000.sh start
@@ -274,7 +274,7 @@ repl_backlog_histlen:0
 ...(하략)
 </pre>
 <p>실제로 레디스 콘솔에 접속해서 10000번 포트의 정보를 살펴보면 slave로 역할이 바뀌어 있음을 알 수 있습니다.</p>
-<h2>마무리</h2>
+<h2 id="마무리">마무리</h2>
 <p>Redis Replication + Sentinel 조합에 대해 알아 봤습니다. 다음은 레디스 클러스터(Redis Cluster)에 대해 시간이 나면 포스팅하는 것으로 하고, 이만 줄이겠습니다. :3</p>
 </div>
 				</article>

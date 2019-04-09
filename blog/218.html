@@ -51,9 +51,9 @@
                     <h1 id="content_title">아파치 스톰 클러스터 구축(Apache Storm Cluster Setup)</h1>
 					<!-- 본문 -->
 					<div id="content">
-<h2>Apache Storm Cluster Setup</h2>
+<h2 id="Apache_Storm_Cluster_Setup">Apache Storm Cluster Setup</h2>
 <p>스톰 클러스터를 구축해 봅시다. <strong>이 포스트는 클러스터 구축에만 초점이 맞춰져 있습니다.</strong> 용어에 대한 설명은 간략하게 하거나 또는 없을 수 있습니다. :)</p>
-<h3>Prepare to library for Storm Cluster Setup</h3>
+<h3 id="Prepare_to_library_for_Storm_Cluster_Setup">Prepare to library for Storm Cluster Setup</h3>
 <p>우선 다음 목록에 있는 프로그램들을 설치해야 합니다.</p>
 <div class="none">
 <ul>
@@ -62,9 +62,9 @@
 </ul>
 </div>
 <p>위 프로그램들은 버전을 먼저 확인해보고 설치 되어있다면 지나갑니다. 다만 파이썬은 버전에 민감할 수 있으니 <strong>문제가 생기면 파이썬 버전을 맞춰봅시다.</strong></p>
-<h3>Zookeeper Cluster Setup</h3>
+<h3 id="Zookeeper_Cluster_Setup">Zookeeper Cluster Setup</h3>
 <p>다음은 주키퍼 클러스터를 구축합니다. 구축 방법은 <a href="/blog/214">Zookeeper Cluster(Multi-Node)</a> 링크를 확인하세요.</p>
-<h3>Storm Cluster Hosts</h3>
+<h3 id="Storm_Cluster_Hosts">Storm Cluster Hosts</h3>
 <p>주키퍼 클러스터 구축까지 끝났으면 스톰 클러스터를 구축해봅시다. 다음과 같은 호스트들을 준비하고 진행합니다. 이번 포스트에서는 호스트 3대를 기준으로 구축합니다.</p>
 <div class="none">
 <ul>
@@ -73,7 +73,7 @@
 <li>storm-3.jdm.kr</li>
 </ul>
 </div>
-<h3>Download Apache Storm Package(Each node)</h3>
+<h3 id="Download_Apache_Storm_Package(Each_node)">Download Apache Storm Package(Each node)</h3>
 <p>스톰 패키지를 다운로드 받아야 합니다. <strong>모든 노드에서 진행</strong>합니다. 저는 <span class="command">0.10.0</span> 버전으로 진행했습니다.</p>
 <pre class="prettyprint lang-sh">
 $ wget http://apache.mirror.cdnetworks.com/storm/apache-storm-0.10.0/apache-storm-0.10.0.tar.gz
@@ -81,7 +81,7 @@ $ tar -xzf apache-storm-0.10.0.tar.gz
 $ ln -s apache-storm-0.10.0 storm
 $ cd storm
 </pre>
-<h3>Storm Configuration(Each node)</h3>
+<h3 id="Storm_Configuration(Each_node)">Storm Configuration(Each node)</h3>
 <p>모든 노드에 스톰 패키지를 다운로드 받았다면 환경설정을 해봅시다. 이부분 역시 모든 노드에서 진행합니다. 참고로 <span class="command">_storm_root_</span>이 뜻하는 것은 스톰 패키지가 존재하는 루트 디렉토리입니다.</p>
 <p>수정할 파일은 <span class="command">_storm_root_/conf/storm.yaml</span> 파일입니다.</p>
 <pre class="prettyprint lang-sh">
@@ -98,20 +98,20 @@ storm.zookeeper.servers:
 
 nimbus.seeds: ["storm-1.jdm.kr"]
 </pre>
-<h3>Start Storm Cluster</h3>
+<h3 id="Start_Storm_Cluster">Start Storm Cluster</h3>
 <p>환경 설정까지 끝났다면 이젠 구동시켜야 할 차례입니다. 호스트 중에서 1번 호스트<span class="refer">storm-1.jdm.kr</span>는 <span class="command">nimbus(master)</span>가 옆에 있었다는 것 기억하시나요?</p>
 <p>이번 포스트에서 1번 호스트는 님버스<span class="refer">nimbus</span> 서버의 역할도 같이 합니다. 자세한 내용은 <a href="http://storm.apache.org/documentation.html">스톰 문서</a>를 확인하세요.</p>
-<h4>Start nimbus(first node only)</h4>
+<h4 id="Start_nimbus(first_node_only)">Start nimbus(first node only)</h4>
 <p>님버스는 마스터 노드에서 실행하는 데몬입니다. 다음과 같은 커맨드를 1번 노드에서만 진행합니다.</p>
 <pre class="prettyprint lang-sh">
 $ nohup _storm_root_/bin/storm nimbus &gt;&gt; nimbus.log 2&gt;&1 &
 </pre>
-<h4>Start supervisor(Each node)</h4>
+<h4 id="Start_supervisor(Each_node)">Start supervisor(Each node)</h4>
 <p>슈퍼바이저는 워커 노드에서 실행하는 데몬입니다. 각각의 노드에서 다음과 같은 커맨드로 기동합니다.</p>
 <pre class="prettyprint lang-sh">
 $ nohup _storm_root_/bin/storm supervisor &gt;&gt; supervisor.log 2&gt;&1 &
 </pre>
-<h4>Start storm UI(first node only)</h4>
+<h4 id="Start_storm_UI(first_node_only)">Start storm UI(first node only)</h4>
 <p>스톰 UI를 기동하는데 1번 노드에서만 진행합니다. 스톰 UI라는 것은 스톰 클러스터를 모니터링할 수 있게 도와주는 시각화 도구입니다. 웹으로 확인 할 수 있으므로 편리합니다.</p>
 <pre class="prettyprint lang-sh">
 $ nohup _storm_root_/bin/storm ui &gt;&gt; ui.log 2&gt;&1 &
@@ -120,12 +120,12 @@ $ nohup _storm_root_/bin/storm ui &gt;&gt; ui.log 2&gt;&1 &
 <div class="green">
 <p><strong><i class="fa fa-check fa-lg"></i> TIP.</strong> 스톰 UI에서 확인할 수 있는 정보를 REST API로도 확인할 수 있습니다. <a href="https://github.com/apache/storm/blob/master/docs/documentation/ui-rest-api.md">https://github.com/apache/storm/blob/master/docs/documentation/ui-rest-api.md</a>를 참조하세요.</p>
 </div>
-<h4>Start Logviewer(Each node)</h4>
+<h4 id="Start_Logviewer(Each_node)">Start Logviewer(Each node)</h4>
 <p>로그뷰어<span class="refer">Logviewer</span>는 스톰 UI에서 로그 파일을 바로 읽어볼 수 있도록 해주는 플러그인 같은 역할을 합니다.</p>
 <pre class="prettyprint lang-sh">
 $ nohup _storm_root_/bin/storm logviewer &gt; logviewer.log &
 </pre>
-<h4>Start Example Topology(first node only)</h4>
+<h4 id="Start_Example_Topology(first_node_only)">Start Example Topology(first node only)</h4>
 <p>예제로 주어진 토폴로지<span class="refer">Topology</span>를 실행시켜 봅시다. 1번 노드에서 진행합니다. 아래와 같은 방법으로 구동시켜볼 수 있습니다</p>
 <pre class="prettyprint lang-sh">
 # 예제 토폴로지 jar를 님버스에 업로드하는 과정입니다.
@@ -138,13 +138,13 @@ $ _storm_root_/bin/storm jar ../examples/storm-starter/storm-starter-topologies-
 <pre class="prettyprint lang-sh">
 $ cd _storm_root_/examples/storm-starter
 </pre>
-<h4>Kill Example Topology(first node only)</h4>
+<h4 id="Kill_Example_Topology(first_node_only)">Kill Example Topology(first node only)</h4>
 <p>토폴로지 프로세스를 내리는 방법은 많이 있지만 대표적으로 스톰 UI에서 <span class="command">Kill</span> 버튼으로 내리던지 아니면 커맨드 라인으로 실행합니다.</p>
 <pre class="prettyprint lang-sh">
 $ _storm_root_/bin/storm kill production-topology 1
 </pre>
 <p>물론 <span class="command">Kill</span> 외에도 다양한 커맨드가 존재합니다. 자세한 내용은 <a href="http://storm.apache.org/documentation/Command-line-client.html">http://storm.apache.org/documentation/Command-line-client.html</a>를 확인하세요.</p>
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p>간단하게 스톰 클러스터 구축에 대해 알아봤습니다. :)</p>
 </div>
 				</article>

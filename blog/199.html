@@ -52,12 +52,12 @@
 					<!-- 본문 -->
 					<div id="content">
 <p>이번 포스팅은 Springboot에서 예외 처리를 간편하게 만들어주는 <span class="command">@ControllerAdvice</span>에 대해 알아보고자 합니다.</p>
-<h2>Overview</h2>
+<h2 id="Overview">Overview</h2>
 <p>이번에 소개할 <span class="command">@ControllerAdvice</span>는 클래스의 경로를 검색해서 오류를 캐치할 구현 클래스를 만들게 도와줍니다. 일반적으로 <span class="command">@Controller</span> 또는 <span class="command">@RestController</span>가 선언된 클래스들에서 발생한 예외를 감지하고 적절한 응답을 만들어 낼 때 사용합니다.</p>
 <p>개인적으로 Springboot 사용시 <span class="command">@RestController</span>를 활용한 RESTful API를 만듭니다. 하지만 예외 처리를 안할 수는 없죠. 간단한 Springboot 프로젝트를 만들어 봅시다.</p>
-<h2>Create Project</h2>
+<h2 id="Create_Project">Create Project</h2>
 <p>Springboot 프로젝트를 하나 만든 뒤에 테스트 용도로 사용할 아래의 클래스들을 만들어 줍니다.</p>
-<h3>RuntimeException</h3>
+<h3 id="RuntimeException">RuntimeException</h3>
 <p>우선 만들것은 기존의 예외 클래스도 좋지만 별도의 예외 클래스를 만들어 가시적인 효과를 주는 것도 괜찮습니다. 따라서 런타임 실행 오류 클래스를 하나 만들어줍니다.</p>
 <pre class="prettyprint lang-java">
 public class TestException extends RuntimeException {
@@ -76,7 +76,7 @@ public class TestException extends RuntimeException {
 	}
 }
 </pre>
-<h3>Controller</h3>
+<h3 id="Controller">Controller</h3>
 <p>컨트롤러도 하나 만듭니다. 간단하게 루트 패스<span class="refer">/</span>로 접근시 아까전 만들어뒀던 <span class="command">TestException</span> 오류를 던져주는 코드를 넣었습니다.</p>
 <pre class="prettyprint lang-java">
 @RestController
@@ -87,7 +87,7 @@ public class TestController {
 	}
 }
 </pre>
-<h3>ErrorMessage</h3>
+<h3 id="ErrorMessage">ErrorMessage</h3>
 <p>에러 메시지를 담을 <span class="command">POJO</span> 클래스를 하나 만듭니다. 이 클래스는 추후 에러 메시지 <span class="command">JSON</span>으로 반환할 때 사용합니다.</p>
 <pre class="prettyprint lang-java">
 public class ErrorMessage {
@@ -108,7 +108,7 @@ public class ErrorMessage {
 	}
 }
 </pre>
-<h3>ControllerAdvice</h3>
+<h3 id="ControllerAdvice">ControllerAdvice</h3>
 <p>이 클래스가 이번 포스트에서 가장 중요합니다. 간단하게 설명드리면 <span class="command">@ControllerAdvice</span> 어노테이션을 선언하는 클래스는 추후 생기는 예외<span class="refer">Exception</span>를 <span class="command">catch</span>해서 처리합니다. 따라서 지금 작성된 클래스는 아까전 만들어 뒀던 <span class="command">TestException</span> 예외가 발생했을 경우 해당 예외를 처리하는 코드가 담겨 있습니다.</p>
 <pre class="prettyprint lang-java">
 @ControllerAdvice
@@ -141,7 +141,7 @@ protected ModelAndView handleConflict(RuntimeException ex, WebRequest request) {
 }
 </pre>
 <p>위처럼 처리도 가능하긴 합니다만, 이번 포스트에서는 이런 방법도 있구나 정도로만 알아두시면 될 것 같네요.</p>
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p>간단하게 예외 처리를 한 곳으로 모아 처리할 수 있는 <span class="command">@ControllerAdvice</span>에 대해 알아봤습니다. :D</p>
 </div>
 				</article>

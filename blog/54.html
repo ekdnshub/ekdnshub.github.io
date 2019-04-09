@@ -51,13 +51,13 @@
                     <h1 id="content_title">스트래티지 패턴(Strategy Pattern)</h1>
 					<!-- 본문 -->
 					<div id="content">
-<h2>Introduce</h2>
+<h2 id="Introduce">Introduce</h2>
 <p>전략 패턴 또는 스트래티지 패턴<span class="refer">Strategy Pattern</span>이라 불리는 디자인 패턴이 있습니다. 보통 디자인 패턴 서적에서는 처음으로 다루는 경우가 많은데 저는 좀 특이하게 중간쯤에 포스팅을 하게 되었네요.</p>
 <p>이번엔 프로그래머(Programmer) 클래스를 기준으로 설명하고자 합니다. 프로그래머들은 정말 다양한 개발 스킬을 갖추고 있어요. 대표적으로는 C/C++, Java가 있을거고 파이썬이라던가, 루비같은 언어도 있죠. 물론 웹에서 빠질 수 없는 자바스크립트도 있구요. 하지만 모든 프로그래머가 모든 프로그래밍 언어를 잘 다루는건 아닙니다. 각각 자신의 업무에 맞춰 특화된 스킬들을 가지고 있지요.</p>
 <p>그래서 이번엔 이런 다양한 프로그래머들을 어떻게 유연하게 표현하는가에 대해 초점을 맞추고 이것을 위해 디자인 패턴 중 '전략 패턴'을 사용할겁니다. 그럼 시작할게요. :)</p>
-<h2>Implement Strategy Pattern for Java</h2>
+<h2 id="Implement_Strategy_Pattern_for_Java">Implement Strategy Pattern for Java</h2>
 <p>자바로 전략 패턴을 사용한 간단한 예제를 구현해 봅시다.</p>
-<h3>Need Base Classes</h3>
+<h3 id="Need_Base_Classes">Need Base Classes</h3>
 <div class="green">
 <ul>
 <li><strong>Programmer Class</strong> - 프로그래머라면 기본적으로 가져야 할 클래스입니다.</li>
@@ -66,7 +66,7 @@
 </ul>
 </div>
 <p>우선 이정도로만 잡아놓고 시작해볼까요. UML을 그리면서 하고 싶지만, 역시 문자가 더 편하군요... -_-;</p>
-<h4>ClientSide Interface</h4>
+<h4 id="ClientSide_Interface">ClientSide Interface</h4>
 <pre class="prettyprint lang-java">
 // 클라이언트 사이드 스킬을 표현하기 위한 인터페이스
 public interface ClientSide {
@@ -75,7 +75,7 @@ public interface ClientSide {
 }
 </pre>
 <p>프로그래머의 덕목 중 "클라이언트" 사이드에 관련된 인터페이스입니다. 해당 인터페이스는 추후에 개발자 클래스에 멤버로 삽입됩니다.</p>
-<h4>ServerSide Interface</h4>
+<h4 id="ServerSide_Interface">ServerSide Interface</h4>
 <pre class="prettyprint lang-java">
 // 서버 사이드 스킬을 표현하기 위한 인터페이스
 public interface ServerSide {
@@ -84,7 +84,7 @@ public interface ServerSide {
 }
 </pre>
 <p>프로그래머의 덕목 중 "서버" 사이드에 관련된 인터페이스입니다. 해당 인터페이스는 추후에 개발자 클래스에 멤버로 삽입됩니다.</p>
-<h4>Programmer Class</h4>
+<h4 id="Programmer_Class">Programmer Class</h4>
 <pre class="prettyprint lang-java">
 // 프로그래머라면 이 클래스를 상속 또는 추가 구현 해야 합니다.
 public abstract class Programmer {
@@ -123,7 +123,7 @@ public abstract class Programmer {
 }
 </pre>
 <p>프로그래머 클래스입니다. 추상 클래스로 프로그래머 클래스를 바로 사용할 수 없습니다. 앞으로 프로그래머가 되고 싶은 클래스들은 이 클래스를 상속 받거나 추가 구현을 해야 합니다. 찬찬히 살펴보면 앞서서 보여드렸던 ClientSide, ServerSide 인터페이스가 멤버 변수로 정의 되어 있습니다. <span class="command">getAllSkill()</span>는 추상 메소드로 상속받은 클래스가 구현해야 합니다.</p>
-<h3>Implement Classes using base class</h3>
+<h3 id="Implement_Classes_using_base_class">Implement Classes using base class</h3>
 <p>뼈대는 완성이 되었습니다. 이제부턴 살을 붙여 나가야 하는 시점입니다. 제가 만들고자 하는 프로그래머는 총 세종류 입니다. 웹 프로그래머, 아마추어 프로그래머, 고급 웹 프로그래머죠.</p>
 <p>그리고 이들이 가질 스킬을 표현할 클래스는 네 종류입니다. 기초/고급 클라이언트 사이드 스킬, 기초/고급 서버 사이드 스킬입니다.</p>
 <p>정리하자면 총 일곱개의 클래스를 작성하면 됩니다. 엄청 많네요. 하나씩 정리하기 전에 박스 형태로 한번 보고 가면 좋을 것 같습니다.</p>
@@ -142,7 +142,7 @@ public abstract class Programmer {
 <li><span class="command">WebServerSide</span> - 기초 웹 서버 스킬</li>
 </ul>
 </div>
-<h4>Implement Skill Classes</h4>
+<h4 id="Implement_Skill_Classes">Implement Skill Classes</h4>
 <p>우선 스킬 클래스부터 작성을 해보겠습니다. 코드가 많기 때문에 부연 설명은 주석으로 대체하겠습니다.</p>
 <pre class="prettyprint lang-java">
 // 웹 클라이언트 사이드 스킬
@@ -181,7 +181,7 @@ public class AdvancedWebServerSide implements ServerSide {
 }
 </pre>
 <p>총 4가지의 스킬 클래스를 작성했습니다. 각각의 클래스는 필요한 인터페이스를 포함시킨 뒤 구현을 하는 것이 전부입니다.</p>
-<h4>Implement Programmer Classes</h4>
+<h4 id="Implement_Programmer_Classes">Implement Programmer Classes</h4>
 <p>이번엔 프로그래머 클래스를 작성하겠습니다. 스킬 클래스와 마찬가지로 코드가 많기 때문에 주석으로 대체하겠습니다.</p>
 <pre class="prettyprint lang-java">
 public class WebProgrammer extends Programmer {
@@ -238,7 +238,7 @@ public class AdvancedWebProgrammer extends Programmer {
 	}
 }
 </pre>
-<h3>Execute Test Program</h3>
+<h3 id="Execute_Test_Program">Execute Test Program</h3>
 <p>지금까지 만든 클래스들로 간단한 테스트 프로그램을 만들어서 실행해 봅시다.</p>
 <pre class="prettyprint lang-java">
 public class StrategyMain {
@@ -279,7 +279,7 @@ Javascript, CSS, Html, AnguarJS, Java
 [DynamicProgrammer]
 Javascript, Html, Java, C, C++, Python, Ruby
 </pre>
-<h2>Closing Remarks</h2>
+<h2 id="Closing_Remarks">Closing Remarks</h2>
 <p>전략 패턴은 갑작스런 알고리즘의 변화에도 유연하게 대처가능 합니다. 알고리즘을 캡슐화하기 때문입니다. 따라서 언제든지 알고리즘이 변경된다면 프로세스의 큰 틀을 바꾸지 않고도 유연한 프로그래밍을 할 수 있습니다. 모두 즐거운 프로그래밍이 되었으면 합니다! :)</p>
 <p><strong>P.S</strong> 상기 명시된 코드들은 커버리지가 100%가 아닙니다.. TT 설명을 위해 최소한으로만 작업했습니다.</p>
 </div>
