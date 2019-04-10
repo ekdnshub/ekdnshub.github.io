@@ -175,7 +175,7 @@ function addInfoBody(currentSeq){
 var referencePostTemplate = `
 	 <li id="toplist_{{seq}}">
 	 <a href="/blog/{{seq}}">
-	 <span style="display:block;">{{title}}<span class="pull-right hidden-xs"><span>{{category}}</span>│<span class="mycolor1">{{created}}</span></span></span>
+	 <span class="toplist_main_span">{{title}}<span class="pull-right hidden-xs"><span>{{category}}</span>│<span class="mycolor1">{{created}}</span></span></span>
 	 </a>
 	 </li>`;
 
@@ -191,18 +191,18 @@ function addReferencePost(item){
 function initReferencePost(){
 	var initBody = `
 			<hr>
-			<h3 style="font-size:1.5em; font-weight:bold;">Reference Post</h3>
-			<a href="javascript:;" id="top_more_after"><span class="more text-center" style="border-bottom: 1px solid #eee;">▲more</span></a>
-			<ul class="list-unstyled" style="margin-bottom: 0px;">	
+			<h3 id="reference_head">관련 포스트</h3>
+			<a href="javascript:;" id="top_more_after"><span class="more text-center">▲최신글</span></a>
+			<ul class="list-unstyled">
 			</ul>
-			<a href="javascript:;" id="top_more_before"><span class="more text-center" style="border-top: 1px solid #eee;">▼more</span></a>`;
+			<a href="javascript:;" id="top_more_before"><span class="more text-center">▼이전글</span></a>`;
 	$("#top_list").html(initBody);
 	
 	$("#top_more_after").click(function(){
 		$("#top_list ul li").each(function(){				
 			if( $(this).css("display") != "none" ){
 				for( var i = 0; i <= 5; i++ ){
-					showAnimationForReferenecePost($(this), "prev", i, i*100 );
+					showAnimationForReferenecePost($(this), "prev", i, i*40);
 				}
 			}
 		});
@@ -211,7 +211,7 @@ function initReferencePost(){
 		$($("#top_list ul li").get().reverse()).each(function(){				
 			if( $(this).css("display") != "none" ){
 				for( var i = 0; i <= 5; i++ ){
-					showAnimationForReferenecePost($(this), "next", i, i*100 );
+					showAnimationForReferenecePost($(this), "next", i, i*40);
 				}
 			}		
 		});
@@ -227,8 +227,11 @@ function makeReferencePost(seq){
 		addReferencePost(meta[data[i]]);
 	}
 
+    // 현재글 마크업 조작
 	$("#toplist_"+seq).data("current", true);
 	$("#toplist_"+seq).html($("#toplist_"+seq+" a").html());
+	$("#toplist_"+seq+">span").wrap("<strong>");
+	$("#toplist_"+seq+">strong>span").prepend("[현재글] ");
 
 	$("#top_list ul li").each(function(){
 		if( $(this).data("current") ){
@@ -316,6 +319,7 @@ $( document ).ready(function(){
 			<!-- 게시글 목록 -->
 			<div id="top_list" style="display:none; margin-bottom:1em;"></div>
 		</div>
+		<hr>
 		<!-- 한줄 공간 -->
 		<div id="comment_body" class="tab-content" style="margin-top:1em;"></div>
 	`;

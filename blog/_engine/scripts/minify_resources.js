@@ -61,7 +61,7 @@ var resourcesMinify = (function() {
               compressor: cleanCSS,
               input: [
                   "../resources/common/common.css",
-                  "../../css/view.css"
+                  "../resources/view/view.css"
               ],
               output: "../../css/view.min.css",
               callback: function(err, min) {

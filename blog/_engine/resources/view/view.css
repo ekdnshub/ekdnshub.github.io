@@ -23,10 +23,28 @@ body { font-family: 'Nanum Gothic Coding', monospace !important; /* background-c
 */
 
 /* 관련 카테고리 목록 */
-#top_list .more { display: block; }
-#top_list .more:hover { background:#eee; }
-#top_list li:hover { background:#eee; }
+#reference_head { position: relative; font-size:1.5em; font-weight:bold; font-family:"Nanum Gothic", sans-serif; padding:5px; }
+
+#top_list ul { margin-bottom: 10px; margin-top: 10px; font-family:"Nanum Gothic"; }
+#top_list .more { display: block; font-family:"Nanum Gothic"; font-weight: bold; }
+#top_list .more:hover { background:#e3f5ff; }
+#top_list .toplist_main_span { display:block; padding-top: 5px; padding-bottom: 5px; }
+#top_list li:hover { background:#e3f5ff; }
+#top_list li:after {
+content: ""; position: absolute; left: 15px; right:0; height: 1px;
+background-image: -ms-linear-gradient(left, #e3f5ff, #fff);
+background-image: -webkit-linear-gradient(left, #e3f5ff, #fff);
+background-image: -moz-linear-gradient(left, #e3f5ff, #fff);
+background-image: -o-linear-gradient(left, #e3f5ff, #fff);
+}
+#top_list a { color: #337ab7; }
 #top_list a:hover { text-decoration: none; }
+
+#top_more_after span { padding-top: 5px; padding-bottom: 5px; border: 1px solid #259CE0; }
+#top_more_after:focus { text-decoration: none; }
+
+#top_more_before span { padding-top: 5px; padding-bottom: 5px; border: 1px solid #259CE0; }
+#top_more_before:focus { text-decoration: none; }
 
 /* 타이틀 */
 #content_title { font-size:2.20rem; margin:0; padding-top:0.5em; font-weight:bold; }
