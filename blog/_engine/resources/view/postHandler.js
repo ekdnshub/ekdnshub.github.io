@@ -161,6 +161,10 @@ function addInfoBody(currentSeq){
         }
         $("#view_summary").hide();
     });
+
+    if ($("#content h1,#content h2,#content h3,#content h4,#content h5").length <= 0) {
+        $("#view_summary").hide();
+    }
 	
 	// 카테고리 이름 출력
 	$("#content_category").html(ArchiveGroup.findName(currentSeq)).show();

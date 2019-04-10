@@ -940,7 +940,11 @@ var postsInfo = (function(){
             "235":{
                 "title":"프록시 패턴(Proxy Pattern)",
                 "created":"2019-04-07"
-            }
+            },
+             "236":{
+                 "title":"2019년 개발 이야기",
+                 "created":"2019-04-10"
+             }
         }
 
         var keys = Object.keys(meta);
