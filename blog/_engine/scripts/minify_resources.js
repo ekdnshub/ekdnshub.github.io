@@ -9,6 +9,8 @@ $ npm install @node-minify/clean-css
 이 스크립트는 블로그에서 사용하는 모든 css/스크립트를 minify 하기 위한 용도로 제작 되었다.
 */
 
+const collectAllContentMetaUtil = require("./utils/CollectAllContentMetaUtil.js").getIns();
+
 const minify = require('@node-minify/core');
 const gcc = require('@node-minify/google-closure-compiler');
 const cleanCSS = require('@node-minify/clean-css');
@@ -36,23 +38,25 @@ var resourcesMinify = (function() {
 
         if (type == "all" || type == "meta") {
             console.log("블로그 포스트 정보 미니파이 시작...");
-            minify({
-              compressor: gcc,
-              input: [
-                  "../resources/meta/posts.js",
-                  "../resources/meta/ArchiveGroup.js",
-              ],
-              output: '../../scripts/posts.min.js',
-              options: {
-                compilationLevel: 'WHITESPACE_ONLY'
-              },
-              callback: function(err, min) {
-                if (err) {
-                  console.log("error:", err);
-                }
-                  console.log("블로그 포스트 정보 미니파이 완료!");
-              }
+            collectAllContentMetaUtil.execute().then(() => {
+                minify({
+                  compressor: gcc,
+                  input: [
+                      "../resources/meta/posts.js"
+                  ],
+                  output: '../../scripts/posts.min.js',
+                  options: {
+                    compilationLevel: 'SIMPLE'
+                  },
+                  callback: function(err, min) {
+                    if (err) {
+                      console.log("error:", err);
+                    }
+                      console.log("블로그 포스트 정보 미니파이 완료!");
+                  }
+                });
             });
+
         }
 
         if (type == "all" || type == "view") {

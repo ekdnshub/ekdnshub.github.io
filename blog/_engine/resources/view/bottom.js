@@ -2,7 +2,7 @@ var Bottom = (function(){
   /*
     maxPostsCnt : 최대 포스트 개수
   */
-  var init = function(maxPostsCnt){
+  var init = function(){
     var body = `
         <!-- bottom 영역 -->
         <div class="col-md-12" id="sidebar" role="navigation">
@@ -42,26 +42,44 @@ var Bottom = (function(){
     $("#left_wrap").append(body);
     
     /* 포스트 총 개수 출력 */
-	  $("#content_total").html(maxPostsCnt);
+	  $("#content_total").html(PostProvider.getPostMaxCount());
 	  
 	  /* 카테고리 메뉴 출력 */
 	  var template = `
 	        <li class="right_menu sub"><a href="{{seq}}"><span><i class="fa fa-angle-double-right"></i> {{name}}<span class="mycolor1">({{count}})</span></span></a></li>`;
 	  $("#right_category").html("");
     var html = "";
-    var names = ArchiveGroup.findNameAll();
-    for( var i = 0; i < names.length; i++ ){
-    	var name = names[i];
-    	var group = ArchiveGroup.findGroupByName(name);
-    	var obj = {};
-    	obj["name"] = name;
-    	obj["count"] = group.length;
-    	obj["seq"] = group[group.length-1];
-    	html += o.mapper.toHtml( template, obj );
-    }
+    var categoryMap = PostProvider.getCategoriesMap();
+    var categoryNames = Object.keys(categoryMap).sort();
+
+    var firstOrders = ["My Story", "Dev Story"].reverse();
+    var lastOrders = ["ETC"];
+    firstOrders.forEach(order => insertFirst(categoryNames, order));
+    lastOrders.forEach(order => insertLast(categoryNames, order));
+
+    categoryNames.forEach((category) => {
+        const data = categoryMap[category];
+        const obj = {};
+        obj["name"] = category;
+        obj["count"] = data.length;
+        obj["seq"] = data[data.length-1].postNumber;
+        html += o.mapper.toHtml( template, obj );
+    });
+
     $("#right_category").html(html);
   };
-  
+
+    function insertFirst(array, name) {
+        if (array.indexOf(name) < 0) return;
+        array.splice(array.indexOf(name), 1);
+        array.unshift(name);
+    };
+
+    function insertLast(array, name) {
+        if (array.indexOf(name) < 0) return;
+        array.splice(array.indexOf(name), 1);
+        array.push(name);
+    };
   
   return {
     init:init

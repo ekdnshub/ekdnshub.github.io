@@ -1,8 +1,7 @@
 $(document).ready(function(){
-    var totalPostCount = o.util.getObjectSize(postsInfo.getMeta());
+    var totalPostCount = PostProvider.getPostMaxCount();
     var currentIndex = ++totalPostCount;
-
-    ArchiveGroup.init(totalPostCount);
+    var postsMap = PostProvider.getMap();
 
     function load(count) {
         for(var i = 0 ; i < count; i++){
@@ -15,17 +14,15 @@ $(document).ready(function(){
         var template = `
             <div class="card mb-3">
                 <div class="card-body">
-                    <h4 class="card-title"><a href="/blog/{{seq}}" style="">{{title}}</a></h4>
+                    <h4 class="card-title"><a href="/blog/{{postNumber}}" style="">{{title}}</a></h4>
                     <p class="card-text"><small class="text-muted">{{category}} | {{created}}</small></p>
                 </div>
             </div>
         `;
 
-        if( postsMeta[printingId] != null ){
-            var data = postsMeta[printingId];
-            data.seq = printingId;
-            data.category = ArchiveGroup.findName(printingId);
-            html = o.mapper.toHtml(template, data);
+        if( postsMap[printingId] != null ){
+            var post = postsMap[printingId];
+            html = o.mapper.toHtml(template, post);
         }
 
         $("#list_wrap").append("<div class=\"card-deck\">"+html+"</div>");

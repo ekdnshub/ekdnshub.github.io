@@ -14,7 +14,7 @@ var extractContentMetaUtil = (function() {
     var execute = function (seq) {
         return new Promise((resolve, reject) => {
             var infoFlag = false;
-            var data = { seq: seq };
+            var data = { postNumber: Number(seq) };
             var chkKeyCnt = 0;
             fs.readFile(CONTENTS_PATH+"/"+seq, 'utf8', (err, body) => {
                 if (err) reject(new Error("[" + seq + "]번 파일이 없습니다."));

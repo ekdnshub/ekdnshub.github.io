@@ -1,6 +1,6 @@
-const originPosts = {{{data}}};
+const PostProvider = (function () {
 
-const PostProvider = (function (originPosts) {
+    const originPosts = {{{data}}};
 
     const IDX_POST_NUM = 0;
     const IDX_TITLE = 1;
@@ -64,4 +64,4 @@ const PostProvider = (function (originPosts) {
         getCategoriesMap: getCategoriesMap,
         getPostArrayByCategory: getPostArrayByCategory
     }
-})(originPosts);
+})();

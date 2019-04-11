@@ -104,7 +104,7 @@ function applyContentEffect(){
 	$("#content").after("<p class=\"text-right\"><a href=\"#\">Go Top(문서 처음으로)</a></p>");
 };
 
-function addInfoBody(currentSeq){
+function addInfoBody(post){
 	var body = `
 	  	<!-- 추가 정보 -->
 		<div id="add_info" style="padding-top:1em;">
@@ -118,7 +118,7 @@ function addInfoBody(currentSeq){
 		</div>
 		<hr>`;
 	
-	body = o.mapper.toHtml(body, { created: postsMeta[currentSeq].created });
+	body = o.mapper.toHtml(body, { created: post.created });
 	
 	$("#content_title").after(body);
 	
@@ -167,22 +167,21 @@ function addInfoBody(currentSeq){
     }
 	
 	// 카테고리 이름 출력
-	$("#content_category").html(ArchiveGroup.findName(currentSeq)).show();
+	$("#content_category").html(post.category).show();
 };
 
 // s:우측 카테고리 관련
 // start : ReferencePost
 var referencePostTemplate = `
-	 <li id="toplist_{{seq}}">
-	 <a href="/blog/{{seq}}">
+	 <li id="toplist_{{postNumber}}">
+	 <a href="/blog/{{postNumber}}">
 	 <span class="toplist_main_span">{{title}}<span class="pull-right hidden-xs"><span>{{category}}</span>│<span class="mycolor1">{{created}}</span></span></span>
 	 </a>
 	 </li>`;
 
 // order : true면 상단, false면 하단에 삽입
-function addReferencePost(item){
-	item["category"] = ArchiveGroup.findName(item["seq"]);
-	var html = o.mapper.toHtml(referencePostTemplate, item);
+function addReferencePost(post){
+	var html = o.mapper.toHtml(referencePostTemplate, post);
 	$("#top_list ul").append(html);
 
 	//$("#toplist_"+seq).hide().delay(500).fadeIn("slow");
@@ -218,13 +217,13 @@ function initReferencePost(){
 	});
 };
 
-function makeReferencePost(seq){
+function makeReferencePost(post){
+    var seq = post.postNumber;
 	$("#top_list ul").html("");
-	var data = ArchiveGroup.findGroup(seq);
+	var data = PostProvider.getPostArrayByCategory(post.category);
 	if( data == null ) return;
-	var meta = postsInfo.getMeta();
 	for(var i = data.length-1; i >= 0 ; i--){
-		addReferencePost(meta[data[i]]);
+		addReferencePost(data[i]);
 	}
 
     // 현재글 마크업 조작
@@ -287,25 +286,23 @@ function showAnimationForReferenecePost( _obj, order, loopCnt, delay ){
 // end : ReferencePost
 
 $( document ).ready(function(){
-	var maxPostsCnt = o.util.getObjectSize(postsInfo.getMeta()); // 포스트 총 개수
 	
 	/* current Seq 처리 */
 	var currentSeq = 1;
 	try {
 	    currentSeq = window.location.href.split("/").pop().match(/([0-9]+)/g)[0];
 	} catch (ex) { console.log("fail to get sequence."); }
-	
+
 	/* 블로그 부가 효과 선처리 */
 	// ie 사용자에게 크롬 브라우저 사용 유도
 	if( o.browser.isLowerIE(10) ){
 		o.toast.info("IE를 업그레이드 해주시거나 다른 브라우저를 이용하세요.");
 	}
 
-	/* 아카이브 그룹 초기화 */
-	ArchiveGroup.init(maxPostsCnt);
-	
+	var post = PostProvider.get(currentSeq);
+
 	/* 본문 상단 템플릿 처리 */
-	addInfoBody(currentSeq);
+	addInfoBody(post);
 	
 	/* 본문 이펙트 효과 모음 */
 	applyContentEffect();
@@ -331,11 +328,11 @@ $( document ).ready(function(){
 	
 	/* 관련 게시글 목록 생성 */
 	initReferencePost();
-	makeReferencePost(currentSeq);
+	makeReferencePost(post);
 
 	/* 코멘트 관련 처리 */
 	Comment.init(currentSeq);
 	
 	/* Bottom 처리(SideBar) */
-	Bottom.init(maxPostsCnt);
+	Bottom.init();
 });
