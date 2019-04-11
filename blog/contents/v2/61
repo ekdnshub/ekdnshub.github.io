@@ -2,7 +2,7 @@
 title=Google Go 문법 공부(한글 문서)
 created=2015-01-20
 ad=false
-category=Go
+category=ETC
 tags=Go
 ###
 #p 헐, Go 프로그래밍 언어의 매뉴얼이 별도로 있었습니다. 간단한 문법은 여기서 직접 돌려볼 수도 있고, 무엇보다 {!한글}입니다. 얼른 링크 타고 가셔서 공부해보세요! {$http://go-tour-kr.appspot.com/#1|Google Go를 한글로 공부하자!}

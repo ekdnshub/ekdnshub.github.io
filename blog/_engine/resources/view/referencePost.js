@@ -27,7 +27,7 @@ var ReferencePost = (function(PostProvider) {
             $("#top_list ul li").each(function(){
                 if( $(this).css("display") != "none" ){
                     for( var i = 0; i <= 5; i++ ){
-                        showAnimationForReferenecePost($(this), "prev", i, i*40);
+                        showAnimationForReferencePost($(this), "prev", i, i*40);
                     }
                 }
             });
@@ -36,7 +36,7 @@ var ReferencePost = (function(PostProvider) {
             $($("#top_list ul li").get().reverse()).each(function(){
                 if( $(this).css("display") != "none" ){
                     for( var i = 0; i <= 5; i++ ){
-                        showAnimationForReferenecePost($(this), "next", i, i*40);
+                        showAnimationForReferencePost($(this), "next", i, i*40);
                     }
                 }
             });
@@ -62,13 +62,13 @@ var ReferencePost = (function(PostProvider) {
             if( $(this).data("current") ){
                 $("#top_list ul li").hide();
 
-                showAnimationForReferenecePost($(this), "prev", 3, null);
-                showAnimationForReferenecePost($(this), "prev", 2, null);
-                showAnimationForReferenecePost($(this), "prev", 1, null);
-                showAnimationForReferenecePost($(this), "prev", 0, null);
-                showAnimationForReferenecePost($(this), "next", 1, null);
-                showAnimationForReferenecePost($(this), "next", 2, null);
-                showAnimationForReferenecePost($(this), "next", 3, null);
+                showAnimationForReferencePost($(this), "prev", 3, null);
+                showAnimationForReferencePost($(this), "prev", 2, null);
+                showAnimationForReferencePost($(this), "prev", 1, null);
+                showAnimationForReferencePost($(this), "prev", 0, null);
+                showAnimationForReferencePost($(this), "next", 1, null);
+                showAnimationForReferencePost($(this), "next", 2, null);
+                showAnimationForReferencePost($(this), "next", 3, null);
 
                 if($(this).prev().prev().prev().prev().length > 0 ){
                     $("#top_more_after").show();
@@ -98,7 +98,7 @@ var ReferencePost = (function(PostProvider) {
         }
     };
 
-    function showAnimationForReferenecePost( _obj, order, loopCnt, delay ){
+    function showAnimationForReferencePost( _obj, order, loopCnt, delay ){
         var obj = _obj;
         for( var i = 0 ; i < loopCnt; i++ ){
             obj = nextItemByOrder(order, obj);

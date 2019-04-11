@@ -52,7 +52,7 @@ var Bottom = (function(){
     var categoryMap = PostProvider.getCategoriesMap();
     var categoryNames = Object.keys(categoryMap).sort();
 
-    var firstOrders = ["My Story", "Dev Story"].reverse();
+    var firstOrders = ["My Story", "Dev Story", "Design Patterns", "Java", "Spring"].reverse();
     var lastOrders = ["ETC"];
     firstOrders.forEach(order => insertFirst(categoryNames, order));
     lastOrders.forEach(order => insertLast(categoryNames, order));

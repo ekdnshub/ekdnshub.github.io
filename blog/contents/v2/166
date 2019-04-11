@@ -2,7 +2,7 @@
 title=Node.js cluster(for using Multi Core CPU)
 created=2015-07-06
 ad=true
-category=Programming
+category=ETC
 tags=Node.js
 ###
 #p node.js는 기본적으로 싱글 스레드 기반입니다. 따라서 싱글 코어 CPU에서는 CPU 자원을 전부(?) 쓸 수 있는데요. 하지만 멀티 코어 CPU가 보편화 된 추세에 일반적으로만 node.js를 쓴다면 서버 CPU 자원이 낭비가 될겁니다.

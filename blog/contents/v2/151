@@ -2,7 +2,7 @@
 title=Netty 개요 및 에코 서버 예제
 created=2015-06-09
 ad=true
-category=Programming
+category=ETC
 tags=Netty
 ###
 #p Netty를 공부하고자 하는 의지(?)는 충만했으나 매번 핑계를 대고 진행 하지 않았습니다. 그래서 이번엔 각잡고 Netty(이하 '네티')가 어떤것인지 감을 잡는 용도의 포스팅을 올리고자 합니다.
