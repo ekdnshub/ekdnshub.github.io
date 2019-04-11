@@ -1,0 +1,67 @@
+const originPosts = {{{data}}};
+
+const PostProvider = (function (originPosts) {
+
+    const IDX_POST_NUM = 0;
+    const IDX_TITLE = 1;
+    const IDX_CREATED = 2;
+    const IDX_CATEGORY = 3;
+    const IDX_TAGS = 4;
+
+    function convertToObjectFrom(originPostArray) {
+        return {
+            postNumber: originPostArray[IDX_POST_NUM],
+            title: originPostArray[IDX_TITLE],
+            created: originPostArray[IDX_CREATED],
+            category: originPostArray[IDX_CATEGORY],
+            tags: originPostArray[IDX_TAGS]
+        }
+    }
+
+    function get(postNumber) {
+        return convertToObjectFrom(originPosts[postNumber - 1]);
+    }
+
+    function getMap() {
+        return originPosts
+            .map(post => convertToObjectFrom(post))
+            .reduce((result, post) => {
+                result[post.postNumber] = post;
+                return result;
+            }, {});
+    }
+
+    function getPostMaxCount() {
+        return originPosts.length;
+    }
+
+    function getCategoriesMap() {
+        return originPosts
+            .map(post => convertToObjectFrom(post))
+            .reduce((result, post) => {
+                if (!result[post.category]) {
+                    result[post.category] = [];
+                }
+                result[post.category].push(post);
+                return result;
+            }, {});
+    }
+
+    function getPostArrayByCategory(category) {
+        return originPosts
+            .map(post => convertToObjectFrom(post))
+            .filter(post => post.category === category)
+            .reduce((result, post) => {
+                result.push(post);
+                return result;
+            }, []);
+    }
+
+    return {
+        get: get,
+        getMap: getMap,
+        getPostMaxCount: getPostMaxCount,
+        getCategoriesMap: getCategoriesMap,
+        getPostArrayByCategory: getPostArrayByCategory
+    }
+})(originPosts);
