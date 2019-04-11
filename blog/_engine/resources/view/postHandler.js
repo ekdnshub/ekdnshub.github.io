@@ -101,7 +101,7 @@ function applyContentEffect(){
 	o.util.autoWidth("#content", "#content iframe");
 	
 	// 본문이 끝나면 처음으로 돌아갈 수 있는 링크 하나를 만들어준다.
-	$("#content").after("<p class=\"text-right\"><a href=\"#\">Go Top(문서 처음으로)</a></p>");
+	$("#content").after("<div id=\"content_tail\"><p class=\"text-right\"><a href=\"#\">Go Top(문서 처음으로)</a></p></div>");
 };
 
 function addInfoBody(post){
@@ -194,6 +194,10 @@ $( document ).ready(function(){
 	
 	/* 본문 이펙트 효과 모음 */
 	applyContentEffect();
+
+	/* 본문 하단 템플릿 처리 */
+	var tags = post.tags.join(", ");
+	$("#content_tail").prepend("<p><i class=\"fa fa-tags\"></i> " + tags + "</p>");
 	
 	/* 본문 하단 공간 */
 	var subAreaBody = `

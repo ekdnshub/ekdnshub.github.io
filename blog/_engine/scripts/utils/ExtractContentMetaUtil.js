@@ -1,5 +1,7 @@
 var fs = require("fs");
-var CONTENTS_PATH = "../../contents/v2";
+var path = require('path');
+
+var CONTENTS_PATH = path.resolve(__dirname + "/../../../contents/v2");
 
 var extractContentMetaUtil = (function() {
 
