@@ -101,7 +101,7 @@ function applyContentEffect(){
 	o.util.autoWidth("#content", "#content iframe");
 	
 	// 본문이 끝나면 처음으로 돌아갈 수 있는 링크 하나를 만들어준다.
-	$("#content").after("<div id=\"content_tail\" style=\"font-family:Nanum Gothic;\"><p class=\"text-right\"><a href=\"#\">Go Top(문서 처음으로)</a></p></div>");
+	$("#content").after("<div id=\"content_tail\" style=\"font-family:Nanum Gothic; padding-top: 1em;\"><p class=\"text-right\"><a href=\"#\">Go Top(문서 처음으로)</a></p></div>");
 };
 
 function addInfoBody(post){
