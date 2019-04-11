@@ -82,6 +82,7 @@ var resourcesMinify = (function() {
                   "../resources/view/bottom.js",
                   "../resources/view/comment.js",
                   "../resources/view/copyright.js",
+                  "../resources/view/referencePost.js",
                   "../resources/view/postHandler.js",
               ],
               output: '../../scripts/view.min.js',
