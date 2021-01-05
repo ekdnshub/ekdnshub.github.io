@@ -2,7 +2,7 @@
 v2 content에서 html을 완성한다.
 스크립트 디렉토리에서 실행한다.
 ex)
-$ node ./20170706_to_v2_from_v1_converter.js {number}
+$ node ./complete_html_from_v2_contents.js {number|all}
 */
 
 var owiki = require("./owiki2.alpha.js");
