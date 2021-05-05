@@ -67,10 +67,10 @@ int access(const char *pathname, int mode);
 <p>사용하고자 하는 프로그램상에 <span class="command">unistd.h</span> 헤더 파일을 포함하고 <span class="command">.access()</span> 함수에 매개 인자를 넘겨주면 됩니다.</p>
 <p>pathname에는 체크하고자할 디렉토리 또는 파일명을 넣고 mode 변수에는 적절한 마스크<span class="refer">mask</span> 값을 넣으면 됩니다. mode 변수에 들어갈 수 있는 마스크 값은 다음과 같습니다.</p>
 <pre class="console">
-&lt;span class="light"&gt;R_OK&lt;/span&gt; : 파일 존재 여부, 읽기 권한 여부
-&lt;span class="light"&gt;W_OK&lt;/span&gt; : 파일 존재 여부, 쓰기 권한 여부
-&lt;span class="light"&gt;X_OK&lt;/span&gt; : 파일 존재 여부, 실행 권한 여부
-&lt;span class="light"&gt;F_OK&lt;/span&gt; : 파일 존재 여부 
+R_OK : 파일 존재 여부, 읽기 권한 여부
+W_OK : 파일 존재 여부, 쓰기 권한 여부
+X_OK : 파일 존재 여부, 실행 권한 여부
+F_OK : 파일 존재 여부
 </pre>
 <p><span class="command">.access()</span> 함수의 결과 값은 int형으로 <strong>성공하면</strong> <span class="command">0</span>을, <strong>실패하면</strong> <span class="error">-1</span>을 반환합니다. 오류의 원인에 대해서는 errno에 세팅됩니다. 해당 부분에 대한 자세한 내용은 C 컴파일러가 설치되었다는 가정 하에 콘솔에 <span class="command">man access</span>를 실행해 보세요.</p>
 <pre class="prettyprint lang-sh">
